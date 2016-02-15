@@ -139,12 +139,12 @@ namespace lib
 
 			if (e.type == sf::Event::KeyPressed)
 			{
-				appController->eventManager()->addEvent(uptr<lib::events::KeyPressedEvent>(new lib::events::KeyPressedEvent{doCast(e.key.code)}));
+				appController->eventManager()->addEvent(uptr<events::KeyEvent>(new events::KeyEvent{ events::KeyEvent::Action::KeyPressed, doCast(e.key.code) }));
 //				p_sceneManager->onKeyPressed(e.key);
 			}
 			else
 			{
-				appController->eventManager()->addEvent(uptr<lib::events::KeyReleasedEvent>(new lib::events::KeyReleasedEvent{ doCast(e.key.code) }));
+				appController->eventManager()->addEvent(uptr<events::KeyEvent>(new events::KeyEvent{ events::KeyEvent::Action::KeyPressed, doCast(e.key.code) }));
 				//				p_sceneManager->onKeyReleased(e.key);
 			}
 		}

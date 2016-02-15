@@ -7,7 +7,7 @@ namespace lib
 {
 	namespace input
 	{
-		enum Key
+		enum KeyCode
 		{
 			Unknown = -1, ///< Unhandled key
 			A = 0,        ///< The A key
@@ -113,6 +113,13 @@ namespace lib
 			Pause,        ///< The Pause key
 
 			KeyCount      ///< Keep last -- the total number of keyboard keys
+		};
+
+		struct Key
+		{
+			KeyCode kCode;
+			explicit Key(KeyCode code) : kCode{ code } {}
+			explicit Key(int code) : kCode{ static_cast<KeyCode>(code) } {}
 		};
 	}
 }

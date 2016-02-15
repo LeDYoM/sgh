@@ -6,34 +6,40 @@
 
 namespace lib
 {
-	namespace events
+	namespace core
 	{
-		class InputEvent : public Event
+		namespace events
 		{
-		public:
-			enum class Action
+			class InputEvent : public Event
 			{
-				KeyPressed,
-				KeyReleased
+			public:
+				enum class Device
+				{
+					Keyboard
+				};
+				virtual EventType eventType() { return Event::EventType::Input; }
+				InputEvent(const Device &device_) : m_device{ device_ } {}
+			private:
+				const Device m_device;
 			};
-			InputEvent(const Action &_action) : action{ _action } {}
-			const Action action;
-			InputEvent &operator=(const InputEvent &rho) = delete;
-		};
 
-		class KeyPressedEvent : public InputEvent
-		{
-		public:
-			KeyPressedEvent(const input::Key key_) : InputEvent{ Action::KeyPressed }, key{ key_ } {}
-			const input::Key key;
-		};
+			class KeyEvent : public InputEvent
+			{
+			public:
+				enum class Action
+				{
+					KeyPressed,
+					KeyReleased
+				};
 
-		class KeyReleasedEvent : public InputEvent
-		{
-		public:
-			KeyReleasedEvent(const input::Key key_) : InputEvent{ Action::KeyPressed }, key{ key_ } {}
-			const input::Key key;
-		};
+				KeyEvent(const Action action_, const input::Key key) : InputEvent{ Device::Keyboard }, m_action{ action_ }, m_key{ key } {}
+				const Action &action() const { return m_action; }
+				const input::Key &key() const { return m_key; }
+			private:
+				const Action m_action;
+				const input::Key m_key;
+			};
+		}
 	}
 }
 

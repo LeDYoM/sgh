@@ -4,6 +4,9 @@
 #include <lib/core/window.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/appcontroller.hpp>
+#include <lib/core/eventmanager.hpp>
+#include <lib/core/events/eventreceiver.hpp>
+#include <lib/core/events/inputevent.hpp>
 
 namespace lib
 {
@@ -12,6 +15,17 @@ namespace lib
 		SceneManager::SceneManager(core::AppController *const appController) : AppService{ appController }
 		{
 			LOG_CONSTRUCT_NOPARAMS;
+			m_eventReceiver = appController->eventManager()->newEventReceiver();
+			m_eventReceiver->setReceiver([](lib::core::events::EventReceiver::ReceivedEvent event_)
+			{
+				auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
+				if (evKey->action() == core::events::KeyEvent::Action::KeyPressed)
+				{
+//					this->onKeyReleased()
+				}
+				event_;
+				int b = 0;
+			});
 		}
 
 		SceneManager::~SceneManager()
@@ -64,16 +78,16 @@ namespace lib
 			}
 		}
 
-		void SceneManager::onKeyPressed(sf::Event::KeyEvent kEvent)
+		void SceneManager::onKeyPressed(lib::input::Key key)
 		{
 			__ASSERT(_currentScene, "No active scene when pressing a key");
-			_currentScene->onKeyPressed(kEvent);
+			_currentScene->onKeyPressed(key);
 		}
 
-		void SceneManager::onKeyReleased(sf::Event::KeyEvent kEvent)
+		void SceneManager::onKeyReleased(lib::input::Key key)
 		{
 			__ASSERT(_currentScene, "No active scene when releasing a key");
-			_currentScene->onKeyReleased(kEvent);
+			_currentScene->onKeyReleased(key);
 		}
 
 		void SceneManager::setScene(sptr<Scene> scene)

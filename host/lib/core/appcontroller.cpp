@@ -79,6 +79,7 @@ namespace lib
 		bool AppController::loopStep()
 		{
 			bool windowWants2Close = m_window->preLoop();
+			m_eventManager->update();
 			m_sceneManager->update();
 			windowWants2Close |= m_window->postLoop();
 			return windowWants2Close;

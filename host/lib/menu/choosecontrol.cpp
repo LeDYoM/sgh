@@ -4,6 +4,7 @@
 #include <lib/draw/positionanimation.hpp>
 #include <lib/draw/nodeshape.hpp>
 #include <lib/draw/nodetext.hpp>
+#include <lib/include/key.hpp>
 
 namespace lib
 {
@@ -76,17 +77,17 @@ namespace lib
 			updateSubLabelText(index);
 		}
 
-		void ChooseControl::onKeyPressed(sf::Event::KeyEvent kEvent)
+		void ChooseControl::onKeyPressed(lib::input::Key key)
 		{
-			if (kEvent.code == sf::Keyboard::Down || kEvent.code == sf::Keyboard::Numpad2)
+			if (key.kCode == lib::input::KeyCode::Down || key.kCode == lib::input::KeyCode::Numpad2)
 			{
 				goDown();
 			}
-			else if (kEvent.code == sf::Keyboard::Up || kEvent.code == sf::Keyboard::Numpad8)
+			else if (key.kCode == lib::input::KeyCode::Up || key.kCode == lib::input::KeyCode::Numpad8)
 			{
 				goUp();
 			}
-			else if (kEvent.code == sf::Keyboard::Return || kEvent.code == sf::Keyboard::Space)
+			else if (key.kCode == lib::input::KeyCode::Return || key.kCode == lib::input::KeyCode::Space)
 			{
 				if (_onSelected)
 				{
@@ -95,20 +96,20 @@ namespace lib
 			}
 			else if (_labelData[_cursorItemSelected].textSubLabel.size() > 0)
 			{
-				if (kEvent.code == sf::Keyboard::Left || kEvent.code == sf::Keyboard::Numpad4)
+				if (key.kCode == lib::input::KeyCode::Left || key.kCode == lib::input::KeyCode::Numpad4)
 				{
 					goLeft();
 				}
-				else if (kEvent.code == sf::Keyboard::Right || kEvent.code == sf::Keyboard::Numpad6)
+				else if (key.kCode == lib::input::KeyCode::Right || key.kCode == lib::input::KeyCode::Numpad6)
 				{
 					goRight();
 				}
 			}
 		}
 
-		void ChooseControl::onKeyReleased(sf::Event::KeyEvent kEvent)
+		void ChooseControl::onKeyReleased(lib::input::Key key)
 		{
-			kEvent;
+			key;
 		}
 
 		void ChooseControl::updateSubLabelText(const u32 index)

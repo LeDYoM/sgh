@@ -36,19 +36,19 @@ namespace zoper
 			setTextForKey();
 		}
 
-		void KeyRedefinitionMenu::onKeyPressed(sf::Event::KeyEvent kEvent)
+		void KeyRedefinitionMenu::onKeyPressed(lib::input::Key key)
 		{
-			lib::menu::MenuStep::onKeyPressed(kEvent);
-			if (_keyMapping.setKey(_indexKey, kEvent.code))
+			lib::menu::MenuStep::onKeyPressed(key);
+			if (_keyMapping.setKey(_indexKey, key.kCode))
 			{
 				++_indexKey;
 				setTextForKey();
 			}
 		}
 
-		void KeyRedefinitionMenu::onKeyReleased(sf::Event::KeyEvent kEvent)
+		void KeyRedefinitionMenu::onKeyReleased(lib::input::Key key)
 		{
-			lib::menu::MenuStep::onKeyReleased(kEvent);
+			lib::menu::MenuStep::onKeyReleased(key);
 		}
 
 		void KeyRedefinitionMenu::setTextForKey()

@@ -4,6 +4,7 @@
 #include <lib/draw/rendergroup.hpp>
 #include <lib/menu/imenucontrol.hpp>
 #include <lib/include/types.hpp>
+#include <lib/include/key.hpp>
 
 #include <vector>
 #include <memory>
@@ -23,8 +24,8 @@ namespace lib
 			MenuManager *menuManager();
 
 			void addMenuControl(sptr<IMenuControl> nControl);
-			virtual void onKeyPressed(sf::Event::KeyEvent kEvent);
-			virtual void onKeyReleased(sf::Event::KeyEvent kEvent);
+			virtual void onKeyPressed(lib::input::Key kEvent);
+			virtual void onKeyReleased(lib::input::Key kEvent);
 
 		private:
 			std::vector<sptr<IMenuControl>> _controls;

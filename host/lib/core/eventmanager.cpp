@@ -1,5 +1,7 @@
 #include "eventmanager.hpp"
+#include "events/event.hpp"
 #include "events/eventsender.hpp"
+#include "events/eventreceiver.hpp"
 #include "log.hpp"
 
 namespace lib
@@ -16,10 +18,10 @@ namespace lib
 		EventManager::~EventManager()
 		{
 			LOG_DEBUG("Going to destroy event manager...");
-			while (!eventQueue.empty())
+			while (!m_eventQueue.empty())
 			{
-				LOG_DEBUG("Event was still in queue: " << typeid(eventQueue.front()).name());
-				eventQueue.pop();
+				LOG_DEBUG("Event was still in queue: " << typeid(m_eventQueue.front()).name());
+				m_eventQueue.pop();
 			}
 			LOG_DESTRUCT_NOPARAMS;
 		}
@@ -31,14 +33,55 @@ namespace lib
 			return temp;
 		}
 
-		void EventManager::addEvent(uptr<lib::events::Event> event_)
+
+		sptr<events::EventReceiver> EventManager::newEventReceiver()
 		{
-			eventQueue.push(sptr<lib::events::Event>(std::move(event_)));
+			auto temp = sptr<events::EventReceiver>(new events::EventReceiver(this));
+			m_eventreceivers.push_back(temp);
+			return temp;
+		}
+
+		void EventManager::addEvent(uptr<events::Event> event_)
+		{
+			m_eventQueue.push(std::move(event_));
+		}
+
+
+		void EventManager::update()
+		{
+			while (!empty())
+			{
+				update1();
+			}
+		}
+
+
+		void EventManager::update1()
+		{
+			if (!m_eventQueue.empty())
+			{
+				events::EventReceiver::ReceivedEvent &next = m_eventQueue.front();
+				for (auto receiver : m_eventreceivers)
+				{
+					auto receiver_ = receiver.lock();
+					if (receiver_)
+					{
+						receiver_->receive(next);
+					}
+				}
+				m_eventQueue.pop();
+			}
+		}
+
+
+		lib::u32 EventManager::pendingEvents()
+		{
+			return m_eventQueue.size();
 		}
 
 		bool EventManager::empty()
 		{
-			return eventQueue.empty();
+			return m_eventQueue.empty();
 		}
 	}
 }

@@ -4,10 +4,10 @@
 #include "hasname.hpp"
 #include <lib/core/compileconfig.hpp>
 #include <lib/include/types.hpp>
+#include <lib/include/key.hpp>
 #include <lib/core/timer.hpp>
 #include "rendergroup.hpp"
 #include <string>
-#include <SFML/Window/Event.hpp>
 
 namespace lib
 {
@@ -40,8 +40,8 @@ namespace lib
 
 			virtual void update() = 0;
 
-			virtual void onKeyPressed(sf::Event::KeyEvent kEvent);
-			virtual void onKeyReleased(sf::Event::KeyEvent kEvent);
+			virtual void onKeyPressed(input::Key key);
+			virtual void onKeyReleased(input::Key key);
 
 			void setNextScene(const std::string &name);
 

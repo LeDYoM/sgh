@@ -26,19 +26,19 @@ namespace lib
 			_controls.push_back(nControl);
 		}
 
-		void MenuStep::onKeyPressed(sf::Event::KeyEvent kEvent)
+		void MenuStep::onKeyPressed(lib::input::Key key)
 		{
 			for (auto control : _controls)
 			{
-				control->onKeyPressed(kEvent);
+				control->onKeyPressed(key);
 			}
 		}
 
-		void MenuStep::onKeyReleased(sf::Event::KeyEvent kEvent)
+		void MenuStep::onKeyReleased(lib::input::Key key)
 		{
 			for (auto control : _controls)
 			{
-				control->onKeyReleased(kEvent);
+				control->onKeyReleased(key);
 			}
 		}
 

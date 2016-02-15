@@ -81,14 +81,14 @@ namespace lib
 			LOG_DEBUG("Exited from scene " << name());
 		}
 
-		void Scene::onKeyPressed(sf::Event::KeyEvent kEvent)
+		void Scene::onKeyPressed(input::Key key)
 		{
-			LOG_DEBUG("Key pressed: " << int{ kEvent.code });
+			LOG_DEBUG("Key pressed: " << int{ key.kCode });
 		}
 
-		void Scene::onKeyReleased(sf::Event::KeyEvent kEvent)
+		void Scene::onKeyReleased(input::Key key)
 		{
-			LOG_DEBUG("Key released: " << int{ kEvent.code });
+			LOG_DEBUG("Key released: " << int{ key.kCode });
 		}
 
 		void Scene::setNextScene(const std::string &name)

@@ -1,7 +1,5 @@
 #include "nodetext.hpp"
 #include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/RenderTarget.hpp>
-#include <cmath>
 
 #include <lib/core/window.hpp>
 

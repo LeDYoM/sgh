@@ -1,5 +1,6 @@
 #include "gamebasetile.hpp"
 #include <lib/core/log.hpp>
+#include <lib/include/color.hpp>
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -14,7 +15,7 @@ namespace zoper
 	{
 	}
 
-	sf::Color GameBaseTile::getColorForToken() const
+	lib::draw::Color GameBaseTile::getColorForToken() const
 	{
 
 		sf::Color c;

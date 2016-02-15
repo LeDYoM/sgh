@@ -17,7 +17,7 @@ namespace lib
 
 			}
 
-			void EventSender::sendEvent(uptr<lib::events::Event> event_)
+			void EventSender::sendEvent(uptr<events::Event> event_)
 			{
 				m_eventManager->addEvent(std::move(event_));
 			}

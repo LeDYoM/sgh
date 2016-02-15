@@ -2,7 +2,6 @@
 #define __LIB_EVENTMANAGER_HPP__
 
 #include "appservice.hpp"
-#include "events/event.hpp"
 #include <lib/include/types.hpp>
 #include "vecsptr.hpp"
 #include <queue>
@@ -15,6 +14,8 @@ namespace lib
 		namespace events
 		{
 			class EventSender;
+			class EventReceiver;
+			class Event;
 		}
 		class EventManager : public AppService
 		{
@@ -23,13 +24,18 @@ namespace lib
 			virtual ~EventManager();
 
 			sptr<events::EventSender> newEventSender();
-			virtual void addEvent(uptr<lib::events::Event> event_);
+			sptr<events::EventReceiver> newEventReceiver();
+			virtual void addEvent(uptr<events::Event> event_);
+			void update();
+			void update1();
+			u32 pendingEvents();
 		private:
 			virtual bool empty();
-			friend class events::EventSender;
 
-			std::queue<sptr<lib::events::Event>> eventQueue;
-			VecSPtr<events::EventSender> m_eventsenders;
+			std::queue<sptr<events::Event>> m_eventQueue;
+			std::vector<wptr<events::EventSender>> m_eventsenders;
+			std::vector<wptr<events::EventReceiver>> m_eventreceivers;
+
 		};
 	}
 }

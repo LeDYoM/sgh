@@ -408,24 +408,24 @@ namespace zoper
 		p_boardModel->setTile(position, std::dynamic_pointer_cast<lib::board::ITile>(_mainBoardrg->addRenderizable(newTileToken)));
 	}
 
-	void GameScene::onKeyPressed(sf::Event::KeyEvent kEvent)
+	void GameScene::onKeyPressed(lib::input::Key key)
 	{
-		Scene::onKeyPressed(kEvent);
+		Scene::onKeyPressed(key);
 		switch (state())
 		{
 		case Playing:
 		{
-			auto dir = _keyMapping.getDirectionFromKey(kEvent.code);
+			auto dir = _keyMapping.getDirectionFromKey(key.kCode);
 			if (dir.isValid())
 			{
 				p_player->setCurrentDirection(dir);
 				movePlayer(dir);
 			}
-			else if (_keyMapping.isLaunchKey(kEvent.code))
+			else if (_keyMapping.isLaunchKey(key.kCode))
 			{
 				launchPlayer();
 			}
-			else if (_keyMapping.isPauseKey(kEvent.code))
+			else if (_keyMapping.isPauseKey(key.kCode))
 			{
 				switchPause();
 			}
@@ -435,7 +435,7 @@ namespace zoper
 			setNextScene("MenuScene");
 			break;
 		case Pause:
-			if (_keyMapping.isPauseKey(kEvent.code))
+			if (_keyMapping.isPauseKey(key.kCode))
 			{
 				switchPause();
 			}
@@ -458,9 +458,9 @@ namespace zoper
 		}
 	}
 
-	void GameScene::onKeyReleased(sf::Event::KeyEvent kEvent)
+	void GameScene::onKeyReleased(lib::input::Key key)
 	{
-		Scene::onKeyReleased(kEvent);
+		Scene::onKeyReleased(key);
 	}
 
 	void GameScene::onAnimationStarted(lib::sptr<lib::scn::draw::anim::IAnimation> anim, lib::sptr<lib::scn::draw::Renderizable> node)

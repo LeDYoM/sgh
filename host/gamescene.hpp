@@ -8,6 +8,7 @@
 #include <lib/draw/scene.hpp>
 #include <lib/board/itilescontroller.hpp>
 #include <lib/board/boardmodel.hpp>
+#include <lib/include/key.hpp>
 #include "keymapping.hpp"
 #include "direction.hpp"
 #include "levelproperties.hpp"
@@ -96,8 +97,8 @@ namespace zoper
 		void addPlayer();
 		void tilesCreated();
 
-		virtual void onKeyPressed(sf::Event::KeyEvent kEvent);
-		virtual void onKeyReleased(sf::Event::KeyEvent kEvent);
+		virtual void onKeyPressed(lib::input::Key key);
+		virtual void onKeyReleased(lib::input::Key key);
 
 		// Inherited via ITilesController
 		virtual void tileAdded(const lib::vector2du32 &position, lib::board::WITilePointer nTile) override;

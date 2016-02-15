@@ -5,12 +5,17 @@
 #include <lib/include/types.hpp>
 #include <SFML/Window/Event.hpp>
 #include <lib/core/appservice.hpp>
+#include <lib/include/key.hpp>
 
 namespace lib
 {
 	namespace core
 	{
 		class Window;
+		namespace events
+		{
+			class EventReceiver;
+		}
 	}
 	namespace scn
 	{
@@ -30,8 +35,8 @@ namespace lib
 
 			void addScenes(const std::vector<sptr<Scene>> &&sceneVector);
 
-			void onKeyPressed(sf::Event::KeyEvent kEvent);
-			void onKeyReleased(sf::Event::KeyEvent kEvent);
+			void onKeyPressed(input::Key key);
+			void onKeyReleased(input::Key key);
 			void exitProgram();
 
 		private:
@@ -42,6 +47,7 @@ namespace lib
 			sptr<Scene> _currentScene{ nullptr };
 			bool b_lock{ false };
 			sptr<Scene> _nextScene{ nullptr };
+			sptr<core::events::EventReceiver> m_eventReceiver;
 		};
 	}
 }

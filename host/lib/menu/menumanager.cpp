@@ -71,16 +71,16 @@ namespace lib
 			}
 		}
 
-		void MenuManager::onKeyPressed(sf::Event::KeyEvent kEvent)
+		void MenuManager::onKeyPressed(lib::input::Key key)
 		{
-			Scene::onKeyPressed(kEvent);
-			_activeMenuStep->onKeyPressed(kEvent);
+			Scene::onKeyPressed(key);
+			_activeMenuStep->onKeyPressed(key);
 		}
 
-		void MenuManager::onKeyReleased(sf::Event::KeyEvent kEvent)
+		void MenuManager::onKeyReleased(lib::input::Key key)
 		{
-			Scene::onKeyReleased(kEvent);
-			_activeMenuStep->onKeyReleased(kEvent);
+			Scene::onKeyReleased(key);
+			_activeMenuStep->onKeyReleased(key);
 		}
 	}
 }

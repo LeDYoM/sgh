@@ -1,6 +1,5 @@
 #include "gamebasetile.hpp"
 #include <lib/core/log.hpp>
-#include <lib/include/color.hpp>
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -15,30 +14,30 @@ namespace zoper
 	{
 	}
 
-	lib::draw::Color GameBaseTile::getColorForToken() const
+	lib::scn::draw::Color GameBaseTile::getColorForToken() const
 	{
 
-		sf::Color c;
+		lib::scn::draw::Color c;
 
 		switch (getData())
 		{
 		case 0:
-			c = sf::Color::Red;
+			c = lib::scn::draw::Color::Red;
 			break;
 		case 1:
-			c = sf::Color::Green;
+			c = lib::scn::draw::Color::Green;
 			break;
 		case 2:
-			c = sf::Color::Blue;
+			c = lib::scn::draw::Color::Blue;
 			break;
 		case 3:
-			c = sf::Color::Yellow;
+			c = lib::scn::draw::Color::Yellow;
 			break;
 		case 4:
-			c = sf::Color::Magenta;
+			c = lib::scn::draw::Color::Magenta;
 			break;
 		default:
-			c = sf::Color::White;
+			c = lib::scn::draw::Color::White;
 			LOG_ERROR("Error value for token: " << getData() << " is not supported");
 			break;
 		}

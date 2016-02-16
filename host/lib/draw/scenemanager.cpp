@@ -16,15 +16,21 @@ namespace lib
 		{
 			LOG_CONSTRUCT_NOPARAMS;
 			m_eventReceiver = appController->eventManager()->newEventReceiver();
-			m_eventReceiver->setReceiver([](lib::core::events::EventReceiver::ReceivedEvent event_)
+			m_eventReceiver->setReceiver([this](lib::core::events::EventReceiver::ReceivedEvent event_)
 			{
 				auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
-				if (evKey->action() == core::events::KeyEvent::Action::KeyPressed)
+				switch (evKey->action())
 				{
-//					this->onKeyReleased()
+				case core::events::KeyEvent::Action::KeyPressed:
+					this->onKeyPressed(evKey->key());
+					break;
+				case core::events::KeyEvent::Action::KeyReleased:
+					this->onKeyReleased(evKey->key());
+					break;
+				default:
+					LOG_WARNING("Unknown Action on event key");
+					break;
 				}
-				event_;
-				int b = 0;
 			});
 		}
 
@@ -139,7 +145,7 @@ namespace lib
 				}
 			}
 
-			sf::RenderStates states;
+			lib::scn::draw::RenderStates states;
 			_currentScene->draw(appController->parentWindow().get(), states);
 		}
 

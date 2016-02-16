@@ -3,7 +3,6 @@
 
 #include <string>
 #include <lib/include/types.hpp>
-#include <SFML/Graphics/Color.hpp>
 
 namespace lib
 {
@@ -26,12 +25,12 @@ namespace lib
 		class CursorDescriptor
 		{
 		public:
-			explicit CursorDescriptor(const u32 nVertex, const vector2df &size, const sf::Color &color)
+			explicit CursorDescriptor(const u32 nVertex, const vector2df &size, const lib::scn::draw::Color &color)
 				: _nVertex{ nVertex }, _size{ size }, _color{ color } {}
 
 			u32 _nVertex;
 			vector2df _size;
-			sf::Color _color;
+			lib::scn::draw::Color _color;
 		};
 	}
 }

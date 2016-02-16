@@ -25,10 +25,10 @@ namespace zoper
 	{
 		_gameData.size.x = 18;
 		_gameData.size.y = 12;
-		_gameData.centerRect.begin.x = 7;
-		_gameData.centerRect.begin.y = 4;
-		_gameData.centerRect.size.x = 4;
-		_gameData.centerRect.size.y = 4;
+		_gameData.centerRect.left = 7;
+		_gameData.centerRect.top = 4;
+		_gameData.centerRect.width = 4;
+		_gameData.centerRect.height = 4;
 		_gameData.generateTokenZones();
 	}
 
@@ -89,17 +89,17 @@ namespace zoper
 		_goalDisplay->setCharacterSize(90);
 		_pauseText->setCharacterSize(180);
 
-		_scoreText->setColor(sf::Color::Blue);
-		_scoreDisplay->setColor(sf::Color::White);
-		_currentLevelText->setColor(sf::Color::Blue);
-		_currentLevelDisplay->setColor(sf::Color::White);
-		_gameText->setColor(sf::Color::White);
-		_overText->setColor(sf::Color::White);
-		_levelText->setColor(sf::Color::Blue);
-		_levelDisplay->setColor(sf::Color::White);
-		_goalText->setColor(sf::Color::Blue);
-		_goalDisplay->setColor(sf::Color::White);
-		_pauseText->setColor(sf::Color::White);
+		_scoreText->setColor(lib::scn::draw::Color::Blue);
+		_scoreDisplay->setColor(lib::scn::draw::Color::White);
+		_currentLevelText->setColor(lib::scn::draw::Color::Blue);
+		_currentLevelDisplay->setColor(lib::scn::draw::Color::White);
+		_gameText->setColor(lib::scn::draw::Color::White);
+		_overText->setColor(lib::scn::draw::Color::White);
+		_levelText->setColor(lib::scn::draw::Color::Blue);
+		_levelDisplay->setColor(lib::scn::draw::Color::White);
+		_goalText->setColor(lib::scn::draw::Color::Blue);
+		_goalDisplay->setColor(lib::scn::draw::Color::White);
+		_pauseText->setColor(lib::scn::draw::Color::White);
 
 		_scoreText->setScale(1.0f, 2.0f);
 		_scoreDisplay->setScale(1.0f, 2.0f);
@@ -208,8 +208,8 @@ namespace zoper
 		{
 			setState(Pause);
 			_pauserg->setVisible(true);
-			//_pauseText->getAsText()->setColor(sf::Color(255, 255, 255, 20));
-			addAnimation(lib::scn::draw::anim::ColorAnimation::create(1000, _pauseText, sf::Color(255, 255, 255, 0), sf::Color(255, 255, 255, 255)));
+			//_pauseText->getAsText()->setColor(lib::scn::draw::Color(255, 255, 255, 20));
+			addAnimation(lib::scn::draw::anim::ColorAnimation::create(1000, _pauseText, lib::scn::draw::Color(255, 255, 255, 0), lib::scn::draw::Color(255, 255, 255, 255)));
 			gameClock.pause();
 			return true;
 		}
@@ -288,36 +288,36 @@ namespace zoper
 	void GameData::generateTokenZones()
 	{
 		// From left to right
-		_tokenZones[0].zone.begin.x = 0;
-		_tokenZones[0].zone.begin.y = centerRect.begin.y;
-		_tokenZones[0].zone.size.x = centerRect.begin.x - 1;
-		_tokenZones[0].zone.size.y = (centerRect.begin.y + centerRect.size.y) - 1;
+		_tokenZones[0].zone.left = 0;
+		_tokenZones[0].zone.top = centerRect.top;
+		_tokenZones[0].zone.width = centerRect.left - 1;
+		_tokenZones[0].zone.height = (centerRect.top + centerRect.height) - 1;
 		_tokenZones[0].direction = Direction::DirectionData::Right;
 
 		// From top to bottom
-		_tokenZones[1].zone.begin.x = centerRect.begin.x;
-		_tokenZones[1].zone.begin.y = 0;
-		_tokenZones[1].zone.size.x = (centerRect.begin.x + centerRect.size.x) - 1;
-		_tokenZones[1].zone.size.y = centerRect.begin.y - 1;
+		_tokenZones[1].zone.left = centerRect.left;
+		_tokenZones[1].zone.top = 0;
+		_tokenZones[1].zone.width = (centerRect.left + centerRect.width) - 1;
+		_tokenZones[1].zone.height = centerRect.top - 1;
 		_tokenZones[1].direction = Direction::DirectionData::Down;
 
 		// From right to left
-		_tokenZones[2].zone.begin.x = size.x - 1;
-		_tokenZones[2].zone.begin.y = centerRect.begin.y;
-		_tokenZones[2].zone.size.x = (centerRect.begin.x + centerRect.size.x);
-		_tokenZones[2].zone.size.y = (centerRect.begin.y + centerRect.size.y) - 1;
+		_tokenZones[2].zone.left = size.x - 1;
+		_tokenZones[2].zone.top = centerRect.top;
+		_tokenZones[2].zone.width = (centerRect.left + centerRect.width);
+		_tokenZones[2].zone.height = (centerRect.height + centerRect.height) - 1;
 		_tokenZones[2].direction = Direction::DirectionData::Left;
 
 		// From bottom to top
-		_tokenZones[3].zone.begin.x = centerRect.begin.x;
-		_tokenZones[3].zone.begin.y = size.y - 1;
-		_tokenZones[3].zone.size.x = (centerRect.begin.x + centerRect.size.x) - 1;
-		_tokenZones[3].zone.size.y = centerRect.begin.y + centerRect.size.y;
+		_tokenZones[3].zone.left = centerRect.left;
+		_tokenZones[3].zone.top = size.y - 1;
+		_tokenZones[3].zone.width = (centerRect.left + centerRect.width) - 1;
+		_tokenZones[3].zone.height = centerRect.top + centerRect.height;
 		_tokenZones[3].direction = Direction::DirectionData::Up;
 
 		for (lib::u32 i = 0; i < NUMWAYS; ++i)
 		{
-			_tokenZones[i].size = _tokenZones[i].direction.isHorizontal() ? centerRect.size.y : centerRect.size.x;
+			_tokenZones[i].size = _tokenZones[i].direction.isHorizontal() ? centerRect.height : centerRect.width;
 		}
 	}
 
@@ -326,19 +326,19 @@ namespace zoper
 		const GameData::TokenZone &currentTokenZone = _gameData._tokenZones[_nextTokenPart];
 
 		LOG_DEBUG("NextTokenPart: " << std::to_string(_nextTokenPart));
-		LOG_DEBUG("x1: " << currentTokenZone.zone.begin.x << " y1: " << currentTokenZone.zone.begin.y << 
-			" x2: " << currentTokenZone.zone.size.x << " y2: " << currentTokenZone.zone.size.y);
+		LOG_DEBUG("x1: " << currentTokenZone.zone.left << " y1: " << currentTokenZone.zone.top << 
+			" x2: " << currentTokenZone.zone.width << " y2: " << currentTokenZone.zone.height);
 
 		lib::u32 newToken = 0;// getRandomNumer(NUMTOKENS);
 
 		lib::u32 sizep = 0;// getRandomNumer(currentTokenZone.size);
 
-		lib::u32 newX = currentTokenZone.zone.begin.x + (currentTokenZone.direction.isHorizontal() ? 0 : sizep);
-		lib::u32 newY = currentTokenZone.zone.begin.y + (currentTokenZone.direction.isHorizontal() ? sizep : 0);
+		lib::u32 newX = currentTokenZone.zone.left + (currentTokenZone.direction.isHorizontal() ? 0 : sizep);
+		lib::u32 newY = currentTokenZone.zone.top + (currentTokenZone.direction.isHorizontal() ? sizep : 0);
 		LOG_DEBUG("New tile pos: " << newX << "," << newY);
 
-		lib::vector2du32 loopPosition{ (currentTokenZone.direction.isHorizontal() ? currentTokenZone.zone.size.x : newX),
-			(currentTokenZone.direction.isHorizontal() ? newY : currentTokenZone.zone.size.y) };
+		lib::vector2du32 loopPosition{ (currentTokenZone.direction.isHorizontal() ? currentTokenZone.zone.width : newX),
+			(currentTokenZone.direction.isHorizontal() ? newY : currentTokenZone.zone.height) };
 //		lib::vector2du32 destPosition;
 		LOG_DEBUG("Starting at: " << loopPosition.x << "," << loopPosition.y);
 
@@ -387,10 +387,10 @@ namespace zoper
 
 	void GameScene::addPlayer()
 	{
-		LOG_DEBUG("Adding player tile at " << _gameData.centerRect.begin.x << "," << _gameData.centerRect.begin.y);
+		LOG_DEBUG("Adding player tile at " << _gameData.centerRect.top << "," << _gameData.centerRect.height);
 		__ASSERT(!p_player, "Player already initialized");
 		// Create the player instance
-		p_player = lib::sptr<Player>(new Player(lib::vector2du32(_gameData.centerRect.begin),tileSize()));
+		p_player = lib::sptr<Player>(new Player(lib::vector2du32(_gameData.centerRect.origin()),tileSize()));
 
 		// Add it to the board and to the scene nodes
 		p_boardModel->setTile(p_player->boardPosition(), std::dynamic_pointer_cast<lib::board::ITile>(_mainBoardrg->addRenderizable(p_player)));
@@ -472,7 +472,7 @@ namespace zoper
 		if (anim->animationType() == "ColorAnimation" && node == _pauseText)
 		{
 			_pauserg->setVisible(state()==Pause);
-			_pauseText->setColor(sf::Color::White);
+			_pauseText->setColor(lib::scn::draw::Color::White);
 		}
 		else if (anim->animationType() == "PositionAnimation" && node->name() == "pointIncrementScore")
 		{
@@ -531,10 +531,10 @@ namespace zoper
 	{
 		if (p_boardModel->validCoords(position))
 		{
-			if (position.x < _gameData.centerRect.begin.x || position.y < _gameData.centerRect.begin.y)
+			if (position.x < _gameData.centerRect.left || position.y < _gameData.centerRect.top)
 				return false;
 
-			if (position.x >= (_gameData.centerRect.begin.x + _gameData.centerRect.size.x) || position.y >= (_gameData.centerRect.begin.y + _gameData.centerRect.size.y))
+			if (position.x >= _gameData.centerRect.destX() || position.y >= _gameData.centerRect.destY())
 				return false;
 
 			return true;
@@ -599,7 +599,7 @@ namespace zoper
 				center.x -= (node->getLocalBounds().width / 2.0f);
 				center.y -= (node->getLocalBounds().height / 2.0f);
 				node->setPosition(center);
-				node->setColor(sf::Color::White);
+				node->setColor(lib::scn::draw::Color::White);
 			}
 			_backgroundTiles.push_back(column);
 		}

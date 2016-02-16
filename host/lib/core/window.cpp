@@ -136,17 +136,11 @@ namespace lib
 		void Window::keyEvent(sf::Event e)
 		{
 			_ASSERT(e.type == sf::Event::KeyPressed || e.type == sf::Event::KeyReleased);
+			appController->eventManager()->addEvent(uptr<events::KeyEvent>(new events::KeyEvent{ 
+				e.type == sf::Event::KeyPressed ? events::KeyEvent::Action::KeyPressed : events::KeyEvent::Action::KeyReleased,
+				doCast(e.key.code) 
+			}));
 
-			if (e.type == sf::Event::KeyPressed)
-			{
-				appController->eventManager()->addEvent(uptr<events::KeyEvent>(new events::KeyEvent{ events::KeyEvent::Action::KeyPressed, doCast(e.key.code) }));
-//				p_sceneManager->onKeyPressed(e.key);
-			}
-			else
-			{
-				appController->eventManager()->addEvent(uptr<events::KeyEvent>(new events::KeyEvent{ events::KeyEvent::Action::KeyPressed, doCast(e.key.code) }));
-				//				p_sceneManager->onKeyReleased(e.key);
-			}
 		}
 
 		void Window::exitProgram()

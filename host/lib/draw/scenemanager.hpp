@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <lib/include/types.hpp>
-#include <SFML/Window/Event.hpp>
 #include <lib/core/appservice.hpp>
 #include <lib/include/key.hpp>
 

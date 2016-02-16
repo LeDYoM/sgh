@@ -4,8 +4,11 @@
 #include <cstdint>
 #include <memory>
 #include <lib/core/compileconfig.hpp>
-
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/Graphics/Vertex.hpp>
 
 namespace lib
 {
@@ -29,29 +32,26 @@ namespace lib
 	using f32 = float;
 	using f64 = double;
 
-	using vector2du32 = sf::Vector2u;
-	using vector2ds32 = sf::Vector2i;
-	using vector2df = sf::Vector2f;
-	using vector2du8 = sf::Vector2<u8>;
-	using vector2ds8 = sf::Vector2<s8>;
+	// alias template
+	template<class T>
+	using vector2d = sf::Vector2<T>;
 
-	struct Rect
+	using vector2du32 = vector2d<u32>;
+	using vector2ds32 = vector2d<s32>;
+	using vector2df = vector2d<f32>;
+	using vector2du8 = vector2d<u8>;
+	using vector2ds8 = vector2d<s8>;
+
+	namespace scn
 	{
-		vector2du32 begin;
-		vector2du32 size;
-
-		bool inBounds(const vector2ds32&point)
+		namespace draw
 		{
-			if (point.x < 0 || point.y < 0 
-				|| point.x < (s32)begin.x || point.y < (s32)begin.y || point.x > (s32)(begin.x + size.x) || point.y > (s32)(begin.y + size.y))
-				return false;
-
-			return true;
+			using Color = sf::Color;
+			using RenderStates = sf::RenderStates;
+			using Vertex = sf::Vertex;
+			using VertexArray = sf::VertexArray;
 		}
-	};
-
-
-
+	}
 }
 
 

@@ -29,20 +29,20 @@ namespace lib
 				virtual sf::Vector2f getPoint(lib::u32 index) const;
 				void setTexture(const sf::Texture *texture, bool resetSize=true, bool resetRect = false);
 
-				void setTextureRect(const sf::IntRect& rect);
-				virtual void setColor(const sf::Color& color) override;
+				void setTextureRect(const Rects32& rect);
+				virtual void setColor(const lib::scn::draw::Color& color) override;
 				const sf::Texture* getTexture() const;
-				const sf::IntRect& getTextureRect() const;
-				const sf::Color& getFillColor() const;
-				const sf::Color& getOutlineColor() const;
+				const Rects32& getTextureRect() const;
+				const Color& getFillColor() const;
+				const Color& getOutlineColor() const;
 				float getOutlineThickness() const;
-				sf::FloatRect getLocalBounds() const override;
-				sf::FloatRect getGlobalBounds() const override;
+				Rectf32 getLocalBounds() const override;
+				Rectf32 getGlobalBounds() const override;
 
 			protected:
 				void update();
 				void setTexture_(const sf::Texture* texture, bool resetRect = false);
-				virtual u32 draw(lib::core::Window *window, sf::RenderStates &states) override;
+				virtual u32 draw(lib::core::Window *window, lib::scn::draw::RenderStates &states) override;
 				void updateFillColors();
 				void updateTexCoords();
 
@@ -50,10 +50,10 @@ namespace lib
 				const sf::Texture* m_texture;
 				sf::Vector2f _size;
 				lib::u32 m_pointCount;
-				sf::IntRect m_textureRect;
-				sf::Color m_fillColor;
-				sf::VertexArray m_vertices;
-				sf::FloatRect m_bounds;
+				Rects32 m_textureRect;
+				lib::scn::draw::Color m_fillColor;
+				VertexArray m_vertices;
+				Rectf32 m_bounds;
 			};
 		}
 	}

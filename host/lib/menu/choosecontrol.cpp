@@ -11,7 +11,7 @@ namespace lib
 	namespace menu
 	{
 		ChooseControl::ChooseControl(const std::string &name, sptr<core::Resource> font, 
-			const sf::Color &textColor, const sf::Color &selectedTextColor,
+			const lib::scn::draw::Color &textColor, const lib::scn::draw::Color &selectedTextColor,
 			const scn::draw::Alignment alignment,
 			u32 chSize,float incY,
 			std::function<void(const u32, ChooseControl &self)> onSelected,

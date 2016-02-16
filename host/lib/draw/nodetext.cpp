@@ -19,7 +19,7 @@ namespace lib
 
 			NodeText::~NodeText() {	}
 
-			void NodeText::setString(const std::string & string)
+			void NodeText::setString(const std::string &string)
 			{
 				if (m_string != string)
 				{
@@ -28,7 +28,7 @@ namespace lib
 				}
 			}
 
-			void NodeText::setFont(const sf::Font& font)
+			void NodeText::setFont(const sf::Font &font)
 			{
 				if (m_font != &font)
 				{
@@ -37,7 +37,7 @@ namespace lib
 				}
 			}
 
-			void NodeText::setCharacterSize(unsigned int size)
+			void NodeText::setCharacterSize(u32 size)
 			{
 				if (m_characterSize != size)
 				{
@@ -46,7 +46,7 @@ namespace lib
 				}
 			}
 
-			void NodeText::setStyle(sf::Uint32 style)
+			void NodeText::setStyle(u32 style)
 			{
 				if (m_style != style)
 				{
@@ -55,7 +55,7 @@ namespace lib
 				}
 			}
 
-			void NodeText::setColor(const sf::Color& color)
+			void NodeText::setColor(const Color& color)
 			{
 				if (color != m_color)
 				{
@@ -71,32 +71,32 @@ namespace lib
 				}
 			}
 
-			const std::string & NodeText::getString() const
+			const std::string &NodeText::getString() const
 			{
 				return m_string;
 			}
 
-			const sf::Font* NodeText::getFont() const
+			const sf::Font *NodeText::getFont() const
 			{
 				return m_font;
 			}
 
-			unsigned int NodeText::getCharacterSize() const
+			u32 NodeText::getCharacterSize() const
 			{
 				return m_characterSize;
 			}
 
-			sf::Uint32 NodeText::getStyle() const
+			u32 NodeText::getStyle() const
 			{
 				return m_style;
 			}
 
-			const sf::Color& NodeText::getColor() const
+			const Color &NodeText::getColor() const
 			{
 				return m_color;
 			}
 
-			sf::Vector2f NodeText::findCharacterPos(std::size_t index) const
+			vector2df NodeText::findCharacterPos(u32 index) const
 			{
 				// Make sure that we have a valid font
 				if (!m_font)
@@ -112,11 +112,11 @@ namespace lib
 				float vspace = static_cast<float>(m_font->getLineSpacing(m_characterSize));
 
 				// Compute the position
-				sf::Vector2f position;
-				sf::Uint32 prevChar = 0;
-				for (std::size_t i = 0; i < index; ++i)
+				vector2df position;
+				u32 prevChar = 0;
+				for (auto i = 0u; i < index; ++i)
 				{
-					sf::Uint32 curChar = m_string[i];
+					u32 curChar = m_string[i];
 
 					// Apply the kerning offset
 					position.x += static_cast<float>(m_font->getKerning(prevChar, curChar, m_characterSize));
@@ -140,19 +140,19 @@ namespace lib
 				return position;
 			}
 
-			sf::FloatRect NodeText::getLocalBounds() const
+			Rectf32 NodeText::getLocalBounds() const
 			{
 				ensureGeometryUpdate();
 
 				return m_bounds;
 			}
 
-			sf::FloatRect NodeText::getGlobalBounds() const
+			Rectf32 NodeText::getGlobalBounds() const
 			{
 				return getTransform().transformRect(getLocalBounds());
 			}
 
-			lib::u32 NodeText::draw(lib::core::Window *window, sf::RenderStates &states)
+			u32 NodeText::draw(lib::core::Window *window, RenderStates &states)
 			{
 				if (m_font)
 				{
@@ -179,7 +179,7 @@ namespace lib
 
 				// Clear the previous geometry
 				m_vertices.clear();
-				m_bounds = sf::FloatRect();
+				m_bounds = Rectf32();
 
 				// No font: nothing to draw
 				if (!m_font)
@@ -200,7 +200,7 @@ namespace lib
 				// Compute the location of the strike through dynamically
 				// We use the center point of the lowercase 'x' glyph as the reference
 				// We reuse the underline thickness as the thickness of the strike through as well
-				sf::FloatRect xBounds = m_font->getGlyph(L'x', m_characterSize, bold).bounds;
+				Rectf32 xBounds = m_font->getGlyph(L'x', m_characterSize, bold).bounds;
 				float strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
 
 				// Precompute the variables needed by the algorithm
@@ -214,10 +214,10 @@ namespace lib
 				float minY = static_cast<float>(m_characterSize);
 				float maxX = 0.f;
 				float maxY = 0.f;
-				sf::Uint32 prevChar = 0;
-				for (std::size_t i = 0; i < m_string.length(); ++i)
+				u32 prevChar = 0;
+				for (u32 i = 0u; i < m_string.length(); ++i)
 				{
-					sf::Uint32 curChar = m_string[i];
+					u32 curChar = m_string[i];
 
 					// Apply the kerning offset
 					x += static_cast<float>(m_font->getKerning(prevChar, curChar, m_characterSize));
@@ -229,12 +229,12 @@ namespace lib
 						float top = std::floor(y + underlineOffset - (underlineThickness / 2) + 0.5f);
 						float bottom = top + std::floor(underlineThickness + 0.5f);
 
-						m_vertices.append(sf::Vertex(sf::Vector2f(0, top), m_color, sf::Vector2f(1, 1)));
-						m_vertices.append(sf::Vertex(sf::Vector2f(x, top), m_color, sf::Vector2f(1, 1)));
-						m_vertices.append(sf::Vertex(sf::Vector2f(0, bottom), m_color, sf::Vector2f(1, 1)));
-						m_vertices.append(sf::Vertex(sf::Vector2f(0, bottom), m_color, sf::Vector2f(1, 1)));
-						m_vertices.append(sf::Vertex(sf::Vector2f(x, top), m_color, sf::Vector2f(1, 1)));
-						m_vertices.append(sf::Vertex(sf::Vector2f(x, bottom), m_color, sf::Vector2f(1, 1)));
+						m_vertices.append(Vertex(vector2df(0, top), m_color, vector2df(1, 1)));
+						m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
+						m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
+						m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
+						m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
+						m_vertices.append(Vertex(vector2df(x, bottom), m_color, vector2df(1, 1)));
 					}
 
 					// If we're using the strike through style and there's a new line, draw a line across all characters
@@ -243,12 +243,12 @@ namespace lib
 						float top = std::floor(y + strikeThroughOffset - (underlineThickness / 2) + 0.5f);
 						float bottom = top + std::floor(underlineThickness + 0.5f);
 
-						m_vertices.append(sf::Vertex(sf::Vector2f(0, top), m_color, sf::Vector2f(1, 1)));
-						m_vertices.append(sf::Vertex(sf::Vector2f(x, top), m_color, sf::Vector2f(1, 1)));
-						m_vertices.append(sf::Vertex(sf::Vector2f(0, bottom), m_color, sf::Vector2f(1, 1)));
-						m_vertices.append(sf::Vertex(sf::Vector2f(0, bottom), m_color, sf::Vector2f(1, 1)));
-						m_vertices.append(sf::Vertex(sf::Vector2f(x, top), m_color, sf::Vector2f(1, 1)));
-						m_vertices.append(sf::Vertex(sf::Vector2f(x, bottom), m_color, sf::Vector2f(1, 1)));
+						m_vertices.append(Vertex(vector2df(0, top), m_color, vector2df(1, 1)));
+						m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
+						m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
+						m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
+						m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
+						m_vertices.append(Vertex(vector2df(x, bottom), m_color, vector2df(1, 1)));
 					}
 
 					// Handle special characters
@@ -287,12 +287,12 @@ namespace lib
 					float v2 = static_cast<float>(glyph.textureRect.top + glyph.textureRect.height);
 
 					// Add a quad for the current character
-					m_vertices.append(sf::Vertex(sf::Vector2f(x + left - italic * top, y + top), m_color, sf::Vector2f(u1, v1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x + right - italic * top, y + top), m_color, sf::Vector2f(u2, v1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x + left - italic * bottom, y + bottom), m_color, sf::Vector2f(u1, v2)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x + left - italic * bottom, y + bottom), m_color, sf::Vector2f(u1, v2)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x + right - italic * top, y + top), m_color, sf::Vector2f(u2, v1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x + right - italic * bottom, y + bottom), m_color, sf::Vector2f(u2, v2)));
+					m_vertices.append(Vertex(vector2df(x + left - italic * top, y + top), m_color, vector2df(u1, v1)));
+					m_vertices.append(Vertex(vector2df(x + right - italic * top, y + top), m_color, vector2df(u2, v1)));
+					m_vertices.append(Vertex(vector2df(x + left - italic * bottom, y + bottom), m_color, vector2df(u1, v2)));
+					m_vertices.append(Vertex(vector2df(x + left - italic * bottom, y + bottom), m_color, vector2df(u1, v2)));
+					m_vertices.append(Vertex(vector2df(x + right - italic * top, y + top), m_color, vector2df(u2, v1)));
+					m_vertices.append(Vertex(vector2df(x + right - italic * bottom, y + bottom), m_color, vector2df(u2, v2)));
 
 					// Update the current bounds
 					minX = std::min(minX, x + left - italic * bottom);
@@ -310,12 +310,12 @@ namespace lib
 					float top = std::floor(y + underlineOffset - (underlineThickness / 2) + 0.5f);
 					float bottom = top + std::floor(underlineThickness + 0.5f);
 
-					m_vertices.append(sf::Vertex(sf::Vector2f(0, top), m_color, sf::Vector2f(1, 1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x, top), m_color, sf::Vector2f(1, 1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(0, bottom), m_color, sf::Vector2f(1, 1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(0, bottom), m_color, sf::Vector2f(1, 1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x, top), m_color, sf::Vector2f(1, 1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x, bottom), m_color, sf::Vector2f(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, top), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, bottom), m_color, vector2df(1, 1)));
 				}
 
 				// If we're using the strike through style, add the last line across all characters
@@ -324,12 +324,12 @@ namespace lib
 					float top = std::floor(y + strikeThroughOffset - (underlineThickness / 2) + 0.5f);
 					float bottom = top + std::floor(underlineThickness + 0.5f);
 
-					m_vertices.append(sf::Vertex(sf::Vector2f(0, top), m_color, sf::Vector2f(1, 1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x, top), m_color, sf::Vector2f(1, 1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(0, bottom), m_color, sf::Vector2f(1, 1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(0, bottom), m_color, sf::Vector2f(1, 1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x, top), m_color, sf::Vector2f(1, 1)));
-					m_vertices.append(sf::Vertex(sf::Vector2f(x, bottom), m_color, sf::Vector2f(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, top), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, bottom), m_color, vector2df(1, 1)));
 				}
 
 				// Update the bounding rectangle

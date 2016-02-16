@@ -117,8 +117,8 @@ namespace lib
 				if (texture)
 				{
 					// Recompute the texture area if requested, or if there was no texture & rect before
-					if (resetRect || (!m_texture && (m_textureRect == sf::IntRect())))
-						setTextureRect(sf::IntRect(0, 0, texture->getSize().x, texture->getSize().y));
+					if (resetRect || (!m_texture && (m_textureRect == Rects32())))
+						setTextureRect(Rects32(0, 0, texture->getSize().x, texture->getSize().y));
 				}
 
 				// Assign the new texture
@@ -131,34 +131,34 @@ namespace lib
 				return m_texture;
 			}
 
-			void NodeShape::setTextureRect(const sf::IntRect& rect)
+			void NodeShape::setTextureRect(const Rects32& rect)
 			{
 				m_textureRect = rect;
 				updateTexCoords();
 			}
 
-			const sf::IntRect& NodeShape::getTextureRect() const
+			const Rects32& NodeShape::getTextureRect() const
 			{
 				return m_textureRect;
 			}
 
-			void NodeShape::setColor(const sf::Color& color)
+			void NodeShape::setColor(const Color& color)
 			{
 				m_fillColor = color;
 				updateFillColors();
 			}
 
-			const sf::Color& NodeShape::getFillColor() const
+			const Color& NodeShape::getFillColor() const
 			{
 				return m_fillColor;
 			}
 
-			sf::FloatRect NodeShape::getLocalBounds() const
+			Rectf32 NodeShape::getLocalBounds() const
 			{
 				return m_bounds;
 			}
 
-			sf::FloatRect NodeShape::getGlobalBounds() const
+			Rectf32 NodeShape::getGlobalBounds() const
 			{
 				return getTransform().transformRect(getLocalBounds());
 			}
@@ -194,7 +194,7 @@ namespace lib
 				updateTexCoords();
 			}
 
-			u32 NodeShape::draw(lib::core::Window *window, sf::RenderStates &states)
+			u32 NodeShape::draw(lib::core::Window *window, lib::scn::draw::RenderStates &states)
 			{
 				auto oldTransform = states.transform;
 				states.transform *= getTransform();

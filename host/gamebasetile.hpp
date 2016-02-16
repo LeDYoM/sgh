@@ -13,7 +13,7 @@ namespace zoper
 		GameBaseTile(const GameBaseTile &other) = delete;
 		virtual ~GameBaseTile();
 
-		sf::Color getColorForToken() const;
+		lib::scn::draw::Color getColorForToken() const;
 	};
 }
 

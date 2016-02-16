@@ -33,7 +33,7 @@ namespace zoper
 		}
 	}
 
-	const sf::Color LevelProperties::getBackgroundTileColor(const lib::u32 x, const lib::u32 y, const bool isCenter) const
+	const lib::scn::draw::Color LevelProperties::getBackgroundTileColor(const lib::u32 x, const lib::u32 y, const bool isCenter) const
 	{
 		if (_level <= maxLevelWithProperties)
 		{
@@ -43,15 +43,15 @@ namespace zoper
 				{
 					if (_level%2)
 					{
-						return sf::Color(10, 200, 50);
+						return lib::scn::draw::Color(10, 200, 50);
 					}
 					else if (!(_level%3))
 					{
-						return sf::Color(255, 70, 200);
+						return lib::scn::draw::Color(255, 70, 200);
 					}
 					else
 					{
-						return sf::Color(255,100,100);
+						return lib::scn::draw::Color(255,100,100);
 					}
 				}
 				else
@@ -60,22 +60,22 @@ namespace zoper
 					{
 						if (_level < 15)
 						{
-							return sf::Color(128, 128, 128);
+							return lib::scn::draw::Color(128, 128, 128);
 						}
 						else
 						{
-							return sf::Color(255, 100, 100);
+							return lib::scn::draw::Color(255, 100, 100);
 						}
 					}
 					else
 					{
 						if (_level < 15)
 						{
-							return sf::Color(225, 255, 255);
+							return lib::scn::draw::Color(225, 255, 255);
 						}
 						else
 						{
-							return sf::Color(100, 200, 200);
+							return lib::scn::draw::Color(100, 200, 200);
 						}
 					}
 				}
@@ -84,25 +84,25 @@ namespace zoper
 			{
 				if (_level < 2)
 				{
-					return sf::Color::Black;
+					return lib::scn::draw::Color::Black;
 				}
 				else if (_level < 3)
 				{
-					return sf::Color(255, 128, 0);
+					return lib::scn::draw::Color(255, 128, 0);
 				}
 				else if (_level < 5)
 				{
-					return sf::Color(100, 128, 255);
+					return lib::scn::draw::Color(100, 128, 255);
 				}
 				else if (_level < 10)
 				{
 					if (_level % 2)
 					{
-						return (x % 2) ? sf::Color(0, 255, 255) : sf::Color(255, 100, 200);
+						return (x % 2) ? lib::scn::draw::Color(0, 255, 255) : lib::scn::draw::Color(255, 100, 200);
 					}
 					else
 					{
-						return (y % 2) ? sf::Color(0, 255, 255) : sf::Color(255, 100, 200);
+						return (y % 2) ? lib::scn::draw::Color(0, 255, 255) : lib::scn::draw::Color(255, 100, 200);
 					}
 				}
 				else if (_level < 15)
@@ -113,22 +113,22 @@ namespace zoper
 						{
 							if (y % 2)
 							{
-								return sf::Color(255, 255, 255);
+								return lib::scn::draw::Color(255, 255, 255);
 							}
 							else
 							{
-								return sf::Color(100, 100, 100);
+								return lib::scn::draw::Color(100, 100, 100);
 							}
 						}
 						else
 						{
 							if (y % 2)
 							{
-								return sf::Color(0, 128, 255);
+								return lib::scn::draw::Color(0, 128, 255);
 							}
 							else
 							{
-								return sf::Color(10, 250, 100);
+								return lib::scn::draw::Color(10, 250, 100);
 							}
 						}
 					}
@@ -138,36 +138,36 @@ namespace zoper
 						{
 							if (y % 2)
 							{
-								return sf::Color(25, 25, 25);
+								return lib::scn::draw::Color(25, 25, 25);
 							}
 							else
 							{
-								return sf::Color(10, 12, 250);
+								return lib::scn::draw::Color(10, 12, 250);
 							}
 						}
 						else
 						{
 							if (y % 2)
 							{
-								return sf::Color(250, 50, 10);
+								return lib::scn::draw::Color(250, 50, 10);
 							}
 							else
 							{
-								return sf::Color(10, 200, 10);
+								return lib::scn::draw::Color(10, 200, 10);
 							}
 						}
 					}
 				}
 				else if (_level < maxLevelWithProperties)
 				{
-					return sf::Color(static_cast<lib::u8>(_randomizer.getUInt(255, 0)), 
+					return lib::scn::draw::Color(static_cast<lib::u8>(_randomizer.getUInt(255, 0)), 
 						static_cast<lib::u8>(_randomizer.getUInt(255, 0)),
 						static_cast<lib::u8>(_randomizer.getUInt(255, 0)));
 				}
 
 			}
 		}
-		return sf::Color::Black;
+		return lib::scn::draw::Color::Black;
 	}
 
 }

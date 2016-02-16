@@ -31,7 +31,7 @@ namespace lib
 			return p_view.get();
 		}
 
-		const vector2df Scene::getCoordinatesToCenter(const sf::FloatRect &coordinates) const
+		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const
 		{
 			return{ getCenterCoordinates().x - (coordinates.width / 2.0f), getCenterCoordinates().y - (coordinates.height / 2.0f) };
 		}

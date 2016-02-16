@@ -21,7 +21,7 @@ namespace zoper
 		inline lib::u32 currentLevel() const { return _level; }
 		inline lib::u32 stayTokens() const { return _stayTokens; }
 		const lib::u32 maxLevelWithProperties{ 25u };
-		const sf::Color getBackgroundTileColor(const lib::u32 x, const lib::u32 y, const bool isCenter) const;
+		const lib::scn::draw::Color getBackgroundTileColor(const lib::u32 x, const lib::u32 y, const bool isCenter) const;
 	private:
 		lib::Randomizer _randomizer;
 		lib::u32 _level;

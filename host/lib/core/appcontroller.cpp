@@ -5,7 +5,6 @@
 #include <lib/draw/scene.hpp>
 #include "log.hpp"
 #include "eventmanager.hpp"
-#include <SFML/Config.hpp>
 
 namespace lib
 {

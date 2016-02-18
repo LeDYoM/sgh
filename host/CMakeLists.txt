@@ -25,7 +25,7 @@ file (GLOB_RECURSE LIB_HEADERS "${LIB_DIRECTORY}*.hpp")
 file (GLOB_RECURSE LIB_SOURCES "${LIB_DIRECTORY}*.cpp")
 
 #Add SFML directories
-link_directories ("${PROJECT_SOURCE_DIR}/SFML/lib")
+link_directories ("${PROJECT_SOURCE_DIR}/SFML/lib/win32/msvc")
 include_directories ("${PROJECT_SOURCE_DIR}/SFML/include")
 include_directories (${LIB_BASE_DIRECTORY})
 
@@ -68,7 +68,7 @@ target_link_libraries(${CURRENT_TARGET}
 	optimized sfml-graphics
 	optimized sfml-main
 )
-set (SFML_LINK_DLLS_DIR ${PROJECT_SOURCE_DIR}/SFML/shared/)
+set (SFML_LINK_DLLS_DIR ${PROJECT_SOURCE_DIR}/SFML/shared/win32/msvc)
 
 add_custom_target(copy_zoper_data)
 	add_custom_command(TARGET copy_zoper_data PRE_BUILD

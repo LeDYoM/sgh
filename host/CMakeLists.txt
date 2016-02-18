@@ -1,4 +1,3 @@
-# Properties->C/C++->General->Additional Include Directories
 set (LIB_BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 set (LIB_DIRECTORY "${LIB_BASE_DIRECTORY}lib/")
 
@@ -30,11 +29,24 @@ link_directories ("${PROJECT_SOURCE_DIR}/SFML/lib")
 include_directories ("${PROJECT_SOURCE_DIR}/SFML/include")
 include_directories (${LIB_BASE_DIRECTORY})
 
+#TO DO: Remove zoper from here
 file (GLOB ZOPER_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp")
 file (GLOB ZOPER_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
+set(CURRENT_TARGET host)
 
-add_executable (host ${ZOPER_HEADERS} ${ZOPER_SOURCES} ${LIB_HEADERS} ${LIB_SOURCES})
+add_executable (${CURRENT_TARGET} ${ZOPER_HEADERS} ${ZOPER_SOURCES} ${LIB_HEADERS} ${LIB_SOURCES})
+set(SGH_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
+set(SGH_INSTALL_DIRECTORY ${CMAKE_BINARY_DIR}/install)
+set_target_properties(${CURRENT_TARGET}
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY_DEBUG "${SGH_OUTPUT_DIRECTORY}"
+    ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${SGH_OUTPUT_DIRECTORY}"
+    LIBRARY_OUTPUT_DIRECTORY_DEBUG "${SGH_OUTPUT_DIRECTORY}"
+    LIBRARY_OUTPUT_DIRECTORY_RELEASE "${SGH_OUTPUT_DIRECTORY}"	
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${SGH_OUTPUT_DIRECTORY}"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${SGH_OUTPUT_DIRECTORY}"
+)
 
 # Define source groups for lib
 #source_group("lib\\Header Files" FILES ${LIB_HEADERS})
@@ -46,52 +58,47 @@ source_group("lib\\draw" FILES ${LIB_DRAW_HEADERS} ${LIB_DRAW_SOURCES})
 source_group("lib\\menu" FILES ${LIB_MENU_HEADERS} ${LIB_MENU_SOURCES})
 source_group("lib\\board" FILES ${LIB_BOARD_HEADERS} ${LIB_SOURCES})
 
-
-# Define SFML libraries depending on Configuration
-target_link_libraries(host 
+target_link_libraries(${CURRENT_TARGET} 
 	debug sfml-system-d
 	debug sfml-window-d
 	debug sfml-graphics-d
 	debug sfml-main-d
-	
 	optimized sfml-system
 	optimized sfml-window
 	optimized sfml-graphics
 	optimized sfml-main
-	)
-
+)
 set (SFML_LINK_DLLS_DIR ${PROJECT_SOURCE_DIR}/SFML/shared/)
-#message("SFML_LINK_DLLS_DIR:" ${SFML_LINK_DLLS_DIR})
-
-add_custom_target(copy_sfml)
-add_custom_command(TARGET copy_sfml PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy_directory
-	${SFML_LINK_DLLS_DIR}$<CONFIG>
-	$<TARGET_FILE_DIR:host>)
 
 add_custom_target(copy_zoper_data)
-add_custom_command(TARGET copy_zoper_data PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy_directory
-	${PROJECT_SOURCE_DIR}/zoper/data/
-	$<TARGET_FILE_DIR:host>)
+	add_custom_command(TARGET copy_zoper_data PRE_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+		${PROJECT_SOURCE_DIR}/zoper/data/
+		${SGH_OUTPUT_DIRECTORY})
 
+add_custom_target(copy_sfml_dlls)
+	add_custom_command(TARGET copy_sfml_dlls PRE_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+		${SFML_LINK_DLLS_DIR}
+		${SGH_OUTPUT_DIRECTORY})
 
-# Copy SFML dlls to Target directory
-#add_custom_command(TARGET host POST_BUILD
-#    COMMAND ${CMAKE_COMMAND} -E copy_directory
-#        ${SFML_LINK_DLLS_DIR}$<CONFIG>
-#        $<TARGET_FILE_DIR:host>)
-
-
-# Install part
-# Copy SFML to bin
-#add_custom_command(TARGET INSTALL POST_BUILD        # Adds a post-build event to MyTest
-#    COMMAND ${CMAKE_COMMAND} -E copy_directory  # which executes "cmake - E copy_if_different..."
-#        "${PROJECT_SOURCE_DIR}/SFML/shared"      # <--this is in-file
-#        "${PROJECT_BINARY_DIR}/bin")                 # <--this is out-file path
+if (MSVC)
+	file( WRITE "${CMAKE_CURRENT_BINARY_DIR}/${CURRENT_TARGET}.vcxproj.user" 
+    "<?xml version=\"1.0\" encoding=\"utf-8\"?>     \
+    <Project ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">
+    <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Debug|Win32'\">
+        <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+        <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    </PropertyGroup>
+    <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|Win32'\">
+        <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+        <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    </PropertyGroup>
+    </Project>")
+endif()
 		
 # Adds logic to INSTALL.vcproj to copy host.exe to destination directory
-install (TARGETS host RUNTIME DESTINATION ${PROJECT_BINARY_DIR}/bin)
-#install(FILES ${SFML_LINK_DLLS_DIR}$<CONFIG>/*.dll DESTINATION ${PROJECT_BINARY_DIR}/bin)
+install (TARGETS host RUNTIME DESTINATION ${SGH_INSTALL_DIRECTORY})
+#install(FILES ${SFML_LINK_DLLS_DIR}${CMAKE_BUILD_TYPE}/*.dll DESTINATION ${PROJECT_BINARY_DIR}/bin)
 # Copy all assets to resources file
 #INSTALL(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/assets/ DESTINATION ${INSTALL_PATH}/assets FILES_MATCHING PATTERN "*.dae"  PATTERN "*.jpg")

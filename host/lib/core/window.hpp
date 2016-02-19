@@ -14,7 +14,7 @@ namespace lib
 		struct WindowPrivate;
 		class AppController;
 
-		class Window : public AppService, public external::RenderWindow
+		class Window : public AppService, public RenderWindow
 		{
 		public:
 			Window(AppController *const appController, const WindowCreationParams &wcp);

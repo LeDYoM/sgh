@@ -37,18 +37,6 @@ namespace lib
 			s32 currentFps{ 0 };
 			Randomizer randomizer;
 		};
-		/*
-		Window::Window(ProgramController *parentController, const WindowCreationParams &wcp)
-			: p_wPrivate{ new WindowPrivate() }, p_parentController{ parentController }, _title(wcp.windowTitle)
-		{
-			__ASSERT(p_parentController, "Cannot create a Window with no parent");
-			create(wcp);
-
-			// Create the scene manager
-			p_sceneManager = sptr<lib::scn::SceneManager>(new lib::scn::SceneManager(this, p_parentController->resourceFile()));
-			p_sceneManager->addScenes(p_parentController->scenesVector());
-		}
-		*/
 		Window::Window(AppController *const appController, const WindowCreationParams &wcp)
 			: p_wPrivate{ new WindowPrivate() }, AppService{ appController }, _title(wcp.windowTitle)
 		{

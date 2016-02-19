@@ -55,7 +55,7 @@ namespace lib
 		protected:
 
 			void updateView();
-			sf::View *const getView() const;
+//			sf::View *const getView() const;
 			inline u32 state() const { return _state; }
 			inline void setState(u32 ns) { _state = ns; }
 

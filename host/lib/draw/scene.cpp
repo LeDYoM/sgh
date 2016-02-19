@@ -26,11 +26,12 @@ namespace lib
 			LOG_DEBUG("Scene view set to: center: " << p_view->getCenter().x << "," << p_view->getCenter().y << " and size: " << p_view->getSize().x << "," << p_view->getSize().y);
 		}
 
+		/*
 		sf::View *const Scene::getView() const
 		{
 			return p_view.get();
 		}
-
+		*/
 		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const
 		{
 			return{ getCenterCoordinates().x - (coordinates.width / 2.0f), getCenterCoordinates().y - (coordinates.height / 2.0f) };

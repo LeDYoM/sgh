@@ -9,6 +9,7 @@
 #include "events/event.hpp"
 #include "events/inputevent.hpp"
 #include "eventmanager.hpp"
+#include <lib/draw/view.hpp>
 
 namespace lib
 {
@@ -36,6 +37,7 @@ namespace lib
 			s32 lastFps{ 0 };
 			s32 currentFps{ 0 };
 			Randomizer randomizer;
+			sf::View m_view;
 		};
 		Window::Window(AppController *const appController, const WindowCreationParams &wcp)
 			: p_wPrivate{ new WindowPrivate() }, AppService{ appController }, _title(wcp.windowTitle)
@@ -135,5 +137,11 @@ namespace lib
 		{
 			_shouldClose = true;
 		}
+
+		void Window::updateView(const draw::View &view)
+		{
+			p_wPrivate->m_view.setCenter(view.target().center());
+		}
+
 	}
 }

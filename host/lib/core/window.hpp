@@ -8,7 +8,10 @@
 namespace lib
 {
 	struct WindowCreationParams;
-
+	namespace draw
+	{
+		class View;
+	}
 	namespace core
 	{
 		struct WindowPrivate;
@@ -26,6 +29,7 @@ namespace lib
 			u32 getRandomNumer(u32 max = 1, u32 min = 0);
 			void exitProgram();
 
+			void updateView(const draw::View &view);
 		private:
 			void create(const WindowCreationParams &wcp);
 			void keyEvent(sf::Event e);

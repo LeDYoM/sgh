@@ -5,7 +5,7 @@
 #include <lib/core/window.hpp>
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/resourcemanager.hpp>
-
+#include "view.hpp"
 namespace lib
 {
 	namespace scn
@@ -22,7 +22,8 @@ namespace lib
 
 		void Scene::updateView()
 		{
-			p_scnManager->appController->parentWindow()->setView(*p_view.get());
+//			p_scnManager->appController->parentWindow()->setView(*p_view.get());
+			p_scnManager->appController->parentWindow()->updateView(m_view);
 			LOG_DEBUG("Scene view set to: center: " << p_view->getCenter().x << "," << p_view->getCenter().y << " and size: " << p_view->getSize().x << "," << p_view->getSize().y);
 		}
 

@@ -19,6 +19,9 @@ namespace lib
 			left{ static_cast<T>(rectangle.left) }, top{ static_cast<T>(rectangle.top) },
 			width{ static_cast<T>(rectangle.width) }, height{ static_cast<T>(rectangle.height) } {}
 
+		vector2d<T> center() const { return vector2d<T> {left + (width / static_cast<T>(2)), 
+			top + (height / static_cast<T>(2))}; }
+
 		bool contains(T x, T y) const
 		{
 			T minX = std::min(left, static_cast<T>(left + width));
@@ -90,6 +93,7 @@ namespace lib
 
 	using Rects32 = lib::Rect<s32>;
 	using Rectf32 = sf::FloatRect;
+	using Rectf32_ = lib::Rect<f32>;
 	using Rectu32 = lib::Rect<u32>;
 }
 #endif

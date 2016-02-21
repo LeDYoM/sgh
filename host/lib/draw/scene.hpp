@@ -7,6 +7,7 @@
 #include <lib/include/key.hpp>
 #include <lib/core/timer.hpp>
 #include "rendergroup.hpp"
+#include "view.hpp"
 #include <string>
 
 namespace lib
@@ -53,9 +54,7 @@ namespace lib
 			void exitProgram();
 
 		protected:
-
 			void updateView();
-//			sf::View *const getView() const;
 			inline u32 state() const { return _state; }
 			inline void setState(u32 ns) { _state = ns; }
 
@@ -66,7 +65,7 @@ namespace lib
 			void privateOnEnterScene();
 			void privateOnExitScene();
 
-			uptr<sf::View> p_view;
+			View m_view;
 			u32 _state;
 
 			SceneManager *p_scnManager;

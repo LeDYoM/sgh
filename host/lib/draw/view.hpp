@@ -11,10 +11,12 @@ namespace lib
 		class View
 		{
 		public:
+			explicit View();
 			explicit View(const Rectf32 &rectangle);
 			View(const vector2df &topLeft, const vector2df &size);
 			inline const Rectf32_ &target() const { return m_target; }
 			inline Rectf32_ &target() { return m_target; }
+			inline void setSize(const vector2df &size);
 		private:
 			Rectf32_ m_target;
 		};

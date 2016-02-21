@@ -65,7 +65,7 @@ namespace lib
 			void privateOnEnterScene();
 			void privateOnExitScene();
 
-			View m_view;
+			lib::draw::View m_view;
 			u32 _state;
 
 			SceneManager *p_scnManager;

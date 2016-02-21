@@ -24,7 +24,7 @@ namespace lib
 		{
 //			p_scnManager->appController->parentWindow()->setView(*p_view.get());
 			p_scnManager->appController->parentWindow()->updateView(m_view);
-			LOG_DEBUG("Scene view set to: center: " << p_view->getCenter().x << "," << p_view->getCenter().y << " and size: " << p_view->getSize().x << "," << p_view->getSize().y);
+//			LOG_DEBUG("Scene view set to: center: " << p_view->getCenter().x << "," << p_view->getCenter().y << " and size: " << p_view->getSize().x << "," << p_view->getSize().y);
 		}
 
 		/*
@@ -35,21 +35,17 @@ namespace lib
 		*/
 		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const
 		{
-			return{ getCenterCoordinates().x - (coordinates.width / 2.0f), getCenterCoordinates().y - (coordinates.height / 2.0f) };
-		}
-
-		const vector2df Scene::getCenterCoordinates() const
-		{
-			return{ p_view->getSize().x / 2.0f, p_view->getSize().y / 2.0f };
+			return{ m_view.target().center().x - (coordinates.width / 2.0f), m_view.target().center().y - (coordinates.height / 2.0f) };
 		}
 
 		void Scene::privateOnInit()
 		{
 			LOG_DEBUG("Initializing scene " << name());
-			p_view = uptr<sf::View>(new sf::View(p_scnManager->appController->parentWindow()->getView()));
+//			p_view = uptr<sf::View>(new sf::View(p_scnManager->appController->parentWindow()->getView()));
 			auto sceneSize = getDefaultSizeView();
-			p_view->setSize(sceneSize.x, sceneSize.y);
-			p_view->setCenter(sceneSize.x / 2, sceneSize.y / 2);
+			m_view.setSize(sceneSize);
+//			p_view->setSize(sceneSize.x, sceneSize.y);
+	//		p_view->setCenter(sceneSize.x / 2, sceneSize.y / 2);
 			updateView();
 
 			LOG_DEBUG("Scene view set to: center: " << p_view->getCenter().x << "," << p_view->getCenter().y << " and size: " << p_view->getSize().x << "," << p_view->getSize().y);

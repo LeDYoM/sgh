@@ -6,22 +6,14 @@ namespace lib
 	namespace draw
 	{
 		Transformable::Transformable() :
-			m_origin(0, 0),
-			m_position(0, 0),
-			m_rotation(0),
-			m_scale(1, 1),
-			m_transform(),
-			m_transformNeedUpdate(true),
-			m_inverseTransform(),
-			m_inverseTransformNeedUpdate(true)
-		{
-		}
+			m_origin{ 0, 0 }, m_position{ 0, 0 }, m_rotation{ 0 }, m_scale{ 1, 1 },
+			m_transform{}, m_transformNeedUpdate{ true }, m_inverseTransform{}, m_inverseTransformNeedUpdate{ true } {}
 
 		Transformable::~Transformable()
 		{
 		}
 
-		void Transformable::setPosition(float x, float y)
+		void Transformable::setPosition(f32 x, f32 y)
 		{
 			m_position.x = x;
 			m_position.y = y;
@@ -29,14 +21,14 @@ namespace lib
 			m_inverseTransformNeedUpdate = true;
 		}
 
-		void Transformable::setPosition(const Vector2f& position)
+		void Transformable::setPosition(const vector2df &position)
 		{
 			setPosition(position.x, position.y);
 		}
 
-		void Transformable::setRotation(float angle)
+		void Transformable::setRotation(f32 angle)
 		{
-			m_rotation = static_cast<float>(fmod(angle, 360));
+			m_rotation = (fmod(angle, 360.f));
 			if (m_rotation < 0)
 				m_rotation += 360.f;
 
@@ -44,7 +36,7 @@ namespace lib
 			m_inverseTransformNeedUpdate = true;
 		}
 
-		void Transformable::setScale(float factorX, float factorY)
+		void Transformable::setScale(f32 factorX, f32 factorY)
 		{
 			m_scale.x = factorX;
 			m_scale.y = factorY;
@@ -52,12 +44,12 @@ namespace lib
 			m_inverseTransformNeedUpdate = true;
 		}
 
-		void Transformable::setScale(const Vector2f& factors)
+		void Transformable::setScale(const vector2df &factors)
 		{
 			setScale(factors.x, factors.y);
 		}
 
-		void Transformable::setOrigin(float x, float y)
+		void Transformable::setOrigin(f32 x, f32 y)
 		{
 			m_origin.x = x;
 			m_origin.y = y;
@@ -65,57 +57,57 @@ namespace lib
 			m_inverseTransformNeedUpdate = true;
 		}
 
-		void Transformable::setOrigin(const Vector2f& origin)
+		void Transformable::setOrigin(const vector2df &origin)
 		{
 			setOrigin(origin.x, origin.y);
 		}
 
-		const Vector2f& Transformable::getPosition() const
+		const Vector2f &Transformable::getPosition() const
 		{
 			return m_position;
 		}
 
-		float Transformable::getRotation() const
+		f32 Transformable::getRotation() const
 		{
 			return m_rotation;
 		}
 
-		const Vector2f& Transformable::getScale() const
+		const vector2df &Transformable::getScale() const
 		{
 			return m_scale;
 		}
 
-		const Vector2f& Transformable::getOrigin() const
+		const vector2df &Transformable::getOrigin() const
 		{
 			return m_origin;
 		}
 
-		void Transformable::move(float offsetX, float offsetY)
+		void Transformable::move(f32 offsetX, f32 offsetY)
 		{
 			setPosition(m_position.x + offsetX, m_position.y + offsetY);
 		}
 
-		void Transformable::move(const Vector2f& offset)
+		void Transformable::move(const vector2df &offset)
 		{
 			setPosition(m_position.x + offset.x, m_position.y + offset.y);
 		}
 
-		void Transformable::rotate(float angle)
+		void Transformable::rotate(f32 angle)
 		{
 			setRotation(m_rotation + angle);
 		}
 
-		void Transformable::scale(float factorX, float factorY)
+		void Transformable::scale(f32 factorX, f32 factorY)
 		{
 			setScale(m_scale.x * factorX, m_scale.y * factorY);
 		}
 
-		void Transformable::scale(const Vector2f& factor)
+		void Transformable::scale(const vector2df &factor)
 		{
 			setScale(m_scale.x * factor.x, m_scale.y * factor.y);
 		}
 
-		const Transform& Transformable::getTransform() const
+		const Transform &Transformable::getTransform() const
 		{
 			// Recompute the combined transform if needed
 			if (m_transformNeedUpdate)
@@ -139,9 +131,8 @@ namespace lib
 			return m_transform;
 		}
 
-		const Transform& Transformable::getInverseTransform() const
+		const Transform &Transformable::getInverseTransform() const
 		{
-			// Recompute the inverse transform if needed
 			if (m_inverseTransformNeedUpdate)
 			{
 				m_inverseTransform = getTransform().getInverse();

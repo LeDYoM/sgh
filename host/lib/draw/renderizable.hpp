@@ -5,6 +5,7 @@
 #include "idrawable.hpp"
 #include <SFML/Graphics.hpp>
 #include <lib/include/rect.hpp>
+#include "transformable.hpp"
 
 namespace lib
 {
@@ -17,7 +18,7 @@ namespace lib
 			Right = 2
 		};
 
-		class Renderizable : public lib::core::HasName, public IDrawable, public sf::Transformable
+		class Renderizable : public lib::core::HasName, public IDrawable, public Transformable
 		{
 		public:
 			explicit Renderizable(const std::string &name);
@@ -30,7 +31,7 @@ namespace lib
 			virtual Rectf32 getGlobalBounds() const = 0;
 
 			// Some useful shortcuts
-			using sf::Transformable::setPosition;
+			using Transformable::setPosition;
 			void setPosition(const sf::Vector2f &pos, Alignment alignment);
 			void setPositionX(const float x, Alignment alignment = Alignment::Left);
 			void setPositionY(const float y, Alignment alignment = Alignment::Left);

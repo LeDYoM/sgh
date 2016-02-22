@@ -13,7 +13,6 @@ namespace lib
 		Rect(T rectLeft, T rectTop, T rectWidth, T rectHeight) : left{ rectLeft }, top{ rectTop }, width{ rectWidth }, height{ rectHeight } { }
 		Rect() : Rect{ 0, 0, 0, 0 } {}
 		Rect(const vector2d<T>& position, const vector2d<T>& size) : Rect{ position.x, position.y, size.x, size.y } {}
-
 		template <typename U>
 		Rect(const Rect<U>& rectangle) :
 			left{ static_cast<T>(rectangle.left) }, top{ static_cast<T>(rectangle.top) },
@@ -92,7 +91,7 @@ namespace lib
 	};
 
 	using Rects32 = lib::Rect<s32>;
-	using Rectf32 = sf::FloatRect;
+	using Rectf32 = lib::Rect<f32>; //sf::FloatRect;
 	using Rectf32_ = lib::Rect<f32>;
 	using Rectu32 = lib::Rect<u32>;
 }

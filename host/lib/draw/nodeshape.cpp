@@ -1,4 +1,5 @@
 #include "NodeShape.hpp"
+#include <lib/core/convops.hpp>
 #include <lib/core/log.hpp>
 #include <lib/core/window.hpp>
 
@@ -158,7 +159,7 @@ namespace lib
 
 		Rectf32 NodeShape::getGlobalBounds() const
 		{
-			return getTransform().transformRect(getLocalBounds());
+			return convert(getTransform().transformRect(convert(getLocalBounds())));
 		}
 
 		void NodeShape::update()
@@ -180,7 +181,7 @@ namespace lib
 
 			// Update the bounding rectangle
 			m_vertices[0] = m_vertices[1]; // so that the result of getBounds() is correct
-			m_bounds = m_vertices.getBounds();
+			m_bounds = convert(m_vertices.getBounds());
 			// Compute the center and make it the first vertex
 			m_vertices[0].position.x = m_bounds.width / 2;
 			m_vertices[0].position.y = m_bounds.height / 2;

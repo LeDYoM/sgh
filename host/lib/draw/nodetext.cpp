@@ -1,6 +1,6 @@
 #include "nodetext.hpp"
+#include "lib/core/convops.hpp"
 #include <SFML/Graphics/Texture.hpp>
-
 #include <lib/core/window.hpp>
 
 namespace lib
@@ -147,7 +147,7 @@ namespace lib
 
 		Rectf32 NodeText::getGlobalBounds() const
 		{
-			return getTransform().transformRect(getLocalBounds());
+			return convert(getTransform().transformRect(convert(getLocalBounds())));
 		}
 
 		u32 NodeText::draw(lib::core::Window *window, RenderStates &states)
@@ -191,27 +191,27 @@ namespace lib
 			bool  bold = (m_style & Bold) != 0;
 			bool  underlined = (m_style & Underlined) != 0;
 			bool  strikeThrough = (m_style & StrikeThrough) != 0;
-			float italic = (m_style & Italic) ? 0.208f : 0.f; // 12 degrees
-			float underlineOffset = m_font->getUnderlinePosition(m_characterSize);
-			float underlineThickness = m_font->getUnderlineThickness(m_characterSize);
+			f32 italic = (m_style & Italic) ? 0.208f : 0.f; // 12 degrees
+			f32 underlineOffset = m_font->getUnderlinePosition(m_characterSize);
+			f32 underlineThickness = m_font->getUnderlineThickness(m_characterSize);
 
 			// Compute the location of the strike through dynamically
 			// We use the center point of the lowercase 'x' glyph as the reference
 			// We reuse the underline thickness as the thickness of the strike through as well
-			Rectf32 xBounds = m_font->getGlyph(L'x', m_characterSize, bold).bounds;
-			float strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
+			Rectf32 xBounds = convert(m_font->getGlyph(L'x', m_characterSize, bold).bounds);
+			f32 strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
 
 			// Precompute the variables needed by the algorithm
-			float hspace = static_cast<float>(m_font->getGlyph(L' ', m_characterSize, bold).advance);
-			float vspace = static_cast<float>(m_font->getLineSpacing(m_characterSize));
-			float x = 0.f;
-			float y = static_cast<float>(m_characterSize);
+			f32 hspace = static_cast<f32>(m_font->getGlyph(L' ', m_characterSize, bold).advance);
+			f32 vspace = static_cast<f32>(m_font->getLineSpacing(m_characterSize));
+			f32 x = 0.f;
+			f32 y = static_cast<f32>(m_characterSize);
 
 			// Create one quad for each character
-			float minX = static_cast<float>(m_characterSize);
-			float minY = static_cast<float>(m_characterSize);
-			float maxX = 0.f;
-			float maxY = 0.f;
+			f32 minX = static_cast<f32>(m_characterSize);
+			f32 minY = static_cast<f32>(m_characterSize);
+			f32 maxX = 0.f;
+			f32 maxY = 0.f;
 			u32 prevChar = 0;
 			for (u32 i = 0u; i < m_string.length(); ++i)
 			{
@@ -274,15 +274,15 @@ namespace lib
 				// Extract the current glyph's description
 				const sf::Glyph& glyph = m_font->getGlyph(curChar, m_characterSize, bold);
 
-				float left = glyph.bounds.left;
-				float top = glyph.bounds.top;
-				float right = glyph.bounds.left + glyph.bounds.width;
-				float bottom = glyph.bounds.top + glyph.bounds.height;
+				f32 left = glyph.bounds.left;
+				f32 top = glyph.bounds.top;
+				f32 right = glyph.bounds.left + glyph.bounds.width;
+				f32 bottom = glyph.bounds.top + glyph.bounds.height;
 
-				float u1 = static_cast<float>(glyph.textureRect.left);
-				float v1 = static_cast<float>(glyph.textureRect.top);
-				float u2 = static_cast<float>(glyph.textureRect.left + glyph.textureRect.width);
-				float v2 = static_cast<float>(glyph.textureRect.top + glyph.textureRect.height);
+				f32 u1 = static_cast<f32>(glyph.textureRect.left);
+				f32 v1 = static_cast<f32>(glyph.textureRect.top);
+				f32 u2 = static_cast<f32>(glyph.textureRect.left + glyph.textureRect.width);
+				f32 v2 = static_cast<f32>(glyph.textureRect.top + glyph.textureRect.height);
 
 				// Add a quad for the current character
 				m_vertices.append(Vertex(vector2df(x + left - italic * top, y + top), m_color, vector2df(u1, v1)));
@@ -305,8 +305,8 @@ namespace lib
 			// If we're using the underlined style, add the last line
 			if (underlined)
 			{
-				float top = std::floor(y + underlineOffset - (underlineThickness / 2) + 0.5f);
-				float bottom = top + std::floor(underlineThickness + 0.5f);
+				f32 top = std::floor(y + underlineOffset - (underlineThickness / 2) + 0.5f);
+				f32 bottom = top + std::floor(underlineThickness + 0.5f);
 
 				m_vertices.append(Vertex(vector2df(0, top), m_color, vector2df(1, 1)));
 				m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
@@ -319,8 +319,8 @@ namespace lib
 			// If we're using the strike through style, add the last line across all characters
 			if (strikeThrough)
 			{
-				float top = std::floor(y + strikeThroughOffset - (underlineThickness / 2) + 0.5f);
-				float bottom = top + std::floor(underlineThickness + 0.5f);
+				f32 top = std::floor(y + strikeThroughOffset - (underlineThickness / 2) + 0.5f);
+				f32 bottom = top + std::floor(underlineThickness + 0.5f);
 
 				m_vertices.append(Vertex(vector2df(0, top), m_color, vector2df(1, 1)));
 				m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));

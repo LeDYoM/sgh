@@ -47,6 +47,7 @@ namespace lib
 			uptr<core::ResourceManager> const &resourceManager();
 			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
 			inline const Rectf32_ &rectangleView() const { return m_view.target(); }
+			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
 
 			void exitProgram();
 

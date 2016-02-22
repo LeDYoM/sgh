@@ -19,7 +19,7 @@ namespace lib
 			left{ static_cast<T>(rectangle.left) }, top{ static_cast<T>(rectangle.top) },
 			width{ static_cast<T>(rectangle.width) }, height{ static_cast<T>(rectangle.height) } {}
 
-		vector2d<T> center() const { return vector2d<T> {left + (width / static_cast<T>(2)), 
+		inline vector2d<T> center() const { return vector2d<T> {left + (width / static_cast<T>(2)), 
 			top + (height / static_cast<T>(2))}; }
 
 		bool contains(T x, T y) const

@@ -544,14 +544,13 @@ namespace zoper
 
 	const lib::vector2df GameScene::board2Scene(const lib::vector2du32 &bPosition) const
 	{
-//		return lib::vector2df{ (getView()->getSize().x * bPosition.x) / static_cast<float>(p_boardModel->size().x),
-//			(getView()->getSize().y * bPosition.y) / static_cast<float>(p_boardModel->size().y) };
-		return lib::vector2df{};
+		return pointViewToCurrentView(lib::vector2df{ static_cast<lib::f32>(bPosition.x), static_cast<lib::f32>(bPosition.y) }, 
+			lib::vector2df{ static_cast<lib::f32>(p_boardModel->size().x), static_cast<lib::f32>(p_boardModel->size().y) });
 	}
 
 	const lib::vector2df GameScene::tileSize() const
 	{
-		return board2Scene(lib::vector2du32( 1, 1 ));
+		return board2Scene(lib::vector2du32{ 1, 1 });
 	}
 
 	void GameScene::_debugDisplayBoard() const
@@ -562,7 +561,7 @@ namespace zoper
 			for (lib::u32 x = 0; x < _gameData.size.x; ++x)
 			{
 				std::string chTemp;
-				auto lp_tile = p_boardModel->getTile(lib::vector2du32(x, y)).lock();
+				auto lp_tile = p_boardModel->getTile(lib::vector2du32{ x, y }).lock();
 				if (lp_tile)
 				{
 					chTemp = std::to_string(lp_tile->getData());

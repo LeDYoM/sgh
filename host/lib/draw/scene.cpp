@@ -74,6 +74,11 @@ namespace lib
 			onEnterScene();
 		}
 
+		lib::vector2df Scene::pointViewToCurrentView(const vector2df &point, const vector2df &size) const
+		{
+			return { (rectangleView().width * point.x) / size.x, (rectangleView().height * point.y) / size.y };
+		}
+
 		void Scene::privateOnExitScene()
 		{
 			onExitScene();

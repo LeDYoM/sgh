@@ -1,12 +1,7 @@
 #ifndef _LIB_NODETEXT_HPP__
 #define _LIB_NODETEXT_HPP__
 
-#include <SFML/Graphics/Export.hpp>
-#include <SFML/Graphics/Drawable.hpp>
-#include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/Rect.hpp>
-#include <SFML/Graphics/VertexArray.hpp>
 #include <string>
 #include <vector>
 

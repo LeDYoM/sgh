@@ -9,7 +9,7 @@
 
 namespace lib
 {
-	namespace scn
+	namespace draw
 	{
 		class SceneManager;
 		class Scene;
@@ -47,7 +47,7 @@ namespace lib
 			AppState m_state;
 			uptr<Window> m_window{ nullptr };
 			uptr<IApp> m_iapp{ nullptr };
-			uptr<scn::SceneManager> m_sceneManager{ nullptr };
+			uptr<draw::SceneManager> m_sceneManager{ nullptr };
 			uptr<ResourceManager> m_resourceManager{ nullptr };
 			uptr<EventManager> m_eventManager{ nullptr };
 

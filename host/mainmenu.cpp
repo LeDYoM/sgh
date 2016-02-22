@@ -48,11 +48,11 @@ namespace zoper
 			};
 			_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("mainmenu_chooseControl",
 				menuManager()->resourceManager()->getResource("game_menu.mainFont"),
-				lib::scn::draw::Color::Blue, lib::scn::draw::Color::Red,
-				lib::scn::draw::Alignment::Center,
+				lib::draw::Color::Blue, lib::draw::Color::Red,
+				lib::draw::Alignment::Center,
 				90, 1,
 				callBack,
-				lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 90.0f, 90.0f },lib::scn::draw::Color::Red)),
+				lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 90.0f, 90.0f },lib::draw::Color::Red)),
 				std::vector<lib::sptr<lib::menu::OptionDescriptor>>{
 				lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Play token mode")),
 					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Play time mode")),
@@ -60,7 +60,7 @@ namespace zoper
 				lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Exit"))
 			}));
 			addMenuControl(_chooseControl);
-			_chooseControl->setPosition(menuManager()->getCenterCoordinates().x, 700);
+			_chooseControl->setPosition(menuManager()->rectangleView().center().x, 700);
 		}
 	}
 }

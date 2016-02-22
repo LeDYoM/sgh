@@ -22,8 +22,8 @@ namespace lib
 		{
 		public:
 			ChooseControl(const std::string &name, sptr<core::Resource> font,
-				const lib::scn::draw::Color &textColor, const lib::scn::draw::Color &selectedTextColor,
-				const scn::draw::Alignment alignment,
+				const lib::draw::Color &textColor, const lib::draw::Color &selectedTextColor,
+				const draw::Alignment alignment,
 				u32 chSize, float incY, std::function<void(const u32,ChooseControl &self)> onSelected,
 				sptr<CursorDescriptor> cursorDescriptor, 
 				const std::vector<sptr<OptionDescriptor>> labels);
@@ -44,21 +44,21 @@ namespace lib
 
 			vector2df descriptorCursorSize;
 			u32 _cursorItemSelected{ 0 };
-			lib::scn::draw::Color _textColor;
-			lib::scn::draw::Color _selectedTextColor;
+			lib::draw::Color _textColor;
+			lib::draw::Color _selectedTextColor;
 
 			struct LabelData
 			{
 				std::vector<std::string> textSubLabel;
-				sptr<scn::draw::NodeText> subLabel{ nullptr };
-				sptr<scn::draw::NodeText> label{ nullptr };
+				sptr<draw::NodeText> subLabel{ nullptr };
+				sptr<draw::NodeText> label{ nullptr };
 				u32 selectedSublabel{ 0 };
-				LabelData(const std::vector<std::string> textSubLevel_, sptr<scn::draw::NodeText> subLabel_,
-					sptr<scn::draw::NodeText> label_, const u32 selectedSubLabel_)
+				LabelData(const std::vector<std::string> textSubLevel_, sptr<draw::NodeText> subLabel_,
+					sptr<draw::NodeText> label_, const u32 selectedSubLabel_)
 					: textSubLabel(textSubLevel_), subLabel{ subLabel_ }, label{ label_ }, selectedSublabel{ selectedSubLabel_ } {}
 			};
 			std::vector<LabelData> _labelData;
-			sptr<scn::draw::NodeShape> _cursor;
+			sptr<draw::NodeShape> _cursor;
 			std::function<void(const u32, ChooseControl &self)> _onSelected;
 		};
 	}

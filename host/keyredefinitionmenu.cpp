@@ -30,8 +30,8 @@ namespace zoper
 			_nextKeyText->setFont(*menuManager()->resourceManager()->getResource("game_menu.mainFont")->getAsFont());
 			_nextKeyText->setCharacterSize(90);
 			_nextKeyText->setString(" ");
-			_nextKeyText->setColor(lib::scn::draw::Color::Blue);
-			_nextKeyText->setPosition(sf::Vector2f{ 1000.0f, 1000.0f }, lib::scn::draw::Alignment::Center);
+			_nextKeyText->setColor(lib::draw::Color::Blue);
+			_nextKeyText->setPosition(sf::Vector2f{ 1000.0f, 1000.0f }, lib::draw::Alignment::Center);
 			_indexKey = 0;
 			setTextForKey();
 		}
@@ -62,7 +62,7 @@ namespace zoper
 			else
 			{
 				_nextKeyText->setString("Press key for "+getKeyNameStr(_indexKey));
-				_nextKeyText->setPosition(sf::Vector2f{ 1000.0,1000.0 }, lib::scn::draw::Alignment::Center);
+				_nextKeyText->setPosition(sf::Vector2f{ 1000.0,1000.0 }, lib::draw::Alignment::Center);
 			}
 		}
 

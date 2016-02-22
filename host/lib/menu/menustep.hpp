@@ -14,7 +14,7 @@ namespace lib
 	namespace menu
 	{
 		class MenuManager;
-		class MenuStep : public scn::draw::RenderGroup
+		class MenuStep : public draw::RenderGroup
 		{
 		public:
 			MenuStep(const std::string &name);

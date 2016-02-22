@@ -42,15 +42,12 @@ namespace lib
 	using vector2du8 = vector2d<u8>;
 	using vector2ds8 = vector2d<s8>;
 
-	namespace scn
+	namespace draw
 	{
-		namespace draw
-		{
-			using Color = sf::Color;
-			using RenderStates = sf::RenderStates;
-			using Vertex = sf::Vertex;
-			using VertexArray = sf::VertexArray;
-		}
+		using Color = sf::Color;
+		using RenderStates = sf::RenderStates;
+		using Vertex = sf::Vertex;
+		using VertexArray = sf::VertexArray;
 	}
 }
 

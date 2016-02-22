@@ -25,12 +25,12 @@ namespace lib
 		class CursorDescriptor
 		{
 		public:
-			explicit CursorDescriptor(const u32 nVertex, const vector2df &size, const lib::scn::draw::Color &color)
+			explicit CursorDescriptor(const u32 nVertex, const vector2df &size, const lib::draw::Color &color)
 				: _nVertex{ nVertex }, _size{ size }, _color{ color } {}
 
 			u32 _nVertex;
 			vector2df _size;
-			lib::scn::draw::Color _color;
+			lib::draw::Color _color;
 		};
 	}
 }

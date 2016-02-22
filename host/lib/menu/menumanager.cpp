@@ -7,7 +7,7 @@ namespace lib
 	namespace menu
 	{
 		MenuManager::MenuManager(const std::string &name)
-			: scn::Scene{ name }
+			: Scene{ name }
 		{
 //			_steps = stepsVector();
 //			getSteps();

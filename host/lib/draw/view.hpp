@@ -12,11 +12,16 @@ namespace lib
 		{
 		public:
 			explicit View();
-			explicit View(const Rectf32 &rectangle);
+			explicit View(const Rectf32_ &rectangle);
 			View(const vector2df &topLeft, const vector2df &size);
 			inline const Rectf32_ &target() const { return m_target; }
 			inline Rectf32_ &target() { return m_target; }
-			inline void setSize(const vector2df &size);
+			inline void setSize(const vector2df &size)
+			{
+				m_target.width = size.x;
+				m_target.height = size.y;
+			}
+
 		private:
 			Rectf32_ m_target;
 		};

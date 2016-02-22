@@ -39,7 +39,7 @@ namespace lib
 				m_eventManager = uptr<EventManager>(new EventManager(this));
 				m_window = uptr<Window>(new Window(this, m_iapp->getAppDescriptor().wcp));
 				m_resourceManager = uptr<ResourceManager>(new core::ResourceManager(this,m_iapp->getAppDescriptor().resourceFile));
-				m_sceneManager = uptr<scn::SceneManager>(new scn::SceneManager(this));
+				m_sceneManager = uptr<draw::SceneManager>(new draw::SceneManager(this));
 				m_sceneManager->addScenes(m_iapp->scenesVector());
 
 				m_iapp->onInit();

@@ -6,31 +6,32 @@
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include "view.hpp"
+
 namespace lib
 {
-	namespace scn
+	namespace draw
 	{
-		Scene::Scene(const std::string &_name) : RenderGroup{_name,nullptr}
+		Scene::Scene(const std::string &_name) : RenderGroup{ _name, nullptr }
 		{
 			LOG_CONSTRUCT("Name: " << name());
 		}
 
 		Scene::~Scene()
 		{
-			LOG_DESTRUCT("Name: "<<name());
+			LOG_DESTRUCT("Name: " << name());
 		}
 
 		void Scene::updateView()
 		{
-//			p_scnManager->appController->parentWindow()->setView(*p_view.get());
+			//			p_scnManager->appController->parentWindow()->setView(*p_view.get());
 			p_scnManager->appController->parentWindow()->updateView(m_view);
-//			LOG_DEBUG("Scene view set to: center: " << p_view->getCenter().x << "," << p_view->getCenter().y << " and size: " << p_view->getSize().x << "," << p_view->getSize().y);
+			//			LOG_DEBUG("Scene view set to: center: " << p_view->getCenter().x << "," << p_view->getCenter().y << " and size: " << p_view->getSize().x << "," << p_view->getSize().y);
 		}
 
 		/*
 		sf::View *const Scene::getView() const
 		{
-			return p_view.get();
+		return p_view.get();
 		}
 		*/
 		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const
@@ -41,14 +42,14 @@ namespace lib
 		void Scene::privateOnInit()
 		{
 			LOG_DEBUG("Initializing scene " << name());
-//			p_view = uptr<sf::View>(new sf::View(p_scnManager->appController->parentWindow()->getView()));
+			//			p_view = uptr<sf::View>(new sf::View(p_scnManager->appController->parentWindow()->getView()));
 			auto sceneSize = getDefaultSizeView();
 			m_view.setSize(sceneSize);
-//			p_view->setSize(sceneSize.x, sceneSize.y);
-	//		p_view->setCenter(sceneSize.x / 2, sceneSize.y / 2);
+			//			p_view->setSize(sceneSize.x, sceneSize.y);
+			//		p_view->setCenter(sceneSize.x / 2, sceneSize.y / 2);
 			updateView();
 
-			LOG_DEBUG("Scene view set to: center: " << p_view->getCenter().x << "," << p_view->getCenter().y << " and size: " << p_view->getSize().x << "," << p_view->getSize().y);
+			//			LOG_DEBUG("Scene view set to: center: " << m_view.target().center().x << "," << m_view.target().center().y << " and size: " << m_view.target().width << "," << m_view.target().height);
 
 			onInit();
 		}
@@ -63,11 +64,11 @@ namespace lib
 		{
 			LOG_DEBUG("Entered in scene " << name());
 			auto sceneSize = getDefaultSizeView();
-			p_view->setSize(sceneSize.x, sceneSize.y);
-			p_view->setCenter(sceneSize.x / 2, sceneSize.y / 2);
+			m_view.setSize(sceneSize);
+			//			m_view.setCenter(sceneSize.x / 2, sceneSize.y / 2);
 			updateView();
 
-			LOG_DEBUG("Scene view set to: center: " << p_view->getCenter().x << "," << p_view->getCenter().y << " and size: " << p_view->getSize().x << "," << p_view->getSize().y);
+			LOG_DEBUG("Scene view set to: center: " << m_view.target().center().x << "," << m_view.target().center().y << " and size: " << m_view.target().width << "," << m_view.target().height);
 
 			clock.restart();
 			onEnterScene();
@@ -104,6 +105,5 @@ namespace lib
 		{
 			p_scnManager->exitProgram();
 		}
-
 	}
 }

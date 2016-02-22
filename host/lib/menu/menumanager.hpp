@@ -10,7 +10,7 @@ namespace lib
 {
 	namespace menu
 	{
-		class MenuManager : public lib::scn::Scene
+		class MenuManager : public lib::draw::Scene
 		{
 		public:
 			MenuManager(const std::string &name);

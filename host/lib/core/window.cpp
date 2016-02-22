@@ -140,7 +140,9 @@ namespace lib
 
 		void Window::updateView(const draw::View &view)
 		{
+			p_wPrivate->m_view.setSize(view.target().width, view.target().height);
 			p_wPrivate->m_view.setCenter(view.target().center());
+			this->setView(p_wPrivate->m_view);
 		}
 
 	}

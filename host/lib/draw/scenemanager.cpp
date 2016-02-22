@@ -10,7 +10,7 @@
 
 namespace lib
 {
-	namespace scn
+	namespace draw
 	{
 		SceneManager::SceneManager(core::AppController *const appController) : AppService{ appController }
 		{
@@ -145,7 +145,7 @@ namespace lib
 				}
 			}
 
-			lib::scn::draw::RenderStates states;
+			lib::draw::RenderStates states;
 			_currentScene->draw(appController->parentWindow().get(), states);
 		}
 

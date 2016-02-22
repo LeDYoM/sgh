@@ -16,7 +16,7 @@ namespace lib
 			class EventReceiver;
 		}
 	}
-	namespace scn
+	namespace draw
 	{
 		class ResourceManager;
 		class Scene;

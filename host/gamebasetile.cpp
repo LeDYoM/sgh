@@ -6,7 +6,7 @@
 namespace zoper
 {
 	GameBaseTile::GameBaseTile(lib::board::BoardTileData data, const sf::Vector2f &size, const std::string &baseName) 
-		: lib::board::ITile{ data }, lib::scn::draw::NodeShape(baseName,size,30)
+		: lib::board::ITile{ data }, lib::draw::NodeShape(baseName,size,30)
 	{
 	}
 
@@ -14,30 +14,30 @@ namespace zoper
 	{
 	}
 
-	lib::scn::draw::Color GameBaseTile::getColorForToken() const
+	lib::draw::Color GameBaseTile::getColorForToken() const
 	{
 
-		lib::scn::draw::Color c;
+		lib::draw::Color c;
 
 		switch (getData())
 		{
 		case 0:
-			c = lib::scn::draw::Color::Red;
+			c = lib::draw::Color::Red;
 			break;
 		case 1:
-			c = lib::scn::draw::Color::Green;
+			c = lib::draw::Color::Green;
 			break;
 		case 2:
-			c = lib::scn::draw::Color::Blue;
+			c = lib::draw::Color::Blue;
 			break;
 		case 3:
-			c = lib::scn::draw::Color::Yellow;
+			c = lib::draw::Color::Yellow;
 			break;
 		case 4:
-			c = lib::scn::draw::Color::Magenta;
+			c = lib::draw::Color::Magenta;
 			break;
 		default:
-			c = lib::scn::draw::Color::White;
+			c = lib::draw::Color::White;
 			LOG_ERROR("Error value for token: " << getData() << " is not supported");
 			break;
 		}

@@ -6,23 +6,20 @@
 
 namespace lib
 {
-	namespace scn
+	namespace draw
 	{
-		namespace draw
+		namespace anim
 		{
-			namespace anim
+			class ColorAnimation : public IValueAnimation<lib::draw::Color>
 			{
-				class ColorAnimation : public IValueAnimation<lib::scn::draw::Color>
-				{
-				public:
-					ColorAnimation(const s32 duration, sptr<Renderizable> node, const lib::scn::draw::Color &startColor, const lib::scn::draw::Color &endColor);
-					static sptr<ColorAnimation> create(const s32 duration, sptr<Renderizable> node, const lib::scn::draw::Color &startColor, const lib::scn::draw::Color &endColor);
-					static sptr<ColorAnimation> create(const s32 duration, sptr<Renderizable> node, const lib::scn::draw::Color &endColor);
-					virtual ~ColorAnimation();
-					virtual bool animate();
-					virtual const std::string animationType() const { return "ColorAnimation"; }
-				};
-			}
+			public:
+				ColorAnimation(const s32 duration, sptr<Renderizable> node, const lib::draw::Color &startColor, const lib::draw::Color &endColor);
+				static sptr<ColorAnimation> create(const s32 duration, sptr<Renderizable> node, const lib::draw::Color &startColor, const lib::draw::Color &endColor);
+				static sptr<ColorAnimation> create(const s32 duration, sptr<Renderizable> node, const lib::draw::Color &endColor);
+				virtual ~ColorAnimation();
+				virtual bool animate();
+				virtual const std::string animationType() const { return "ColorAnimation"; }
+			};
 		}
 	}
 }

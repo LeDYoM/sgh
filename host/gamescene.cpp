@@ -89,17 +89,17 @@ namespace zoper
 		_goalDisplay->setCharacterSize(90);
 		_pauseText->setCharacterSize(180);
 
-		_scoreText->setColor(lib::scn::draw::Color::Blue);
-		_scoreDisplay->setColor(lib::scn::draw::Color::White);
-		_currentLevelText->setColor(lib::scn::draw::Color::Blue);
-		_currentLevelDisplay->setColor(lib::scn::draw::Color::White);
-		_gameText->setColor(lib::scn::draw::Color::White);
-		_overText->setColor(lib::scn::draw::Color::White);
-		_levelText->setColor(lib::scn::draw::Color::Blue);
-		_levelDisplay->setColor(lib::scn::draw::Color::White);
-		_goalText->setColor(lib::scn::draw::Color::Blue);
-		_goalDisplay->setColor(lib::scn::draw::Color::White);
-		_pauseText->setColor(lib::scn::draw::Color::White);
+		_scoreText->setColor(lib::draw::Color::Blue);
+		_scoreDisplay->setColor(lib::draw::Color::White);
+		_currentLevelText->setColor(lib::draw::Color::Blue);
+		_currentLevelDisplay->setColor(lib::draw::Color::White);
+		_gameText->setColor(lib::draw::Color::White);
+		_overText->setColor(lib::draw::Color::White);
+		_levelText->setColor(lib::draw::Color::Blue);
+		_levelDisplay->setColor(lib::draw::Color::White);
+		_goalText->setColor(lib::draw::Color::Blue);
+		_goalDisplay->setColor(lib::draw::Color::White);
+		_pauseText->setColor(lib::draw::Color::White);
 
 		_scoreText->setScale(1.0f, 2.0f);
 		_scoreDisplay->setScale(1.0f, 2.0f);
@@ -122,11 +122,11 @@ namespace zoper
 
 		auto _gameBoundingBox = _gameText->getLocalBounds();
 		auto _overBoundingBox = _overText->getLocalBounds();
-		auto sceneCenter = getCenterCoordinates();
+		auto sceneCenter = rectangleView().center();
 		_gameText->setPosition(sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height);
 		_overText->setPosition(sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y);
 
-		_pauseText->setPosition(sf::Vector2f{ 1000.0f, 1000.0f }, lib::scn::draw::Alignment::Center);
+		_pauseText->setPosition(sf::Vector2f{ 1000.0f, 1000.0f }, lib::draw::Alignment::Center);
 
 	}
 
@@ -208,8 +208,8 @@ namespace zoper
 		{
 			setState(Pause);
 			_pauserg->setVisible(true);
-			//_pauseText->getAsText()->setColor(lib::scn::draw::Color(255, 255, 255, 20));
-			addAnimation(lib::scn::draw::anim::ColorAnimation::create(1000, _pauseText, lib::scn::draw::Color(255, 255, 255, 0), lib::scn::draw::Color(255, 255, 255, 255)));
+			//_pauseText->getAsText()->setColor(lib::draw::Color(255, 255, 255, 20));
+			addAnimation(lib::draw::anim::ColorAnimation::create(1000, _pauseText, lib::draw::Color(255, 255, 255, 0), lib::draw::Color(255, 255, 255, 255)));
 			gameClock.pause();
 			return true;
 		}
@@ -463,16 +463,16 @@ namespace zoper
 		Scene::onKeyReleased(key);
 	}
 
-	void GameScene::onAnimationStarted(lib::sptr<lib::scn::draw::anim::IAnimation> anim, lib::sptr<lib::scn::draw::Renderizable> node)
+	void GameScene::onAnimationStarted(lib::sptr<lib::draw::anim::IAnimation> anim, lib::sptr<lib::draw::Renderizable> node)
 	{
 	}
 
-	void GameScene::onAnimationFinished(lib::sptr<lib::scn::draw::anim::IAnimation> anim, lib::sptr<lib::scn::draw::Renderizable> node)
+	void GameScene::onAnimationFinished(lib::sptr<lib::draw::anim::IAnimation> anim, lib::sptr<lib::draw::Renderizable> node)
 	{
 		if (anim->animationType() == "ColorAnimation" && node == _pauseText)
 		{
 			_pauserg->setVisible(state()==Pause);
-			_pauseText->setColor(lib::scn::draw::Color::White);
+			_pauseText->setColor(lib::draw::Color::White);
 		}
 		else if (anim->animationType() == "PositionAnimation" && node->name() == "pointIncrementScore")
 		{
@@ -518,7 +518,7 @@ namespace zoper
 			if (found)
 			{
 				auto node = createShape("pointIncrementScore", sf::Vector2f{ 15.0f,15.0f });
-				addAnimation(lib::scn::draw::anim::PositionAnimation::create(600, node, lastTokenPosition, lib::vector2df(450,100)));
+				addAnimation(lib::draw::anim::PositionAnimation::create(600, node, lastTokenPosition, lib::vector2df(450,100)));
 			}
 			return result;
 		});
@@ -585,7 +585,7 @@ namespace zoper
 		_backgroundTilesrg = createNewRenderGroup("backgroundTiles", _mainBoardrg);
 		for (lib::u32 y = 0; y < _gameData.size.y; ++y)
 		{
-			std::vector<lib::sptr<lib::scn::draw::NodeShape>> column;
+			std::vector<lib::sptr<lib::draw::NodeShape>> column;
 
 			for (lib::u32 x = 0; x < _gameData.size.x; ++x)
 			{
@@ -600,7 +600,7 @@ namespace zoper
 				center.x -= (node->getLocalBounds().width / 2.0f);
 				center.y -= (node->getLocalBounds().height / 2.0f);
 				node->setPosition(center);
-				node->setColor(lib::scn::draw::Color::White);
+				node->setColor(lib::draw::Color::White);
 			}
 			_backgroundTiles.push_back(column);
 		}
@@ -660,7 +660,7 @@ namespace zoper
 	void GameScene::tokenMoved(const lib::vector2du32 &source, const lib::vector2du32 &dest, lib::sptr<Tile> tile)
 	{
 		source;
-		addAnimation(lib::scn::draw::anim::PositionAnimation::create(_levelProperties.millisBetweenTokens() / 2, tile, board2Scene(dest)));
+		addAnimation(lib::draw::anim::PositionAnimation::create(_levelProperties.millisBetweenTokens() / 2, tile, board2Scene(dest)));
 	}
 
 	void GameScene::tokenAppeared(const lib::vector2du32 &position, lib::sptr<Tile> tile)

@@ -11,8 +11,8 @@ namespace lib
 	namespace menu
 	{
 		ChooseControl::ChooseControl(const std::string &name, sptr<core::Resource> font, 
-			const lib::scn::draw::Color &textColor, const lib::scn::draw::Color &selectedTextColor,
-			const scn::draw::Alignment alignment,
+			const lib::draw::Color &textColor, const lib::draw::Color &selectedTextColor,
+			const draw::Alignment alignment,
 			u32 chSize,float incY,
 			std::function<void(const u32, ChooseControl &self)> onSelected,
 			sptr<CursorDescriptor> cursorDescriptor, 
@@ -37,7 +37,7 @@ namespace lib
 				text->setPositionX(0, alignment);
 				text->setPositionY(currentPos.y);
 
-				sptr<scn::draw::NodeText> subtext{ nullptr };
+				sptr<draw::NodeText> subtext{ nullptr };
 				if (labels[count]->_subOptionsLabels.size()>0)
 				{
 					subtext = createText("sub_name" + count);
@@ -45,7 +45,7 @@ namespace lib
 					subtext->setCharacterSize(chSize);
 					subtext->setString(labels[count]->_subOptionsLabels[labels[count]->_startValueIndex]);
 					subtext->setColor(textColor);
-					subtext->setPositionX(1800, lib::scn::draw::Alignment::Right);
+					subtext->setPositionX(1800, lib::draw::Alignment::Right);
 					subtext->setPositionY(currentPos.y);
 				}
 
@@ -115,7 +115,7 @@ namespace lib
 		void ChooseControl::updateSubLabelText(const u32 index)
 		{
 			_labelData[index].subLabel->setString(_labelData[index].textSubLabel[_labelData[index].selectedSublabel]);
-			_labelData[index].subLabel->setPositionX(1800.0f, lib::scn::draw::Alignment::Right);
+			_labelData[index].subLabel->setPositionX(1800.0f, lib::draw::Alignment::Right);
 		}
 
 		void ChooseControl::cursorSelectItem(u32 nodeIndex)
@@ -139,7 +139,7 @@ namespace lib
 
 			_cursor->setRotation(90);
 			
-			addAnimation(scn::draw::anim::PositionAnimation::create(120, _cursor, 
+			addAnimation(draw::anim::PositionAnimation::create(120, _cursor, 
 				vector2df{ selectedText->getPosition().x - descriptorCursorSize.x, selectedText->getPosition().y }));
 		}
 

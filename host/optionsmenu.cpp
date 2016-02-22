@@ -70,11 +70,11 @@ namespace zoper
 
 			_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("optionsmenu_chooseControl",
 				menuManager()->resourceManager()->getResource("game_menu.mainFont"),
-				lib::scn::draw::Color::Blue, lib::scn::draw::Color::Red,
-				lib::scn::draw::Alignment::Left,
+				lib::draw::Color::Blue, lib::draw::Color::Red,
+				lib::draw::Alignment::Left,
 				70, 1,
 				callBack,
-				lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 70.0f, 70.0f }, lib::scn::draw::Color::Red)),
+				lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 70.0f, 70.0f }, lib::draw::Color::Red)),
 				std::vector<lib::sptr<lib::menu::OptionDescriptor>>{
 				lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Antialiasing", 
 					true, 0, std::vector<std::string>{"Worst", "Bad", "Normal", "Good", "Best"})),

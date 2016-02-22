@@ -74,21 +74,21 @@ namespace lib
 			}
 		}
 
-		bool operator==(const Rect<T> &r)
+		inline bool operator==(const Rect<T> &r)
 		{
 			return (left == r.left && width == r.width && top == r.top && height == r.height);
 		}
 
-		bool operator!=(const Rect<T> &r)
+		inline bool operator!=(const Rect<T> &r)
 		{
 			return !(operator==(r));
 		}
 
-		vector2d<T> origin() const { return vector2d<T>(left, top); }
-		vector2d<T> size() const { return vector2d<T>(width, height); }
-		T destX() const { return left + width; }
-		T destY() const { return top + height; }
-		vector2d<T> dest() const { return vector2d<T>(destX(), destY()); }
+		inline vector2d<T> origin() const { return vector2d<T>(left, top); }
+		inline vector2d<T> size() const { return vector2d<T>(width, height); }
+		inline T destX() const { return left + width; }
+		inline T destY() const { return top + height; }
+		inline vector2d<T> dest() const { return vector2d<T>{destX(), destY()}; }
 	};
 
 	using Rects32 = lib::Rect<s32>;

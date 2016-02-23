@@ -39,48 +39,48 @@ namespace lib
 				Transformable::setPosition(pos);
 				break;
 			case lib::draw::Alignment::Center:
-				Transformable::setPosition(sf::Vector2f{ pos.x - (getLocalBounds().width / 2.0f), pos.y - (getLocalBounds().height / 2.0f) });
+				Transformable::setPosition(lib::vector2df{ pos.x - (getLocalBounds().width / 2.0f), pos.y - (getLocalBounds().height / 2.0f) });
 				break;
 			case lib::draw::Alignment::Right:
-				Transformable::setPosition(sf::Vector2f{ pos.x - (getLocalBounds().width), pos.y - (getLocalBounds().height) });
+				Transformable::setPosition(lib::vector2df{ pos.x - (getLocalBounds().width), pos.y - (getLocalBounds().height) });
 				break;
 			}
 		}
 
 		void Renderizable::setPositionX(const float x, Alignment alignment /*= Alignment::Left*/)
 		{
-			const sf::Vector2f position( Transformable::getPosition() );
+			const lib::vector2df position( Transformable::getPosition() );
 			switch (alignment)
 			{
 			default:
 			case lib::draw::Alignment::Left:
-				Transformable::setPosition(sf::Vector2f{ x, position.y });
+				Transformable::setPosition(lib::vector2df{ x, position.y });
 				break;
 			case lib::draw::Alignment::Center:
 			{
-				Transformable::setPosition(sf::Vector2f{ x - (getLocalBounds().width / 2.0f), position.y });
+				Transformable::setPosition(lib::vector2df{ x - (getLocalBounds().width / 2.0f), position.y });
 			}
 				break;
 			case lib::draw::Alignment::Right:
-				Transformable::setPosition(sf::Vector2f{ x - (getLocalBounds().width), position.y });
+				Transformable::setPosition(lib::vector2df{ x - (getLocalBounds().width), position.y });
 				break;
 			}
 		}
 
 		void Renderizable::setPositionY(const float y, Alignment alignment /*= Alignment::Left*/)
 		{
-			const sf::Vector2f position(Transformable::getPosition());
+			const lib::vector2df position(Transformable::getPosition());
 			switch (alignment)
 			{
 			default:
 			case lib::draw::Alignment::Left:
-				Transformable::setPosition(sf::Vector2f{ position.x, y });
+				Transformable::setPosition(lib::vector2df{ position.x, y });
 				break;
 			case lib::draw::Alignment::Center:
-				Transformable::setPosition(sf::Vector2f{ position.x, y - (getLocalBounds().height / 2.0f) });
+				Transformable::setPosition(lib::vector2df{ position.x, y - (getLocalBounds().height / 2.0f) });
 				break;
 			case lib::draw::Alignment::Right:
-				Transformable::setPosition(sf::Vector2f{ position.x, y - (getLocalBounds().height) });
+				Transformable::setPosition(lib::vector2df{ position.x, y - (getLocalBounds().height) });
 				break;
 			}
 		}

@@ -26,8 +26,8 @@ namespace lib
 			virtual ~RenderGroup();
 
 			sptr<NodeText> createText(const std::string &name);
-			sptr<NodeShape> createShape(const std::string &name,const sf::Vector2f &radius=sf::Vector2f(),u32 pointCount=30);
-			sptr<NodeShape> createSpriteShape(const std::string &name, const sf::Vector2f &radius = sf::Vector2f());
+			sptr<NodeShape> createShape(const std::string &name,const lib::vector2df &radius=lib::vector2df(),u32 pointCount=30);
+			sptr<NodeShape> createSpriteShape(const std::string &name, const lib::vector2df &radius = lib::vector2df());
 			sptr<draw::Renderizable> addRenderizable(sptr<Renderizable> newElement);
 			bool removeRenderizable(sptr<Renderizable> element);
 			void clear();

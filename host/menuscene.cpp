@@ -32,7 +32,7 @@ namespace zoper
 
 		_logo = createSpriteShape("mainLogo");
 		_logo->setTexture(resourceManager()->getResource("game_menu.logo")->getAsTexture(), true, false);
-		_logo->setSize(sf::Vector2f(800, 400));
+		_logo->setSize(lib::vector2df(800, 400));
 		_logo->setPositionX(rectangleView().center().x, lib::draw::Alignment::Center);
 		_logo->setPositionY(100);
 

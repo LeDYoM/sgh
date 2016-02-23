@@ -98,7 +98,7 @@ namespace lib
 		{
 			// Make sure that we have a valid font
 			if (!m_font)
-				return sf::Vector2f();
+				return lib::vector2df();
 
 			// Adjust the index if it's out of range
 			if (index > m_string.length())

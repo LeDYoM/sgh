@@ -31,14 +31,15 @@ namespace lib
 			Transform &scale(f32 scaleX, f32 scaleY, f32 centerX, f32 centerY);
 			Transform &scale(const vector2df &factors);
 			Transform &scale(const vector2df &factors, const vector2df &center);
+			Transform operator*(const Transform &right);
+			Transform &operator*=(const Transform &right);
+			vector2df operator*(const vector2df &right);
+
 			static const Transform Identity;
 		private:
 			f32 m_matrix[16]; ///< 4x4 matrix defining the transformation
 		};
 
-		Transform operator *(const Transform &left, const Transform &right);
-		Transform &operator *=(Transform &left, const Transform &right);
-		vector2df operator *(const Transform &left, const vector2df &right);
 	}
 }
 

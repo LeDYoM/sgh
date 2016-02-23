@@ -189,19 +189,19 @@ namespace lib
 			return scale(factors.x, factors.y, center.x, center.y);
 		}
 
-		Transform operator *(const Transform& left, const Transform& right)
+		Transform Transform::operator *(const Transform& right)
 		{
-			return Transform(left).combine(right);
+			return Transform(*this).combine(right);
 		}
 
-		Transform& operator *=(Transform& left, const Transform& right)
+		Transform &Transform::operator *=(const Transform& right)
 		{
-			return left.combine(right);
+			return combine(right);
 		}
 
-		vector2df operator *(const Transform &left, const vector2df &right)
+		vector2df Transform::operator *(const vector2df &right)
 		{
-			return left.transformPoint(right);
+			return transformPoint(right);
 		}
 	}
 }

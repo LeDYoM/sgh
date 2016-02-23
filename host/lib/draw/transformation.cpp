@@ -23,7 +23,7 @@ namespace lib
 			m_matrix[3] = a20; m_matrix[7] = a21; m_matrix[11] = 0.f; m_matrix[15] = a22;
 		}
 
-		const f32* Transformation::getMatrix() const
+		const Transformation::TransformationDataType &Transformation::getMatrix() const
 		{
 			return m_matrix;
 		}
@@ -31,13 +31,15 @@ namespace lib
 		Transformation Transformation::getInverse() const
 		{
 			// Compute the determinant
-			float det = m_matrix[0] * (m_matrix[15] * m_matrix[5] - m_matrix[7] * m_matrix[13]) -
+			f64 det_{ m_matrix[0] * (m_matrix[15] * m_matrix[5] - m_matrix[7] * m_matrix[13]) -
 				m_matrix[1] * (m_matrix[15] * m_matrix[4] - m_matrix[7] * m_matrix[12]) +
-				m_matrix[3] * (m_matrix[13] * m_matrix[4] - m_matrix[5] * m_matrix[12]);
+				m_matrix[3] * (m_matrix[13] * m_matrix[4] - m_matrix[5] * m_matrix[12]) };
+
+			f32 det{ static_cast<f32>(det_) };
 
 			// Compute the inverse if the determinant is not zero
 			// (don't use an epsilon because the determinant may *really* be tiny)
-			if (det != 0.f)
+			if (det_ != 0.f)
 			{
 				return Transformation{ (m_matrix[15] * m_matrix[5] - m_matrix[7] * m_matrix[13]) / det,
 					-(m_matrix[15] * m_matrix[4] - m_matrix[7] * m_matrix[12]) / det,
@@ -95,8 +97,8 @@ namespace lib
 
 		Transformation &Transformation::combine(const Transformation &transform)
 		{
-			const f32 *a = m_matrix;
-			const f32 *b = transform.m_matrix;
+			const TransformationDataType &a = m_matrix;
+			const TransformationDataType &b = transform.m_matrix;
 
 			*this = Transformation{ a[0] * b[0] + a[4] * b[1] + a[12] * b[3],
 				a[0] * b[4] + a[4] * b[5] + a[12] * b[7],

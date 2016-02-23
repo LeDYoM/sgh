@@ -3,6 +3,7 @@
 
 #include <lib/include/types.hpp>
 #include <lib/include/rect.hpp>
+#include <array>
 
 namespace lib
 {
@@ -11,12 +12,14 @@ namespace lib
 		class Transformation
 		{
 		public:
+			using TransformationDataType = std::array<f32, 16>;
+
 			Transformation();
 			Transformation(f32 a00, f32 a01, f32 a02,
 				f32 a10, f32 a11, f32 a12,
 				f32 a20, f32 a21, f32 a22);
 
-			const f32* getMatrix() const;
+			const TransformationDataType &getMatrix() const;
 			Transformation getInverse() const;
 			vector2df transformPoint(float x, float y) const;
 			vector2df transformPoint(const vector2df &point) const;
@@ -35,7 +38,7 @@ namespace lib
 			Transformation &operator*=(const Transformation &right);
 			vector2df operator*(const vector2df &right);
 		private:
-			f32 m_matrix[16]; ///< 4x4 matrix defining the transformation
+			TransformationDataType  m_matrix;
 		};
 
 	}

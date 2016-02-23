@@ -14,7 +14,7 @@ namespace lib
 
 	sf::Transform convert(const draw::Transformation &transform)
 	{
-		const f32 *f{ transform.getMatrix() };
+		const draw::Transformation::TransformationDataType &f{ transform.getMatrix() };
 		return sf::Transform{ f[0], f[1], /*f[2],*/ f[3], 
 			f[4], f[5], /*f[6],*/ f[7], 
 			/*f[8], f[9], f[10], f[11],*/

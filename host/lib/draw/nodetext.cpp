@@ -147,7 +147,7 @@ namespace lib
 
 		Rectf32 NodeText::getGlobalBounds() const
 		{
-			return convert(getTransform().transformRect(convert(getLocalBounds())));
+			return getTransform().transformRect(getLocalBounds());
 		}
 
 		u32 NodeText::draw(lib::core::Window *window, RenderStates &states)
@@ -156,11 +156,11 @@ namespace lib
 			{
 				ensureGeometryUpdate();
 
-				auto oldTransform = states.transform;
-				states.transform *= getTransform();
+				auto oldTransformation= states.transform;
+				states.transform *= convert(getTransform());
 				states.texture = &m_font->getTexture(m_characterSize);
 				window->draw(m_vertices, states);
-				states.transform = oldTransform;
+				states.transform = oldTransformation;
 				return 1;
 			}
 			return 0;

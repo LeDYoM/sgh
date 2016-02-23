@@ -7,7 +7,7 @@ namespace lib
 	{
 		Transformable::Transformable() :
 			m_origin{ 0, 0 }, m_position{ 0, 0 }, m_rotation{ 0 }, m_scale{ 1, 1 },
-			m_transform{}, m_transformNeedUpdate{ true }, m_inverseTransform{}, m_inverseTransformNeedUpdate{ true } {}
+			m_transformation{}, m_transformationNeedUpdate{ true }, m_inverseTransformation{}, m_inverseTransformationNeedUpdate{ true } {}
 
 		Transformable::~Transformable()
 		{
@@ -17,8 +17,8 @@ namespace lib
 		{
 			m_position.x = x;
 			m_position.y = y;
-			m_transformNeedUpdate = true;
-			m_inverseTransformNeedUpdate = true;
+			m_transformationNeedUpdate = true;
+			m_inverseTransformationNeedUpdate = true;
 		}
 
 		void Transformable::setPosition(const vector2df &position)
@@ -32,16 +32,16 @@ namespace lib
 			if (m_rotation < 0)
 				m_rotation += 360.f;
 
-			m_transformNeedUpdate = true;
-			m_inverseTransformNeedUpdate = true;
+			m_transformationNeedUpdate = true;
+			m_inverseTransformationNeedUpdate = true;
 		}
 
 		void Transformable::setScale(f32 factorX, f32 factorY)
 		{
 			m_scale.x = factorX;
 			m_scale.y = factorY;
-			m_transformNeedUpdate = true;
-			m_inverseTransformNeedUpdate = true;
+			m_transformationNeedUpdate = true;
+			m_inverseTransformationNeedUpdate = true;
 		}
 
 		void Transformable::setScale(const vector2df &factors)
@@ -53,8 +53,8 @@ namespace lib
 		{
 			m_origin.x = x;
 			m_origin.y = y;
-			m_transformNeedUpdate = true;
-			m_inverseTransformNeedUpdate = true;
+			m_transformationNeedUpdate = true;
+			m_inverseTransformationNeedUpdate = true;
 		}
 
 		void Transformable::setOrigin(const vector2df &origin)
@@ -107,10 +107,10 @@ namespace lib
 			setScale(m_scale.x * factor.x, m_scale.y * factor.y);
 		}
 
-		const Transform &Transformable::getTransform() const
+		const Transformation &Transformable::getTransform() const
 		{
-			// Recompute the combined transform if needed
-			if (m_transformNeedUpdate)
+			// Recompute the combined transformation if needed
+			if (m_transformationNeedUpdate)
 			{
 				float angle = -m_rotation * 3.141592654f / 180.f;
 				float cosine = static_cast<float>(std::cos(angle));
@@ -122,24 +122,24 @@ namespace lib
 				float tx = -m_origin.x * sxc - m_origin.y * sys + m_position.x;
 				float ty = m_origin.x * sxs - m_origin.y * syc + m_position.y;
 
-				m_transform = Transform(sxc, sys, tx,
+				m_transformation= Transformation{ sxc, sys, tx,
 					-sxs, syc, ty,
-					0.f, 0.f, 1.f);
-				m_transformNeedUpdate = false;
+					0.f, 0.f, 1.f };
+				m_transformationNeedUpdate = false;
 			}
 
-			return m_transform;
+			return m_transformation;
 		}
 
-		const Transform &Transformable::getInverseTransform() const
+		const Transformation &Transformable::getInverseTransform() const
 		{
-			if (m_inverseTransformNeedUpdate)
+			if (m_inverseTransformationNeedUpdate)
 			{
-				m_inverseTransform = getTransform().getInverse();
-				m_inverseTransformNeedUpdate = false;
+				m_inverseTransformation= getTransform().getInverse();
+				m_inverseTransformationNeedUpdate = false;
 			}
 
-			return m_inverseTransform;
+			return m_inverseTransformation;
 		}
 	}
 }

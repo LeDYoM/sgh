@@ -159,7 +159,7 @@ namespace lib
 
 		Rectf32 NodeShape::getGlobalBounds() const
 		{
-			return convert(getTransform().transformRect(convert(getLocalBounds())));
+			return getTransform().transformRect(getLocalBounds());
 		}
 
 		void NodeShape::update()
@@ -195,22 +195,15 @@ namespace lib
 
 		u32 NodeShape::draw(lib::core::Window *window, lib::draw::RenderStates &states)
 		{
-			auto oldTransform = states.transform;
-			states.transform *= getTransform();
+			auto oldTransformation= states.transform;
+			states.transform *= convert(getTransform());
 
 			// Render the inside
 			states.texture = m_texture;
 			window->draw(m_vertices, states);
 
-			states.transform = oldTransform;
+			states.transform = oldTransformation;
 			return 1;
-
-			// Render the outline
-//				if (m_outlineThickness != 0)
-//				{
-//					states.texture = NULL;
-//					window->draw(m_outlineVertices, states);
-//				}
 		}
 
 		void NodeShape::updateFillColors()

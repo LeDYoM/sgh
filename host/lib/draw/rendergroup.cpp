@@ -2,6 +2,7 @@
 #include "renderizable.hpp"
 #include "nodeshape.hpp"
 #include "nodetext.hpp"
+#include <lib/core/convops.hpp>
 #include <lib/core/window.hpp>
 
 namespace lib
@@ -58,7 +59,7 @@ namespace lib
 				updateAnimations();
 				u32 rNodes{ 0 };
 				auto oldTransformation = states.transform;
-				states.transform *= getTransform();
+				states.transform *= convert(getTransform());
 
 				for (const auto renderizable : _renderNodes)
 				{

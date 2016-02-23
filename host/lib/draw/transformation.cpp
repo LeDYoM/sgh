@@ -5,8 +5,6 @@ namespace lib
 {
 	namespace draw
 	{
-		const Transformation Transformation::Identity;
-
 		Transformation::Transformation()
 		{
 			m_matrix[0] = 1.f; m_matrix[4] = 0.f; m_matrix[8] = 0.f; m_matrix[12] = 0.f;
@@ -53,7 +51,7 @@ namespace lib
 			}
 			else
 			{
-				return Identity;
+				return Transformation{};
 			}
 		}
 

@@ -34,8 +34,6 @@ namespace lib
 			Transformation operator*(const Transformation &right);
 			Transformation &operator*=(const Transformation &right);
 			vector2df operator*(const vector2df &right);
-
-			static const Transformation Identity;
 		private:
 			f32 m_matrix[16]; ///< 4x4 matrix defining the transformation
 		};

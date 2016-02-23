@@ -32,9 +32,9 @@ namespace lib
 
 			// Some useful shortcuts
 			using Transformable::setPosition;
-			void setPosition(const sf::Vector2f &pos, Alignment alignment);
-			void setPositionX(const float x, Alignment alignment = Alignment::Left);
-			void setPositionY(const float y, Alignment alignment = Alignment::Left);
+			void setPosition(const vector2df &pos, Alignment alignment);
+			void setPositionX(const f32 x, Alignment alignment = Alignment::Left);
+			void setPositionY(const f32 y, Alignment alignment = Alignment::Left);
 			void setAlignment(Alignment alignment);
 		};
 	}

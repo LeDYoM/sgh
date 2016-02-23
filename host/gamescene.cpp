@@ -165,7 +165,7 @@ namespace zoper
 		}
 
 		_levelDisplay->setPositionX(_levelText->getLocalBounds().width);
-		_goalDisplay->setPosition(sf::Vector2f{ _goalText->getLocalBounds().width, 200 });
+		_goalDisplay->setPosition(lib::vector2df{ _goalText->getLocalBounds().width, 200 });
 
 
 		setState(Playing);

@@ -30,7 +30,7 @@ namespace lib
 		{
 		}
 
-		void Renderizable::setPosition(const sf::Vector2f &pos, Alignment alignment)
+		void Renderizable::setPosition(const vector2df &pos, Alignment alignment)
 		{
 			switch (alignment)
 			{

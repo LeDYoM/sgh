@@ -193,7 +193,7 @@ namespace lib
 			updateTexCoords();
 		}
 
-		u32 NodeShape::draw(lib::core::Window *window, lib::draw::RenderStates &states)
+		u32 NodeShape::draw(lib::core::Window *window, RenderStates &states)
 		{
 			auto oldTransformation= states.transform;
 			states.transform *= getTransform();

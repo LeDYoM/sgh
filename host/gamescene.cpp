@@ -15,6 +15,8 @@
 #include <lib/draw/nodetext.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
+#include <lib/util/randomizer.hpp>
+#include <lib/util/utilprovider.hpp>
 #include <memory>
 #include <functional>
 
@@ -329,12 +331,11 @@ namespace zoper
 		LOG_DEBUG("x1: " << currentTokenZone.zone.left << " y1: " << currentTokenZone.zone.top << 
 			" x2: " << currentTokenZone.zone.width << " y2: " << currentTokenZone.zone.height);
 
-		lib::u32 newToken = 0;// getRandomNumer(NUMTOKENS);
+		lib::u32 newToken{ utilProvider()->getRandomNumer(NUMTOKENS) };
+		lib::u32 sizep{ utilProvider()->getRandomNumer(currentTokenZone.size) };
 
-		lib::u32 sizep = 0;// getRandomNumer(currentTokenZone.size);
-
-		lib::u32 newX = currentTokenZone.zone.left + (currentTokenZone.direction.isHorizontal() ? 0 : sizep);
-		lib::u32 newY = currentTokenZone.zone.top + (currentTokenZone.direction.isHorizontal() ? sizep : 0);
+		lib::u32 newX{ currentTokenZone.zone.left + (currentTokenZone.direction.isHorizontal() ? 0 : sizep) };
+		lib::u32 newY{ currentTokenZone.zone.top + (currentTokenZone.direction.isHorizontal() ? sizep : 0) };
 		LOG_DEBUG("New tile pos: " << newX << "," << newY);
 
 		lib::vector2du32 loopPosition{ (currentTokenZone.direction.isHorizontal() ? currentTokenZone.zone.width : newX),

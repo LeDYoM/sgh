@@ -16,6 +16,10 @@ namespace lib
 	{
 		class ResourceManager;
 	}
+	namespace util
+	{
+		class UtilProvider;
+	}
 	namespace draw
 	{
 		class RenderGroup;
@@ -45,6 +49,8 @@ namespace lib
 
 			virtual const vector2df getDefaultSizeView() = 0;
 			uptr<core::ResourceManager> const &resourceManager();
+			uptr<util::UtilProvider> const &utilProvider();
+
 			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
 			inline const Rectf32_ &rectangleView() const { return m_view.target(); }
 			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;

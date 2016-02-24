@@ -106,6 +106,11 @@ namespace lib
 			return p_scnManager->appController->resourceManager();
 		}
 
+		uptr<util::UtilProvider> const & Scene::utilProvider()
+		{
+			return p_scnManager->appController->utilProvider();
+		}
+
 		void Scene::exitProgram()
 		{
 			p_scnManager->exitProgram();

@@ -26,7 +26,6 @@ namespace lib
 			bool postLoop();
 			virtual void onCreate();
 			virtual void onDestroy();
-			u32 getRandomNumer(u32 max = 1, u32 min = 0);
 			void exitProgram();
 
 			void updateView(const draw::View &view);

@@ -3,6 +3,7 @@
 #include "resourcemanager.hpp"
 #include <lib/draw/scenemanager.hpp>
 #include <lib/draw/scene.hpp>
+#include <lib/util/utilprovider.hpp>
 #include "log.hpp"
 #include "eventmanager.hpp"
 
@@ -36,10 +37,11 @@ namespace lib
 				m_state = AppState::Executing;
 
 				//TO DO: Ask via requests
-				m_eventManager = uptr<EventManager>(new EventManager(this));
-				m_window = uptr<Window>(new Window(this, m_iapp->getAppDescriptor().wcp));
-				m_resourceManager = uptr<ResourceManager>(new core::ResourceManager(this,m_iapp->getAppDescriptor().resourceFile));
-				m_sceneManager = uptr<draw::SceneManager>(new draw::SceneManager(this));
+				m_eventManager = uptr<EventManager>{new EventManager(this)};
+				m_utilProvider = uptr<util::UtilProvider>{new util::UtilProvider{ this }};
+				m_window = uptr<Window>{new Window(this, m_iapp->getAppDescriptor().wcp)};
+				m_resourceManager = uptr<ResourceManager>{new ResourceManager(this, m_iapp->getAppDescriptor().resourceFile)};
+				m_sceneManager = uptr<draw::SceneManager>{new draw::SceneManager(this)};
 				m_sceneManager->addScenes(m_iapp->scenesVector());
 
 				m_iapp->onInit();
@@ -62,6 +64,7 @@ namespace lib
 				m_window = nullptr;
 				m_sceneManager = nullptr;
 				m_resourceManager = nullptr;
+				m_utilProvider = nullptr;
 				m_eventManager = nullptr;
 				LOG_DEBUG(appId() << ": " << " terminated");
 				return true;

@@ -1,5 +1,4 @@
 #include "levelproperties.hpp"
-#include <lib/core/randomizer.hpp>
 
 namespace zoper
 {
@@ -161,9 +160,10 @@ namespace zoper
 				}
 				else if (_level < maxLevelWithProperties)
 				{
-					return Color(static_cast<lib::u8>(_randomizer.getUInt(255, 0)), 
-						static_cast<lib::u8>(_randomizer.getUInt(255, 0)),
-						static_cast<lib::u8>(_randomizer.getUInt(255, 0)));
+					return Color{};
+//					return Color(static_cast<lib::u8>(_randomizer.getUInt(255, 0)), 
+//						static_cast<lib::u8>(_randomizer.getUInt(255, 0)),
+//						static_cast<lib::u8>(_randomizer.getUInt(255, 0)));
 				}
 
 			}

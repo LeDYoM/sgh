@@ -2,7 +2,6 @@
 #include "window.hpp"
 #include "compileconfig.hpp"
 #include "log.hpp"
-#include "randomizer.hpp"
 #include "timer.hpp"
 #include "appcontroller.hpp"
 #include <lib/include/iapp.hpp>
@@ -36,7 +35,6 @@ namespace lib
 			u64 lastTimeFps{ 0 };
 			s32 lastFps{ 0 };
 			s32 currentFps{ 0 };
-			Randomizer randomizer;
 			sf::View m_view;
 		};
 		Window::Window(AppController *const appController, const WindowCreationParams &wcp)
@@ -116,11 +114,6 @@ namespace lib
 			LOG_DEBUG("Going to close Window");
 			close();
 			LOG_DEBUG("Window closed");
-		}
-
-		u32 Window::getRandomNumer(u32 max /*= 1*/, u32 min /*= 0*/)
-		{
-			return p_wPrivate->randomizer.getUInt(max, min);
 		}
 
 		void Window::keyEvent(sf::Event e)

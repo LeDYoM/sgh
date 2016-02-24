@@ -2,7 +2,6 @@
 #define __LEVELPROPERTIES_HPP__
 
 #include <lib/include/types.hpp>
-#include <lib/core/randomizer.hpp>
 #include <SFML/Graphics/Color.hpp>
 
 namespace zoper
@@ -12,6 +11,7 @@ namespace zoper
 	public:
 		LevelProperties(const lib::u32 level = 0);
 		virtual ~LevelProperties();
+		LevelProperties &operator=(const LevelProperties &) = delete;
 
 		void setLevel(const lib::u32 level);
 
@@ -23,7 +23,6 @@ namespace zoper
 		const lib::u32 maxLevelWithProperties{ 25u };
 		const lib::draw::Color getBackgroundTileColor(const lib::u32 x, const lib::u32 y, const bool isCenter) const;
 	private:
-		lib::Randomizer _randomizer;
 		lib::u32 _level;
 		lib::u32 _millisBetweenTokens;
 		lib::u32 _baseScore;

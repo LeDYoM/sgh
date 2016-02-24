@@ -1,6 +1,8 @@
 #include "resourcemanager.hpp"
 #include "log.hpp"
 #include "resource.hpp"
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 namespace lib
 {

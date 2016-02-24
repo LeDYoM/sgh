@@ -46,8 +46,8 @@ namespace lib
 	{
 		using Color = sf::Color;
 //		using RenderStates = sf::RenderStates;
-		using Vertex = sf::Vertex;
-		using VertexArray = sf::VertexArray;
+//		using Vertex = sf::Vertex;
+//		using VertexArray = sf::VertexArray;
 	}
 }
 

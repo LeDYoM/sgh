@@ -6,9 +6,6 @@
 #include <lib/core/compileconfig.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Color.hpp>
-//#include <SFML/Graphics/RenderStates.hpp>
-#include <SFML/Graphics/VertexArray.hpp>
-#include <SFML/Graphics/Vertex.hpp>
 
 namespace lib
 {
@@ -45,9 +42,6 @@ namespace lib
 	namespace draw
 	{
 		using Color = sf::Color;
-//		using RenderStates = sf::RenderStates;
-//		using Vertex = sf::Vertex;
-//		using VertexArray = sf::VertexArray;
 	}
 }
 

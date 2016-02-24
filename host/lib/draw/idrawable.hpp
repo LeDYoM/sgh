@@ -2,6 +2,7 @@
 #define __LIB_IDRAWABLE_HPP__
 
 #include <lib/include/types.hpp>
+#include "renderstates.hpp"
 
 namespace lib
 {

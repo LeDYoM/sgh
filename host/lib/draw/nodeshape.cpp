@@ -200,7 +200,7 @@ namespace lib
 
 			// Render the inside
 			states.texture = m_texture;
-			window->draw(m_vertices, states);
+			window->draw(m_vertices, convert(states));
 
 			states.transform = oldTransformation;
 			return 1;

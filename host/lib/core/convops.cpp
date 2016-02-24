@@ -23,4 +23,9 @@ namespace lib
 		return temp;
 	}
 
+	sf::RenderStates convert(const draw::RenderStates &renderStates)
+	{
+		return sf::RenderStates{ renderStates.blendMode, renderStates.transform, renderStates.texture, renderStates.shader };
+	}
+
 }

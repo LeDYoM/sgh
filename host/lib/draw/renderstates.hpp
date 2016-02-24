@@ -2,7 +2,8 @@
 #define LIB_DRAW_RENDERSTATES_HPP
 
 #include <SFML/Graphics/BlendMode.hpp>
-#include <SFML/Graphics/Transform.hpp>
+//#include <SFML/Graphics/Transform.hpp>
+#include "transformation.hpp"
 
 namespace sf
 {
@@ -20,15 +21,15 @@ namespace lib
 		public:
 			RenderStates();
 			RenderStates(const sf::BlendMode &theBlendMode);
-			RenderStates(const sf::Transform &theTransform);
+			RenderStates(const Transformation &transformation);
 			RenderStates(const sf::Texture* theTexture);
 			RenderStates(const sf::Shader* theShader);
-			RenderStates(const sf::BlendMode &theBlendMode, const sf::Transform &theTransform,
+			RenderStates(const sf::BlendMode &theBlendMode, const Transformation &transformation,
 				const sf::Texture *theTexture, const sf::Shader *theShader);
-			static const RenderStates Default; ///< Special instance holding the default render states
+			static const RenderStates Default;
 
 			sf::BlendMode blendMode;
-			sf::Transform transform;
+			Transformation transform;
 			const sf::Texture* texture;
 			const sf::Shader*  shader;
 		};

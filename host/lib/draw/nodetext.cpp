@@ -157,7 +157,7 @@ namespace lib
 				ensureGeometryUpdate();
 
 				auto oldTransformation= states.transform;
-				states.transform *= convert(getTransform());
+				states.transform *= getTransform();
 				states.texture = &m_font->getTexture(m_characterSize);
 				window->draw(m_vertices, convert(states));
 				states.transform = oldTransformation;

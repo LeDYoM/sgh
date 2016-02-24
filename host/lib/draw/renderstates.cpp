@@ -13,8 +13,8 @@ namespace lib
 			: blendMode{ sf::BlendAlpha }, transform{}, texture{ nullptr }, shader{ nullptr } {}
 
 
-		RenderStates::RenderStates(const sf::Transform &theTransform)
-			: blendMode{ sf::BlendAlpha }, transform{ theTransform }, texture{ nullptr }, shader{ nullptr } {}
+		RenderStates::RenderStates(const Transformation &transformation)
+			: blendMode{ sf::BlendAlpha }, transform{ transformation }, texture{ nullptr }, shader{ nullptr } {}
 
 		RenderStates::RenderStates(const sf::BlendMode &theBlendMode)
 			: blendMode{ theBlendMode }, transform{}, texture{ nullptr }, shader{ nullptr } {}
@@ -25,8 +25,8 @@ namespace lib
 		RenderStates::RenderStates(const sf::Shader* theShader)
 			: blendMode{ sf::BlendAlpha }, transform{}, texture{ nullptr }, shader{ theShader } {}
 
-		RenderStates::RenderStates(const sf::BlendMode& theBlendMode, const sf::Transform& theTransform,
+		RenderStates::RenderStates(const sf::BlendMode& theBlendMode, const Transformation &transformation,
 			const sf::Texture* theTexture, const sf::Shader* theShader) 
-			: blendMode{ theBlendMode }, transform{ theTransform }, texture{ theTexture }, shader{ theShader } {}
+			: blendMode{ theBlendMode }, transform{ transformation }, texture{ theTexture }, shader{ theShader } {}
 	}
 }

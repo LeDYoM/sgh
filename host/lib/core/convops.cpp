@@ -25,7 +25,7 @@ namespace lib
 
 	sf::RenderStates convert(const draw::RenderStates &renderStates)
 	{
-		return sf::RenderStates{ renderStates.blendMode, renderStates.transform, renderStates.texture, renderStates.shader };
+		return sf::RenderStates{ renderStates.blendMode, convert(renderStates.transform), renderStates.texture, renderStates.shader };
 	}
 
 }

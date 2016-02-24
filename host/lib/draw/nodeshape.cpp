@@ -196,7 +196,7 @@ namespace lib
 		u32 NodeShape::draw(lib::core::Window *window, lib::draw::RenderStates &states)
 		{
 			auto oldTransformation= states.transform;
-			states.transform *= convert(getTransform());
+			states.transform *= getTransform();
 
 			// Render the inside
 			states.texture = m_texture;

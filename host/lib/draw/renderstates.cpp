@@ -10,20 +10,20 @@ namespace lib
 			sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add));
 
 		RenderStates::RenderStates()
-			: blendMode{ sf::BlendAlpha }, transform{}, texture{ nullptr }, shader{ nullptr } {}
+			: RenderStates{ sf::BlendAlpha, {}, nullptr, nullptr } {}
 
 
 		RenderStates::RenderStates(const Transformation &transformation)
-			: blendMode{ sf::BlendAlpha }, transform{ transformation }, texture{ nullptr }, shader{ nullptr } {}
+			: RenderStates{ sf::BlendAlpha, transformation, nullptr, nullptr } {}
 
 		RenderStates::RenderStates(const sf::BlendMode &theBlendMode)
-			: blendMode{ theBlendMode }, transform{}, texture{ nullptr }, shader{ nullptr } {}
+			: RenderStates{ theBlendMode, {}, nullptr, nullptr } {}
 
 		RenderStates::RenderStates(const sf::Texture* theTexture)
-			: blendMode{ sf::BlendAlpha }, transform{}, texture{ theTexture }, shader{ nullptr } {}
+			: RenderStates{ sf::BlendAlpha, {}, theTexture, nullptr } {}
 
 		RenderStates::RenderStates(const sf::Shader* theShader)
-			: blendMode{ sf::BlendAlpha }, transform{}, texture{ nullptr }, shader{ theShader } {}
+			: RenderStates{ sf::BlendAlpha, {}, nullptr, theShader } {}
 
 		RenderStates::RenderStates(const sf::BlendMode& theBlendMode, const Transformation &transformation,
 			const sf::Texture* theTexture, const sf::Shader* theShader) 

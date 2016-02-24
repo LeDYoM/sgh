@@ -159,7 +159,7 @@ namespace lib
 				auto oldTransformation= states.transform;
 				states.transform *= getTransform();
 				states.texture = &m_font->getTexture(m_characterSize);
-				window->draw(m_vertices, convert(states));
+				window->draw(convert(m_vertices), m_vertices.getVertexCount(), m_vertices.getPrimitiveType(),convert(states));
 				states.transform = oldTransformation;
 				return 1;
 			}

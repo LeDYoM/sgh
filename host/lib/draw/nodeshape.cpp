@@ -181,7 +181,7 @@ namespace lib
 
 			// Update the bounding rectangle
 			m_vertices[0] = m_vertices[1]; // so that the result of getBounds() is correct
-			m_bounds = convert(m_vertices.getBounds());
+			m_bounds = m_vertices.getBounds();
 			// Compute the center and make it the first vertex
 			m_vertices[0].position.x = m_bounds.width / 2;
 			m_vertices[0].position.y = m_bounds.height / 2;
@@ -200,7 +200,7 @@ namespace lib
 
 			// Render the inside
 			states.texture = m_texture;
-			window->draw(m_vertices, convert(states));
+			window->draw(convert(m_vertices), m_vertices.getVertexCount(), m_vertices.getPrimitiveType(), convert(states));
 
 			states.transform = oldTransformation;
 			return 1;

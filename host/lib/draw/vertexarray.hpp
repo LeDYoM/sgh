@@ -4,8 +4,8 @@
 #include <SFML/Graphics/PrimitiveType.hpp>
 #include "idrawable.hpp"
 #include "vertex.hpp"
-#include <vector>
 #include <lib/include/rect.hpp>
+#include <vector>
 
 namespace lib
 {

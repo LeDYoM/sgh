@@ -56,10 +56,10 @@ namespace lib
 		{
 			if (!m_vertices.empty())
 			{
-				float left = m_vertices[0].position.x;
-				float top = m_vertices[0].position.y;
-				float right = m_vertices[0].position.x;
-				float bottom = m_vertices[0].position.y;
+				f32 left = m_vertices[0].position.x;
+				f32 top = m_vertices[0].position.y;
+				f32 right = m_vertices[0].position.x;
+				f32 bottom = m_vertices[0].position.y;
 
 				for (std::size_t i = 1; i < m_vertices.size(); ++i)
 				{

@@ -2,8 +2,8 @@
 #define __LIB_ELLIPSESHAPE_HPP__
 
 #include <lib/include/types.hpp>
-#include <SFML/Graphics.hpp>
 #include "renderizable.hpp"
+#include "vertexarray.hpp"
 
 namespace lib
 {
@@ -50,7 +50,7 @@ namespace lib
 			lib::u32 m_pointCount;
 			Rects32 m_textureRect;
 			lib::draw::Color m_fillColor;
-			VertexArray m_vertices;
+			lib::draw::VertexArray m_vertices;
 			Rectf32 m_bounds;
 		};
 	}

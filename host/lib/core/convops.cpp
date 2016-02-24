@@ -28,4 +28,9 @@ namespace lib
 		return sf::RenderStates{ renderStates.blendMode, convert(renderStates.transform), renderStates.texture, renderStates.shader };
 	}
 
+	const sf::Vertex * convert(const draw::VertexArray &vertexArray)
+	{
+		return reinterpret_cast<const sf::Vertex*>(&(vertexArray[0]));
+	}
+
 }

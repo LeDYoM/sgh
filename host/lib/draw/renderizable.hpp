@@ -3,7 +3,6 @@
 
 #include "hasname.hpp"
 #include "idrawable.hpp"
-#include <SFML/Graphics.hpp>
 #include <lib/include/rect.hpp>
 #include "transformable.hpp"
 

@@ -9,6 +9,7 @@
 #include "events/inputevent.hpp"
 #include "eventmanager.hpp"
 #include <lib/draw/view.hpp>
+#include <SFML/Window/Event.hpp>
 
 namespace lib
 {

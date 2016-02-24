@@ -8,6 +8,8 @@
 
 #include "common.hpp"
 
+#include <SFML/Window/VideoMode.hpp>
+
 namespace zoper
 {
 	namespace zmenu

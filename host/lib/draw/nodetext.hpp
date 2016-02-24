@@ -2,6 +2,7 @@
 #define _LIB_NODETEXT_HPP__
 
 #include <SFML/Graphics/Font.hpp>
+#include "vertexarray.hpp"
 #include <string>
 #include <vector>
 

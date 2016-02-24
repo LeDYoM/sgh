@@ -1,9 +1,7 @@
 #ifndef LIB_DRAW_VERTEX_HPP
 #define LIB_DRAW_VERTEX_HPP
 
-#include <SFML/Graphics/Export.hpp>
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/System/Vector2.hpp>
+#include <lib/include/types.hpp>
 
 namespace lib
 {
@@ -13,14 +11,14 @@ namespace lib
 		{
 		public:
 			Vertex();
-			Vertex(const sf::Vector2f& thePosition);
-			Vertex(const sf::Vector2f& thePosition, const sf::Color& theColor);
-			Vertex(const sf::Vector2f& thePosition, const sf::Vector2f& theTexCoords);
-			Vertex(const sf::Vector2f& thePosition, const sf::Color& theColor, const sf::Vector2f& theTexCoords);
+			Vertex(const vector2df &thePosition);
+			Vertex(const vector2df &thePosition, const Color &theColor);
+			Vertex(const vector2df &thePosition, const vector2df &theTexCoords);
+			Vertex(const vector2df &thePosition, const Color &theColor, const vector2df &theTexCoords);
 
-			sf::Vector2f position;
-			sf::Color color;
-			sf::Vector2f texCoords;
+			vector2df position;
+			Color color;
+			vector2df texCoords;
 		};
 	}
 }

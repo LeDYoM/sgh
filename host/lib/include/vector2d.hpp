@@ -10,6 +10,10 @@ namespace lib
 
 		vector2d() : x{}, y{} {}
 		vector2d(T X, T Y) : x{ X }, y{ Y } {}
+		vector2d(const vector2d<T> &) = default;
+		vector2d(vector2d &&v) : x{ std::move(v.x) }, y{ std::move(v.y) } {}
+		vector2d &operator=(const vector2d<T> &) = default;
+		vector2d &operator=(vector2d<T> &&v) { x = std::move(v.x); y = std::move(v.y); return *this; }
 
 		template <typename U>
 		explicit vector2d(const vector2d<U>& vector) : x{ static_cast<T>(vector.x) }, y{ static_cast<T>(vector.y) } {}

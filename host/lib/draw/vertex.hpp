@@ -2,6 +2,7 @@
 #define LIB_DRAW_VERTEX_HPP
 
 #include <lib/include/types.hpp>
+#include <lib/include/color.hpp>
 
 namespace lib
 {

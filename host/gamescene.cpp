@@ -91,17 +91,17 @@ namespace zoper
 		_goalDisplay->setCharacterSize(90);
 		_pauseText->setCharacterSize(180);
 
-		_scoreText->setColor(lib::draw::Color::Blue);
-		_scoreDisplay->setColor(lib::draw::Color::White);
-		_currentLevelText->setColor(lib::draw::Color::Blue);
-		_currentLevelDisplay->setColor(lib::draw::Color::White);
-		_gameText->setColor(lib::draw::Color::White);
-		_overText->setColor(lib::draw::Color::White);
-		_levelText->setColor(lib::draw::Color::Blue);
-		_levelDisplay->setColor(lib::draw::Color::White);
-		_goalText->setColor(lib::draw::Color::Blue);
-		_goalDisplay->setColor(lib::draw::Color::White);
-		_pauseText->setColor(lib::draw::Color::White);
+		_scoreText->setColor(lib::draw::Color::Blue());
+		_scoreDisplay->setColor(lib::draw::Color::White());
+		_currentLevelText->setColor(lib::draw::Color::Blue());
+		_currentLevelDisplay->setColor(lib::draw::Color::White());
+		_gameText->setColor(lib::draw::Color::White());
+		_overText->setColor(lib::draw::Color::White());
+		_levelText->setColor(lib::draw::Color::Blue());
+		_levelDisplay->setColor(lib::draw::Color::White());
+		_goalText->setColor(lib::draw::Color::Blue());
+		_goalDisplay->setColor(lib::draw::Color::White());
+		_pauseText->setColor(lib::draw::Color::White());
 
 		_scoreText->setScale(1.0f, 2.0f);
 		_scoreDisplay->setScale(1.0f, 2.0f);
@@ -473,7 +473,7 @@ namespace zoper
 		if (anim->animationType() == "ColorAnimation" && node == _pauseText)
 		{
 			_pauserg->setVisible(state()==Pause);
-			_pauseText->setColor(lib::draw::Color::White);
+			_pauseText->setColor(lib::draw::Color::White());
 		}
 		else if (anim->animationType() == "PositionAnimation" && node->name() == "pointIncrementScore")
 		{
@@ -600,7 +600,7 @@ namespace zoper
 				center.x -= (node->getLocalBounds().width / 2.0f);
 				center.y -= (node->getLocalBounds().height / 2.0f);
 				node->setPosition(center);
-				node->setColor(lib::draw::Color::White);
+				node->setColor(lib::draw::Color::White());
 			}
 			_backgroundTiles.push_back(column);
 		}

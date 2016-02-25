@@ -5,7 +5,6 @@
 #include <memory>
 #include <lib/core/compileconfig.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <SFML/Graphics/Color.hpp>
 
 namespace lib
 {
@@ -38,11 +37,6 @@ namespace lib
 	using vector2df = vector2d<f32>;
 	using vector2du8 = vector2d<u8>;
 	using vector2ds8 = vector2d<s8>;
-
-	namespace draw
-	{
-		using Color = sf::Color;
-	}
 }
 
 

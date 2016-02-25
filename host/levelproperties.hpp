@@ -2,7 +2,7 @@
 #define __LEVELPROPERTIES_HPP__
 
 #include <lib/include/types.hpp>
-#include <SFML/Graphics/Color.hpp>
+#include <lib/include/color.hpp>
 
 namespace zoper
 {

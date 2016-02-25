@@ -152,12 +152,12 @@ namespace lib
 			return m_fillColor;
 		}
 
-		Rectf32 NodeShape::getLocalBounds() const
+		Rectf32 NodeShape::getLocalBounds()
 		{
 			return m_bounds;
 		}
 
-		Rectf32 NodeShape::getGlobalBounds() const
+		Rectf32 NodeShape::getGlobalBounds()
 		{
 			return getTransform().transformRect(getLocalBounds());
 		}

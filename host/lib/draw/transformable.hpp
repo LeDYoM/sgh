@@ -32,18 +32,18 @@ namespace lib
 			void rotate(f32 angle);
 			void scale(f32 factorX, f32 factorY);
 			void scale(const vector2df &factor);
-			const Transformation &getTransform() const;
-			const Transformation &getInverseTransform() const;
+			const Transformation &getTransform();
+			const Transformation &getInverseTransform();
 
 		private:
 			vector2df m_origin;
 			vector2df m_position;
 			f32 m_rotation;
 			vector2df m_scale;
-			mutable Transformation m_transformation;
-			mutable bool m_transformationNeedUpdate;
-			mutable Transformation m_inverseTransformation;
-			mutable bool m_inverseTransformationNeedUpdate;
+			Transformation m_transformation;
+			bool m_transformationNeedUpdate;
+			Transformation m_inverseTransformation;
+			bool m_inverseTransformationNeedUpdate;
 		};
 	}
 }

@@ -34,8 +34,8 @@ namespace lib
 			const Color& getFillColor() const;
 			const Color& getOutlineColor() const;
 			float getOutlineThickness() const;
-			Rectf32 getLocalBounds() const override;
-			Rectf32 getGlobalBounds() const override;
+			Rectf32 getLocalBounds() override;
+			Rectf32 getGlobalBounds() override;
 
 		protected:
 			void update();

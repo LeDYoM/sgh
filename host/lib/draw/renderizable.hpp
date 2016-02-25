@@ -3,7 +3,7 @@
 
 #include "hasname.hpp"
 #include "idrawable.hpp"
-#include <lib/include/rect.hpp>
+#include <lib/include/types.hpp>
 #include <lib/include/color.hpp>
 #include "transformable.hpp"
 
@@ -27,8 +27,8 @@ namespace lib
 			virtual u32 draw(lib::core::Window *window, lib::draw::RenderStates &states) override;
 			virtual void setColor(const lib::draw::Color &color) = 0;
 
-			virtual Rectf32 getLocalBounds() const = 0;
-			virtual Rectf32 getGlobalBounds() const = 0;
+			virtual Rectf32 getLocalBounds() = 0;
+			virtual Rectf32 getGlobalBounds() = 0;
 
 			// Some useful shortcuts
 			using Transformable::setPosition;

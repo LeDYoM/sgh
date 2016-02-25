@@ -62,7 +62,7 @@ namespace lib
 			setOrigin(origin.x, origin.y);
 		}
 
-		const Vector2f &Transformable::getPosition() const
+		const vector2df &Transformable::getPosition() const
 		{
 			return m_position;
 		}
@@ -107,7 +107,7 @@ namespace lib
 			setScale(m_scale.x * factor.x, m_scale.y * factor.y);
 		}
 
-		const Transformation &Transformable::getTransform() const
+		const Transformation &Transformable::getTransform()
 		{
 			// Recompute the combined transformation if needed
 			if (m_transformationNeedUpdate)
@@ -131,7 +131,7 @@ namespace lib
 			return m_transformation;
 		}
 
-		const Transformation &Transformable::getInverseTransform() const
+		const Transformation &Transformable::getInverseTransform()
 		{
 			if (m_inverseTransformationNeedUpdate)
 			{

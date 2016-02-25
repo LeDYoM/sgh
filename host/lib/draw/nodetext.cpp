@@ -94,7 +94,7 @@ namespace lib
 			return m_color;
 		}
 
-		vector2df NodeText::findCharacterPos(u32 index) const
+		vector2df NodeText::findCharacterPos(u32 index)
 		{
 			// Make sure that we have a valid font
 			if (!m_font)
@@ -138,14 +138,14 @@ namespace lib
 			return position;
 		}
 
-		Rectf32 NodeText::getLocalBounds() const
+		Rectf32 NodeText::getLocalBounds()
 		{
 			ensureGeometryUpdate();
 
 			return m_bounds;
 		}
 
-		Rectf32 NodeText::getGlobalBounds() const
+		Rectf32 NodeText::getGlobalBounds()
 		{
 			return getTransform().transformRect(getLocalBounds());
 		}
@@ -166,7 +166,7 @@ namespace lib
 			return 0;
 		}
 
-		void NodeText::ensureGeometryUpdate() const
+		void NodeText::ensureGeometryUpdate()
 		{
 			// Do nothing, if geometry has not changed
 //				if (!m_geometryNeedUpdate)

@@ -37,21 +37,21 @@ namespace lib
 			u32 getCharacterSize() const;
 			u32 getStyle() const;
 			const Color& getColor() const;
-			vector2df findCharacterPos(u32 index) const;
-			Rectf32 getLocalBounds() const;
-			Rectf32 getGlobalBounds() const;
+			vector2df findCharacterPos(u32 index);
+			Rectf32 getLocalBounds() override;
+			Rectf32 getGlobalBounds() override;
 		private:
 			virtual u32 draw(lib::core::Window *window, RenderStates &states) override;
-			void ensureGeometryUpdate() const;
+			void ensureGeometryUpdate();
 
 			std::string m_string;
 			const sf::Font* m_font;
 			u32 m_characterSize;
 			u32 m_style;
 			Color m_color;
-			mutable VertexArray m_vertices;
-			mutable Rectf32 m_bounds;
-			mutable bool m_geometryNeedUpdate;
+			VertexArray m_vertices;
+			Rectf32 m_bounds;
+			bool m_geometryNeedUpdate;
 		};
 	}
 }

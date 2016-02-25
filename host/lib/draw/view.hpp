@@ -2,7 +2,6 @@
 #define LIB_DRAW_VIEW_HPP
 
 #include <lib/include/types.hpp>
-#include <lib/include/rect.hpp>
 
 namespace lib
 {

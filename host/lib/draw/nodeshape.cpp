@@ -91,7 +91,7 @@ namespace lib
 			setTexture_(texture, resetRect);
 			if (resetSize)
 			{
-				setSize(static_cast<lib::vector2df>(texture->getSize()));
+				setSize(static_cast<lib::vector2df>(convert(texture->getSize())));
 			}
 		}
 
@@ -152,12 +152,12 @@ namespace lib
 			return m_fillColor;
 		}
 
-		Rectf32 NodeShape::getLocalBounds() const
+		Rectf32 NodeShape::getLocalBounds()
 		{
 			return m_bounds;
 		}
 
-		Rectf32 NodeShape::getGlobalBounds() const
+		Rectf32 NodeShape::getGlobalBounds()
 		{
 			return getTransform().transformRect(getLocalBounds());
 		}

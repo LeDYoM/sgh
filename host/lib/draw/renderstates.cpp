@@ -5,9 +5,9 @@ namespace lib
 {
 	namespace draw
 	{
-		const RenderStates RenderStates::Default(sf::BlendMode(
-			sf::BlendMode::SrcAlpha, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add,
-			sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add));
+//		const RenderStates RenderStates::Default(sf::BlendMode(
+//			sf::BlendMode::SrcAlpha, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add,
+//			sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add));
 
 		RenderStates::RenderStates()
 			: RenderStates{ sf::BlendAlpha, {}, nullptr, nullptr } {}

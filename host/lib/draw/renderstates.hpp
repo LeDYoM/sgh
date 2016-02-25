@@ -26,12 +26,12 @@ namespace lib
 			RenderStates(const sf::Shader* theShader);
 			RenderStates(const sf::BlendMode &theBlendMode, const Transformation &transformation,
 				const sf::Texture *theTexture, const sf::Shader *theShader);
-			static const RenderStates Default;
+			//static const RenderStates Default;
 
 			sf::BlendMode blendMode;
 			Transformation transform;
 			const sf::Texture* texture;
-			const sf::Shader*  shader;
+			const sf::Shader* shader;
 		};
 	}
 }

@@ -63,31 +63,31 @@ namespace lib
 
 		vector2d operator+(const vector2d &right) const
 		{
-			return (vector2d{ *this } += right);
+			return (vector2d(*this) += right);
 		}
 
 		vector2d operator-(const vector2d &right) const
 		{
-			return (vector2d{ *this } -= right);
+			return (vector2d(*this) -= right);
 		}
 
 		vector2d operator*(const vector2d &right) const
 		{
-			return (vector2d{ *this } *= right);
+			return (vector2d(*this) *= right);
 		}
 		vector2d operator/(const vector2d &right) const
 		{
-			return (vector2d{ *this } /= right);
+			return (vector2d(*this) /= right);
 		}
 
 		vector2d operator*(const T &right) const
 		{
-			return (vector2d{ *this } *= right);
+			return (vector2d(*this) *= right);
 		}
 
 		vector2d operator/(const T &right) const
 		{
-			return (vector2d{ *this } /= right);
+			return (vector2d(*this) /= right);
 		}
 
 		bool operator ==(const vector2d &right) const

@@ -22,7 +22,7 @@ namespace lib
 				a{ static_cast<u8>((color & 0x000000ff) >> 0) } {}
 
 			u32 toInteger() const { return (r << 24) | (g << 16) | (b << 8) | a; }
-			Color(Color&&right) { *this = std::move(right); }
+			Color(const Color&) = default;
 
 			bool operator ==(const Color& right) const
 			{
@@ -36,17 +36,17 @@ namespace lib
 
 			Color operator+(const Color& right) const
 			{
-				return (Color{ *this } += right);
+				return (Color(*this) += right);
 			}
 
 			Color operator -(const Color& right) const
 			{
-				return (Color{ *this } -= right);
+				return (Color(*this) -= right);
 			}
 
 			Color operator*(const Color& right) const
 			{
-				return (Color{ *this } *= right);
+				return (Color(*this) *= right);
 			}
 
 			Color &operator +=(const Color& right)

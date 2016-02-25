@@ -2,7 +2,6 @@
 #define LIB_TRANSFORMATION_HPP
 
 #include <lib/include/types.hpp>
-#include <lib/include/rect.hpp>
 #include <array>
 
 namespace lib

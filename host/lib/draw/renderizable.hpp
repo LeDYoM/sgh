@@ -3,7 +3,7 @@
 
 #include "hasname.hpp"
 #include "idrawable.hpp"
-#include <lib/include/rect.hpp>
+#include <lib/include/types.hpp>
 #include <lib/include/color.hpp>
 #include "transformable.hpp"
 

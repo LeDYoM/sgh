@@ -4,7 +4,6 @@
 #include "transformation.hpp"
 #include <lib/include/types.hpp>
 
-using namespace sf;
 
 namespace lib
 {
@@ -40,7 +39,7 @@ namespace lib
 			vector2df m_origin;
 			vector2df m_position;
 			f32 m_rotation;
-			Vector2f m_scale;
+			vector2df m_scale;
 			mutable Transformation m_transformation;
 			mutable bool m_transformationNeedUpdate;
 			mutable Transformation m_inverseTransformation;

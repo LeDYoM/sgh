@@ -91,7 +91,7 @@ namespace lib
 			setTexture_(texture, resetRect);
 			if (resetSize)
 			{
-				setSize(static_cast<lib::vector2df>(texture->getSize()));
+				setSize(static_cast<lib::vector2df>(convert(texture->getSize())));
 			}
 		}
 

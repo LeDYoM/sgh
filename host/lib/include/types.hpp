@@ -4,7 +4,6 @@
 #include <cstdint>
 #include <memory>
 #include <lib/core/compileconfig.hpp>
-#include <SFML/System/Vector2.hpp>
 
 namespace lib
 {
@@ -27,17 +26,9 @@ namespace lib
 	using s8 = int8_t;
 	using f32 = float;
 	using f64 = double;
-
-	// alias template
-	template<class T>
-	using vector2d = sf::Vector2<T>;
-
-	using vector2du32 = vector2d<u32>;
-	using vector2ds32 = vector2d<s32>;
-	using vector2df = vector2d<f32>;
-	using vector2du8 = vector2d<u8>;
-	using vector2ds8 = vector2d<s8>;
 }
 
+#include "vector2d.hpp"
+#include "rect.hpp"
 
 #endif

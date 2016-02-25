@@ -8,6 +8,7 @@
 #include "events/event.hpp"
 #include "events/inputevent.hpp"
 #include "eventmanager.hpp"
+#include "convops.hpp"
 #include <lib/draw/view.hpp>
 #include <SFML/Window/Event.hpp>
 
@@ -135,7 +136,7 @@ namespace lib
 		void Window::updateView(const draw::View &view)
 		{
 			p_wPrivate->m_view.setSize(view.target().width, view.target().height);
-			p_wPrivate->m_view.setCenter(view.target().center());
+			p_wPrivate->m_view.setCenter(convert(view.target().center()));
 			this->setView(p_wPrivate->m_view);
 		}
 

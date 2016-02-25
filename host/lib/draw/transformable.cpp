@@ -62,7 +62,7 @@ namespace lib
 			setOrigin(origin.x, origin.y);
 		}
 
-		const Vector2f &Transformable::getPosition() const
+		const vector2df &Transformable::getPosition() const
 		{
 			return m_position;
 		}

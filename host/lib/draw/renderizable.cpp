@@ -46,7 +46,7 @@ namespace lib
 			}
 		}
 
-		void Renderizable::setPositionX(const float x, Alignment alignment /*= Alignment::Left*/)
+		void Renderizable::setPositionX(const f32 x, Alignment alignment /*= Alignment::Left*/)
 		{
 			const lib::vector2df position( Transformable::position() );
 			switch (alignment)
@@ -66,7 +66,7 @@ namespace lib
 			}
 		}
 
-		void Renderizable::setPositionY(const float y, Alignment alignment /*= Alignment::Left*/)
+		void Renderizable::setPositionY(const f32 y, Alignment alignment /*= Alignment::Left*/)
 		{
 			const lib::vector2df position(Transformable::position());
 			switch (alignment)

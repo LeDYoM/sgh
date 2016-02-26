@@ -1,7 +1,7 @@
 #include "NodeShape.hpp"
 #include <lib/core/convops.hpp>
 #include <lib/core/log.hpp>
-#include <lib/core/window.hpp>
+#include <lib/core/rendertarget.hpp>
 
 #include <SFML/Graphics/Texture.hpp>
 

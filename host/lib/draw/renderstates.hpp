@@ -14,9 +14,12 @@ namespace sf
 
 namespace lib
 {
-	namespace draw
+	namespace core
 	{
 		class RenderTarget;
+	}
+	namespace draw
+	{
 		class RenderStates
 		{
 		public:
@@ -36,7 +39,7 @@ namespace lib
 			Transformation transform;
 			const sf::Texture *texture;
 			const sf::Shader *shader;
-			sptr<RenderTarget> currentTarget;
+			sptr<core::RenderTarget> currentTarget;
 		};
 	}
 }

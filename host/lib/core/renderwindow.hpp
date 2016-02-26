@@ -3,7 +3,7 @@
 
 //#include <SFML/Graphics/RenderTarget.hpp>
 //#include <SFML/Graphics/Image.hpp>
-#include <lib/draw/rendertarget.hpp>
+#include "rendertarget.hpp"
 #include <SFML/Window/Window.hpp>
 #include <string>
 
@@ -13,7 +13,7 @@ namespace lib
 {
 	namespace core
 	{
-		class RenderWindow : public sf::Window, public draw::RenderTarget
+		class RenderWindow : public sf::Window, public RenderTarget
 		{
 		public:
 			RenderWindow();

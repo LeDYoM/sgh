@@ -5,7 +5,7 @@
 
 namespace lib
 {
-	namespace draw
+	namespace core
 	{
 		class RenderTarget : public sf::RenderTarget
 		{

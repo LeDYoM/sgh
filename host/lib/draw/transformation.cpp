@@ -23,12 +23,12 @@ namespace lib
 			m_matrix[3] = a20; m_matrix[7] = a21; m_matrix[11] = 0.f; m_matrix[15] = a22;
 		}
 
-		const Transformation::TransformationDataType &Transformation::getMatrix() const
+		const Transformation::TransformationDataType &Transformation::matrix() const
 		{
 			return m_matrix;
 		}
 
-		Transformation Transformation::getInverse() const
+		Transformation Transformation::inverse() const
 		{
 			// Compute the determinant
 			f64 det_{ m_matrix[0] * (m_matrix[15] * m_matrix[5] - m_matrix[7] * m_matrix[13]) -

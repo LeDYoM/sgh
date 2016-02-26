@@ -107,7 +107,7 @@ namespace lib
 		{
 			if (m_inverseTransformationNeedUpdate)
 			{
-				m_inverseTransformation= transformation().getInverse();
+				m_inverseTransformation= transformation().inverse();
 				m_inverseTransformationNeedUpdate = false;
 			}
 

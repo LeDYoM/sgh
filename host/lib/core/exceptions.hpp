@@ -19,7 +19,7 @@ namespace lib
 		public:
 			BaseException(const Severity severity, const std::string &errorMessage) 
 				: std::exception(errorMessage.c_str()),	m_severity{ severity } {}
-			virtual ~BaseException() {}
+			~BaseException() {}
 		protected:
 			Severity m_severity;
 		};
@@ -28,7 +28,7 @@ namespace lib
 		{
 		public:
 			LogErrorException(const std::string &errorMessage) : BaseException{ Severity::Continue, errorMessage } {}
-			virtual ~LogErrorException() {}
+			~LogErrorException() {}
 		};
 	}
 #define LIB_THROW(severity,component,message) throw excp::BaseException(severity,component+": "+message);

@@ -18,8 +18,9 @@ namespace lib
 				f32 a10, f32 a11, f32 a12,
 				f32 a20, f32 a21, f32 a22);
 
-			const TransformationDataType &getMatrix() const;
-			Transformation getInverse() const;
+			Transformation(const Transformation &) = default;
+			const TransformationDataType &matrix() const;
+			Transformation inverse() const;
 			vector2df transformPoint(float x, float y) const;
 			vector2df transformPoint(const vector2df &point) const;
 			Rectf32 transformRect(const Rectf32 &rectangle) const;

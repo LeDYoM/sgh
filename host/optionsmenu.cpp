@@ -91,7 +91,7 @@ namespace zoper
 					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Accept"))
 			}));
 			addMenuControl(_chooseControl);
-			_chooseControl->setPosition(100, 700);
+			_chooseControl->setPosition({ 100, 700 });
 			resetControl();
 		}
 

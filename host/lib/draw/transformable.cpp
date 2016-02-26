@@ -13,17 +13,11 @@ namespace lib
 		{
 		}
 
-		void Transformable::setPosition(f32 x, f32 y)
-		{
-			m_position.x = x;
-			m_position.y = y;
-			m_transformationNeedUpdate = true;
-			m_inverseTransformationNeedUpdate = true;
-		}
-
 		void Transformable::setPosition(const vector2df &position)
 		{
-			setPosition(position.x, position.y);
+			m_position = position;
+			m_transformationNeedUpdate = true;
+			m_inverseTransformationNeedUpdate = true;
 		}
 
 		void Transformable::setRotation(f32 angle)
@@ -36,30 +30,18 @@ namespace lib
 			m_inverseTransformationNeedUpdate = true;
 		}
 
-		void Transformable::setScale(f32 factorX, f32 factorY)
-		{
-			m_scale.x = factorX;
-			m_scale.y = factorY;
-			m_transformationNeedUpdate = true;
-			m_inverseTransformationNeedUpdate = true;
-		}
-
 		void Transformable::setScale(const vector2df &factors)
 		{
-			setScale(factors.x, factors.y);
-		}
-
-		void Transformable::setOrigin(f32 x, f32 y)
-		{
-			m_origin.x = x;
-			m_origin.y = y;
+			m_scale = factors;
 			m_transformationNeedUpdate = true;
 			m_inverseTransformationNeedUpdate = true;
 		}
 
 		void Transformable::setOrigin(const vector2df &origin)
 		{
-			setOrigin(origin.x, origin.y);
+			m_origin = origin;
+			m_transformationNeedUpdate = true;
+			m_inverseTransformationNeedUpdate = true;
 		}
 
 		const vector2df &Transformable::getPosition() const
@@ -82,14 +64,9 @@ namespace lib
 			return m_origin;
 		}
 
-		void Transformable::move(f32 offsetX, f32 offsetY)
-		{
-			setPosition(m_position.x + offsetX, m_position.y + offsetY);
-		}
-
 		void Transformable::move(const vector2df &offset)
 		{
-			setPosition(m_position.x + offset.x, m_position.y + offset.y);
+			setPosition(getPosition()+offset);
 		}
 
 		void Transformable::rotate(f32 angle)
@@ -97,14 +74,9 @@ namespace lib
 			setRotation(m_rotation + angle);
 		}
 
-		void Transformable::scale(f32 factorX, f32 factorY)
-		{
-			setScale(m_scale.x * factorX, m_scale.y * factorY);
-		}
-
 		void Transformable::scale(const vector2df &factor)
 		{
-			setScale(m_scale.x * factor.x, m_scale.y * factor.y);
+			setScale(m_scale * factor);
 		}
 
 		const Transformation &Transformable::getTransform()

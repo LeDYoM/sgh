@@ -60,7 +60,7 @@ namespace zoper
 				lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Exit"))
 			}));
 			addMenuControl(_chooseControl);
-			_chooseControl->setPosition(menuManager()->rectangleView().center().x, 700);
+			_chooseControl->setPosition({ menuManager()->rectangleView().center().x, 700 });
 		}
 	}
 }

@@ -40,7 +40,7 @@ namespace lib
 		protected:
 			void update();
 			void setTexture_(const sf::Texture* texture, bool resetRect = false);
-			virtual u32 draw(lib::core::Window *window, lib::draw::RenderStates &states) override;
+			virtual u32 draw(lib::draw::RenderStates &states) override;
 			void updateFillColors();
 			void updateTexCoords();
 

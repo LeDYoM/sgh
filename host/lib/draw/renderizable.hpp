@@ -24,7 +24,7 @@ namespace lib
 			explicit Renderizable(const std::string &name);
 			virtual ~Renderizable();
 
-			virtual u32 draw(lib::core::Window *window, lib::draw::RenderStates &states) override;
+			virtual u32 draw(lib::draw::RenderStates &states) override;
 			virtual void setColor(const lib::draw::Color &color) = 0;
 
 			virtual Rectf32 getLocalBounds() = 0;

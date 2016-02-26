@@ -51,7 +51,7 @@ namespace lib
 			return removeFromspVector(element, _renderNodes);
 		}
 
-		u32 RenderGroup::draw(lib::core::Window *window, lib::draw::RenderStates &states)
+		u32 RenderGroup::draw(lib::draw::RenderStates &states)
 		{
 			if (isVisible())
 			{
@@ -62,7 +62,7 @@ namespace lib
 
 				for (const auto renderizable : _renderNodes)
 				{
-					rNodes += renderizable->draw(window,states);
+					rNodes += renderizable->draw(states);
 				}
 				states.transform = oldTransformation;
 				return rNodes;

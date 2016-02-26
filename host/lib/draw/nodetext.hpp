@@ -41,7 +41,7 @@ namespace lib
 			Rectf32 getLocalBounds() override;
 			Rectf32 getGlobalBounds() override;
 		private:
-			virtual u32 draw(lib::core::Window *window, RenderStates &states) override;
+			virtual u32 draw(RenderStates &states) override;
 			void ensureGeometryUpdate();
 
 			std::string m_string;

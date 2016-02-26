@@ -6,10 +6,6 @@
 
 namespace lib
 {
-	namespace core
-	{
-		class Window;
-	}
 	namespace draw
 	{
 		class IDrawable
@@ -18,7 +14,7 @@ namespace lib
 			IDrawable() {}
 			virtual ~IDrawable() {}
 
-			virtual u32 draw(core::Window *window, RenderStates &states) = 0;
+			virtual u32 draw(RenderStates &states) = 0;
 
 			inline bool isVisible() const { return visible; }
 			inline void setVisible(bool nv) { visible = nv; }

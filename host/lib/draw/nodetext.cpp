@@ -150,7 +150,7 @@ namespace lib
 			return transformation().transformRect(getLocalBounds());
 		}
 
-		u32 NodeText::draw(lib::core::Window *window, RenderStates &states)
+		u32 NodeText::draw(RenderStates &states)
 		{
 			if (m_font)
 			{
@@ -159,7 +159,7 @@ namespace lib
 				auto oldTransformation= states.transform;
 				states.transform *= transformation();
 				states.texture = &m_font->getTexture(m_characterSize);
-				window->draw(convert(m_vertices), m_vertices.getVertexCount(), m_vertices.getPrimitiveType(),convert(states));
+				states.currentTarget->draw(convert(m_vertices), m_vertices.getVertexCount(), m_vertices.getPrimitiveType(), convert(states));
 				states.transform = oldTransformation;
 				return 1;
 			}

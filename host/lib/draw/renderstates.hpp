@@ -16,6 +16,7 @@ namespace lib
 {
 	namespace draw
 	{
+		class RenderTarget;
 		class RenderStates
 		{
 		public:
@@ -30,8 +31,9 @@ namespace lib
 
 			sf::BlendMode blendMode;
 			Transformation transform;
-			const sf::Texture* texture;
-			const sf::Shader* shader;
+			const sf::Texture *texture;
+			const sf::Shader *shader;
+			RenderTarget *currentTarget;
 		};
 	}
 }

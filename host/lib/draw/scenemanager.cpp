@@ -146,7 +146,9 @@ namespace lib
 			}
 
 			lib::draw::RenderStates states;
-			_currentScene->draw(appController->parentWindow().get(), states);
+			states.currentTarget = appController->parentWindow().get();
+			_currentScene->draw(states);
+			states.currentTarget = nullptr;
 		}
 
 		void SceneManager::exitProgram()

@@ -193,14 +193,14 @@ namespace lib
 			updateTexCoords();
 		}
 
-		u32 NodeShape::draw(lib::core::Window *window, RenderStates &states)
+		u32 NodeShape::draw(RenderStates &states)
 		{
 			auto oldTransformation= states.transform;
 			states.transform *= transformation();
 
 			// Render the inside
 			states.texture = m_texture;
-			window->draw(convert(m_vertices), m_vertices.getVertexCount(), m_vertices.getPrimitiveType(), convert(states));
+			states.currentTarget->draw(convert(m_vertices), m_vertices.getVertexCount(), m_vertices.getPrimitiveType(), convert(states));
 
 			states.transform = oldTransformation;
 			return 1;

@@ -33,7 +33,7 @@ namespace lib
 
 			sptr<PositionAnimation> PositionAnimation::create(const s32 duration, sptr<Renderizable> node, const vector2df &endPosition)
 			{
-				auto animation = std::make_shared<PositionAnimation>(duration, node, node->getPosition(), endPosition);
+				auto animation = std::make_shared<PositionAnimation>(duration, node, node->position(), endPosition);
 				return animation;
 			}
 		}

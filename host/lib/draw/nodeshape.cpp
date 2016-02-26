@@ -159,7 +159,7 @@ namespace lib
 
 		Rectf32 NodeShape::getGlobalBounds()
 		{
-			return getTransform().transformRect(getLocalBounds());
+			return transformation().transformRect(getLocalBounds());
 		}
 
 		void NodeShape::update()
@@ -196,7 +196,7 @@ namespace lib
 		u32 NodeShape::draw(lib::core::Window *window, RenderStates &states)
 		{
 			auto oldTransformation= states.transform;
-			states.transform *= getTransform();
+			states.transform *= transformation();
 
 			// Render the inside
 			states.texture = m_texture;

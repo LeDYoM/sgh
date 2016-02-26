@@ -133,7 +133,7 @@ namespace lib
 			}
 
 			// Transform the position to global coordinates
-			position = getTransform().transformPoint(position);
+			position = transformation().transformPoint(position);
 
 			return position;
 		}
@@ -147,7 +147,7 @@ namespace lib
 
 		Rectf32 NodeText::getGlobalBounds()
 		{
-			return getTransform().transformRect(getLocalBounds());
+			return transformation().transformRect(getLocalBounds());
 		}
 
 		u32 NodeText::draw(lib::core::Window *window, RenderStates &states)
@@ -157,7 +157,7 @@ namespace lib
 				ensureGeometryUpdate();
 
 				auto oldTransformation= states.transform;
-				states.transform *= getTransform();
+				states.transform *= transformation();
 				states.texture = &m_font->getTexture(m_characterSize);
 				window->draw(convert(m_vertices), m_vertices.getVertexCount(), m_vertices.getPrimitiveType(),convert(states));
 				states.transform = oldTransformation;

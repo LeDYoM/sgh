@@ -19,15 +19,15 @@ namespace lib
 			void setRotation(f32 angle);
 			void setScale(const vector2df &factors);
 			void setOrigin(const vector2df &origin);
-			const vector2df &getPosition() const;
-			f32 getRotation() const;
-			const vector2df &getScale() const;
-			const vector2df &getOrigin() const;
+			const vector2df &position() const;
+			f32 rotation() const;
+			const vector2df &scale() const;
+			const vector2df &origin() const;
 			void move(const vector2df &offset);
 			void rotate(f32 angle);
 			void scale(const vector2df &factor);
-			const Transformation &getTransform();
-			const Transformation &getInverseTransform();
+			const Transformation &transformation();
+			const Transformation &inverseTransform();
 
 		private:
 			vector2df m_origin;

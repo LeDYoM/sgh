@@ -58,7 +58,7 @@ namespace lib
 				updateAnimations();
 				u32 rNodes{ 0 };
 				auto oldTransformation = states.transform;
-				states.transform *= getTransform();
+				states.transform *= transformation();
 
 				for (const auto renderizable : _renderNodes)
 				{

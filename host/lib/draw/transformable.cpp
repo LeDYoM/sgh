@@ -44,29 +44,29 @@ namespace lib
 			m_inverseTransformationNeedUpdate = true;
 		}
 
-		const vector2df &Transformable::getPosition() const
+		const vector2df &Transformable::position() const
 		{
 			return m_position;
 		}
 
-		f32 Transformable::getRotation() const
+		f32 Transformable::rotation() const
 		{
 			return m_rotation;
 		}
 
-		const vector2df &Transformable::getScale() const
+		const vector2df &Transformable::scale() const
 		{
 			return m_scale;
 		}
 
-		const vector2df &Transformable::getOrigin() const
+		const vector2df &Transformable::origin() const
 		{
 			return m_origin;
 		}
 
 		void Transformable::move(const vector2df &offset)
 		{
-			setPosition(getPosition()+offset);
+			setPosition(position()+offset);
 		}
 
 		void Transformable::rotate(f32 angle)
@@ -79,7 +79,7 @@ namespace lib
 			setScale(m_scale * factor);
 		}
 
-		const Transformation &Transformable::getTransform()
+		const Transformation &Transformable::transformation()
 		{
 			// Recompute the combined transformation if needed
 			if (m_transformationNeedUpdate)
@@ -103,11 +103,11 @@ namespace lib
 			return m_transformation;
 		}
 
-		const Transformation &Transformable::getInverseTransform()
+		const Transformation &Transformable::inverseTransform()
 		{
 			if (m_inverseTransformationNeedUpdate)
 			{
-				m_inverseTransformation= getTransform().getInverse();
+				m_inverseTransformation= transformation().getInverse();
 				m_inverseTransformationNeedUpdate = false;
 			}
 

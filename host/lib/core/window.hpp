@@ -17,7 +17,7 @@ namespace lib
 		struct WindowPrivate;
 		class AppController;
 
-		class Window : public AppService, public RenderWindow
+		class Window : public AppService
 		{
 		public:
 			Window(AppController *const appController, const WindowCreationParams &wcp);
@@ -29,6 +29,7 @@ namespace lib
 			void exitProgram();
 
 			void updateView(const draw::View &view);
+			sptr<RenderWindow> renderWindow();
 		private:
 			void create(const WindowCreationParams &wcp);
 			void keyEvent(sf::Event e);
@@ -36,6 +37,7 @@ namespace lib
 			uptr<WindowPrivate> p_wPrivate{ nullptr };
 			bool _shouldClose{ false };
 			std::string _title;
+			sptr<RenderWindow> m_renderWindow{ nullptr };
 		};
 	}
 }

@@ -27,13 +27,16 @@ namespace lib
 			RenderStates(const sf::Shader* theShader);
 			RenderStates(const sf::BlendMode &theBlendMode, const Transformation &transformation,
 				const sf::Texture *theTexture, const sf::Shader *theShader);
+			RenderStates(const RenderStates&) = delete;
+			RenderStates &operator=(const RenderStates&) = delete;
+
 			//static const RenderStates Default;
 
 			sf::BlendMode blendMode;
 			Transformation transform;
 			const sf::Texture *texture;
 			const sf::Shader *shader;
-			RenderTarget *currentTarget;
+			sptr<RenderTarget> currentTarget;
 		};
 	}
 }

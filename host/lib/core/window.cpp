@@ -62,10 +62,10 @@ namespace lib
 			if (wcp.fullScreen)
 				style = sf::Style::Fullscreen;
 
-			// Deal with SFML bug
-			sf::Window::create(sf::VideoMode(wcp.width, wcp.height, wcp.bpp), getAsString(_title), style,sf::ContextSettings(0,0,wcp.antialiasing));
+			m_renderWindow = sptr<RenderWindow>{new RenderWindow()};
+			m_renderWindow->create(sf::VideoMode(wcp.width, wcp.height, wcp.bpp), getAsString(_title), style,sf::ContextSettings(0,0,wcp.antialiasing));
 
-			this->setVerticalSyncEnabled(wcp.vsync);
+			m_renderWindow->setVerticalSyncEnabled(wcp.vsync);
 		}
 
 		bool Window::preLoop()
@@ -76,13 +76,13 @@ namespace lib
 				p_wPrivate->lastTimeFps = eMs;
 				p_wPrivate->lastFps = p_wPrivate->currentFps;
 				p_wPrivate->currentFps = 0;
-				setTitle(getAsString(_title + " FPS:" + std::to_string(p_wPrivate->lastFps)));
+				m_renderWindow->setTitle(getAsString(_title + " FPS:" + std::to_string(p_wPrivate->lastFps)));
 			}
 			++(p_wPrivate->currentFps);
-			clear();
+			m_renderWindow->clear();
 
 			sf::Event event;
-			while (pollEvent(event))
+			while (m_renderWindow->pollEvent(event))
 			{
 				if (event.type == sf::Event::Closed)
 				{
@@ -102,7 +102,7 @@ namespace lib
 
 		bool Window::postLoop()
 		{
-			display();
+			m_renderWindow->display();
 			return _shouldClose;
 		}
 
@@ -114,7 +114,7 @@ namespace lib
 		void Window::onDestroy()
 		{
 			LOG_DEBUG("Going to close Window");
-			close();
+			m_renderWindow->close();
 			LOG_DEBUG("Window closed");
 		}
 
@@ -137,7 +137,12 @@ namespace lib
 		{
 			p_wPrivate->m_view.setSize(view.target().width, view.target().height);
 			p_wPrivate->m_view.setCenter(convert(view.target().center()));
-			this->setView(p_wPrivate->m_view);
+			m_renderWindow->setView(p_wPrivate->m_view);
+		}
+
+		sptr<RenderWindow> Window::renderWindow()
+		{
+			return m_renderWindow;
 		}
 
 	}

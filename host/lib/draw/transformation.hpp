@@ -21,17 +21,12 @@ namespace lib
 			Transformation(const Transformation &) = default;
 			const TransformationDataType &matrix() const;
 			Transformation inverse() const;
-			vector2df transformPoint(float x, float y) const;
 			vector2df transformPoint(const vector2df &point) const;
 			Rectf32 transformRect(const Rectf32 &rectangle) const;
 			Transformation &combine(const Transformation &transform);
-			Transformation &translate(f32 x, f32 y);
 			Transformation &translate(const vector2df &offset);
 			Transformation &rotate(f32 angle);
-			Transformation &rotate(f32 angle, f32 centerX, f32 centerY);
 			Transformation &rotate(f32 angle, const vector2df &center);
-			Transformation &scale(f32 scaleX, f32 scaleY);
-			Transformation &scale(f32 scaleX, f32 scaleY, f32 centerX, f32 centerY);
 			Transformation &scale(const vector2df &factors);
 			Transformation &scale(const vector2df &factors, const vector2df &center);
 			Transformation operator*(const Transformation &right);

@@ -57,15 +57,10 @@ namespace lib
 			}
 		}
 
-		vector2df Transformation::transformPoint(f32 x, f32 y) const
-		{
-			return vector2df{ m_matrix[0] * x + m_matrix[4] * y + m_matrix[12],
-				m_matrix[1] * x + m_matrix[5] * y + m_matrix[13] };
-		}
-
 		vector2df Transformation::transformPoint(const vector2df &point) const
 		{
-			return transformPoint(point.x, point.y);
+			return vector2df{ m_matrix[0] * point.x + m_matrix[4] * point.y + m_matrix[12],
+				m_matrix[1] * point.x + m_matrix[5] * point.y + m_matrix[13] };
 		}
 
 		Rectf32 Transformation::transformRect(const Rectf32 &rectangle) const
@@ -73,17 +68,17 @@ namespace lib
 			// Transform the 4 corners of the rectangle
 			const vector2df points[] =
 			{
-				transformPoint(rectangle.left, rectangle.top),
-				transformPoint(rectangle.left, rectangle.top + rectangle.height),
-				transformPoint(rectangle.left + rectangle.width, rectangle.top),
-				transformPoint(rectangle.left + rectangle.width, rectangle.top + rectangle.height)
+				transformPoint(rectangle.origin()),
+				transformPoint({ rectangle.left, rectangle.top + rectangle.height }),
+				transformPoint({ rectangle.left + rectangle.width, rectangle.top }),
+				transformPoint(rectangle.dest())
 			};
 
 			// Compute the bounding rectangle of the transformed points
-			float left = points[0].x;
-			float top = points[0].y;
-			float right = points[0].x;
-			float bottom = points[0].y;
+			f32 left = points[0].x;
+			f32 top = points[0].y;
+			f32 right = points[0].x;
+			f32 bottom = points[0].y;
 			for (int i = 1; i < 4; ++i)
 			{
 				if (points[i].x < left)   left = points[i].x;
@@ -113,18 +108,13 @@ namespace lib
 			return *this;
 		}
 
-		Transformation &Transformation::translate(f32 x, f32 y)
+		Transformation &Transformation::translate(const vector2df &offset)
 		{
-			Transformation translation{ 1, 0, x,
-				0, 1, y,
+			Transformation translation{ 1, 0, offset.x,
+				0, 1, offset.y,
 				0, 0, 1 };
 
 			return combine(translation);
-		}
-
-		Transformation &Transformation::translate(const vector2df &offset)
-		{
-			return translate(offset.x, offset.y);
 		}
 
 		Transformation &Transformation::rotate(f32 angle)
@@ -140,50 +130,35 @@ namespace lib
 			return combine(rotation);
 		}
 
-		Transformation &Transformation::rotate(f32 angle, f32 centerX, f32 centerY)
+		Transformation &Transformation::rotate(f32 angle, const vector2df& center)
 		{
 			f32 rad = angle * 3.141592654f / 180.f;
 			f32 cos = std::cos(rad);
 			f32 sin = std::sin(rad);
 
-			Transformation rotation{ cos, -sin, centerX * (1 - cos) + centerY * sin,
-				sin, cos, centerY * (1 - cos) - centerX * sin,
+			Transformation rotation{ cos, -sin, center.x * (1 - cos) + center.y * sin,
+				sin, cos, center.y * (1 - cos) - center.x * sin,
 				0, 0, 1 };
 
 			return combine(rotation);
 		}
 
-		Transformation &Transformation::rotate(f32 angle, const vector2df& center)
+		Transformation &Transformation::scale(const vector2df& factors)
 		{
-			return rotate(angle, center.x, center.y);
-		}
-
-		Transformation& Transformation::scale(f32 scaleX, f32 scaleY)
-		{
-			Transformation scaling(scaleX, 0, 0,
-				0, scaleY, 0,
+			Transformation scaling(factors.x, 0, 0,
+				0, factors.y, 0,
 				0, 0, 1);
 
 			return combine(scaling);
 		}
 
-		Transformation &Transformation::scale(f32 scaleX, f32 scaleY, f32 centerX, f32 centerY)
+		Transformation &Transformation::scale(const vector2df& factors, const vector2df& center)
 		{
-			Transformation scaling{ scaleX, 0, centerX * (1 - scaleX),
-				0, scaleY, centerY * (1 - scaleY),
+			Transformation scaling{ factors.x, 0, center.x * (1 - factors.x),
+				0, factors.y, center.y * (1 - factors.y),
 				0, 0, 1 };
 
 			return combine(scaling);
-		}
-
-		Transformation &Transformation::scale(const vector2df& factors)
-		{
-			return scale(factors.x, factors.y);
-		}
-
-		Transformation &Transformation::scale(const vector2df& factors, const vector2df& center)
-		{
-			return scale(factors.x, factors.y, center.x, center.y);
 		}
 
 		Transformation Transformation::operator *(const Transformation& right)

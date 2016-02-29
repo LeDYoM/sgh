@@ -16,7 +16,7 @@ namespace lib
 			: RenderNode{ name, sf::PrimitiveType::TrianglesFan }, _mode{ mode }, m_texture{ nullptr }, m_textureRect{},
 			_size{ size }, m_pointCount{ pointCount }
 		{
-			update();
+			ensureGeometryUpdate();
 		}
 
 		NodeShape::~NodeShape()
@@ -27,7 +27,7 @@ namespace lib
 		void NodeShape::setSize(const lib::vector2df & size)
 		{
 			_size = size;
-			update();
+			m_geometryNeedUpdate = true;
 		}
 
 		void NodeShape::setSize(const float size)
@@ -48,7 +48,7 @@ namespace lib
 		void NodeShape::setPointCount(lib::u32 numPoints)
 		{
 			m_pointCount = numPoints;
-			update();
+			m_geometryNeedUpdate = true;
 		}
 			
 		vector2df NodeShape::getPoint(unsigned int index) const
@@ -151,7 +151,7 @@ namespace lib
 			return transformation().transformRect(getLocalBounds());
 		}
 
-		void NodeShape::update()
+		void NodeShape::ensureGeometryUpdate()
 		{
 			// Get the total number of points of the shape
 			std::size_t count = getPointCount();
@@ -184,6 +184,7 @@ namespace lib
 
 		u32 NodeShape::draw(RenderStates &states)
 		{
+			ensureGeometryUpdate();
 			auto oldTransformation= states.transform;
 			states.transform *= transformation();
 

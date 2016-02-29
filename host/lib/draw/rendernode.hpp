@@ -29,8 +29,8 @@ namespace lib
 			virtual void setColor(const lib::draw::Color &color);
 			const Color& getColor() const;
 
-			virtual Rectf32 getLocalBounds() = 0;
-			virtual Rectf32 getGlobalBounds() = 0;
+			virtual Rectf32 getLocalBounds();
+			virtual Rectf32 getGlobalBounds();
 
 			// Some useful shortcuts
 			using Transformable::setPosition;
@@ -40,6 +40,7 @@ namespace lib
 			void setAlignment(Alignment alignment);
 
 		protected:
+			virtual void ensureGeometryUpdate() = 0;
 			void updateFillColors();
 			VertexArray m_vertices;
 			Rectf32 m_bounds;

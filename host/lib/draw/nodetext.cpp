@@ -10,6 +10,7 @@ namespace lib
 		NodeText::NodeText(const std::string &name)
 			: RenderNode{ name, sf::Triangles }, m_string(), m_font(nullptr), m_characterSize(30), m_style(Regular)
 		{
+			ensureGeometryUpdate();
 		}
 
 		NodeText::NodeText(const std::string &name, const sf::String& string, const sf::Font& font, unsigned int characterSize) :
@@ -117,18 +118,6 @@ namespace lib
 			position = transformation().transformPoint(position);
 
 			return position;
-		}
-
-		Rectf32 NodeText::getLocalBounds()
-		{
-			ensureGeometryUpdate();
-
-			return m_bounds;
-		}
-
-		Rectf32 NodeText::getGlobalBounds()
-		{
-			return transformation().transformRect(getLocalBounds());
 		}
 
 		u32 NodeText::draw(RenderStates &states)

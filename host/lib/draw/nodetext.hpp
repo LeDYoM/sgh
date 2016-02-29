@@ -35,11 +35,9 @@ namespace lib
 			u32 getCharacterSize() const;
 			u32 getStyle() const;
 			vector2df findCharacterPos(u32 index);
-			Rectf32 getLocalBounds() override;
-			Rectf32 getGlobalBounds() override;
 		private:
 			virtual u32 draw(RenderStates &states) override;
-			void ensureGeometryUpdate();
+			virtual void ensureGeometryUpdate() override;
 
 			std::string m_string;
 			const sf::Font* m_font;

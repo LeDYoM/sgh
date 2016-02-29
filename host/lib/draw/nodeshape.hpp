@@ -34,7 +34,7 @@ namespace lib
 			Rectf32 getGlobalBounds() override;
 
 		protected:
-			void update();
+			virtual void ensureGeometryUpdate() override;
 			void setTexture_(const sf::Texture* texture, bool resetRect = false);
 			virtual u32 draw(lib::draw::RenderStates &states) override;
 			void updateTexCoords();

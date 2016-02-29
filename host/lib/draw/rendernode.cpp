@@ -7,7 +7,8 @@ namespace lib
 	namespace draw
 	{
 		RenderNode::RenderNode(const std::string &name, const sf::PrimitiveType primitiveType)
-			: HasName{ name }, m_vertices{ primitiveType }, m_bounds{}, m_color{ 255, 255, 255 }, m_geometryNeedUpdate{ true }
+			: HasName{ name }, m_vertices{ primitiveType }, m_bounds{}, m_color{ 255, 255, 255 }, 
+			m_geometryNeedUpdate{ true }, m_colorsNeedUpdate{ true }
 		{
 			LOG_CONSTRUCT("Name: " << name << " of type");
 		}
@@ -79,7 +80,7 @@ namespace lib
 		void RenderNode::setColor(const Color& color)
 		{
 			m_color = color;
-			updateFillColors();
+			m_colorsNeedUpdate = true;
 		}
 
 		const Color &RenderNode::getColor() const
@@ -89,19 +90,13 @@ namespace lib
 
 		void RenderNode::updateFillColors()
 		{
-			// Change vertex colors directly, no need to update whole geometry
-			// (if geometry is updated anyway, we can skip this step)
-//			if (!m_geometryNeedUpdate)
-//			{
-				for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i)
-					m_vertices[i].color = m_color;
-//			}
+			for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i)
+				m_vertices[i].color = m_color;
 		}
 
 		Rectf32 RenderNode::getLocalBounds()
 		{
-			ensureGeometryUpdate();
-
+			updateGeometryIfNecessary();
 			return m_bounds;
 		}
 
@@ -109,5 +104,20 @@ namespace lib
 		{
 			return transformation().transformRect(getLocalBounds());
 		}
+
+		void RenderNode::updateGeometryIfNecessary()
+		{
+			if (m_geometryNeedUpdate)
+			{
+				ensureGeometryUpdate();
+			}
+
+			if (m_colorsNeedUpdate)
+			{
+				updateFillColors();
+				m_colorsNeedUpdate = false;
+			}
+		}
+
 	}
 }

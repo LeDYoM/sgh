@@ -39,6 +39,7 @@ namespace lib
 			void setPositionY(const f32 y, Alignment alignment = Alignment::Left);
 			void setAlignment(Alignment alignment);
 
+			void updateGeometryIfNecessary();
 		protected:
 			virtual void ensureGeometryUpdate() = 0;
 			void updateFillColors();
@@ -46,6 +47,7 @@ namespace lib
 			Rectf32 m_bounds;
 			Color m_color;
 			bool m_geometryNeedUpdate;
+			bool m_colorsNeedUpdate;
 		};
 	}
 }

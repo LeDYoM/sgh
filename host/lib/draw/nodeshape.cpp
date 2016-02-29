@@ -141,16 +141,6 @@ namespace lib
 			return m_textureRect;
 		}
 
-		Rectf32 NodeShape::getLocalBounds()
-		{
-			return m_bounds;
-		}
-
-		Rectf32 NodeShape::getGlobalBounds()
-		{
-			return transformation().transformRect(getLocalBounds());
-		}
-
 		void NodeShape::ensureGeometryUpdate()
 		{
 			// Get the total number of points of the shape

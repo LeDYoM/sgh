@@ -29,9 +29,6 @@ namespace lib
 			void setTextureRect(const Rects32& rect);
 			const sf::Texture* getTexture() const;
 			const Rects32& getTextureRect() const;
-			float getOutlineThickness() const;
-			Rectf32 getLocalBounds() override;
-			Rectf32 getGlobalBounds() override;
 
 		protected:
 			virtual void ensureGeometryUpdate() override;

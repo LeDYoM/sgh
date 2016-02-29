@@ -27,11 +27,8 @@ namespace lib
 			void setTexture(const sf::Texture *texture, bool resetSize=true, bool resetRect = false);
 
 			void setTextureRect(const Rects32& rect);
-			virtual void setColor(const lib::draw::Color& color) override;
 			const sf::Texture* getTexture() const;
 			const Rects32& getTextureRect() const;
-			const Color& getFillColor() const;
-			const Color& getOutlineColor() const;
 			float getOutlineThickness() const;
 			Rectf32 getLocalBounds() override;
 			Rectf32 getGlobalBounds() override;
@@ -40,7 +37,6 @@ namespace lib
 			void update();
 			void setTexture_(const sf::Texture* texture, bool resetRect = false);
 			virtual u32 draw(lib::draw::RenderStates &states) override;
-			void updateFillColors();
 			void updateTexCoords();
 
 		private:
@@ -48,7 +44,6 @@ namespace lib
 			lib::vector2df _size;
 			lib::u32 m_pointCount;
 			Rects32 m_textureRect;
-			lib::draw::Color m_fillColor;
 		};
 	}
 }

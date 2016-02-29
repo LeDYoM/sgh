@@ -8,14 +8,12 @@ namespace lib
 	namespace draw
 	{
 		NodeText::NodeText(const std::string &name)
-			: RenderNode{ name, sf::Triangles }, m_string(), m_font(nullptr), m_characterSize(30), m_style(Regular),
-			m_color(255, 255, 255), m_geometryNeedUpdate(false)
+			: RenderNode{ name, sf::Triangles }, m_string(), m_font(nullptr), m_characterSize(30), m_style(Regular)
 		{
 		}
 
 		NodeText::NodeText(const std::string &name, const sf::String& string, const sf::Font& font, unsigned int characterSize) :
-			RenderNode{ name, sf::Triangles }, m_string(string), m_font(&font), m_characterSize(characterSize), m_style(Regular),
-			m_color(255, 255, 255), m_geometryNeedUpdate(true)
+			RenderNode{ name, sf::Triangles }, m_string(string), m_font(&font), m_characterSize(characterSize), m_style(Regular)
 		{
 		}
 
@@ -57,22 +55,6 @@ namespace lib
 			}
 		}
 
-		void NodeText::setColor(const Color& color)
-		{
-			if (color != m_color)
-			{
-				m_color = color;
-
-				// Change vertex colors directly, no need to update whole geometry
-				// (if geometry is updated anyway, we can skip this step)
-				if (!m_geometryNeedUpdate)
-				{
-					for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i)
-						m_vertices[i].color = m_color;
-				}
-			}
-		}
-
 		const std::string &NodeText::getString() const
 		{
 			return m_string;
@@ -91,11 +73,6 @@ namespace lib
 		u32 NodeText::getStyle() const
 		{
 			return m_style;
-		}
-
-		const Color &NodeText::getColor() const
-		{
-			return m_color;
 		}
 
 		vector2df NodeText::findCharacterPos(u32 index)

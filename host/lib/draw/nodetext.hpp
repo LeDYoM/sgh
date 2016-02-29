@@ -30,12 +30,10 @@ namespace lib
 			void setFont(const sf::Font& font);
 			void setCharacterSize(u32 size);
 			void setStyle(u32 style);
-			void setColor(const Color& color);
 			const std::string &getString() const;
 			const sf::Font* getFont() const;
 			u32 getCharacterSize() const;
 			u32 getStyle() const;
-			const Color& getColor() const;
 			vector2df findCharacterPos(u32 index);
 			Rectf32 getLocalBounds() override;
 			Rectf32 getGlobalBounds() override;
@@ -47,8 +45,6 @@ namespace lib
 			const sf::Font* m_font;
 			u32 m_characterSize;
 			u32 m_style;
-			Color m_color;
-			bool m_geometryNeedUpdate;
 		};
 	}
 }

@@ -26,7 +26,8 @@ namespace lib
 			virtual ~RenderNode();
 
 			virtual u32 draw(lib::draw::RenderStates &states) = 0;
-			virtual void setColor(const lib::draw::Color &color) = 0;
+			virtual void setColor(const lib::draw::Color &color);
+			const Color& getColor() const;
 
 			virtual Rectf32 getLocalBounds() = 0;
 			virtual Rectf32 getGlobalBounds() = 0;
@@ -37,9 +38,13 @@ namespace lib
 			void setPositionX(const f32 x, Alignment alignment = Alignment::Left);
 			void setPositionY(const f32 y, Alignment alignment = Alignment::Left);
 			void setAlignment(Alignment alignment);
+
 		protected:
+			void updateFillColors();
 			VertexArray m_vertices;
 			Rectf32 m_bounds;
+			Color m_color;
+			bool m_geometryNeedUpdate;
 		};
 	}
 }

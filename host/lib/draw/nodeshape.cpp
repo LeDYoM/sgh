@@ -13,7 +13,7 @@ namespace lib
 	namespace draw
 	{
 		NodeShape::NodeShape(const std::string &name, const vector2df& size, const u32 pointCount, const NodeMode mode)
-			: RenderNode{ name,sf::PrimitiveType::TrianglesFan }, _mode{ mode }, m_texture{ nullptr },m_textureRect(),m_fillColor(255, 255, 255),
+			: RenderNode{ name, sf::PrimitiveType::TrianglesFan }, _mode{ mode }, m_texture{ nullptr }, m_textureRect{},
 			_size{ size }, m_pointCount{ pointCount }
 		{
 			update();
@@ -141,17 +141,6 @@ namespace lib
 			return m_textureRect;
 		}
 
-		void NodeShape::setColor(const Color& color)
-		{
-			m_fillColor = color;
-			updateFillColors();
-		}
-
-		const Color& NodeShape::getFillColor() const
-		{
-			return m_fillColor;
-		}
-
 		Rectf32 NodeShape::getLocalBounds()
 		{
 			return m_bounds;
@@ -204,12 +193,6 @@ namespace lib
 
 			states.transform = oldTransformation;
 			return 1;
-		}
-
-		void NodeShape::updateFillColors()
-		{
-			for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i)
-				m_vertices[i].color = m_fillColor;
 		}
 
 		void NodeShape::updateTexCoords()

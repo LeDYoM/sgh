@@ -7,7 +7,7 @@ namespace lib
 	namespace draw
 	{
 		RenderNode::RenderNode(const std::string &name, const sf::PrimitiveType primitiveType)
-			: HasName{ name }, m_vertices{ primitiveType }, m_bounds{}
+			: HasName{ name }, m_vertices{ primitiveType }, m_bounds{}, m_color{ 255, 255, 255 }, m_geometryNeedUpdate{ false }
 		{
 			LOG_CONSTRUCT("Name: " << name << " of type");
 		}
@@ -75,5 +75,29 @@ namespace lib
 		{
 			setPosition(position(), alignment);
 		}
+
+		void RenderNode::setColor(const Color& color)
+		{
+			m_color = color;
+			updateFillColors();
+		}
+
+		const Color &RenderNode::getColor() const
+		{
+			return m_color;
+		}
+
+		void RenderNode::updateFillColors()
+		{
+			// Change vertex colors directly, no need to update whole geometry
+			// (if geometry is updated anyway, we can skip this step)
+			if (!m_geometryNeedUpdate)
+			{
+				for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i)
+					m_vertices[i].color = m_color;
+			}
+		}
+
+
 	}
 }

@@ -6,6 +6,7 @@
 #include <lib/include/types.hpp>
 #include <lib/include/color.hpp>
 #include "transformable.hpp"
+#include "vertexarray.hpp"
 
 namespace lib
 {
@@ -21,10 +22,10 @@ namespace lib
 		class RenderNode : public lib::core::HasName, public IDrawable, public Transformable
 		{
 		public:
-			explicit RenderNode(const std::string &name);
+			explicit RenderNode(const std::string &name, const sf::PrimitiveType primitiveType);
 			virtual ~RenderNode();
 
-			virtual u32 draw(lib::draw::RenderStates &states) override;
+			virtual u32 draw(lib::draw::RenderStates &states) = 0;
 			virtual void setColor(const lib::draw::Color &color) = 0;
 
 			virtual Rectf32 getLocalBounds() = 0;
@@ -36,6 +37,8 @@ namespace lib
 			void setPositionX(const f32 x, Alignment alignment = Alignment::Left);
 			void setPositionY(const f32 y, Alignment alignment = Alignment::Left);
 			void setAlignment(Alignment alignment);
+		protected:
+			VertexArray m_vertices;
 		};
 	}
 }

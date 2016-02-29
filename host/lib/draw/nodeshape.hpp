@@ -2,8 +2,7 @@
 #define __LIB_ELLIPSESHAPE_HPP__
 
 #include <lib/include/types.hpp>
-#include "RenderNode.hpp"
-#include "vertexarray.hpp"
+#include "rendernode.hpp"
 
 namespace lib
 {
@@ -50,7 +49,6 @@ namespace lib
 			lib::u32 m_pointCount;
 			Rects32 m_textureRect;
 			lib::draw::Color m_fillColor;
-			lib::draw::VertexArray m_vertices;
 			Rectf32 m_bounds;
 		};
 	}

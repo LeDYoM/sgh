@@ -8,12 +8,16 @@ namespace lib
 	namespace draw
 	{
 		NodeText::NodeText(const std::string &name)
-			: RenderNode{ name }, m_string(), m_font(nullptr), m_characterSize(30), m_style(Regular),
-			m_color(255, 255, 255), m_vertices(sf::Triangles), m_bounds(), m_geometryNeedUpdate(false) {}
+			: RenderNode{ name, sf::Triangles }, m_string(), m_font(nullptr), m_characterSize(30), m_style(Regular),
+			m_color(255, 255, 255), m_bounds(), m_geometryNeedUpdate(false)
+		{
+		}
 
 		NodeText::NodeText(const std::string &name, const sf::String& string, const sf::Font& font, unsigned int characterSize) :
-			RenderNode{ name }, m_string(string), m_font(&font), m_characterSize(characterSize), m_style(Regular),
-			m_color(255, 255, 255), m_vertices(sf::Triangles), m_bounds(), m_geometryNeedUpdate(true) {}
+			RenderNode{ name, sf::Triangles }, m_string(string), m_font(&font), m_characterSize(characterSize), m_style(Regular),
+			m_color(255, 255, 255), m_bounds(), m_geometryNeedUpdate(true)
+		{
+		}
 
 		NodeText::~NodeText() {	}
 
@@ -201,7 +205,7 @@ namespace lib
 			Rectf32 xBounds = convert(m_font->getGlyph(L'x', m_characterSize, bold).bounds);
 			f32 strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
 
-			// Precompute the variables needed by the algorithm
+			// Pre compute the variables needed by the algorithm
 			f32 hspace = static_cast<f32>(m_font->getGlyph(L' ', m_characterSize, bold).advance);
 			f32 vspace = static_cast<f32>(m_font->getLineSpacing(m_characterSize));
 			f32 x = 0.f;

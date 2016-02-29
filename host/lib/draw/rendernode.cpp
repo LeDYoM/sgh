@@ -6,23 +6,10 @@ namespace lib
 {
 	namespace draw
 	{
-		RenderNode::RenderNode(const std::string &name)
-			: HasName{ name }
+		RenderNode::RenderNode(const std::string &name, const sf::PrimitiveType primitiveType)
+			: HasName{ name }, m_vertices{ primitiveType }
 		{
 			LOG_CONSTRUCT("Name: " << name << " of type");
-
-		}
-
-		u32 RenderNode::draw(lib::draw::RenderStates &states)
-		{
-			states;
-			if (isVisible())
-			{
-//					window->draw()
-//					window->draw(*getAsDrawable(),states);
-				return 1;
-			}
-			return 0;
 		}
 
 		RenderNode::~RenderNode()

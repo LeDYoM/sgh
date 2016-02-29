@@ -13,8 +13,8 @@ namespace lib
 	namespace draw
 	{
 		NodeShape::NodeShape(const std::string &name, const vector2df& size, const u32 pointCount, const NodeMode mode)
-			: RenderNode{ name }, _mode{ mode }, m_texture{ nullptr },m_textureRect(),m_fillColor(255, 255, 255),
-			m_vertices(sf::TrianglesFan), m_bounds(), _size{ size }, m_pointCount{ pointCount }
+			: RenderNode{ name,sf::PrimitiveType::TrianglesFan }, _mode{ mode }, m_texture{ nullptr },m_textureRect(),m_fillColor(255, 255, 255),
+			m_bounds(), _size{ size }, m_pointCount{ pointCount }
 		{
 			update();
 		}

@@ -2,11 +2,10 @@
 #define _LIB_NODETEXT_HPP__
 
 #include <SFML/Graphics/Font.hpp>
-#include "vertexarray.hpp"
 #include <string>
 #include <vector>
 
-#include "RenderNode.hpp"
+#include "rendernode.hpp"
 
 namespace lib
 {
@@ -49,7 +48,6 @@ namespace lib
 			u32 m_characterSize;
 			u32 m_style;
 			Color m_color;
-			VertexArray m_vertices;
 			Rectf32 m_bounds;
 			bool m_geometryNeedUpdate;
 		};

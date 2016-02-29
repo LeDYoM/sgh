@@ -85,11 +85,11 @@ source_group("lib\\draw" FILES ${LIB_DRAW_HEADERS} ${LIB_DRAW_SOURCES})
 source_group("lib\\util" FILES ${LIB_UTILP_HEADERS} ${LIB_UTILP_SOURCES})
 source_group("lib\\datap" FILES ${LIB_DATAP_HEADERS} ${LIB_DATAP_SOURCES})
 source_group("lib\\menu" FILES ${LIB_MENU_HEADERS} ${LIB_MENU_SOURCES})
-source_group("lib\\board" FILES ${LIB_BOARD_HEADERS} ${LIB_SOURCES})
+source_group("lib\\board" FILES ${LIB_BOARD_HEADERS} ${LIB_BOARD_SOURCES})
 source_group("lib\\drivers\\window" FILES ${LIB_DRIVERS_WINDOW_HEADERS})
 
 # For now, add SFML driver implementation
-source_group("lib\\driv_implementation\\sfml\\window" FILES ${LIB_DRIVERS_IMPLEMENTATION_SFML_WINDOW_HEADERS} ${LIB_DRIVERS_IMPLEMENTATION_SFML_WINDOW_SOURCES})
+source_group("lib\\driv_implementation\\sfml\\window" FILES ${LIB_DRIVERS_IMPLEMENTATION_SFML_WINDOW_HEADERS}  ${LIB_DRIVERS_IMPLEMENTATION_SFML_WINDOW_SOURCES})
 
 target_link_libraries(${CURRENT_TARGET} 
 	debug sfml-system-d

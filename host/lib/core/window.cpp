@@ -10,6 +10,9 @@
 #include "eventmanager.hpp"
 #include "convops.hpp"
 #include <lib/draw/view.hpp>
+#include <lib/driv_impl/sfml/wwindow_impl.hpp>
+#include "appcontroller.hpp"
+#include "driver.hpp"
 #include <SFML/Window/Event.hpp>
 
 namespace lib
@@ -38,6 +41,7 @@ namespace lib
 			s32 lastFps{ 0 };
 			s32 currentFps{ 0 };
 			sf::View m_view;
+			sptr<drivers::window::IWWindow> m_renderWindow{ nullptr };
 		};
 		Window::Window(AppController *const appController, const WindowCreationParams &wcp)
 			: p_wPrivate{ new WindowPrivate() }, AppService{ appController }, _title(wcp.windowTitle)
@@ -62,10 +66,10 @@ namespace lib
 			if (wcp.fullScreen)
 				style = sf::Style::Fullscreen;
 
-			m_renderWindow = sptr<RenderWindow>{new RenderWindow()};
-			m_renderWindow->create(sf::VideoMode(wcp.width, wcp.height, wcp.bpp), getAsString(_title), style,sf::ContextSettings(0,0,wcp.antialiasing));
+			p_wPrivate->m_renderWindow = appController->driver()->newWindow(); //sptr<drivers::window>{new RenderWindow()};
+			p_wPrivate->m_renderWindow->create(wcp.width, wcp.height, wcp.bpp, _title.c_str(), 0, 0, 0, 0, 0, 0);
 
-			m_renderWindow->setVerticalSyncEnabled(wcp.vsync);
+			p_wPrivate->m_renderWindow->setVerticalSync(wcp.vsync);
 		}
 
 		bool Window::preLoop()
@@ -76,13 +80,14 @@ namespace lib
 				p_wPrivate->lastTimeFps = eMs;
 				p_wPrivate->lastFps = p_wPrivate->currentFps;
 				p_wPrivate->currentFps = 0;
-				m_renderWindow->setTitle(getAsString(_title + " FPS:" + std::to_string(p_wPrivate->lastFps)));
+				p_wPrivate->m_renderWindow->setTitle(std::string(_title + " FPS:" + std::to_string(p_wPrivate->lastFps) ).c_str());
 			}
 			++(p_wPrivate->currentFps);
-			m_renderWindow->clear();
+			p_wPrivate->m_renderWindow->clear();
 
+			/*
 			sf::Event event;
-			while (m_renderWindow->pollEvent(event))
+			while (p_wPrivate->m_renderWindow->pollEvent(event))
 			{
 				if (event.type == sf::Event::Closed)
 				{
@@ -93,16 +98,14 @@ namespace lib
 					keyEvent(event);
 				}
 			}
+			*/
 
-//			p_sceneManager->update();
-
-//			display();
 			return _shouldClose;
 		}
 
 		bool Window::postLoop()
 		{
-			m_renderWindow->display();
+			p_wPrivate->m_renderWindow->display();
 			return _shouldClose;
 		}
 
@@ -114,7 +117,7 @@ namespace lib
 		void Window::onDestroy()
 		{
 			LOG_DEBUG("Going to close Window");
-			m_renderWindow->close();
+//			p_wPrivate->m_renderWindow->close();
 			LOG_DEBUG("Window closed");
 		}
 
@@ -137,12 +140,12 @@ namespace lib
 		{
 			p_wPrivate->m_view.setSize(view.target().width, view.target().height);
 			p_wPrivate->m_view.setCenter(convert(view.target().center()));
-			m_renderWindow->setView(p_wPrivate->m_view);
+			//m_renderWindow->setView(p_wPrivate->m_view);
 		}
 
-		sptr<RenderWindow> Window::renderWindow()
+		sptr<RenderTarget> Window::renderTarget()
 		{
-			return m_renderWindow;
+			return p_wPrivate->m_renderWindow;
 		}
 
 	}

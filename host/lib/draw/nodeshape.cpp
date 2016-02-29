@@ -180,7 +180,7 @@ namespace lib
 
 			// Render the inside
 			states.texture = m_texture;
-			states.currentTarget->draw(convert(m_vertices), m_vertices.getVertexCount(), m_vertices.getPrimitiveType(), convert(states));
+			states.currentTarget->draw(m_vertices,states);
 
 			states.transform = oldTransformation;
 			return 1;

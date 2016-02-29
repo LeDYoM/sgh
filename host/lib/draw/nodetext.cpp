@@ -2,6 +2,7 @@
 #include "lib/core/convops.hpp"
 #include <SFML/Graphics/Texture.hpp>
 #include <lib/core/window.hpp>
+#include <lib/core/rendertarget.hpp>
 
 namespace lib
 {
@@ -129,7 +130,7 @@ namespace lib
 				auto oldTransformation= states.transform;
 				states.transform *= transformation();
 				states.texture = &m_font->getTexture(m_characterSize);
-				states.currentTarget->draw(convert(m_vertices), m_vertices.getVertexCount(), m_vertices.getPrimitiveType(), convert(states));
+				states.currentTarget->draw(m_vertices, states);
 				states.transform = oldTransformation;
 				return 1;
 			}

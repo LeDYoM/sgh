@@ -3,6 +3,7 @@
 #include "log.hpp"
 #include "hosttask.hpp"
 #include "appcontroller.hpp"
+#include "driver.hpp"
 
 namespace lib
 {
@@ -67,12 +68,25 @@ namespace lib
 				auto task = m_pendingTasks.front();
 				switch (task->code())
 				{
+				case HostTask::HostTaskCode::LoadDriver:
+				{
+					__ASSERT(!m_driver, "Cannot load another driver. There is already one loaded");
+
+					m_driver = sptr<Driver>(new Driver());
+				}
+					break;
+				case HostTask::HostTaskCode::UnloadDriver:
+					m_driver = nullptr;
+					break;
 				case HostTask::HostTaskCode::LoadAppFromFileName:
+					__ASSERT(m_driver, "Cannot load an app without having loaded a driver first");
+
 					break;
 				case HostTask::HostTaskCode::LoadAppFromIApp:
 				{
+					__ASSERT(m_driver, "Cannot load an app without having loaded a driver first");
 					sptr<AppController> app = sptr<AppController>(new AppController
-						(std::move(std::dynamic_pointer_cast<HostTaskLoadAppFromIApp>(task)->deAttach())));
+						(std::move(std::dynamic_pointer_cast<HostTaskLoadAppFromIApp>(task)->deAttach()),m_driver));
 					m_apps.push_back(app);
 				}
 				break;

@@ -23,6 +23,7 @@ namespace lib
 		class Window;
 		class ResourceManager;
 		class EventManager;
+		class Driver;
 	
 		class AppController
 		{
@@ -35,7 +36,7 @@ namespace lib
 				ReadyToTerminate,
 				Terminated
 			};
-			AppController(uptr<IApp> iapp);
+			AppController(uptr<IApp> iapp,sptr<Driver> driverInstance);
 			virtual ~AppController();
 			
 			bool update();
@@ -43,7 +44,7 @@ namespace lib
 			uptr<ResourceManager> const &resourceManager() const { return m_resourceManager; }
 			uptr<EventManager> const &eventManager() const { return m_eventManager; }
 			uptr<util::UtilProvider> const &utilProvider() const { return m_utilProvider; }
-
+			sptr<Driver> const &driver() const { return m_driver; }
 			const std::string appId() const;
 
 		protected:
@@ -56,7 +57,7 @@ namespace lib
 			uptr<ResourceManager> m_resourceManager{ nullptr };
 			uptr<EventManager> m_eventManager{ nullptr };
 			uptr<util::UtilProvider> m_utilProvider{ nullptr };
-
+			sptr<Driver> m_driver{ nullptr };
 		};
 	}
 }

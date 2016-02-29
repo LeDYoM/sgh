@@ -13,6 +13,8 @@ namespace lib
 		public:
 			enum class HostTaskCode
 			{
+				LoadDriver,
+				UnloadDriver,
 				LoadAppFromFileName,
 				LoadAppFromIApp,
 				UnloadApp
@@ -20,9 +22,23 @@ namespace lib
 			const HostTaskCode code() const { return m_hostTaskCode; }
 			virtual ~HostTask() {}
 		protected:
-			HostTask(const HostTaskCode hostTaskCode) : m_hostTaskCode(hostTaskCode) {}
+			HostTask(const HostTaskCode hostTaskCode) : m_hostTaskCode{ hostTaskCode } {}
 		private:
 			HostTaskCode m_hostTaskCode;
+		};
+
+		class HostTaskLoadDriver : public HostTask
+		{
+		public:
+			HostTaskLoadDriver(const std::string &fileName) : HostTask(HostTaskCode::LoadDriver), m_fileName(fileName) {}
+		private:
+			std::string m_fileName;
+		};
+
+		class HostTaskUnloadDriver : public HostTask
+		{
+		public:
+			HostTaskUnloadDriver() : HostTask(HostTaskCode::UnloadDriver) {}
 		};
 
 		class HostTaskLoadAppFromFileName : public HostTask
@@ -50,7 +66,6 @@ namespace lib
 		private:
 			sptr<AppController> m_app;
 		};
-
 	}
 }
 #endif

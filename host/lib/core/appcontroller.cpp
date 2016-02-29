@@ -11,8 +11,8 @@ namespace lib
 {
 	namespace core
 	{
-		AppController::AppController(uptr<IApp> iapp)
-			: m_iapp( std::move(iapp) )
+		AppController::AppController(uptr<IApp> iapp, sptr<Driver> driverInstance)
+			: m_iapp{ std::move(iapp) }, m_driver{ driverInstance }
 		{
 			LOG_CONSTRUCT_NOPARAMS;
 			LOG_DEBUG("Starting app " << appId() << "...");

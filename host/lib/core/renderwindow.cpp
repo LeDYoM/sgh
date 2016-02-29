@@ -6,7 +6,7 @@ namespace lib
 {
 	namespace core
 	{
-
+		/*
 		RenderWindow::RenderWindow() {}
 		RenderWindow::~RenderWindow() {}
 
@@ -42,12 +42,12 @@ namespace lib
 
 		return image;
 		}
-		*/
 
 		void RenderWindow::onResize()
 		{
 			// Update the current view (recompute the view port, which is stored in relative coordinates)
 			setView(getView());
 		}
+		*/
 	}
 }

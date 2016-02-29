@@ -13,6 +13,7 @@ namespace lib
 	namespace core
 	{
 		class Window;
+		class Driver;
 		class HostTask;
 		class AppController;
 
@@ -35,6 +36,7 @@ namespace lib
 			bool exit{ false };
 			std::queue<sptr<HostTask>> m_pendingTasks;
 			VecSPtr<AppController> m_apps;
+			sptr<Driver> m_driver{ nullptr };
 		};
 	}
 }

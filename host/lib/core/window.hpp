@@ -5,6 +5,8 @@
 #include "appservice.hpp"
 #include "renderwindow.hpp"
 
+#include <SFML/Window/Event.hpp>
+
 namespace lib
 {
 	struct WindowCreationParams;
@@ -12,10 +14,18 @@ namespace lib
 	{
 		class View;
 	}
+	namespace drivers
+	{
+		namespace window
+		{
+			class IRenderTarget;
+		}
+	}
 	namespace core
 	{
 		struct WindowPrivate;
 		class AppController;
+		class RenderTarget;
 
 		class Window : public AppService
 		{
@@ -29,7 +39,7 @@ namespace lib
 			void exitProgram();
 
 			void updateView(const draw::View &view);
-			sptr<RenderWindow> renderWindow();
+			sptr<RenderTarget> renderTarget();
 		private:
 			void create(const WindowCreationParams &wcp);
 			void keyEvent(sf::Event e);
@@ -37,7 +47,6 @@ namespace lib
 			uptr<WindowPrivate> p_wPrivate{ nullptr };
 			bool _shouldClose{ false };
 			std::string _title;
-			sptr<RenderWindow> m_renderWindow{ nullptr };
 		};
 	}
 }

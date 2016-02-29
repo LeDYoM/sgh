@@ -1,4 +1,5 @@
 #include "wwindow_impl.hpp"
+#include <lib/core/convops.hpp>
 
 namespace lib
 {
@@ -17,8 +18,46 @@ namespace lib
 				antialiasing;
 				major;
 				minor;
+				attributes;
+				sf::Window::create(sf::VideoMode{ width, height, bpp }, sf::String(title), sf::Style::Default, sf::ContextSettings{ depth, stencil, antialiasing, major, minor, attributes });
 				return true;
 			}
+
+			bool SFMLWindow::resizePending() const
+			{
+				return m_resizePending;
+			}
+
+			lib::vector2du32 SFMLWindow::size() const
+			{
+				return vector2du32();
+			}
+
+			void SFMLWindow::setVerticalSync(bool enabled)
+			{
+				sf::Window::setVerticalSyncEnabled(enabled);
+			}
+
+			void SFMLWindow::setTitle(const char *title)
+			{
+				sf::Window::setTitle(title);
+			}
+
+			void SFMLWindow::clear()
+			{
+				sf::RenderWindow::clear();
+			}
+
+			void SFMLWindow::display()
+			{
+				sf::Window::display();
+			}
+
+			void SFMLWindow::draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states)
+			{
+				sf::RenderWindow::draw(convert(vertexArray), vertexArray.getVertexCount(), vertexArray.getPrimitiveType(), convert(states));
+			}
+
 		}
 	}
 }

@@ -1,15 +1,17 @@
 #ifndef LIB_DRAW_RENDERTARGET_HPP
 #define LIB_DRAW_RENDERTARGET_HPP
 
-#include <SFML/Graphics/RenderTarget.hpp>
+#include <lib/draw/vertexarray.hpp>
+#include <lib/draw/renderstates.hpp>
 
 namespace lib
 {
 	namespace core
 	{
-		class RenderTarget : public sf::RenderTarget
+		class RenderTarget
 		{
-
+		public:
+			virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) = 0;
 		};
 	}
 }

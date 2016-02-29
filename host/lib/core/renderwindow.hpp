@@ -1,6 +1,6 @@
 #ifndef __LIB_EXTERNAL_REDNERWINDOW_HPP__
 #define __LIB_EXTERNAL_REDNERWINDOW_HPP__
-
+/*
 //#include <SFML/Graphics/RenderTarget.hpp>
 //#include <SFML/Graphics/Image.hpp>
 #include "rendertarget.hpp"
@@ -29,6 +29,6 @@ namespace lib
 		};
 	}
 }
-
+*/
 #endif
 

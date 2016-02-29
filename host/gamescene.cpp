@@ -8,7 +8,7 @@
 #include <lib/core/log.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
-#include <lib/draw/renderizable.hpp>
+#include <lib/draw/RenderNode.hpp>
 #include <lib/draw/positionanimation.hpp>
 #include <lib/draw/coloranimation.hpp>
 #include <lib/draw/nodeshape.hpp>
@@ -394,7 +394,7 @@ namespace zoper
 		p_player = lib::sptr<Player>(new Player(lib::vector2du32(_gameData.centerRect.origin()),tileSize()));
 
 		// Add it to the board and to the scene nodes
-		p_boardModel->setTile(p_player->boardPosition(), std::dynamic_pointer_cast<lib::board::ITile>(_mainBoardrg->addRenderizable(p_player)));
+		p_boardModel->setTile(p_player->boardPosition(), std::dynamic_pointer_cast<lib::board::ITile>(_mainBoardrg->addRenderNode(p_player)));
 	}
 
 	void GameScene::addNewToken(const lib::vector2du32 &position, lib::u32 newToken)
@@ -406,7 +406,7 @@ namespace zoper
 		newTileToken->setPosition(board2Scene(position));
 
 		// Add it to the board and to the scene nodes
-		p_boardModel->setTile(position, std::dynamic_pointer_cast<lib::board::ITile>(_mainBoardrg->addRenderizable(newTileToken)));
+		p_boardModel->setTile(position, std::dynamic_pointer_cast<lib::board::ITile>(_mainBoardrg->addRenderNode(newTileToken)));
 	}
 
 	void GameScene::onKeyPressed(lib::input::Key key)
@@ -464,11 +464,11 @@ namespace zoper
 		Scene::onKeyReleased(key);
 	}
 
-	void GameScene::onAnimationStarted(lib::sptr<lib::draw::anim::IAnimation> anim, lib::sptr<lib::draw::Renderizable> node)
+	void GameScene::onAnimationStarted(lib::sptr<lib::draw::anim::IAnimation> anim, lib::sptr<lib::draw::RenderNode> node)
 	{
 	}
 
-	void GameScene::onAnimationFinished(lib::sptr<lib::draw::anim::IAnimation> anim, lib::sptr<lib::draw::Renderizable> node)
+	void GameScene::onAnimationFinished(lib::sptr<lib::draw::anim::IAnimation> anim, lib::sptr<lib::draw::RenderNode> node)
 	{
 		if (anim->animationType() == "ColorAnimation" && node == _pauseText)
 		{
@@ -477,7 +477,7 @@ namespace zoper
 		}
 		else if (anim->animationType() == "PositionAnimation" && node->name() == "pointIncrementScore")
 		{
-			removeRenderizable(node);
+			removeRenderNode(node);
 		}
 	}
 
@@ -673,7 +673,7 @@ namespace zoper
 	{
 		position;
 		LOG_DEBUG("Deleting token " << tile->name() << " from scene");
-		_mainBoardrg->removeRenderizable(tile);
+		_mainBoardrg->removeRenderNode(tile);
 	}
 
 	void GameScene::tokenChangedValue(const lib::vector2du32 &position, lib::sptr<Tile> tile,

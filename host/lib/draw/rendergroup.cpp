@@ -1,5 +1,5 @@
 #include "rendergroup.hpp"
-#include "renderizable.hpp"
+#include "RenderNode.hpp"
 #include "nodeshape.hpp"
 #include "nodetext.hpp"
 #include <lib/core/window.hpp>
@@ -22,31 +22,31 @@ namespace lib
 		sptr<NodeText> RenderGroup::createText(const std::string &name)
 		{
 			auto result = sptr<NodeText>(new NodeText(name));
-			addRenderizable(result);
+			addRenderNode(result);
 			return result;
 		}
 
 		sptr<NodeShape> RenderGroup::createShape(const std::string &name, const lib::vector2df &radius/*=lib::vector2df()*/, u32 pointCount/*=30*/)
 		{
 			auto result = sptr<NodeShape>(new NodeShape(name,radius,pointCount));
-			addRenderizable(result);
+			addRenderNode(result);
 			return result;
 		}
 
 		sptr<NodeShape> RenderGroup::createSpriteShape(const std::string &name, const lib::vector2df &radius /*= lib::vector2df()*/)
 		{
 			auto result = sptr<NodeShape>(new NodeShape(name,radius, 4,NodeShape::NodeMode::Sprite));
-			addRenderizable(result);
+			addRenderNode(result);
 			return result;
 		}
 
-		sptr<draw::Renderizable> RenderGroup::addRenderizable(sptr<Renderizable> newElement)
+		sptr<draw::RenderNode> RenderGroup::addRenderNode(sptr<RenderNode> newElement)
 		{
 			_renderNodes.push_back(newElement);
 			return newElement;
 		}
 
-		bool RenderGroup::removeRenderizable(sptr<Renderizable> element)
+		bool RenderGroup::removeRenderNode(sptr<RenderNode> element)
 		{
 			return removeFromspVector(element, _renderNodes);
 		}
@@ -60,9 +60,9 @@ namespace lib
 				auto oldTransformation = states.transform;
 				states.transform *= transformation();
 
-				for (const auto renderizable : _renderNodes)
+				for (const auto renderNode : _renderNodes)
 				{
-					rNodes += renderizable->draw(states);
+					rNodes += renderNode->draw(states);
 				}
 				states.transform = oldTransformation;
 				return rNodes;

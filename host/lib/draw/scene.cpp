@@ -1,6 +1,6 @@
 #include "scene.hpp"
 #include "scenemanager.hpp"
-#include "renderizable.hpp"
+#include "RenderNode.hpp"
 #include <lib/core/log.hpp>
 #include <lib/core/window.hpp>
 #include <lib/core/appcontroller.hpp>

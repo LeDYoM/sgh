@@ -1,5 +1,5 @@
-#ifndef __LIB_RENDERIZABLE_HPP__
-#define __LIB_RENDERIZABLE_HPP__
+#ifndef LIB_DRAW_RENDERNODE_HPP
+#define LIB_DRAW_RENDERNODE_HPP
 
 #include "hasname.hpp"
 #include "idrawable.hpp"
@@ -18,11 +18,11 @@ namespace lib
 			Right = 2
 		};
 
-		class Renderizable : public lib::core::HasName, public IDrawable, public Transformable
+		class RenderNode : public lib::core::HasName, public IDrawable, public Transformable
 		{
 		public:
-			explicit Renderizable(const std::string &name);
-			virtual ~Renderizable();
+			explicit RenderNode(const std::string &name);
+			virtual ~RenderNode();
 
 			virtual u32 draw(lib::draw::RenderStates &states) override;
 			virtual void setColor(const lib::draw::Color &color) = 0;

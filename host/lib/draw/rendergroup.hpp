@@ -16,7 +16,7 @@ namespace lib
 	}
 	namespace draw
 	{
-		class Renderizable;
+		class RenderNode;
 		class NodeShape;
 		class NodeText;
 		class RenderGroup : public lib::core::HasName, public IDrawable, public anim::AnimationManager, public Transformable
@@ -28,8 +28,8 @@ namespace lib
 			sptr<NodeText> createText(const std::string &name);
 			sptr<NodeShape> createShape(const std::string &name,const lib::vector2df &radius=lib::vector2df(),u32 pointCount=30);
 			sptr<NodeShape> createSpriteShape(const std::string &name, const lib::vector2df &radius = lib::vector2df());
-			sptr<draw::Renderizable> addRenderizable(sptr<Renderizable> newElement);
-			bool removeRenderizable(sptr<Renderizable> element);
+			sptr<draw::RenderNode> addRenderNode(sptr<RenderNode> newElement);
+			bool removeRenderNode(sptr<RenderNode> element);
 			void clear();
 
 			sptr<RenderGroup> createNewRenderGroup(const std::string &name,sptr<IDrawable> beforeNode=nullptr);

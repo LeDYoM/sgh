@@ -6,13 +6,13 @@
 #include <string>
 #include <vector>
 
-#include "renderizable.hpp"
+#include "RenderNode.hpp"
 
 namespace lib
 {
 	namespace draw
 	{
-		class NodeText : public lib::draw::Renderizable
+		class NodeText : public lib::draw::RenderNode
 		{
 		public:
 			enum Style

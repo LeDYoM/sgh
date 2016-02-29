@@ -1,4 +1,4 @@
-#include "renderizable.hpp"
+#include "RenderNode.hpp"
 #include <lib/core/window.hpp>
 #include <lib/core/log.hpp>
 
@@ -6,14 +6,14 @@ namespace lib
 {
 	namespace draw
 	{
-		Renderizable::Renderizable(const std::string &name)
+		RenderNode::RenderNode(const std::string &name)
 			: HasName{ name }
 		{
 			LOG_CONSTRUCT("Name: " << name << " of type");
 
 		}
 
-		u32 Renderizable::draw(lib::draw::RenderStates &states)
+		u32 RenderNode::draw(lib::draw::RenderStates &states)
 		{
 			states;
 			if (isVisible())
@@ -25,11 +25,11 @@ namespace lib
 			return 0;
 		}
 
-		Renderizable::~Renderizable()
+		RenderNode::~RenderNode()
 		{
 		}
 
-		void Renderizable::setPosition(const vector2df &pos, Alignment alignment)
+		void RenderNode::setPosition(const vector2df &pos, Alignment alignment)
 		{
 			switch (alignment)
 			{
@@ -46,7 +46,7 @@ namespace lib
 			}
 		}
 
-		void Renderizable::setPositionX(const f32 x, Alignment alignment /*= Alignment::Left*/)
+		void RenderNode::setPositionX(const f32 x, Alignment alignment /*= Alignment::Left*/)
 		{
 			const lib::vector2df position( Transformable::position() );
 			switch (alignment)
@@ -66,7 +66,7 @@ namespace lib
 			}
 		}
 
-		void Renderizable::setPositionY(const f32 y, Alignment alignment /*= Alignment::Left*/)
+		void RenderNode::setPositionY(const f32 y, Alignment alignment /*= Alignment::Left*/)
 		{
 			const lib::vector2df position(Transformable::position());
 			switch (alignment)
@@ -84,7 +84,7 @@ namespace lib
 			}
 		}
 
-		void Renderizable::setAlignment(Alignment alignment)
+		void RenderNode::setAlignment(Alignment alignment)
 		{
 			setPosition(position(), alignment);
 		}

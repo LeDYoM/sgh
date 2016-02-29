@@ -6,7 +6,7 @@ namespace lib
 	{
 		namespace anim
 		{
-			PositionAnimation::PositionAnimation(const s32 duration, sptr<Renderizable> node, const vector2df &startPosition, const vector2df &endPosition)
+			PositionAnimation::PositionAnimation(const s32 duration, sptr<RenderNode> node, const vector2df &startPosition, const vector2df &endPosition)
 				: IValueAnimation(duration,node,startPosition,endPosition)
 			{
 			}
@@ -25,13 +25,13 @@ namespace lib
 				return result;
 			}
 
-			sptr<PositionAnimation> PositionAnimation::create(const s32 duration, sptr<Renderizable> node, const vector2df &startPosition, const vector2df &endPosition)
+			sptr<PositionAnimation> PositionAnimation::create(const s32 duration, sptr<RenderNode> node, const vector2df &startPosition, const vector2df &endPosition)
 			{
 				auto animation = std::make_shared<PositionAnimation>(duration, node, startPosition, endPosition);
 				return animation;
 			}
 
-			sptr<PositionAnimation> PositionAnimation::create(const s32 duration, sptr<Renderizable> node, const vector2df &endPosition)
+			sptr<PositionAnimation> PositionAnimation::create(const s32 duration, sptr<RenderNode> node, const vector2df &endPosition)
 			{
 				auto animation = std::make_shared<PositionAnimation>(duration, node, node->position(), endPosition);
 				return animation;

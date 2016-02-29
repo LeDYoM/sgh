@@ -6,7 +6,7 @@ namespace lib
 	{
 		namespace anim
 		{
-			ColorAnimation::ColorAnimation(const s32 duration, sptr<Renderizable> node, const lib::draw::Color &startColor, const lib::draw::Color &endColor)
+			ColorAnimation::ColorAnimation(const s32 duration, sptr<RenderNode> node, const lib::draw::Color &startColor, const lib::draw::Color &endColor)
 				: IValueAnimation(duration, node, startColor, endColor)
 			{
 			}
@@ -35,13 +35,13 @@ namespace lib
 				return result;
 			}
 
-			sptr<ColorAnimation> ColorAnimation::create(const s32 duration, sptr<Renderizable> node, const lib::draw::Color &startColor, const lib::draw::Color &endColor)
+			sptr<ColorAnimation> ColorAnimation::create(const s32 duration, sptr<RenderNode> node, const lib::draw::Color &startColor, const lib::draw::Color &endColor)
 			{
 				auto animation = std::make_shared<ColorAnimation>(duration, node, startColor, endColor);
 				return animation;
 			}
 
-			sptr<ColorAnimation> ColorAnimation::create(const s32 duration, sptr<Renderizable> node, const lib::draw::Color &endColor)
+			sptr<ColorAnimation> ColorAnimation::create(const s32 duration, sptr<RenderNode> node, const lib::draw::Color &endColor)
 			{
 				auto animation = std::make_shared<ColorAnimation>(duration, node, endColor, endColor);
 				return animation;

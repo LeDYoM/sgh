@@ -2,14 +2,14 @@
 #define __LIB_ELLIPSESHAPE_HPP__
 
 #include <lib/include/types.hpp>
-#include "renderizable.hpp"
+#include "RenderNode.hpp"
 #include "vertexarray.hpp"
 
 namespace lib
 {
 	namespace draw
 	{
-		class NodeShape : public Renderizable
+		class NodeShape : public RenderNode
 		{
 		public:
 			enum class NodeMode : u8

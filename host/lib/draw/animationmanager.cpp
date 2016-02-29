@@ -61,12 +61,12 @@ namespace lib
 				}
 			}
 
-			void AnimationManager::onAnimationStarted(sptr<IAnimation> anim, sptr<Renderizable> node)
+			void AnimationManager::onAnimationStarted(sptr<IAnimation> anim, sptr<RenderNode> node)
 			{
 
 			}
 
-			void AnimationManager::onAnimationFinished(sptr<IAnimation> anim, sptr<Renderizable> node)
+			void AnimationManager::onAnimationFinished(sptr<IAnimation> anim, sptr<RenderNode> node)
 			{
 
 			}

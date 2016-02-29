@@ -1,7 +1,7 @@
 #ifndef __LIB_IANIMATION_HPP__
 #define __LIB_IANIMATION_HPP__
 
-#include "renderizable.hpp"
+#include "rendernode.hpp"
 #include <lib/core/timer.hpp>
 
 namespace lib
@@ -13,7 +13,7 @@ namespace lib
 			class IAnimation
 			{
 			public:
-				IAnimation(const u32 duration, sptr<Renderizable> node)
+				IAnimation(const u32 duration, sptr<RenderNode> node)
 					: _duration{ duration }, _node{ node }
 				{
 					_clock.restart();
@@ -30,13 +30,13 @@ namespace lib
 					_delta = (static_cast<f32>(currentTime) / _duration);
 					return true;
 				}
-				sptr<Renderizable> node() const { return _node; }
+				sptr<RenderNode> node() const { return _node; }
 				virtual ~IAnimation(){}
 			protected:
 				u64 currentTime;
 				u64 _duration;
 				float _delta{ 0.0f };
-				sptr<Renderizable> _node;
+				sptr<RenderNode> _node;
 				Timer _clock;
 			};
 
@@ -44,7 +44,7 @@ namespace lib
 			class IValueAnimation : public IAnimation
 			{
 			public:
-				IValueAnimation(const s32 duration, sptr<Renderizable> node, const T&start, const T&end)
+				IValueAnimation(const s32 duration, sptr<RenderNode> node, const T&start, const T&end)
 					: IAnimation(duration, node), _startValue(start), _endValue(end) {}
 			protected:
 				T _startValue;

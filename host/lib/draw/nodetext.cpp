@@ -9,13 +9,13 @@ namespace lib
 	{
 		NodeText::NodeText(const std::string &name)
 			: RenderNode{ name, sf::Triangles }, m_string(), m_font(nullptr), m_characterSize(30), m_style(Regular),
-			m_color(255, 255, 255), m_bounds(), m_geometryNeedUpdate(false)
+			m_color(255, 255, 255), m_geometryNeedUpdate(false)
 		{
 		}
 
 		NodeText::NodeText(const std::string &name, const sf::String& string, const sf::Font& font, unsigned int characterSize) :
 			RenderNode{ name, sf::Triangles }, m_string(string), m_font(&font), m_characterSize(characterSize), m_style(Regular),
-			m_color(255, 255, 255), m_bounds(), m_geometryNeedUpdate(true)
+			m_color(255, 255, 255), m_geometryNeedUpdate(true)
 		{
 		}
 

@@ -48,7 +48,6 @@ namespace lib
 			u32 m_characterSize;
 			u32 m_style;
 			Color m_color;
-			Rectf32 m_bounds;
 			bool m_geometryNeedUpdate;
 		};
 	}

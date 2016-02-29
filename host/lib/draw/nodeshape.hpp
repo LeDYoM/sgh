@@ -49,7 +49,6 @@ namespace lib
 			lib::u32 m_pointCount;
 			Rects32 m_textureRect;
 			lib::draw::Color m_fillColor;
-			Rectf32 m_bounds;
 		};
 	}
 }

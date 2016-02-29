@@ -7,7 +7,7 @@ namespace lib
 	namespace draw
 	{
 		RenderNode::RenderNode(const std::string &name, const sf::PrimitiveType primitiveType)
-			: HasName{ name }, m_vertices{ primitiveType }
+			: HasName{ name }, m_vertices{ primitiveType }, m_bounds{}
 		{
 			LOG_CONSTRUCT("Name: " << name << " of type");
 		}

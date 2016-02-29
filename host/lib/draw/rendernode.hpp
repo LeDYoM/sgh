@@ -39,6 +39,7 @@ namespace lib
 			void setAlignment(Alignment alignment);
 		protected:
 			VertexArray m_vertices;
+			Rectf32 m_bounds;
 		};
 	}
 }

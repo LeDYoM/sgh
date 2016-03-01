@@ -8,7 +8,6 @@
 #include "events/event.hpp"
 #include "events/inputevent.hpp"
 #include "eventmanager.hpp"
-#include "convops.hpp"
 #include <lib/draw/camera.hpp>
 #include <lib/driv_impl/sfml/wwindow_impl.hpp>
 #include "appcontroller.hpp"

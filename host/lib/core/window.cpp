@@ -65,6 +65,8 @@ namespace lib
 			if (wcp.fullScreen)
 				style = sf::Style::Fullscreen;
 
+			auto a = appController->driver();
+			a->newWindow();
 			p_wPrivate->m_renderWindow = appController->driver()->newWindow(); //sptr<drivers::window>{new RenderWindow()};
 			p_wPrivate->m_renderWindow->create(wcp.width, wcp.height, wcp.bpp, _title.c_str(), 0, 0, 0, 0, 0, 0);
 

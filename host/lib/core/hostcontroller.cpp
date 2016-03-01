@@ -9,7 +9,6 @@ namespace lib
 {
 	namespace core
 	{
-
 		HostController::HostController(const std::vector<std::string> &params)
 			: Configuration{ "host.cfg" }
 		{
@@ -23,8 +22,16 @@ namespace lib
 			LOG_DESTRUCT_NOPARAMS;
 		}
 
+		int HostController::initialize()
+		{
+			// Temporary hardcoded initialization
+			addTask(sptr<HostTaskLoadDriver>(new HostTaskLoadDriver("fooDriver.dll")));
+			return 0;
+		}
+
 		int HostController::run()
 		{
+			initialize();
 			while (!exit)
 			{
 				processTask();
@@ -39,10 +46,17 @@ namespace lib
 				}
 			}
 
+			finalize();
 			if (m_apps.empty())
 			{
 				LOG_INFO("Apps list is empty. Exiting normally");
 			}
+			return 0;
+		}
+
+		int HostController::finalize()
+		{
+			addTask(sptr<HostTaskUnloadDriver>(new HostTaskUnloadDriver()));
 			return 0;
 		}
 
@@ -69,13 +83,11 @@ namespace lib
 				switch (task->code())
 				{
 				case HostTask::HostTaskCode::LoadDriver:
-				{
 					__ASSERT(!m_driver, "Cannot load another driver. There is already one loaded");
-
 					m_driver = sptr<Driver>(new Driver());
-				}
 					break;
 				case HostTask::HostTaskCode::UnloadDriver:
+					__ASSERT(m_driver, "Trying to delete driver when no driver loaded");
 					m_driver = nullptr;
 					break;
 				case HostTask::HostTaskCode::LoadAppFromFileName:

@@ -11,6 +11,7 @@ namespace lib
 		class Driver
 		{
 		public:
+			explicit Driver();
 			bool initialize(const std::string &fileName);
 			sptr<drivers::window::IWWindow> newWindow();
 			virtual ~Driver();

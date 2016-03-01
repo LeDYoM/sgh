@@ -23,7 +23,9 @@ namespace lib
 			HostController(const std::vector<std::string> &params);
 			virtual ~HostController();
 
+			int initialize();
 			int run();
+			int finalize();
 
 			void addApp(uptr<IApp> iapp);
 			void removeApp(sptr<AppController> iapp);

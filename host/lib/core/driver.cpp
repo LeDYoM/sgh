@@ -7,6 +7,11 @@ namespace lib
 	namespace core
 	{
 
+		Driver::Driver()
+		{
+			LOG_CONSTRUCT_NOPARAMS;
+		}
+
 		bool Driver::initialize(const std::string &fileName)
 		{
 			LOG_CONSTRUCT("Driver fileName: " << fileName);

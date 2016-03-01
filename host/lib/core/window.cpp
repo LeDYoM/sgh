@@ -13,7 +13,6 @@
 #include <lib/driv_impl/sfml/wwindow_impl.hpp>
 #include "appcontroller.hpp"
 #include "driver.hpp"
-#include <SFML/Window/Event.hpp>
 
 namespace lib
 {

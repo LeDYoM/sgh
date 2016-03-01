@@ -2,7 +2,6 @@
 #define LIB_DRAW_RENDERSTATES_HPP
 
 #include <SFML/Graphics/BlendMode.hpp>
-//#include <SFML/Graphics/Transform.hpp>
 #include "transformation.hpp"
 
 namespace sf

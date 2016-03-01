@@ -9,13 +9,13 @@ namespace lib
 	namespace draw
 	{
 		NodeText::NodeText(const std::string &name)
-			: RenderNode{ name, sf::Triangles }, m_string(), m_font(nullptr), m_characterSize(30), m_style(Regular)
+			: RenderNode{ name, PrimitiveType::Triangles }, m_string(), m_font(nullptr), m_characterSize(30), m_style(Regular)
 		{
 			ensureGeometryUpdate();
 		}
 
 		NodeText::NodeText(const std::string &name, const sf::String& string, const sf::Font& font, unsigned int characterSize) :
-			RenderNode{ name, sf::Triangles }, m_string(string), m_font(&font), m_characterSize(characterSize), m_style(Regular)
+			RenderNode{ name, PrimitiveType::Triangles }, m_string(string), m_font(&font), m_characterSize(characterSize), m_style(Regular)
 		{
 		}
 

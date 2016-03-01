@@ -34,4 +34,10 @@ namespace lib
 	{
 		return reinterpret_cast<const sf::Vertex*>(&(vertexArray[0]));
 	}
+
+	sf::PrimitiveType convert(const draw::PrimitiveType primitiveType)
+	{
+		return static_cast<sf::PrimitiveType>((int)primitiveType);
+	}
+
 }

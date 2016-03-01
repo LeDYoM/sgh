@@ -6,7 +6,7 @@ namespace lib
 {
 	namespace draw
 	{
-		RenderNode::RenderNode(const std::string &name, const sf::PrimitiveType primitiveType)
+		RenderNode::RenderNode(const std::string &name, const PrimitiveType primitiveType)
 			: HasName{ name }, m_vertices{ primitiveType }, m_bounds{}, m_color{ 255, 255, 255 }, 
 			m_geometryNeedUpdate{ true }, m_colorsNeedUpdate{ true }
 		{

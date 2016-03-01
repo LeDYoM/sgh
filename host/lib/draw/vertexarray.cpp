@@ -6,10 +6,10 @@ namespace lib
 	namespace draw
 	{
 		VertexArray::VertexArray() 
-			: m_vertices{}, m_primitiveType{ sf::Points } {}
+			: m_vertices{}, m_primitiveType{ PrimitiveType::Points } {}
 
 
-		VertexArray::VertexArray(sf::PrimitiveType type, std::size_t vertexCount)
+		VertexArray::VertexArray(PrimitiveType type, std::size_t vertexCount)
 			: m_vertices( vertexCount ), m_primitiveType{ type } {}
 
 		std::size_t VertexArray::getVertexCount() const
@@ -42,12 +42,12 @@ namespace lib
 			m_vertices.push_back(vertex);
 		}
 
-		void VertexArray::setPrimitiveType(sf::PrimitiveType type)
+		void VertexArray::setPrimitiveType(PrimitiveType type)
 		{
 			m_primitiveType = type;
 		}
 
-		sf::PrimitiveType VertexArray::getPrimitiveType() const
+		PrimitiveType VertexArray::getPrimitiveType() const
 		{
 			return m_primitiveType;
 		}

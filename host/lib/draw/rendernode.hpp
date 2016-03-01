@@ -22,7 +22,7 @@ namespace lib
 		class RenderNode : public lib::core::HasName, public IDrawable, public Transformable
 		{
 		public:
-			explicit RenderNode(const std::string &name, const sf::PrimitiveType primitiveType);
+			explicit RenderNode(const std::string &name, const PrimitiveType primitiveType);
 			virtual ~RenderNode();
 
 			virtual u32 draw(lib::draw::RenderStates &states) = 0;

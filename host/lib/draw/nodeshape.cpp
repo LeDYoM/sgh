@@ -2,7 +2,6 @@
 #include <lib/core/convops.hpp>
 #include <lib/core/log.hpp>
 #include <lib/core/rendertarget.hpp>
-
 #include <SFML/Graphics/Texture.hpp>
 
 #define _USE_MATH_DEFINES
@@ -13,7 +12,7 @@ namespace lib
 	namespace draw
 	{
 		NodeShape::NodeShape(const std::string &name, const vector2df& size, const u32 pointCount, const NodeMode mode)
-			: RenderNode{ name, sf::PrimitiveType::TrianglesFan }, _mode{ mode }, m_texture{ nullptr }, m_textureRect{},
+			: RenderNode{ name, PrimitiveType::TrianglesFan }, _mode{ mode }, m_texture{ nullptr }, m_textureRect{},
 			_size{ size }, m_pointCount{ pointCount }
 		{
 			ensureGeometryUpdate();

@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Transform.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
+#include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/System/Vector2.hpp>
 
 namespace lib
@@ -19,6 +20,7 @@ namespace lib
 	sf::Transform convert(const draw::Transformation &transform);
 	sf::RenderStates convert(const draw::RenderStates &renderStates);
 	const sf::Vertex * convert(const draw::VertexArray &vertexArray);
+	sf::PrimitiveType convert(const draw::PrimitiveType primitiveType);
 
 	template <typename T>
 	const sf::Vector2<T> convert(const vector2d<T> &v)

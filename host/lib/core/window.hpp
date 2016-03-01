@@ -14,13 +14,6 @@ namespace lib
 	{
 		class View;
 	}
-	namespace drivers
-	{
-		namespace window
-		{
-			class IRenderTarget;
-		}
-	}
 	namespace core
 	{
 		struct WindowPrivate;

@@ -7,7 +7,7 @@
 #include <lib/include/key.hpp>
 #include <lib/core/timer.hpp>
 #include "rendergroup.hpp"
-#include "view.hpp"
+#include "camera.hpp"
 #include <string>
 
 namespace lib
@@ -52,7 +52,7 @@ namespace lib
 			uptr<util::UtilProvider> const &utilProvider();
 
 			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
-			inline const Rectf32_ &rectangleView() const { return m_view.target(); }
+			inline const Camera &camera() const { return m_camera; }
 			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
 
 			void exitProgram();
@@ -69,7 +69,7 @@ namespace lib
 			void privateOnEnterScene();
 			void privateOnExitScene();
 
-			lib::draw::View m_view;
+			lib::draw::Camera m_camera;
 			u32 _state;
 
 			SceneManager *p_scnManager;

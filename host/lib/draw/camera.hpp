@@ -7,14 +7,13 @@ namespace lib
 {
 	namespace draw
 	{
-		class View
+		class Camera
 		{
 		public:
-			explicit View();
-			explicit View(const Rectf32_ &rectangle);
-			View(const vector2df &topLeft, const vector2df &size);
-			inline const Rectf32_ &target() const { return m_target; }
-			inline Rectf32_ &target() { return m_target; }
+			explicit Camera() {}
+			explicit Camera(const Rectf32 &rectangle) : m_target{ rectangle } {}
+			inline const Rectf32 &target() const { return m_target; }
+			inline Rectf32 &target() { return m_target; }
 			inline void setSize(const vector2df &size)
 			{
 				m_target.width = size.x;
@@ -22,7 +21,7 @@ namespace lib
 			}
 
 		private:
-			Rectf32_ m_target;
+			Rectf32 m_target;
 		};
 	}
 }

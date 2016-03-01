@@ -12,7 +12,7 @@ namespace lib
 	struct WindowCreationParams;
 	namespace draw
 	{
-		class View;
+		class Camera;
 	}
 	namespace core
 	{
@@ -31,7 +31,7 @@ namespace lib
 			virtual void onDestroy();
 			void exitProgram();
 
-			void updateView(const draw::View &view);
+			void updateCamera(const draw::Camera &camera);
 			sptr<RenderTarget> renderTarget();
 		private:
 			void create(const WindowCreationParams &wcp);

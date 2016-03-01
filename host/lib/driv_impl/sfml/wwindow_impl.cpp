@@ -9,16 +9,6 @@ namespace lib
 		{
 			bool SFMLWindow::create(u32 width, u32 height, u32 bpp, const char *title, u32 depth, u32 stencil, u32 antialiasing, u32 major, u32 minor, u32 attributes)
 			{
-				width;
-				height;
-				bpp;
-				title;
-				depth;
-				stencil;
-				antialiasing;
-				major;
-				minor;
-				attributes;
 				sf::Window::create(sf::VideoMode{ width, height, bpp }, sf::String(title), sf::Style::Default, sf::ContextSettings{ depth, stencil, antialiasing, major, minor, attributes });
 				return true;
 			}
@@ -56,6 +46,12 @@ namespace lib
 			void SFMLWindow::draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states)
 			{
 				sf::RenderWindow::draw(convert(vertexArray), vertexArray.getVertexCount(), vertexArray.getPrimitiveType(), convert(states));
+			}
+
+			void SFMLWindow::setViewRectangle(const Rectf32 &rect)
+			{
+				sf::View view{ sf::FloatRect{ rect.left, rect.top, rect.width, rect.height } };
+				setView(view);
 			}
 
 		}

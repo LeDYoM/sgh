@@ -91,8 +91,7 @@ namespace lib
 	};
 
 	using Rects32 = lib::Rect<s32>;
-	using Rectf32 = lib::Rect<f32>; //sf::FloatRect;
-	using Rectf32_ = lib::Rect<f32>;
+	using Rectf32 = lib::Rect<f32>;
 	using Rectu32 = lib::Rect<u32>;
 }
 #endif

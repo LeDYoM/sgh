@@ -124,7 +124,7 @@ namespace zoper
 
 		auto _gameBoundingBox = _gameText->getLocalBounds();
 		auto _overBoundingBox = _overText->getLocalBounds();
-		auto sceneCenter = rectangleView().center();
+		auto sceneCenter = camera().target().center();
 		_gameText->setPosition({ sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height });
 		_overText->setPosition({ sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y });
 

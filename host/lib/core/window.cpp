@@ -9,7 +9,7 @@
 #include "events/inputevent.hpp"
 #include "eventmanager.hpp"
 #include "convops.hpp"
-#include <lib/draw/view.hpp>
+#include <lib/draw/camera.hpp>
 #include <lib/driv_impl/sfml/wwindow_impl.hpp>
 #include "appcontroller.hpp"
 #include "driver.hpp"
@@ -40,7 +40,6 @@ namespace lib
 			u64 lastTimeFps{ 0 };
 			s32 lastFps{ 0 };
 			s32 currentFps{ 0 };
-			sf::View m_view;
 			sptr<drivers::window::IWWindow> m_renderWindow{ nullptr };
 		};
 		Window::Window(AppController *const appController, const WindowCreationParams &wcp)
@@ -136,11 +135,9 @@ namespace lib
 			_shouldClose = true;
 		}
 
-		void Window::updateView(const draw::View &view)
+		void Window::updateCamera(const draw::Camera &camera)
 		{
-			p_wPrivate->m_view.setSize(view.target().width, view.target().height);
-			p_wPrivate->m_view.setCenter(convert(view.target().center()));
-			//m_renderWindow->setView(p_wPrivate->m_view);
+			p_wPrivate->m_renderWindow->setViewRectangle(camera.target());
 		}
 
 		sptr<RenderTarget> Window::renderTarget()

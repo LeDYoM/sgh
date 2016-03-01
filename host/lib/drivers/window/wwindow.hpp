@@ -20,6 +20,7 @@ namespace lib
 				virtual void setTitle(const char *title) = 0;
 				virtual void clear() = 0;
 				virtual void display() = 0;
+				virtual void setViewRectangle(const Rectf32 &rect) = 0;
 			};
 		}
 	}

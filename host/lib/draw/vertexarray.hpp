@@ -24,12 +24,12 @@ namespace lib
 		{
 		public:
 			VertexArray();
-			explicit VertexArray(PrimitiveType type, std::size_t vertexCount = 0);
+			explicit VertexArray(const PrimitiveType type, const std::size_t vertexCount = 0);
 			std::size_t getVertexCount() const;
-			Vertex &operator [](std::size_t index);
-			const Vertex &operator [](std::size_t index) const;
+			Vertex &operator [](const std::size_t index);
+			const Vertex &operator [](const std::size_t index) const;
 			void clear();
-			void resize(std::size_t vertexCount);
+			void resize(const std::size_t vertexCount);
 			void append(const Vertex &vertex);
 			void setPrimitiveType(const PrimitiveType type);
 			PrimitiveType getPrimitiveType() const;

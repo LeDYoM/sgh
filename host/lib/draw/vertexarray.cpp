@@ -9,7 +9,7 @@ namespace lib
 			: m_vertices{}, m_primitiveType{ PrimitiveType::Points } {}
 
 
-		VertexArray::VertexArray(PrimitiveType type, std::size_t vertexCount)
+		VertexArray::VertexArray(const PrimitiveType type, const std::size_t vertexCount)
 			: m_vertices( vertexCount ), m_primitiveType{ type } {}
 
 		std::size_t VertexArray::getVertexCount() const
@@ -17,12 +17,12 @@ namespace lib
 			return m_vertices.size();
 		}
 
-		Vertex &VertexArray::operator [](std::size_t index)
+		Vertex &VertexArray::operator [](const std::size_t index)
 		{
 			return m_vertices[index];
 		}
 
-		const Vertex &VertexArray::operator [](std::size_t index) const
+		const Vertex &VertexArray::operator [](const std::size_t index) const
 		{
 			return m_vertices[index];
 		}
@@ -32,7 +32,7 @@ namespace lib
 			m_vertices.clear();
 		}
 
-		void VertexArray::resize(std::size_t vertexCount)
+		void VertexArray::resize(const std::size_t vertexCount)
 		{
 			m_vertices.resize(vertexCount);
 		}

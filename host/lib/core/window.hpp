@@ -3,9 +3,8 @@
 
 #include <lib/include/types.hpp>
 #include "appservice.hpp"
-#include "renderwindow.hpp"
 
-#include <SFML/Window/Event.hpp>
+#include "events/inputevent.hpp"
 
 namespace lib
 {
@@ -33,9 +32,12 @@ namespace lib
 
 			void updateCamera(const draw::Camera &camera);
 			sptr<RenderTarget> renderTarget();
+
+			/* Driver communication */
+			void receiveKeyEvent(const events::KeyEvent &e);
+			void wantsClose();
 		private:
 			void create(const WindowCreationParams &wcp);
-			void keyEvent(sf::Event e);
 
 			uptr<WindowPrivate> p_wPrivate{ nullptr };
 			bool _shouldClose{ false };

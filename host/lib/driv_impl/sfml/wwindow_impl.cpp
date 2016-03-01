@@ -1,5 +1,8 @@
 #include "wwindow_impl.hpp"
 #include <lib/core/convops.hpp>
+#include <lib/core/window.hpp>
+#include <lib/include/key.hpp>
+#include <lib/core/events/inputevent.hpp>
 
 namespace lib
 {
@@ -7,6 +10,15 @@ namespace lib
 	{
 		namespace window
 		{
+			namespace
+			{
+				lib::input::Key doCast(const sf::Keyboard::Key &k)
+				{
+					int temp = k;
+					return static_cast<lib::input::Key>(temp);
+				}
+			}
+
 			bool SFMLWindow::create(u32 width, u32 height, u32 bpp, const char *title, u32 depth, u32 stencil, u32 antialiasing, u32 major, u32 minor, u32 attributes)
 			{
 				sf::Window::create(sf::VideoMode{ width, height, bpp }, sf::String(title), sf::Style::Default, sf::ContextSettings{ depth, stencil, antialiasing, major, minor, attributes });
@@ -54,6 +66,26 @@ namespace lib
 				setView(view);
 			}
 
+			void SFMLWindow::receiveEvent(core::Window *const window)
+			{
+				sf::Event e;
+				while (sf::Window::pollEvent(e))
+				{
+					if (e.type == sf::Event::Closed)
+					{
+						window->wantsClose();
+					}
+					else if (e.type == sf::Event::KeyPressed || e.type == sf::Event::KeyReleased)
+					{
+						core::events::KeyEvent event_{e.type == sf::Event::KeyPressed ? 
+							core::events::KeyEvent::Action::KeyPressed : core::events::KeyEvent::Action::KeyReleased,
+							doCast(e.key.code)
+						};
+
+						window->receiveKeyEvent(event_);
+					}
+				}
+			}
 		}
 	}
 }

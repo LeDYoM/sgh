@@ -27,12 +27,6 @@ namespace lib
 				sf::String temp(wsTmp);
 				return temp;
 			}
-
-			lib::input::Key doCast(const sf::Keyboard::Key &k)
-			{
-				int temp = k;
-				return static_cast<lib::input::Key>(temp);
-			}
 		}
 		struct WindowPrivate
 		{
@@ -65,8 +59,6 @@ namespace lib
 			if (wcp.fullScreen)
 				style = sf::Style::Fullscreen;
 
-			auto a = appController->driver();
-			a->newWindow();
 			p_wPrivate->m_renderWindow = appController->driver()->newWindow(); //sptr<drivers::window>{new RenderWindow()};
 			p_wPrivate->m_renderWindow->create(wcp.width, wcp.height, wcp.bpp, _title.c_str(), 0, 0, 0, 0, 0, 0);
 
@@ -85,7 +77,7 @@ namespace lib
 			}
 			++(p_wPrivate->currentFps);
 			p_wPrivate->m_renderWindow->clear();
-
+			p_wPrivate->m_renderWindow->receiveEvent(this);
 			/*
 			sf::Event event;
 			while (p_wPrivate->m_renderWindow->pollEvent(event))
@@ -122,14 +114,14 @@ namespace lib
 			LOG_DEBUG("Window closed");
 		}
 
-		void Window::keyEvent(sf::Event e)
+		void Window::receiveKeyEvent(const events::KeyEvent &e)
 		{
-			_ASSERT(e.type == sf::Event::KeyPressed || e.type == sf::Event::KeyReleased);
-			appController->eventManager()->addEvent(uptr<events::KeyEvent>(new events::KeyEvent{ 
-				e.type == sf::Event::KeyPressed ? events::KeyEvent::Action::KeyPressed : events::KeyEvent::Action::KeyReleased,
-				doCast(e.key.code) 
-			}));
+			appController->eventManager()->addEvent(uptr<events::InputEvent>(new events::KeyEvent(e)));
+		}
 
+		void Window::wantsClose()
+		{
+			_shouldClose = true;
 		}
 
 		void Window::exitProgram()
@@ -146,6 +138,5 @@ namespace lib
 		{
 			return p_wPrivate->m_renderWindow;
 		}
-
 	}
 }

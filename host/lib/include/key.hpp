@@ -9,24 +9,24 @@ namespace lib
 	{
 		enum KeyCode
 		{
-			Unknown = -1, ///< Unhandled key
-			A = 0,        ///< The A key
-			B,            ///< The B key
-			C,            ///< The C key
-			D,            ///< The D key
-			E,            ///< The E key
-			F,            ///< The F key
-			G,            ///< The G key
-			H,            ///< The H key
-			I,            ///< The I key
-			J,            ///< The J key
-			K,            ///< The K key
-			L,            ///< The L key
-			M,            ///< The M key
-			N,            ///< The N key
-			O,            ///< The O key
-			P,            ///< The P key
-			Q,            ///< The Q key
+			Unknown = -1,
+			A = 0,
+			B,
+			C,
+			D,
+			E,
+			F,
+			G,
+			H,
+			I,
+			J,
+			K,
+			L,
+			M,
+			N,
+			O,
+			P,
+			Q,
 			R,            ///< The R key
 			S,            ///< The S key
 			T,            ///< The T key

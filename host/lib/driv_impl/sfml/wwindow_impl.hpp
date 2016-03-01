@@ -22,6 +22,7 @@ namespace lib
 				virtual void display() override;
 				virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) override;
 				virtual void setViewRectangle(const Rectf32 &rect) override;
+				virtual void receiveEvent(core::Window *const window);
 			private:
 				bool m_resizePending;
 			};

@@ -6,6 +6,10 @@
 
 namespace lib
 {
+	namespace core
+	{
+		class Window;
+	}
 	namespace drivers
 	{
 		namespace window
@@ -21,6 +25,7 @@ namespace lib
 				virtual void clear() = 0;
 				virtual void display() = 0;
 				virtual void setViewRectangle(const Rectf32 &rect) = 0;
+				virtual void receiveEvent(core::Window *const window) = 0;
 			};
 		}
 	}

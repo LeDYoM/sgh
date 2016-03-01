@@ -1,7 +1,6 @@
 #ifndef LIB_DRAW_VERTEXARRAY_HPP
 #define LIB_DRAW_VERTEXARRAY_HPP
 
-#include <SFML/Graphics/PrimitiveType.hpp>
 #include "idrawable.hpp"
 #include "vertex.hpp"
 #include <lib/include/types.hpp>

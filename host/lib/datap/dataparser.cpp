@@ -29,7 +29,7 @@ namespace lib
 
 				if (temp2.isValidSymbol())
 				{
-					return DataObject::getNewLeaf(tokenData.data,temp2.data);
+					return DataObjectLeaf::getNewLeaf(tokenData.data,temp2.data);
 				}
 
 			}
@@ -37,6 +37,7 @@ namespace lib
 			{
 				setError("Expected identifier in readObject");
 			}
+			return nullptr;
 		}
 
 		const DataParser::TokenData DataParser::nextToken()

@@ -18,17 +18,7 @@ namespace lib
 			{
 				return sptr<DataObject>(new DataObject(name));
 			}
-
-			static sptr<DataObjectTree> getNewTree(const std::string &name)
-			{
-				return sptr<DataObjectTree>(new DataObjectTree(name));
-			}
-			static sptr<DataObjectLeaf> getNewLeaf(const std::string &name, const std::string &value)
-			{
-				return sptr<DataObjectLeaf>(new DataObjectLeaf(name,value));
-			}
 			void setName(const std::string &name) { m_name = name; }
-
 		protected:
 			DataObject(const std::string &name) : m_name{ name } {}
 		private:
@@ -38,6 +28,11 @@ namespace lib
 		class DataObjectTree : public DataObject
 		{
 		public:
+			static sptr<DataObjectTree> getNewTree(const std::string &name)
+			{
+				return sptr<DataObjectTree>(new DataObjectTree(name));
+			}
+
 			DataObjectTree(const std::string &name) : DataObject(name) {}
 		private:
 			std::vector<sptr<DataObject>> m_objects;
@@ -46,6 +41,11 @@ namespace lib
 		class DataObjectLeaf : public DataObject
 		{
 		public:
+			static sptr<DataObjectLeaf> getNewLeaf(const std::string &name, const std::string &value)
+			{
+				return sptr<DataObjectLeaf>(new DataObjectLeaf(name, value));
+			}
+
 			DataObjectLeaf(const std::string &name, const std::string &value) : DataObject(name), m_value{ value } {}
 		private:
 			std::string m_value;

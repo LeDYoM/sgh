@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <lib/include/types.hpp>
+#include "dataobject.hpp"
 
 namespace lib
 {
@@ -42,7 +43,6 @@ namespace lib
 				const std::string message;
 				ParserError(Cursor &cursor_, const std::string &message_) : cursor{ cursor_ }, message( message_ ) {}
 			};
-			DataParser(const std::vector<std::string> &);
 
 			class TokenData
 			{
@@ -54,10 +54,15 @@ namespace lib
 				bool isIdent() const { return data.size() > 0 && !isColon() && !isOpenBrackets() && !isCloseBrackets(); }
 				bool isValidSymbol() const { return data.size() == 1 && (isColon() || isOpenBrackets() || isCloseBrackets()); }
 			};
+
+			DataParser(const std::vector<std::string> &);
+
 		private:
 			sptr<ParserError> m_lastError;
 			State m_state{ State::Free };
+			const std::vector<std::string> &m_data;
 			Cursor m_cursor;
+			sptr<DataObject> readObject();
 			const TokenData nextToken();
 			void readBlanks();
 			void setError(const std::string &message);

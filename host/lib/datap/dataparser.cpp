@@ -6,28 +6,36 @@ namespace lib
 	namespace datap
 	{
 		DataParser::DataParser(const std::vector<std::string> &data)
-			: m_cursor{ data }
+			: m_data{ data }, m_cursor{ m_data }
 		{
-			while (!m_lastError)
+			while (!m_lastError && !m_cursor.eof())
 			{
-				const DataParser::TokenData tokenData = nextToken();
 
-				switch (m_state)
+			}
+		}
+
+		sptr<DataObject> DataParser::readObject()
+		{
+			const DataParser::TokenData tokenData = nextToken();
+			if (tokenData.isIdent())
+			{
+				TokenData temp = nextToken();
+				if (!temp.isColon())
 				{
-				case lib::datap::DataParser::State::Free:
-					if (tokenData.isIdent())
-					{
+					setError("Expected :");
+					return nullptr;
+				}
+				TokenData temp2 = nextToken();
 
-					}
-					else
-					{
-						setError("Expected identifier");
-					}
-					break;
-				default:
-					break;
+				if (temp2.isValidSymbol())
+				{
+					return DataObject::getNewLeaf(tokenData.data,temp2.data);
 				}
 
+			}
+			else
+			{
+				setError("Expected identifier in readObject");
 			}
 		}
 

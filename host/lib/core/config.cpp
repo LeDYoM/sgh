@@ -12,6 +12,7 @@ namespace lib
 
 		void Config::loadFile(const std::string &file)
 		{
+
 		}
 	}
 }

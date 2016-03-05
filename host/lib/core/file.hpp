@@ -8,12 +8,14 @@ namespace lib
 {
 	namespace core
 	{
-		class FileSystem : public AppService
+		class FileSystem;
+		class File
 		{
 		public:
-			FileSystem(AppController *const appController);
-			virtual ~FileSystem();
-
+			File(FileSystem *const fileSystem_);
+			virtual ~File();
+		private:
+			FileSystem *const fileSystem;
 		};
 	}
 }

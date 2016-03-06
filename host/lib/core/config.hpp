@@ -12,7 +12,7 @@ namespace lib
 		class Config : public AppService
 		{
 		public:
-			Config(AppController *const appController);
+			Config();
 			virtual ~Config() {}
 
 		private:

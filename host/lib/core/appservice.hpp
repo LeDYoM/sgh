@@ -11,9 +11,18 @@ namespace lib
 	class AppService
 	{
 	public:
-		AppService(core::AppController *appController_) : appController{ appController_ } {}
 		AppService &operator=(const AppService &rh) = delete;
-		core::AppController *const appController;
+		core::AppController *const appController() { return m_appController; }
+		virtual void Init() {}
+	private:
+		friend class AppController;
+		core::AppController *m_appController;
+
+		void PrivateInit(core::AppController *const appController_)
+		{
+			m_appController = appController_;
+			Init();
+		}
 	};
 }
 #endif

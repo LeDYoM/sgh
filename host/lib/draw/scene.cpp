@@ -23,7 +23,7 @@ namespace lib
 
 		void Scene::updateView()
 		{
-			p_scnManager->appController->parentWindow()->updateCamera(m_camera);
+			p_scnManager->appController()->parentWindow()->updateCamera(m_camera);
 		}
 
 		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const
@@ -89,12 +89,12 @@ namespace lib
 
 		uptr<core::ResourceManager> const &Scene::resourceManager()
 		{
-			return p_scnManager->appController->resourceManager();
+			return p_scnManager->appController()->resourceManager();
 		}
 
 		uptr<util::UtilProvider> const & Scene::utilProvider()
 		{
-			return p_scnManager->appController->utilProvider();
+			return p_scnManager->appController()->utilProvider();
 		}
 
 		void Scene::exitProgram()

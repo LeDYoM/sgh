@@ -11,16 +11,17 @@ namespace lib
 	{
 		class Resource;
 
-		class ResourceManager : public AppService, public Configuration
+		class ResourceManager : public AppService
 		{
 		public:
-			ResourceManager(core::AppController *appController, const std::string &resourceFile);
+			ResourceManager(const std::string &resourceFile);
 			virtual ~ResourceManager();
+			void Init() override;
 			sptr<Resource> &getResource(const std::string rid);
 
 		private:
 			std::vector<sptr<Resource>> resources;
-
+			const std::string m_resourceFile;
 		};
 	}
 }

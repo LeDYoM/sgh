@@ -25,16 +25,20 @@ namespace lib
 			s32 currentFps{ 0 };
 			sptr<drivers::window::IWWindow> m_renderWindow{ nullptr };
 		};
-		Window::Window(AppController *const appController, const WindowCreationParams &wcp)
-			: p_wPrivate{ new WindowPrivate() }, AppService{ appController }, _title(wcp.windowTitle)
+		Window::Window(const WindowCreationParams &wcp)
+			: p_wPrivate{ new WindowPrivate() }, m_wcp{ wcp }, _title(wcp.windowTitle)
 		{
 			LOG_CONSTRUCT_NOPARAMS;
-			create(wcp);
 		}
 
 		Window::~Window()
 		{
 			LOG_DESTRUCT_NOPARAMS;
+		}
+
+		void Window::Init()
+		{
+			create(m_wcp);
 		}
 
 		void Window::create(const WindowCreationParams &wcp)
@@ -48,7 +52,7 @@ namespace lib
 			if (wcp.fullScreen)
 				style = sf::Style::Fullscreen;
 
-			p_wPrivate->m_renderWindow = appController->driver()->newWindow(); //sptr<drivers::window>{new RenderWindow()};
+			p_wPrivate->m_renderWindow = appController()->driver()->newWindow(); //sptr<drivers::window>{new RenderWindow()};
 			p_wPrivate->m_renderWindow->create(wcp.width, wcp.height, wcp.bpp, _title.c_str(), 0, 0, 0, 0, 0, 0);
 
 			p_wPrivate->m_renderWindow->setVerticalSync(wcp.vsync);
@@ -105,7 +109,7 @@ namespace lib
 
 		void Window::receiveKeyEvent(const events::KeyEvent &e)
 		{
-			appController->eventManager()->addEvent(uptr<events::InputEvent>(new events::KeyEvent(e)));
+			appController()->eventManager()->addEvent(uptr<events::InputEvent>(new events::KeyEvent(e)));
 		}
 
 		void Window::wantsClose()

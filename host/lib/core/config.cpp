@@ -5,8 +5,7 @@ namespace lib
 {
 	namespace core
 	{
-		Config::Config(AppController *const appController)
-			: AppService{ appController }
+		Config::Config()
 		{
 		}
 

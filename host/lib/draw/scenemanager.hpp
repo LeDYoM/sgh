@@ -24,8 +24,8 @@ namespace lib
 		class SceneManager : public AppService
 		{
 		public:
-			SceneManager(const SceneManager &rh) = delete;
-			SceneManager(core::AppController *const appController);
+			using AppService::AppService;
+//			SceneManager(core::AppController *const appController);
 			virtual ~SceneManager();
 
 			void addScene(sptr<Scene> newScene);

@@ -37,11 +37,18 @@ namespace lib
 				m_state = AppState::Executing;
 
 				//TO DO: Ask via requests
-				m_eventManager = uptr<EventManager>{new EventManager(this)};
-				m_utilProvider = uptr<util::UtilProvider>{new util::UtilProvider{ this }};
-				m_window = uptr<Window>{new Window(this, m_iapp->getAppDescriptor().wcp)};
-				m_resourceManager = uptr<ResourceManager>{new ResourceManager(this, m_iapp->getAppDescriptor().resourceFile)};
-				m_sceneManager = uptr<draw::SceneManager>{new draw::SceneManager(this)};
+				m_eventManager = uptr<EventManager>{ new EventManager{} };
+				m_utilProvider = uptr<util::UtilProvider>{new util::UtilProvider{}};
+				m_window = uptr<Window>{ new Window{m_iapp->getAppDescriptor().wcp} };
+				m_resourceManager = uptr<ResourceManager>{ new ResourceManager{m_iapp->getAppDescriptor().resourceFile} };
+				m_sceneManager = uptr<draw::SceneManager>{ new draw::SceneManager{} };
+
+				m_eventManager->Init();
+				m_utilProvider->Init();
+				m_window->Init();
+				m_resourceManager->Init();
+				m_sceneManager->Init();
+
 				m_sceneManager->addScenes(m_iapp->scenesVector());
 
 				m_iapp->onInit();
@@ -61,9 +68,10 @@ namespace lib
 				LOG_DEBUG(appId() << ": " << " started termination");
 				m_state = AppState::Terminated;
 //				m_iapp->onFinish();
-				m_window = nullptr;
+
 				m_sceneManager = nullptr;
 				m_resourceManager = nullptr;
+				m_window = nullptr;
 				m_utilProvider = nullptr;
 				m_eventManager = nullptr;
 				LOG_DEBUG(appId() << ": " << " terminated");

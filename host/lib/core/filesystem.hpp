@@ -11,7 +11,7 @@ namespace lib
 		class FileSystem : public AppService
 		{
 		public:
-			FileSystem(AppController *const appController);
+			FileSystem();
 			virtual ~FileSystem();
 
 		};

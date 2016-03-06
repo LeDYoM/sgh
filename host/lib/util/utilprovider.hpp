@@ -12,10 +12,9 @@ namespace lib
 		class UtilProvider : public AppService
 		{
 		public:
-			UtilProvider(core::AppController *appController);
+			UtilProvider();
 			virtual ~UtilProvider();
 			u32 getRandomNumer(u32 max = 1, u32 min = 0);
-
 		private:
 			uptr<Randomizer> m_randomizer;
 		};

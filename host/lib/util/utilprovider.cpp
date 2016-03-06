@@ -7,8 +7,8 @@ namespace lib
 	namespace util
 	{
 
-		UtilProvider::UtilProvider(core::AppController *appController)
-			: AppService{ appController }, m_randomizer{ uptr<Randomizer>{new Randomizer()} } 
+		UtilProvider::UtilProvider()
+			: m_randomizer{ uptr<Randomizer>{new Randomizer()} } 
 		{
 			LOG_CONSTRUCT_NOPARAMS;
 		}

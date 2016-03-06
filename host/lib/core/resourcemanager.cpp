@@ -8,16 +8,21 @@ namespace lib
 {
 	namespace core
 	{
-		ResourceManager::ResourceManager(core::AppController *appController, const std::string &resourceFile)
-			: AppService{ appController }, Configuration{ resourceFile }
+		ResourceManager::ResourceManager(const std::string &resourceFile)
+			: m_resourceFile{ resourceFile }
 		{
-			if (resourceFile.size() > 0 && !configFileExists(resourceFile))
+		}
+
+		void ResourceManager::Init()
+		{
+/*
+			if (m_resourceFile.size() > 0 && !configFileExists(m_resourceFile))
 			{
 //				throw ResourceNotFoundException(resourceFile);
 			}
 			else
 			{
-				if (resourceFile.size() > 0)
+				if (m_resourceFile.size() > 0)
 				{
 					const std::string resourcesDirectoryKey = "resources_directory";
 					std::string resourcesDirectory = getAsString(resourcesDirectoryKey);
@@ -49,6 +54,7 @@ namespace lib
 					LOG_DEBUG("Empty resources file. No resources loaded or used");
 				}
 			}
+			*/
 		}
 
 		ResourceManager::~ResourceManager()

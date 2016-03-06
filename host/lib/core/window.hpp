@@ -2,13 +2,13 @@
 #define __LIB_WINDOW_HPP__
 
 #include <lib/include/types.hpp>
+#include <lib/include/iapp.hpp>
 #include "appservice.hpp"
 
 #include "events/inputevent.hpp"
 
 namespace lib
 {
-	struct WindowCreationParams;
 	namespace draw
 	{
 		class Camera;
@@ -22,8 +22,9 @@ namespace lib
 		class Window : public AppService
 		{
 		public:
-			Window(AppController *const appController, const WindowCreationParams &wcp);
+			Window(const WindowCreationParams &wcp);
 			virtual ~Window();
+			void Init() override;
 			bool preLoop();
 			bool postLoop();
 			virtual void onCreate();
@@ -38,7 +39,7 @@ namespace lib
 			void wantsClose();
 		private:
 			void create(const WindowCreationParams &wcp);
-
+			WindowCreationParams m_wcp;
 			uptr<WindowPrivate> p_wPrivate{ nullptr };
 			bool _shouldClose{ false };
 			std::string _title;

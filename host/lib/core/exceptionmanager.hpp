@@ -12,7 +12,7 @@ namespace lib
 		class ExceptionManager : public AppService
 		{
 		public:
-			ExceptionManager(AppController *const appController);
+			ExceptionManager();
 			virtual ~ExceptionManager();
 		private:
 		};

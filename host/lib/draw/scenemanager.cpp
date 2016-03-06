@@ -12,6 +12,7 @@ namespace lib
 {
 	namespace draw
 	{
+/*
 		SceneManager::SceneManager(core::AppController *const appController) : AppService{ appController }
 		{
 			LOG_CONSTRUCT_NOPARAMS;
@@ -33,7 +34,7 @@ namespace lib
 				}
 			});
 		}
-
+		*/
 		SceneManager::~SceneManager()
 		{
 			for (auto scene : _scenes)
@@ -146,7 +147,7 @@ namespace lib
 			}
 
 			lib::draw::RenderStates states;// { appController->parentWindow().get()->startRenderStates() };
-			states.currentTarget = appController->parentWindow()->renderTarget();
+			states.currentTarget = appController()->parentWindow()->renderTarget();
 			_currentScene->draw(states);
 			states.currentTarget = nullptr;
 		}

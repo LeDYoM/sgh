@@ -20,8 +20,11 @@ namespace lib
 		class EventManager : public AppService
 		{
 		public:
-			EventManager(AppController *const appController);
+			EventManager();
 			virtual ~EventManager();
+
+			void Init();
+			void DeInit();
 
 			sptr<events::EventSender> newEventSender();
 			sptr<events::EventReceiver> newEventReceiver();

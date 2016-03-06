@@ -9,8 +9,7 @@ namespace lib
 	namespace core
 	{
 
-		EventManager::EventManager(AppController *const appController)
-			: AppService{ appController }
+		EventManager::EventManager()
 		{
 			LOG_CONSTRUCT_NOPARAMS;
 		}
@@ -24,6 +23,14 @@ namespace lib
 				m_eventQueue.pop();
 			}
 			LOG_DESTRUCT_NOPARAMS;
+		}
+
+		void EventManager::Init()
+		{
+		}
+
+		void EventManager::DeInit()
+		{
 		}
 
 		sptr<events::EventSender> EventManager::newEventSender()

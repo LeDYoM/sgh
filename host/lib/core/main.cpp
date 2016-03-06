@@ -2,7 +2,6 @@
 #include <lib/core/compileconfig.hpp>
 #include <lib/core/memmanager.hpp>
 #include <lib/core/log.hpp>
-#include <lib/core/exceptions.hpp>
 #include <lib/core/hostcontroller.hpp>
 #include <vector>
 #include <string>
@@ -45,7 +44,7 @@ namespace lib
 			// End wip
 			result = hostController.run();
 		}
-		catch (lib::excp::BaseException e)
+		catch (std::exception e)
 		{
 			LOG_DEBUG("Exception: " << e.what());
 		}

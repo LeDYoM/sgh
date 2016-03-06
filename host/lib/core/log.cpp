@@ -1,6 +1,5 @@
 #include "log.hpp"
 #include "compileconfig.hpp"
-#include "exceptions.hpp"
 
 #ifdef __USE_LOGS__
 

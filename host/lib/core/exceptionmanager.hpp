@@ -9,15 +9,12 @@ namespace lib
 {
 	namespace core
 	{
-		class FileSystem;
-		class File
+		class ExceptionManager : public AppService
 		{
 		public:
-			File(FileSystem *const fileSystem, const std::string &fileName);
-			virtual ~File();
+			ExceptionManager(AppController *const appController);
+			virtual ~ExceptionManager();
 		private:
-			FileSystem *const m_fileSystem;
-			std::string m_fileName;
 		};
 	}
 }

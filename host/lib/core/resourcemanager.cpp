@@ -13,7 +13,7 @@ namespace lib
 		{
 			if (resourceFile.size() > 0 && !configFileExists(resourceFile))
 			{
-				throw ResourceNotFoundException(resourceFile);
+//				throw ResourceNotFoundException(resourceFile);
 			}
 			else
 			{
@@ -65,7 +65,7 @@ namespace lib
 					return resources[i];
 				}
 			}
-			throw ResourceNotFoundException(rid);
+//			throw ResourceNotFoundException(rid);
 		}
 	}
 }

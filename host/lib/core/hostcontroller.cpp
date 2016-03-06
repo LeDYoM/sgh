@@ -31,7 +31,8 @@ namespace lib
 
 		int HostController::run()
 		{
-			initialize();
+			// TO DO: Do initialize here.
+			// initialize();
 			while (!exit)
 			{
 				processTask();
@@ -79,48 +80,54 @@ namespace lib
 		{
 			if (!m_pendingTasks.empty())
 			{
-				auto task = m_pendingTasks.front();
-				switch (task->code())
+				u32 nTasks = m_pendingTasks.size();
+				u32 nProcessedTasks{ 0 };
+				while (nProcessedTasks < nTasks && !m_pendingTasks.empty())
 				{
-				case HostTask::HostTaskCode::LoadDriver:
-					__ASSERT(!m_driver, "Cannot load another driver. There is already one loaded");
-					m_driver = sptr<Driver>(new Driver());
-					break;
-				case HostTask::HostTaskCode::UnloadDriver:
-					__ASSERT(m_driver, "Trying to delete driver when no driver loaded");
-					m_driver = nullptr;
-					break;
-				case HostTask::HostTaskCode::LoadAppFromFileName:
-					__ASSERT(m_driver, "Cannot load an app without having loaded a driver first");
+					auto task = m_pendingTasks.front();
+					switch (task->code())
+					{
+					case HostTask::HostTaskCode::LoadDriver:
+						__ASSERT(!m_driver, "Cannot load another driver. There is already one loaded");
+						m_driver = sptr<Driver>(new Driver());
+						break;
+					case HostTask::HostTaskCode::UnloadDriver:
+						__ASSERT(m_driver, "Trying to delete driver when no driver loaded");
+						m_driver = nullptr;
+						break;
+					case HostTask::HostTaskCode::LoadAppFromFileName:
+						__ASSERT(m_driver, "Cannot load an app without having loaded a driver first");
 
-					break;
-				case HostTask::HostTaskCode::LoadAppFromIApp:
-				{
-					__ASSERT(m_driver, "Cannot load an app without having loaded a driver first");
-					sptr<AppController> app = sptr<AppController>(new AppController
-						(std::move(std::dynamic_pointer_cast<HostTaskLoadAppFromIApp>(task)->deAttach()),m_driver));
-					m_apps.push_back(app);
-				}
-				break;
-				case HostTask::HostTaskCode::UnloadApp:
-				{
-					sptr<AppController> app{ std::dynamic_pointer_cast<HostTaskUnloadApp>(task)->deAttach() };
-					bool found{ removeFromspVector(app, m_apps) };
-					if (found)
+						break;
+					case HostTask::HostTaskCode::LoadAppFromIApp:
 					{
-						LOG_DEBUG("Going to uninstatiate " << app->appId());
-						app.reset();
+						__ASSERT(m_driver, "Cannot load an app without having loaded a driver first");
+						sptr<AppController> app = sptr<AppController>(new AppController
+							(std::move(std::dynamic_pointer_cast<HostTaskLoadAppFromIApp>(task)->deAttach()), m_driver));
+						m_apps.push_back(app);
 					}
-					else
-					{
-						LOG_WARNING("Trying to unload unregistered app");
-					}
-				}
-				break;
-				default:
 					break;
+					case HostTask::HostTaskCode::UnloadApp:
+					{
+						sptr<AppController> app{ std::dynamic_pointer_cast<HostTaskUnloadApp>(task)->deAttach() };
+						bool found{ removeFromspVector(app, m_apps) };
+						if (found)
+						{
+							LOG_DEBUG("Going to uninstatiate " << app->appId());
+							app.reset();
+						}
+						else
+						{
+							LOG_WARNING("Trying to unload unregistered app");
+						}
+					}
+					break;
+					default:
+						break;
+					}
+					m_pendingTasks.pop();
+					++nProcessedTasks;
 				}
-				m_pendingTasks.pop();
 			}
 		}
 

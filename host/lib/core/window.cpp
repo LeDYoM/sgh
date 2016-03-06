@@ -17,15 +17,6 @@ namespace lib
 {
 	namespace core
 	{
-		namespace
-		{
-			sf::String getAsString(const std::string &other)
-			{
-				std::wstring wsTmp(other.begin(), other.end());
-				sf::String temp(wsTmp);
-				return temp;
-			}
-		}
 		struct WindowPrivate
 		{
 			Timer globalClock;

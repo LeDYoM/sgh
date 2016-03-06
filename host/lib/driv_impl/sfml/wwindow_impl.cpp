@@ -12,6 +12,13 @@ namespace lib
 		{
 			namespace
 			{
+				sf::String getAsString(const std::string &other)
+				{
+					std::wstring wsTmp(other.begin(), other.end());
+					sf::String temp(wsTmp);
+					return temp;
+				}
+
 				lib::input::Key doCast(const sf::Keyboard::Key &k)
 				{
 					int temp = k;
@@ -21,7 +28,7 @@ namespace lib
 
 			bool SFMLWindow::create(u32 width, u32 height, u32 bpp, const char *title, u32 depth, u32 stencil, u32 antialiasing, u32 major, u32 minor, u32 attributes)
 			{
-				sf::Window::create(sf::VideoMode{ width, height, bpp }, sf::String(title), sf::Style::Default, sf::ContextSettings{ depth, stencil, antialiasing, major, minor, attributes });
+				sf::Window::create(sf::VideoMode{ width, height, bpp }, getAsString(title), sf::Style::Default, sf::ContextSettings{ depth, stencil, antialiasing, major, minor, attributes });
 				return true;
 			}
 
@@ -42,7 +49,7 @@ namespace lib
 
 			void SFMLWindow::setTitle(const char *title)
 			{
-				sf::Window::setTitle(title);
+				sf::Window::setTitle(getAsString(title));
 			}
 
 			void SFMLWindow::clear()

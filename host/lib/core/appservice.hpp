@@ -15,8 +15,8 @@ namespace lib
 		core::AppController *const appController() { return m_appController; }
 		virtual void Init() {}
 	private:
-		friend class AppController;
-		core::AppController *m_appController;
+		friend class core::AppController;
+		core::AppController *m_appController{ nullptr };
 
 		void PrivateInit(core::AppController *const appController_)
 		{

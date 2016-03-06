@@ -23,9 +23,6 @@ namespace lib
 			EventManager();
 			virtual ~EventManager();
 
-			void Init();
-			void DeInit();
-
 			sptr<events::EventSender> newEventSender();
 			sptr<events::EventReceiver> newEventReceiver();
 			virtual void addEvent(uptr<events::Event> event_);

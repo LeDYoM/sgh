@@ -43,11 +43,11 @@ namespace lib
 				m_resourceManager = uptr<ResourceManager>{ new ResourceManager{m_iapp->getAppDescriptor().resourceFile} };
 				m_sceneManager = uptr<draw::SceneManager>{ new draw::SceneManager{} };
 
-				m_eventManager->Init();
-				m_utilProvider->Init();
-				m_window->Init();
-				m_resourceManager->Init();
-				m_sceneManager->Init();
+				m_eventManager->PrivateInit(this);
+				m_utilProvider->PrivateInit(this);
+				m_window->PrivateInit(this);
+				m_resourceManager->PrivateInit(this);
+				m_sceneManager->PrivateInit(this);
 
 				m_sceneManager->addScenes(m_iapp->scenesVector());
 

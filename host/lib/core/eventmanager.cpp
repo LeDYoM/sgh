@@ -25,14 +25,6 @@ namespace lib
 			LOG_DESTRUCT_NOPARAMS;
 		}
 
-		void EventManager::Init()
-		{
-		}
-
-		void EventManager::DeInit()
-		{
-		}
-
 		sptr<events::EventSender> EventManager::newEventSender()
 		{
 			auto temp = sptr<events::EventSender>(new events::EventSender(this));

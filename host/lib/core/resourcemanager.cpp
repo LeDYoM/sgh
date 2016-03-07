@@ -9,7 +9,7 @@ namespace lib
 	namespace core
 	{
 		ResourceManager::ResourceManager(const std::string &resourceFile)
-			: m_resourceFile{ resourceFile }
+			: m_resourceFile( resourceFile )
 		{
 		}
 

@@ -20,7 +20,7 @@ namespace lib
 			}
 			void setName(const std::string &name) { m_name = name; }
 		protected:
-			DataObject(const std::string &name) : m_name{ name } {}
+			DataObject(const std::string &name) : m_name( name ) {}
 		private:
 			std::string m_name;
 		};
@@ -46,7 +46,7 @@ namespace lib
 				return sptr<DataObjectLeaf>(new DataObjectLeaf(name, value));
 			}
 
-			DataObjectLeaf(const std::string &name, const std::string &value) : DataObject(name), m_value{ value } {}
+			DataObjectLeaf(const std::string &name, const std::string &value) : DataObject(name), m_value( value ) {}
 		private:
 			std::string m_value;
 		};

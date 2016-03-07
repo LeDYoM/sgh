@@ -10,13 +10,7 @@ namespace lib
 {
 	namespace core
 	{
-		class ConfigSection
-		{
-		public:
-			ConfigSection() {}
-			std::map<std::string, std::string> data;
-			std::map<std::string, ConfigSection> sections;
-		};
+		class ConfigSection : public TreeData<std::string, ConfigSection> {};
 		class Config : public AppService
 		{
 		public:

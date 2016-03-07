@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <map>
 #include <lib/core/compileconfig.hpp>
 
 namespace lib
@@ -26,6 +27,14 @@ namespace lib
 	using s8 = int8_t;
 	using f32 = float;
 	using f64 = double;
+
+	template <class T, class U>
+	class TreeData
+	{
+	public:
+		std::map<std::string, T> data;
+		std::map<std::string, U> sections;
+	};
 }
 
 #include "vector2d.hpp"

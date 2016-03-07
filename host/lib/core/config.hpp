@@ -1,23 +1,33 @@
-#ifndef __LIB_CONFIGURATION_HPP__
-#define __LIB_CONFIGURATION_HPP__
+#ifndef __LIB_CONFIG_HPP__
+#define __LIB_CONFIG_HPP__
 
 #include <lib/include/types.hpp>
 #include "appservice.hpp"
-#include <string>
+#include "file.hpp"
+#include <map>
 
 namespace lib
 {
 	namespace core
 	{
+		class ConfigSection
+		{
+		public:
+			ConfigSection() {}
+			std::map<std::string, std::string> data;
+			std::map<std::string, ConfigSection> sections;
+		};
 		class Config : public AppService
 		{
 		public:
 			Config();
 			virtual ~Config() {}
+			void loadFile(const std::string &fileName);
+			void loadFile(sptr<File> file);
 
 		private:
-			void loadFile(const std::string &file);
-			const std::string currentFile;
+			ConfigSection m_mainSection;
+
 		};
 	}
 }

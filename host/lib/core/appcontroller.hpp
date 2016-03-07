@@ -25,6 +25,7 @@ namespace lib
 		class EventManager;
 		class ExceptionManager;
 		class FileSystem;
+		class Config;
 		class Driver;
 	
 		class AppController
@@ -48,6 +49,7 @@ namespace lib
 			uptr<util::UtilProvider> const &utilProvider() const { return m_utilProvider; }
 			uptr<ExceptionManager> const &exceptionManager() const { return m_exceptionManager; }
 			uptr<FileSystem> const &fileSystem() const { return m_fileSystem; }
+			uptr<Config> const &config() const { return m_config; }
 			sptr<Driver> const &driver() const { return m_driver; }
 
 			const std::string appId() const;
@@ -58,6 +60,7 @@ namespace lib
 			AppState m_state;
 			uptr<Window> m_window{ nullptr };
 			uptr<IApp> m_iapp{ nullptr };
+			uptr<Config> m_config{ nullptr };
 			uptr<draw::SceneManager> m_sceneManager{ nullptr };
 			uptr<ResourceManager> m_resourceManager{ nullptr };
 			uptr<EventManager> m_eventManager{ nullptr };

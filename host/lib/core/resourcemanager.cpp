@@ -10,14 +10,13 @@ namespace lib
 {
 	namespace core
 	{
-		ResourceManager::ResourceManager(const std::string &resourceFile)
-			: m_resourceFile( resourceFile )
+		ResourceManager::ResourceManager()
 		{
 		}
 
 		void ResourceManager::Init()
 		{
-/*
+			/*
 			if (m_resourceFile.size() > 0 && !configFileExists(m_resourceFile))
 			{
 //				throw ResourceNotFoundException(resourceFile);
@@ -64,8 +63,16 @@ namespace lib
 			resources.clear();
 		}
 
+		void ResourceManager::load()
+		{
+			m_loaded = true;
+		}
+
 		sptr<Resource> ResourceManager::getResource(const std::string rid)
 		{
+			if (!m_loaded)
+				load();
+
 			for (auto i = 0u; i < resources.size(); ++i)
 			{
 				if (resources[i]->name() == rid)

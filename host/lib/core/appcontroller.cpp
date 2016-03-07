@@ -8,6 +8,7 @@
 #include "eventmanager.hpp"
 #include "exceptionmanager.hpp"
 #include "filesystem.hpp"
+#include "config.hpp"
 
 namespace lib
 {
@@ -35,26 +36,29 @@ namespace lib
 			case lib::core::AppController::AppState::ReadyToStart:
 			{
 				// Create the scene manager
-				LOG_DEBUG(appId() << ": " << " Starting initialization...");
+				LOG_DEBUG_(appId() + ":  Starting initialization...");
 				m_state = AppState::Executing;
 
 				//TO DO: Ask via requests
 				m_exceptionManager = uptr<ExceptionManager>{ new ExceptionManager{} };
 				m_fileSystem = uptr<FileSystem>{ new FileSystem{} };
+				m_config = uptr<Config>{ new Config{} };
 				m_eventManager = uptr<EventManager>{ new EventManager{} };
 				m_utilProvider = uptr<util::UtilProvider>{new util::UtilProvider{}};
 				m_window = uptr<Window>{ new Window{m_iapp->getAppDescriptor().wcp} };
-				m_resourceManager = uptr<ResourceManager>{ new ResourceManager{m_iapp->getAppDescriptor().resourceFile} };
+				m_resourceManager = uptr<ResourceManager>{ new ResourceManager{} };
 				m_sceneManager = uptr<draw::SceneManager>{ new draw::SceneManager{} };
 
 				m_exceptionManager->PrivateInit(this);
 				m_fileSystem->PrivateInit(this);
+				m_config->PrivateInit(this);
 				m_eventManager->PrivateInit(this);
 				m_utilProvider->PrivateInit(this);
 				m_window->PrivateInit(this);
 				m_resourceManager->PrivateInit(this);
 				m_sceneManager->PrivateInit(this);
 
+				m_config->loadFile(m_fileSystem->getFile(m_iapp->getAppDescriptor().configFile));
 				m_sceneManager->addScenes(m_iapp->scenesVector());
 
 				m_iapp->onInit();
@@ -80,7 +84,10 @@ namespace lib
 				m_window = nullptr;
 				m_utilProvider = nullptr;
 				m_eventManager = nullptr;
-				LOG_DEBUG(appId() << ": " << " terminated");
+				m_config = nullptr;
+				m_fileSystem = nullptr;
+				m_exceptionManager = nullptr;
+				LOG_DEBUG_(appId() + ": terminated");
 				return true;
 				break;
 			case lib::core::AppController::AppState::Terminated:

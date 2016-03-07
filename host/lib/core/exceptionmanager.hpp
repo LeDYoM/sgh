@@ -1,5 +1,5 @@
-#ifndef LIB_FILE_HPP
-#define LIB_FILE_HPP
+#ifndef LIB_EXCEPTIONMANAGER_HPP
+#define LIB_EXCEPTIONMANAGER_HPP
 
 #include <lib/include/types.hpp>
 #include "appservice.hpp"
@@ -36,5 +36,6 @@ namespace lib
 }
 
 #define EXCEPTION_INTERNAL(c,sc,r)	lib::core::Exception{__LINE__,__FILE__,c,sc,r,true}
+#define ADD_EXCEPTION_INTERNAL(c,sc,r) appController()->exceptionManager()->addException(lib::core::Exception{__LINE__,__FILE__,c, sc,r,true})
 
 #endif

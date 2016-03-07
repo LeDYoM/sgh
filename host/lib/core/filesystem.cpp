@@ -1,4 +1,5 @@
 #include "filesystem.hpp"
+#include "file.hpp"
 
 namespace lib
 {
@@ -12,6 +13,12 @@ namespace lib
 		{
 
 		}
+
+		sptr<File> FileSystem::getFile(const std::string &fileName)
+		{
+			return sptr<File>{new File(this, fileName)};
+		}
+
 	}
 }
 

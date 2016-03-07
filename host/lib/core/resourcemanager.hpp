@@ -10,18 +10,19 @@ namespace lib
 	namespace core
 	{
 		class Resource;
-
+		class ConfigSection;
 		class ResourceManager : public AppService
 		{
 		public:
-			ResourceManager(const std::string &resourceFile);
+			ResourceManager();
 			virtual ~ResourceManager();
 			void Init() override;
 			sptr<Resource> getResource(const std::string rid);
 
 		private:
+			void load();
 			std::vector<sptr<Resource>> resources;
-			const std::string m_resourceFile;
+			bool m_loaded{ false };
 		};
 	}
 }

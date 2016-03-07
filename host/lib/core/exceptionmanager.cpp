@@ -12,6 +12,12 @@ namespace lib
 		{
 
 		}
+
+		void ExceptionManager::addException(Exception &&exception)
+		{
+			m_exceptions.push(exception);
+		}
+
 	}
 }
 

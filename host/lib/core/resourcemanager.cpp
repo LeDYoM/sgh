@@ -1,6 +1,8 @@
 #include "resourcemanager.hpp"
 #include "log.hpp"
 #include "resource.hpp"
+#include "exceptionmanager.hpp"
+#include "appcontroller.hpp"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
@@ -62,7 +64,7 @@ namespace lib
 			resources.clear();
 		}
 
-		sptr<Resource>& ResourceManager::getResource(const std::string rid)
+		sptr<Resource> ResourceManager::getResource(const std::string rid)
 		{
 			for (auto i = 0u; i < resources.size(); ++i)
 			{
@@ -71,6 +73,8 @@ namespace lib
 					return resources[i];
 				}
 			}
+			appController()->exceptionManager()->addException(EXCEPTION_INTERNAL("ResourceNotFound", "", "Cannot find resource " + rid));
+			return sptr<Resource>();
 //			throw ResourceNotFoundException(rid);
 		}
 	}

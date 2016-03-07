@@ -23,6 +23,8 @@ namespace lib
 		class Window;
 		class ResourceManager;
 		class EventManager;
+		class ExceptionManager;
+		class FileSystem;
 		class Driver;
 	
 		class AppController
@@ -44,7 +46,10 @@ namespace lib
 			uptr<ResourceManager> const &resourceManager() const { return m_resourceManager; }
 			uptr<EventManager> const &eventManager() const { return m_eventManager; }
 			uptr<util::UtilProvider> const &utilProvider() const { return m_utilProvider; }
+			uptr<ExceptionManager> const &exceptionManager() const { return m_exceptionManager; }
+			uptr<FileSystem> const &fileSystem() const { return m_fileSystem; }
 			sptr<Driver> const &driver() const { return m_driver; }
+
 			const std::string appId() const;
 
 		protected:
@@ -57,6 +62,8 @@ namespace lib
 			uptr<ResourceManager> m_resourceManager{ nullptr };
 			uptr<EventManager> m_eventManager{ nullptr };
 			uptr<util::UtilProvider> m_utilProvider{ nullptr };
+			uptr<ExceptionManager> m_exceptionManager{ nullptr };
+			uptr<FileSystem> m_fileSystem{ nullptr };
 			sptr<Driver> m_driver{ nullptr };
 		};
 	}

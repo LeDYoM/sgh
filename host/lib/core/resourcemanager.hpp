@@ -17,7 +17,7 @@ namespace lib
 			ResourceManager(const std::string &resourceFile);
 			virtual ~ResourceManager();
 			void Init() override;
-			sptr<Resource> &getResource(const std::string rid);
+			sptr<Resource> getResource(const std::string rid);
 
 		private:
 			std::vector<sptr<Resource>> resources;

@@ -24,7 +24,7 @@ namespace lib
 
 		AppController::~AppController()
 		{
-			LOG_DESTRUCT("Name: " << appId());
+			LOG_DESTRUCT("Name: " + appId());
 		}
 
 		bool AppController::update()

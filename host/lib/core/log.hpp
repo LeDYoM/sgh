@@ -19,12 +19,12 @@
 	#define PREPARE_LOG(level,params) { std::ostringstream os_; os_ << params << std::endl; logOutput(level,os_.str()); }
 	#define EXECUTE_IN_DEBUG(x)		x
 	#define LOG_DEBUG(x)			PREPARE_LOG(LogType::Debug, x)
-	#define LOG_DEBUG_(x)			logOutput(LogType::Debug,x);
+	#define LOG_DEBUG_(x)			logOutput(LogType::Debug,x+"\n");
 	#define LOG_INFO(x)				PREPARE_LOG(LogType::Info, x)
 	#define LOG_WARNING(x)			PREPARE_LOG(LogType::Warning, x)
 	#define LOG_ERROR(x)			PREPARE_LOG(LogType::Error, "Error: " << x)
-	#define LOG_CONSTRUCT(x)		LOG_DEBUG("Constructing "<< typeid(*this).name() << " " << x)
-	#define LOG_DESTRUCT(x)			LOG_DEBUG("Destroying "<< typeid(*this).name() << " " << x)
+	#define LOG_CONSTRUCT(x)		LOG_DEBUG_("Constructing "+ std::string(typeid(*this).name()) + " " + x)
+	#define LOG_DESTRUCT(x)			LOG_DEBUG_("Destroying " + std::string(typeid(*this).name()) + " " + x)
 	#define LOG_CONSTRUCT_NOPARAMS	LOG_CONSTRUCT("")
 	#define LOG_DESTRUCT_NOPARAMS	LOG_DESTRUCT("")
 

@@ -8,7 +8,7 @@ namespace lib
 		BoardModel::BoardModel(const vector2du32 &size, ITilesController *tController)
 		{
 			p_tController = tController;
-			LOG_CONSTRUCT(" w: " << size.x << " h: " << size.y);
+			LOG_CONSTRUCT(" w: " + std::to_string(size.x) + " h: " + std::to_string(size.y));
 			for (auto x = 0u; x < size.x; ++x)
 			{
 				std::vector<WITilePointer> column;

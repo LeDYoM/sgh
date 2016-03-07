@@ -18,7 +18,7 @@ namespace lib
 			virtual ~ResourceManager();
 			void Init() override;
 			sptr<Resource> getResource(const std::string rid);
-
+			void setResourceList(const ConfigSection &resourceList);
 		private:
 			void load();
 			std::vector<sptr<Resource>> resources;

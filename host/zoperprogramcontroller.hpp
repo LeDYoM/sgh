@@ -14,14 +14,10 @@ namespace zoper
 		// Inherited via ProgramController
 		void onInit() override;
 		virtual lib::VecSPtr<lib::draw::Scene> scenesVector() override;
-
 		virtual const lib::IAppDescriptor getAppDescriptor() const override;
 
 		//virtual void start() override;
 		virtual int loop() override;
-
-		virtual lib::ServicesRequest getServicesRequest() const override;
-
 	};
 }
 

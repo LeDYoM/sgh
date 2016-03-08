@@ -42,20 +42,9 @@ namespace zoper
 		};
 	}
 
-//	void ZoperProgramController::start()
-//	{
-//		throw std::logic_error("The method or operation is not implemented.");
-//	}
-
 	int ZoperProgramController::loop()
 	{
-//		throw std::logic_error("The method or operation is not implemented.");
 		return 0;
-	}
-
-	lib::ServicesRequest ZoperProgramController::getServicesRequest() const
-	{
-		return lib::ServicesRequest();
 	}
 
 	lib::VecSPtr<lib::draw::Scene> ZoperProgramController::scenesVector()

@@ -4,13 +4,18 @@
 #include <lib/include/types.hpp>
 #include "appservice.hpp"
 #include "file.hpp"
-#include <map>
+#include <functional>
 
 namespace lib
 {
 	namespace core
 	{
-		class ConfigSection : public TreeData<std::string, ConfigSection> {};
+		class ConfigSection : public TreeData<std::string, ConfigSection>
+		{
+		public:
+			void for_each_property(std::function<void(const std::pair<std::string, std::string>&)> callback) const;
+		};
+
 		class Config : public AppService
 		{
 		public:

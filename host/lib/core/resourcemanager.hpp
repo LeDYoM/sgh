@@ -2,8 +2,9 @@
 #define __LIB_RESOURCEMANAGER_HPP__
 
 #include <lib/include/types.hpp>
-#include "configuration.hpp"
 #include "appservice.hpp"
+#include <vector>
+#include <map>
 
 namespace lib
 {
@@ -20,9 +21,10 @@ namespace lib
 			sptr<Resource> getResource(const std::string rid);
 			void setResourceList(const ConfigSection &resourceList);
 		private:
-			void load();
+			void load(const std::string &section);
 			std::vector<sptr<Resource>> resources;
-			bool m_loaded{ false };
+			std::map<std::string, std::string> m_resourceList;
+			std::string resourcesDirectory;
 		};
 	}
 }

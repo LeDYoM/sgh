@@ -3,7 +3,7 @@
 #include "appcontroller.hpp"
 #include "filesystem.hpp"
 #include "exceptionmanager.hpp"
-#include <cctype>
+#include "strutils.hpp"
 
 namespace lib
 {
@@ -31,11 +31,7 @@ namespace lib
 				{
 					std::string temp(line);
 
-					while (!temp.empty() && std::isspace(temp[0]))
-						temp = temp.substr(1);
-
-					while (!temp.empty() && std::isspace(temp[temp.size() - 1]))
-						temp = temp.substr(0, line.size() - 2);
+					trim(temp);
 
 					if (!temp.empty())
 					{
@@ -97,5 +93,11 @@ namespace lib
 				}
 			}
 		}
+
+		void ConfigSection::for_each_property(std::function<void(const std::pair<std::string, std::string>&)> callback) const
+		{
+			std::for_each(data.begin(), data.end(), callback);
+		}
+
 	}
 }

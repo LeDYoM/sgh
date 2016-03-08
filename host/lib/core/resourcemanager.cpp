@@ -3,6 +3,8 @@
 #include "resource.hpp"
 #include "exceptionmanager.hpp"
 #include "appcontroller.hpp"
+#include "config.hpp"
+#include "strutils.hpp"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
@@ -16,46 +18,6 @@ namespace lib
 
 		void ResourceManager::Init()
 		{
-			/*
-			if (m_resourceFile.size() > 0 && !configFileExists(m_resourceFile))
-			{
-//				throw ResourceNotFoundException(resourceFile);
-			}
-			else
-			{
-				if (m_resourceFile.size() > 0)
-				{
-					const std::string resourcesDirectoryKey = "resources_directory";
-					std::string resourcesDirectory = getAsString(resourcesDirectoryKey);
-					for_each_property([&resourcesDirectoryKey,&resourcesDirectory,this](const Configuration::CMapLine &dataLine) 
-					{
-						if (dataLine.first != resourcesDirectoryKey)
-						{
-							auto completeId = splitString(dataLine.first, '@');
-							if (completeId.size() > 1)
-							{
-								std::string resourceTypeStr = completeId[0];
-								std::string id = completeId[1];
-								Resource::ResourceType resourceType{ Resource::ResourceType::Empty };
-								resourceType = (resourceTypeStr[0] == 'f' || resourceTypeStr[0] == 'F')
-									? Resource::ResourceType::Font :
-									Resource::ResourceType::Texture;
-								resources.push_back(std::make_shared<Resource>(resourceType, resourcesDirectory + dataLine.second, id));
-								LOG_DEBUG("Resource with id " << dataLine.second << " from file " << dataLine.first << " added");
-							}
-							else
-							{
-								LOG_ERROR("Malformed resource file");
-							}
-						}
-					});
-				}
-				else
-				{
-					LOG_DEBUG("Empty resources file. No resources loaded or used");
-				}
-			}
-			*/
 		}
 
 		ResourceManager::~ResourceManager()
@@ -63,16 +25,29 @@ namespace lib
 			resources.clear();
 		}
 
-		void ResourceManager::load()
+		void ResourceManager::load(const std::string &section)
 		{
-			m_loaded = true;
+			for (const auto tuple : m_resourceList)
+			{
+				if (starts_with(tuple.first, section))
+				{
+					std::string resourceTypeStr(tuple.first);
+					std::string id(tuple.first);
+					leftFrom(id, "@");
+					rightFrom(resourceTypeStr, "@");
+
+					Resource::ResourceType resourceType{ Resource::ResourceType::Empty };
+					resourceType = (resourceTypeStr[0] == 'f' || resourceTypeStr[0] == 'F')
+						? Resource::ResourceType::Font :
+						Resource::ResourceType::Texture;
+					resources.push_back(std::make_shared<Resource>(resourceType, resourcesDirectory + tuple.second, id));
+					LOG_DEBUG_("Resource with id " + tuple.second + " added");
+				}
+			}
 		}
 
 		sptr<Resource> ResourceManager::getResource(const std::string rid)
 		{
-			if (!m_loaded)
-				load();
-
 			for (auto i = 0u; i < resources.size(); ++i)
 			{
 				if (resources[i]->name() == rid)
@@ -84,5 +59,23 @@ namespace lib
 			return sptr<Resource>();
 //			throw ResourceNotFoundException(rid);
 		}
+
+		void ResourceManager::setResourceList(const ConfigSection &resourceList)
+		{
+			const std::string resourcesDirectoryKey = "resources_directory";
+
+			resourceList.for_each_property([this,&resourcesDirectoryKey](const std::pair<std::string, std::string>&data)
+			{
+				if (data.first == resourcesDirectoryKey)
+				{
+					resourcesDirectory = data.second;
+				}
+				else
+				{
+					m_resourceList[data.first] = data.second;
+				}
+			});
+		}
+
 	}
 }

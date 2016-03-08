@@ -3,6 +3,7 @@
 
 #include "compconfig.hpp"
 #include "types.hpp"
+#include "wcp.hpp"
 #include <string>
 #include <vector>
 
@@ -12,31 +13,12 @@
 
 namespace lib
 {
-	struct WindowCreationParams
-	{
-		std::string windowTitle;
-		u32 width{ 1024 };
-		u32 height{ 768 };
-		u32 bpp{ 16 };
-		u32 antialiasing{ 0 };
-		bool vsync{ false };
-		bool fullScreen{ false };
-		bool resizable{ false };
-		inline WindowCreationParams(const std::string &wt, const u32 w, const u32 h, const u32 b, const u32 aa, const bool vs, const bool fs, const bool rs)
-			: windowTitle( wt ), width{ w }, height{ h }, bpp{ b }, antialiasing{ aa }, vsync{ vs }, fullScreen{ fs }, resizable{ rs } {}
-		/*
-		inline WindowCreationParams(const WindowCreationParams &rh)
-			: windowTitle(rh.windowTitle), width{ rh.width }, height{ rh.height }, bpp{ rh.bpp }, antialiasing{ rh.antialiasing }, 
-			vsync{ rh.vsync }, fullScreen{ rh.fullScreen }, resizable{ rh.resizable } {}
-			*/
-	};
-
 	struct IAppDescriptor
 	{
 		std::string Name;
-		lib::u32 Version;
-		lib::u32 SubVersion;
-		lib::u32 Patch;
+		u32 Version;
+		u32 SubVersion;
+		u32 Patch;
 		std::string configFile;
 		std::string resourceFile;
 		WindowCreationParams wcp;

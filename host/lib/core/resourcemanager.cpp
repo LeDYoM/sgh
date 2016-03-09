@@ -27,20 +27,22 @@ namespace lib
 
 		void ResourceManager::load(const std::string &section)
 		{
-			for (const auto tuple : m_resourceList)
+			auto resourcesList = appController()->config()->section("Resources");
+			resourcesDirectory = resourcesList.data["resources_directory"];
+			for (const auto tuple : resourcesList.data)
 			{
-				if (starts_with(tuple.first, section))
+				if (starts_with(tuple.first, section) || section=="*")
 				{
 					std::string resourceTypeStr(tuple.first);
 					std::string id(tuple.first);
-					leftFrom(id, "@");
-					rightFrom(resourceTypeStr, "@");
+					leftFrom(resourceTypeStr, "@");
+					rightFrom(id, "@");
 
 					Resource::ResourceType resourceType{ Resource::ResourceType::Empty };
 					resourceType = (resourceTypeStr[0] == 'f' || resourceTypeStr[0] == 'F')
 						? Resource::ResourceType::Font :
 						Resource::ResourceType::Texture;
-					resources.push_back(std::make_shared<Resource>(resourceType, resourcesDirectory + tuple.second, id));
+					resources.push_back(sptr<Resource>(new Resource(resourceType, resourcesDirectory + tuple.second, id)));
 					LOG_DEBUG_("Resource with id " + tuple.second + " added");
 				}
 			}
@@ -60,6 +62,7 @@ namespace lib
 //			throw ResourceNotFoundException(rid);
 		}
 
+		/*
 		void ResourceManager::setResourceList(const ConfigSection &resourceList)
 		{
 			const std::string resourcesDirectoryKey = "resources_directory";
@@ -76,6 +79,6 @@ namespace lib
 				}
 			});
 		}
-
+		*/
 	}
 }

@@ -10,10 +10,12 @@ namespace lib
 {
 	namespace core
 	{
-		class ConfigSection : public TreeData<std::string, ConfigSection>
+		class ConfigSection
 		{
 		public:
 			void for_each_property(std::function<void(const std::pair<std::string, std::string>&)> callback) const;
+			std::map<std::string, std::string> data;
+			std::map<std::string, ConfigSection> sections;
 		};
 
 		class Config : public AppService
@@ -23,6 +25,8 @@ namespace lib
 			virtual ~Config() {}
 			void loadFile(const std::string &fileName);
 			void loadFile(sptr<File> file);
+
+			const ConfigSection &section(const std::string &cname);
 
 		private:
 			ConfigSection m_mainSection;

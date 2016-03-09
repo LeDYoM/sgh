@@ -94,6 +94,11 @@ namespace lib
 			}
 		}
 
+		const lib::core::ConfigSection & Config::section(const std::string &cname)
+		{
+			return m_mainSection.sections[cname];
+		}
+
 		void ConfigSection::for_each_property(std::function<void(const std::pair<std::string, std::string>&)> callback) const
 		{
 			std::for_each(data.begin(), data.end(), callback);

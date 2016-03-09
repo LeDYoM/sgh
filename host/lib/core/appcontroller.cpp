@@ -59,6 +59,7 @@ namespace lib
 				m_sceneManager->PrivateInit(this);
 
 				m_config->loadFile(m_fileSystem->getFile(m_iapp->getAppDescriptor().configFile));
+				m_resourceManager->load("*");
 				m_sceneManager->addScenes(m_iapp->scenesVector());
 
 				m_iapp->onInit();

@@ -29,6 +29,11 @@ namespace lib
 		}
 		class SceneManager;
 
+		class SceneHandle
+		{
+
+		};
+
 		class Scene : public draw::RenderGroup, public IScene
 		{
 		public:
@@ -48,6 +53,8 @@ namespace lib
 			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
 
 			void exitProgram();
+
+			SceneHandle *sceneHandle;
 
 		protected:
 			void updateView();

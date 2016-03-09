@@ -14,11 +14,13 @@ namespace lib
 		Scene::Scene(const std::string &_name) : RenderGroup{ _name, nullptr }
 		{
 			LOG_CONSTRUCT("Name: " + name());
+			sceneHandle = new SceneHandle;
 		}
 
 		Scene::~Scene()
 		{
 			LOG_DESTRUCT("Name: " + name());
+			delete sceneHandle;
 		}
 
 		void Scene::updateView()

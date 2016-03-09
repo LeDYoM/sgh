@@ -6,6 +6,7 @@
 #include <lib/include/types.hpp>
 #include <lib/include/key.hpp>
 #include <lib/core/timer.hpp>
+#include "iscenecontroller.hpp"
 #include "rendergroup.hpp"
 #include "camera.hpp"
 #include <string>
@@ -28,25 +29,17 @@ namespace lib
 		}
 		class SceneManager;
 
-		class Scene : public draw::RenderGroup
+		class Scene : public draw::RenderGroup, public ISceneController
 		{
 		public:
 			Scene(const std::string &_name);
 			virtual ~Scene();
-
-			virtual void onInit() = 0;
-			virtual void onDeinit() = 0;
-			virtual void onEnterScene() = 0;
-			virtual void onExitScene() = 0;
-
-			virtual void update() = 0;
 
 			virtual void onKeyPressed(input::Key key);
 			virtual void onKeyReleased(input::Key key);
 
 			void setNextScene(const std::string &name);
 
-			virtual const vector2df getDefaultSizeView() = 0;
 			uptr<core::ResourceManager> const &resourceManager();
 			uptr<util::UtilProvider> const &utilProvider();
 

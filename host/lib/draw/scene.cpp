@@ -23,12 +23,12 @@ namespace lib
 			delete sceneHandle;
 		}
 
-		void Scene::updateView()
+		void SceneHandle::updateView()
 		{
-			sceneHandle->p_scnManager->appController()->parentWindow()->updateCamera(m_camera);
+			p_scnManager->appController()->parentWindow()->updateCamera(m_camera);
 		}
 
-		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const
+		const vector2df SceneHandle::getCoordinatesToCenter(const Rectf32 &coordinates) const
 		{
 			return{ m_camera.target().center().x - (coordinates.width / 2.0f), m_camera.target().center().y - (coordinates.height / 2.0f) };
 		}
@@ -37,8 +37,8 @@ namespace lib
 		{
 			LOG_DEBUG("Initializing scene " << name());
 			auto sceneSize = getDefaultSizeView();
-			m_camera.setSize(sceneSize);
-			updateView();
+			sceneHandle->m_camera.setSize(sceneSize);
+			sceneHandle->updateView();
 			onInit();
 		}
 
@@ -52,17 +52,17 @@ namespace lib
 		{
 			LOG_DEBUG("Entered in scene " << name());
 			auto sceneSize = getDefaultSizeView();
-			m_camera.setSize(sceneSize);
+			sceneHandle->m_camera.setSize(sceneSize);
 			//			m_view.setCenter(sceneSize.x / 2, sceneSize.y / 2);
-			updateView();
+			sceneHandle->updateView();
 
-			LOG_DEBUG("Scene camera set to: center: " << m_camera.target().center().x << "," << m_camera.target().center().y << " and size: " << m_camera.target().width << "," << m_camera.target().height);
+			LOG_DEBUG("Scene camera set to: center: " << sceneHandle->m_camera.target().center().x << "," << sceneHandle->m_camera.target().center().y << " and size: " << sceneHandle->m_camera.target().width << "," << sceneHandle->m_camera.target().height);
 
 			clock.restart();
 			onEnterScene();
 		}
 
-		lib::vector2df Scene::pointViewToCurrentView(const vector2df &point, const vector2df &size) const
+		lib::vector2df SceneHandle::pointViewToCurrentView(const vector2df &point, const vector2df &size) const
 		{
 			return{ (m_camera.target().width * point.x) / size.x, (camera().target().height * point.y) / size.y };
 		}

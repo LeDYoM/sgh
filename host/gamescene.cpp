@@ -124,7 +124,7 @@ namespace zoper
 
 		auto _gameBoundingBox = _gameText->getLocalBounds();
 		auto _overBoundingBox = _overText->getLocalBounds();
-		auto sceneCenter = camera().target().center();
+		auto sceneCenter = sceneHandle->camera().target().center();
 		_gameText->setPosition({ sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height });
 		_overText->setPosition({ sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y });
 
@@ -545,7 +545,7 @@ namespace zoper
 
 	const lib::vector2df GameScene::board2Scene(const lib::vector2du32 &bPosition) const
 	{
-		return pointViewToCurrentView(lib::vector2df{ static_cast<lib::f32>(bPosition.x), static_cast<lib::f32>(bPosition.y) }, 
+		return sceneHandle->pointViewToCurrentView(lib::vector2df{ static_cast<lib::f32>(bPosition.x), static_cast<lib::f32>(bPosition.y) },
 			lib::vector2df{ static_cast<lib::f32>(p_boardModel->size().x), static_cast<lib::f32>(p_boardModel->size().y) });
 	}
 

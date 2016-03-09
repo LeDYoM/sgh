@@ -38,6 +38,14 @@ namespace lib
 			uptr<core::ResourceManager> const &resourceManager();
 			uptr<util::UtilProvider> const &utilProvider();
 
+			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
+			inline const Camera &camera() const { return m_camera; }
+			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
+		protected:
+			void updateView();
+		private:
+			lib::draw::Camera m_camera;
+			friend class Scene;
 		};
 
 		class Scene : public draw::RenderGroup, public IScene
@@ -50,17 +58,11 @@ namespace lib
 			virtual void onKeyReleased(input::Key key);
 
 			void setNextScene(const std::string &name);
-
-			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
-			inline const Camera &camera() const { return m_camera; }
-			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
-
 			void exitProgram();
 
 			SceneHandle *sceneHandle;
 
 		protected:
-			void updateView();
 			inline u32 state() const { return _state; }
 			inline void setState(u32 ns) { _state = ns; }
 
@@ -70,8 +72,6 @@ namespace lib
 			void privateOnDeinit();
 			void privateOnEnterScene();
 			void privateOnExitScene();
-
-			lib::draw::Camera m_camera;
 			u32 _state;
 
 			friend class SceneManager;

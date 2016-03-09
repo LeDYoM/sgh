@@ -25,7 +25,7 @@ namespace lib
 
 		void Scene::updateView()
 		{
-			p_scnManager->appController()->parentWindow()->updateCamera(m_camera);
+			sceneHandle->p_scnManager->appController()->parentWindow()->updateCamera(m_camera);
 		}
 
 		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const
@@ -85,23 +85,23 @@ namespace lib
 
 		void Scene::setNextScene(const std::string &name)
 		{
-			__ASSERT(p_scnManager, "Null SceneManager on Scene");
-			p_scnManager->setScene(name);
+			__ASSERT(sceneHandle->p_scnManager, "Null SceneManager on Scene");
+			sceneHandle->p_scnManager->setScene(name);
 		}
 
 		uptr<core::ResourceManager> const &Scene::resourceManager()
 		{
-			return p_scnManager->appController()->resourceManager();
+			return sceneHandle->p_scnManager->appController()->resourceManager();
 		}
 
 		uptr<util::UtilProvider> const & Scene::utilProvider()
 		{
-			return p_scnManager->appController()->utilProvider();
+			return sceneHandle->p_scnManager->appController()->utilProvider();
 		}
 
 		void Scene::exitProgram()
 		{
-			p_scnManager->exitProgram();
+			sceneHandle->p_scnManager->exitProgram();
 		}
 	}
 }

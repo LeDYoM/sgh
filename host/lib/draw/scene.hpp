@@ -31,6 +31,9 @@ namespace lib
 
 		class SceneHandle
 		{
+		public:
+			SceneManager *p_scnManager;
+			friend class SceneManager;
 
 		};
 
@@ -71,7 +74,6 @@ namespace lib
 			lib::draw::Camera m_camera;
 			u32 _state;
 
-			SceneManager *p_scnManager;
 			friend class SceneManager;
 		};
 	}

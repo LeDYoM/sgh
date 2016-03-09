@@ -41,6 +41,11 @@ namespace lib
 			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
 			inline const Camera &camera() const { return m_camera; }
 			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
+
+			void setNextScene(const std::string &name);
+			void exitProgram();
+
+			Timer clock;
 		protected:
 			void updateView();
 		private:
@@ -57,16 +62,11 @@ namespace lib
 			virtual void onKeyPressed(input::Key key);
 			virtual void onKeyReleased(input::Key key);
 
-			void setNextScene(const std::string &name);
-			void exitProgram();
-
 			SceneHandle *sceneHandle;
 
 		protected:
 			inline u32 state() const { return _state; }
 			inline void setState(u32 ns) { _state = ns; }
-
-			Timer clock;
 		private:
 			void privateOnInit();
 			void privateOnDeinit();

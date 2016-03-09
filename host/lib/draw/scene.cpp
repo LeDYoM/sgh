@@ -58,7 +58,7 @@ namespace lib
 
 			LOG_DEBUG("Scene camera set to: center: " << sceneHandle->m_camera.target().center().x << "," << sceneHandle->m_camera.target().center().y << " and size: " << sceneHandle->m_camera.target().width << "," << sceneHandle->m_camera.target().height);
 
-			clock.restart();
+			sceneHandle->clock.restart();
 			onEnterScene();
 		}
 
@@ -83,10 +83,10 @@ namespace lib
 			LOG_DEBUG("Key released: " << int{ key.kCode });
 		}
 
-		void Scene::setNextScene(const std::string &name)
+		void SceneHandle::setNextScene(const std::string &name)
 		{
-			__ASSERT(sceneHandle->p_scnManager, "Null SceneManager on Scene");
-			sceneHandle->p_scnManager->setScene(name);
+			__ASSERT(p_scnManager, "Null SceneManager on Scene");
+			p_scnManager->setScene(name);
 		}
 
 		uptr<core::ResourceManager> const &SceneHandle::resourceManager()
@@ -99,9 +99,9 @@ namespace lib
 			return p_scnManager->appController()->utilProvider();
 		}
 
-		void Scene::exitProgram()
+		void SceneHandle::exitProgram()
 		{
-			sceneHandle->p_scnManager->exitProgram();
+			p_scnManager->exitProgram();
 		}
 	}
 }

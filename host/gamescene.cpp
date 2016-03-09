@@ -433,7 +433,7 @@ namespace zoper
 		}
 		break;
 		case GameOver:
-			setNextScene("MenuScene");
+			sceneHandle->setNextScene("MenuScene");
 			break;
 		case Pause:
 			if (_keyMapping.isPauseKey(key.kCode))

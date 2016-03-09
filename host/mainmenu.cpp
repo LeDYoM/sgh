@@ -42,7 +42,7 @@ namespace zoper
 					break;
 				case 3:
 				default:
-					menuManager()->exitProgram();
+					menuManager()->sceneHandle->exitProgram();
 					break;
 				}
 			};

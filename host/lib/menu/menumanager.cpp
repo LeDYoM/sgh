@@ -73,13 +73,11 @@ namespace lib
 
 		void MenuManager::onKeyPressed(lib::input::Key key)
 		{
-			Scene::onKeyPressed(key);
 			_activeMenuStep->onKeyPressed(key);
 		}
 
 		void MenuManager::onKeyReleased(lib::input::Key key)
 		{
-			Scene::onKeyReleased(key);
 			_activeMenuStep->onKeyReleased(key);
 		}
 	}

@@ -92,13 +92,13 @@ namespace lib
 		void SceneManager::onKeyPressed(lib::input::Key key)
 		{
 			__ASSERT(_currentScene, "No active scene when pressing a key");
-			_currentScene->onKeyPressed(key);
+			_currentScene->onPrivateKeyPressed(key);
 		}
 
 		void SceneManager::onKeyReleased(lib::input::Key key)
 		{
 			__ASSERT(_currentScene, "No active scene when releasing a key");
-			_currentScene->onKeyReleased(key);
+			_currentScene->onPrivateKeyReleased(key);
 		}
 
 		void SceneManager::setScene(sptr<Scene> scene)

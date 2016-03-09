@@ -73,14 +73,16 @@ namespace lib
 			LOG_DEBUG("Exited from scene " << name());
 		}
 
-		void Scene::onKeyPressed(input::Key key)
+		void Scene::onPrivateKeyPressed(input::Key key)
 		{
 			LOG_DEBUG("Key pressed: " << int{ key.kCode });
+			onKeyPressed(key);
 		}
 
-		void Scene::onKeyReleased(input::Key key)
+		void Scene::onPrivateKeyReleased(input::Key key)
 		{
 			LOG_DEBUG("Key released: " << int{ key.kCode });
+			onKeyReleased(key);
 		}
 
 		void SceneHandle::setNextScene(const std::string &name)

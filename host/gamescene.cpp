@@ -411,7 +411,6 @@ namespace zoper
 
 	void GameScene::onKeyPressed(lib::input::Key key)
 	{
-		Scene::onKeyPressed(key);
 		switch (state())
 		{
 		case Playing:
@@ -461,7 +460,7 @@ namespace zoper
 
 	void GameScene::onKeyReleased(lib::input::Key key)
 	{
-		Scene::onKeyReleased(key);
+		key;
 	}
 
 	void GameScene::onAnimationStarted(lib::sptr<lib::draw::anim::IAnimation> anim, lib::sptr<lib::draw::RenderNode> node)

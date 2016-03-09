@@ -35,8 +35,8 @@ namespace lib
 				{
 					std::string resourceTypeStr(tuple.first);
 					std::string id(tuple.first);
-					leftFrom(resourceTypeStr, "@");
-					rightFrom(id, "@");
+					leftFrom(id, "@");
+					rightFrom(resourceTypeStr, "@");
 
 					Resource::ResourceType resourceType{ Resource::ResourceType::Empty };
 					resourceType = (resourceTypeStr[0] == 'f' || resourceTypeStr[0] == 'F')

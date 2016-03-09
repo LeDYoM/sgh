@@ -16,7 +16,21 @@ namespace lib
 		SceneManager::SceneManager(core::AppController *const appController) : AppService{ appController }
 		{
 			LOG_CONSTRUCT_NOPARAMS;
-			m_eventReceiver = appController->eventManager()->newEventReceiver();
+		}
+		*/
+		SceneManager::~SceneManager()
+		{
+			for (auto scene : _scenes)
+			{
+				scene->privateOnDeinit();
+			}
+			_scenes.clear();
+			LOG_DESTRUCT_NOPARAMS;
+		}
+
+		void SceneManager::Init()
+		{
+			m_eventReceiver = appController()->eventManager()->newEventReceiver();
 			m_eventReceiver->setReceiver([this](lib::core::events::EventReceiver::ReceivedEvent event_)
 			{
 				auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
@@ -33,16 +47,6 @@ namespace lib
 					break;
 				}
 			});
-		}
-		*/
-		SceneManager::~SceneManager()
-		{
-			for (auto scene : _scenes)
-			{
-				scene->privateOnDeinit();
-			}
-			_scenes.clear();
-			LOG_DESTRUCT_NOPARAMS;
 		}
 
 		void SceneManager::addScene(sptr<Scene> newScene)

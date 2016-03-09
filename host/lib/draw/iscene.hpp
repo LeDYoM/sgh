@@ -14,11 +14,11 @@ namespace lib
 {
 	namespace draw
 	{
-		class ISceneController
+		class IScene
 		{
 		public:
-			ISceneController() {}
-			virtual ~ISceneController() {}
+			IScene() {}
+			virtual ~IScene() {}
 
 			virtual void onInit() = 0;
 			virtual void onDeinit() = 0;

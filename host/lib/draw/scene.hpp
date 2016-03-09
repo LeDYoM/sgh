@@ -6,7 +6,7 @@
 #include <lib/include/types.hpp>
 #include <lib/include/key.hpp>
 #include <lib/core/timer.hpp>
-#include "iscenecontroller.hpp"
+#include "iscene.hpp"
 #include "rendergroup.hpp"
 #include "camera.hpp"
 #include <string>
@@ -29,7 +29,7 @@ namespace lib
 		}
 		class SceneManager;
 
-		class Scene : public draw::RenderGroup, public ISceneController
+		class Scene : public draw::RenderGroup, public IScene
 		{
 		public:
 			Scene(const std::string &_name);

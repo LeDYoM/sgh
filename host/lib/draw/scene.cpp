@@ -89,14 +89,14 @@ namespace lib
 			sceneHandle->p_scnManager->setScene(name);
 		}
 
-		uptr<core::ResourceManager> const &Scene::resourceManager()
+		uptr<core::ResourceManager> const &SceneHandle::resourceManager()
 		{
-			return sceneHandle->p_scnManager->appController()->resourceManager();
+			return p_scnManager->appController()->resourceManager();
 		}
 
-		uptr<util::UtilProvider> const & Scene::utilProvider()
+		uptr<util::UtilProvider> const & SceneHandle::utilProvider()
 		{
-			return sceneHandle->p_scnManager->appController()->utilProvider();
+			return p_scnManager->appController()->utilProvider();
 		}
 
 		void Scene::exitProgram()

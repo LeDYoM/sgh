@@ -59,17 +59,17 @@ namespace zoper
 		_gameText = _gameOverrg->createText("gameovergame");
 		_overText = _gameOverrg->createText("gameoverover");
 
-		_scoreText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_scoreDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_currentLevelText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_currentLevelDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_gameText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_overText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_levelText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_levelDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_goalText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_goalDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_pauseText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_scoreText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_scoreDisplay->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_currentLevelText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_currentLevelDisplay->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_gameText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_overText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_levelText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_levelDisplay->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_goalText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_goalDisplay->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_pauseText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
 
 		_scoreText->setString("Score: ");
 		increaseScore(0);
@@ -331,8 +331,8 @@ namespace zoper
 		LOG_DEBUG("x1: " << currentTokenZone.zone.left << " y1: " << currentTokenZone.zone.top << 
 			" x2: " << currentTokenZone.zone.width << " y2: " << currentTokenZone.zone.height);
 
-		lib::u32 newToken{ utilProvider()->getRandomNumer(NUMTOKENS) };
-		lib::u32 sizep{ utilProvider()->getRandomNumer(currentTokenZone.size) };
+		lib::u32 newToken{ sceneHandle->utilProvider()->getRandomNumer(NUMTOKENS) };
+		lib::u32 sizep{ sceneHandle->utilProvider()->getRandomNumer(currentTokenZone.size) };
 
 		lib::u32 newX{ currentTokenZone.zone.left + (currentTokenZone.direction.isHorizontal() ? 0 : sizep) };
 		lib::u32 newY{ currentTokenZone.zone.top + (currentTokenZone.direction.isHorizontal() ? sizep : 0) };

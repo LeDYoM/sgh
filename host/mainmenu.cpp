@@ -47,7 +47,7 @@ namespace zoper
 				}
 			};
 			_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("mainmenu_chooseControl",
-				menuManager()->resourceManager()->getResource("game_menu.mainFont"),
+				menuManager()->sceneHandle->resourceManager()->getResource("game_menu.mainFont"),
 				lib::draw::Color::Blue(), lib::draw::Color::Red(),
 				lib::draw::Alignment::Center,
 				90, 1,

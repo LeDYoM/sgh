@@ -35,6 +35,9 @@ namespace lib
 			SceneManager *p_scnManager;
 			friend class SceneManager;
 
+			uptr<core::ResourceManager> const &resourceManager();
+			uptr<util::UtilProvider> const &utilProvider();
+
 		};
 
 		class Scene : public draw::RenderGroup, public IScene
@@ -47,9 +50,6 @@ namespace lib
 			virtual void onKeyReleased(input::Key key);
 
 			void setNextScene(const std::string &name);
-
-			uptr<core::ResourceManager> const &resourceManager();
-			uptr<util::UtilProvider> const &utilProvider();
 
 			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
 			inline const Camera &camera() const { return m_camera; }

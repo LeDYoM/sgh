@@ -12,12 +12,6 @@ namespace lib
 {
 	namespace draw
 	{
-/*
-		SceneManager::SceneManager(core::AppController *const appController) : AppService{ appController }
-		{
-			LOG_CONSTRUCT_NOPARAMS;
-		}
-		*/
 		SceneManager::~SceneManager()
 		{
 			for (auto scene : _scenes)

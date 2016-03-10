@@ -8,10 +8,9 @@ namespace lib
 {
 	namespace core
 	{
-		class EventManager;
-
 		namespace events
 		{
+			class EventProxy;
 			class EventSender
 			{
 			public:
@@ -20,9 +19,9 @@ namespace lib
 
 				virtual void sendEvent(uptr<events::Event> event_);
 			private:
-				EventSender(EventManager *const eventManager);
-				EventManager  *const m_eventManager;
-				friend class EventManager;
+				EventSender(EventProxy *const eventProxy);
+				EventProxy  *const m_eventProxy;
+				friend class EventProxy;
 			};
 		}
 	}

@@ -1,5 +1,5 @@
 #include "eventsender.hpp"
-#include "../eventmanager.hpp"
+#include "eventproxy.hpp"
 
 namespace lib
 {
@@ -7,7 +7,7 @@ namespace lib
 	{
 		namespace events
 		{
-			EventSender::EventSender(EventManager *const eventManager) : m_eventManager{ eventManager }
+			EventSender::EventSender(EventProxy *const eventProxy) : m_eventProxy{ eventProxy }
 			{
 
 			}
@@ -19,7 +19,7 @@ namespace lib
 
 			void EventSender::sendEvent(uptr<events::Event> event_)
 			{
-				m_eventManager->addEvent(std::move(event_));
+				m_eventProxy->send(std::move(event_));
 			}
 
 		}

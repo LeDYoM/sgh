@@ -2,6 +2,7 @@
 #include "events/event.hpp"
 #include "events/eventsender.hpp"
 #include "events/eventreceiver.hpp"
+#include "events/eventproxy.hpp"
 #include "log.hpp"
 
 namespace lib
@@ -25,6 +26,14 @@ namespace lib
 			LOG_DESTRUCT_NOPARAMS;
 		}
 
+		sptr<events::EventProxy> EventManager::newEventProxy()
+		{
+			auto ep = sptr<events::EventProxy>(new events::EventProxy{ this });
+			m_eventProxies.push_back(ep);
+			return ep;
+		}
+
+		/*
 		sptr<events::EventSender> EventManager::newEventSender()
 		{
 			auto temp = sptr<events::EventSender>(new events::EventSender(this));
@@ -32,13 +41,13 @@ namespace lib
 			return temp;
 		}
 
-
 		sptr<events::EventReceiver> EventManager::newEventReceiver()
 		{
 			auto temp = sptr<events::EventReceiver>(new events::EventReceiver(this));
 			m_eventreceivers.push_back(temp);
 			return temp;
 		}
+		*/
 
 		void EventManager::addEvent(uptr<events::Event> event_)
 		{
@@ -54,18 +63,21 @@ namespace lib
 			}
 		}
 
-
 		void EventManager::update1()
 		{
 			if (!m_eventQueue.empty())
 			{
 				events::EventReceiver::ReceivedEvent &next = m_eventQueue.front();
-				for (auto receiver : m_eventreceivers)
+				for (auto eproxy : m_eventProxies)
 				{
-					auto receiver_ = receiver.lock();
-					if (receiver_)
+					auto eproxy_ = eproxy.lock();
+					if (eproxy_)
 					{
-						receiver_->receive(next);
+						eproxy_->receive(next);
+					}
+					else
+					{
+						//TO DO: Delete proxy from list
 					}
 				}
 				m_eventQueue.pop();

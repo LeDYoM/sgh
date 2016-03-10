@@ -13,7 +13,7 @@ namespace lib
 		class Window;
 		namespace events
 		{
-			class EventReceiver;
+			class EventProxy;
 		}
 	}
 	namespace draw
@@ -47,7 +47,7 @@ namespace lib
 			sptr<Scene> _currentScene{ nullptr };
 			bool b_lock{ false };
 			sptr<Scene> _nextScene{ nullptr };
-			sptr<core::events::EventReceiver> m_eventReceiver;
+			sptr<core::events::EventProxy> m_eventProxy{ nullptr };
 		};
 	}
 }

@@ -9,10 +9,9 @@ namespace lib
 {
 	namespace core
 	{
-		class EventManager;
-
 		namespace events
 		{
+			class EventProxy;
 			class EventReceiver
 			{
 			public:
@@ -24,11 +23,11 @@ namespace lib
 				void setReceiver(EventListener listener);
 
 			private:
-				EventReceiver(EventManager *const eventManager);
+				EventReceiver(EventProxy *const eventProxy);
 				void receive(ReceivedEvent event_);
-				EventManager  *const m_eventManager;
+				EventProxy  *const m_eventProxy;
 				EventListener m_listener;
-				friend class EventManager;
+				friend class EventProxy;
 			};
 		}
 	}

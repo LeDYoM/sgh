@@ -6,6 +6,7 @@
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/eventmanager.hpp>
 #include <lib/core/events/eventreceiver.hpp>
+#include <lib/core/events/eventproxy.hpp>
 #include <lib/core/events/inputevent.hpp>
 
 namespace lib
@@ -24,8 +25,8 @@ namespace lib
 
 		void SceneManager::Init()
 		{
-			m_eventReceiver = appController()->eventManager()->newEventReceiver();
-			m_eventReceiver->setReceiver([this](lib::core::events::EventReceiver::ReceivedEvent event_)
+			m_eventProxy = appController()->eventManager()->newEventProxy();
+			m_eventProxy->newEventReceiver()->setReceiver([this](lib::core::events::EventReceiver::ReceivedEvent event_)
 			{
 				auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
 				switch (evKey->action())

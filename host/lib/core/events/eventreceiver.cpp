@@ -1,5 +1,5 @@
 #include "eventreceiver.hpp"
-#include "../eventmanager.hpp"
+#include "eventproxy.hpp"
 
 namespace lib
 {
@@ -7,11 +7,9 @@ namespace lib
 	{
 		namespace events
 		{
-			EventReceiver::EventReceiver(EventManager *const eventManager) : m_eventManager{ eventManager }
+			EventReceiver::EventReceiver(EventProxy *const eventProxy) : m_eventProxy{ eventProxy }
 			{
-
 			}
-
 
 			void EventReceiver::receive(ReceivedEvent event_)
 			{
@@ -30,7 +28,6 @@ namespace lib
 			{
 				m_listener = listener;
 			}
-
 		}
 	}
 }

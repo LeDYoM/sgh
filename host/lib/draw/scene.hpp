@@ -67,9 +67,6 @@ namespace lib
 			virtual void onPrivateKeyPressed(input::Key key);
 			virtual void onPrivateKeyReleased(input::Key key);
 
-			virtual void onKeyPressed(input::Key key) = 0;
-			virtual void onKeyReleased(input::Key key) = 0;
-
 			SceneHandle *sceneHandle;
 			sptr<core::events::EventClient> eventClient() const;
 

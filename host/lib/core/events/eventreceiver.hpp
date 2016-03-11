@@ -21,12 +21,15 @@ namespace lib
 				virtual ~EventReceiver();
 
 				void setReceiver(EventListener listener);
+				void setActive(bool active);
+				const  bool isActive() const;
 
 			private:
 				EventReceiver(EventProxy *const eventProxy);
 				void receive(ReceivedEvent event_);
 				EventProxy  *const m_eventProxy;
 				EventListener m_listener;
+				bool m_active{ false };
 				friend class EventProxy;
 			};
 		}

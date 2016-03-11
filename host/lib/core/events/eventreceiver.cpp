@@ -21,12 +21,23 @@ namespace lib
 
 			EventReceiver::~EventReceiver()
 			{
-
+				setActive(false);
+				m_listener = nullptr;
 			}
 
 			void EventReceiver::setReceiver(EventListener listener)
 			{
 				m_listener = listener;
+			}
+
+			void EventReceiver::setActive(bool active)
+			{
+				m_active = active;
+			}
+
+			const bool EventReceiver::isActive() const
+			{
+				return m_active;
 			}
 		}
 	}

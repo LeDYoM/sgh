@@ -80,6 +80,7 @@ namespace lib
 			LOG_DEBUG("Scene camera set to: center: " << sceneHandle->m_camera.target().center().x << "," << sceneHandle->m_camera.target().center().y << " and size: " << sceneHandle->m_camera.target().width << "," << sceneHandle->m_camera.target().height);
 
 			sceneHandle->clock.restart();
+			m_eventReceiver->setActive(true);
 			onEnterScene();
 		}
 
@@ -90,6 +91,7 @@ namespace lib
 
 		void Scene::privateOnExitScene()
 		{
+			m_eventReceiver->setActive(false);
 			onExitScene();
 			LOG_DEBUG("Exited from scene " << name());
 		}

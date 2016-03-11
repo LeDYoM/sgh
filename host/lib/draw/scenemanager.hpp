@@ -34,9 +34,6 @@ namespace lib
 			void update();
 
 			void addScenes(const std::vector<sptr<Scene>> &&sceneVector);
-
-			void onKeyPressed(input::Key key);
-			void onKeyReleased(input::Key key);
 			void exitProgram();
 
 			sptr<core::events::EventProxy> eventProxy() const;

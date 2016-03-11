@@ -26,22 +26,6 @@ namespace lib
 		void SceneManager::Init()
 		{
 			m_eventProxy = appController()->eventManager()->newEventProxy();
-			m_eventProxy->newEventReceiver()->setReceiver([this](lib::core::events::EventReceiver::ReceivedEvent event_)
-			{
-				auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
-				switch (evKey->action())
-				{
-				case core::events::KeyEvent::Action::KeyPressed:
-					this->onKeyPressed(evKey->key());
-					break;
-				case core::events::KeyEvent::Action::KeyReleased:
-					this->onKeyReleased(evKey->key());
-					break;
-				default:
-					LOG_WARNING("Unknown Action on event key");
-					break;
-				}
-			});
 		}
 
 		void SceneManager::addScene(sptr<Scene> newScene)
@@ -82,18 +66,6 @@ namespace lib
 			{
 				addScene(scene);
 			}
-		}
-
-		void SceneManager::onKeyPressed(lib::input::Key key)
-		{
-			__ASSERT(_currentScene, "No active scene when pressing a key");
-			_currentScene->onPrivateKeyPressed(key);
-		}
-
-		void SceneManager::onKeyReleased(lib::input::Key key)
-		{
-			__ASSERT(_currentScene, "No active scene when releasing a key");
-			_currentScene->onPrivateKeyReleased(key);
 		}
 
 		void SceneManager::setScene(sptr<Scene> scene)

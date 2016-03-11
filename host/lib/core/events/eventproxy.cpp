@@ -43,7 +43,10 @@ namespace lib
 					auto receiver_ = receiver.lock();
 					if (receiver_)
 					{
-						receiver_->receive(ev);
+						if (receiver_->isActive())
+						{
+							receiver_->receive(ev);
+						}
 					}
 				}
 			}

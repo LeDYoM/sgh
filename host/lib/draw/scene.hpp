@@ -16,6 +16,10 @@ namespace lib
 	namespace core
 	{
 		class ResourceManager;
+		namespace events
+		{
+			class EventReceiver;
+		}
 	}
 	namespace util
 	{
@@ -46,6 +50,7 @@ namespace lib
 			void exitProgram();
 
 			Timer clock;
+			core::events::EventReceiver *eventReceiver();
 		protected:
 			void updateView();
 		private:
@@ -71,6 +76,8 @@ namespace lib
 			inline u32 state() const { return _state; }
 			inline void setState(u32 ns) { _state = ns; }
 		private:
+			sptr<core::events::EventReceiver> m_eventReceiver{ nullptr };
+
 			void privateOnInit();
 			void privateOnDeinit();
 			void privateOnEnterScene();

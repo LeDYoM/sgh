@@ -6,6 +6,8 @@
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include "camera.hpp"
+#include <lib/core/events/eventproxy.hpp>
+#include <lib/core/events/eventreceiver.hpp>
 
 namespace lib
 {
@@ -39,6 +41,25 @@ namespace lib
 			auto sceneSize = getDefaultSizeView();
 			sceneHandle->m_camera.setSize(sceneSize);
 			sceneHandle->updateView();
+
+			m_eventReceiver = sceneHandle->p_scnManager->eventProxy()->newEventReceiver();
+			m_eventReceiver->setReceiver([this](lib::core::events::EventReceiver::ReceivedEvent event_)
+			{
+				auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
+				switch (evKey->action())
+				{
+				case core::events::KeyEvent::Action::KeyPressed:
+					this->onPrivateKeyPressed(evKey->key());
+					break;
+				case core::events::KeyEvent::Action::KeyReleased:
+					this->onPrivateKeyReleased(evKey->key());
+					break;
+				default:
+					LOG_WARNING("Unknown Action on event key");
+					break;
+				}
+			});
+
 			onInit();
 		}
 

@@ -39,6 +39,7 @@ namespace lib
 			void onKeyReleased(input::Key key);
 			void exitProgram();
 
+			sptr<core::events::EventProxy> eventProxy() const;
 		private:
 			void setScene(sptr<Scene> scene);
 

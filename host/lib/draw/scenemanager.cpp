@@ -156,5 +156,10 @@ namespace lib
 //			p_parentWindow->exitProgram();
 		}
 
+		sptr<core::events::EventProxy> SceneManager::eventProxy() const
+		{
+			return m_eventProxy;
+		}
+
 	}
 }

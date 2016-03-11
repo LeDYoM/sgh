@@ -50,7 +50,6 @@ namespace lib
 			void exitProgram();
 
 			Timer clock;
-			core::events::EventClient *eventClient();
 		protected:
 			void updateView();
 		private:

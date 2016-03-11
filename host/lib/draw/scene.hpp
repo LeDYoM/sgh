@@ -71,6 +71,7 @@ namespace lib
 			virtual void onKeyReleased(input::Key key) = 0;
 
 			SceneHandle *sceneHandle;
+			sptr<core::events::EventClient> eventClient() const;
 
 		protected:
 			inline u32 state() const { return _state; }

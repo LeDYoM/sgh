@@ -108,6 +108,11 @@ namespace lib
 			onKeyReleased(key);
 		}
 
+		sptr<core::events::EventClient> Scene::eventClient() const
+		{
+			return m_eventClient;
+		}
+
 		void SceneHandle::setNextScene(const std::string &name)
 		{
 			__ASSERT(p_scnManager, "Null SceneManager on Scene");

@@ -58,6 +58,8 @@ namespace lib
 				}
 			});
 
+			m_eventClient->setActive(false);
+
 			onInit();
 		}
 

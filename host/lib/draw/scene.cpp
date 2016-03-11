@@ -6,8 +6,7 @@
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include "camera.hpp"
-#include <lib/core/events/eventproxy.hpp>
-#include <lib/core/events/eventreceiver.hpp>
+#include <lib/core/events/eventclient.hpp>
 
 namespace lib
 {
@@ -41,9 +40,8 @@ namespace lib
 			auto sceneSize = getDefaultSizeView();
 			sceneHandle->m_camera.setSize(sceneSize);
 			sceneHandle->updateView();
-
-			m_eventReceiver = sceneHandle->p_scnManager->eventProxy()->newEventReceiver();
-			m_eventReceiver->setReceiver([this](lib::core::events::EventReceiver::ReceivedEvent event_)
+			m_eventClient = sceneHandle->p_scnManager->eventClient()->newEventClient();
+			m_eventClient->setReceiver([this](lib::core::events::EventClient::ReceivedEvent event_)
 			{
 				auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
 				switch (evKey->action())
@@ -80,7 +78,7 @@ namespace lib
 			LOG_DEBUG("Scene camera set to: center: " << sceneHandle->m_camera.target().center().x << "," << sceneHandle->m_camera.target().center().y << " and size: " << sceneHandle->m_camera.target().width << "," << sceneHandle->m_camera.target().height);
 
 			sceneHandle->clock.restart();
-			m_eventReceiver->setActive(true);
+			m_eventClient->setActive(true);
 			onEnterScene();
 		}
 
@@ -91,7 +89,7 @@ namespace lib
 
 		void Scene::privateOnExitScene()
 		{
-			m_eventReceiver->setActive(false);
+			m_eventClient->setActive(false);
 			onExitScene();
 			LOG_DEBUG("Exited from scene " << name());
 		}

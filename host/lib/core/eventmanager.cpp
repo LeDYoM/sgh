@@ -1,8 +1,6 @@
 #include "eventmanager.hpp"
 #include "events/event.hpp"
-#include "events/eventsender.hpp"
-#include "events/eventreceiver.hpp"
-#include "events/eventproxy.hpp"
+#include "events/eventclient.hpp"
 #include "log.hpp"
 
 namespace lib
@@ -26,34 +24,17 @@ namespace lib
 			LOG_DESTRUCT_NOPARAMS;
 		}
 
-		sptr<events::EventProxy> EventManager::newEventProxy()
+		sptr<events::EventClient> EventManager::newEventClient()
 		{
-			auto ep = sptr<events::EventProxy>(new events::EventProxy{ this });
-			m_eventProxies.push_back(ep);
+			auto ep = sptr<events::EventClient>(new events::EventClient{ this });
+			m_eventClients.push_back(ep);
 			return ep;
 		}
-
-		/*
-		sptr<events::EventSender> EventManager::newEventSender()
-		{
-			auto temp = sptr<events::EventSender>(new events::EventSender(this));
-			m_eventsenders.push_back(temp);
-			return temp;
-		}
-
-		sptr<events::EventReceiver> EventManager::newEventReceiver()
-		{
-			auto temp = sptr<events::EventReceiver>(new events::EventReceiver(this));
-			m_eventreceivers.push_back(temp);
-			return temp;
-		}
-		*/
 
 		void EventManager::addEvent(uptr<events::Event> event_)
 		{
 			m_eventQueue.push(std::move(event_));
 		}
-
 
 		void EventManager::update()
 		{
@@ -67,8 +48,8 @@ namespace lib
 		{
 			if (!m_eventQueue.empty())
 			{
-				events::EventReceiver::ReceivedEvent &next = m_eventQueue.front();
-				for (auto eproxy : m_eventProxies)
+				events::EventClient::ReceivedEvent &next = m_eventQueue.front();
+				for (auto eproxy : m_eventClients)
 				{
 					auto eproxy_ = eproxy.lock();
 					if (eproxy_)

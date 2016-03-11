@@ -13,7 +13,7 @@ namespace lib
 		class Window;
 		namespace events
 		{
-			class EventProxy;
+			class EventClient;
 		}
 	}
 	namespace draw
@@ -36,7 +36,7 @@ namespace lib
 			void addScenes(const std::vector<sptr<Scene>> &&sceneVector);
 			void exitProgram();
 
-			sptr<core::events::EventProxy> eventProxy() const;
+			sptr<core::events::EventClient> eventClient() const;
 		private:
 			void setScene(sptr<Scene> scene);
 
@@ -45,7 +45,7 @@ namespace lib
 			sptr<Scene> _currentScene{ nullptr };
 			bool b_lock{ false };
 			sptr<Scene> _nextScene{ nullptr };
-			sptr<core::events::EventProxy> m_eventProxy{ nullptr };
+			sptr<core::events::EventClient> m_eventClient{ nullptr };
 		};
 	}
 }

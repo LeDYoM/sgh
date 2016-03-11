@@ -5,8 +5,7 @@
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/eventmanager.hpp>
-#include <lib/core/events/eventreceiver.hpp>
-#include <lib/core/events/eventproxy.hpp>
+#include <lib/core/events/eventclient.hpp>
 #include <lib/core/events/inputevent.hpp>
 
 namespace lib
@@ -25,7 +24,7 @@ namespace lib
 
 		void SceneManager::Init()
 		{
-			m_eventProxy = appController()->eventManager()->newEventProxy();
+			m_eventClient = appController()->eventManager()->newEventClient();
 		}
 
 		void SceneManager::addScene(sptr<Scene> newScene)
@@ -128,9 +127,9 @@ namespace lib
 //			p_parentWindow->exitProgram();
 		}
 
-		sptr<core::events::EventProxy> SceneManager::eventProxy() const
+		sptr<core::events::EventClient> SceneManager::eventClient() const
 		{
-			return m_eventProxy;
+			return m_eventClient;
 		}
 
 	}

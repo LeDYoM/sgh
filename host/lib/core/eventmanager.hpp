@@ -13,10 +13,8 @@ namespace lib
 	{
 		namespace events
 		{
-			class EventSender;
-			class EventReceiver;
 			class Event;
-			class EventProxy;
+			class EventClient;
 		}
 		class EventManager : public AppService
 		{
@@ -24,9 +22,7 @@ namespace lib
 			EventManager();
 			virtual ~EventManager();
 
-			//sptr<events::EventSender> newEventSender();
-			//sptr<events::EventReceiver> newEventReceiver();
-			sptr<events::EventProxy> newEventProxy();
+			sptr<events::EventClient> newEventClient();
 			virtual void addEvent(uptr<events::Event> event_);
 			void update();
 			void update1();
@@ -35,10 +31,7 @@ namespace lib
 			virtual bool empty();
 
 			std::queue<sptr<events::Event>> m_eventQueue;
-			std::vector<wptr<events::EventProxy>> m_eventProxies;
-			//std::vector<wptr<events::EventSender>> m_eventsenders;
-			//std::vector<wptr<events::EventReceiver>> m_eventreceivers;
-
+			std::vector<wptr<events::EventClient>> m_eventClients;
 		};
 	}
 }

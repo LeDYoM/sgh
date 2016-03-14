@@ -13,8 +13,6 @@ namespace lib
 
 		namespace events
 		{
-			class EventSender;
-			class EventReceiver;
 			class Event;
 
 			class EventClient
@@ -25,6 +23,8 @@ namespace lib
 
 				EventClient(EventManager *const eventManager);
 				virtual ~EventClient();
+
+				EventClient &operator=(EventClient &r) = delete;
 
 				void receive(ReceivedEvent ev);
 				void send(uptr<Event> ev);

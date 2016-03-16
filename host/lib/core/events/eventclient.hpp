@@ -25,6 +25,7 @@ namespace lib
 
 				EventClient(EventManager *const eventManager);
 				virtual ~EventClient();
+				EventClient &operator=(const EventClient&) = delete;
 
 				void receive(ReceivedEvent ev);
 				void send(uptr<Event> ev);

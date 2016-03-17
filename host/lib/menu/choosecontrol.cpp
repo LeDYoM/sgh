@@ -17,7 +17,7 @@ namespace lib
 			std::function<void(const u32, ChooseControl &self)> onSelected,
 			sptr<CursorDescriptor> cursorDescriptor, 
 			const std::vector<sptr<OptionDescriptor>> labels)
-			: IMenuControl{ name }, _textColor{ textColor }, _selectedTextColor{ selectedTextColor }, _onSelected {onSelected}
+			: IMenuControl{ name,nullptr }, _textColor{ textColor }, _selectedTextColor{ selectedTextColor }, _onSelected {onSelected}
 		{
 			descriptorCursorSize = cursorDescriptor->_size;
 			_cursor = createShape("cursor");

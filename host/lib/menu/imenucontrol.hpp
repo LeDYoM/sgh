@@ -3,6 +3,9 @@
 
 #include <lib/draw/rendergroup.hpp>
 #include <lib/include/key.hpp>
+#include <lib/include/color.hpp>
+#include "menumanager.hpp"
+#include <lib/draw/scene.hpp>
 
 namespace lib
 {
@@ -12,11 +15,14 @@ namespace lib
 		{
 		public:
 
-			IMenuControl(const std::string &name) : lib::draw::RenderGroup(name) {}
+			IMenuControl(const std::string &name,MenuManager *const parentManager) : lib::draw::RenderGroup(name,parentManager) {}
 			virtual ~IMenuControl() {}
 			virtual void onKeyPressed(lib::input::Key key) = 0;
 			virtual void onKeyReleased(lib::input::Key key) = 0;
-
+			MenuManager * const menuManager() const
+			{
+				return dynamic_cast<MenuManager*const>(parent());
+			}
 		};
 	}
 }

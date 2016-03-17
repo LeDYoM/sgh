@@ -1,8 +1,7 @@
 #ifndef LIB_DRAW_RENDERNODE_HPP
 #define LIB_DRAW_RENDERNODE_HPP
 
-#include "hasname.hpp"
-#include "idrawable.hpp"
+#include "inameddrawable.hpp"
 #include <lib/include/types.hpp>
 #include <lib/include/color.hpp>
 #include "transformable.hpp"
@@ -19,7 +18,7 @@ namespace lib
 			Right = 2
 		};
 
-		class RenderNode : public lib::core::HasName, public IDrawable, public Transformable
+		class RenderNode : public INamedDrawable, public Transformable
 		{
 		public:
 			explicit RenderNode(const std::string &name, const PrimitiveType primitiveType);

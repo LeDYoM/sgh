@@ -8,8 +8,8 @@ namespace lib
 {
 	namespace draw
 	{
-		RenderGroup::RenderGroup(const std::string &name, RenderGroup *parent)
-			: HasName{ name }, _parent{ parent }
+		RenderGroup::RenderGroup(const str &name, RenderGroup *parent)
+			: INamedDrawable( name ), _parent{ parent }
 		{
 		}
 
@@ -107,5 +107,16 @@ namespace lib
 		{
 			_renderNodes.clear();
 		}
+
+		sptr<IDrawable> RenderGroup::findByName(const str &name) const
+		{
+			auto result( std::find_if(_renderNodes.cbegin(), _renderNodes.cend(), [name](const sptr<INamedDrawable> &node)
+			{
+				return (node->name() == name);
+			}) );
+
+			return (result != _renderNodes.end()) ? *result : sptr<IDrawable>();
+		}
+
 	}
 }

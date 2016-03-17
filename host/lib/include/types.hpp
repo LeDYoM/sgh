@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <memory>
 #include <map>
+#include <string>
 #include <lib/core/compileconfig.hpp>
 
 namespace lib
@@ -27,6 +28,8 @@ namespace lib
 	using s8 = int8_t;
 	using f32 = float;
 	using f64 = double;
+
+	using str = std::string;
 }
 
 #include "vector2d.hpp"

@@ -16,21 +16,11 @@ namespace lib
 
 		MenuManager::~MenuManager()
 		{
-			_steps.clear();
-		}
-
-		void MenuManager::addMenuSteps(std::vector<sptr<MenuStep>> &steps)
-		{
-			for (auto menuStep : steps)
-			{
-				addMenuStep(menuStep);
-			}
 		}
 
 		void MenuManager::addMenuStep(sptr<MenuStep> step)
 		{
 			addRenderGroup(step);
-			_steps.push_back(step);
 			step->onCreate();
 		}
 
@@ -47,12 +37,10 @@ namespace lib
 
 		void MenuManager::changeStep(const std::string &step)
 		{
-			for (const auto nstep : _steps)
+			sptr<MenuStep> nstep = findByNameAs<MenuStep>(step);
+			if (nstep)
 			{
-				if (nstep->name() == step)
-				{
-					changeStep(nstep);
-				}
+				changeStep(nstep);
 			}
 		}
 
@@ -65,7 +53,7 @@ namespace lib
 		{
 			_activeMenuStep = step;
 
-			for (auto _step : _steps)
+			for (auto _step : _renderNodes)
 			{
 				_step->setVisible(_step == step);
 			}

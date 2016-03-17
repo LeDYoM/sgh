@@ -9,14 +9,9 @@ namespace lib
 {
 	namespace menu
 	{
-		SimpleMenu::SimpleMenu(const std::string &name, sptr<core::Resource> font,
-			const lib::draw::Color &textColor, const lib::draw::Color &selectedTextColor,
-			const draw::Alignment alignment,
-			u32 chSize,float incY,
-			std::function<void(const u32, ChooseControl &self)> onSelected,
-			sptr<CursorDescriptor> cursorDescriptor, 
-			const std::vector<sptr<OptionDescriptor>> labels)
-			: IMenuControl{ name }, _textColor{ textColor }, _selectedTextColor{ selectedTextColor }, _onSelected {onSelected}
+		SimpleMenu::SimpleMenu(const str &name, MenuManager *const parentManager, const draw::Alignment alignment,
+			std::function<void(const u32, SimpleMenu &self)> onSelected)
+			: IMenuControl{ name, parentManager }, _onSelected {onSelected}
 		{
 			descriptorCursorSize = cursorDescriptor->_size;
 			_cursor = createShape("cursor");
@@ -57,26 +52,13 @@ namespace lib
 		}
 
 
-		ChooseControl::~ChooseControl()
+		SimpleMenu::~SimpleMenu()
 		{
 			_labelData.clear();
 			_cursor = nullptr;
 		}
 
-		lib::u32 ChooseControl::getSelectedSubLabel(u32 index) const
-		{
-			__ASSERT(index < _labelData.size(), "Invalid index");
-			return _labelData[index].selectedSublabel;
-		}
-
-		void ChooseControl::setSelectedSubLabel(u32 index, u32 subIndex)
-		{
-			__ASSERT(index < _labelData.size(), "Invalid index");
-			_labelData[index].selectedSublabel = subIndex;
-			updateSubLabelText(index);
-		}
-
-		void ChooseControl::onKeyPressed(lib::input::Key key)
+		void SimpleMenu::onKeyPressed(lib::input::Key key)
 		{
 			if (key.kCode == lib::input::KeyCode::Down || key.kCode == lib::input::KeyCode::Numpad2)
 			{
@@ -93,48 +75,21 @@ namespace lib
 					_onSelected(_cursorItemSelected,*this);
 				}
 			}
-			else if (_labelData[_cursorItemSelected].textSubLabel.size() > 0)
-			{
-				if (key.kCode == lib::input::KeyCode::Left || key.kCode == lib::input::KeyCode::Numpad4)
-				{
-					goLeft();
-				}
-				else if (key.kCode == lib::input::KeyCode::Right || key.kCode == lib::input::KeyCode::Numpad6)
-				{
-					goRight();
-				}
-			}
 		}
 
-		void ChooseControl::onKeyReleased(lib::input::Key key)
+		void SimpleMenu::onKeyReleased(lib::input::Key key)
 		{
 			key;
 		}
 
-		void ChooseControl::updateSubLabelText(const u32 index)
-		{
-			_labelData[index].subLabel->setString(_labelData[index].textSubLabel[_labelData[index].selectedSublabel]);
-			_labelData[index].subLabel->setPositionX(1800.0f, lib::draw::Alignment::Right);
-		}
-
-		void ChooseControl::cursorSelectItem(u32 nodeIndex)
+		void SimpleMenu::cursorSelectItem(u32 nodeIndex)
 		{
 			__ASSERT(nodeIndex < _labelData.size(), "Invalid select index for cursor");
 
-			_labelData[_cursorItemSelected].label->setColor(_textColor);
-			if (_labelData[_cursorItemSelected].subLabel)
-			{
-				_labelData[_cursorItemSelected].subLabel->setColor(_textColor);
-			}
+			_labelData[_cursorItemSelected]->setColor(_textColor);
 
 			_cursorItemSelected = nodeIndex;
-			auto selectedText = _labelData[nodeIndex].label;
-
-			selectedText->setColor(_selectedTextColor);
-			if (_labelData[_cursorItemSelected].subLabel)
-			{
-				_labelData[_cursorItemSelected].subLabel->setColor(_selectedTextColor);
-			}
+			_labelData[nodeIndex]->setColor(_selectedTextColor);
 
 			_cursor->setRotation(90);
 			
@@ -142,7 +97,7 @@ namespace lib
 				vector2df{ selectedText->position().x - descriptorCursorSize.x, selectedText->position().y }));
 		}
 
-		void ChooseControl::goDown()
+		void SimpleMenu::goDown()
 		{
 			if (_cursorItemSelected < (_labelData.size() - 1))
 			{
@@ -154,7 +109,7 @@ namespace lib
 			}
 		}
 
-		void ChooseControl::goUp()
+		void SimpleMenu::goUp()
 		{
 			if (_cursorItemSelected > 0)
 			{
@@ -166,7 +121,7 @@ namespace lib
 			}
 		}
 
-		void ChooseControl::goLeft()
+		void SimpleMenu::goLeft()
 		{
 			auto index = _labelData[_cursorItemSelected].selectedSublabel;
 
@@ -185,7 +140,7 @@ namespace lib
 			}
 		}
 
-		void ChooseControl::goRight()
+		void SimpleMenu::goRight()
 		{
 			auto index = _labelData[_cursorItemSelected].selectedSublabel;
 

@@ -2,8 +2,7 @@
 #define __LIB_RENDERGROUP_HPP__
 
 #include <lib/include/types.hpp>
-#include "HasName.hpp"
-#include "idrawable.hpp"
+#include "inameddrawable.hpp"
 #include "animationmanager.hpp"
 #include <lib/core/vecsptr.hpp>
 #include "transformable.hpp"
@@ -19,10 +18,10 @@ namespace lib
 		class RenderNode;
 		class NodeShape;
 		class NodeText;
-		class RenderGroup : public lib::core::HasName, public IDrawable, public anim::AnimationManager, public Transformable
+		class RenderGroup : public INamedDrawable, public anim::AnimationManager, public Transformable
 		{
 		public:
-			RenderGroup(const std::string &name, RenderGroup *parent=nullptr);
+			RenderGroup(const std::string &name, RenderGroup *const parent=nullptr);
 			virtual ~RenderGroup();
 
 			sptr<NodeText> createText(const std::string &name);
@@ -37,11 +36,19 @@ namespace lib
 
 			u32 draw(lib::draw::RenderStates &states) override;
 
+			sptr<IDrawable> findByName(const str &name) const;
+			template <class T> sptr<T> findByNameAs(const str&name) const
+			{
+				return std::dynamic_pointer_cast<T>(findByName(name));
+			}
+
+			RenderGroup &operator=(RenderGroup &r) = delete;
+
 		protected:
 			void addRenderGroup(sptr<RenderGroup> node, sptr<IDrawable> beforeNode = nullptr);
 
-			RenderGroup *parent() const { return _parent; }
-			VecSPtr<IDrawable> _renderNodes;
+			RenderGroup *const parent() const { return _parent; }
+			VecSPtr<INamedDrawable> _renderNodes;
 
 		private:
 			RenderGroup *_parent{ nullptr };

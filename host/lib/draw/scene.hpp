@@ -6,7 +6,6 @@
 #include <lib/include/types.hpp>
 #include <lib/include/key.hpp>
 #include <lib/core/timer.hpp>
-#include "iscene.hpp"
 #include "rendergroup.hpp"
 #include "camera.hpp"
 #include <string>
@@ -57,11 +56,23 @@ namespace lib
 			friend class Scene;
 		};
 
-		class Scene : public draw::RenderGroup, public IScene
+		class Scene : public draw::RenderGroup
 		{
 		public:
 			Scene(const std::string &_name);
 			virtual ~Scene();
+
+			virtual void onInit() = 0;
+			virtual void onDeinit() = 0;
+
+			virtual void onEnterScene() = 0;
+			virtual void onExitScene() = 0;
+
+			virtual void onKeyPressed(lib::input::Key key) = 0;
+			virtual void onKeyReleased(lib::input::Key key) = 0;
+
+			virtual const lib::vector2df getDefaultSizeView() = 0;
+			virtual void update() = 0;
 
 			virtual void onPrivateKeyPressed(input::Key key);
 			virtual void onPrivateKeyReleased(input::Key key);

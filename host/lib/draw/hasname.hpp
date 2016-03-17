@@ -17,7 +17,7 @@ namespace lib
 			virtual const std::string name() const = 0;
 		};
 
-		class HasName
+		class HasName : public IHasName
 		{
 		public:
 			HasName(const std::string name) :_name(name) {}

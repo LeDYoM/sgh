@@ -13,7 +13,6 @@ namespace lib
 			explicit Camera() {}
 			explicit Camera(const Rectf32 &rectangle) : m_target{ rectangle } {}
 			inline const Rectf32 &target() const { return m_target; }
-			inline Rectf32 &target() { return m_target; }
 			inline void setSize(const vector2df &size)
 			{
 				m_target.width = size.x;

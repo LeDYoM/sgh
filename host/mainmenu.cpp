@@ -2,10 +2,10 @@
 #include <lib/menu/menumanager.hpp>
 #include <lib/menu/choosecontrol.hpp>
 #include <lib/menu/menudescriptors.hpp>
-#include <lib/draw/RenderNode.hpp>
+#include <lib/draw/rendernode.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
-
+#include <lib/menu/simplemenu.hpp>
 #include "common.hpp"
 
 namespace zoper
@@ -46,7 +46,7 @@ namespace zoper
 					break;
 				}
 			};
-			_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("mainmenu_chooseControl",
+			_chooseControl = lib::sptr<lib::menu::SimpleMenu>(new lib::menu::SimpleMenu("mainmenu_chooseControl",
 				menuManager()->resourceManager()->getResource("game_menu.mainFont"),
 				lib::draw::Color::Blue(), lib::draw::Color::Red(),
 				lib::draw::Alignment::Center,

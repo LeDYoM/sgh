@@ -66,11 +66,14 @@ namespace lib
 			void exitProgram();
 
 			Timer clock;
+			inline const Rectf32 &currentView() const { return m_camera.target(); }
 
 		protected:
 			inline u32 state() const { return _state; }
 			inline void setState(u32 ns) { _state = ns; }
 			void updateView();
+
+			Scene *const parentScene() override final;
 
 		private:
 			sptr<core::events::EventClient> m_eventClient{ nullptr };

@@ -118,5 +118,19 @@ namespace lib
 			return (result != _renderNodes.end()) ? *result : sptr<IDrawable>();
 		}
 
+		lib::draw::Scene *const RenderGroup::parentScene()
+		{
+			__ASSERT(_parent, "Error getting parent scene: nullptr parent");
+			return _parent->parentScene();
+		}
+
+		void RenderGroup::for_each_renderNode(std::function<void(sptr<INamedDrawable> node)> f)
+		{
+			for (auto node : _renderNodes)
+			{
+				f(node);
+			}
+		}
+
 	}
 }

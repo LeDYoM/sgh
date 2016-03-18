@@ -14,6 +14,10 @@ namespace lib
 	{
 		class Resource;
 	}
+	namespace draw
+	{
+		class TextGroup;
+	}
 	namespace menu
 	{
 		class OptionDescriptor;
@@ -25,6 +29,7 @@ namespace lib
 				std::function<void(const u32, SimpleMenu &self)> onSelected);
 			virtual ~SimpleMenu();
 
+			void addOption(const str &text);
 		private:
 			virtual void onKeyPressed(lib::input::Key key) override;
 			virtual void onKeyReleased(lib::input::Key key) override;
@@ -35,11 +40,10 @@ namespace lib
 			void goLeft();
 			void goRight();
 
-			vector2df descriptorCursorSize;
 			u32 _cursorItemSelected{ 0 };
 			VecSPtr<draw::NodeText> _labelData;
-			sptr<draw::NodeShape> _cursor;
 			std::function<void(const u32, SimpleMenu &self)> _onSelected;
+			sptr<draw::TextGroup> m_textGroup;
 		};
 	}
 }

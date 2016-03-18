@@ -3,6 +3,7 @@
 #include <lib/draw/positionanimation.hpp>
 #include <lib/draw/nodeshape.hpp>
 #include <lib/draw/nodetext.hpp>
+#include <lib/draw/textgroup.hpp>
 #include <lib/include/key.hpp>
 
 namespace lib
@@ -11,53 +12,17 @@ namespace lib
 	{
 		SimpleMenu::SimpleMenu(const str &name, MenuManager *const parentManager, const draw::Alignment alignment,
 			std::function<void(const u32, SimpleMenu &self)> onSelected)
-			: IMenuControl{ name, parentManager }, _onSelected {onSelected}
-		{
-			/*
-			descriptorCursorSize = cursorDescriptor->_size;
-			_cursor = createShape("cursor");
-			_cursor->setPointCount(cursorDescriptor->_nVertex);
-			_cursor->setColor(cursorDescriptor->_color);
-			_cursor->setSize(descriptorCursorSize);
-
-			u32 count{ 0 };
-			vector2df currentPos{ 0.0f, 0.0f };
-			for (const auto label : labels)
-			{
-				auto text = createText("name" + count);
-				text->setFont(*(font->getAsFont()));
-				text->setCharacterSize(chSize);
-				text->setString(labels[count]->_text);
-				text->setColor(textColor);
-				text->setPositionX(0, alignment);
-				text->setPositionY(currentPos.y);
-
-				sptr<draw::NodeText> subtext{ nullptr };
-				if (labels[count]->_subOptionsLabels.size()>0)
-				{
-					subtext = createText("sub_name" + count);
-					subtext->setFont(*(font->getAsFont()));
-					subtext->setCharacterSize(chSize);
-					subtext->setString(labels[count]->_subOptionsLabels[labels[count]->_startValueIndex]);
-					subtext->setColor(textColor);
-					subtext->setPositionX(1800, lib::draw::Alignment::Right);
-					subtext->setPositionY(currentPos.y);
-				}
-
-				currentPos.y += (chSize + incY);
-				_labelData.push_back(LabelData(labels[count]->_subOptionsLabels,subtext,text, labels[count]->_startValueIndex));
-				++count;
-			}
-
-			cursorSelectItem(0);
-			*/
-		}
-
+			: IMenuControl{ name, parentManager }, _onSelected {onSelected},
+			m_textGroup{this->crreateNewRenderGroupOfType<draw::TextGroup>("simpleMenu_textGroup")}	{}
 
 		SimpleMenu::~SimpleMenu()
 		{
 			_labelData.clear();
-			_cursor = nullptr;
+		}
+
+		void SimpleMenu::addOption(const str &text)
+		{
+			m_textGroup->addText(text);
 		}
 
 		void SimpleMenu::onKeyPressed(lib::input::Key key)

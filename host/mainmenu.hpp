@@ -2,7 +2,7 @@
 #define __MAINMENU_HPP__
 
 #include <lib/menu/menustep.hpp>
-#include <lib/menu/choosecontrol.hpp>
+#include <lib/menu/simplemenu.hpp>
 #include <lib/core/configuration.hpp>
 
 namespace zoper
@@ -19,7 +19,7 @@ namespace zoper
 
 		private:
 			lib::Configuration _gameConfig;
-			lib::sptr<lib::menu::ChooseControl> _chooseControl{ nullptr };
+			lib::sptr<lib::menu::SimpleMenu> _chooseControl{ nullptr };
 		};
 	}
 }

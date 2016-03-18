@@ -17,7 +17,7 @@ namespace lib
 		class MenuStep : public draw::RenderGroup
 		{
 		public:
-			MenuStep(const std::string &name);
+			MenuStep(const std::string &name, const MenuManager *parent);
 			virtual ~MenuStep();
 
 			virtual void onCreate() = 0;
@@ -26,9 +26,6 @@ namespace lib
 			void addMenuControl(sptr<IMenuControl> nControl);
 			virtual void onKeyPressed(lib::input::Key kEvent);
 			virtual void onKeyReleased(lib::input::Key kEvent);
-
-		private:
-			std::vector<sptr<IMenuControl>> _controls;
 		};
 	}
 }

@@ -131,5 +131,10 @@ namespace lib
 		{
 			p_scnManager->exitProgram();
 		}
+
+		lib::draw::Scene *const Scene::parentScene()
+		{
+			return this;
+		}
 	}
 }

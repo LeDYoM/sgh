@@ -5,8 +5,8 @@ namespace lib
 {
 	namespace menu
 	{
-		MenuStep::MenuStep(const std::string &name)
-			: RenderGroup(name)
+		MenuStep::MenuStep(const std::string &name, const MenuManager *parent)
+			: RenderGroup(name,parent)
 		{
 		}
 
@@ -23,12 +23,11 @@ namespace lib
 		void MenuStep::addMenuControl(sptr<IMenuControl> nControl)
 		{
 			addRenderGroup(nControl);
-			_controls.push_back(nControl);
 		}
 
 		void MenuStep::onKeyPressed(lib::input::Key key)
 		{
-			for (auto control : _controls)
+			for (auto control : _renderNodes)
 			{
 				control->onKeyPressed(key);
 			}

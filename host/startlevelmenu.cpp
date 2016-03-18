@@ -32,7 +32,7 @@ namespace zoper
 					_gameConfig.addConfigInt(StartLevelStr, self.getSelectedSubLabel(0), true);
 					LOG_DEBUG("Starting t level:" << self.getSelectedSubLabel(0));
 					self.setSelectedSubLabel(0, 0);
-					menuManager()->sceneHandle->setNextScene("GameScene");
+					menuManager()->setNextScene("GameScene");
 
 					break;
 				default:
@@ -42,7 +42,7 @@ namespace zoper
 				}
 			};
 			_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("optionsmenu_chooseControl",
-				menuManager()->sceneHandle->resourceManager()->getResource("game_menu.mainFont"), lib::draw::Color::Blue(), lib::draw::Color::Red(),
+				menuManager()->resourceManager()->getResource("game_menu.mainFont"), lib::draw::Color::Blue(), lib::draw::Color::Red(),
 				lib::draw::Alignment::Left,
 				70, 1,
 				callBack,

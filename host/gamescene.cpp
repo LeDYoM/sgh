@@ -59,17 +59,17 @@ namespace zoper
 		_gameText = _gameOverrg->createText("gameovergame");
 		_overText = _gameOverrg->createText("gameoverover");
 
-		_scoreText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_scoreDisplay->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_currentLevelText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_currentLevelDisplay->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_gameText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_overText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_levelText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_levelDisplay->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_goalText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_goalDisplay->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_pauseText->setFont(*(sceneHandle->resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_scoreText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_scoreDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_currentLevelText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_currentLevelDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_gameText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_overText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_levelText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_levelDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_goalText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_goalDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+		_pauseText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
 
 		_scoreText->setString("Score: ");
 		increaseScore(0);
@@ -124,7 +124,7 @@ namespace zoper
 
 		auto _gameBoundingBox = _gameText->getLocalBounds();
 		auto _overBoundingBox = _overText->getLocalBounds();
-		auto sceneCenter = sceneHandle->camera().target().center();
+		auto sceneCenter = camera().target().center();
 		_gameText->setPosition({ sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height });
 		_overText->setPosition({ sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y });
 
@@ -331,8 +331,8 @@ namespace zoper
 		LOG_DEBUG("x1: " << currentTokenZone.zone.left << " y1: " << currentTokenZone.zone.top << 
 			" x2: " << currentTokenZone.zone.width << " y2: " << currentTokenZone.zone.height);
 
-		lib::u32 newToken{ sceneHandle->utilProvider()->getRandomNumer(NUMTOKENS) };
-		lib::u32 sizep{ sceneHandle->utilProvider()->getRandomNumer(currentTokenZone.size) };
+		lib::u32 newToken{ utilProvider()->getRandomNumer(NUMTOKENS) };
+		lib::u32 sizep{ utilProvider()->getRandomNumer(currentTokenZone.size) };
 
 		lib::u32 newX{ currentTokenZone.zone.left + (currentTokenZone.direction.isHorizontal() ? 0 : sizep) };
 		lib::u32 newY{ currentTokenZone.zone.top + (currentTokenZone.direction.isHorizontal() ? sizep : 0) };
@@ -432,7 +432,7 @@ namespace zoper
 		}
 		break;
 		case GameOver:
-			sceneHandle->setNextScene("MenuScene");
+			setNextScene("MenuScene");
 			break;
 		case Pause:
 			if (_keyMapping.isPauseKey(key.kCode))
@@ -544,7 +544,7 @@ namespace zoper
 
 	const lib::vector2df GameScene::board2Scene(const lib::vector2du32 &bPosition) const
 	{
-		return sceneHandle->pointViewToCurrentView(lib::vector2df{ static_cast<lib::f32>(bPosition.x), static_cast<lib::f32>(bPosition.y) },
+		return pointViewToCurrentView(lib::vector2df{ static_cast<lib::f32>(bPosition.x), static_cast<lib::f32>(bPosition.y) },
 			lib::vector2df{ static_cast<lib::f32>(p_boardModel->size().x), static_cast<lib::f32>(p_boardModel->size().y) });
 	}
 

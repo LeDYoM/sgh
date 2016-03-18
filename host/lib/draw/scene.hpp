@@ -32,30 +32,6 @@ namespace lib
 		}
 		class SceneManager;
 
-		class SceneHandle
-		{
-		public:
-			SceneManager *p_scnManager;
-			friend class SceneManager;
-
-			uptr<core::ResourceManager> const &resourceManager();
-			uptr<util::UtilProvider> const &utilProvider();
-
-			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
-			inline const Camera &camera() const { return m_camera; }
-			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
-
-			void setNextScene(const std::string &name);
-			void exitProgram();
-
-			Timer clock;
-		protected:
-			void updateView();
-		private:
-			lib::draw::Camera m_camera;
-			friend class Scene;
-		};
-
 		class Scene : public draw::RenderGroup
 		{
 		public:
@@ -77,12 +53,25 @@ namespace lib
 			virtual void onPrivateKeyPressed(input::Key key);
 			virtual void onPrivateKeyReleased(input::Key key);
 
-			SceneHandle *sceneHandle;
 			sptr<core::events::EventClient> eventClient() const;
+
+			uptr<core::ResourceManager> const &resourceManager();
+			uptr<util::UtilProvider> const &utilProvider();
+
+			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
+			inline const Camera &camera() const { return m_camera; }
+			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
+
+			void setNextScene(const std::string &name);
+			void exitProgram();
+
+			Timer clock;
 
 		protected:
 			inline u32 state() const { return _state; }
 			inline void setState(u32 ns) { _state = ns; }
+			void updateView();
+
 		private:
 			sptr<core::events::EventClient> m_eventClient{ nullptr };
 
@@ -93,6 +82,9 @@ namespace lib
 			u32 _state;
 
 			friend class SceneManager;
+			SceneManager *p_scnManager;
+			friend class SceneManager;
+			lib::draw::Camera m_camera;
 		};
 	}
 }

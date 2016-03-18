@@ -13,6 +13,7 @@ namespace lib
 			std::function<void(const u32, SimpleMenu &self)> onSelected)
 			: IMenuControl{ name, parentManager }, _onSelected {onSelected}
 		{
+			/*
 			descriptorCursorSize = cursorDescriptor->_size;
 			_cursor = createShape("cursor");
 			_cursor->setPointCount(cursorDescriptor->_nVertex);
@@ -49,6 +50,7 @@ namespace lib
 			}
 
 			cursorSelectItem(0);
+			*/
 		}
 
 
@@ -84,6 +86,7 @@ namespace lib
 
 		void SimpleMenu::cursorSelectItem(u32 nodeIndex)
 		{
+			/*
 			__ASSERT(nodeIndex < _labelData.size(), "Invalid select index for cursor");
 
 			_labelData[_cursorItemSelected]->setColor(_textColor);
@@ -95,6 +98,7 @@ namespace lib
 			
 			addAnimation(draw::anim::PositionAnimation::create(120, _cursor, 
 				vector2df{ selectedText->position().x - descriptorCursorSize.x, selectedText->position().y }));
+				*/
 		}
 
 		void SimpleMenu::goDown()
@@ -123,6 +127,7 @@ namespace lib
 
 		void SimpleMenu::goLeft()
 		{
+			/*
 			auto index = _labelData[_cursorItemSelected].selectedSublabel;
 
 			if (_labelData[_cursorItemSelected].textSubLabel.size() > 0)
@@ -138,10 +143,12 @@ namespace lib
 				_labelData[_cursorItemSelected].selectedSublabel = index;
 				updateSubLabelText(_cursorItemSelected);
 			}
+			*/
 		}
 
 		void SimpleMenu::goRight()
 		{
+			/*
 			auto index = _labelData[_cursorItemSelected].selectedSublabel;
 
 			if (_labelData[_cursorItemSelected].textSubLabel.size() > 0)
@@ -156,8 +163,8 @@ namespace lib
 				}
 				_labelData[_cursorItemSelected].selectedSublabel = index;
 				updateSubLabelText(_cursorItemSelected);
-
 			}
+			*/
 		}
 	}
 }

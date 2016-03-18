@@ -42,12 +42,12 @@ namespace zoper
 					break;
 				case 3:
 				default:
-					menuManager()->sceneHandle->exitProgram();
+					menuManager()->exitProgram();
 					break;
 				}
 			};
 			_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("mainmenu_chooseControl",
-				menuManager()->sceneHandle->resourceManager()->getResource("game_menu.mainFont"),
+				menuManager()->resourceManager()->getResource("game_menu.mainFont"),
 				lib::draw::Color::Blue(), lib::draw::Color::Red(),
 				lib::draw::Alignment::Center,
 				90, 1,
@@ -60,7 +60,7 @@ namespace zoper
 				lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Exit"))
 			}));
 			addMenuControl(_chooseControl);
-			_chooseControl->setPosition({ menuManager()->sceneHandle->camera().target().center().x, 700 });
+			_chooseControl->setPosition({ menuManager()->camera().target().center().x, 700 });
 		}
 	}
 }

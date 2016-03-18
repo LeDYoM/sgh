@@ -31,12 +31,12 @@ namespace zoper
 		addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::StartLevelMenu));
 
 		_logo = createSpriteShape("mainLogo");
-		_logo->setTexture(sceneHandle->resourceManager()->getResource("game_menu.logo")->getAsTexture(), true, false);
+		_logo->setTexture(resourceManager()->getResource("game_menu.logo")->getAsTexture(), true, false);
 		_logo->setSize(lib::vector2df(800, 400));
-		_logo->setPositionX(sceneHandle->camera().target().center().x, lib::draw::Alignment::Center);
+		_logo->setPositionX(camera().target().center().x, lib::draw::Alignment::Center);
 		_logo->setPositionY(100);
 
-		_background->setTexture(sceneHandle->resourceManager()->getResource("game_menu.background")->getAsTexture(), true, false);
+		_background->setTexture(resourceManager()->getResource("game_menu.background")->getAsTexture(), true, false);
 		_background->setSize(2000.0f);
 	}
 

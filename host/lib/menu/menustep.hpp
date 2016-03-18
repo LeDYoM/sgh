@@ -17,7 +17,7 @@ namespace lib
 		class MenuStep : public draw::RenderGroup
 		{
 		public:
-			MenuStep(const std::string &name, const MenuManager *parent);
+			MenuStep(const std::string &name);
 			virtual ~MenuStep();
 
 			virtual void onCreate() = 0;

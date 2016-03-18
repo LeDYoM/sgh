@@ -25,7 +25,7 @@ namespace lib
 		class SimpleMenu : public IMenuControl
 		{
 		public:
-			SimpleMenu(const str &name, MenuManager *const parentManager, const draw::Alignment alignment,
+			SimpleMenu(const str &name, const draw::Alignment alignment,
 				std::function<void(const u32, SimpleMenu &self)> onSelected);
 			virtual ~SimpleMenu();
 
@@ -43,7 +43,7 @@ namespace lib
 			u32 _cursorItemSelected{ 0 };
 			VecSPtr<draw::NodeText> _labelData;
 			std::function<void(const u32, SimpleMenu &self)> _onSelected;
-			sptr<draw::TextGroup> m_textGroup;
+//			sptr<draw::TextGroup> m_textGroup;
 		};
 	}
 }

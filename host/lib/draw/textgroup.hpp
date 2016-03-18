@@ -15,7 +15,7 @@ namespace lib
 		class TextGroup : public RenderGroup
 		{
 		public:
-			TextGroup(const str &name, RenderGroup *const parent = nullptr);
+			TextGroup(const str &name);
 			virtual ~TextGroup();
 
 			void setFont(const sptr<core::Resource> font);

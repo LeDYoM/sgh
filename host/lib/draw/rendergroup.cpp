@@ -8,11 +8,8 @@ namespace lib
 {
 	namespace draw
 	{
-		RenderGroup::RenderGroup(const str &name, RenderGroup *parent)
-			: INamedDrawable( name ), _parent{ parent }
-		{
-		}
-
+		RenderGroup::RenderGroup(const std::string &name)
+			: INamedDrawable(name), _parent{ nullptr } {}
 
 		RenderGroup::~RenderGroup()
 		{
@@ -73,7 +70,7 @@ namespace lib
 
 		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<IDrawable> beforeNode)
 		{
-			sptr<RenderGroup> rg = std::make_shared<RenderGroup>(name, this);
+			sptr<RenderGroup> rg = std::make_shared<RenderGroup>(name);
 			addRenderGroup(rg, beforeNode);
 			return rg;
 		}

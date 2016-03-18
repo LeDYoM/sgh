@@ -3,17 +3,17 @@
 #include <lib/draw/positionanimation.hpp>
 #include <lib/draw/nodeshape.hpp>
 #include <lib/draw/nodetext.hpp>
-#include <lib/draw/textgroup.hpp>
 #include <lib/include/key.hpp>
 
 namespace lib
 {
 	namespace menu
 	{
-		SimpleMenu::SimpleMenu(const str &name, MenuManager *const parentManager, const draw::Alignment alignment,
+		SimpleMenu::SimpleMenu(const str &name, const draw::Alignment alignment,
 			std::function<void(const u32, SimpleMenu &self)> onSelected)
-			: IMenuControl{ name, parentManager }, _onSelected {onSelected},
-			m_textGroup{this->crreateNewRenderGroupOfType<draw::TextGroup>("simpleMenu_textGroup")}	{}
+			: IMenuControl{ name  }, _onSelected {onSelected}
+		//	,m_textGroup{}
+		{}
 
 		SimpleMenu::~SimpleMenu()
 		{
@@ -22,7 +22,7 @@ namespace lib
 
 		void SimpleMenu::addOption(const str &text)
 		{
-			m_textGroup->addText(text);
+			//m_textGroup->addText(text);
 		}
 
 		void SimpleMenu::onKeyPressed(lib::input::Key key)

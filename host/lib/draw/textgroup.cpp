@@ -15,8 +15,8 @@ namespace lib
 			Alignment m_alignment{ Alignment::Left };
 		};
 
-		TextGroup::TextGroup(const str &name, RenderGroup *parent)
-			: RenderGroup{ name, parent }, m_private{ uptr<TextGroupPrivate>(new TextGroupPrivate) }
+		TextGroup::TextGroup(const str &name)
+			: RenderGroup{ name }, m_private{ uptr<TextGroupPrivate>(new TextGroupPrivate) }
 		{
 		}
 

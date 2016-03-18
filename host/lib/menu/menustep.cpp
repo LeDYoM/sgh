@@ -5,8 +5,8 @@ namespace lib
 {
 	namespace menu
 	{
-		MenuStep::MenuStep(const std::string &name, const MenuManager *parent)
-			: RenderGroup(name,parent)
+		MenuStep::MenuStep(const std::string &name)
+			: RenderGroup(name)
 		{
 		}
 
@@ -27,18 +27,18 @@ namespace lib
 
 		void MenuStep::onKeyPressed(lib::input::Key key)
 		{
-			for (auto control : _renderNodes)
-			{
-				control->onKeyPressed(key);
-			}
+//			for (auto control : _renderNodes)
+//			{
+//				control->onKeyPressed(key);
+//			}
 		}
 
 		void MenuStep::onKeyReleased(lib::input::Key key)
 		{
-			for (auto control : _controls)
-			{
-				control->onKeyReleased(key);
-			}
+//			for (auto control : _controls)
+//			{
+//				control->onKeyReleased(key);
+//			}
 		}
 
 	}

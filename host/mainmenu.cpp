@@ -46,6 +46,7 @@ namespace zoper
 					break;
 				}
 			};
+			/*
 			_chooseControl = lib::sptr<lib::menu::SimpleMenu>(new lib::menu::SimpleMenu("mainmenu_chooseControl",
 				menuManager()->resourceManager()->getResource("game_menu.mainFont"),
 				lib::draw::Color::Blue(), lib::draw::Color::Red(),
@@ -61,6 +62,7 @@ namespace zoper
 			}));
 			addMenuControl(_chooseControl);
 			_chooseControl->setPosition({ menuManager()->camera().target().center().x, 700 });
+			*/
 		}
 	}
 }

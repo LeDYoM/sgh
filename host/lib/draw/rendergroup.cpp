@@ -1,5 +1,5 @@
 #include "rendergroup.hpp"
-#include "RenderNode.hpp"
+#include "rendernode.hpp"
 #include "nodeshape.hpp"
 #include "nodetext.hpp"
 #include <lib/core/window.hpp>
@@ -9,7 +9,7 @@ namespace lib
 	namespace draw
 	{
 		RenderGroup::RenderGroup(const std::string &name)
-			: INamedDrawable(name), _parent{ nullptr } {}
+			: INamedDrawable(name), m_parent{ nullptr } {}
 
 		RenderGroup::~RenderGroup()
 		{
@@ -39,6 +39,7 @@ namespace lib
 
 		sptr<draw::RenderNode> RenderGroup::addRenderNode(sptr<RenderNode> newElement)
 		{
+			newElement->setParent(this);
 			_renderNodes.push_back(newElement);
 			return newElement;
 		}
@@ -70,13 +71,15 @@ namespace lib
 
 		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<IDrawable> beforeNode)
 		{
-			sptr<RenderGroup> rg = std::make_shared<RenderGroup>(name);
+			sptr<RenderGroup> rg = sptr<RenderGroup>{ new RenderGroup(name) };
 			addRenderGroup(rg, beforeNode);
 			return rg;
 		}
 
 		void RenderGroup::addRenderGroup(sptr<RenderGroup> node, sptr<IDrawable> beforeNode)
 		{
+			__ASSERT(node, "Trying to add nullptr node");
+			node->setParent(this);
 			if (!beforeNode)
 			{
 				_renderNodes.push_back(node);
@@ -92,7 +95,6 @@ namespace lib
 					}
 				}
 			}
-			node->_parent = this;
 		}
 
 		bool RenderGroup::removeRenderGroup(sptr<RenderGroup> element)
@@ -117,8 +119,8 @@ namespace lib
 
 		lib::draw::Scene *const RenderGroup::parentScene()
 		{
-			__ASSERT(_parent, "Error getting parent scene: nullptr parent");
-			return _parent->parentScene();
+			__ASSERT(m_parent, "Error getting parent scene: nullptr parent");
+			return m_parent->parentScene();
 		}
 
 		void RenderGroup::for_each_renderNode(std::function<void(sptr<INamedDrawable> node)> f)
@@ -127,6 +129,12 @@ namespace lib
 			{
 				f(node);
 			}
+		}
+
+		void RenderGroup::setParent(RenderGroup *const parent)
+		{
+			__ASSERT(!m_parent, "Node already has a parent");
+			m_parent = parent;
 		}
 
 	}

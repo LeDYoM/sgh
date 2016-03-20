@@ -32,6 +32,11 @@ namespace lib
 			updatePositions();
 		}
 
+		void TextGroup::setAlignment(const Alignment alignment)
+		{
+
+		}
+
 		void TextGroup::addText(const str &caption)
 		{
 			RenderGroup::createText(name() + "_" + caption)->setString(caption);

@@ -20,8 +20,6 @@ namespace lib
 	}
 	namespace menu
 	{
-		class OptionDescriptor;
-		class MenuStep;
 		class SimpleMenu : public IMenuControl
 		{
 		public:

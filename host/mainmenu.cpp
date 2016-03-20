@@ -24,7 +24,7 @@ namespace zoper
 
 		void MainMenu::onCreate()
 		{
-			auto callBack = [this](lib::u32 index, lib::menu::ChooseControl &self)
+			auto callBack = [this](lib::u32 index, lib::menu::SimpleMenu &self)
 			{
 				self;
 				switch (index)
@@ -46,23 +46,23 @@ namespace zoper
 					break;
 				}
 			};
-			/*
 			_chooseControl = lib::sptr<lib::menu::SimpleMenu>(new lib::menu::SimpleMenu("mainmenu_chooseControl",
-				menuManager()->resourceManager()->getResource("game_menu.mainFont"),
-				lib::draw::Color::Blue(), lib::draw::Color::Red(),
+//				menuManager()->resourceManager()->getResource("game_menu.mainFont"),
+//				lib::draw::Color::Blue(), lib::draw::Color::Red(),
 				lib::draw::Alignment::Center,
-				90, 1,
-				callBack,
+//				90, 1,
+				callBack
+				/*
 				lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 90.0f, 90.0f },lib::draw::Color::Red())),
 				std::vector<lib::sptr<lib::menu::OptionDescriptor>>{
 				lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Play token mode")),
 					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Play time mode")),
 				lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Options")),
 				lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Exit"))
-			}));
+				*/
+			));
 			addMenuControl(_chooseControl);
 			_chooseControl->setPosition({ menuManager()->camera().target().center().x, 700 });
-			*/
 		}
 	}
 }

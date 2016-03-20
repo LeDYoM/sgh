@@ -6,11 +6,13 @@
 #include <lib/include/color.hpp>
 #include "transformable.hpp"
 #include "vertexarray.hpp"
+#include "iparentable.hpp"
 
 namespace lib
 {
 	namespace draw
 	{
+		class RenderGroup;
 		enum class Alignment : u8
 		{
 			Left = 0,
@@ -18,7 +20,7 @@ namespace lib
 			Right = 2
 		};
 
-		class RenderNode : public INamedDrawable, public Transformable
+		class RenderNode : public IParentable<RenderGroup>, public INamedDrawable, public Transformable
 		{
 		public:
 			explicit RenderNode(const std::string &name, const PrimitiveType primitiveType);
@@ -47,6 +49,7 @@ namespace lib
 			Color m_color;
 			bool m_geometryNeedUpdate;
 			bool m_colorsNeedUpdate;
+		private:
 		};
 	}
 }

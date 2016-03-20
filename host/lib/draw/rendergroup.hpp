@@ -50,11 +50,12 @@ namespace lib
 
 		protected:
 
-			RenderGroup *const parent() const { return _parent; }
+			RenderGroup *const parent() const { return m_parent; }
 			VecSPtr<INamedDrawable> _renderNodes;
 
 		private:
-			RenderGroup *_parent{ nullptr };
+			void setParent(RenderGroup *const parent);
+			RenderGroup *m_parent{ nullptr };
 		};
 	}
 }

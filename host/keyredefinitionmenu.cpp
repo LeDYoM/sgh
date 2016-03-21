@@ -23,8 +23,14 @@ namespace zoper
 		{
 		}
 
-		void KeyRedefinitionMenu::onCreate()
+		bool KeyRedefinitionMenu::init()
 		{
+			bool result = MenuStep::init();
+			if (!result)
+			{
+				return false;
+			}
+
 			_nextKeyText = createText("pressKey");
 
 			_nextKeyText->setFont(*menuManager()->resourceManager()->getResource("game_menu.mainFont")->getAsFont());
@@ -34,6 +40,7 @@ namespace zoper
 			_nextKeyText->setPosition(lib::vector2df{ 1000.0f, 1000.0f }, lib::draw::Alignment::Center);
 			_indexKey = 0;
 			setTextForKey();
+			return true;
 		}
 
 		void KeyRedefinitionMenu::onKeyPressed(lib::input::Key key)

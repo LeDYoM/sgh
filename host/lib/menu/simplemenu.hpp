@@ -27,6 +27,7 @@ namespace lib
 				std::function<void(const u32, SimpleMenu &self)> onSelected);
 			virtual ~SimpleMenu();
 
+			virtual bool init() override;
 			void addOption(const str &text);
 		private:
 			virtual void onKeyPressed(lib::input::Key key) override;
@@ -41,7 +42,7 @@ namespace lib
 			u32 _cursorItemSelected{ 0 };
 			VecSPtr<draw::NodeText> _labelData;
 			std::function<void(const u32, SimpleMenu &self)> _onSelected;
-//			sptr<draw::TextGroup> m_textGroup;
+			sptr<draw::TextGroup> m_textGroup;
 		};
 	}
 }

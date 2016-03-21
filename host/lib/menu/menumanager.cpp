@@ -21,7 +21,6 @@ namespace lib
 		void MenuManager::addMenuStep(sptr<MenuStep> step)
 		{
 			addRenderGroup(step);
-			step->onCreate();
 		}
 
 		void MenuManager::start(sptr<MenuStep> firstStep)
@@ -37,11 +36,7 @@ namespace lib
 
 		void MenuManager::changeStep(const std::string &step)
 		{
-			sptr<MenuStep> nstep = findByNameAs<MenuStep>(step);
-			if (nstep)
-			{
-				changeStep(nstep);
-			}
+			setActiveStep(findByNameAs<MenuStep>(step));
 		}
 
 		void MenuManager::changeStep(sptr<MenuStep> step)
@@ -51,12 +46,7 @@ namespace lib
 
 		void MenuManager::setActiveStep(sptr<MenuStep> step)
 		{
-			_activeMenuStep = step;
-
-			for (auto _step : _renderNodes)
-			{
-				_step->setVisible(_step == step);
-			}
+			activateOne(step);
 		}
 
 		void MenuManager::onKeyPressed(lib::input::Key key)

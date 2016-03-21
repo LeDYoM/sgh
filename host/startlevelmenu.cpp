@@ -22,38 +22,43 @@ namespace zoper
 		{
 		}
 
-		void StartLevelMenu::onCreate()
+		bool StartLevelMenu::init()
 		{
-			auto callBack = [this](lib::u32 index, lib::menu::ChooseControl &self)
+			if (MenuStep::init())
 			{
-				switch (index)
+				auto callBack = [this](lib::u32 index, lib::menu::ChooseControl &self)
 				{
-				case 0:
-					_gameConfig.addConfigInt(StartLevelStr, self.getSelectedSubLabel(0), true);
-					LOG_DEBUG("Starting t level:" << self.getSelectedSubLabel(0));
-					self.setSelectedSubLabel(0, 0);
-					menuManager()->setNextScene("GameScene");
+					switch (index)
+					{
+					case 0:
+						_gameConfig.addConfigInt(StartLevelStr, self.getSelectedSubLabel(0), true);
+						LOG_DEBUG("Starting t level:" << self.getSelectedSubLabel(0));
+						self.setSelectedSubLabel(0, 0);
+						menuManager()->setNextScene("GameScene");
 
-					break;
-				default:
-				case 1:
-					menuManager()->changeStep("MainMenu");
-					break;
-				}
-			};
-			_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("optionsmenu_chooseControl",
-				menuManager()->resourceManager()->getResource("game_menu.mainFont"), lib::draw::Color::Blue(), lib::draw::Color::Red(),
-				lib::draw::Alignment::Left,
-				70, 1,
-				callBack,
-				lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 70.0f, 70.0f }, lib::draw::Color::Red())),
-				std::vector<lib::sptr<lib::menu::OptionDescriptor>>{
-				lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Start level: ", 
-					true, 0, std::vector<std::string>{"1", "2", "3", "4","5", "6","7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" })),
-					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Back", true))
-			}));
-			addMenuControl(_chooseControl);
-			_chooseControl->setPosition({ 100, 700 });
+						break;
+					default:
+					case 1:
+						menuManager()->changeStep("MainMenu");
+						break;
+					}
+				};
+				_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("optionsmenu_chooseControl",
+					menuManager()->resourceManager()->getResource("game_menu.mainFont"), lib::draw::Color::Blue(), lib::draw::Color::Red(),
+					lib::draw::Alignment::Left,
+					70, 1,
+					callBack,
+					lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 70.0f, 70.0f }, lib::draw::Color::Red())),
+					std::vector<lib::sptr<lib::menu::OptionDescriptor>>{
+					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Start level: ",
+						true, 0, std::vector<std::string>{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" })),
+						lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Back", true))
+				}));
+				addMenuControl(_chooseControl);
+				_chooseControl->setPosition({ 100, 700 });
+				return true;
+			}
+			return false;
 		}
 	}
 }

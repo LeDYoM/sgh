@@ -40,6 +40,7 @@ namespace lib
 		void TextGroup::addText(const str &caption)
 		{
 			RenderGroup::createText(name() + "_" + caption)->setString(caption);
+
 			updatePositions();
 		}
 

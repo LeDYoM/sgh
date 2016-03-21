@@ -13,7 +13,7 @@ namespace zoper
 		public:
 			KeyRedefinitionMenu();
 			virtual ~KeyRedefinitionMenu();
-			virtual void onCreate() override;
+			virtual bool init() override;
 
 			virtual void onKeyPressed(lib::input::Key kEvent) override;
 			virtual void onKeyReleased(lib::input::Key kEvent) override;

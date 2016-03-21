@@ -14,7 +14,7 @@ namespace zoper
 		public:
 			OptionsMenu();
 			virtual ~OptionsMenu();
-			virtual void onCreate() override;
+			virtual bool init() override;
 
 			void resetControl();
 		private:

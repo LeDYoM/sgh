@@ -20,7 +20,6 @@ namespace lib
 			MenuStep(const std::string &name);
 			virtual ~MenuStep();
 
-			virtual void onCreate() = 0;
 			MenuManager *menuManager();
 
 			void addMenuControl(sptr<IMenuControl> nControl);

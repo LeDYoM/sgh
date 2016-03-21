@@ -24,75 +24,80 @@ namespace zoper
 		{
 		}
 
-		void OptionsMenu::onCreate()
+		bool OptionsMenu::init()
 		{
-			// Read available resolutions
-			std::vector<std::string> _resolutionsStr;
-			for (const auto resolution : sf::VideoMode::getFullscreenModes())
+			if (MenuStep::init())
 			{
-				_resolutionsStr.push_back(std::to_string(resolution.width) + "x" + std::to_string(resolution.height) + "x" + std::to_string(resolution.bitsPerPixel));
-			}
-			auto callBack = [this](lib::u32 index, lib::menu::ChooseControl &self)
-			{
-				switch (index)
+				// Read available resolutions
+				std::vector<std::string> _resolutionsStr;
+				for (const auto resolution : sf::VideoMode::getFullscreenModes())
 				{
-				case 0:
-					break;
-				case 1:
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				case 4:
-					menuManager()->changeStep("KeyRedefinitionMenu");
-					break;
-				case 5:
-					menuManager()->changeStep("MainMenu");
-					resetControl();
-					break;
-				case 6:
-				default:
-					addConfigInt(GraphicsLevelStr, self.getSelectedSubLabel(0), true);
-					auto _resolution = sf::VideoMode::getFullscreenModes()[self.getSelectedSubLabel(1)];
-					if (_resolution.isValid())
-					{
-						addConfigInt(ResolutionXStr, _resolution.width, true);
-						addConfigInt(ResolutionYStr, _resolution.height, true);
-						addConfigInt(BPPStr, _resolution.bitsPerPixel, true);
-					}
-					addConfigInt(FulscreenStr, self.getSelectedSubLabel(2), true);
-					addConfigInt(VSyncStr, self.getSelectedSubLabel(3), true);
-					saveConfig();
-					resetControl();
-					menuManager()->changeStep("MainMenu");
-					break;
+					_resolutionsStr.push_back(std::to_string(resolution.width) + "x" + std::to_string(resolution.height) + "x" + std::to_string(resolution.bitsPerPixel));
 				}
-			};
+				auto callBack = [this](lib::u32 index, lib::menu::ChooseControl &self)
+				{
+					switch (index)
+					{
+					case 0:
+						break;
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					case 4:
+						menuManager()->changeStep("KeyRedefinitionMenu");
+						break;
+					case 5:
+						menuManager()->changeStep("MainMenu");
+						resetControl();
+						break;
+					case 6:
+					default:
+						addConfigInt(GraphicsLevelStr, self.getSelectedSubLabel(0), true);
+						auto _resolution = sf::VideoMode::getFullscreenModes()[self.getSelectedSubLabel(1)];
+						if (_resolution.isValid())
+						{
+							addConfigInt(ResolutionXStr, _resolution.width, true);
+							addConfigInt(ResolutionYStr, _resolution.height, true);
+							addConfigInt(BPPStr, _resolution.bitsPerPixel, true);
+						}
+						addConfigInt(FulscreenStr, self.getSelectedSubLabel(2), true);
+						addConfigInt(VSyncStr, self.getSelectedSubLabel(3), true);
+						saveConfig();
+						resetControl();
+						menuManager()->changeStep("MainMenu");
+						break;
+					}
+				};
 
-			_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("optionsmenu_chooseControl",
-				menuManager()->resourceManager()->getResource("game_menu.mainFont"),
-				lib::draw::Color::Blue(), lib::draw::Color::Red(),
-				lib::draw::Alignment::Left,
-				70, 1,
-				callBack,
-				lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 70.0f, 70.0f }, lib::draw::Color::Red())),
-				std::vector<lib::sptr<lib::menu::OptionDescriptor>>{
-				lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Antialiasing", 
-					true, 0, std::vector<std::string>{"Worst", "Bad", "Normal", "Good", "Best"})),
-					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Resolution",
-					true, 0, _resolutionsStr)),
-					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Fullscreen",
-					true, 0, std::vector<std::string>{"No", "Yes"})),
-					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("VSync",
-					true, 0, std::vector<std::string>{"No", "Yes"})),
-					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Redefine keyboard")),
-					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Cancel")),
-					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Accept"))
-			}));
-			addMenuControl(_chooseControl);
-			_chooseControl->setPosition({ 100, 700 });
-			resetControl();
+				_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("optionsmenu_chooseControl",
+					menuManager()->resourceManager()->getResource("game_menu.mainFont"),
+					lib::draw::Color::Blue(), lib::draw::Color::Red(),
+					lib::draw::Alignment::Left,
+					70, 1,
+					callBack,
+					lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 70.0f, 70.0f }, lib::draw::Color::Red())),
+					std::vector<lib::sptr<lib::menu::OptionDescriptor>>{
+					lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Antialiasing",
+						true, 0, std::vector<std::string>{"Worst", "Bad", "Normal", "Good", "Best"})),
+						lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Resolution",
+						true, 0, _resolutionsStr)),
+						lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Fullscreen",
+						true, 0, std::vector<std::string>{"No", "Yes"})),
+						lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("VSync",
+						true, 0, std::vector<std::string>{"No", "Yes"})),
+						lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Redefine keyboard")),
+						lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Cancel")),
+						lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Accept"))
+				}));
+				addMenuControl(_chooseControl);
+				_chooseControl->setPosition({ 100, 700 });
+				resetControl();
+				return true;
+			}
+			return false;
 		}
 
 		void OptionsMenu::resetControl()

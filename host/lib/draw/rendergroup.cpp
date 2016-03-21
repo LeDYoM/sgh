@@ -16,9 +16,14 @@ namespace lib
 			_renderNodes.clear();
 		}
 
+		bool RenderGroup::init()
+		{
+			return true;
+		}
+
 		sptr<NodeText> RenderGroup::createText(const std::string &name)
 		{
-			auto result = sptr<NodeText>(new NodeText(name));
+			auto result = sptr<NodeText>{new NodeText(name)};
 			addRenderNode(result);
 			return result;
 		}
@@ -69,14 +74,14 @@ namespace lib
 			return 0;
 		}
 
-		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<IDrawable> beforeNode)
+		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<INamedDrawable> beforeNode)
 		{
 			sptr<RenderGroup> rg = sptr<RenderGroup>{ new RenderGroup(name) };
 			addRenderGroup(rg, beforeNode);
 			return rg;
 		}
 
-		void RenderGroup::addRenderGroup(sptr<RenderGroup> node, sptr<IDrawable> beforeNode)
+		void RenderGroup::addRenderGroup(sptr<RenderGroup> node, sptr<INamedDrawable> beforeNode)
 		{
 			__ASSERT(node, "Trying to add nullptr node");
 			node->setParent(this);
@@ -95,6 +100,7 @@ namespace lib
 					}
 				}
 			}
+			node->init();
 		}
 
 		bool RenderGroup::removeRenderGroup(sptr<RenderGroup> element)
@@ -107,14 +113,14 @@ namespace lib
 			_renderNodes.clear();
 		}
 
-		sptr<IDrawable> RenderGroup::findByName(const str &name) const
+		sptr<INamedDrawable> RenderGroup::findByName(const str &name) const
 		{
-			auto result( std::find_if(_renderNodes.cbegin(), _renderNodes.cend(), [name](const sptr<INamedDrawable> &node)
+			auto result( std::find_if(_renderNodes.begin(), _renderNodes.end(), [name](const sptr<INamedDrawable> &node)
 			{
 				return (node->name() == name);
 			}) );
 
-			return (result != _renderNodes.end()) ? *result : sptr<IDrawable>();
+			return (result != _renderNodes.end()) ? *result : sptr<INamedDrawable>();
 		}
 
 		lib::draw::Scene *const RenderGroup::parentScene()
@@ -131,11 +137,29 @@ namespace lib
 			}
 		}
 
+		bool RenderGroup::activateOne(const str& node)
+		{
+			return activateOne(findByName(node));
+		}
+
+		bool RenderGroup::activateOne(sptr<INamedDrawable> node)
+		{
+			__ASSERT(node, "Node parameter is nullptr");
+			bool found{ false };
+
+			for (auto node_ : _renderNodes)
+			{
+				bool isThis{ node == node_ };
+				node_->setVisible(isThis);
+				found |= (isThis);
+			}
+			return found;
+		}
+
 		void RenderGroup::setParent(RenderGroup *const parent)
 		{
 			__ASSERT(!m_parent, "Node already has a parent");
 			m_parent = parent;
 		}
-
 	}
 }

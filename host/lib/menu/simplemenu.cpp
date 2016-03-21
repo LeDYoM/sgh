@@ -4,6 +4,7 @@
 #include <lib/draw/nodeshape.hpp>
 #include <lib/draw/nodetext.hpp>
 #include <lib/include/key.hpp>
+#include <lib/draw/textgroup.hpp>
 
 namespace lib
 {
@@ -12,7 +13,7 @@ namespace lib
 		SimpleMenu::SimpleMenu(const str &name, const draw::Alignment alignment,
 			std::function<void(const u32, SimpleMenu &self)> onSelected)
 			: IMenuControl{ name  }, _onSelected {onSelected}
-		//	,m_textGroup{}
+			,m_textGroup{}
 		{}
 
 		SimpleMenu::~SimpleMenu()
@@ -20,9 +21,18 @@ namespace lib
 			_labelData.clear();
 		}
 
+		bool SimpleMenu::init()
+		{
+			if (IMenuControl::init())
+			{
+				m_textGroup = createNewRenderGroupOf<draw::TextGroup>(name()+"_textGroup");
+			}
+			return false;
+		}
+
 		void SimpleMenu::addOption(const str &text)
 		{
-			//m_textGroup->addText(text);
+			m_textGroup->addText(text);
 		}
 
 		void SimpleMenu::onKeyPressed(lib::input::Key key)

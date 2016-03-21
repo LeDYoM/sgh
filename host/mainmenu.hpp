@@ -15,7 +15,7 @@ namespace zoper
 			MainMenu();
 			virtual ~MainMenu();
 
-			virtual void onCreate() override;
+			virtual bool init() override;
 
 		private:
 			lib::Configuration _gameConfig;

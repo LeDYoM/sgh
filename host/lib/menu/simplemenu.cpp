@@ -1,4 +1,6 @@
 #include "simplemenu.hpp"
+#include <lib/menu/menumanager.hpp>
+#include <lib/menu/menutheme.hpp>
 #include <lib/core/resource.hpp>
 #include <lib/draw/positionanimation.hpp>
 #include <lib/draw/nodeshape.hpp>
@@ -26,6 +28,7 @@ namespace lib
 			if (IMenuControl::init())
 			{
 				m_textGroup = createNewRenderGroupOf<draw::TextGroup>(name()+"_textGroup");
+				m_textGroup->setFont(menuManager()->menuTheme()->defaultFont());
 			}
 			return false;
 		}

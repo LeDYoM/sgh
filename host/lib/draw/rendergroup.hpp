@@ -5,6 +5,7 @@
 #include "inameddrawable.hpp"
 #include "animationmanager.hpp"
 #include <lib/core/vecsptr.hpp>
+#include "iparentable.hpp"
 #include "transformable.hpp"
 
 #include <functional>
@@ -21,7 +22,7 @@ namespace lib
 		class NodeShape;
 		class NodeText;
 		class Scene;
-		class RenderGroup : public INamedDrawable, public anim::AnimationManager, public Transformable
+		class RenderGroup : public IParentable<RenderGroup>, public INamedDrawable, public anim::AnimationManager, public Transformable
 		{
 		public:
 			RenderGroup(const std::string &name);
@@ -64,10 +65,12 @@ namespace lib
 			RenderGroup *const parent() const { return m_parent; }
 			VecSPtr<INamedDrawable> _renderNodes;
 
+			/*
 		private:
 
 			void setParent(RenderGroup *const parent);
 			RenderGroup *m_parent{ nullptr };
+			*/
 		};
 	}
 }

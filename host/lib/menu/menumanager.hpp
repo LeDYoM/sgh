@@ -10,12 +10,14 @@ namespace lib
 	namespace menu
 	{
 		class MenuStep;
+		class MenuTheme;
 		class MenuManager : public draw::Scene
 		{
 		public:
 			MenuManager(const std::string &name);
 			virtual ~MenuManager();
 
+			virtual bool init() override;
 			void addMenuStep(sptr<MenuStep> step);
 
 			void start(sptr<MenuStep> firstStep);
@@ -25,10 +27,12 @@ namespace lib
 			virtual void onKeyPressed(input::Key key);
 			virtual void onKeyReleased(input::Key key);
 
+			uptr<MenuTheme> const &menuTheme() const { return m_mTheme; }
+
 		private:
 			void setActiveStep(sptr<MenuStep> step);
-
 			sptr<MenuStep> _activeMenuStep{ nullptr };
+			uptr<MenuTheme> m_mTheme{ nullptr };
 		};
 	}
 }

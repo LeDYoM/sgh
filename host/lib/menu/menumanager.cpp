@@ -1,6 +1,7 @@
 #include "menumanager.hpp"
 #include "menustep.hpp"
 #include <lib/core/log.hpp>
+#include "menutheme.hpp"
 
 namespace lib
 {
@@ -13,6 +14,17 @@ namespace lib
 //			getSteps();
 		}
 
+		bool MenuManager::init()
+		{
+			using namespace draw;
+			if (Scene::init())
+			{
+				m_mTheme = uptr<MenuTheme>(new MenuTheme{ Color{ 0, 0, 255 }, Color{ 255, 0, 0 }, "game_menu.mainFont" });
+//				m_mTheme->notSelectedColor.s
+				return true;
+			}
+			return false;
+		}
 
 		MenuManager::~MenuManager()
 		{

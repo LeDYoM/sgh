@@ -23,6 +23,11 @@ namespace lib
 			{
 				return dynamic_cast<MenuManager*const>(parent());
 			}
+
+			uptr<MenuTheme> const &menuTheme() const
+			{
+				return menuManager()->menuTheme();
+			}
 		};
 	}
 }

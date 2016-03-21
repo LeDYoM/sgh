@@ -9,7 +9,7 @@ namespace lib
 	namespace draw
 	{
 		RenderGroup::RenderGroup(const std::string &name)
-			: INamedDrawable(name), m_parent{ nullptr } {}
+			: IParentable{}, INamedDrawable(name) {}
 
 		RenderGroup::~RenderGroup()
 		{
@@ -154,12 +154,6 @@ namespace lib
 				found |= (isThis);
 			}
 			return found;
-		}
-
-		void RenderGroup::setParent(RenderGroup *const parent)
-		{
-			__ASSERT(!m_parent, "Node already has a parent");
-			m_parent = parent;
 		}
 	}
 }

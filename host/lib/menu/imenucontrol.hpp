@@ -19,12 +19,12 @@ namespace lib
 			virtual ~IMenuControl() {}
 			virtual void onKeyPressed(lib::input::Key key) = 0;
 			virtual void onKeyReleased(lib::input::Key key) = 0;
-			MenuManager * const menuManager() const
+			MenuManager * const menuManager()
 			{
-				return dynamic_cast<MenuManager*const>(parent());
+				return dynamic_cast<MenuManager *const>(parentScene());
 			}
 
-			uptr<MenuTheme> const &menuTheme() const
+			uptr<MenuTheme> const &menuTheme()
 			{
 				return menuManager()->menuTheme();
 			}

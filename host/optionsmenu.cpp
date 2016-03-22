@@ -75,7 +75,7 @@ namespace zoper
 				_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("optionsmenu_chooseControl",
 					menuManager()->resourceManager()->getResource("game_menu.mainFont"),
 					lib::draw::Color::Blue(), lib::draw::Color::Red(),
-					lib::draw::Alignment::Left,
+					lib::draw::NodeText::Alignment::Left,
 					70, 1,
 					callBack,
 					lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 70.0f, 70.0f }, lib::draw::Color::Red())),

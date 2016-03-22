@@ -1,5 +1,4 @@
 #include "textgroup.hpp"
-#include "nodetext.hpp"
 #include "scene.hpp"
 #include <lib/core/resource.hpp>
 #include <lib/core/log.hpp>
@@ -12,7 +11,7 @@ namespace lib
 		struct TextGroup::TextGroupPrivate
 		{
 			sptr<core::Resource> m_font{ nullptr };
-			Alignment m_alignment{ Alignment::Left };
+			NodeText::Alignment m_alignment{ NodeText::Alignment::Left };
 			u32 m_characterSize{ 1 };
 			TextGroupPrivate()
 			{
@@ -50,7 +49,7 @@ namespace lib
 			update();
 		}
 
-		void TextGroup::setAlignment(const Alignment alignment)
+		void TextGroup::setAlignment(const NodeText::Alignment alignment)
 		{
 			m_private->m_alignment = alignment;
 		}
@@ -80,8 +79,8 @@ namespace lib
 				{
 					node_->setFont(*(m_private->m_font->getAsFont()));
 					node_->setCharacterSize(m_private->m_characterSize);
-					node_->setPositionX(viewCenter.x, m_private->m_alignment);
-					node_->setPositionY(static_cast<f32>(count*(m_private->m_characterSize)));
+					node_->setPosition({ viewCenter.x, static_cast<f32>(count*(m_private->m_characterSize)) });
+					node_->setAlignment(m_private->m_alignment);
 					++count;
 				}
 			}

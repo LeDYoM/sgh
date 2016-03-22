@@ -12,7 +12,7 @@ namespace lib
 {
 	namespace menu
 	{
-		SimpleMenu::SimpleMenu(const str &name, const draw::Alignment alignment,
+		SimpleMenu::SimpleMenu(const str &name, const draw::NodeText::Alignment alignment,
 			std::function<void(const u32, SimpleMenu &self)> onSelected)
 			: IMenuControl{ name  }, _onSelected {onSelected}
 			,m_textGroup{nullptr}

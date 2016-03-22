@@ -2,7 +2,8 @@
 #define LIB_MENU_SIMPLEMENU_HPP
 
 #include <lib/include/types.hpp>
-#include <lib/draw/RenderNode.hpp>
+#include <lib/draw/rendernode.hpp>
+#include <lib/draw/nodetext.hpp>
 #include "imenucontrol.hpp"
 #include "menudescriptors.hpp"
 #include <vector>
@@ -23,7 +24,7 @@ namespace lib
 		class SimpleMenu : public IMenuControl
 		{
 		public:
-			SimpleMenu(const str &name, const draw::Alignment alignment,
+			SimpleMenu(const str &name, const draw::NodeText::Alignment alignment,
 				std::function<void(const u32, SimpleMenu &self)> onSelected);
 			virtual ~SimpleMenu();
 

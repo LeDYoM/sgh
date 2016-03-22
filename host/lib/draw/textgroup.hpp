@@ -3,6 +3,7 @@
 
 #include <lib/include/types.hpp>
 #include "rendergroup.hpp"
+#include <lib/draw/nodetext.hpp>
 
 namespace lib
 {
@@ -20,7 +21,7 @@ namespace lib
 
 			void setFont(const sptr<core::Resource> font);
 			void setCharacterSize(u32 size);
-			void setAlignment(const Alignment alignment);
+			void setAlignment(const NodeText::Alignment alignment);
 			void addText(const str &caption);
 			const sptr<core::Resource> font() const;
 		private:

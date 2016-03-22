@@ -22,6 +22,12 @@ namespace lib
 				Underlined = 1 << 2,
 				StrikeThrough = 1 << 3
 			};
+			enum class Alignment : u8
+			{
+				Left = 0,
+				Center = 1,
+				Right = 2
+			};
 
 			NodeText(const std::string &name);
 			NodeText(const std::string &name, const sf::String& string, const sf::Font& font, u32 characterSize = 30);
@@ -35,6 +41,8 @@ namespace lib
 			u32 getCharacterSize() const;
 			u32 getStyle() const;
 			vector2df findCharacterPos(u32 index);
+			void setAlignment(Alignment alignment);
+
 		private:
 			virtual u32 draw(RenderStates &states) override;
 			virtual void ensureGeometryUpdate() override;
@@ -43,6 +51,7 @@ namespace lib
 			const sf::Font* m_font;
 			u32 m_characterSize;
 			u32 m_style;
+			Alignment m_alignment;
 		};
 	}
 }

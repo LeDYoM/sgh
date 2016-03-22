@@ -38,9 +38,6 @@ namespace lib
 			Scene(const std::string &_name);
 			virtual ~Scene();
 
-			virtual void onInit() = 0;
-			virtual void onDeinit() = 0;
-
 			virtual void onEnterScene() = 0;
 			virtual void onExitScene() = 0;
 
@@ -67,6 +64,8 @@ namespace lib
 
 			Timer clock;
 			inline const Rectf32 &currentView() const { return m_camera.target(); }
+			virtual bool init() override;
+			virtual bool deinit();
 
 		protected:
 			inline u32 state() const { return _state; }
@@ -77,16 +76,15 @@ namespace lib
 
 		private:
 			sptr<core::events::EventClient> m_eventClient{ nullptr };
+			
 
-			void privateOnInit();
-			void privateOnDeinit();
 			void privateOnEnterScene();
 			void privateOnExitScene();
 			u32 _state;
 
 			friend class SceneManager;
-			SceneManager *p_scnManager;
-			friend class SceneManager;
+			SceneManager *m_scnManager;
+//			SceneManager *scnManager() { return dynamic_cast<SceneManager*>(parent()); }
 			lib::draw::Camera m_camera;
 		};
 	}

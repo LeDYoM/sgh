@@ -4,6 +4,7 @@
 #include <vector>
 #include <lib/include/types.hpp>
 #include <lib/core/appservice.hpp>
+#include <lib/draw/inodetree.hpp>
 #include <lib/include/key.hpp>
 
 namespace lib
@@ -21,7 +22,7 @@ namespace lib
 		class ResourceManager;
 		class Scene;
 
-		class SceneManager : public AppService
+		class SceneManager : public AppService, public INodeTree<Scene>
 		{
 		public:
 			using AppService::AppService;
@@ -41,7 +42,7 @@ namespace lib
 			void setScene(sptr<Scene> scene);
 
 			sptr<Scene> getSceneByName(const std::string &name) const;
-			std::vector<sptr<Scene>> _scenes;
+//			std::vector<sptr<Scene>> _scenes;
 			sptr<Scene> _currentScene{ nullptr };
 			bool b_lock{ false };
 			sptr<Scene> _nextScene{ nullptr };

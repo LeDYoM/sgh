@@ -38,104 +38,113 @@ namespace zoper
 	{
 	}
 
-	void GameScene::onInit()
+	bool GameScene::init()
 	{
-		_mainBoardrg = this->createNewRenderGroup("mainBoard");
-		_gameOverrg = this->createNewRenderGroup("gameOverScreen");
-		_scorerg = this->createNewRenderGroup("score");
-		_levelrg = this->createNewRenderGroup("level");
-		_pauserg = this->createNewRenderGroup("pause");
+		if (Scene::init())
+		{
+			_mainBoardrg = this->createNewRenderGroup("mainBoard");
+			_gameOverrg = this->createNewRenderGroup("gameOverScreen");
+			_scorerg = this->createNewRenderGroup("score");
+			_levelrg = this->createNewRenderGroup("level");
+			_pauserg = this->createNewRenderGroup("pause");
 
-		_scoreText = _scorerg->createText("scoretxt");
-		_scoreDisplay = _scorerg->createText("scoredisplay");
-		_currentLevelText = _scorerg->createText("scoretxt");
-		_currentLevelDisplay = _scorerg->createText("scoredisplay");
-		_levelText = _levelrg->createText("leveltxt");
-		_levelDisplay = _levelrg->createText("leveldisplay");
-		_goalText = _levelrg->createText("leveltxt");
-		_goalDisplay = _levelrg->createText("leveldisplay");
-		_pauseText = _pauserg->createText("pausetext");
+			_scoreText = _scorerg->createText("scoretxt");
+			_scoreDisplay = _scorerg->createText("scoredisplay");
+			_currentLevelText = _scorerg->createText("scoretxt");
+			_currentLevelDisplay = _scorerg->createText("scoredisplay");
+			_levelText = _levelrg->createText("leveltxt");
+			_levelDisplay = _levelrg->createText("leveldisplay");
+			_goalText = _levelrg->createText("leveltxt");
+			_goalDisplay = _levelrg->createText("leveldisplay");
+			_pauseText = _pauserg->createText("pausetext");
 
-		_gameText = _gameOverrg->createText("gameovergame");
-		_overText = _gameOverrg->createText("gameoverover");
+			_gameText = _gameOverrg->createText("gameovergame");
+			_overText = _gameOverrg->createText("gameoverover");
 
-		_scoreText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_scoreDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_currentLevelText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_currentLevelDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_gameText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_overText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_levelText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_levelDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_goalText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_goalDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
-		_pauseText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_scoreText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_scoreDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_currentLevelText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_currentLevelDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_gameText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_overText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_levelText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_levelDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_goalText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_goalDisplay->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
+			_pauseText->setFont(*(resourceManager()->getResource("game_scene.scoreFont")->getAsFont()));
 
-		_scoreText->setString("Score: ");
-		increaseScore(0);
-		_gameText->setString("GAME");
-		_overText->setString("OVER");
-		_pauseText->setString("PAUSE");
-		_currentLevelText->setString("Level: ");
-		_currentLevelDisplay->setString("0");
+			_scoreText->setString("Score: ");
+			increaseScore(0);
+			_gameText->setString("GAME");
+			_overText->setString("OVER");
+			_pauseText->setString("PAUSE");
+			_currentLevelText->setString("Level: ");
+			_currentLevelDisplay->setString("0");
 
-		_scoreText->setCharacterSize(90);
-		_scoreDisplay->setCharacterSize(90);
-		_currentLevelText->setCharacterSize(90);
-		_currentLevelDisplay->setCharacterSize(90);
-		_gameText->setCharacterSize(360);
-		_overText->setCharacterSize(360);
-		_levelText->setCharacterSize(90);
-		_levelDisplay->setCharacterSize(90);
-		_goalText->setCharacterSize(90);
-		_goalDisplay->setCharacterSize(90);
-		_pauseText->setCharacterSize(180);
+			_scoreText->setCharacterSize(90);
+			_scoreDisplay->setCharacterSize(90);
+			_currentLevelText->setCharacterSize(90);
+			_currentLevelDisplay->setCharacterSize(90);
+			_gameText->setCharacterSize(360);
+			_overText->setCharacterSize(360);
+			_levelText->setCharacterSize(90);
+			_levelDisplay->setCharacterSize(90);
+			_goalText->setCharacterSize(90);
+			_goalDisplay->setCharacterSize(90);
+			_pauseText->setCharacterSize(180);
 
-		_scoreText->setColor(lib::draw::Color::Blue());
-		_scoreDisplay->setColor(lib::draw::Color::White());
-		_currentLevelText->setColor(lib::draw::Color::Blue());
-		_currentLevelDisplay->setColor(lib::draw::Color::White());
-		_gameText->setColor(lib::draw::Color::White());
-		_overText->setColor(lib::draw::Color::White());
-		_levelText->setColor(lib::draw::Color::Blue());
-		_levelDisplay->setColor(lib::draw::Color::White());
-		_goalText->setColor(lib::draw::Color::Blue());
-		_goalDisplay->setColor(lib::draw::Color::White());
-		_pauseText->setColor(lib::draw::Color::White());
+			_scoreText->setColor(lib::draw::Color::Blue());
+			_scoreDisplay->setColor(lib::draw::Color::White());
+			_currentLevelText->setColor(lib::draw::Color::Blue());
+			_currentLevelDisplay->setColor(lib::draw::Color::White());
+			_gameText->setColor(lib::draw::Color::White());
+			_overText->setColor(lib::draw::Color::White());
+			_levelText->setColor(lib::draw::Color::Blue());
+			_levelDisplay->setColor(lib::draw::Color::White());
+			_goalText->setColor(lib::draw::Color::Blue());
+			_goalDisplay->setColor(lib::draw::Color::White());
+			_pauseText->setColor(lib::draw::Color::White());
 
-		_scoreText->setScale({ 1.0f, 2.0f });
-		_scoreDisplay->setScale({ 1.0f, 2.0f });
-		_levelText->setScale({ 1.0f, 2.0f });
-		_levelDisplay->setScale({1.0f, 2.0f });
-		_goalText->setScale({ 1.0f, 2.0f });
-		_goalDisplay->setScale({ 1.0f, 2.0f });
+			_scoreText->setScale({ 1.0f, 2.0f });
+			_scoreDisplay->setScale({ 1.0f, 2.0f });
+			_levelText->setScale({ 1.0f, 2.0f });
+			_levelDisplay->setScale({ 1.0f, 2.0f });
+			_goalText->setScale({ 1.0f, 2.0f });
+			_goalDisplay->setScale({ 1.0f, 2.0f });
 
-		_scorerg->setPosition({ 50, 50 });
-		_scoreDisplay->setPositionX(_scoreText->getLocalBounds().width);
+			_scorerg->setPosition({ 50, 50 });
+			_scoreDisplay->setPositionX(_scoreText->getLocalBounds().width);
 
-		_currentLevelDisplay->setPositionX(_currentLevelText->getLocalBounds().width);
+			_currentLevelDisplay->setPositionX(_currentLevelText->getLocalBounds().width);
 
-		_levelrg->setPosition({ 1250, 50 });
-		_goalText->setPositionY(200);
+			_levelrg->setPosition({ 1250, 50 });
+			_goalText->setPositionY(200);
 
-		_currentLevelText->setPositionY(200);
-		_currentLevelDisplay->setPositionY(200);
+			_currentLevelText->setPositionY(200);
+			_currentLevelDisplay->setPositionY(200);
 
 
-		auto _gameBoundingBox = _gameText->getLocalBounds();
-		auto _overBoundingBox = _overText->getLocalBounds();
-		auto sceneCenter = camera().target().center();
-		_gameText->setPosition({ sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height });
-		_overText->setPosition({ sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y });
+			auto _gameBoundingBox = _gameText->getLocalBounds();
+			auto _overBoundingBox = _overText->getLocalBounds();
+			auto sceneCenter = camera().target().center();
+			_gameText->setPosition({ sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height });
+			_overText->setPosition({ sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y });
 
-		_pauseText->setPosition(lib::vector2df{ 1000.0f, 1000.0f }, lib::draw::Alignment::Center);
-
+			_pauseText->setPosition(lib::vector2df{ 1000.0f, 1000.0f }, lib::draw::Alignment::Center);
+			return true;
+		}
+		return false;
 	}
 
-	void GameScene::onDeinit()
+	bool GameScene::deinit()
 	{
-		// Remove instances from all nodes.
-		clear();
+		if (Scene::deinit())
+		{
+			// Remove instances from all nodes.
+			clear();
+			return true;
+		}
+		return false;
 	}
 
 	void GameScene::onEnterScene()

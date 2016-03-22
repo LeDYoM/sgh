@@ -15,11 +15,12 @@ namespace lib
 		SimpleMenu::SimpleMenu(const str &name, const draw::Alignment alignment,
 			std::function<void(const u32, SimpleMenu &self)> onSelected)
 			: IMenuControl{ name  }, _onSelected {onSelected}
-			,m_textGroup{}
+			,m_textGroup{nullptr}
 		{}
 
 		SimpleMenu::~SimpleMenu()
 		{
+			m_textGroup.reset();
 			_labelData.clear();
 		}
 

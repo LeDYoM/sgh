@@ -13,16 +13,28 @@ namespace lib
 		{
 			sptr<core::Resource> m_font{ nullptr };
 			Alignment m_alignment{ Alignment::Left };
+			TextGroupPrivate()
+			{
+				LOG_CONSTRUCT_NOPARAMS;
+			}
+
+			~TextGroupPrivate()
+			{
+				LOG_DESTRUCT_NOPARAMS;
+			}
 		};
 
 		TextGroup::TextGroup(const str &name)
-			: RenderGroup{ name }, m_private{ uptr<TextGroupPrivate>(new TextGroupPrivate) }
+			: RenderGroup{ name }
+			, m_private{ new TextGroupPrivate() }
 		{
+			LOG_CONSTRUCT_NOPARAMS;
 		}
 
 		TextGroup::~TextGroup()
 		{
-			m_private.release();
+			m_private = nullptr;
+			LOG_DESTRUCT_NOPARAMS;
 		}
 
 		void TextGroup::setFont(const sptr<core::Resource> font)
@@ -34,7 +46,7 @@ namespace lib
 
 		void TextGroup::setAlignment(const Alignment alignment)
 		{
-
+			m_private->m_alignment = alignment;
 		}
 
 		void TextGroup::addText(const str &caption)
@@ -71,7 +83,7 @@ namespace lib
 				sptr<NodeText> temp = std::dynamic_pointer_cast<NodeText>(node);
 				if (temp)
 				{
-					temp->setFont(*(m_private->m_font->getAsFont()));
+//					temp->setFont(*(m_private->m_font->getAsFont()));
 				}
 			}
 		}

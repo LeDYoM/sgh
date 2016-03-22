@@ -28,7 +28,7 @@ namespace lib
 			void updatePositions();
 
 			struct TextGroupPrivate;
-			uptr<TextGroupPrivate> m_private;
+			uptr<TextGroupPrivate> m_private{ nullptr };
 		};
 	}
 }

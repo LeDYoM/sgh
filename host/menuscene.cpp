@@ -21,28 +21,33 @@ namespace zoper
 	{
 	}
 
-	void MenuScene::onInit()
+	bool MenuScene::init()
 	{
-		_background = createSpriteShape("background");
+		if (MenuManager::init())
+		{
+			_background = createSpriteShape("background");
 
-		addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::MainMenu));
-		addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::OptionsMenu));
-		addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::KeyRedefinitionMenu));
-		addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::StartLevelMenu));
+			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::MainMenu));
+			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::OptionsMenu));
+			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::KeyRedefinitionMenu));
+			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::StartLevelMenu));
 
-		_logo = createSpriteShape("mainLogo");
-		_logo->setTexture(resourceManager()->getResource("game_menu.logo")->getAsTexture(), true, false);
-		_logo->setSize(lib::vector2df(800, 400));
-		_logo->setPositionX(camera().target().center().x, lib::draw::Alignment::Center);
-		_logo->setPositionY(100);
+			_logo = createSpriteShape("mainLogo");
+			_logo->setTexture(resourceManager()->getResource("game_menu.logo")->getAsTexture(), true, false);
+			_logo->setSize(lib::vector2df(800, 400));
+			_logo->setPositionX(camera().target().center().x, lib::draw::Alignment::Center);
+			_logo->setPositionY(100);
 
-		_background->setTexture(resourceManager()->getResource("game_menu.background")->getAsTexture(), true, false);
-		_background->setSize(2000.0f);
+			_background->setTexture(resourceManager()->getResource("game_menu.background")->getAsTexture(), true, false);
+			_background->setSize(2000.0f);
+			return true;
+		}
+		return false;
 	}
 
-	void MenuScene::onDeinit()
+	bool MenuScene::deinit()
 	{
-
+		return Scene::deinit();
 	}
 
 	void MenuScene::onEnterScene()

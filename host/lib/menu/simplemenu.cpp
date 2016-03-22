@@ -30,6 +30,7 @@ namespace lib
 			{
 				m_textGroup = createNewRenderGroupOf<draw::TextGroup>(name()+"_textGroup");
 				m_textGroup->setFont(menuManager()->menuTheme()->defaultFont());
+				m_textGroup->setCharacterSize(menuManager()->menuTheme()->normalCharacterSize());
 			}
 			return false;
 		}

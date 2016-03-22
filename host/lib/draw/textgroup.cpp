@@ -13,6 +13,7 @@ namespace lib
 		{
 			sptr<core::Resource> m_font{ nullptr };
 			Alignment m_alignment{ Alignment::Left };
+			u32 m_characterSize{ 1 };
 			TextGroupPrivate()
 			{
 				LOG_CONSTRUCT_NOPARAMS;
@@ -40,8 +41,13 @@ namespace lib
 		void TextGroup::setFont(const sptr<core::Resource> font)
 		{
 			m_private->m_font = font;
-			updateFont();
-			updatePositions();
+			update();
+		}
+
+		void TextGroup::setCharacterSize(u32 size)
+		{
+			m_private->m_characterSize = size;
+			update();
 		}
 
 		void TextGroup::setAlignment(const Alignment alignment)
@@ -53,8 +59,7 @@ namespace lib
 		{
 			sptr<NodeText> node{ RenderGroup::createText(name() + "_" + caption) };
 			node->setString(caption);
-			updateFontOne(node);
-			updatePositions();
+			update();
 		}
 
 		const sptr<core::Resource> TextGroup::font() const
@@ -62,35 +67,22 @@ namespace lib
 			return m_private->m_font;
 		}
 
-		void TextGroup::updatePositions()
+		void TextGroup::update()
 		{
 			const Rectf32 &parentView{ parentScene()->currentView() };
 			const vector2df viewCenter{ parentView.center() };
+			u32 count{ 0 };
 
 			for (auto &node : _renderNodes)
 			{
-				sptr<NodeText> temp = std::dynamic_pointer_cast<NodeText>(node);
-				if (temp)
+				sptr<NodeText> node_ = std::dynamic_pointer_cast<NodeText>(node);
+				if (node_)
 				{
-					temp->setPositionX(viewCenter.x, m_private->m_alignment);
-				}
-			}
-		}
-
-		void TextGroup::updateFontOne(sptr<NodeText> node)
-		{
-			__ASSERT(node, "Node is null");
-			node->setFont(*(m_private->m_font->getAsFont()));
-		}
-
-		void TextGroup::updateFont()
-		{
-			for (auto &node : _renderNodes)
-			{
-				sptr<NodeText> temp = std::dynamic_pointer_cast<NodeText>(node);
-				if (temp)
-				{
-					updateFontOne(temp);
+					node_->setFont(*(m_private->m_font->getAsFont()));
+					node_->setCharacterSize(m_private->m_characterSize);
+					node_->setPositionX(viewCenter.x, m_private->m_alignment);
+					node_->setPositionY(static_cast<f32>(count*(m_private->m_characterSize)));
+					++count;
 				}
 			}
 		}

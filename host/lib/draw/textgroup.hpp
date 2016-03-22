@@ -19,15 +19,12 @@ namespace lib
 			virtual ~TextGroup();
 
 			void setFont(const sptr<core::Resource> font);
+			void setCharacterSize(u32 size);
 			void setAlignment(const Alignment alignment);
 			void addText(const str &caption);
-
 			const sptr<core::Resource> font() const;
 		private:
-			void updateFont();
-			void updatePositions();
-
-			void updateFontOne(sptr<NodeText> node);
+			void update();
 
 			struct TextGroupPrivate;
 			uptr<TextGroupPrivate> m_private{ nullptr };

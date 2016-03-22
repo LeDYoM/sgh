@@ -19,7 +19,7 @@ namespace lib
 			using namespace draw;
 			if (Scene::init())
 			{
-				m_mTheme = uptr<MenuTheme>(new MenuTheme{ Color{ 0, 0, 255 }, Color{ 255, 0, 0 }, "game_menu.mainFont" });
+				m_mTheme = uptr<MenuTheme>(new MenuTheme{ Color{ 0, 0, 255 }, Color{ 255, 0, 0 }, "game_menu.mainFont",40 });
 				m_mTheme->setParent(this);
 				m_mTheme->init();
 //				m_mTheme->notSelectedColor.s

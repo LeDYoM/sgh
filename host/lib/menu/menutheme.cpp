@@ -5,8 +5,8 @@ namespace lib
 {
 	namespace menu
 	{
-		MenuTheme::MenuTheme(const draw::Color &nsc, const draw::Color &sc, const str&defaultFontId)
-			: notSelectedColor{ nsc }, selectedColor{ sc }, m_defaultFontId( defaultFontId )
+		MenuTheme::MenuTheme(const draw::Color &nsc, const draw::Color &sc, const str&defaultFontId, const u32 normalTextCharacterSize)
+			: m_notSelectedColor{ nsc }, m_selectedColor{ sc }, m_defaultFontId(defaultFontId), m_normalTextCharacterSize{ normalTextCharacterSize }
 		{
 		}
 

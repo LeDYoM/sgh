@@ -65,6 +65,9 @@ namespace zoper
 					));
 				addMenuControl(_chooseControl);
 				_chooseControl->addOption("Play token mode");
+				_chooseControl->addOption("Play time mode");
+				_chooseControl->addOption("Options");
+				_chooseControl->addOption("Exit");
 				//			_chooseControl->setPosition({ menuManager()->camera().target().center().x, 700 });
 				return true;
 			}

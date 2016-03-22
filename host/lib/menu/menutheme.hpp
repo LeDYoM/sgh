@@ -20,6 +20,8 @@ namespace lib
 			MenuTheme(const draw::Color &nsc, const draw::Color &sc, const str&defaultFontId);
 			virtual ~MenuTheme();
 
+			virtual bool init();
+
 			Property<draw::Color,MenuTheme> notSelectedColor;
 			Property<draw::Color, MenuTheme> selectedColor;
 
@@ -27,6 +29,7 @@ namespace lib
 		private:
 			void aquireFont(const str&fid);
 			sptr<core::Resource> default_font;
+			str m_defaultFontId;
 
 		};
 	}

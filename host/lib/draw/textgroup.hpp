@@ -27,6 +27,8 @@ namespace lib
 			void updateFont();
 			void updatePositions();
 
+			void updateFontOne(sptr<NodeText> node);
+
 			struct TextGroupPrivate;
 			uptr<TextGroupPrivate> m_private{ nullptr };
 		};

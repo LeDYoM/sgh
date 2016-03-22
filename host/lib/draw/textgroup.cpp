@@ -51,8 +51,9 @@ namespace lib
 
 		void TextGroup::addText(const str &caption)
 		{
-			RenderGroup::createText(name() + "_" + caption)->setString(caption);
-
+			sptr<NodeText> node{ RenderGroup::createText(name() + "_" + caption) };
+			node->setString(caption);
+			updateFontOne(node);
 			updatePositions();
 		}
 
@@ -76,6 +77,12 @@ namespace lib
 			}
 		}
 
+		void TextGroup::updateFontOne(sptr<NodeText> node)
+		{
+			__ASSERT(node, "Node is null");
+			node->setFont(*(m_private->m_font->getAsFont()));
+		}
+
 		void TextGroup::updateFont()
 		{
 			for (auto &node : _renderNodes)
@@ -83,7 +90,7 @@ namespace lib
 				sptr<NodeText> temp = std::dynamic_pointer_cast<NodeText>(node);
 				if (temp)
 				{
-//					temp->setFont(*(m_private->m_font->getAsFont()));
+					updateFontOne(temp);
 				}
 			}
 		}

@@ -20,6 +20,8 @@ namespace lib
 			if (Scene::init())
 			{
 				m_mTheme = uptr<MenuTheme>(new MenuTheme{ Color{ 0, 0, 255 }, Color{ 255, 0, 0 }, "game_menu.mainFont" });
+				m_mTheme->setParent(this);
+				m_mTheme->init();
 //				m_mTheme->notSelectedColor.s
 				return true;
 			}

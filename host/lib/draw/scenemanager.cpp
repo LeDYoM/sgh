@@ -16,7 +16,7 @@ namespace lib
 		{
 			for (auto scene : _scenes)
 			{
-				scene->privateOnDeinit();
+				scene->deinit();
 			}
 			_scenes.clear();
 			LOG_DESTRUCT_NOPARAMS;
@@ -32,7 +32,7 @@ namespace lib
 			__ASSERT(newScene, "Cannot add a null scene");
 			newScene->p_scnManager = this;
 			_scenes.push_back(newScene);
-			newScene->privateOnInit();
+			newScene->init();
 		}
 	
 		void SceneManager::setScene(const std::string &name)

@@ -32,39 +32,43 @@ namespace lib
 			return{ m_camera.target().center().x - (coordinates.width / 2.0f), m_camera.target().center().y - (coordinates.height / 2.0f) };
 		}
 
-		void Scene::privateOnInit()
+		bool Scene::init()
 		{
 			LOG_DEBUG("Initializing scene " << name());
-			auto sceneSize = getDefaultSizeView();
-			m_camera.setSize(sceneSize);
-			updateView();
-			m_eventClient = p_scnManager->eventClient()->newEventClient();
-			m_eventClient->setReceiver([this](lib::core::events::EventClient::ReceivedEvent event_)
+			if (RenderGroup::init())
 			{
-				auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
-				switch (evKey->action())
+				auto sceneSize = getDefaultSizeView();
+				m_camera.setSize(sceneSize);
+				updateView();
+				m_eventClient = p_scnManager->eventClient()->newEventClient();
+				m_eventClient->setReceiver([this](lib::core::events::EventClient::ReceivedEvent event_)
 				{
-				case core::events::KeyEvent::Action::KeyPressed:
-					this->onPrivateKeyPressed(evKey->key());
-					break;
-				case core::events::KeyEvent::Action::KeyReleased:
-					this->onPrivateKeyReleased(evKey->key());
-					break;
-				default:
-					LOG_WARNING("Unknown Action on event key");
-					break;
-				}
-			});
+					auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
+					switch (evKey->action())
+					{
+					case core::events::KeyEvent::Action::KeyPressed:
+						this->onPrivateKeyPressed(evKey->key());
+						break;
+					case core::events::KeyEvent::Action::KeyReleased:
+						this->onPrivateKeyReleased(evKey->key());
+						break;
+					default:
+						LOG_WARNING("Unknown Action on event key");
+						break;
+					}
+				});
 
-			m_eventClient->setActive(false);
+				m_eventClient->setActive(false);
+				return true;
+			}
 
-			onInit();
+			return false;
 		}
 
-		void Scene::privateOnDeinit()
+		bool Scene::deinit()
 		{
 			LOG_DEBUG("Deinitializing scene " << name());
-			onDeinit();
+			return true;
 		}
 
 		void Scene::privateOnEnterScene()

@@ -130,7 +130,8 @@ namespace zoper
 			_gameText->setPosition({ sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height });
 			_overText->setPosition({ sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y });
 
-			_pauseText->setPosition(lib::vector2df{ 1000.0f, 1000.0f }, lib::draw::Alignment::Center);
+			_pauseText->setPosition({ 1000.0f, 1000.0f });
+			_pauseText->setAlignment(lib::draw::NodeText::Alignment::Center);
 			return true;
 		}
 		return false;

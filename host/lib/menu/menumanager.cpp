@@ -29,6 +29,7 @@ namespace lib
 
 		MenuManager::~MenuManager()
 		{
+
 		}
 
 		void MenuManager::addMenuStep(sptr<MenuStep> step)
@@ -59,6 +60,7 @@ namespace lib
 
 		void MenuManager::setActiveStep(sptr<MenuStep> step)
 		{
+			_activeMenuStep = step;
 			activateOne(step);
 		}
 

@@ -13,6 +13,8 @@ namespace lib
 		{
 			sptr<core::Resource> m_font{ nullptr };
 			Alignment m_alignment{ Alignment::Left };
+			u32 m_characterSize{ 1 };
+			draw::Color m_color;
 		};
 
 		TextGroup::TextGroup(const str &name)
@@ -25,11 +27,15 @@ namespace lib
 			m_private = nullptr;
 		}
 
+		bool TextGroup::init()
+		{
+			return RenderGroup::init();
+		}
+
 		void TextGroup::setFont(const sptr<core::Resource> font)
 		{
 			m_private->m_font = font;
-			updateFont();
-			updatePositions();
+			update();
 		}
 
 		void TextGroup::setAlignment(const Alignment alignment)
@@ -40,8 +46,19 @@ namespace lib
 		void TextGroup::addText(const str &caption)
 		{
 			RenderGroup::createText(name() + "_" + caption)->setString(caption);
+			update();
+		}
 
-			updatePositions();
+		void TextGroup::setCharacterSize(const u32 chSize)
+		{
+			m_private->m_characterSize = chSize;
+			update();
+		}
+
+		void TextGroup::setColor(const draw::Color & color)
+		{
+			m_private->m_color = color;
+			update();
 		}
 
 		const sptr<core::Resource> TextGroup::font() const
@@ -49,7 +66,7 @@ namespace lib
 			return m_private->m_font;
 		}
 
-		void TextGroup::updatePositions()
+		void TextGroup::update()
 		{
 			const Rectf32 &parentView{ parentScene()->currentView() };
 			const vector2df viewCenter{ parentView.center() };
@@ -59,19 +76,10 @@ namespace lib
 				sptr<NodeText> temp = std::dynamic_pointer_cast<NodeText>(node);
 				if (temp)
 				{
-					temp->setPositionX(viewCenter.x, m_private->m_alignment);
-				}
-			}
-		}
-
-		void TextGroup::updateFont()
-		{
-			for (auto &node : _renderNodes)
-			{
-				sptr<NodeText> temp = std::dynamic_pointer_cast<NodeText>(node);
-				if (temp)
-				{
 					temp->setFont(*(m_private->m_font->getAsFont()));
+					temp->setCharacterSize(m_private->m_characterSize);
+					temp->setColor(m_private->m_color);
+					temp->setPositionX(viewCenter.x, m_private->m_alignment);
 				}
 			}
 		}

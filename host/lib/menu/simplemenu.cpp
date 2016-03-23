@@ -29,6 +29,8 @@ namespace lib
 			{
 				m_textGroup = createNewRenderGroupOf<draw::TextGroup>(name()+"_textGroup");
 				m_textGroup->setFont(menuManager()->menuTheme()->defaultFont());
+				m_textGroup->setCharacterSize(menuManager()->menuTheme()->notSelectedTextSize());
+				m_textGroup->setColor(menuManager()->menuTheme()->notSelectedColor());
 			}
 			return false;
 		}

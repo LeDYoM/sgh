@@ -25,6 +25,9 @@ namespace lib
 			sptr<core::Resource> defaultFont() const;
 			const draw::Color &notSelectedColor() const { return m_notSelectedColor; }
 			const draw::Color &selectedColor() const { return m_selectedColor; }
+			const u32 notSelectedTextSize() const { return m_notSelectedTextSize; }
+			const u32 selectedTextSize() const { return m_selectedTextSize; }
+
 		private:
 			draw::Color m_notSelectedColor;
 			draw::Color m_selectedColor;

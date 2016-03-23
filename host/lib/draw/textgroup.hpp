@@ -18,14 +18,17 @@ namespace lib
 			TextGroup(const str &name);
 			virtual ~TextGroup();
 
+			virtual bool init() override;
+
 			void setFont(const sptr<core::Resource> font);
 			void setAlignment(const Alignment alignment);
 			void addText(const str &caption);
+			void setCharacterSize(const u32 chSize);
+			void setColor(const draw::Color &color);
 
 			const sptr<core::Resource> font() const;
 		private:
-			void updateFont();
-			void updatePositions();
+			void update();
 
 			struct TextGroupPrivate;
 			sptr<TextGroupPrivate> m_private;

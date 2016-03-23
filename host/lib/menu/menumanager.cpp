@@ -10,8 +10,7 @@ namespace lib
 		MenuManager::MenuManager(const std::string &name)
 			: Scene{ name }
 		{
-//			_steps = stepsVector();
-//			getSteps();
+			LOG_CONSTRUCT("Name: " + name);
 		}
 
 		bool MenuManager::init()
@@ -29,7 +28,8 @@ namespace lib
 
 		MenuManager::~MenuManager()
 		{
-
+			LOG_DESTRUCT("Name: " + name());
+			_activeMenuStep = nullptr;
 		}
 
 		void MenuManager::addMenuStep(sptr<MenuStep> step)

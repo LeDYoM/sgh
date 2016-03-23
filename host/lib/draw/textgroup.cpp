@@ -70,7 +70,7 @@ namespace lib
 		{
 			const Rectf32 &parentView{ parentScene()->currentView() };
 			const vector2df viewCenter{ parentView.center() };
-
+			u32 count{ 0 };
 			for (auto &node : _renderNodes)
 			{
 				sptr<NodeText> temp = std::dynamic_pointer_cast<NodeText>(node);
@@ -80,6 +80,8 @@ namespace lib
 					temp->setCharacterSize(m_private->m_characterSize);
 					temp->setColor(m_private->m_color);
 					temp->setPositionX(viewCenter.x, m_private->m_alignment);
+					temp->setPositionY(count*m_private->m_characterSize);
+					++count;
 				}
 			}
 		}

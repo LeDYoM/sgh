@@ -48,13 +48,13 @@ namespace lib
 			sptr<INamedDrawable> findByName(const str &name) const;
 			template <class T> sptr<T> findByNameAs(const str&name) const
 			{
-				return std::dynamic_pointer_cast<T>(findByName(name));
+				return as<T>(findByName(name));
 			}
 
 			RenderGroup &operator=(RenderGroup &r) = delete;
 			void for_each_renderNode(std::function<void(sptr<INamedDrawable> node)> f);
 			void addRenderGroup(sptr<RenderGroup> node, sptr<INamedDrawable> beforeNode = nullptr);
-			template <class T> static sptr<T> as(sptr<RenderGroup> node) { return std::dynamic_pointer_cast<T>(node); }
+			template <class T,class S> static sptr<T> as(sptr<S> node) { return std::dynamic_pointer_cast<T>(node); }
 			virtual Scene *const parentScene();
 
 			bool activateOne(const str& node);
@@ -62,13 +62,6 @@ namespace lib
 
 		protected:
 			VecSPtr<INamedDrawable> _renderNodes;
-
-			/*
-		private:
-
-			void setParent(RenderGroup *const parent);
-			RenderGroup *m_parent{ nullptr };
-			*/
 		};
 	}
 }

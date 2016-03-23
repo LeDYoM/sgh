@@ -639,11 +639,11 @@ namespace zoper
 
 	void GameScene::tileMoved(const lib::vector2du32 &source, const lib::vector2du32 &dest, lib::board::WITilePointer tile)
 	{
-		if (auto ztile = std::dynamic_pointer_cast<Tile>(tile.lock()))
+		if (auto ztile = as<Tile>(tile.lock()))
 		{
 			tokenMoved(source, dest, ztile);
 		}
-		else if (auto ztile_ = std::dynamic_pointer_cast<Player>(tile.lock()))
+		else if (auto ztile_ = as<Player>(tile.lock()))
 		{
 			playerMoved(source, dest, ztile_);
 		}

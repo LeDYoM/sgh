@@ -49,7 +49,6 @@ namespace lib
 			Color m_color;
 			bool m_geometryNeedUpdate;
 			bool m_colorsNeedUpdate;
-		private:
 		};
 	}
 }

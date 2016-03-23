@@ -73,7 +73,7 @@ namespace lib
 			u32 count{ 0 };
 			for (auto &node : _renderNodes)
 			{
-				sptr<NodeText> temp = std::dynamic_pointer_cast<NodeText>(node);
+				sptr<NodeText> temp = as<NodeText>(node);
 				if (temp)
 				{
 					temp->setFont(*(m_private->m_font->getAsFont()));

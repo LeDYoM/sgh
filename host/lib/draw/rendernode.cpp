@@ -15,6 +15,8 @@ namespace lib
 
 		RenderNode::~RenderNode()
 		{
+			LOG_DESTRUCT("Name: " + name());
+			m_vertices.clear();
 		}
 
 		void RenderNode::setPosition(const vector2df &pos, Alignment alignment)

@@ -61,8 +61,6 @@ namespace lib
 			bool activateOne(sptr<INamedDrawable> node);
 
 		protected:
-
-			RenderGroup *const parent() const { return m_parent; }
 			VecSPtr<INamedDrawable> _renderNodes;
 
 			/*

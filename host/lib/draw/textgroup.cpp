@@ -16,13 +16,13 @@ namespace lib
 		};
 
 		TextGroup::TextGroup(const str &name)
-			: RenderGroup{ name }, m_private{ uptr<TextGroupPrivate>(new TextGroupPrivate) }
+			: RenderGroup{ name }, m_private{ sptr<TextGroupPrivate>(new TextGroupPrivate) }
 		{
 		}
 
 		TextGroup::~TextGroup()
 		{
-			m_private.release();
+			m_private = nullptr;
 		}
 
 		void TextGroup::setFont(const sptr<core::Resource> font)

@@ -23,7 +23,7 @@ namespace zoper
 
 	bool MenuScene::init()
 	{
-		if (Scene::init())
+		if (MenuManager::init())
 		{
 			_background = createSpriteShape("background");
 

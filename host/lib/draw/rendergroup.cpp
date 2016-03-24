@@ -9,7 +9,7 @@ namespace lib
 	namespace draw
 	{
 		RenderGroup::RenderGroup(const std::string &name)
-			: IParentable{}, INamedDrawable(name) {}
+			: IParentable{}, Node(name) {}
 
 		RenderGroup::~RenderGroup()
 		{
@@ -74,14 +74,14 @@ namespace lib
 			return 0;
 		}
 
-		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<INamedDrawable> beforeNode)
+		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<Node> beforeNode)
 		{
 			sptr<RenderGroup> rg = sptr<RenderGroup>{ new RenderGroup(name) };
 			addRenderGroup(rg, beforeNode);
 			return rg;
 		}
 
-		void RenderGroup::addRenderGroup(sptr<RenderGroup> node, sptr<INamedDrawable> beforeNode)
+		void RenderGroup::addRenderGroup(sptr<RenderGroup> node, sptr<Node> beforeNode)
 		{
 			__ASSERT(node, "Trying to add nullptr node");
 			node->setParent(this);
@@ -113,14 +113,14 @@ namespace lib
 			_renderNodes.clear();
 		}
 
-		sptr<INamedDrawable> RenderGroup::findByName(const str &name) const
+		sptr<Node> RenderGroup::findByName(const str &name) const
 		{
-			auto result( std::find_if(_renderNodes.begin(), _renderNodes.end(), [name](const sptr<INamedDrawable> &node)
+			auto result( std::find_if(_renderNodes.begin(), _renderNodes.end(), [name](const sptr<Node> &node)
 			{
 				return (node->name() == name);
 			}) );
 
-			return (result != _renderNodes.end()) ? *result : sptr<INamedDrawable>();
+			return (result != _renderNodes.end()) ? *result : sptr<Node>();
 		}
 
 		lib::draw::Scene *const RenderGroup::parentScene()
@@ -129,7 +129,7 @@ namespace lib
 			return m_parent->parentScene();
 		}
 
-		void RenderGroup::for_each_renderNode(std::function<void(sptr<INamedDrawable> node)> f)
+		void RenderGroup::for_each_renderNode(std::function<void(sptr<Node> node)> f)
 		{
 			for (auto node : _renderNodes)
 			{
@@ -142,7 +142,7 @@ namespace lib
 			return activateOne(findByName(node));
 		}
 
-		bool RenderGroup::activateOne(sptr<INamedDrawable> node)
+		bool RenderGroup::activateOne(sptr<Node> node)
 		{
 			__ASSERT(node, "Node parameter is nullptr");
 			bool found{ false };

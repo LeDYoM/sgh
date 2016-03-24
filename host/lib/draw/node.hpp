@@ -9,11 +9,11 @@ namespace lib
 {
 	namespace draw
 	{
-		class INamedDrawable : public core::HasName, public IDrawable
+		class Node : public core::HasName, public IDrawable
 		{
 		public:
-			INamedDrawable(const str &name) : HasName(name), IDrawable{} {}
-			virtual ~INamedDrawable() {}
+			Node(const str &name) : HasName(name), IDrawable{} {}
+			virtual ~Node() {}
 		};
 	}
 }

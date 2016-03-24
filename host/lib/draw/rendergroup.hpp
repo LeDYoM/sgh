@@ -2,7 +2,7 @@
 #define __LIB_RENDERGROUP_HPP__
 
 #include <lib/include/types.hpp>
-#include "inameddrawable.hpp"
+#include "node.hpp"
 #include "animationmanager.hpp"
 #include <lib/core/vecsptr.hpp>
 #include "iparentable.hpp"
@@ -22,7 +22,7 @@ namespace lib
 		class NodeShape;
 		class NodeText;
 		class Scene;
-		class RenderGroup : public IParentable<RenderGroup>, public INamedDrawable, public anim::AnimationManager, public Transformable
+		class RenderGroup : public IParentable<RenderGroup>, public Node, public anim::AnimationManager, public Transformable
 		{
 		public:
 			RenderGroup(const std::string &name);
@@ -36,8 +36,8 @@ namespace lib
 			bool removeRenderNode(sptr<RenderNode> element);
 			void clear();
 
-			sptr<RenderGroup> createNewRenderGroup(const std::string &name, sptr<INamedDrawable> beforeNode = nullptr);
-			template <class T> sptr<T> createNewRenderGroupOf(const std::string &name, sptr<INamedDrawable> beforeNode = nullptr)
+			sptr<RenderGroup> createNewRenderGroup(const std::string &name, sptr<Node> beforeNode = nullptr);
+			template <class T> sptr<T> createNewRenderGroupOf(const std::string &name, sptr<Node> beforeNode = nullptr)
 			{
 				sptr<T> t{ new T(name) };
 				addRenderGroup(t, beforeNode);
@@ -45,23 +45,23 @@ namespace lib
 			}
 			bool removeRenderGroup(sptr<RenderGroup> element);
 			u32 draw(lib::draw::RenderStates &states) override;
-			sptr<INamedDrawable> findByName(const str &name) const;
+			sptr<Node> findByName(const str &name) const;
 			template <class T> sptr<T> findByNameAs(const str&name) const
 			{
 				return as<T>(findByName(name));
 			}
 
 			RenderGroup &operator=(RenderGroup &r) = delete;
-			void for_each_renderNode(std::function<void(sptr<INamedDrawable> node)> f);
-			void addRenderGroup(sptr<RenderGroup> node, sptr<INamedDrawable> beforeNode = nullptr);
+			void for_each_renderNode(std::function<void(sptr<Node> node)> f);
+			void addRenderGroup(sptr<RenderGroup> node, sptr<Node> beforeNode = nullptr);
 			template <class T,class S> static sptr<T> as(sptr<S> node) { return std::dynamic_pointer_cast<T>(node); }
 			virtual Scene *const parentScene();
 
 			bool activateOne(const str& node);
-			bool activateOne(sptr<INamedDrawable> node);
+			bool activateOne(sptr<Node> node);
 
 		protected:
-			VecSPtr<INamedDrawable> _renderNodes;
+			VecSPtr<Node> _renderNodes;
 		};
 	}
 }

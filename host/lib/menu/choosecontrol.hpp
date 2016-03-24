@@ -2,7 +2,7 @@
 #define __LIB_CHOOSECONTROL_HPP__
 
 #include <lib/include/types.hpp>
-#include <lib/draw/RenderNode.hpp>
+#include <lib/draw/rendernode.hpp>
 #include "imenucontrol.hpp"
 #include "menudescriptors.hpp"
 #include <vector>

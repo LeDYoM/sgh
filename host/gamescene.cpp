@@ -8,7 +8,7 @@
 #include <lib/core/log.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
-#include <lib/draw/RenderNode.hpp>
+#include <lib/draw/rendernode.hpp>
 #include <lib/draw/positionanimation.hpp>
 #include <lib/draw/coloranimation.hpp>
 #include <lib/draw/nodeshape.hpp>

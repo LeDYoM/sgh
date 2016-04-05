@@ -3,21 +3,19 @@
 
 #include <string>
 #include <map>
-#include <fstream>
 #include <functional>
 #include <vector>
 #include <lib/include/types.hpp>
+#include "appservice.hpp"
+#include "data.hpp"
 
 namespace lib
 {
-	class Configuration
+	class Configuration : public AppService
 	{
 	public:
-		Configuration() = delete;
-		Configuration(const std::string &file);
-		Configuration(const Configuration &other) = delete;
-
-		virtual ~Configuration() {}
+		Configuration();
+		virtual ~Configuration();
 
 		Configuration &operator=(const Configuration &other) = delete;
 		s32 getAsInt(const std::string &name) const;
@@ -34,6 +32,8 @@ namespace lib
 
 		bool join(const Configuration &other,const bool overwrite=true);
 
+//		void loadFile(const std::string &file);
+
 	protected:
 		bool configFileExists(const std::string &file);
 
@@ -42,10 +42,8 @@ namespace lib
 		std::vector<std::string> splitString(const std::string &input, const char separator);
 
 	private:
-		void loadFile(const std::string &file);
 		const std::string currentFile;
-		CMap *currentMap;
-		static CDataMap _data;
+		DataMap m_data;
 	};
 }
 

@@ -3,7 +3,7 @@
 #include "resource.hpp"
 #include "exceptionmanager.hpp"
 #include "appcontroller.hpp"
-#include "config.hpp"
+#include "configuration.hpp"
 #include "strutils.hpp"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -27,7 +27,7 @@ namespace lib
 
 		void ResourceManager::load(const std::string &section)
 		{
-			auto resourcesList = appController()->config()->section("Resources");
+//			auto resourcesList = appController()->config()->section("Resources");
 			resourcesDirectory = resourcesList.data["resources_directory"];
 			for (const auto tuple : resourcesList.data)
 			{

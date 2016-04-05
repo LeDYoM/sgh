@@ -15,7 +15,7 @@ namespace zoper
 	namespace zmenu
 	{
 		OptionsMenu::OptionsMenu()
-			: lib::menu::MenuStep{ "OptionsMenu" }, lib::Configuration("config.cfg")
+			: lib::menu::MenuStep{ "OptionsMenu" }
 		{
 		}
 

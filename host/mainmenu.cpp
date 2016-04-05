@@ -13,7 +13,7 @@ namespace zoper
 	namespace zmenu
 	{
 		MainMenu::MainMenu()
-			: lib::menu::MenuStep{ "MainMenu" }, _gameConfig{ ":NextGame" }
+			: lib::menu::MenuStep{ "MainMenu" }
 		{
 		}
 

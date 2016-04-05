@@ -23,7 +23,7 @@
 namespace zoper
 {
 	GameScene::GameScene()
-		: Scene("GameScene"), Configuration("config.cfg"), _gameConfig{ ":NextGame" }
+		: Scene("GameScene")
 	{
 		_gameData.size.x = 18;
 		_gameData.size.y = 12;

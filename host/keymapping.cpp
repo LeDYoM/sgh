@@ -2,7 +2,7 @@
 
 namespace zoper
 {
-	KeyMapping::KeyMapping() : lib::Configuration("config.cfg")
+	KeyMapping::KeyMapping()
 	{
 		std::array<lib::input::KeyCode, TotalKeys> defaults{ lib::input::KeyCode::Left, lib::input::KeyCode::Right, lib::input::KeyCode::Up, lib::input::KeyCode::Down, lib::input::KeyCode::Space, lib::input::KeyCode::Escape };
 

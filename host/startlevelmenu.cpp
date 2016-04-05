@@ -13,7 +13,7 @@ namespace zoper
 	namespace zmenu
 	{
 		StartLevelMenu::StartLevelMenu()
-			: lib::menu::MenuStep{ "StartLevelMenu" }, lib::Configuration("config.cfg"), _gameConfig{ ":NextGame" }
+			: lib::menu::MenuStep{ "StartLevelMenu" }
 		{
 		}
 

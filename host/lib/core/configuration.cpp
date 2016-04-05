@@ -1,12 +1,10 @@
 #include "configuration.hpp"
 #include "log.hpp"
-
+#include <fstream>
 #include <regex>
 
 namespace lib
 {
-
-	Configuration::CDataMap Configuration::_data;
 
 	std::vector<std::string> split_helper(const std::string& input, const std::string& regex)
 	{
@@ -54,15 +52,18 @@ namespace lib
 		return result;
 	}
 
-	Configuration::Configuration(const std::string &file)
-		: currentFile(file)
+	Configuration::Configuration()
 	{
-		loadFile(file);
 	}
 
+	Configuration::~Configuration()
+	{
+	}
+
+	/*
 	void Configuration::loadFile(const std::string &file)
 	{
-		CDataMap::iterator fIterator{ _data.find(currentFile) };
+		CDataMap::iterator fIterator{ m_data.find(currentFile) };
 
 		if (fIterator != _data.end())
 		{
@@ -104,7 +105,7 @@ namespace lib
 			currentMap = &(_data[currentFile]);
 		}
 	}
-
+	*/
 	bool Configuration::configFileExists(const std::string &file)
 	{
 		std::ifstream f(file);

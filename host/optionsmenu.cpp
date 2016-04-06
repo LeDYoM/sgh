@@ -15,7 +15,7 @@ namespace zoper
 	namespace zmenu
 	{
 		OptionsMenu::OptionsMenu()
-			: lib::menu::MenuStep{ "OptionsMenu" }, lib::Configuration("config.cfg")
+			: lib::menu::MenuStep{ "OptionsMenu" }
 		{
 		}
 
@@ -36,6 +36,7 @@ namespace zoper
 				}
 				auto callBack = [this](lib::u32 index, lib::menu::ChooseControl &self)
 				{
+					self;
 					switch (index)
 					{
 					case 0:
@@ -55,6 +56,7 @@ namespace zoper
 						break;
 					case 6:
 					default:
+						/*
 						addConfigInt(GraphicsLevelStr, self.getSelectedSubLabel(0), true);
 						auto _resolution = sf::VideoMode::getFullscreenModes()[self.getSelectedSubLabel(1)];
 						if (_resolution.isValid())
@@ -68,6 +70,7 @@ namespace zoper
 						saveConfig();
 						resetControl();
 						menuManager()->changeStep("MainMenu");
+						*/
 						break;
 					}
 				};
@@ -75,7 +78,7 @@ namespace zoper
 				_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("optionsmenu_chooseControl",
 					menuManager()->resourceManager()->getResource("game_menu.mainFont"),
 					lib::draw::Color::Blue(), lib::draw::Color::Red(),
-					lib::draw::NodeText::Alignment::Left,
+					lib::draw::Alignment::Left,
 					70, 1,
 					callBack,
 					lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 70.0f, 70.0f }, lib::draw::Color::Red())),
@@ -103,9 +106,9 @@ namespace zoper
 		void OptionsMenu::resetControl()
 		{
 			sf::VideoMode vm;
-			vm.width = getAsInt(ResolutionXStr, 1024);
-			vm.height = getAsInt(ResolutionYStr, 768);
-			vm.bitsPerPixel = getAsInt(BPPStr, 32);
+//			vm.width = getAsInt(ResolutionXStr, 1024);
+//			vm.height = getAsInt(ResolutionYStr, 768);
+//			vm.bitsPerPixel = getAsInt(BPPStr, 32);
 			lib::u32 index{ 0 };
 			auto _resolutions( sf::VideoMode::getFullscreenModes() );
 			for (lib::u32 i = 0u; i < _resolutions.size(); ++i)
@@ -116,10 +119,10 @@ namespace zoper
 				}
 			}
 
-			_chooseControl->setSelectedSubLabel(0, getAsInt(GraphicsLevelStr, 0));
-			_chooseControl->setSelectedSubLabel(1, index);
-			_chooseControl->setSelectedSubLabel(2, getAsInt(FulscreenStr, 0));
-			_chooseControl->setSelectedSubLabel(3, getAsInt(VSyncStr, 0));
+//			_chooseControl->setSelectedSubLabel(0, getAsInt(GraphicsLevelStr, 0));
+//			_chooseControl->setSelectedSubLabel(1, index);
+//			_chooseControl->setSelectedSubLabel(2, getAsInt(FulscreenStr, 0));
+//			_chooseControl->setSelectedSubLabel(3, getAsInt(VSyncStr, 0));
 		}
 	}
 }

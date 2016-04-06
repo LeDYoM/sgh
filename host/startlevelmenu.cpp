@@ -13,7 +13,7 @@ namespace zoper
 	namespace zmenu
 	{
 		StartLevelMenu::StartLevelMenu()
-			: lib::menu::MenuStep{ "StartLevelMenu" }, lib::Configuration("config.cfg"), _gameConfig{ ":NextGame" }
+			: lib::menu::MenuStep{ "StartLevelMenu" }
 		{
 		}
 
@@ -31,7 +31,7 @@ namespace zoper
 					switch (index)
 					{
 					case 0:
-						_gameConfig.addConfigInt(StartLevelStr, self.getSelectedSubLabel(0), true);
+//						_gameConfig.addConfigInt(StartLevelStr, self.getSelectedSubLabel(0), true);
 						LOG_DEBUG("Starting t level:" << self.getSelectedSubLabel(0));
 						self.setSelectedSubLabel(0, 0);
 						menuManager()->setNextScene("GameScene");
@@ -45,7 +45,7 @@ namespace zoper
 				};
 				_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("optionsmenu_chooseControl",
 					menuManager()->resourceManager()->getResource("game_menu.mainFont"), lib::draw::Color::Blue(), lib::draw::Color::Red(),
-					lib::draw::NodeText::Alignment::Left,
+					lib::draw::Alignment::Left,
 					70, 1,
 					callBack,
 					lib::sptr<lib::menu::CursorDescriptor>(new lib::menu::CursorDescriptor(3, lib::vector2df{ 70.0f, 70.0f }, lib::draw::Color::Red())),

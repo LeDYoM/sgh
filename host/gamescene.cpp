@@ -8,7 +8,7 @@
 #include <lib/core/log.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
-#include <lib/draw/RenderNode.hpp>
+#include <lib/draw/rendernode.hpp>
 #include <lib/draw/positionanimation.hpp>
 #include <lib/draw/coloranimation.hpp>
 #include <lib/draw/nodeshape.hpp>
@@ -23,7 +23,7 @@
 namespace zoper
 {
 	GameScene::GameScene()
-		: Scene("GameScene"), Configuration("config.cfg"), _gameConfig{ ":NextGame" }
+		: Scene("GameScene")
 	{
 		_gameData.size.x = 18;
 		_gameData.size.y = 12;
@@ -130,8 +130,7 @@ namespace zoper
 			_gameText->setPosition({ sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height });
 			_overText->setPosition({ sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y });
 
-			_pauseText->setPosition({ 1000.0f, 1000.0f });
-			_pauseText->setAlignment(lib::draw::NodeText::Alignment::Center);
+			_pauseText->setPosition(lib::vector2df{ 1000.0f, 1000.0f }, lib::draw::Alignment::Center);
 			return true;
 		}
 		return false;
@@ -139,25 +138,22 @@ namespace zoper
 
 	bool GameScene::deinit()
 	{
-		if (Scene::deinit())
-		{
-			// Remove instances from all nodes.
-			clear();
-			return true;
-		}
-		return false;
+		Scene::deinit();
+		// Remove instances from all nodes.
+		return true;
 	}
 
 	void GameScene::onEnterScene()
 	{
+		lib::DataMap &gConfig{ *_gameConfig.sharedData() };
 		p_boardModel = lib::sptr<lib::board::BoardModel>(new lib::board::BoardModel(_gameData.size, this));
 		tilesCreated();
 		addPlayer();
-		_gameData._gameMode = static_cast<GameData::GameModes>(_gameConfig.getAsInt(GameModeStr, 0));
+		_gameData._gameMode = static_cast<GameData::GameModes>(gConfig[GameModeStr].gets32());
 
 		_score = 0;
 		_nextTokenPart = 0;
-		setLevel(_gameConfig.getAsInt(StartLevelStr, 0));
+		setLevel(gConfig[StartLevelStr].gets32());
 		_gameOverrg->setVisible(false);
 		_mainBoardrg->setVisible(true);
 		_pauserg->setVisible(false);
@@ -643,11 +639,11 @@ namespace zoper
 
 	void GameScene::tileMoved(const lib::vector2du32 &source, const lib::vector2du32 &dest, lib::board::WITilePointer tile)
 	{
-		if (auto ztile = std::dynamic_pointer_cast<Tile>(tile.lock()))
+		if (auto ztile = as<Tile>(tile.lock()))
 		{
 			tokenMoved(source, dest, ztile);
 		}
-		else if (auto ztile_ = std::dynamic_pointer_cast<Player>(tile.lock()))
+		else if (auto ztile_ = as<Player>(tile.lock()))
 		{
 			playerMoved(source, dest, ztile_);
 		}

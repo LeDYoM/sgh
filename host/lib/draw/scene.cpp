@@ -24,7 +24,7 @@ namespace lib
 
 		void Scene::updateView()
 		{
-			m_scnManager->appController()->parentWindow()->updateCamera(m_camera);
+			p_scnManager->appController()->parentWindow()->updateCamera(m_camera);
 		}
 
 		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const
@@ -40,7 +40,7 @@ namespace lib
 				auto sceneSize = getDefaultSizeView();
 				m_camera.setSize(sceneSize);
 				updateView();
-				m_eventClient = m_scnManager->eventClient()->newEventClient();
+				m_eventClient = p_scnManager->eventClient()->newEventClient();
 				m_eventClient->setReceiver([this](lib::core::events::EventClient::ReceivedEvent event_)
 				{
 					auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
@@ -61,6 +61,7 @@ namespace lib
 				m_eventClient->setActive(false);
 				return true;
 			}
+
 			return false;
 		}
 
@@ -116,23 +117,23 @@ namespace lib
 
 		void Scene::setNextScene(const std::string &name)
 		{
-			__ASSERT(m_scnManager, "Null SceneManager on Scene");
-			m_scnManager->setScene(name);
+			__ASSERT(p_scnManager, "Null SceneManager on Scene");
+			p_scnManager->setScene(name);
 		}
 
 		uptr<core::ResourceManager> const &Scene::resourceManager()
 		{
-			return m_scnManager->appController()->resourceManager();
+			return p_scnManager->appController()->resourceManager();
 		}
 
 		uptr<util::UtilProvider> const & Scene::utilProvider()
 		{
-			return m_scnManager->appController()->utilProvider();
+			return p_scnManager->appController()->utilProvider();
 		}
 
 		void Scene::exitProgram()
 		{
-			m_scnManager->exitProgram();
+			p_scnManager->exitProgram();
 		}
 
 		lib::draw::Scene *const Scene::parentScene()

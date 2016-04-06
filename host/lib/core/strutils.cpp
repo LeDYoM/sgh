@@ -44,4 +44,9 @@ namespace lib
 		}
 	}
 
+	bool contains(const std::string &str, const std::string &what)
+	{
+		return str.find_first_of(what) != std::string::npos;
+	}
+
 }

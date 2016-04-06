@@ -11,7 +11,7 @@ namespace lib
 		class IParentable
 		{
 		protected:
-			T *parent() const { return m_parent; }
+			T *const parent() const { return m_parent; }
 		private:
 			T *m_parent{ nullptr };
 			void setParent(T *const parent_)

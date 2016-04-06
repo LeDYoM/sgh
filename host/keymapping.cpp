@@ -2,17 +2,17 @@
 
 namespace zoper
 {
-	KeyMapping::KeyMapping() : lib::Configuration("config.cfg")
+	KeyMapping::KeyMapping()
 	{
-		std::array<lib::input::KeyCode, TotalKeys> defaults{ lib::input::KeyCode::Left, lib::input::KeyCode::Right, lib::input::KeyCode::Up, lib::input::KeyCode::Down, lib::input::KeyCode::Space, lib::input::KeyCode::Escape };
+//		std::array<lib::input::KeyCode, TotalKeys> defaults{ lib::input::KeyCode::Left, lib::input::KeyCode::Right, lib::input::KeyCode::Up, lib::input::KeyCode::Down, lib::input::KeyCode::Space, lib::input::KeyCode::Escape };
 
 		for (auto i = 0u; i < Direction::Total; ++i)
 		{
-			_keys[i] = static_cast<lib::input::KeyCode>(addConfigInt("key" + std::to_string(i), defaults[i]));
+//			_keys[i] = static_cast<lib::input::KeyCode>(addConfigInt("key" + std::to_string(i), defaults[i]));
 		}
 
-		_keys[Direction::Total] = static_cast<lib::input::KeyCode>(addConfigInt("key_launch" + std::to_string(Direction::Total), defaults[Direction::Total]));
-		_keys[Direction::Total + 1] = static_cast<lib::input::KeyCode>(addConfigInt("key_pause" + std::to_string(Direction::Total + 1), defaults[Direction::Total + 1]));
+//		_keys[Direction::Total] = static_cast<lib::input::KeyCode>(addConfigInt("key_launch" + std::to_string(Direction::Total), defaults[Direction::Total]));
+//		_keys[Direction::Total + 1] = static_cast<lib::input::KeyCode>(addConfigInt("key_pause" + std::to_string(Direction::Total + 1), defaults[Direction::Total + 1]));
 	}
 
 	KeyMapping::~KeyMapping()
@@ -74,11 +74,11 @@ namespace zoper
 	{
 		for (auto i = 0u; i < Direction::Total; ++i)
 		{
-			addConfigInt("key" + std::to_string(i), _keys[i],true);
+//			addConfigInt("key" + std::to_string(i), _keys[i],true);
 		}
 
-		addConfigInt("key_launch" + std::to_string(Direction::Total), _keys[Direction::Total]);
-		addConfigInt("key_pause" + std::to_string(Direction::Total + 1), _keys[Direction::Total + 1]);
+//		addConfigInt("key_launch" + std::to_string(Direction::Total), _keys[Direction::Total]);
+//		addConfigInt("key_pause" + std::to_string(Direction::Total + 1), _keys[Direction::Total + 1]);
 	}
 
 }

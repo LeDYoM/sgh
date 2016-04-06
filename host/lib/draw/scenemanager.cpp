@@ -14,11 +14,11 @@ namespace lib
 	{
 		SceneManager::~SceneManager()
 		{
-//			for (auto scene : _scenes)
-//			{
-//				scene->privateOnDeinit();
-//			}
-//			_scenes.clear();
+			for (auto scene : _scenes)
+			{
+				scene->deinit();
+			}
+			_scenes.clear();
 			LOG_DESTRUCT_NOPARAMS;
 		}
 
@@ -30,10 +30,9 @@ namespace lib
 		void SceneManager::addScene(sptr<Scene> newScene)
 		{
 			__ASSERT(newScene, "Cannot add a null scene");
-			newScene->m_scnManager = this;
-			addNode(newScene);
-//			_scenes.push_back(newScene);
-//			newScene->privateOnInit();
+			newScene->p_scnManager = this;
+			_scenes.push_back(newScene);
+			newScene->init();
 		}
 	
 		void SceneManager::setScene(const std::string &name)
@@ -85,7 +84,7 @@ namespace lib
 
 		sptr<Scene> SceneManager::getSceneByName(const std::string &name) const
 		{
-			for (auto scene : m_nodes)
+			for (auto scene : _scenes)
 			{
 				if (scene->name() == name)
 				{
@@ -99,9 +98,9 @@ namespace lib
 		{
 			if (!_currentScene)
 			{
-				if (m_nodes.size() > 0)
+				if (_scenes.size() > 0)
 				{
-					setScene(m_nodes[0]);
+					setScene(_scenes[0]);
 				}
 			}
 			else if (_nextScene)

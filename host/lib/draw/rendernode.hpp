@@ -13,6 +13,12 @@ namespace lib
 	namespace draw
 	{
 		class RenderGroup;
+		enum class Alignment : u8
+		{
+			Left = 0,
+			Center = 1,
+			Right = 2
+		};
 
 		class RenderNode : public IParentable<RenderGroup>, public Node, public Transformable
 		{
@@ -28,10 +34,11 @@ namespace lib
 			virtual Rectf32 getGlobalBounds();
 
 			// Some useful shortcuts
-//			using Transformable::setPosition;
-			void setPosition(const vector2df &pos);
-			void setPositionX(const f32 x);
-			void setPositionY(const f32 y);
+			using Transformable::setPosition;
+			void setPosition(const vector2df &pos, Alignment alignment);
+			void setPositionX(const f32 x, Alignment alignment = Alignment::Left);
+			void setPositionY(const f32 y, Alignment alignment = Alignment::Left);
+			void setAlignment(Alignment alignment);
 
 			void updateGeometryIfNecessary();
 		protected:

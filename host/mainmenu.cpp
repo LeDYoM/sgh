@@ -13,7 +13,7 @@ namespace zoper
 	namespace zmenu
 	{
 		MainMenu::MainMenu()
-			: lib::menu::MenuStep{ "MainMenu" }, _gameConfig{ ":NextGame" }
+			: lib::menu::MenuStep{ "MainMenu" }
 		{
 		}
 
@@ -26,17 +26,18 @@ namespace zoper
 		{
 			if (MenuStep::init())
 			{
+				
 				auto callBack = [this](lib::u32 index, lib::menu::SimpleMenu &self)
 				{
 					self;
 					switch (index)
 					{
 					case 0:
-						_gameConfig.addConfigInt(GameModeStr, 0, true);
+//						_gameConfig.addConfigInt(GameModeStr, 0, true);
 						menuManager()->changeStep("StartLevelMenu");
 						break;
 					case 1:
-						_gameConfig.addConfigInt(GameModeStr, 1, true);
+//						_gameConfig.addConfigInt(GameModeStr, 1, true);
 						menuManager()->changeStep("StartLevelMenu");
 						break;
 					case 2:
@@ -51,7 +52,7 @@ namespace zoper
 				_chooseControl = lib::sptr<lib::menu::SimpleMenu>(new lib::menu::SimpleMenu("mainmenu_chooseControl",
 					//				menuManager()->resourceManager()->getResource("game_menu.mainFont"),
 					//				lib::draw::Color::Blue(), lib::draw::Color::Red(),
-					lib::draw::NodeText::Alignment::Center,
+					lib::draw::Alignment::Center,
 					//				90, 1,
 					callBack
 					/*
@@ -68,6 +69,7 @@ namespace zoper
 				_chooseControl->addOption("Play time mode");
 				_chooseControl->addOption("Options");
 				_chooseControl->addOption("Exit");
+
 				//			_chooseControl->setPosition({ menuManager()->camera().target().center().x, 700 });
 				return true;
 			}

@@ -10,8 +10,7 @@ namespace lib
 		MenuManager::MenuManager(const std::string &name)
 			: Scene{ name }
 		{
-//			_steps = stepsVector();
-//			getSteps();
+			LOG_CONSTRUCT("Name: " + name);
 		}
 
 		bool MenuManager::init()
@@ -19,17 +18,18 @@ namespace lib
 			using namespace draw;
 			if (Scene::init())
 			{
-				m_mTheme = uptr<MenuTheme>(new MenuTheme{ Color{ 0, 0, 255 }, Color{ 255, 0, 0 }, "game_menu.mainFont",40 });
+				m_mTheme = sptr<MenuTheme>(new MenuTheme{ Color{ 0, 0, 255 }, Color{ 255, 0, 0 }, 
+					"game_menu.mainFont", 40,40});
 				m_mTheme->setParent(this);
-				m_mTheme->init();
-//				m_mTheme->notSelectedColor.s
-				return true;
+				return m_mTheme->init();
 			}
 			return false;
 		}
 
 		MenuManager::~MenuManager()
 		{
+			LOG_DESTRUCT("Name: " + name());
+			_activeMenuStep = nullptr;
 		}
 
 		void MenuManager::addMenuStep(sptr<MenuStep> step)
@@ -60,6 +60,7 @@ namespace lib
 
 		void MenuManager::setActiveStep(sptr<MenuStep> step)
 		{
+			_activeMenuStep = step;
 			activateOne(step);
 		}
 

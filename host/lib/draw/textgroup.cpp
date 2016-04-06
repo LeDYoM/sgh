@@ -1,4 +1,5 @@
 #include "textgroup.hpp"
+#include "nodetext.hpp"
 #include "scene.hpp"
 #include <lib/core/resource.hpp>
 #include <lib/core/log.hpp>
@@ -11,30 +12,24 @@ namespace lib
 		struct TextGroup::TextGroupPrivate
 		{
 			sptr<core::Resource> m_font{ nullptr };
-			NodeText::Alignment m_alignment{ NodeText::Alignment::Left };
+			Alignment m_alignment{ Alignment::Left };
 			u32 m_characterSize{ 1 };
-			TextGroupPrivate()
-			{
-				LOG_CONSTRUCT_NOPARAMS;
-			}
-
-			~TextGroupPrivate()
-			{
-				LOG_DESTRUCT_NOPARAMS;
-			}
+			draw::Color m_color;
 		};
 
 		TextGroup::TextGroup(const str &name)
-			: RenderGroup{ name }
-			, m_private{ new TextGroupPrivate() }
+			: RenderGroup{ name }, m_private{ sptr<TextGroupPrivate>(new TextGroupPrivate) }
 		{
-			LOG_CONSTRUCT_NOPARAMS;
 		}
 
 		TextGroup::~TextGroup()
 		{
 			m_private = nullptr;
-			LOG_DESTRUCT_NOPARAMS;
+		}
+
+		bool TextGroup::init()
+		{
+			return RenderGroup::init();
 		}
 
 		void TextGroup::setFont(const sptr<core::Resource> font)
@@ -43,21 +38,26 @@ namespace lib
 			update();
 		}
 
-		void TextGroup::setCharacterSize(u32 size)
+		void TextGroup::setAlignment(const Alignment alignment)
 		{
-			m_private->m_characterSize = size;
-			update();
-		}
 
-		void TextGroup::setAlignment(const NodeText::Alignment alignment)
-		{
-			m_private->m_alignment = alignment;
 		}
 
 		void TextGroup::addText(const str &caption)
 		{
-			sptr<NodeText> node{ RenderGroup::createText(name() + "_" + caption) };
-			node->setString(caption);
+			RenderGroup::createText(name() + "_" + caption)->setString(caption);
+			update();
+		}
+
+		void TextGroup::setCharacterSize(const u32 chSize)
+		{
+			m_private->m_characterSize = chSize;
+			update();
+		}
+
+		void TextGroup::setColor(const draw::Color & color)
+		{
+			m_private->m_color = color;
 			update();
 		}
 
@@ -71,16 +71,16 @@ namespace lib
 			const Rectf32 &parentView{ parentScene()->currentView() };
 			const vector2df viewCenter{ parentView.center() };
 			u32 count{ 0 };
-
 			for (auto &node : _renderNodes)
 			{
-				sptr<NodeText> node_ = std::dynamic_pointer_cast<NodeText>(node);
-				if (node_)
+				sptr<NodeText> temp = as<NodeText>(node);
+				if (temp)
 				{
-					node_->setFont(*(m_private->m_font->getAsFont()));
-					node_->setCharacterSize(m_private->m_characterSize);
-					node_->setPosition({ viewCenter.x, static_cast<f32>(count*(m_private->m_characterSize)) });
-					node_->setAlignment(m_private->m_alignment);
+					temp->setFont(*(m_private->m_font->getAsFont()));
+					temp->setCharacterSize(m_private->m_characterSize);
+					temp->setColor(m_private->m_color);
+					temp->setPositionX(viewCenter.x, m_private->m_alignment);
+					temp->setPositionY(count*m_private->m_characterSize);
 					++count;
 				}
 			}

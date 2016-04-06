@@ -3,7 +3,6 @@
 
 #include <lib/include/types.hpp>
 #include <lib/draw/rendernode.hpp>
-#include <lib/draw/nodetext.hpp>
 #include "imenucontrol.hpp"
 #include "menudescriptors.hpp"
 #include <vector>
@@ -24,7 +23,7 @@ namespace lib
 		public:
 			ChooseControl(const std::string &name, sptr<core::Resource> font,
 				const lib::draw::Color &textColor, const lib::draw::Color &selectedTextColor,
-				const draw::NodeText::Alignment alignment,
+				const draw::Alignment alignment,
 				u32 chSize, float incY, std::function<void(const u32,ChooseControl &self)> onSelected,
 				sptr<CursorDescriptor> cursorDescriptor, 
 				const std::vector<sptr<OptionDescriptor>> labels);

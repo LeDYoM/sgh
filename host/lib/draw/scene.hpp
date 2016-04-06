@@ -76,15 +76,14 @@ namespace lib
 
 		private:
 			sptr<core::events::EventClient> m_eventClient{ nullptr };
-			
 
 			void privateOnEnterScene();
 			void privateOnExitScene();
 			u32 _state;
 
 			friend class SceneManager;
-			SceneManager *m_scnManager;
-//			SceneManager *scnManager() { return dynamic_cast<SceneManager*>(parent()); }
+			SceneManager *p_scnManager;
+			friend class SceneManager;
 			lib::draw::Camera m_camera;
 		};
 	}

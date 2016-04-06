@@ -12,15 +12,14 @@ namespace lib
 {
 	namespace menu
 	{
-		SimpleMenu::SimpleMenu(const str &name, const draw::NodeText::Alignment alignment,
+		SimpleMenu::SimpleMenu(const str &name, const draw::Alignment alignment,
 			std::function<void(const u32, SimpleMenu &self)> onSelected)
 			: IMenuControl{ name  }, _onSelected {onSelected}
-			,m_textGroup{nullptr}
+			,m_textGroup{}
 		{}
 
 		SimpleMenu::~SimpleMenu()
 		{
-			m_textGroup.reset();
 			_labelData.clear();
 		}
 
@@ -30,7 +29,8 @@ namespace lib
 			{
 				m_textGroup = createNewRenderGroupOf<draw::TextGroup>(name()+"_textGroup");
 				m_textGroup->setFont(menuManager()->menuTheme()->defaultFont());
-				m_textGroup->setCharacterSize(menuManager()->menuTheme()->normalCharacterSize());
+				m_textGroup->setCharacterSize(menuManager()->menuTheme()->notSelectedTextSize());
+				m_textGroup->setColor(menuManager()->menuTheme()->notSelectedColor());
 			}
 			return false;
 		}

@@ -3,7 +3,6 @@
 
 #include <lib/include/types.hpp>
 #include "rendergroup.hpp"
-#include <lib/draw/nodetext.hpp>
 
 namespace lib
 {
@@ -19,16 +18,20 @@ namespace lib
 			TextGroup(const str &name);
 			virtual ~TextGroup();
 
+			virtual bool init() override;
+
 			void setFont(const sptr<core::Resource> font);
-			void setCharacterSize(u32 size);
-			void setAlignment(const NodeText::Alignment alignment);
+			void setAlignment(const Alignment alignment);
 			void addText(const str &caption);
+			void setCharacterSize(const u32 chSize);
+			void setColor(const draw::Color &color);
+
 			const sptr<core::Resource> font() const;
 		private:
 			void update();
 
 			struct TextGroupPrivate;
-			uptr<TextGroupPrivate> m_private{ nullptr };
+			sptr<TextGroupPrivate> m_private;
 		};
 	}
 }

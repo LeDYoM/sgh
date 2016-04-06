@@ -10,7 +10,7 @@ namespace lib
 	namespace core
 	{
 		HostController::HostController(const std::vector<std::string> &params)
-			: Configuration{ "host.cfg" }
+//			: Configuration{ "host.cfg" }
 		{
 			params;
 			LOG_CONSTRUCT_NOPARAMS;

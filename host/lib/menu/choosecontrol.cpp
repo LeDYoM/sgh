@@ -12,7 +12,7 @@ namespace lib
 	{
 		ChooseControl::ChooseControl(const std::string &name, sptr<core::Resource> font, 
 			const lib::draw::Color &textColor, const lib::draw::Color &selectedTextColor,
-			const draw::NodeText::Alignment alignment,
+			const draw::Alignment alignment,
 			u32 chSize,float incY,
 			std::function<void(const u32, ChooseControl &self)> onSelected,
 			sptr<CursorDescriptor> cursorDescriptor, 
@@ -34,8 +34,8 @@ namespace lib
 				text->setCharacterSize(chSize);
 				text->setString(labels[count]->_text);
 				text->setColor(textColor);
-				text->setPosition({ 0, currentPos.y });
-				text->setAlignment(alignment);
+				text->setPositionX(0, alignment);
+				text->setPositionY(currentPos.y);
 
 				sptr<draw::NodeText> subtext{ nullptr };
 				if (labels[count]->_subOptionsLabels.size()>0)
@@ -45,8 +45,8 @@ namespace lib
 					subtext->setCharacterSize(chSize);
 					subtext->setString(labels[count]->_subOptionsLabels[labels[count]->_startValueIndex]);
 					subtext->setColor(textColor);
-					subtext->setPosition({ 1800, currentPos.y });
-					subtext->setAlignment(lib::draw::NodeText::Alignment::Right);
+					subtext->setPositionX(1800, lib::draw::Alignment::Right);
+					subtext->setPositionY(currentPos.y);
 				}
 
 				currentPos.y += (chSize + incY);
@@ -115,8 +115,7 @@ namespace lib
 		void ChooseControl::updateSubLabelText(const u32 index)
 		{
 			_labelData[index].subLabel->setString(_labelData[index].textSubLabel[_labelData[index].selectedSublabel]);
-			_labelData[index].subLabel->setPositionX(1800.0f);
-			_labelData[index].subLabel->setAlignment(draw::NodeText::Alignment::Right);
+			_labelData[index].subLabel->setPositionX(1800.0f, lib::draw::Alignment::Right);
 		}
 
 		void ChooseControl::cursorSelectItem(u32 nodeIndex)

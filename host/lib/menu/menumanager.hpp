@@ -27,12 +27,12 @@ namespace lib
 			virtual void onKeyPressed(input::Key key);
 			virtual void onKeyReleased(input::Key key);
 
-			uptr<MenuTheme> const &menuTheme() const { return m_mTheme; }
+			sptr<MenuTheme> const &menuTheme() const { return m_mTheme; }
 
 		private:
 			void setActiveStep(sptr<MenuStep> step);
 			sptr<MenuStep> _activeMenuStep{ nullptr };
-			uptr<MenuTheme> m_mTheme{ nullptr };
+			sptr<MenuTheme> m_mTheme{ nullptr };
 		};
 	}
 }

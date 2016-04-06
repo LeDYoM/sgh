@@ -24,7 +24,7 @@ namespace lib
 				return dynamic_cast<MenuManager *const>(parentScene());
 			}
 
-			uptr<MenuTheme> const &menuTheme()
+			sptr<MenuTheme> const &menuTheme()
 			{
 				return menuManager()->menuTheme();
 			}

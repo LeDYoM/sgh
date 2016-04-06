@@ -1,7 +1,7 @@
 #ifndef LIB_DRAW_RENDERNODE_HPP
 #define LIB_DRAW_RENDERNODE_HPP
 
-#include "inameddrawable.hpp"
+#include "node.hpp"
 #include <lib/include/types.hpp>
 #include <lib/include/color.hpp>
 #include "transformable.hpp"
@@ -14,7 +14,7 @@ namespace lib
 	{
 		class RenderGroup;
 
-		class RenderNode : public IParentable<RenderGroup>, public INamedDrawable, public Transformable
+		class RenderNode : public IParentable<RenderGroup>, public Node, public Transformable
 		{
 		public:
 			explicit RenderNode(const std::string &name, const PrimitiveType primitiveType);
@@ -42,7 +42,6 @@ namespace lib
 			Color m_color;
 			bool m_geometryNeedUpdate;
 			bool m_colorsNeedUpdate;
-		private:
 		};
 	}
 }

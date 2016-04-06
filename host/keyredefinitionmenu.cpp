@@ -4,7 +4,7 @@
 #include <lib/menu/menudescriptors.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
-#include <lib/draw/RenderNode.hpp>
+#include <lib/draw/rendernode.hpp>
 #include <lib/draw/nodetext.hpp>
 
 #include "common.hpp"

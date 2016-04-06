@@ -228,7 +228,7 @@ namespace lib
 			return "T_Unknown: (?)";
 	}
 
-	void DataValue::loadFile(const std::string &file)
+	bool DataValue::loadFile(const std::string &file)
 	{
 		LOG_DEBUG("Trying to read file "+file);
 		std::ifstream f(file);
@@ -268,6 +268,8 @@ namespace lib
 					}
 				}
 			}
+			return true;
 		}
+		return false;
 	}
 }

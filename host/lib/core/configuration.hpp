@@ -21,7 +21,7 @@ namespace lib
 		DataMap *configuration();
 		DataMap *sharedData();
 
-
+		bool loadConfiguration();
 	private:
 
 		DataMap m_rootNode;

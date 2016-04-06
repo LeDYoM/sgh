@@ -23,4 +23,11 @@ namespace lib
 		return m_rootNode["sharedData"].getMap();
 	}
 
+	bool Configuration::loadConfiguration()
+	{
+		DataValue temp;
+
+		return temp.loadFile("config.cfg");
+	}
+
 }

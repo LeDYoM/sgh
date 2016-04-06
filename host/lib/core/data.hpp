@@ -40,7 +40,7 @@ namespace lib
 		DataMap *getMap();
 		const str toString() const;
 
-		void loadFile(const std::string &file);
+		bool loadFile(const std::string &file);
 	private:
 		class DataValuePrivate;
 		DataValuePrivate *m_private;

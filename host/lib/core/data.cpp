@@ -13,8 +13,6 @@ namespace lib
 		DataValuePrivate(const DataType dtype=DataType::T_Empty)
 			: m_dtype{ dtype }
 		{
-			using std::string;
-
 			switch (m_dtype)
 			{
 			case DataType::T_f64:
@@ -22,10 +20,8 @@ namespace lib
 			case DataType::T_Empty:
 				break;
 			case DataType::T_string:
-				delete reinterpret_cast<std::string*>(ptr_);
 				break;
 			case DataType::T_Tree:
-				delete reinterpret_cast<DataMap*>(ptr_);
 				break;
 			default:
 				break;
@@ -57,14 +53,59 @@ namespace lib
 			*(reinterpret_cast<DataMap*>(ptr_)) = value_;
 		}
 
-		~DataValuePrivate()
+		DataValuePrivate::DataValuePrivate(DataValuePrivate &&value_)
+			: DataValuePrivate(std::move(value_.m_dtype))
 		{
-			using std::string;
-
 			switch (m_dtype)
 			{
-			case DataType::T_f64:
+			case DataType::T_Empty:
+				break;
 			case DataType::T_s32:
+				s32_ = std::move(value_.s32_);
+				break;
+			case DataType::T_f64:
+				f64_ = std::move(value_.f64_);
+				break;
+			case DataType::T_string:
+			case DataType::T_Tree:
+				ptr_ = std::move(value_.ptr_);
+				value_.ptr_ = nullptr;
+				break;
+			default:
+				break;
+			}
+		}
+
+		DataValuePrivate::DataValuePrivate(const DataValuePrivate &value_)
+			: DataValuePrivate(value_.m_dtype)
+		{
+			switch (m_dtype)
+			{
+			case DataType::T_Empty:
+				break;
+			case DataType::T_s32:
+				s32_ = value_.s32_;
+				break;
+			case DataType::T_f64:
+				f64_ = value_.f64_;
+				break;
+			case DataType::T_string:
+				*(reinterpret_cast<std::string*>(ptr_)) = *(reinterpret_cast<std::string*>(value_.ptr_));
+				break;
+			case DataType::T_Tree:
+				*(reinterpret_cast<DataMap*>(ptr_)) = *(reinterpret_cast<DataMap*>(value_.ptr_));
+				break;
+			default:
+				break;
+			}
+		}
+
+		~DataValuePrivate()
+		{
+			switch (m_dtype)
+			{
+			case DataType::T_s32:
+			case DataType::T_f64:
 			case DataType::T_Empty:
 				break;
 			case DataType::T_string:
@@ -88,7 +129,7 @@ namespace lib
 	};
 
 	DataValue::DataValue()
-		: m_private{new DataValue::DataValuePrivate}
+		: m_private{nullptr}
 	{
 	}
 
@@ -108,8 +149,20 @@ namespace lib
 	}
 
 	DataValue::DataValue(const DataMap &value_)
+		: m_private{ new DataValue::DataValuePrivate(value_) }
 	{
-		*this = value_;
+	}
+
+	DataValue::DataValue(const DataValue &other)
+		: m_private{ new DataValue::DataValuePrivate(other.m_private->m_dtype) }
+	{
+
+	}
+
+	DataValue::DataValue(DataValue &&other)
+		: m_private{ std::move(other.m_private) }
+	{
+		other.m_private = nullptr;
 	}
 
 	DataValue::~DataValue()
@@ -117,19 +170,7 @@ namespace lib
 		if (m_private)
 			delete m_private;
 	}
-	/*
-	template <class T>
-	sptr<int> toData(const T&data_)
-	{
-		return sptr<int>(std::dynamic_pointer_cast<T>(sptr<T>(new T{ data_ })));
-	}
 
-	template <class T>
-	sptr<T> fromData(sptr<int> data_)
-	{
-		return std::dynamic_pointer_cast<T>(data_);
-	}
-*/
 	DataValue & DataValue::operator=(s32 value_)
 	{
 		if (m_private)
@@ -148,7 +189,7 @@ namespace lib
 		return *this;
 	}
 
-	DataValue & DataValue::operator=(const str &value_)
+	DataValue &DataValue::operator=(const str &value_)
 	{
 		if (m_private)
 			delete m_private;
@@ -163,6 +204,25 @@ namespace lib
 			delete m_private;
 
 		m_private = new DataValuePrivate(value_);
+		return *this;
+	}
+
+	DataValue &DataValue::operator=(const DataValue &other)
+	{
+		if (m_private)
+			delete m_private;
+
+		m_private = new DataValuePrivate(*(other.m_private));
+		return *this;
+	}
+
+	DataValue &DataValue::operator=(DataValue &&other)
+	{
+		if (m_private)
+			delete m_private;
+
+		m_private = std::move(other.m_private);
+		other.m_private = nullptr;
 		return *this;
 	}
 
@@ -183,7 +243,7 @@ namespace lib
 		else if (m_private->m_dtype == DataType::T_f64)
 			return m_private->f64_;
 		else
-			return s32();
+			return f64();
 	}
 
 	const str DataValue::getString() const                                 
@@ -228,48 +288,68 @@ namespace lib
 			return "T_Unknown: (?)";
 	}
 
-	bool DataValue::loadFile(const std::string &file)
+	DataValue fromString_helper(const str &str_)
 	{
-		LOG_DEBUG("Trying to read file "+file);
-		std::ifstream f(file);
-
-		if (f.is_open())
+		if (str_[0] == '"')
 		{
-			while (f)
-			{
-				std::string line;
-				f >> line;
-				trim(line);
-				if (line.size() > 0)
-				{
-					auto left(line);
-					auto right(line);
+			return str_.substr(1);
+		}
+		else if (contains(str_, "."))
+		{
+			return std::stod(str_);
+		}
+		else
+		{
+			return std::stoi(str_);
+		}
+	}
 
-					leftFrom(left, "=");
-					trim(left);
-					rightFrom(right, "=");
-					trim(right);
-					if (left.size() > 0 && right.size() > 0)
+	std::pair<str, DataValue> fromString(const str &str_)
+	{
+		str left(str_);
+		str right(str_);
+		leftFrom(left, "=");
+		trim(left);
+		rightFrom(right, "=");
+		trim(right);
+		if (left.size() > 0 && right.size() > 0)
+		{
+			return{ left, fromString_helper(right) };
+		}
+		return{};
+	}
+
+	DataValue DataValue::fromStringVector(const std::vector<str> &data, u32 &count)
+	{
+		DataMap current;
+		while (count < data.size())
+		{
+			if (data[count].size() > 0)
+			{
+				str str_(data[count]);
+				trim(str_);
+
+				if (starts_with(str_, "[") && ends_with(str_, "]"))
+				{
+					str currentSection(str_.substr(1, str_.size() - 2));
+					if (starts_with(currentSection, "/"))
 					{
-						DataValue val;
-						if (right[0] == '"')
-						{
-							val = right.substr(1);
-						}
-						else if (contains(right, "."))
-						{
-							val = std::stod(right);
-						}
-						else
-						{
-							val = std::stoi(right);
-						}
-						LOG_DEBUG("Adding key" << left << " with value " << val.toString());
+						return DataValue{ current };
+					}
+					DataValue temp(fromStringVector(data,++count));
+					current[str_] = std::move(temp);
+				}
+				else
+				{
+					std::pair<std::string,DataValue> readValue{ fromString(str_) };
+					if (!readValue.first.empty())
+					{
+						current[readValue.first] = std::move(readValue.second);
 					}
 				}
 			}
-			return true;
+			++count;
 		}
-		return false;
+		return DataValue{ current };
 	}
 }

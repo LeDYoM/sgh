@@ -25,9 +25,27 @@ namespace lib
 
 	bool Configuration::loadConfiguration()
 	{
-		DataValue temp;
-
-		return temp.loadFile("config.cfg");
+		std::vector<str> data(loadFile("config.cfg"));
+		u32 count{ 0 };
+		DataValue temp = DataValue::fromStringVector(data,count);
+		return true;
 	}
 
+	std::vector<str> Configuration::loadFile(const std::string &file)
+	{
+		LOG_DEBUG("Trying to read file " + file);
+		std::vector<str> data;
+		std::ifstream f(file);
+
+		if (f.is_open())
+		{
+			while (f)
+			{
+				str line;
+				f >> line;
+				data.push_back(line);
+			}
+		}
+		return data;
+	}
 }

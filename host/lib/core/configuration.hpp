@@ -22,6 +22,9 @@ namespace lib
 		DataMap *sharedData();
 
 		bool loadConfiguration();
+
+		std::vector<str> loadFile(const std::string &file);
+
 	private:
 
 		DataMap m_rootNode;

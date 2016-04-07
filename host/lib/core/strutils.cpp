@@ -8,6 +8,11 @@ namespace lib
 		return str.find_first_of(what) == 0;
 	}
 
+	bool ends_with(const std::string &str, const std::string &what)
+	{
+		return str.find_last_of(what) + what.size() == str.size();
+	}
+
 	void ltrim(std::string &str)
 	{
 		while (!str.empty() && std::isspace(str[0]))

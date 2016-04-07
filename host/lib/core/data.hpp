@@ -4,6 +4,7 @@
 #include <lib/include/types.hpp>
 #include <lib/include/compconfig.hpp>
 #include <map>
+#include <vector>
 
 namespace lib
 {
@@ -26,12 +27,16 @@ namespace lib
 		DataValue(f64 value_);
 		DataValue(const str &value_);
 		explicit DataValue(const DataMap &value_);
+		DataValue(const DataValue &other);
+		DataValue(DataValue &&other);
 		virtual ~DataValue();
 
 		DataValue &operator=(s32 value_);
 		DataValue &operator=(f64 value_);
 		DataValue &operator=(const str &value_);
 		DataValue &operator=(const DataMap &value_);
+		DataValue &operator=(const DataValue &other);
+		DataValue &operator=(DataValue &&other);
 
 		const s32 gets32() const;
 		const f64 getf64() const;
@@ -40,7 +45,8 @@ namespace lib
 		DataMap *getMap();
 		const str toString() const;
 
-		bool loadFile(const std::string &file);
+		static DataValue fromStringVector(const std::vector<str> &data, u32 &count);
+
 	private:
 		class DataValuePrivate;
 		DataValuePrivate *m_private;

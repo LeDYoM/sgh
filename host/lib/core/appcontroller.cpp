@@ -31,9 +31,9 @@ namespace lib
 		{
 			switch (m_state)
 			{
-			case lib::core::AppController::AppState::NotInitialized:
+			case AppState::NotInitialized:
 				break;
-			case lib::core::AppController::AppState::ReadyToStart:
+			case AppState::ReadyToStart:
 			{
 				// Create the scene manager
 				LOG_DEBUG_(appId() + ":  Starting initialization...");
@@ -67,7 +67,7 @@ namespace lib
 				LOG_DEBUG(appId() << ": " << " is now executing");
 			}
 				break;
-			case lib::core::AppController::AppState::Executing:
+			case AppState::Executing:
 			{
 				if (loopStep())
 				{
@@ -76,7 +76,7 @@ namespace lib
 				}
 			}
 				break;
-			case lib::core::AppController::AppState::ReadyToTerminate:
+			case AppController::AppState::ReadyToTerminate:
 				LOG_DEBUG(appId() << ": " << " started termination");
 				m_state = AppState::Terminated;
 //				m_iapp->onFinish();
@@ -92,7 +92,7 @@ namespace lib
 				LOG_DEBUG_(appId() + ": terminated");
 				return true;
 				break;
-			case lib::core::AppController::AppState::Terminated:
+			case AppState::Terminated:
 				return true;
 				break;
 			default:

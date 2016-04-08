@@ -27,6 +27,7 @@ namespace lib
 
 		void ResourceManager::load(const std::string &section)
 		{
+			section;
 			/*
 			auto resourcesList = appController()->config()->section("Resources");
 			resourcesDirectory = resourcesList.data["resources_directory"];

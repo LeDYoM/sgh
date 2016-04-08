@@ -6,146 +6,83 @@
 
 namespace lib
 {
-	class DataValue::DataValuePrivate
-	{
-	public:
-
-		DataValuePrivate(const DataType dtype=DataType::T_Empty)
-			: m_dtype{ dtype }
-		{
-			switch (m_dtype)
-			{
-			case DataType::T_f64:
-			case DataType::T_s32:
-			case DataType::T_Empty:
-				break;
-			case DataType::T_string:
-				break;
-			case DataType::T_Tree:
-				break;
-			default:
-				break;
-			}
-		}
-
-		DataValuePrivate::DataValuePrivate(s32 value_)
-			: DataValuePrivate(DataType::T_s32)
-		{
-			s32_ = value_;
-		}
-
-		DataValuePrivate::DataValuePrivate(f64 value_)
-			: DataValuePrivate(DataType::T_f64)
-		{
-			f64_ = value_;
-		}
-
-		DataValuePrivate::DataValuePrivate(const str &value_)
-			: DataValuePrivate(DataType::T_string)
-		{
-			ptr_ = new str(value_);
-		}
-
-
-		DataValuePrivate::DataValuePrivate(const DataMap &value_)
-			: DataValuePrivate(DataType::T_Tree)
-		{
-			ptr_ = new DataMap(value_);
-		}
-
-		DataValuePrivate::DataValuePrivate(const DataValuePrivate &value_)
-			: DataValuePrivate(value_.m_dtype)
-		{
-			switch (m_dtype)
-			{
-			case DataType::T_Empty:
-				break;
-			case DataType::T_s32:
-				s32_ = value_.s32_;
-				break;
-			case DataType::T_f64:
-				f64_ = value_.f64_;
-				break;
-			case DataType::T_string:
-				ptr_ = new str(*(reinterpret_cast<str*>(value_.ptr_)));
-				break;
-			case DataType::T_Tree:
-				ptr_ = new DataMap(*(reinterpret_cast<DataMap*>(value_.ptr_)));
-				break;
-			default:
-				break;
-			}
-		}
-
-		~DataValuePrivate()
-		{
-			switch (m_dtype)
-			{
-			case DataType::T_s32:
-			case DataType::T_f64:
-			case DataType::T_Empty:
-				break;
-			case DataType::T_string:
-				delete reinterpret_cast<std::string*>(ptr_);
-				break;
-			case DataType::T_Tree:
-				delete reinterpret_cast<DataMap*>(ptr_);
-				break;
-			default:
-				break;
-			}
-		}
-
-		union
-		{
-			s32 s32_;
-			f64 f64_;
-			void *ptr_;
-		};
-		DataType m_dtype{ DataType::T_Empty };
-	};
-
 	DataValue::DataValue()
-		: m_private{nullptr}
+		: m_dtype{ DataType::T_Empty }
 	{
 	}
 
 	DataValue::DataValue(s32 value_)
-		: m_private{ new DataValue::DataValuePrivate(value_) }
+		: m_dtype{ DataType::T_s32 }
 	{
+		s32_ = value_;
 	}
 
 	DataValue::DataValue(f64 value_)
-		: m_private{ new DataValue::DataValuePrivate(value_) }
+		: m_dtype{ DataType::T_f64 }
 	{
+		f64_ = value_;
 	}
 
 	DataValue::DataValue(const str &value_)
-		: m_private{ new DataValue::DataValuePrivate(value_) }
+		: m_dtype{ DataType::T_string }
 	{
+		ptr_ = new str(value_);
 	}
 
 	DataValue::DataValue(const DataMap &value_)
-		: m_private{ new DataValue::DataValuePrivate(value_) }
+		: m_dtype{ DataType::T_Tree }
 	{
+		ptr_ = new DataMap(value_);
 	}
 
-	DataValue::DataValue(const DataValue &other)
-		: m_private{ new DataValue::DataValuePrivate(*other.m_private) }
+	DataValue::DataValue(const DataValue &value_)
+		: m_dtype{ value_.m_dtype }
 	{
-
-	}
-
-	DataValue::DataValue(DataValue &&other)
-		: m_private{ std::move(other.m_private) }
-	{
-		other.m_private = nullptr;
+		switch (m_dtype)
+		{
+		case DataType::T_Empty:
+			break;
+		case DataType::T_s32:
+			s32_ = value_.s32_;
+			break;
+		case DataType::T_f64:
+			f64_ = value_.f64_;
+			break;
+		case DataType::T_string:
+			ptr_ = new str(value_.getString());
+			break;
+		case DataType::T_Tree:
+			ptr_ = new DataMap(*value_.getMap());
+			break;
+		default:
+			break;
+		}
 	}
 
 	DataValue::~DataValue()
 	{
-		if (m_private)
-			delete m_private;
+		switch (m_dtype)
+		{
+		case DataType::T_s32:
+		case DataType::T_f64:
+		case DataType::T_Empty:
+			break;
+		case DataType::T_string:
+			delete reinterpret_cast<std::string*>(ptr_);
+			break;
+		case DataType::T_Tree:
+			delete reinterpret_cast<DataMap*>(ptr_);
+			break;
+		default:
+			break;
+		}
+	}
+
+	DataValue::DataValue(DataValue &&other)
+		: m_dtype{ std::move(other.m_dtype) }
+	{
+		std::swap(*this, other);
+		other = nullptr;
 	}
 
 	DataValue & DataValue::operator=(s32 value_)

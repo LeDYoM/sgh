@@ -48,8 +48,13 @@ namespace lib
 		static DataMap fromStringVector(const std::vector<str> &data, u32 &count);
 
 	private:
-		class DataValuePrivate;
-		DataValuePrivate *m_private;
+		union
+		{
+			s32 s32_;
+			f64 f64_;
+			void *ptr_;
+		};
+		DataType m_dtype{ DataType::T_Empty };
 	};
 }
 

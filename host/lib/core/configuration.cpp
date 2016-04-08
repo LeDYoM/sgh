@@ -27,7 +27,7 @@ namespace lib
 	{
 		std::vector<str> data(loadFile("config.cfg"));
 		u32 count{ 0 };
-		DataValue temp = DataValue::fromStringVector(data,count);
+		DataMap temp = DataValue::fromStringVector(data,count);
 		return true;
 	}
 

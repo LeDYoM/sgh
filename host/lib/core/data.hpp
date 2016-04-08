@@ -45,7 +45,7 @@ namespace lib
 		DataMap *getMap();
 		const str toString() const;
 
-		static DataValue fromStringVector(const std::vector<str> &data, u32 &count);
+		static DataMap fromStringVector(const std::vector<str> &data, u32 &count);
 
 	private:
 		class DataValuePrivate;

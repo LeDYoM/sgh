@@ -43,37 +43,14 @@ namespace lib
 		DataValuePrivate::DataValuePrivate(const str &value_)
 			: DataValuePrivate(DataType::T_string)
 		{
-			*(reinterpret_cast<std::string*>(ptr_)) = value_;
+			ptr_ = new str(value_);
 		}
 
 
 		DataValuePrivate::DataValuePrivate(const DataMap &value_)
 			: DataValuePrivate(DataType::T_string)
 		{
-			*(reinterpret_cast<DataMap*>(ptr_)) = value_;
-		}
-
-		DataValuePrivate::DataValuePrivate(DataValuePrivate &&value_)
-			: DataValuePrivate(std::move(value_.m_dtype))
-		{
-			switch (m_dtype)
-			{
-			case DataType::T_Empty:
-				break;
-			case DataType::T_s32:
-				s32_ = std::move(value_.s32_);
-				break;
-			case DataType::T_f64:
-				f64_ = std::move(value_.f64_);
-				break;
-			case DataType::T_string:
-			case DataType::T_Tree:
-				ptr_ = std::move(value_.ptr_);
-				value_.ptr_ = nullptr;
-				break;
-			default:
-				break;
-			}
+			ptr_ = new DataMap(value_);
 		}
 
 		DataValuePrivate::DataValuePrivate(const DataValuePrivate &value_)
@@ -90,10 +67,10 @@ namespace lib
 				f64_ = value_.f64_;
 				break;
 			case DataType::T_string:
-				*(reinterpret_cast<std::string*>(ptr_)) = *(reinterpret_cast<std::string*>(value_.ptr_));
+				ptr_ = new str(*(reinterpret_cast<str*>(value_.ptr_)));
 				break;
 			case DataType::T_Tree:
-				*(reinterpret_cast<DataMap*>(ptr_)) = *(reinterpret_cast<DataMap*>(value_.ptr_));
+				ptr_ = new DataMap(*(reinterpret_cast<DataMap*>(value_.ptr_)));
 				break;
 			default:
 				break;
@@ -290,17 +267,17 @@ namespace lib
 
 	DataValue fromString_helper(const str &str_)
 	{
-		if (str_[0] == '"')
+		if (is_int(str_))
 		{
-			return str_.substr(1);
+			return std::stoi(str_);
 		}
-		else if (contains(str_, "."))
+		else if (is_number(str_))
 		{
 			return std::stod(str_);
 		}
 		else
 		{
-			return std::stoi(str_);
+			return str_;
 		}
 	}
 
@@ -319,7 +296,7 @@ namespace lib
 		return{};
 	}
 
-	DataValue DataValue::fromStringVector(const std::vector<str> &data, u32 &count)
+	DataMap DataValue::fromStringVector(const std::vector<str> &data, u32 &count)
 	{
 		DataMap current;
 		while (count < data.size())
@@ -334,10 +311,9 @@ namespace lib
 					str currentSection(str_.substr(1, str_.size() - 2));
 					if (starts_with(currentSection, "/"))
 					{
-						return DataValue{ current };
+						return current;
 					}
-					DataValue temp(fromStringVector(data,++count));
-					current[str_] = std::move(temp);
+					current[currentSection] = std::move(fromStringVector(data, ++count));
 				}
 				else
 				{
@@ -350,6 +326,6 @@ namespace lib
 			}
 			++count;
 		}
-		return DataValue{ current };
+		return current;
 	}
 }

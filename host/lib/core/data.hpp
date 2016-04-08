@@ -26,16 +26,16 @@ namespace lib
 		DataValue(s32 value_);
 		DataValue(f64 value_);
 		DataValue(const str &value_);
-		explicit DataValue(const DataMap &value_);
+		DataValue(const DataMap &value_);
 		DataValue(const DataValue &other);
 		DataValue(DataValue &&other);
 		virtual ~DataValue();
 
-		DataValue &operator=(s32 value_);
-		DataValue &operator=(f64 value_);
-		DataValue &operator=(const str &value_);
-		DataValue &operator=(const DataMap &value_);
-		DataValue &operator=(const DataValue &other);
+//		DataValue &operator=(s32 value_);
+//		DataValue &operator=(f64 value_);
+//		DataValue &operator=(const str &value_);
+//		DataValue &operator=(const DataMap &value_);
+//		DataValue &operator=(const DataValue &other);
 		DataValue &operator=(DataValue &&other);
 
 		const s32 gets32() const;

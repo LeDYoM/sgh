@@ -81,10 +81,11 @@ namespace lib
 	DataValue::DataValue(DataValue &&other)
 		: m_dtype{ std::move(other.m_dtype) }
 	{
-		std::swap(*this, other);
-		other = nullptr;
+		f64_ = std::move(other.f64_);
+		other.m_dtype = DataType::T_Empty;
+		other.f64_ = 0;
 	}
-
+/*
 	DataValue & DataValue::operator=(s32 value_)
 	{
 		if (m_private)
@@ -129,74 +130,73 @@ namespace lib
 		m_private = new DataValuePrivate(*(other.m_private));
 		return *this;
 	}
-
+	*/
 	DataValue &DataValue::operator=(DataValue &&other)
 	{
-		if (m_private)
-			delete m_private;
-
-		m_private = std::move(other.m_private);
-		other.m_private = nullptr;
+		m_dtype = std::move(other.m_dtype);
+		f64_ = std::move(other.f64_);
+		other.m_dtype = DataType::T_Empty;
+		other.f64_ = 0;
 		return *this;
 	}
 
 	const s32 DataValue::gets32() const
 	{
-		if (m_private->m_dtype == DataType::T_s32)
-			return m_private->s32_;
-		else if (m_private->m_dtype == DataType::T_f64)
-			return static_cast<s32>(m_private->f64_);
+		if (m_dtype == DataType::T_s32)
+			return s32_;
+		else if (m_dtype == DataType::T_f64)
+			return static_cast<s32>(f64_);
 		else
 			return s32();
 	}
 
 	const f64 DataValue::getf64() const
 	{
-		if (m_private->m_dtype == DataType::T_s32)
-			return static_cast<f64>(m_private->s32_);
-		else if (m_private->m_dtype == DataType::T_f64)
-			return m_private->f64_;
+		if (m_dtype == DataType::T_s32)
+			return static_cast<f64>(s32_);
+		else if (m_dtype == DataType::T_f64)
+			return f64_;
 		else
 			return f64();
 	}
 
 	const str DataValue::getString() const                                 
 	{
-		if (m_private->m_dtype == DataType::T_s32)
+		if (m_dtype == DataType::T_s32)
 			return std::to_string(gets32()).c_str();
-		else if (m_private->m_dtype == DataType::T_f64)
+		else if (m_dtype == DataType::T_f64)
 			return std::to_string(getf64()).c_str();
-		else if (m_private->m_dtype == DataType::T_string)
-			return *(reinterpret_cast<str*>(m_private->ptr_));
+		else if (m_dtype == DataType::T_string)
+			return *(reinterpret_cast<str*>(ptr_));
 		else
 			return "";
 	}
 
 	const DataMap *DataValue::getMap() const
 	{
-		if (m_private->m_dtype == DataType::T_Tree)
-			return reinterpret_cast<DataMap*>(m_private->ptr_);
+		if (m_dtype == DataType::T_Tree)
+			return reinterpret_cast<DataMap*>(ptr_);
 		else
 			return nullptr;
 	}
 
 	DataMap *DataValue::getMap()
 	{
-		if (m_private->m_dtype == DataType::T_Tree)
-			return reinterpret_cast<DataMap*>(m_private->ptr_);
+		if (m_dtype == DataType::T_Tree)
+			return reinterpret_cast<DataMap*>(ptr_);
 		else
 			return nullptr;
 	}
 
 	const str DataValue::toString() const
 	{
-		if (m_private->m_dtype == DataType::T_Empty)
+		if (m_dtype == DataType::T_Empty)
 			return "T_Empty: ()";
-		else if (m_private->m_dtype == DataType::T_s32)
+		else if (m_dtype == DataType::T_s32)
 			return "T_s32: " + getString();
-		else if (m_private->m_dtype == DataType::T_f64)
+		else if (m_dtype == DataType::T_f64)
 			return "T_f64: " + getString();
-		else if (m_private->m_dtype == DataType::T_string)
+		else if (m_dtype == DataType::T_string)
 			return "T_string: " + getString();
 		else
 			return "T_Unknown: (?)";

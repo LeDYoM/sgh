@@ -48,7 +48,7 @@ namespace lib
 
 
 		DataValuePrivate::DataValuePrivate(const DataMap &value_)
-			: DataValuePrivate(DataType::T_string)
+			: DataValuePrivate(DataType::T_Tree)
 		{
 			ptr_ = new DataMap(value_);
 		}
@@ -131,7 +131,7 @@ namespace lib
 	}
 
 	DataValue::DataValue(const DataValue &other)
-		: m_private{ new DataValue::DataValuePrivate(other.m_private->m_dtype) }
+		: m_private{ new DataValue::DataValuePrivate(*other.m_private) }
 	{
 
 	}
@@ -313,7 +313,7 @@ namespace lib
 					{
 						return current;
 					}
-					current[currentSection] = std::move(fromStringVector(data, ++count));
+					current[currentSection] = fromStringVector(data, ++count);
 				}
 				else
 				{

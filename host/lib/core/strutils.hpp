@@ -13,6 +13,9 @@ namespace lib
 	void leftFrom(std::string &str, const std::string &what);
 	void rightFrom(std::string &str, const std::string &what);
 	bool contains(const std::string &str, const std::string &what);
+	bool is_uint(const std::string &str);
+	bool is_int(const std::string &str);
+	bool is_number(const std::string &str);
 }
 
 #endif

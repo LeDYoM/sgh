@@ -1,5 +1,6 @@
 #include "strutils.hpp"
 #include <cctype>
+#include <algorithm>
 
 namespace lib
 {
@@ -52,6 +53,21 @@ namespace lib
 	bool contains(const std::string &str, const std::string &what)
 	{
 		return str.find_first_of(what) != std::string::npos;
+	}
+
+	bool is_uint(const std::string &str)
+	{
+		return !str.empty() && str.find_first_not_of("0123456789") == std::string::npos;
+	}
+
+	bool is_int(const std::string &str)
+	{
+		return !str.empty() && str.find_first_not_of("-0123456789") == std::string::npos;
+	}
+
+	bool is_number(const std::string &str)
+	{
+		return !str.empty() && str.find_first_not_of(".-0123456789") == std::string::npos;
 	}
 
 }

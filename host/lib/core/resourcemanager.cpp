@@ -18,6 +18,7 @@ namespace lib
 
 		void ResourceManager::Init()
 		{
+			AppService::Init();
 		}
 
 		ResourceManager::~ResourceManager()
@@ -29,7 +30,7 @@ namespace lib
 		{
 			section;
 			/*
-			auto resourcesList = appController()->config()->section("Resources");
+			auto resourcesList = appController()->configuration()->section("Resources");
 			resourcesDirectory = resourcesList.data["resources_directory"];
 			for (const auto tuple : resourcesList.data)
 			{

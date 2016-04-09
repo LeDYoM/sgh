@@ -11,7 +11,6 @@ namespace lib
 	namespace core
 	{
 		class Resource;
-		class ConfigSection;
 		class ResourceManager : public AppService
 		{
 		public:

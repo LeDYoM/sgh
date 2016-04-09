@@ -3,7 +3,7 @@
 #include "resourcemanager.hpp"
 #include <lib/draw/scenemanager.hpp>
 #include <lib/draw/scene.hpp>
-#include <lib/util/utilprovider.hpp>
+#include "utilprovider.hpp"
 #include "log.hpp"
 #include "eventmanager.hpp"
 #include "exceptionmanager.hpp"
@@ -44,7 +44,7 @@ namespace lib
 				m_fileSystem = uptr<FileSystem>{ new FileSystem{} };
 				m_configuration = uptr<Configuration>{ new Configuration{} };
 				m_eventManager = uptr<EventManager>{ new EventManager{} };
-				m_utilProvider = uptr<util::UtilProvider>{new util::UtilProvider{}};
+				m_utilProvider = uptr<UtilProvider>{new UtilProvider{}};
 				m_window = uptr<Window>{ new Window{m_iapp->getAppDescriptor().wcp} };
 				m_resourceManager = uptr<ResourceManager>{ new ResourceManager{} };
 				m_sceneManager = uptr<draw::SceneManager>{ new draw::SceneManager{} };

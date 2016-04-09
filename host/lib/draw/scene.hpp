@@ -20,10 +20,7 @@ namespace lib
 			class EventClient;
 		}
 	}
-	namespace util
-	{
-		class UtilProvider;
-	}
+	class UtilProvider;
 	namespace draw
 	{
 		namespace anim
@@ -53,7 +50,7 @@ namespace lib
 			sptr<core::events::EventClient> eventClient() const;
 
 			uptr<core::ResourceManager> const &resourceManager();
-			uptr<util::UtilProvider> const &utilProvider();
+			uptr<UtilProvider> const &utilProvider();
 
 			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
 			inline const Camera &camera() const { return m_camera; }

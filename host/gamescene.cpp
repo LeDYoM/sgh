@@ -15,8 +15,8 @@
 #include <lib/draw/nodetext.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
-#include <lib/util/randomizer.hpp>
-#include <lib/util/utilprovider.hpp>
+#include <lib/core/randomizer.hpp>
+#include <lib/core/utilprovider.hpp>
 #include <memory>
 #include <functional>
 

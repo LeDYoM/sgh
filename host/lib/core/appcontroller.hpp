@@ -14,10 +14,7 @@ namespace lib
 		class SceneManager;
 		class Scene;
 	}
-	namespace util
-	{
-		class UtilProvider;
-	};
+	class UtilProvider;
 	class Configuration;
 
 	namespace core
@@ -47,7 +44,7 @@ namespace lib
 			uptr<Window> const &parentWindow() const { return m_window; }
 			uptr<ResourceManager> const &resourceManager() const { return m_resourceManager; }
 			uptr<EventManager> const &eventManager() const { return m_eventManager; }
-			uptr<util::UtilProvider> const &utilProvider() const { return m_utilProvider; }
+			uptr<UtilProvider> const &utilProvider() const { return m_utilProvider; }
 			uptr<ExceptionManager> const &exceptionManager() const { return m_exceptionManager; }
 			uptr<FileSystem> const &fileSystem() const { return m_fileSystem; }
 			uptr<Configuration> const &configuration() const { return m_configuration; }
@@ -65,7 +62,7 @@ namespace lib
 			uptr<draw::SceneManager> m_sceneManager{ nullptr };
 			uptr<ResourceManager> m_resourceManager{ nullptr };
 			uptr<EventManager> m_eventManager{ nullptr };
-			uptr<util::UtilProvider> m_utilProvider{ nullptr };
+			uptr<UtilProvider> m_utilProvider{ nullptr };
 			uptr<ExceptionManager> m_exceptionManager{ nullptr };
 			uptr<FileSystem> m_fileSystem{ nullptr };
 			sptr<Driver> m_driver{ nullptr };

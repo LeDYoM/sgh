@@ -126,7 +126,7 @@ namespace lib
 			return p_scnManager->appController()->resourceManager();
 		}
 
-		uptr<util::UtilProvider> const & Scene::utilProvider()
+		uptr<UtilProvider> const & Scene::utilProvider()
 		{
 			return p_scnManager->appController()->utilProvider();
 		}

@@ -26,7 +26,7 @@ namespace lib
 			default_font = parent()->resourceManager()->getResource(fid);
 		}
 
-		sptr<core::Resource> MenuTheme::defaultFont() const
+		sptr<Resource> MenuTheme::defaultFont() const
 		{
 			return default_font;
 		}

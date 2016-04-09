@@ -10,7 +10,7 @@ namespace lib
 {
 	namespace menu
 	{
-		ChooseControl::ChooseControl(const std::string &name, sptr<core::Resource> font, 
+		ChooseControl::ChooseControl(const std::string &name, sptr<Resource> font, 
 			const lib::draw::Color &textColor, const lib::draw::Color &selectedTextColor,
 			const draw::Alignment alignment,
 			u32 chSize,float incY,

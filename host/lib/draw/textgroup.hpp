@@ -6,10 +6,7 @@
 
 namespace lib
 {
-	namespace core
-	{
-		class Resource;
-	}
+	class Resource;
 	namespace draw
 	{
 		class TextGroup : public RenderGroup
@@ -20,13 +17,13 @@ namespace lib
 
 			virtual bool init() override;
 
-			void setFont(const sptr<core::Resource> font);
+			void setFont(const sptr<Resource> font);
 			void setAlignment(const Alignment alignment);
 			void addText(const str &caption);
 			void setCharacterSize(const u32 chSize);
 			void setColor(const draw::Color &color);
 
-			const sptr<core::Resource> font() const;
+			const sptr<Resource> font() const;
 		private:
 			void update();
 

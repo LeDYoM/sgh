@@ -10,10 +10,7 @@
 
 namespace lib
 {
-	namespace core
-	{
-		class Resource;
-	}
+	class Resource;
 	namespace menu
 	{
 		class OptionDescriptor;
@@ -21,7 +18,7 @@ namespace lib
 		class ChooseControl : public IMenuControl
 		{
 		public:
-			ChooseControl(const std::string &name, sptr<core::Resource> font,
+			ChooseControl(const std::string &name, sptr<Resource> font,
 				const lib::draw::Color &textColor, const lib::draw::Color &selectedTextColor,
 				const draw::Alignment alignment,
 				u32 chSize, float incY, std::function<void(const u32,ChooseControl &self)> onSelected,

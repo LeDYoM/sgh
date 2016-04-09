@@ -8,10 +8,7 @@
 
 namespace lib
 {
-	namespace core
-	{
-		class Resource;
-	}
+	class Resource;
 	namespace menu
 	{
 		class MenuTheme : public draw::IParentable<MenuManager>
@@ -24,7 +21,7 @@ namespace lib
 			MenuTheme &operator=(const MenuTheme&) = delete;
 
 			virtual bool init();
-			sptr<core::Resource> defaultFont() const;
+			sptr<Resource> defaultFont() const;
 			const draw::Color &notSelectedColor() const { return m_notSelectedColor; }
 			const draw::Color &selectedColor() const { return m_selectedColor; }
 			const u32 notSelectedTextSize() const { return m_notSelectedTextSize; }
@@ -37,8 +34,7 @@ namespace lib
 			const u32 m_selectedTextSize;
 			str m_defaultFontId;
 			void aquireFont(const str&fid);
-			sptr<core::Resource> default_font;
-
+			sptr<Resource> default_font;
 		};
 	}
 }

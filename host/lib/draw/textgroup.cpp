@@ -11,7 +11,7 @@ namespace lib
 	{
 		struct TextGroup::TextGroupPrivate
 		{
-			sptr<core::Resource> m_font{ nullptr };
+			sptr<Resource> m_font{ nullptr };
 			Alignment m_alignment{ Alignment::Left };
 			u32 m_characterSize{ 1 };
 			draw::Color m_color;
@@ -32,7 +32,7 @@ namespace lib
 			return RenderGroup::init();
 		}
 
-		void TextGroup::setFont(const sptr<core::Resource> font)
+		void TextGroup::setFont(const sptr<Resource> font)
 		{
 			m_private->m_font = font;
 			update();
@@ -61,7 +61,7 @@ namespace lib
 			update();
 		}
 
-		const sptr<core::Resource> TextGroup::font() const
+		const sptr<Resource> TextGroup::font() const
 		{
 			return m_private->m_font;
 		}

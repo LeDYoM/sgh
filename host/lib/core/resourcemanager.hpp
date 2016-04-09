@@ -8,24 +8,21 @@
 
 namespace lib
 {
-	namespace core
+	class Resource;
+	class ResourceManager : public AppService
 	{
-		class Resource;
-		class ResourceManager : public AppService
-		{
-		public:
-			ResourceManager();
-			virtual ~ResourceManager();
-			void Init() override;
-			sptr<Resource> getResource(const std::string rid);
-			void load(const std::string &section);
+	public:
+		ResourceManager();
+		virtual ~ResourceManager();
+		void Init() override;
+		sptr<Resource> getResource(const std::string rid);
+		void load(const std::string &section);
 
-		private:
-			std::vector<sptr<Resource>> resources;
-			std::map<std::string, std::string> m_resourceList;
-			std::string resourcesDirectory;
-		};
-	}
+	private:
+		std::vector<sptr<Resource>> resources;
+		std::map<std::string, std::string> m_resourceList;
+		std::string resourcesDirectory;
+	};
 }
 
 #endif

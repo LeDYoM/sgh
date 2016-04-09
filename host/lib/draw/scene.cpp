@@ -1,6 +1,6 @@
 #include "scene.hpp"
 #include "scenemanager.hpp"
-#include "RenderNode.hpp"
+#include "rendernode.hpp"
 #include <lib/core/log.hpp>
 #include <lib/core/window.hpp>
 #include <lib/core/appcontroller.hpp>
@@ -121,7 +121,7 @@ namespace lib
 			p_scnManager->setScene(name);
 		}
 
-		uptr<core::ResourceManager> const &Scene::resourceManager()
+		uptr<lib::ResourceManager> const &Scene::resourceManager()
 		{
 			return p_scnManager->appController()->resourceManager();
 		}

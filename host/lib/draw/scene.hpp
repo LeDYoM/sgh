@@ -14,12 +14,12 @@ namespace lib
 {
 	namespace core
 	{
-		class ResourceManager;
 		namespace events
 		{
 			class EventClient;
 		}
 	}
+	class ResourceManager;
 	class UtilProvider;
 	namespace draw
 	{
@@ -49,7 +49,7 @@ namespace lib
 
 			sptr<core::events::EventClient> eventClient() const;
 
-			uptr<core::ResourceManager> const &resourceManager();
+			uptr<lib::ResourceManager> const &resourceManager();
 			uptr<UtilProvider> const &utilProvider();
 
 			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;

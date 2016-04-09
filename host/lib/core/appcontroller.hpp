@@ -16,11 +16,11 @@ namespace lib
 	}
 	class UtilProvider;
 	class Configuration;
+	class ResourceManager;
 
 	namespace core
 	{
 		class Window;
-		class ResourceManager;
 		class EventManager;
 		class ExceptionManager;
 		class FileSystem;

@@ -27,7 +27,8 @@ namespace lib
 	{
 		std::vector<str> data(loadFile("config.cfg"));
 		u32 count{ 0 };
-		m_rootNode = std::move(DataValue::fromStringVector(data, count) );
+		m_rootNode["configuration"] = std::move(DataValue::fromStringVector(data, count) );
+		m_rootNode["sharedData"] = DataMap{};
 		return true;
 	}
 

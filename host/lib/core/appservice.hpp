@@ -13,15 +13,17 @@ namespace lib
 	public:
 		AppService &operator=(const AppService &rh) = delete;
 		core::AppController *const appController() { return m_appController; }
+		virtual void Setup() {}
 		virtual void Init() {}
+		virtual void Close() {}
 	private:
 		friend class core::AppController;
 		core::AppController *m_appController{ nullptr };
 
-		void PrivateInit(core::AppController *const appController_)
+		void PrivateSetup(core::AppController *const appController_)
 		{
 			m_appController = appController_;
-			Init();
+			Setup();
 		}
 	};
 }

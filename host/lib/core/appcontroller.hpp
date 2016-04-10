@@ -17,6 +17,7 @@ namespace lib
 	class UtilProvider;
 	class Configuration;
 	class ResourceManager;
+	class AppService;
 
 	namespace core
 	{
@@ -66,6 +67,11 @@ namespace lib
 			uptr<ExceptionManager> m_exceptionManager{ nullptr };
 			uptr<FileSystem> m_fileSystem{ nullptr };
 			sptr<Driver> m_driver{ nullptr };
+
+			std::vector<uptr<AppService>> m_services;
+			void addServiceInstance(uptr<AppService> newService);
+			void setupAllServices();
+			void initializeServices();
 		};
 	}
 }

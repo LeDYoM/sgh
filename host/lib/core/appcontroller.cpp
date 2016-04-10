@@ -40,23 +40,19 @@ namespace lib
 				m_state = AppState::Executing;
 
 				//TO DO: Ask via requests
-				m_exceptionManager = uptr<ExceptionManager>{ new ExceptionManager{} };
-				m_fileSystem = uptr<FileSystem>{ new FileSystem{} };
-				m_configuration = uptr<Configuration>{ new Configuration{} };
-				m_eventManager = uptr<EventManager>{ new EventManager{} };
-				m_utilProvider = uptr<UtilProvider>{new UtilProvider{}};
-				m_window = uptr<Window>{ new Window{m_iapp->getAppDescriptor().wcp} };
-				m_resourceManager = uptr<ResourceManager>{ new ResourceManager{} };
-				m_sceneManager = uptr<draw::SceneManager>{ new draw::SceneManager{} };
+				addServiceInstance(uptr<ExceptionManager>{new ExceptionManager{} });
+				addServiceInstance(uptr<FileSystem>{ new FileSystem{} });
+				addServiceInstance(uptr<Configuration>{ new Configuration{} });
+				addServiceInstance(uptr<EventManager>{ new EventManager{} });
+				addServiceInstance(uptr<UtilProvider>{new UtilProvider{}});
+				addServiceInstance(uptr<ResourceManager>{ new ResourceManager{} });
+				addServiceInstance(uptr<draw::SceneManager>{ new draw::SceneManager{} });
+				m_window = uptr<Window>{ new Window{ m_iapp->getAppDescriptor().wcp } };
 
-				m_exceptionManager->PrivateInit(this);
-				m_fileSystem->PrivateInit(this);
-				m_configuration->PrivateInit(this);
-				m_eventManager->PrivateInit(this);
-				m_utilProvider->PrivateInit(this);
-				m_window->PrivateInit(this);
-				m_resourceManager->PrivateInit(this);
-				m_sceneManager->PrivateInit(this);
+				m_window->PrivateSetup(this);
+				setupAllServices();
+
+				initializeServices();
 
 //				m_configuration->loadFile(/*m_fileSystem->getFile(*/m_iapp->getAppDescriptor().configFile/*)*/);
 				m_configuration->loadConfiguration();
@@ -108,6 +104,27 @@ namespace lib
 			m_sceneManager->update();
 			windowWants2Close |= m_window->postLoop();
 			return windowWants2Close;
+		}
+
+		void AppController::addServiceInstance(uptr<AppService> newService)
+		{
+			m_services.push_back(std::move(newService));
+		}
+
+		void AppController::setupAllServices()
+		{
+			for (auto &service : m_services)
+			{
+				service->PrivateSetup(this);
+			}
+		}
+
+		void AppController::initializeServices()
+		{
+			for (auto &service : m_services)
+			{
+				service->Init();
+			}
 		}
 
 		const std::string AppController::appId() const

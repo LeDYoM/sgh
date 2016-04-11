@@ -44,8 +44,6 @@ namespace lib
 			
 			bool update();
 			uptr<Window> const &parentWindow() const { return m_window; }
-			uptr<ResourceManager> const &resourceManager() const { return m_resourceManager; }
-			uptr<EventManager> const &eventManager() const { return m_eventManager; }
 			uptr<UtilProvider> const &utilProvider() const { return m_utilProvider; }
 			uptr<ExceptionManager> const &exceptionManager() const { return m_exceptionManager; }
 			uptr<FileSystem> const &fileSystem() const { return m_fileSystem; }

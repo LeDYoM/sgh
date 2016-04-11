@@ -24,7 +24,7 @@ namespace lib
 
 		void SceneManager::Init()
 		{
-			m_eventClient = appController()->eventManager()->newEventClient();
+			m_eventClient = service<core::EventManager>()->newEventClient();
 		}
 
 		void SceneManager::addScene(sptr<Scene> newScene)

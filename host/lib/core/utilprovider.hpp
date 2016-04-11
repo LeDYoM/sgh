@@ -13,6 +13,8 @@ namespace lib
 		UtilProvider();
 		virtual ~UtilProvider();
 		u32 getRandomNumer(u32 max = 1, u32 min = 0);
+		const std::string serviceName() override { return "UtilProvider"; }
+
 	private:
 		uptr<Randomizer> m_randomizer;
 	};

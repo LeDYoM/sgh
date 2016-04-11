@@ -27,6 +27,8 @@ namespace lib
 			using AppService::AppService;
 			virtual ~SceneManager();
 
+			const std::string serviceName() override { return "SceneManager"; }
+
 			virtual void Init() override;
 
 			void addScene(sptr<Scene> newScene);

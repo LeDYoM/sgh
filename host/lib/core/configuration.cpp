@@ -23,13 +23,12 @@ namespace lib
 		return m_rootNode["sharedData"].getMap();
 	}
 
-	bool Configuration::loadConfiguration()
+	void Configuration::Init()
 	{
 		std::vector<str> data(loadFile("config.cfg"));
 		u32 count{ 0 };
 		m_rootNode["configuration"] = std::move(DataValue::fromStringVector(data, count) );
 		m_rootNode["sharedData"] = DataMap{};
-		return true;
 	}
 
 	std::vector<str> Configuration::loadFile(const std::string &file)

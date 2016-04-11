@@ -16,12 +16,12 @@ namespace lib
 	public:
 		Configuration();
 		virtual ~Configuration();
-		Configuration &operator=(const Configuration &other) = delete;
+		const std::string serviceName() override { return "Configuration"; }
 
 		DataMap *configuration();
 		DataMap *sharedData();
 
-		bool loadConfiguration();
+		void Init() override;
 
 		std::vector<str> loadFile(const std::string &file);
 

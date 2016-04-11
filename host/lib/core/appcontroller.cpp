@@ -9,13 +9,14 @@
 #include "exceptionmanager.hpp"
 #include "filesystem.hpp"
 #include "configuration.hpp"
+#include "servicesmanager.hpp"
 
 namespace lib
 {
 	namespace core
 	{
 		AppController::AppController(uptr<IApp> iapp, sptr<Driver> driverInstance)
-			: m_iapp{ std::move(iapp) }, m_driver{ driverInstance }
+			: m_iapp{ std::move(iapp) }, m_driver{ driverInstance }, m_servicesManager{ new ServicesManager{ this } }
 		{
 			LOG_CONSTRUCT_NOPARAMS;
 			LOG_DEBUG("Starting app " << appId() << "...");
@@ -40,23 +41,19 @@ namespace lib
 				m_state = AppState::Executing;
 
 				//TO DO: Ask via requests
-				addServiceInstance(uptr<ExceptionManager>{new ExceptionManager{} });
-				addServiceInstance(uptr<FileSystem>{ new FileSystem{} });
-				addServiceInstance(uptr<Configuration>{ new Configuration{} });
-				addServiceInstance(uptr<EventManager>{ new EventManager{} });
-				addServiceInstance(uptr<UtilProvider>{new UtilProvider{}});
-				addServiceInstance(uptr<ResourceManager>{ new ResourceManager{} });
-				addServiceInstance(uptr<draw::SceneManager>{ new draw::SceneManager{} });
+				m_servicesManager->addServiceInstance(uptr<ExceptionManager>{new ExceptionManager{} });
+				m_servicesManager->addServiceInstance(uptr<FileSystem>{ new FileSystem{} });
+				m_servicesManager->addServiceInstance(uptr<Configuration>{ new Configuration{} });
+				m_servicesManager->addServiceInstance(uptr<EventManager>{ new EventManager{} });
+				m_servicesManager->addServiceInstance(uptr<UtilProvider>{new UtilProvider{}});
+				m_servicesManager->addServiceInstance(uptr<ResourceManager>{ new ResourceManager{} });
+				m_servicesManager->addServiceInstance(uptr<draw::SceneManager>{ new draw::SceneManager{} });
 				m_window = uptr<Window>{ new Window{ m_iapp->getAppDescriptor().wcp } };
 
 				m_window->PrivateSetup(this);
-				setupAllServices();
+				m_servicesManager->setupAllServices();
+				m_servicesManager->initializeServices();
 
-				initializeServices();
-
-//				m_configuration->loadFile(/*m_fileSystem->getFile(*/m_iapp->getAppDescriptor().configFile/*)*/);
-				m_configuration->loadConfiguration();
-				m_resourceManager->load("*");
 				m_sceneManager->addScenes(m_iapp->scenesVector());
 
 				m_iapp->onInit();
@@ -104,27 +101,6 @@ namespace lib
 			m_sceneManager->update();
 			windowWants2Close |= m_window->postLoop();
 			return windowWants2Close;
-		}
-
-		void AppController::addServiceInstance(uptr<AppService> newService)
-		{
-			m_services.push_back(std::move(newService));
-		}
-
-		void AppController::setupAllServices()
-		{
-			for (auto &service : m_services)
-			{
-				service->PrivateSetup(this);
-			}
-		}
-
-		void AppController::initializeServices()
-		{
-			for (auto &service : m_services)
-			{
-				service->Init();
-			}
 		}
 
 		const std::string AppController::appId() const

@@ -18,6 +18,7 @@ namespace lib
 	class Configuration;
 	class ResourceManager;
 	class AppService;
+	class ServicesManager;
 
 	namespace core
 	{
@@ -55,7 +56,9 @@ namespace lib
 
 		protected:
 			bool loopStep();
+
 		private:
+			uptr<ServicesManager> m_servicesManager;
 			AppState m_state;
 			uptr<Window> m_window{ nullptr };
 			uptr<IApp> m_iapp{ nullptr };
@@ -69,9 +72,6 @@ namespace lib
 			sptr<Driver> m_driver{ nullptr };
 
 			std::vector<uptr<AppService>> m_services;
-			void addServiceInstance(uptr<AppService> newService);
-			void setupAllServices();
-			void initializeServices();
 		};
 	}
 }

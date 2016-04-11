@@ -17,7 +17,7 @@ namespace lib
 		void Init() override;
 		sptr<Resource> getResource(const std::string rid);
 		void load(const std::string &section);
-		const std::string serviceName() override { return "ResourceManager"; }
+		static const str staticTypeName() { return "ResourceManager"; }
 
 	private:
 		std::vector<sptr<Resource>> resources;

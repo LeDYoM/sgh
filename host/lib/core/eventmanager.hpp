@@ -27,7 +27,7 @@ namespace lib
 			void update();
 			void update1();
 			u32 pendingEvents();
-			const std::string serviceName() override { return "EventManager"; }
+			static const str staticTypeName() { return "EventManager"; }
 
 		private:
 			virtual bool empty();

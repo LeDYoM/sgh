@@ -16,7 +16,7 @@ namespace lib
 		public:
 			FileSystem();
 			virtual ~FileSystem();
-			const std::string serviceName() override { return "FileSystem"; }
+			static const str staticTypeName() { return "FileSystem"; }
 
 			sptr<File> getFile(const std::string &fileName);
 

@@ -28,7 +28,7 @@ namespace lib
 			virtual ~ExceptionManager();
 
 			void addException(Exception &&exception);
-			const std::string serviceName() override { return "ExceptionManager"; }
+			static const str staticTypeName() { return "ExceptionManager"; }
 
 		private:
 			std::stack<Exception> m_exceptions;

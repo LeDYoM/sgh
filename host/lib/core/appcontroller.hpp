@@ -52,6 +52,8 @@ namespace lib
 			uptr<Configuration> const &configuration() const { return m_configuration; }
 			sptr<Driver> const &driver() const { return m_driver; }
 
+			uptr<ServicesManager> const &servicesManager() const { return m_servicesManager; }
+
 			const std::string appId() const;
 
 		protected:

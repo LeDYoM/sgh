@@ -27,7 +27,7 @@ namespace lib
 			using AppService::AppService;
 			virtual ~SceneManager();
 
-			const std::string serviceName() override { return "SceneManager"; }
+			static const str staticTypeName() { return "SceneManager"; }
 
 			virtual void Init() override;
 

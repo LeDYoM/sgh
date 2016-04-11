@@ -14,16 +14,16 @@ namespace lib
 
 	}
 
-	void ServicesManager::addServiceInstance(uptr<AppService> newService)
+	void ServicesManager::addServiceInstance(const std::type_index &typeName, sptr<AppService> newService)
 	{
-		m_services.push_back(std::move(newService));
+		m_services[typeName] = std::move(newService);
 	}
 
 	void ServicesManager::setupAllServices()
 	{
 		for (auto &service : m_services)
 		{
-			service->PrivateSetup(m_appController);
+			service.second->PrivateSetup(m_appController);
 		}
 	}
 
@@ -31,9 +31,23 @@ namespace lib
 	{
 		for (auto &service : m_services)
 		{
-			service->Init();
+			service.second->Init();
 		}
 	}
 
+
+	void ServicesManager::stopServices()
+	{
+		for (auto &service : m_services)
+		{
+			service.second->Stop();
+		}
+		m_services.clear();
+	}
+
+	sptr<AppService> ServicesManager::service(const std::type_index &serviceType) const
+	{
+		return m_services.at(serviceType);
+	}
 
 }

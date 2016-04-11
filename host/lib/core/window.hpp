@@ -24,7 +24,7 @@ namespace lib
 		public:
 			Window(const WindowCreationParams &wcp);
 			virtual ~Window();
-			const std::string serviceName() override { return "Window"; }
+			static const str staticTypeName() { return "Window"; }
 
 			void Init() override;
 			bool preLoop();

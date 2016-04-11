@@ -2,6 +2,7 @@
 #define __LIB_APP_SERVICE_HPP__
 
 #include <string>
+#include "servicesmanager.hpp"
 
 namespace lib
 {
@@ -14,11 +15,15 @@ namespace lib
 	{
 	public:
 		AppService &operator=(const AppService &rh) = delete;
-		core::AppController *const appController() { return m_appController; }
+		core::AppController *const appController() const { return m_appController; }
 		virtual void Setup() {}
 		virtual void Init() {}
-		virtual void Close() {}
-		virtual const std::string serviceName() = 0;
+		virtual void Stop() {}
+	protected:
+		template <class T> sptr<T> service() const
+		{
+			return appController()->servicesManager()->service<T>();
+		}
 	private:
 		friend class core::AppController;
 		friend class ServicesManager;

@@ -41,14 +41,14 @@ namespace lib
 				m_state = AppState::Executing;
 
 				//TO DO: Ask via requests
-				m_servicesManager->addServiceInstance(uptr<ExceptionManager>{new ExceptionManager{} });
-				m_servicesManager->addServiceInstance(uptr<FileSystem>{ new FileSystem{} });
-				m_servicesManager->addServiceInstance(uptr<Configuration>{ new Configuration{} });
-				m_servicesManager->addServiceInstance(uptr<EventManager>{ new EventManager{} });
-				m_servicesManager->addServiceInstance(uptr<UtilProvider>{new UtilProvider{}});
-				m_servicesManager->addServiceInstance(uptr<ResourceManager>{ new ResourceManager{} });
-				m_servicesManager->addServiceInstance(uptr<draw::SceneManager>{ new draw::SceneManager{} });
-				m_window = uptr<Window>{ new Window{ m_iapp->getAppDescriptor().wcp } };
+				m_servicesManager->addService(sptr<ExceptionManager>{new ExceptionManager{}});
+				m_servicesManager->addService(sptr<FileSystem>{ new FileSystem{} });
+				m_servicesManager->addService(sptr<Configuration>{ new Configuration{} });
+				m_servicesManager->addService(sptr<EventManager>{ new EventManager{} });
+				m_servicesManager->addService(sptr<UtilProvider>{new UtilProvider{}});
+				m_servicesManager->addService(sptr<ResourceManager>{ new ResourceManager{} });
+				m_servicesManager->addService(sptr<draw::SceneManager>{ new draw::SceneManager{} });
+				m_servicesManager->addService(sptr<Window>{ new Window{ m_iapp->getAppDescriptor().wcp }});
 
 				m_window->PrivateSetup(this);
 				m_servicesManager->setupAllServices();
@@ -74,14 +74,7 @@ namespace lib
 				m_state = AppState::Terminated;
 //				m_iapp->onFinish();
 
-				m_sceneManager = nullptr;
-				m_resourceManager = nullptr;
-				m_window = nullptr;
-				m_utilProvider = nullptr;
-				m_eventManager = nullptr;
-				m_configuration = nullptr;
-				m_fileSystem = nullptr;
-				m_exceptionManager = nullptr;
+				m_servicesManager->stopServices();
 				LOG_DEBUG_(appId() + ": terminated");
 				return true;
 				break;
@@ -96,10 +89,10 @@ namespace lib
 
 		bool AppController::loopStep()
 		{
-			bool windowWants2Close = m_window->preLoop();
-			m_eventManager->update();
-			m_sceneManager->update();
-			windowWants2Close |= m_window->postLoop();
+			bool windowWants2Close = m_servicesManager->service<Window>()->preLoop();
+			m_servicesManager->service<EventManager>()->update();
+			m_servicesManager->service<draw::SceneManager>()->update();
+			windowWants2Close |= m_servicesManager->service<Window>()->postLoop();
 			return windowWants2Close;
 		}
 

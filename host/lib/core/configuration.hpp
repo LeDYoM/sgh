@@ -16,7 +16,7 @@ namespace lib
 	public:
 		Configuration();
 		virtual ~Configuration();
-		const std::string serviceName() override { return "Configuration"; }
+		static const str staticTypeName() { return "Configuration"; }
 
 		DataMap *configuration();
 		DataMap *sharedData();

@@ -23,8 +23,6 @@ namespace lib
 
 		void Init() override;
 
-		std::vector<str> loadFile(const std::string &file);
-
 	private:
 
 		DataMap m_rootNode;

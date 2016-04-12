@@ -7,20 +7,17 @@
 
 namespace lib
 {
-	namespace core
+	class File;
+
+	class FileSystem : public AppService
 	{
-		class File;
+	public:
+		FileSystem();
+		virtual ~FileSystem();
+		static const str staticTypeName() { return "FileSystem"; }
 
-		class FileSystem : public AppService
-		{
-		public:
-			FileSystem();
-			virtual ~FileSystem();
-			static const str staticTypeName() { return "FileSystem"; }
+		sptr<File> getFile(const std::string &fileName);
 
-			sptr<File> getFile(const std::string &fileName);
-
-		};
-	}
+	};
 }
 #endif

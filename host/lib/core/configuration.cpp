@@ -1,7 +1,7 @@
 #include "configuration.hpp"
+#include "appcontroller.hpp"
+#include "filesystem.hpp"
 #include "log.hpp"
-#include <fstream>
-#include <regex>
 
 namespace lib
 {
@@ -25,27 +25,9 @@ namespace lib
 
 	void Configuration::Init()
 	{
-		std::vector<str> data(loadFile("config.cfg"));
+		std::vector<str> data(service<FileSystem>()->getFile("config.cfg"));
 		u32 count{ 0 };
 		m_rootNode["configuration"] = std::move(DataValue::fromStringVector(data, count) );
 		m_rootNode["sharedData"] = DataMap{};
-	}
-
-	std::vector<str> Configuration::loadFile(const std::string &file)
-	{
-		LOG_DEBUG("Trying to read file " + file);
-		std::vector<str> data;
-		std::ifstream f(file);
-
-		if (f.is_open())
-		{
-			while (f)
-			{
-				str line;
-				f >> line;
-				data.push_back(line);
-			}
-		}
-		return data;
 	}
 }

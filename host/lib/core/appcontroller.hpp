@@ -19,13 +19,13 @@ namespace lib
 	class ResourceManager;
 	class AppService;
 	class ServicesManager;
+	class FileSystem;
 
 	namespace core
 	{
 		class Window;
 		class EventManager;
 		class ExceptionManager;
-		class FileSystem;
 		class Driver;
 	
 		class AppController

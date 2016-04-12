@@ -9,26 +9,24 @@
 
 namespace lib
 {
-	namespace core
+	class FileSystem;
+	class File : public Object
 	{
-		class FileSystem;
-		class File : public Object
-		{
-			NO_COPY(File);
-		public:
-			virtual ~File();
-			bool exists() const;
-			const std::vector<std::string> asText();
-			const std::string fileName() const;
+		NO_COPY(File);
+	public:
+		virtual ~File();
+		bool exists() const;
+		const std::vector<std::string> asText();
+		const std::string fileName() const;
 
-		private:
-			File(FileSystem *const fileSystem, const std::string &fileName);
+	private:
+		File(FileSystem *const fileSystem, const std::string &fileName);
 
-		private:
-			friend class FileSystem;
-			FileSystem *const m_fileSystem;
-			std::string m_fileName;
-		};
-	}
+	private:
+		friend class FileSystem;
+		FileSystem *const m_fileSystem;
+		std::string m_fileName;
+	};
 }
+
 #endif

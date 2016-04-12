@@ -38,10 +38,11 @@ namespace lib
 			LOG_DEBUG("Initializing scene " << name());
 			if (RenderGroup::init())
 			{
+				setProvider(service<SceneManager>().get());
 				auto sceneSize = getDefaultSizeView();
 				m_camera.setSize(sceneSize);
 				updateView();
-				m_eventClient = p_scnManager->eventClient()->newEventClient();
+				m_eventClient = service<SceneManager>()->eventClient()->newEventClient();
 				m_eventClient->setReceiver([this](lib::core::events::EventClient::ReceivedEvent event_)
 				{
 					auto evKey = lib::core::events::getEventAs<core::events::KeyEvent>(event_);
@@ -118,8 +119,7 @@ namespace lib
 
 		void Scene::setNextScene(const std::string &name)
 		{
-			__ASSERT(p_scnManager, "Null SceneManager on Scene");
-			p_scnManager->setScene(name);
+			service<SceneManager>()->setScene(name);
 		}
 
 		sptr<lib::ResourceManager> Scene::resourceManager() const
@@ -134,7 +134,7 @@ namespace lib
 
 		void Scene::exitProgram()
 		{
-			p_scnManager->exitProgram();
+			service<SceneManager>()->exitProgram();
 		}
 
 		lib::draw::Scene *const Scene::parentScene()

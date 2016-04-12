@@ -29,7 +29,7 @@ namespace lib
 
 	lib::AppService * Object::setProvider(Object *obj)
 	{
-		return setProvider(obj->m_provider);
+		return obj ? setProvider(obj->m_provider) : m_provider;
 	}
 
 	Object::~Object()

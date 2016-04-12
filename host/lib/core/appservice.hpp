@@ -19,7 +19,7 @@ namespace lib
 		virtual void Setup() {}
 		virtual void Init() {}
 		virtual void Stop() {}
-	protected:
+
 		template <class T> sptr<T> service() const
 		{
 			return appController()->servicesManager()->service<T>();

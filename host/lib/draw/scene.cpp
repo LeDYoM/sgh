@@ -4,6 +4,7 @@
 #include <lib/core/log.hpp>
 #include <lib/core/window.hpp>
 #include <lib/core/appcontroller.hpp>
+#include <lib/core/utilprovider.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include "camera.hpp"
 #include <lib/core/events/eventclient.hpp>
@@ -121,14 +122,14 @@ namespace lib
 			p_scnManager->setScene(name);
 		}
 
-		uptr<lib::ResourceManager> const &Scene::resourceManager()
+		sptr<lib::ResourceManager> Scene::resourceManager() const
 		{
-			return p_scnManager->appController()->resourceManager();
+			return service<lib::ResourceManager>();
 		}
 
-		uptr<UtilProvider> const & Scene::utilProvider()
+		sptr<UtilProvider> Scene::utilProvider() const
 		{
-			return p_scnManager->appController()->utilProvider();
+			return service<lib::UtilProvider>();
 		}
 
 		void Scene::exitProgram()

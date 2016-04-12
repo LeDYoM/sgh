@@ -50,7 +50,6 @@ namespace lib
 				m_servicesManager->addService(sptr<draw::SceneManager>{ new draw::SceneManager{} });
 				m_servicesManager->addService(sptr<Window>{ new Window{ m_iapp->getAppDescriptor().wcp }});
 
-				m_window->PrivateSetup(this);
 				m_servicesManager->setupAllServices();
 				m_servicesManager->initializeServices();
 

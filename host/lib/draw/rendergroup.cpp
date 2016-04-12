@@ -18,6 +18,7 @@ namespace lib
 
 		bool RenderGroup::init()
 		{
+			setProvider(parent());
 			return true;
 		}
 

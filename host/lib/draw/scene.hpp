@@ -49,8 +49,8 @@ namespace lib
 
 			sptr<core::events::EventClient> eventClient() const;
 
-			uptr<lib::ResourceManager> const &resourceManager();
-			uptr<UtilProvider> const &utilProvider();
+			sptr<lib::ResourceManager> resourceManager() const;
+			sptr<UtilProvider> utilProvider() const;
 
 			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
 			inline const Camera &camera() const { return m_camera; }

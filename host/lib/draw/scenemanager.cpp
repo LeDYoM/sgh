@@ -117,7 +117,7 @@ namespace lib
 			}
 
 			lib::draw::RenderStates states;// { appController->parentWindow().get()->startRenderStates() };
-			states.currentTarget = appController()->parentWindow()->renderTarget();
+			states.currentTarget = service<core::Window>()->renderTarget();
 			_currentScene->draw(states);
 			states.currentTarget = nullptr;
 		}

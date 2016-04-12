@@ -25,7 +25,7 @@ namespace lib
 
 		void Scene::updateView()
 		{
-			p_scnManager->appController()->parentWindow()->updateCamera(m_camera);
+			service<core::Window>()->updateCamera(m_camera);
 		}
 
 		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const

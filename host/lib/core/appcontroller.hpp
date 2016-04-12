@@ -43,10 +43,7 @@ namespace lib
 			virtual ~AppController();
 			
 			bool update();
-			uptr<Window> const &parentWindow() const { return m_window; }
-			uptr<UtilProvider> const &utilProvider() const { return m_utilProvider; }
 			uptr<ExceptionManager> const &exceptionManager() const { return m_exceptionManager; }
-			uptr<FileSystem> const &fileSystem() const { return m_fileSystem; }
 			sptr<Driver> const &driver() const { return m_driver; }
 
 			uptr<ServicesManager> const &servicesManager() const { return m_servicesManager; }
@@ -59,13 +56,9 @@ namespace lib
 		private:
 			uptr<ServicesManager> m_servicesManager;
 			AppState m_state;
-			uptr<Window> m_window{ nullptr };
 			uptr<IApp> m_iapp{ nullptr };
-			uptr<ResourceManager> m_resourceManager{ nullptr };
 			uptr<EventManager> m_eventManager{ nullptr };
-			uptr<UtilProvider> m_utilProvider{ nullptr };
 			uptr<ExceptionManager> m_exceptionManager{ nullptr };
-			uptr<FileSystem> m_fileSystem{ nullptr };
 			sptr<Driver> m_driver{ nullptr };
 
 			std::vector<uptr<AppService>> m_services;

@@ -9,23 +9,11 @@
 
 namespace lib
 {
-	namespace draw
-	{
-		class SceneManager;
-		class Scene;
-	}
-	class UtilProvider;
-	class Configuration;
-	class ResourceManager;
 	class AppService;
 	class ServicesManager;
-	class FileSystem;
 
 	namespace core
 	{
-		class Window;
-		class EventManager;
-		class ExceptionManager;
 		class Driver;
 	
 		class AppController
@@ -56,7 +44,6 @@ namespace lib
 			uptr<ServicesManager> m_servicesManager;
 			AppState m_state;
 			uptr<IApp> m_iapp{ nullptr };
-			uptr<EventManager> m_eventManager{ nullptr };
 			sptr<Driver> m_driver{ nullptr };
 
 			std::vector<uptr<AppService>> m_services;

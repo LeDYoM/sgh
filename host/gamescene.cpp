@@ -146,10 +146,10 @@ namespace zoper
 	void GameScene::onEnterScene()
 	{
 		lib::DataMap &gConfig{ *_gameConfig.sharedData() };
+		_gameData._gameMode = static_cast<GameData::GameModes>(gConfig[GameModeStr].gets32());
 		p_boardModel = lib::sptr<lib::board::BoardModel>(new lib::board::BoardModel(_gameData.size, this));
 		tilesCreated();
 		addPlayer();
-		_gameData._gameMode = static_cast<GameData::GameModes>(gConfig[GameModeStr].gets32());
 
 		_score = 0;
 		_nextTokenPart = 0;

@@ -3,7 +3,8 @@
 #include "resource.hpp"
 #include "exceptionmanager.hpp"
 #include "appcontroller.hpp"
-#include "configuration.hpp"
+#include "filesystem.hpp"
+#include "file.hpp"
 #include "strutils.hpp"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -17,20 +18,22 @@ namespace lib
 	void ResourceManager::Init()
 	{
 		AppService::Init();
+		auto file(service<FileSystem>()->getFile("resources.cfg"));
+		std::vector<str> data{ file->asText() };
+		u32 count{ 0 };
+		m_resourceDescriptionList = std::move(DataValue::fromStringVector(data, count));
+		load("*");
 	}
 
 	ResourceManager::~ResourceManager()
 	{
-		resources.clear();
+		m_resources.clear();
 	}
 
 	void ResourceManager::load(const std::string &section)
 	{
-		section;
-		/*
-		auto resourcesList = appController()->configuration()->section("Resources");
-		resourcesDirectory = resourcesList.data["resources_directory"];
-		for (const auto tuple : resourcesList.data)
+		m_resourcesDirectory = m_resourceDescriptionList["resources_directory"].getString();
+		for (const auto tuple : m_resourceDescriptionList)
 		{
 			if (starts_with(tuple.first, section) || section=="*")
 			{
@@ -43,20 +46,19 @@ namespace lib
 				resourceType = (resourceTypeStr[0] == 'f' || resourceTypeStr[0] == 'F')
 					? Resource::ResourceType::Font :
 					Resource::ResourceType::Texture;
-				resources.push_back(sptr<Resource>(new Resource(resourceType, resourcesDirectory + tuple.second, id)));
-				LOG_DEBUG_("Resource with id " + tuple.second + " added");
+				m_resources.push_back(sptr<Resource>(new Resource(resourceType, m_resourcesDirectory + tuple.second.getString(), id)));
+				LOG_DEBUG_("Resource with id " + tuple.second.getString() + " added");
 			}
 		}
-		*/
 	}
 
 	sptr<Resource> ResourceManager::getResource(const std::string rid)
 	{
-		for (auto i = 0u; i < resources.size(); ++i)
+		for (auto i = 0u; i < m_resources.size(); ++i)
 		{
-			if (resources[i]->name() == rid)
+			if (m_resources[i]->name() == rid)
 			{
-				return resources[i];
+				return m_resources[i];
 			}
 		}
 		service<core::ExceptionManager>()->addException(EXCEPTION_INTERNAL("ResourceNotFound", "", "Cannot find resource " + rid));

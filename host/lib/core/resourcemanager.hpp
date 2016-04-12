@@ -3,8 +3,8 @@
 
 #include <lib/include/types.hpp>
 #include "appservice.hpp"
-#include <vector>
-#include <map>
+#include "data.hpp"
+#include "vecsptr.hpp"
 
 namespace lib
 {
@@ -20,9 +20,9 @@ namespace lib
 		static const str staticTypeName() { return "ResourceManager"; }
 
 	private:
-		std::vector<sptr<Resource>> resources;
-		std::map<std::string, std::string> m_resourceList;
-		std::string resourcesDirectory;
+		VecSPtr<Resource> m_resources;
+		DataMap m_resourceDescriptionList;
+		std::string m_resourcesDirectory;
 	};
 }
 

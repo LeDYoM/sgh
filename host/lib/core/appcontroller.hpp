@@ -47,7 +47,6 @@ namespace lib
 			uptr<UtilProvider> const &utilProvider() const { return m_utilProvider; }
 			uptr<ExceptionManager> const &exceptionManager() const { return m_exceptionManager; }
 			uptr<FileSystem> const &fileSystem() const { return m_fileSystem; }
-			uptr<Configuration> const &configuration() const { return m_configuration; }
 			sptr<Driver> const &driver() const { return m_driver; }
 
 			uptr<ServicesManager> const &servicesManager() const { return m_servicesManager; }
@@ -62,8 +61,6 @@ namespace lib
 			AppState m_state;
 			uptr<Window> m_window{ nullptr };
 			uptr<IApp> m_iapp{ nullptr };
-			uptr<Configuration> m_configuration{ nullptr };
-			uptr<draw::SceneManager> m_sceneManager{ nullptr };
 			uptr<ResourceManager> m_resourceManager{ nullptr };
 			uptr<EventManager> m_eventManager{ nullptr };
 			uptr<UtilProvider> m_utilProvider{ nullptr };

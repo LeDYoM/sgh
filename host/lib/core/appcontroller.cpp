@@ -53,7 +53,7 @@ namespace lib
 				m_servicesManager->setupAllServices();
 				m_servicesManager->initializeServices();
 
-				m_sceneManager->addScenes(m_iapp->scenesVector());
+				m_servicesManager->service<draw::SceneManager>()->addScenes(m_iapp->scenesVector());
 
 				m_iapp->onInit();
 				LOG_DEBUG(appId() << ": " << " is now executing");

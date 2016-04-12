@@ -9,7 +9,7 @@ namespace lib
 	namespace core
 	{
 		File::File(FileSystem *const fileSystem, const std::string &fileName)
-			: m_fileSystem{ fileSystem }, m_fileName( fileName )
+			: Object{fileSystem}, m_fileSystem{ fileSystem }, m_fileName(fileName)
 		{
 
 		}
@@ -38,7 +38,7 @@ namespace lib
 			}
 			else
 			{
-				m_fileSystem->appController()->exceptionManager()->addException(EXCEPTION_INTERNAL("FileNotFound", "", "Cannot find or open file " + m_fileName));
+				service<ExceptionManager>()->addException(EXCEPTION_INTERNAL("FileNotFound", "", "Cannot find or open file " + m_fileName));
 			}
 			return result;
 		}

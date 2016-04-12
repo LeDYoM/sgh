@@ -43,7 +43,6 @@ namespace lib
 			virtual ~AppController();
 			
 			bool update();
-			uptr<ExceptionManager> const &exceptionManager() const { return m_exceptionManager; }
 			sptr<Driver> const &driver() const { return m_driver; }
 
 			uptr<ServicesManager> const &servicesManager() const { return m_servicesManager; }
@@ -58,7 +57,6 @@ namespace lib
 			AppState m_state;
 			uptr<IApp> m_iapp{ nullptr };
 			uptr<EventManager> m_eventManager{ nullptr };
-			uptr<ExceptionManager> m_exceptionManager{ nullptr };
 			sptr<Driver> m_driver{ nullptr };
 
 			std::vector<uptr<AppService>> m_services;

@@ -59,7 +59,7 @@ namespace lib
 				return resources[i];
 			}
 		}
-		appController()->exceptionManager()->addException(EXCEPTION_INTERNAL("ResourceNotFound", "", "Cannot find resource " + rid));
+		service<core::ExceptionManager>()->addException(EXCEPTION_INTERNAL("ResourceNotFound", "", "Cannot find resource " + rid));
 		return sptr<Resource>();
 //			throw ResourceNotFoundException(rid);
 	}

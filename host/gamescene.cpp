@@ -17,6 +17,8 @@
 #include <lib/core/resource.hpp>
 #include <lib/core/randomizer.hpp>
 #include <lib/core/utilprovider.hpp>
+#include <lib/core/shareddata.hpp>
+#include <lib/core/appcontroller.hpp>
 #include <memory>
 #include <functional>
 
@@ -145,7 +147,7 @@ namespace zoper
 
 	void GameScene::onEnterScene()
 	{
-		lib::DataMap &gConfig{ *_gameConfig.sharedData() };
+		lib::DataMap &gConfig{ service<lib::SharedData>()->sharedData() };
 		_gameData._gameMode = static_cast<GameData::GameModes>(gConfig[GameModeStr].gets32());
 		p_boardModel = lib::sptr<lib::board::BoardModel>(new lib::board::BoardModel(_gameData.size, this));
 		tilesCreated();

@@ -35,7 +35,7 @@ namespace lib
 		m_resourcesDirectory = m_resourceDescriptionList["resources_directory"].getString();
 		for (const auto tuple : m_resourceDescriptionList)
 		{
-			if (starts_with(tuple.first, section) || section=="*")
+			if (tuple.first != "resources_directory" && (starts_with(tuple.first, section) || section=="*"))
 			{
 				std::string resourceTypeStr(tuple.first);
 				std::string id(tuple.first);

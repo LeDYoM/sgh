@@ -1,10 +1,6 @@
 #ifndef __LIB_CONFIGURATION_HPP__
 #define __LIB_CONFIGURATION_HPP__
 
-#include <string>
-#include <map>
-#include <functional>
-#include <vector>
 #include <lib/include/types.hpp>
 #include "appservice.hpp"
 #include "data.hpp"
@@ -17,14 +13,10 @@ namespace lib
 		Configuration();
 		virtual ~Configuration();
 		static const str staticTypeName() { return "Configuration"; }
-
-		DataMap *configuration();
-		DataMap *sharedData();
-
+		DataMap &configuration();
 		void Init() override;
 
 	private:
-
 		DataMap m_rootNode;
 	};
 }

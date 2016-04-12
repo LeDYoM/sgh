@@ -1,4 +1,4 @@
-#include "configuration.hpp"
+#include "shareddata.hpp"
 #include "appcontroller.hpp"
 #include "filesystem.hpp"
 #include "file.hpp"
@@ -6,20 +6,21 @@
 
 namespace lib
 {
-	Configuration::Configuration()
+	SharedData::SharedData()
 	{
 	}
 
-	Configuration::~Configuration()
+	SharedData::~SharedData()
 	{
 	}
 
-	DataMap &Configuration::configuration()
+
+	DataMap &SharedData::sharedData()
 	{
 		return m_rootNode;
 	}
 
-	void Configuration::Init()
+	void SharedData::Init()
 	{
 		auto file(service<FileSystem>()->getFile("config.cfg"));
 		std::vector<str> data{ file->asText() };

@@ -10,6 +10,7 @@
 #include "filesystem.hpp"
 #include "configuration.hpp"
 #include "servicesmanager.hpp"
+#include "shareddata.hpp"
 
 namespace lib
 {
@@ -44,7 +45,8 @@ namespace lib
 				m_servicesManager->addService(sptr<ExceptionManager>{new ExceptionManager{}});
 				m_servicesManager->addService(sptr<FileSystem>{ new FileSystem{} });
 				m_servicesManager->addService(sptr<Configuration>{ new Configuration{} });
-				m_servicesManager->addService(sptr<EventManager>{ new EventManager{} });
+				m_servicesManager->addService(sptr<Configuration>{ new Configuration{} });
+				m_servicesManager->addService(sptr<SharedData>{ new SharedData{} });
 				m_servicesManager->addService(sptr<UtilProvider>{new UtilProvider{}});
 				m_servicesManager->addService(sptr<ResourceManager>{ new ResourceManager{} });
 				m_servicesManager->addService(sptr<draw::SceneManager>{ new draw::SceneManager{} });

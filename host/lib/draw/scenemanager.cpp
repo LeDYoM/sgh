@@ -4,8 +4,6 @@
 #include <lib/core/window.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/appcontroller.hpp>
-#include <lib/core/eventmanager.hpp>
-#include <lib/core/events/eventclient.hpp>
 #include <lib/core/events/inputevent.hpp>
 
 namespace lib
@@ -24,7 +22,6 @@ namespace lib
 
 		void SceneManager::Init()
 		{
-			m_eventClient = service<core::EventManager>()->newEventClient();
 		}
 
 		void SceneManager::addScene(sptr<Scene> newScene)

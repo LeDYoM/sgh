@@ -5,7 +5,6 @@
 #include <lib/draw/scene.hpp>
 #include "utilprovider.hpp"
 #include "log.hpp"
-#include "eventmanager.hpp"
 #include "exceptionmanager.hpp"
 #include "filesystem.hpp"
 #include "configuration.hpp"
@@ -91,7 +90,6 @@ namespace lib
 		bool AppController::loopStep()
 		{
 			bool windowWants2Close = m_servicesManager->service<Window>()->preLoop();
-			m_servicesManager->service<EventManager>()->update();
 			m_servicesManager->service<draw::SceneManager>()->update();
 			windowWants2Close |= m_servicesManager->service<Window>()->postLoop();
 			return windowWants2Close;

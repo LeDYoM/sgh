@@ -7,7 +7,6 @@
 #include <lib/include/iapp.hpp>
 #include "events/event.hpp"
 #include "events/inputevent.hpp"
-#include "eventmanager.hpp"
 #include "servicesmanager.hpp"
 #include <lib/draw/camera.hpp>
 #include <lib/driv_impl/sfml/wwindow_impl.hpp>
@@ -110,7 +109,7 @@ namespace lib
 
 		void Window::receiveKeyEvent(const events::KeyEvent &e)
 		{
-			service<core::EventManager>()->addEvent(uptr<events::InputEvent>(new events::KeyEvent(e)));
+//			service<core::EventManager>()->addEvent(uptr<events::InputEvent>(new events::KeyEvent(e)));
 		}
 
 		void Window::wantsClose()

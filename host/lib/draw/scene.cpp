@@ -7,7 +7,6 @@
 #include <lib/core/utilprovider.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include "camera.hpp"
-#include <lib/core/events/eventclient.hpp>
 
 namespace lib
 {
@@ -42,6 +41,7 @@ namespace lib
 				auto sceneSize = getDefaultSizeView();
 				m_camera.setSize(sceneSize);
 				updateView();
+				/*
 				m_eventClient = service<SceneManager>()->eventClient()->newEventClient();
 				m_eventClient->setReceiver([this](lib::core::events::EventClient::ReceivedEvent event_)
 				{
@@ -61,6 +61,7 @@ namespace lib
 				});
 
 				m_eventClient->setActive(false);
+				*/
 				return true;
 			}
 
@@ -84,7 +85,6 @@ namespace lib
 			LOG_DEBUG("Scene camera set to: center: " << m_camera.target().center().x << "," << m_camera.target().center().y << " and size: " << m_camera.target().width << "," << m_camera.target().height);
 
 			clock.restart();
-			m_eventClient->setActive(true);
 			onEnterScene();
 		}
 
@@ -95,7 +95,6 @@ namespace lib
 
 		void Scene::privateOnExitScene()
 		{
-			m_eventClient->setActive(false);
 			onExitScene();
 			LOG_DEBUG("Exited from scene " << name());
 		}
@@ -110,11 +109,6 @@ namespace lib
 		{
 			LOG_DEBUG("Key released: " << int{ key.kCode });
 			onKeyReleased(key);
-		}
-
-		sptr<core::events::EventClient> Scene::eventClient() const
-		{
-			return m_eventClient;
 		}
 
 		void Scene::setNextScene(const std::string &name)

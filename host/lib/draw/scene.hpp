@@ -12,13 +12,6 @@
 
 namespace lib
 {
-	namespace core
-	{
-		namespace events
-		{
-			class EventClient;
-		}
-	}
 	class ResourceManager;
 	class UtilProvider;
 	namespace draw
@@ -47,8 +40,6 @@ namespace lib
 			virtual void onPrivateKeyPressed(input::Key key);
 			virtual void onPrivateKeyReleased(input::Key key);
 
-			sptr<core::events::EventClient> eventClient() const;
-
 			sptr<lib::ResourceManager> resourceManager() const;
 			sptr<UtilProvider> utilProvider() const;
 
@@ -72,8 +63,6 @@ namespace lib
 			Scene *const parentScene() override final;
 
 		private:
-			sptr<core::events::EventClient> m_eventClient{ nullptr };
-
 			void privateOnEnterScene();
 			void privateOnExitScene();
 			u32 _state;

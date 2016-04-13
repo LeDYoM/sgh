@@ -31,14 +31,14 @@ namespace lib
 			virtual void onEnterScene() = 0;
 			virtual void onExitScene() = 0;
 
-			virtual void onKeyPressed(lib::input::Key key) = 0;
-			virtual void onKeyReleased(lib::input::Key key) = 0;
+			virtual void onKeyPressed(lib::Key key) = 0;
+			virtual void onKeyReleased(lib::Key key) = 0;
 
 			virtual const lib::vector2df getDefaultSizeView() = 0;
 			virtual void update() = 0;
 
-			virtual void onPrivateKeyPressed(input::Key key);
-			virtual void onPrivateKeyReleased(input::Key key);
+			virtual void onPrivateKeyPressed(Key key);
+			virtual void onPrivateKeyReleased(Key key);
 
 			sptr<lib::ResourceManager> resourceManager() const;
 			sptr<UtilProvider> utilProvider() const;

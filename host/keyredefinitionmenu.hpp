@@ -15,8 +15,8 @@ namespace zoper
 			virtual ~KeyRedefinitionMenu();
 			virtual bool init() override;
 
-			virtual void onKeyPressed(lib::input::Key kEvent) override;
-			virtual void onKeyReleased(lib::input::Key kEvent) override;
+			virtual void onKeyPressed(lib::Key kEvent) override;
+			virtual void onKeyReleased(lib::Key kEvent) override;
 
 		private:
 			const std::string getKeyNameStr(const lib::u32 index) const;

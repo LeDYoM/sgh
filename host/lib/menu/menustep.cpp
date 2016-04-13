@@ -25,7 +25,7 @@ namespace lib
 			addRenderGroup(nControl);
 		}
 
-		void MenuStep::onKeyPressed(lib::input::Key key)
+		void MenuStep::onKeyPressed(lib::Key key)
 		{
 //			for (auto control : _renderNodes)
 //			{
@@ -33,7 +33,7 @@ namespace lib
 //			}
 		}
 
-		void MenuStep::onKeyReleased(lib::input::Key key)
+		void MenuStep::onKeyReleased(lib::Key key)
 		{
 //			for (auto control : _controls)
 //			{

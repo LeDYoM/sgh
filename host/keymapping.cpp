@@ -19,11 +19,11 @@ namespace zoper
 	{
 	}
 
-	lib::input::KeyCode KeyMapping::getKey(Direction d) const
+	lib::KeyCode KeyMapping::getKey(Direction d) const
 	{
 		return _keys[d];
 	}
-	Direction KeyMapping::getDirectionFromKey(lib::input::KeyCode k) const
+	Direction KeyMapping::getDirectionFromKey(lib::KeyCode k) const
 	{
 		for (lib::u8 i = 0; i < Direction::Total; ++i)
 		{
@@ -35,27 +35,27 @@ namespace zoper
 		return Direction::Invalid;
 	}
 
-	lib::input::KeyCode KeyMapping::getLaunchKey() const
+	lib::KeyCode KeyMapping::getLaunchKey() const
 	{
 		return _keys[Direction::Total];
 	}
 
-	bool KeyMapping::isLaunchKey(const lib::input::KeyCode key) const
+	bool KeyMapping::isLaunchKey(const lib::KeyCode key) const
 	{
 		return key == getLaunchKey();
 	}
 
-	lib::input::KeyCode KeyMapping::getPauseKey() const
+	lib::KeyCode KeyMapping::getPauseKey() const
 	{
 		return _keys[Direction::Total+1];
 	}
 
-	bool KeyMapping::isPauseKey(const lib::input::KeyCode key) const
+	bool KeyMapping::isPauseKey(const lib::KeyCode key) const
 	{
 		return key == getPauseKey();
 	}
 
-	bool KeyMapping::setKey(lib::u32 index, lib::input::KeyCode key)
+	bool KeyMapping::setKey(lib::u32 index, lib::KeyCode key)
 	{
 		__ASSERT(index < TotalKeys, "Invalid index");
 

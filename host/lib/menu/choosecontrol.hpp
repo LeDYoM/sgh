@@ -29,8 +29,8 @@ namespace lib
 			u32 getSelectedSubLabel(u32 index) const;
 			void setSelectedSubLabel(u32 index, u32 subIndex);
 		private:
-			virtual void onKeyPressed(lib::input::Key key) override;
-			virtual void onKeyReleased(lib::input::Key key) override;
+			virtual void onKeyPressed(lib::Key key) override;
+			virtual void onKeyReleased(lib::Key key) override;
 
 			void updateSubLabelText(const u32 index);
 			void cursorSelectItem(u32 nodeIndex);

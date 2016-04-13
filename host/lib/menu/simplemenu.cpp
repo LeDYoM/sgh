@@ -40,17 +40,18 @@ namespace lib
 			m_textGroup->addText(text);
 		}
 
-		void SimpleMenu::onKeyPressed(lib::input::Key key)
+		void SimpleMenu::onKeyPressed(lib::Key key)
 		{
-			if (key.kCode == lib::input::KeyCode::Down || key.kCode == lib::input::KeyCode::Numpad2)
+			using namespace lib;
+			if (key.kCode == KeyCode::Down || key.kCode == KeyCode::Numpad2)
 			{
 				goDown();
 			}
-			else if (key.kCode == lib::input::KeyCode::Up || key.kCode == lib::input::KeyCode::Numpad8)
+			else if (key.kCode == KeyCode::Up || key.kCode == KeyCode::Numpad8)
 			{
 				goUp();
 			}
-			else if (key.kCode == lib::input::KeyCode::Return || key.kCode == lib::input::KeyCode::Space)
+			else if (key.kCode == KeyCode::Return || key.kCode == KeyCode::Space)
 			{
 				if (_onSelected)
 				{
@@ -59,7 +60,7 @@ namespace lib
 			}
 		}
 
-		void SimpleMenu::onKeyReleased(lib::input::Key key)
+		void SimpleMenu::onKeyReleased(lib::Key key)
 		{
 			key;
 		}

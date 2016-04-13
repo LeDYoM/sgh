@@ -417,7 +417,7 @@ namespace zoper
 		p_boardModel->setTile(position, std::dynamic_pointer_cast<lib::board::ITile>(_mainBoardrg->addRenderNode(newTileToken)));
 	}
 
-	void GameScene::onKeyPressed(lib::input::Key key)
+	void GameScene::onKeyPressed(lib::Key key)
 	{
 		switch (state())
 		{
@@ -466,7 +466,7 @@ namespace zoper
 		}
 	}
 
-	void GameScene::onKeyReleased(lib::input::Key key)
+	void GameScene::onKeyReleased(lib::Key key)
 	{
 		key;
 	}

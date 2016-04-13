@@ -99,13 +99,13 @@ namespace lib
 			LOG_DEBUG("Exited from scene " << name());
 		}
 
-		void Scene::onPrivateKeyPressed(input::Key key)
+		void Scene::onPrivateKeyPressed(Key key)
 		{
 			LOG_DEBUG("Key pressed: " << int{ key.kCode });
 			onKeyPressed(key);
 		}
 
-		void Scene::onPrivateKeyReleased(input::Key key)
+		void Scene::onPrivateKeyReleased(Key key)
 		{
 			LOG_DEBUG("Key released: " << int{ key.kCode });
 			onKeyReleased(key);

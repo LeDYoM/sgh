@@ -37,7 +37,6 @@ namespace lib
 			sptr<RenderTarget> renderTarget();
 
 			/* Driver communication */
-			void receiveKeyEvent(const events::KeyEvent &e);
 			void wantsClose();
 		private:
 			void create(const WindowCreationParams &wcp);

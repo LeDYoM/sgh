@@ -96,8 +96,8 @@ namespace zoper
 		void addPlayer();
 		void tilesCreated();
 
-		virtual void onKeyPressed(lib::input::Key key) override;
-		virtual void onKeyReleased(lib::input::Key key) override;
+		virtual void onKeyPressed(lib::Key key) override;
+		virtual void onKeyReleased(lib::Key key) override;
 
 		// Inherited via ITilesController
 		virtual void tileAdded(const lib::vector2du32 &position, lib::board::WITilePointer nTile) override;

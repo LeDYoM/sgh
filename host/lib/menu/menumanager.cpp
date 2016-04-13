@@ -64,12 +64,12 @@ namespace lib
 			activateOne(step);
 		}
 
-		void MenuManager::onKeyPressed(lib::input::Key key)
+		void MenuManager::onKeyPressed(lib::Key key)
 		{
 			_activeMenuStep->onKeyPressed(key);
 		}
 
-		void MenuManager::onKeyReleased(lib::input::Key key)
+		void MenuManager::onKeyReleased(lib::Key key)
 		{
 			_activeMenuStep->onKeyReleased(key);
 		}

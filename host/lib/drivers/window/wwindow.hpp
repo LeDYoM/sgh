@@ -3,6 +3,7 @@
 
 #include <lib/include/types.hpp>
 #include <lib/core/rendertarget.hpp>
+#include <lib/core/data.hpp>
 
 namespace lib
 {
@@ -25,7 +26,8 @@ namespace lib
 				virtual void clear() = 0;
 				virtual void display() = 0;
 				virtual void setViewRectangle(const Rectf32 &rect) = 0;
-				virtual void receiveEvent(core::Window *const window) = 0;
+				virtual void collectEvents() = 0;
+				virtual const std::vector<sptr<DataMap>> &collectedEvents() = 0;
 			};
 		}
 	}

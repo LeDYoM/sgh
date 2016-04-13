@@ -77,17 +77,18 @@ namespace lib
 			updateSubLabelText(index);
 		}
 
-		void ChooseControl::onKeyPressed(lib::input::Key key)
+		void ChooseControl::onKeyPressed(lib::Key key)
 		{
-			if (key.kCode == lib::input::KeyCode::Down || key.kCode == lib::input::KeyCode::Numpad2)
+			using namespace lib;
+			if (key.kCode == KeyCode::Down || key.kCode == KeyCode::Numpad2)
 			{
 				goDown();
 			}
-			else if (key.kCode == lib::input::KeyCode::Up || key.kCode == lib::input::KeyCode::Numpad8)
+			else if (key.kCode == KeyCode::Up || key.kCode == KeyCode::Numpad8)
 			{
 				goUp();
 			}
-			else if (key.kCode == lib::input::KeyCode::Return || key.kCode == lib::input::KeyCode::Space)
+			else if (key.kCode == KeyCode::Return || key.kCode == KeyCode::Space)
 			{
 				if (_onSelected)
 				{
@@ -96,18 +97,18 @@ namespace lib
 			}
 			else if (_labelData[_cursorItemSelected].textSubLabel.size() > 0)
 			{
-				if (key.kCode == lib::input::KeyCode::Left || key.kCode == lib::input::KeyCode::Numpad4)
+				if (key.kCode == KeyCode::Left || key.kCode == KeyCode::Numpad4)
 				{
 					goLeft();
 				}
-				else if (key.kCode == lib::input::KeyCode::Right || key.kCode == lib::input::KeyCode::Numpad6)
+				else if (key.kCode == KeyCode::Right || key.kCode == KeyCode::Numpad6)
 				{
 					goRight();
 				}
 			}
 		}
 
-		void ChooseControl::onKeyReleased(lib::input::Key key)
+		void ChooseControl::onKeyReleased(lib::Key key)
 		{
 			key;
 		}

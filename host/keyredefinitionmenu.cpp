@@ -43,7 +43,7 @@ namespace zoper
 			return true;
 		}
 
-		void KeyRedefinitionMenu::onKeyPressed(lib::input::Key key)
+		void KeyRedefinitionMenu::onKeyPressed(lib::Key key)
 		{
 			lib::menu::MenuStep::onKeyPressed(key);
 			if (_keyMapping.setKey(_indexKey, key.kCode))
@@ -53,7 +53,7 @@ namespace zoper
 			}
 		}
 
-		void KeyRedefinitionMenu::onKeyReleased(lib::input::Key key)
+		void KeyRedefinitionMenu::onKeyReleased(lib::Key key)
 		{
 			lib::menu::MenuStep::onKeyReleased(key);
 		}

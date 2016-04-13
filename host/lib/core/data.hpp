@@ -13,7 +13,13 @@ namespace lib
 	enum class LIB_API DataType : u8
 	{
 		T_Empty,
+		T_bool,
+		T_s8,
+		T_u8,
+		T_s16,
+		T_u16,
 		T_s32,
+		T_u32,
 		T_f64,
 		T_string,
 		T_Tree
@@ -23,22 +29,40 @@ namespace lib
 	{
 	public:
 		explicit DataValue();
-		DataValue(s32 value_);
-		DataValue(f64 value_);
+		DataValue(const bool value_);
+		DataValue(const s8 value_);
+		DataValue(const u8 value_);
+		DataValue(const s16 value_);
+		DataValue(const u16 value_);
+		DataValue(const s32 value_);
+		DataValue(const u32 value_);
+		DataValue(const f64 value_);
 		DataValue(const str &value_);
 		DataValue(const DataMap &value_);
 		DataValue(const DataValue &other);
 		DataValue(DataValue &&other);
 		virtual ~DataValue();
 
-//		DataValue &operator=(s32 value_);
-//		DataValue &operator=(f64 value_);
-//		DataValue &operator=(const str &value_);
-//		DataValue &operator=(const DataMap &value_);
-//		DataValue &operator=(const DataValue &other);
+		bool operator==(const bool value_) const;
+		bool operator==(const s8 value_) const;
+		bool operator==(const u8 value_) const;
+		bool operator==(const s16 value_) const;
+		bool operator==(const u16 value_) const;
+		bool operator==(const s32 value_) const;
+		bool operator==(const u32 value_) const;
+		bool operator==(const f64 value_) const;
+		bool operator==(const str &value_) const;
+		bool operator==(const DataMap &value_) const;
+		bool operator==(const DataValue &other) const;
 		DataValue &operator=(DataValue &&other);
 
+		const bool getbool() const;
+		const s8 gets8() const;
+		const u8 getu8() const;
+		const s16 gets16() const;
+		const u16 getu16() const;
 		const s32 gets32() const;
+		const u32 getu32() const;
 		const f64 getf64() const;
 		const str getString() const;
 		const DataMap *getMap() const;
@@ -50,7 +74,13 @@ namespace lib
 	private:
 		union
 		{
+			bool bool_;
+			s8 s8_;
+			u8 u8_;
+			s16 s16_;
+			u16 u16_;
 			s32 s32_;
+			u32 u32_;
 			f64 f64_;
 			void *ptr_;
 		};

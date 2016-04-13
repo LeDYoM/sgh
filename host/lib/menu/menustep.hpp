@@ -23,8 +23,8 @@ namespace lib
 			MenuManager *menuManager();
 
 			void addMenuControl(sptr<IMenuControl> nControl);
-			virtual void onKeyPressed(lib::input::Key kEvent);
-			virtual void onKeyReleased(lib::input::Key kEvent);
+			virtual void onKeyPressed(lib::Key kEvent);
+			virtual void onKeyReleased(lib::Key kEvent);
 		};
 	}
 }

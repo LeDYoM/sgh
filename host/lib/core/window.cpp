@@ -70,7 +70,16 @@ namespace lib
 			}
 			++(p_wPrivate->currentFps);
 			p_wPrivate->m_renderWindow->clear();
-			p_wPrivate->m_renderWindow->receiveEvent(this);
+			p_wPrivate->m_renderWindow->collectEvents();
+
+			for (const sptr<DataMap> driverEvent : p_wPrivate->m_renderWindow->collectedEvents())
+			{
+				const DataMap &event_ = *driverEvent;
+				if (event_.at("type") == "Input")
+				{
+
+				}
+			}
 			/*
 			sf::Event event;
 			while (p_wPrivate->m_renderWindow->pollEvent(event))
@@ -105,11 +114,6 @@ namespace lib
 			LOG_DEBUG("Going to close Window");
 //			p_wPrivate->m_renderWindow->close();
 			LOG_DEBUG("Window closed");
-		}
-
-		void Window::receiveKeyEvent(const events::KeyEvent &e)
-		{
-//			service<core::EventManager>()->addEvent(uptr<events::InputEvent>(new events::KeyEvent(e)));
 		}
 
 		void Window::wantsClose()

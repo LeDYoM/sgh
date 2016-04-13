@@ -30,8 +30,8 @@ namespace lib
 			virtual bool init() override;
 			void addOption(const str &text);
 		private:
-			virtual void onKeyPressed(lib::input::Key key) override;
-			virtual void onKeyReleased(lib::input::Key key) override;
+			virtual void onKeyPressed(lib::Key key) override;
+			virtual void onKeyReleased(lib::Key key) override;
 
 			void cursorSelectItem(u32 nodeIndex);
 			void goDown();

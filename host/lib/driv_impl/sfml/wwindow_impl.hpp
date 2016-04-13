@@ -2,6 +2,7 @@
 #define LIB_DRIVERS_SFML_WWINDOW_IMPLEMENTATION_HPP
 
 #include <lib/drivers/window/wwindow.hpp>
+#include <lib/include/types.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -22,9 +23,11 @@ namespace lib
 				virtual void display() override;
 				virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) override;
 				virtual void setViewRectangle(const Rectf32 &rect) override;
-				virtual void receiveEvent(core::Window *const window);
+				virtual void collectEvents() override;
+				virtual const std::vector<sptr<DataMap>> &collectedEvents() override;
 			private:
 				bool m_resizePending;
+				std::vector<sptr<DataMap>> m_collectedEvents;
 			};
 		}
 	}

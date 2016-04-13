@@ -17,8 +17,8 @@ namespace lib
 
 			IMenuControl(const std::string &name) : lib::draw::RenderGroup(name) {}
 			virtual ~IMenuControl() {}
-			virtual void onKeyPressed(lib::input::Key key) = 0;
-			virtual void onKeyReleased(lib::input::Key key) = 0;
+			virtual void onKeyPressed(lib::Key key) = 0;
+			virtual void onKeyReleased(lib::Key key) = 0;
 			MenuManager * const menuManager()
 			{
 				return dynamic_cast<MenuManager *const>(parentScene());

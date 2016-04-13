@@ -231,6 +231,23 @@ namespace lib
 		return f64_ == value_.f64_;
 	}
 
+	const bool DataValue::getbool() const
+	{
+		switch (m_dtype)
+		{
+			SW_CONV_BL(bool);
+			SW_CONV_S8(bool);
+			SW_CONV_U8(bool);
+			SW_CONV_S16(bool);
+			SW_CONV_U16(bool);
+			SW_CONV_S32(bool);
+			SW_CONV_U32(bool);
+			SW_CONV_F64(bool);
+		default:
+			return false;
+		}
+	}
+
 	const s8 DataValue::gets8() const
 	{
 		switch (m_dtype)

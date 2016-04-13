@@ -4,37 +4,35 @@
 namespace lib
 {
 	Object::Object()
-		: m_provider{ nullptr }
+		: m_app{ nullptr }
 	{
 
 	}
 
 	Object::Object(Object *other)
-		: m_provider{ other->m_provider }
+		: m_app{ other->m_app }
 	{
 	}
 
-	Object::Object(AppService *provider)
-		: m_provider{ provider }
+	Object::Object(core::AppController *app)
+		: m_app{ app }
 	{
 
 	}
 
-	lib::AppService * Object::setProvider(AppService *other)
+	void Object::setProvider(core::AppController *app)
 	{
-		AppService *temp(m_provider);
-		m_provider = other;
-		return temp;
+		m_app = app;
 	}
 
-	lib::AppService * Object::setProvider(Object *obj)
+	void Object::setProvider(Object *obj)
 	{
-		return obj ? setProvider(obj->m_provider) : m_provider;
+		setProvider(obj->m_app);
 	}
 
 	Object::~Object()
 	{
-		m_provider = nullptr;
+		m_app = nullptr;
 	}
 
 }

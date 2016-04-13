@@ -1,28 +1,33 @@
 #ifndef LIB_OBJECT_HPP
 #define LIB_OBJECT_HPP
 
-#include "appservice.hpp"
+#include "servicesmanager.hpp"
 
 namespace lib
 {
+	namespace core
+	{
+		class AppController;
+	}
 	class Object
 	{
 	public:
 		Object();
 		Object(Object *other);
-		Object(AppService *provider);
+		Object(core::AppController *app);
 
-		AppService *setProvider(AppService *other);
-		AppService *setProvider(Object *obj);
+		void setProvider(core::AppController *app);
+		void setProvider(Object *obj);
 		virtual ~Object();
 
 		template <class T> sptr<T> service() const
 		{
-			return m_provider->service<T>();
+			return m_app->servicesManager()->service<T>();
 		}
 
-	private:
-		AppService *m_provider;
+		core::AppController *appController() const { return m_app; }
+	protected:
+		core::AppController *m_app;
 
 	};
 }

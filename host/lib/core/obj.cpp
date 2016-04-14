@@ -27,7 +27,8 @@ namespace lib
 
 	void Object::setProvider(Object *obj)
 	{
-		setProvider(obj->m_app);
+		if (obj)
+			setProvider(obj->m_app);
 	}
 
 	Object::~Object()

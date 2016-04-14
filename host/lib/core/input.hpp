@@ -11,11 +11,11 @@ namespace lib
 	class InputData
 	{
 	public:
-		enum class Device
+		enum Device
 		{
 			Keyboard
 		};
-		enum class Action
+		enum Action
 		{
 			KeyPressed,
 			KeyReleased
@@ -38,7 +38,7 @@ namespace lib
 		static const str staticTypeName() { return "Input"; }
 		void Init() override;
 
-		void addInputAction(const DataMap *map);
+		void addInputAction(const sptr<DataMap> eventData);
 	};
 }
 

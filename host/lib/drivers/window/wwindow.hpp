@@ -27,7 +27,8 @@ namespace lib
 				virtual void display() = 0;
 				virtual void setViewRectangle(const Rectf32 &rect) = 0;
 				virtual void collectEvents() = 0;
-				virtual const std::vector<sptr<DataMap>> &collectedEvents() = 0;
+				virtual sptr<DataMap> nextEvent() = 0;
+				virtual u32 pendingEvents() = 0;
 			};
 		}
 	}

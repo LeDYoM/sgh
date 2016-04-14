@@ -22,7 +22,7 @@ namespace lib
 				lib::Key doCast(const sf::Keyboard::Key &k)
 				{
 					int temp = k;
-					return static_cast<lib::Key>(temp);
+					return temp;
 				}
 			}
 
@@ -75,7 +75,6 @@ namespace lib
 
 			void SFMLWindow::collectEvents()
 			{
-				m_collectedEvents.clear();
 				sf::Event e;
 				while (sf::Window::pollEvent(e))
 				{
@@ -83,16 +82,16 @@ namespace lib
 					bool correctEvent{ true };
 					if (e.type == sf::Event::Closed)
 					{
-						(*event_)["type"] = DataValue{ "Window" };
+						(*event_)["Type"] = DataValue{ "Window" };
 						(*event_)["Action"] = DataValue{ "WantsClose" };
 //						window->wantsClose();
 					}
 					else if (e.type == sf::Event::KeyPressed || e.type == sf::Event::KeyReleased)
 					{
-						(*event_)["type"] = DataValue{ "Input" };
-						(*event_)["subType"] = DataValue{ "Keyboard" };
-						(*event_)["Action"] = DataValue{ (const char*)((e.type == sf::Event::KeyPressed ? "KeyPressed" : "KeyReleased")) };
-						(*event_)["Key"] = DataValue{ doCast(e.key.code).tou8() };
+						(*event_)["Type"] = DataValue{ "Input" };
+						(*event_)["SubType"] = DataValue{ "Keyboard" };
+						(*event_)["Action"] = DataValue{e.type == sf::Event::KeyPressed };
+						(*event_)["Key"] = DataValue{ doCast(e.key.code).codetos32() };
 //						window->receiveKeyEvent(event_);
 					}
 					else
@@ -102,14 +101,24 @@ namespace lib
 
 					if (correctEvent)
 					{
-						m_collectedEvents.push_back(event_);
+						m_collectedEvents.push(event_);
 					}
 				}
 			}
 
-			const std::vector<sptr<DataMap>> &SFMLWindow::collectedEvents()
+			sptr<DataMap> SFMLWindow::nextEvent()
 			{
-				return m_collectedEvents;
+				if (m_collectedEvents.empty())
+					return nullptr;
+
+				auto next = m_collectedEvents.front();
+				m_collectedEvents.pop();
+				return next;
+			}
+
+			u32 SFMLWindow::pendingEvents()
+			{
+				return m_collectedEvents.size();
 			}
 
 		}

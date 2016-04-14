@@ -72,12 +72,20 @@ namespace lib
 			p_wPrivate->m_renderWindow->clear();
 			p_wPrivate->m_renderWindow->collectEvents();
 
-			for (const sptr<DataMap> driverEvent : p_wPrivate->m_renderWindow->collectedEvents())
+			while (p_wPrivate->m_renderWindow->pendingEvents())
 			{
-				const DataMap &event_ = *driverEvent;
-				if (event_.at("type") == "Input")
+				sptr<DataMap> pEvent{ p_wPrivate->m_renderWindow->nextEvent() };
+				if (pEvent)
 				{
+					const std::string &eType( pEvent->at("Type").getString() );
+					if ( eType == "Input")
+					{
 
+					}
+					else if (eType == "Window")
+					{
+						_shouldClose = true;
+					}
 				}
 			}
 			/*

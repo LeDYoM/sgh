@@ -5,6 +5,7 @@
 #include <lib/include/types.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <queue>
 
 namespace lib
 {
@@ -24,10 +25,11 @@ namespace lib
 				virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) override;
 				virtual void setViewRectangle(const Rectf32 &rect) override;
 				virtual void collectEvents() override;
-				virtual const std::vector<sptr<DataMap>> &collectedEvents() override;
+				virtual sptr<DataMap> nextEvent();
+				virtual u32 pendingEvents();
 			private:
 				bool m_resizePending;
-				std::vector<sptr<DataMap>> m_collectedEvents;
+				std::queue<sptr<DataMap>> m_collectedEvents;
 			};
 		}
 	}

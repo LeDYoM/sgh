@@ -5,7 +5,7 @@
 
 namespace lib
 {
-	enum KeyCode : s8
+	enum KeyCode : s32
 	{
 		Unknown = -1,
 		A = 0,
@@ -116,9 +116,9 @@ namespace lib
 	struct Key
 	{
 		KeyCode kCode;
-		explicit Key(KeyCode code) : kCode{ code } {}
-		explicit Key(u8 code) : kCode{ static_cast<KeyCode>(code) } {}
-		u8 tou8() const { return kCode; }
+		inline Key(KeyCode code) : kCode{ code } {}
+		inline Key(s32 code) : kCode{ static_cast<KeyCode>(code) } {}
+		s32 codetos32() const { return kCode; }
 	};
 }
 

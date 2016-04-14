@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-#include "zoperprogramcontroller.hpp"
+//#include "zoperprogramcontroller.hpp"
 
 namespace lib
 {
@@ -39,8 +39,8 @@ namespace lib
 			core::HostController hostController(transformParams(argc,argv));
 			// WIP:
 			hostController.initialize();
-			uptr<IApp> zpc = std::make_unique<zoper::ZoperProgramController>();
-			hostController.addApp(std::move(zpc));
+//			uptr<IApp> zpc = std::make_unique<zoper::ZoperProgramController>();
+//			hostController.addApp(std::move(zpc));
 
 			// End wip
 			result = hostController.run();

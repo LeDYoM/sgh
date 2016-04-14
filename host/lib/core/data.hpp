@@ -13,7 +13,6 @@ namespace lib
 	enum class LIB_API DataType : u8
 	{
 		T_Empty,
-		T_bool,
 		T_s8,
 		T_u8,
 		T_s16,
@@ -29,7 +28,6 @@ namespace lib
 	{
 	public:
 		explicit DataValue();
-		DataValue(const bool value_);
 		DataValue(const s8 value_);
 		DataValue(const u8 value_);
 		DataValue(const s16 value_);
@@ -43,7 +41,6 @@ namespace lib
 		DataValue(DataValue &&other);
 		virtual ~DataValue();
 
-		bool operator==(const bool value_) const;
 		bool operator==(const s8 value_) const;
 		bool operator==(const u8 value_) const;
 		bool operator==(const s16 value_) const;
@@ -56,7 +53,6 @@ namespace lib
 		bool operator==(const DataValue &other) const;
 		DataValue &operator=(DataValue &&other);
 
-		const bool getbool() const;
 		const s8 gets8() const;
 		const u8 getu8() const;
 		const s16 gets16() const;
@@ -74,7 +70,6 @@ namespace lib
 	private:
 		union
 		{
-			bool bool_;
 			s8 s8_;
 			u8 u8_;
 			s16 s16_;

@@ -24,7 +24,7 @@ namespace lib
 		}
 	}
 
-	int lib::libMain(int argc, char *argv[])
+	int lib::libMain(int argc, char *argv[], uptr<lib::IApp> iApp)
 	{
 		argc;
 		argv;
@@ -40,7 +40,7 @@ namespace lib
 			// WIP:
 			hostController.initialize();
 //			uptr<IApp> zpc = std::make_unique<zoper::ZoperProgramController>();
-//			hostController.addApp(std::move(zpc));
+			hostController.addApp(std::move(iApp));
 
 			// End wip
 			result = hostController.run();

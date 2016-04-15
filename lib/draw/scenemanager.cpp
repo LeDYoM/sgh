@@ -44,30 +44,25 @@ namespace lib
 		{
 			sptr<Scene> scene = getSceneByName(name);
 			
-			if (scene)
-			{
-				if (b_lock)
-				{
+			if (scene) {
+				if (b_lock) {
 					_nextScene = scene;
 					LOG_DEBUG("Deferred Change scene to " << name);
 				}
-				else
-				{
+				else {
 					b_lock = true;
 					setScene(scene);
 					b_lock = false;
 				}
 			}
-			else
-			{
+			else {
 				LOG_ERROR("Scene " << name << " not found in SceneManager");
 			}
 		}
 		
 		void SceneManager::addScenes(const std::vector<sptr<Scene>>&& sceneVector)
 		{
-			for (auto scene : sceneVector)
-			{
+			for (auto scene : sceneVector) {
 				addScene(scene);
 			}
 		}
@@ -75,12 +70,10 @@ namespace lib
 		void SceneManager::setScene(sptr<Scene> scene)
 		{
 			__ASSERT(scene, "Cannot change to a nullptr Scene");
-			if (_currentScene)
-			{
+			if (_currentScene) {
 				_currentScene->privateOnExitScene();
 			}
-			else
-			{
+			else {
 				LOG_DEBUG("Set first scene");
 			}
 			_currentScene = scene;
@@ -89,10 +82,8 @@ namespace lib
 
 		sptr<Scene> SceneManager::getSceneByName(const std::string &name) const
 		{
-			for (auto scene : _scenes)
-			{
-				if (scene->name() == name)
-				{
+			for (auto scene : _scenes) {
+				if (scene->name() == name) {
 					return scene;
 				}
 			}
@@ -101,22 +92,17 @@ namespace lib
 
 		void SceneManager::update()
 		{
-			if (!_currentScene)
-			{
-				if (_scenes.size() > 0)
-				{
+			if (!_currentScene) {
+				if (_scenes.size() > 0) {
 					setScene(_scenes[0]);
 				}
 			}
-			else if (_nextScene)
-			{
+			else if (_nextScene) {
 				setScene(_nextScene);
 				_nextScene = nullptr;
 			}
-			else
-			{
-				if (_currentScene)
-				{
+			else {
+				if (_currentScene) {
 					_currentScene->update();
 				}
 			}

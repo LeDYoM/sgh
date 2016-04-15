@@ -50,7 +50,6 @@ namespace lib
 				return as<T>(findByName(name));
 			}
 
-			RenderGroup &operator=(RenderGroup &r) = delete;
 			void for_each_renderNode(std::function<void(sptr<Node> node)> f);
 			template <class T,class S> static sptr<T> as(sptr<S> node) { return std::dynamic_pointer_cast<T>(node); }
 			virtual Scene *const parentScene();

@@ -107,6 +107,7 @@ namespace lib
 				}
 			}
 
+			m_renderStates->nextFrame();
 			m_renderStates->currentTarget = service<core::Window>()->renderTarget();
 			_currentScene->draw();
 			m_renderStates->currentTarget = nullptr;

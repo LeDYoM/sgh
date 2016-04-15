@@ -35,10 +35,9 @@ namespace lib
 			void nextFrame();
 			void reset();
 
-			//static const RenderStates Default;
+			Transformation transform;
 
 			sf::BlendMode blendMode;
-			Transformation transform;
 			const sf::Texture *texture;
 			const sf::Shader *shader;
 			sptr<core::RenderTarget> currentTarget;

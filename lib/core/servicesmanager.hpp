@@ -3,13 +3,14 @@
 
 #include <vector>
 #include <lib/include/types.hpp>
+#include "data.hpp"
 #include <functional>
 #include <typeindex>
 
 namespace lib
 {
 	class AppService;
-	class DataMap;
+
 	namespace core
 	{
 		class AppController;

@@ -6,7 +6,6 @@
 #include <lib/include/color.hpp>
 #include "transformable.hpp"
 #include "vertexarray.hpp"
-#include "iparentable.hpp"
 
 namespace lib
 {
@@ -20,13 +19,13 @@ namespace lib
 			Right = 2
 		};
 
-		class RenderNode : public IParentable<RenderGroup>, public Node, public Transformable
+		class RenderNode : public Node, public Transformable
 		{
 		public:
 			explicit RenderNode(const std::string &name, const PrimitiveType primitiveType);
 			virtual ~RenderNode();
 
-			virtual u32 draw(lib::draw::RenderStates &states) = 0;
+			virtual u32 draw() = 0;
 			virtual void setColor(const lib::draw::Color &color);
 			const Color& getColor() const;
 

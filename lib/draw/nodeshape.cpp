@@ -1,8 +1,10 @@
-#include "NodeShape.hpp"
+#include "nodeshape.hpp"
 #include <lib/core/convops.hpp>
 #include <lib/core/log.hpp>
 #include <lib/core/rendertarget.hpp>
+#include "scenemanager.hpp"
 #include <SFML/Graphics/Texture.hpp>
+#include "../core/appcontroller.hpp"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -171,9 +173,10 @@ namespace lib
 			updateTexCoords();
 		}
 
-		u32 NodeShape::draw(RenderStates &states)
+		u32 NodeShape::draw()
 		{
 			ensureGeometryUpdate();
+			RenderStates &states{ *service<SceneManager>()->frameRenderStates() };
 			auto oldTransformation= states.transform;
 			states.transform *= transformation();
 

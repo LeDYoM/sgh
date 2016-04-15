@@ -10,6 +10,12 @@ namespace lib
 {
 	namespace draw
 	{
+
+		SceneManager::SceneManager()
+		{
+			LOG_DESTRUCT_NOPARAMS;
+		}
+
 		SceneManager::~SceneManager()
 		{
 			for (auto scene : _scenes)
@@ -22,6 +28,8 @@ namespace lib
 
 		void SceneManager::Init()
 		{
+			AppService::Init();
+			m_renderStates = sptr<RenderStates>(new RenderStates);
 		}
 
 		void SceneManager::addScene(sptr<Scene> newScene)
@@ -113,10 +121,9 @@ namespace lib
 				}
 			}
 
-			lib::draw::RenderStates states;// { appController->parentWindow().get()->startRenderStates() };
-			states.currentTarget = service<core::Window>()->renderTarget();
-			_currentScene->draw(states);
-			states.currentTarget = nullptr;
+			m_renderStates->currentTarget = service<core::Window>()->renderTarget();
+			_currentScene->draw();
+			m_renderStates->currentTarget = nullptr;
 		}
 
 		void SceneManager::exitProgram()
@@ -124,9 +131,9 @@ namespace lib
 //			p_parentWindow->exitProgram();
 		}
 
-		sptr<core::events::EventClient> SceneManager::eventClient() const
+		sptr<RenderStates> SceneManager::frameRenderStates() const
 		{
-			return m_eventClient;
+			return m_renderStates;
 		}
 
 	}

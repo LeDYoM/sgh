@@ -11,20 +11,16 @@ namespace lib
 	namespace core
 	{
 		class Window;
-		namespace events
-		{
-			class EventClient;
-		}
 	}
 	namespace draw
 	{
-		class ResourceManager;
 		class Scene;
+		class RenderStates;
 
 		class SceneManager : public AppService
 		{
 		public:
-			using AppService::AppService;
+			SceneManager();
 			virtual ~SceneManager();
 
 			static const str staticTypeName() { return "SceneManager"; }
@@ -38,7 +34,7 @@ namespace lib
 			void addScenes(const std::vector<sptr<Scene>> &&sceneVector);
 			void exitProgram();
 
-			sptr<core::events::EventClient> eventClient() const;
+			sptr<RenderStates> frameRenderStates() const;
 		private:
 			void setScene(sptr<Scene> scene);
 
@@ -47,7 +43,7 @@ namespace lib
 			sptr<Scene> _currentScene{ nullptr };
 			bool b_lock{ false };
 			sptr<Scene> _nextScene{ nullptr };
-			sptr<core::events::EventClient> m_eventClient{ nullptr };
+			sptr<RenderStates> m_renderStates{ nullptr };
 		};
 	}
 }

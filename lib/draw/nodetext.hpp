@@ -36,7 +36,7 @@ namespace lib
 			u32 getStyle() const;
 			vector2df findCharacterPos(u32 index);
 		private:
-			virtual u32 draw(RenderStates &states) override;
+			virtual u32 draw() override;
 			virtual void ensureGeometryUpdate() override;
 
 			std::string m_string;

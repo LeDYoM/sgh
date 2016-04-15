@@ -22,7 +22,7 @@ namespace lib
 
 		void MenuStep::addMenuControl(sptr<IMenuControl> nControl)
 		{
-			addRenderGroup(nControl);
+			addNode(nControl);
 		}
 
 		void MenuStep::onKeyPressed(lib::Key key)

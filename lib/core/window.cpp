@@ -79,7 +79,7 @@ namespace lib
 					const std::string &eType( pEvent->at("Type").getString() );
 					if ( eType == "Input")
 					{
-						service<Input>();
+//						service<Input>()->
 					}
 					else if (eType == "Window")
 					{

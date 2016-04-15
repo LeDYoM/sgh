@@ -2,14 +2,16 @@
 #include "rendernode.hpp"
 #include "nodeshape.hpp"
 #include "nodetext.hpp"
+#include "scenemanager.hpp"
 #include <lib/core/window.hpp>
+#include "../core/appcontroller.hpp"
 
 namespace lib
 {
 	namespace draw
 	{
 		RenderGroup::RenderGroup(const std::string &name)
-			: IParentable{}, Node(name) {}
+			: Node(name) {}
 
 		RenderGroup::~RenderGroup()
 		{
@@ -18,57 +20,73 @@ namespace lib
 
 		bool RenderGroup::init()
 		{
-			setProvider(parent());
-			return true;
+			return Node::init();
 		}
 
 		sptr<NodeText> RenderGroup::createText(const std::string &name)
 		{
 			auto result = sptr<NodeText>{new NodeText(name)};
-			addRenderNode(result);
+			addNode(result);
 			return result;
 		}
 
 		sptr<NodeShape> RenderGroup::createShape(const std::string &name, const lib::vector2df &radius/*=lib::vector2df()*/, u32 pointCount/*=30*/)
 		{
 			auto result = sptr<NodeShape>(new NodeShape(name,radius,pointCount));
-			addRenderNode(result);
+			addNode(result);
 			return result;
 		}
 
 		sptr<NodeShape> RenderGroup::createSpriteShape(const std::string &name, const lib::vector2df &radius /*= lib::vector2df()*/)
 		{
 			auto result = sptr<NodeShape>(new NodeShape(name,radius, 4,NodeShape::NodeMode::Sprite));
-			addRenderNode(result);
+			addNode(result);
 			return result;
 		}
 
-		sptr<draw::RenderNode> RenderGroup::addRenderNode(sptr<RenderNode> newElement)
+		sptr<Node> RenderGroup::addNode(sptr<Node> newElement, sptr<Node> beforeNode)
 		{
+			__ASSERT(newElement, "Trying to add nullptr node");
 			newElement->setParent(this);
-			_renderNodes.push_back(newElement);
+			if (!beforeNode)
+			{
+				_renderNodes.push_back(newElement);
+			}
+			else
+			{
+				for (auto iterator = _renderNodes.begin(); iterator != _renderNodes.end(); ++iterator)
+				{
+					if (*iterator == beforeNode)
+					{
+						_renderNodes.insert(iterator, newElement);
+						iterator = _renderNodes.end() - 1;
+					}
+				}
+			}
+			newElement->init();
 			return newElement;
+
 		}
 
-		bool RenderGroup::removeRenderNode(sptr<RenderNode> element)
+		bool RenderGroup::removeNode(sptr<Node> element)
 		{
 			return removeFromspVector(element, _renderNodes);
 		}
 
-		u32 RenderGroup::draw(lib::draw::RenderStates &states)
+		u32 RenderGroup::draw()
 		{
 			if (isVisible())
 			{
 				updateAnimations();
 				u32 rNodes{ 0 };
-				auto oldTransformation = states.transform;
-				states.transform *= transformation();
+				auto oldTransformation = service<SceneManager>()->frameRenderStates()->transform;
+				service<SceneManager>()->frameRenderStates()->transform *= transformation();
 
 				for (const auto renderNode : _renderNodes)
 				{
-					rNodes += renderNode->draw(states);
+					rNodes += renderNode->draw();
 				}
-				states.transform = oldTransformation;
+				service<SceneManager>()->frameRenderStates()->transform = oldTransformation;
 				return rNodes;
 			}
 
@@ -78,35 +96,8 @@ namespace lib
 		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<Node> beforeNode)
 		{
 			sptr<RenderGroup> rg = sptr<RenderGroup>{ new RenderGroup(name) };
-			addRenderGroup(rg, beforeNode);
+			addNode(rg, beforeNode);
 			return rg;
-		}
-
-		void RenderGroup::addRenderGroup(sptr<RenderGroup> node, sptr<Node> beforeNode)
-		{
-			__ASSERT(node, "Trying to add nullptr node");
-			node->setParent(this);
-			if (!beforeNode)
-			{
-				_renderNodes.push_back(node);
-			}
-			else
-			{
-				for (auto iterator = _renderNodes.begin(); iterator != _renderNodes.end();++iterator)
-				{
-					if (*iterator == beforeNode)
-					{
-						_renderNodes.insert(iterator, node);
-						iterator = _renderNodes.end()-1;
-					}
-				}
-			}
-			node->init();
-		}
-
-		bool RenderGroup::removeRenderGroup(sptr<RenderGroup> element)
-		{
-			return removeFromspVector(element, _renderNodes);
 		}
 
 		void RenderGroup::clear()

@@ -1,20 +1,22 @@
 #ifndef __LIB_INAMEDDRAWABLE_HPP__
 #define __LIB_INAMEDDRAWABLE_HPP__
 
-#include <lib/include/types.hpp>
 #include <lib/core/obj.hpp>
 #include "hasname.hpp"
 #include "idrawable.hpp"
+#include "iparentable.hpp"
 
 namespace lib
 {
 	namespace draw
 	{
-		class Node : public core::HasName, public IDrawable, public Object
+		class RenderGroup;
+		class Node : public IParentable<RenderGroup>, public core::HasName, public IDrawable, public Object
 		{
 		public:
-			Node(const str &name) : HasName(name), IDrawable{}, Object{} {}
-			virtual ~Node() {}
+			Node(const str &name);
+			virtual bool init();
+			virtual ~Node();
 		};
 	}
 }

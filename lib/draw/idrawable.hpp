@@ -14,7 +14,7 @@ namespace lib
 			IDrawable() {}
 			virtual ~IDrawable() {}
 
-			virtual u32 draw(RenderStates &states) = 0;
+			virtual u32 draw() = 0;
 
 			inline bool isVisible() const { return visible; }
 			inline void setVisible(bool nv) { visible = nv; }

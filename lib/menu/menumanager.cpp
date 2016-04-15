@@ -34,7 +34,7 @@ namespace lib
 
 		void MenuManager::addMenuStep(sptr<MenuStep> step)
 		{
-			addRenderGroup(step);
+			addNode(step);
 		}
 
 		void MenuManager::start(sptr<MenuStep> firstStep)

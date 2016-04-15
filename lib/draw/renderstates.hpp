@@ -32,6 +32,9 @@ namespace lib
 			RenderStates(const RenderStates&) = delete;
 			RenderStates &operator=(const RenderStates&) = delete;
 
+			void nextFrame();
+			void reset();
+
 			//static const RenderStates Default;
 
 			sf::BlendMode blendMode;

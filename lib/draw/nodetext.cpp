@@ -3,6 +3,8 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <lib/core/window.hpp>
 #include <lib/core/rendertarget.hpp>
+#include "scenemanager.hpp"
+#include "../core/appcontroller.hpp"
 
 namespace lib
 {
@@ -121,13 +123,14 @@ namespace lib
 			return position;
 		}
 
-		u32 NodeText::draw(RenderStates &states)
+		u32 NodeText::draw()
 		{
 			if (m_font)
 			{
 				ensureGeometryUpdate();
 
-				auto oldTransformation= states.transform;
+				RenderStates &states{ *service<SceneManager>()->frameRenderStates() };
+				auto oldTransformation = states.transform;
 				states.transform *= transformation();
 				states.texture = &m_font->getTexture(m_characterSize);
 				states.currentTarget->draw(m_vertices, states);

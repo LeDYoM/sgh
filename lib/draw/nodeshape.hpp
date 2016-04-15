@@ -33,7 +33,7 @@ namespace lib
 		protected:
 			virtual void ensureGeometryUpdate() override;
 			void setTexture_(const sf::Texture* texture, bool resetRect = false);
-			virtual u32 draw(lib::draw::RenderStates &states) override;
+			virtual u32 draw() override;
 			void updateTexCoords();
 
 		private:

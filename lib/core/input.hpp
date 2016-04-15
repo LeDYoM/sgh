@@ -38,7 +38,8 @@ namespace lib
 		static const str staticTypeName() { return "Input"; }
 		void Init() override;
 
-		void addInputAction(const sptr<DataMap> eventData);
+
+		void processSystemEvent(const sptr<DataMap> eventData);
 	};
 }
 

@@ -3,11 +3,13 @@
 
 #include <vector>
 #include <lib/include/types.hpp>
+#include <functional>
 #include <typeindex>
 
 namespace lib
 {
 	class AppService;
+	class DataMap;
 	namespace core
 	{
 		class AppController;
@@ -26,7 +28,7 @@ namespace lib
 		void setupAllServices();
 		void initializeServices();
 		void stopServices();
-
+		void processSystemEvent(sptr<DataMap> data);
 
 		template <class T> sptr<T> service() const
 		{
@@ -34,6 +36,7 @@ namespace lib
 		}
 
 	private:
+		void for_each_service(std::function<void(std::type_index, sptr<AppService>)> callback);
 		void addServiceInstance(const std::type_index &typeName, sptr<AppService> newService);
 		sptr<AppService> service(const std::type_index &serviceType) const;
 

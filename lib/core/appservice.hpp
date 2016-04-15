@@ -2,7 +2,6 @@
 #define __LIB_APP_SERVICE_HPP__
 
 #include <string>
-//#include "servicesmanager.hpp"
 #include "obj.hpp"
 
 namespace lib
@@ -19,21 +18,14 @@ namespace lib
 		virtual void Init() {}
 		virtual void Stop() {}
 
-		/*
-		template <class T> sptr<T> service() const
-		{
-			return appController()->servicesManager()->service<T>();
-		}
-		*/
+		virtual void processSystemEvent(const DataMap *) {}
 	private:
 		friend class core::AppController;
 		friend class ServicesManager;
-//		core::AppController *m_appController{ nullptr };
 
 		void PrivateSetup(core::AppController *const appController_)
 		{
 			setProvider(appController_);
-//			m_appController = appController_;
 			Setup();
 		}
 	};

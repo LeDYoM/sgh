@@ -18,13 +18,12 @@ namespace lib
 
 	}
 
-	void Input::addInputAction(const sptr<DataMap> eventData)
+	void Input::processSystemEvent(const sptr<DataMap> eventData)
 	{
 		__ASSERT(eventData, "Map parameter is nullptr");
 
 		InputData::Device device{ static_cast<InputData::Device>(eventData->at("Device").getu8()) };
-//		InputData::Action action{ static_cast<InputData::Action>(eventData->at("Action").getbool() ? InputData::Action::KeyPressed : InputData::Action::KeyReleased) };
+		//		InputData::Action action{ static_cast<InputData::Action>(eventData->at("Action").getbool() ? InputData::Action::KeyPressed : InputData::Action::KeyReleased) };
 		Key key{ static_cast<InputData::Device>(eventData->at("Key").gets32()) };
-
 	}
 }

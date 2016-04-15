@@ -1,5 +1,6 @@
 #include "servicesmanager.hpp"
 #include "appservice.hpp"
+#include "data.hpp"
 
 namespace lib
 {
@@ -14,6 +15,14 @@ namespace lib
 
 	}
 
+	void ServicesManager::for_each_service(std::function<void(std::type_index, sptr<AppService>)> callback)
+	{
+		for (std::pair<std::type_index,sptr<AppService>> serviceNode : m_services)
+		{
+			callback(serviceNode.first, serviceNode.second);
+		}
+	}
+
 	void ServicesManager::addServiceInstance(const std::type_index &typeName, sptr<AppService> newService)
 	{
 		m_services[typeName] = std::move(newService);
@@ -21,28 +30,36 @@ namespace lib
 
 	void ServicesManager::setupAllServices()
 	{
-		for (auto &service : m_services)
+		for_each_service([this](std::type_index, sptr<AppService> _service)
 		{
-			service.second->PrivateSetup(m_appController);
-		}
+			_service->PrivateSetup(m_appController);
+		});
 	}
 
 	void ServicesManager::initializeServices()
 	{
-		for (auto &service : m_services)
+		for_each_service([this](std::type_index, sptr<AppService> _service)
 		{
-			service.second->Init();
-		}
+			_service->Init();
+		});
 	}
-
 
 	void ServicesManager::stopServices()
 	{
-		for (auto &service : m_services)
+		for_each_service([this](std::type_index, sptr<AppService> _service)
 		{
-			service.second->Stop();
-		}
+			_service->Stop();
+		});
+
 		m_services.clear();
+	}
+
+	void ServicesManager::processSystemEvent(sptr<DataMap> data)
+	{
+		for_each_service([this](std::type_index, sptr<AppService> _service)
+		{
+			_service->Init();
+		});
 	}
 
 	sptr<AppService> ServicesManager::service(const std::type_index &serviceType) const

@@ -5,13 +5,12 @@
 #include "timer.hpp"
 #include "appcontroller.hpp"
 #include <lib/include/iapp.hpp>
-#include "events/event.hpp"
-#include "events/inputevent.hpp"
 #include "servicesmanager.hpp"
 #include <lib/draw/camera.hpp>
 #include <lib/driv_impl/sfml/wwindow_impl.hpp>
 #include "appcontroller.hpp"
 #include "driver.hpp"
+#include "input.hpp"
 
 namespace lib
 {
@@ -80,7 +79,7 @@ namespace lib
 					const std::string &eType( pEvent->at("Type").getString() );
 					if ( eType == "Input")
 					{
-
+						service<Input>();
 					}
 					else if (eType == "Window")
 					{

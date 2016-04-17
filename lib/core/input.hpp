@@ -11,23 +11,39 @@ namespace lib
 	class InputData
 	{
 	public:
-		enum Device
+		enum Device : u8
 		{
-			Keyboard
+			Keyboard = 0,
 		};
-		enum Action
+		enum Action : u8
 		{
-			KeyPressed,
-			KeyReleased
+			KeyPressed=0,
+			KeyReleased=1
 		};
 
+		const Device &device() const { return m_device; }
 		const Action &action() const { return m_action; }
 		const Key &key() const { return m_key; }
 
+		InputData(const sptr<DataMap> eventData);
 	private:
 		const Device m_device;
 		const Key m_key;
 		const Action m_action;
+	};
+
+	class Node;
+	using InputReceiverCallback = std::function<void(Node *node, const InputData &iData)>;
+
+	class InputReceiver
+	{
+	public:
+		InputReceiver(Node *obj, InputReceiverCallback callback)
+			: m_node{ obj }, m_callback{ callback } {}
+
+	private:
+		InputReceiverCallback m_callback{ nullptr };
+		Node *m_node;
 	};
 
 	class Input : public AppService
@@ -38,8 +54,9 @@ namespace lib
 		static const str staticTypeName() { return "Input"; }
 		void Init() override;
 
-
 		void processSystemEvent(const sptr<DataMap> eventData);
+		void addInputCallback(Node *node, InputReceiverCallback callback);
+	private:
 	};
 }
 

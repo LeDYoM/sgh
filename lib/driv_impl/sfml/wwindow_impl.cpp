@@ -90,7 +90,7 @@ namespace lib
 					{
 						(*event_)["Type"] = DataValue{ "Input" };
 						(*event_)["SubType"] = DataValue{ "Keyboard" };
-						(*event_)["Action"] = DataValue{e.type == sf::Event::KeyPressed };
+						(*event_)["Action"] = DataValue{ e.type == sf::Event::KeyPressed ? u8{0} : u8{1} };
 						(*event_)["Key"] = DataValue{ doCast(e.key.code).codetos32() };
 //						window->receiveKeyEvent(event_);
 					}

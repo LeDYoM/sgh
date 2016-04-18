@@ -55,8 +55,9 @@ namespace lib
 		void Init() override;
 
 		void processSystemEvent(const sptr<DataMap> eventData);
-		void addInputCallback(Node *node, InputReceiverCallback callback);
+		void addInputCallback(Node *node, sptr<InputReceiverCallback> callback);
 	private:
+//		std::list<wptr<InputReceiver>> m_callbacks;
 	};
 }
 

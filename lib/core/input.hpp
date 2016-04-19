@@ -33,18 +33,24 @@ namespace lib
 	};
 
 	class Node;
-	using InputReceiverCallback = std::function<void(Node *node, const InputData &iData)>;
 
-	class InputReceiver
+	class KeyPressedReceiver
 	{
 	public:
-		InputReceiver(Node *obj, InputReceiverCallback callback)
-			: m_node{ obj }, m_callback{ callback } {}
+		KeyPressedReceiver() {}
+		virtual ~KeyPressedReceiver() {}
+		
+		virtual void onKeyPressed(const Key &key) = 0;
+	}
 
-	private:
-		InputReceiverCallback m_callback{ nullptr };
-		Node *m_node;
-	};
+	class KeyReleasedReceiver
+	{
+	public:
+		KeyPressedReceiver() {}
+		virtual ~KeyPressedReceiver() {}
+		
+		virtual void onKeyReleased(const Key &key) = 0;
+	}
 
 	class Input : public AppService
 	{
@@ -55,9 +61,7 @@ namespace lib
 		void Init() override;
 
 		void processSystemEvent(const sptr<DataMap> eventData);
-		void addInputCallback(Node *node, sptr<InputReceiverCallback> callback);
-	private:
-//		std::list<wptr<InputReceiver>> m_callbacks;
+		void updateNode(Node *);
 	};
 }
 

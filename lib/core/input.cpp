@@ -19,4 +19,19 @@ namespace lib
 	{
 		__ASSERT(eventData, "Map parameter is nullptr");
 	}
+	
+	void Input::updateNode(Node *node)
+	{
+		KeyPressedReceiver *kpreceiver = dynamic_cast<KeyPressedReceiver*>(node);
+		
+		if (kpreceiver) {
+			kpreceiver->onKeyPressed();
+		}
+		
+		KeyReleasedReceiver *krReceiver = dynamic_cast<KeyReleasedReceiver>(node);
+		
+		if (krreceiver) {
+			krreceiver->onKeyReleased();
+		}
+	}
 }

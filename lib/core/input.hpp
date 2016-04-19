@@ -35,7 +35,11 @@ namespace lib
 
 	class Node;
 
-	class KeyPressedReceiver
+	class Receiver
+	{
+
+	};
+	class KeyPressedReceiver : public Receiver
 	{
 	public:
 		KeyPressedReceiver() {}
@@ -44,7 +48,7 @@ namespace lib
 		virtual void onKeyPressed(const Key &key) = 0;
 	};
 
-	class KeyReleasedReceiver
+	class KeyReleasedReceiver : public Receiver
 	{
 	public:
 		KeyReleasedReceiver() {}

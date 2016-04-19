@@ -18,20 +18,25 @@ namespace lib
 	void Input::processSystemEvent(const sptr<DataMap> eventData)
 	{
 		__ASSERT(eventData, "Map parameter is nullptr");
+		m_iData.emplace(InputData{ eventData });
 	}
 	
-	void Input::updateNode(Node *node)
+	void Input::updateNode(const sptr<Node> node)
 	{
-		KeyPressedReceiver *kpreceiver = dynamic_cast<KeyPressedReceiver*>(node);
-		
-		if (kpreceiver) {
-			kpreceiver->onKeyPressed();
-		}
-		
-		KeyReleasedReceiver *krReceiver = dynamic_cast<KeyReleasedReceiver>(node);
-		
-		if (krreceiver) {
-			krreceiver->onKeyReleased();
+		if (!m_iData.empty()) {
+			auto kpreceiver = std::dynamic_pointer_cast<KeyPressedReceiver>(node);
+			auto krreceiver = std::dynamic_pointer_cast<KeyReleasedReceiver>(node);
+
+			if (kpreceiver || krreceiver) {
+				const InputData iData{ m_iData.top() };
+				if (kpreceiver) {
+					kpreceiver->onKeyPressed(iData.key());
+				}
+
+				if (krreceiver) {
+					krreceiver->onKeyReleased(iData.key());
+				}
+			}
 		}
 	}
 }

@@ -5,6 +5,7 @@
 #include <lib/include/key.hpp>
 #include "appservice.hpp"
 #include "data.hpp"
+#include <stack>
 
 namespace lib
 {
@@ -41,16 +42,16 @@ namespace lib
 		virtual ~KeyPressedReceiver() {}
 		
 		virtual void onKeyPressed(const Key &key) = 0;
-	}
+	};
 
 	class KeyReleasedReceiver
 	{
 	public:
-		KeyPressedReceiver() {}
-		virtual ~KeyPressedReceiver() {}
+		KeyReleasedReceiver() {}
+		virtual ~KeyReleasedReceiver() {}
 		
 		virtual void onKeyReleased(const Key &key) = 0;
-	}
+	};
 
 	class Input : public AppService
 	{
@@ -61,7 +62,9 @@ namespace lib
 		void Init() override;
 
 		void processSystemEvent(const sptr<DataMap> eventData);
-		void updateNode(Node *);
+		void updateNode(const sptr<Node>);
+	private:
+		std::stack<InputData> m_iData;
 	};
 }
 

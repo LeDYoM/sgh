@@ -3,7 +3,7 @@
 
 #include <lib/include/types.hpp>
 #include <lib/include/key.hpp>
-#include "appservice.hpp"
+#include "nodeupdater.hpp"
 #include "data.hpp"
 #include <stack>
 
@@ -37,7 +37,7 @@ namespace lib
 		const Action m_action;
 	};
 
-	class Input : public AppService
+	class Input : public NodeUpdater
 	{
 	public:
 		Input();
@@ -46,7 +46,7 @@ namespace lib
 		void Init() override;
 
 		void processSystemEvent(const sptr<DataMap> eventData);
-		void updateNode(const sptr<draw::Node>&);
+		void updateNode(const sptr<draw::Node>&) override;
 	private:
 		std::stack<InputData> m_iData;
 	};

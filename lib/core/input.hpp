@@ -9,6 +9,10 @@
 
 namespace lib
 {
+	namespace draw
+	{
+		class Node;
+	}
 	class InputData
 	{
 	public:
@@ -33,30 +37,6 @@ namespace lib
 		const Action m_action;
 	};
 
-	class Node;
-
-	class Receiver
-	{
-
-	};
-	class KeyPressedReceiver : public Receiver
-	{
-	public:
-		KeyPressedReceiver() {}
-		virtual ~KeyPressedReceiver() {}
-		
-		virtual void onKeyPressed(const Key &key) = 0;
-	};
-
-	class KeyReleasedReceiver : public Receiver
-	{
-	public:
-		KeyReleasedReceiver() {}
-		virtual ~KeyReleasedReceiver() {}
-		
-		virtual void onKeyReleased(const Key &key) = 0;
-	};
-
 	class Input : public AppService
 	{
 	public:
@@ -66,7 +46,7 @@ namespace lib
 		void Init() override;
 
 		void processSystemEvent(const sptr<DataMap> eventData);
-		void updateNode(const sptr<Node>);
+		void updateNode(const sptr<draw::Node>&);
 	private:
 		std::stack<InputData> m_iData;
 	};

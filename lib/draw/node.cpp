@@ -16,5 +16,11 @@ namespace lib
 		Node::~Node()
 		{
 		}
+		
+		void Node::autoUpdate()
+		{
+			
+		}
+
 	}
 }

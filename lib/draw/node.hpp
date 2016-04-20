@@ -5,11 +5,10 @@
 #include "hasname.hpp"
 #include "idrawable.hpp"
 #include "iparentable.hpp"
+#include "../core/input.hpp"
 
 namespace lib
 {
-	class Receiver;
-
 	namespace draw
 	{
 		class RenderGroup;
@@ -19,9 +18,11 @@ namespace lib
 			Node(const str &name);
 			virtual bool init();
 			virtual ~Node();
-		private:
-			VecSPtr<lib::Receiver> m_receivers;
+			
+			virtual void autoUpdate();
+
 		};
+	
 	}
 }
 

@@ -1,6 +1,7 @@
 #include "input.hpp"
 #include "log.hpp"
-
+#include "../draw/node.hpp"
+#include "inputreceiver.hpp"
 namespace lib
 {
 	InputData::InputData(const sptr<DataMap> eventData)
@@ -18,24 +19,18 @@ namespace lib
 	void Input::processSystemEvent(const sptr<DataMap> eventData)
 	{
 		__ASSERT(eventData, "Map parameter is nullptr");
-		m_iData.emplace(InputData{ eventData });
+		m_iData.push(InputData{ eventData });
 	}
 	
-	void Input::updateNode(const sptr<Node> node)
+	void Input::updateNode(const sptr<draw::Node> &node)
 	{
 		if (!m_iData.empty()) {
-			auto kpreceiver = std::dynamic_pointer_cast<KeyPressedReceiver>(node);
-			auto krreceiver = std::dynamic_pointer_cast<KeyReleasedReceiver>(node);
+			auto iReceiver = std::dynamic_pointer_cast<InputReceiverNode>(node);
 
-			if (kpreceiver || krreceiver) {
+			if (iReceiver) {
 				const InputData iData{ m_iData.top() };
-				if (kpreceiver) {
-					kpreceiver->onKeyPressed(iData.key());
-				}
-
-				if (krreceiver) {
-					krreceiver->onKeyReleased(iData.key());
-				}
+				iReceiver->onKeyPressed(iData.key());
+				iReceiver->onKeyReleased(iData.key());
 			}
 		}
 	}

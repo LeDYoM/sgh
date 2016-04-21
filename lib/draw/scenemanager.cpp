@@ -108,9 +108,10 @@ namespace lib
 			}
 
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
-			m_renderStates.emplace();
+			m_renderStates.emplace(RenderStates{);
 			m_renderStates.top()->currentTarget = service<core::Window>()->renderTarget();
-			_currentScene->draw();
+//			_currentScene->draw();
+			visit(_currentScene);
 			m_renderStates.pop();
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
 		}
@@ -120,20 +121,19 @@ namespace lib
 			service<Input>()->updateNode(node);
 
 			if (auto transformableNode = as<Transformable>(node)) {
-				auto oldTransformation{ service<SceneManager>()->frameRenderStates()->transform };
+				m_renderStates.push(m_renderStates.top());
+				m_renderStates.top()->currentTarget = service<core::Window>()->renderTarget();
 				service<SceneManager>()->frameRenderStates()->transform *= transformableNode->transformation();
+			}
 
-				if (auto drawableNode = as<IDrawable>(node)) {
-					drawableNode->draw();
+			if (auto drawableNode = as<IDrawable>(node)) {
+				drawableNode->draw();
+			}
+
+			if (auto renderGroupNode = as<RenderGroup>(node)) {
+				for (auto node_ : renderGroupNode->renderNodes()) {
+					visit(node_);
 				}
-
-				if (auto renderGroupNode = as<RenderGroup>(node)) {
-					for (auto node_ : renderGroupNode->renderNodes()) {
-						visit(node_);
-					}
-				}
-
-				service<SceneManager>()->frameRenderStates()->transform = oldTransformation;
 			}
 		}
 

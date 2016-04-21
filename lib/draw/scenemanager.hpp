@@ -16,6 +16,7 @@ namespace lib
 	{
 		class Scene;
 		class RenderStates;
+		class Node;
 
 		class SceneManager : public AppService
 		{
@@ -35,6 +36,7 @@ namespace lib
 			void exitProgram();
 
 			sptr<RenderStates> frameRenderStates() const;
+			void visit(const sptr<Node> &node);
 		private:
 			void setScene(sptr<Scene> scene);
 

@@ -51,11 +51,12 @@ namespace lib
 			}
 
 			void for_each_renderNode(std::function<void(sptr<Node> node)> f);
-			template <class T,class S> static sptr<T> as(sptr<S> node) { return std::dynamic_pointer_cast<T>(node); }
 			virtual Scene *const parentScene();
 
 			bool activateOne(const str& node);
 			bool activateOne(sptr<Node> node);
+
+			inline const VecSPtr<Node> renderNodes() { return _renderNodes; }
 
 		protected:
 			VecSPtr<Node> _renderNodes;

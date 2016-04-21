@@ -113,6 +113,28 @@ namespace lib
 			m_renderStates->currentTarget = nullptr;
 		}
 
+		void SceneManager::visit(const sptr<Node>& node)
+		{
+			service<Input>()->updateNode(node);
+
+			if (auto transformableNode = as<Transformable>(node)) {
+				auto oldTransformation{ service<SceneManager>()->frameRenderStates()->transform };
+				service<SceneManager>()->frameRenderStates()->transform *= transformableNode->transformation();
+
+				if (auto drawableNode = as<IDrawable>(node)) {
+					drawableNode->draw();
+				}
+
+				if (auto renderGroupNode = as<RenderGroup>(node)) {
+					for (auto node_ : renderGroupNode->renderNodes()) {
+						visit(node_);
+					}
+				}
+
+				service<SceneManager>()->frameRenderStates()->transform = oldTransformation;
+			}
+		}
+
 		void SceneManager::exitProgram()
 		{
 //			p_parentWindow->exitProgram();
@@ -122,6 +144,5 @@ namespace lib
 		{
 			return m_renderStates;
 		}
-
 	}
 }

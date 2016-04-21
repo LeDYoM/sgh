@@ -5,6 +5,7 @@
 #include <lib/include/types.hpp>
 #include <lib/core/appservice.hpp>
 #include <lib/include/key.hpp>
+#include <stack>
 
 namespace lib
 {
@@ -45,7 +46,8 @@ namespace lib
 			sptr<Scene> _currentScene{ nullptr };
 			bool b_lock{ false };
 			sptr<Scene> _nextScene{ nullptr };
-			sptr<RenderStates> m_renderStates{ nullptr };
+			typedef std::stack <sptr<RenderStates>, std::vector<sptr<RenderStates>>> StackVector;
+			StackVector m_renderStates;
 		};
 	}
 }

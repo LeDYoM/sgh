@@ -29,7 +29,7 @@ namespace lib
 		void SceneManager::Init()
 		{
 			AppService::Init();
-			m_renderStates = sptr<RenderStates>(new RenderStates);
+//			m_renderStates = sptr<RenderStates>(new RenderStates);
 		}
 
 		void SceneManager::addScene(sptr<Scene> newScene)
@@ -107,10 +107,12 @@ namespace lib
 				}
 			}
 
-			m_renderStates->nextFrame();
-			m_renderStates->currentTarget = service<core::Window>()->renderTarget();
+			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
+			m_renderStates.emplace();
+			m_renderStates.top()->currentTarget = service<core::Window>()->renderTarget();
 			_currentScene->draw();
-			m_renderStates->currentTarget = nullptr;
+			m_renderStates.pop();
+			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
 		}
 
 		void SceneManager::visit(const sptr<Node>& node)

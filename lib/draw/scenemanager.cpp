@@ -108,7 +108,7 @@ namespace lib
 			}
 
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
-			m_renderStates.emplace(RenderStates{);
+			m_renderStates.emplace();
 			m_renderStates.top()->currentTarget = service<core::Window>()->renderTarget();
 //			_currentScene->draw();
 			visit(_currentScene);
@@ -144,7 +144,7 @@ namespace lib
 
 		sptr<RenderStates> SceneManager::frameRenderStates() const
 		{
-			return m_renderStates;
+			return m_renderStates.top();
 		}
 	}
 }

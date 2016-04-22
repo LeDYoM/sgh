@@ -19,13 +19,13 @@ namespace lib
 		RenderStates::RenderStates(const sf::BlendMode &theBlendMode)
 			: RenderStates{ theBlendMode, {}, nullptr, nullptr } {}
 
-		RenderStates::RenderStates(sf::Texture* theTexture)
+		RenderStates::RenderStates(const sf::Texture* theTexture)
 			: RenderStates{ sf::BlendAlpha, {}, theTexture, nullptr } {}
 
-		RenderStates::RenderStates(sf::Shader* theShader)
+		RenderStates::RenderStates(const sf::Shader* theShader)
 			: RenderStates{ sf::BlendAlpha, {}, nullptr, theShader } {}
 
-		RenderStates::RenderStates(const sf::BlendMode &theBlendMode, const Transformation &transformation,	sf::Texture* theTexture, sf::Shader* theShader) 
+		RenderStates::RenderStates(const sf::BlendMode &theBlendMode, const Transformation &transformation,	const sf::Texture* theTexture, const sf::Shader* theShader) 
 			: blendMode{ theBlendMode }, transform{ transformation }, texture{ theTexture }, shader{ theShader } {}
 
 		void RenderStates::nextFrame()

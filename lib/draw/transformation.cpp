@@ -161,7 +161,7 @@ namespace lib
 			return combine(scaling);
 		}
 
-		Transformation Transformation::operator *(const Transformation& right)
+		Transformation Transformation::operator *(const Transformation& right) const
 		{
 			return Transformation(*this).combine(right);
 		}

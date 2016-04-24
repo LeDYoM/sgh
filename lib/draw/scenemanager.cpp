@@ -109,7 +109,7 @@ namespace lib
 
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
 			m_renderStates.emplace();
-			m_renderStates.top()->currentTarget = service<core::Window>()->renderTarget();
+			m_renderStates.top().currentTarget = service<core::Window>()->renderTarget();
 //			_currentScene->draw();
 			visit(_currentScene);
 			m_renderStates.pop();
@@ -121,9 +121,11 @@ namespace lib
 			service<Input>()->updateNode(node);
 
 			if (auto transformableNode = as<Transformable>(node)) {
-				m_renderStates.push(m_renderStates.top());
-				m_renderStates.top()->currentTarget = service<core::Window>()->renderTarget();
-				service<SceneManager>()->frameRenderStates()->transform *= transformableNode->transformation();
+				const RenderStates &top{ m_renderStates.top() };
+				RenderStates rStates{ top.blendMode,top.transform*transformableNode->transformation(),top.texture,top.shader };
+				m_renderStates.push(rStates);
+//				m_renderStates.top().currentTarget = service<core::Window>()->renderTarget();
+//				service<SceneManager>()->frameRenderStates()->transform *= transformableNode->transformation();
 			}
 
 			if (auto drawableNode = as<IDrawable>(node)) {
@@ -142,7 +144,7 @@ namespace lib
 //			p_parentWindow->exitProgram();
 		}
 
-		sptr<RenderStates> SceneManager::frameRenderStates() const
+		const RenderStates &SceneManager::frameRenderStates() const
 		{
 			return m_renderStates.top();
 		}

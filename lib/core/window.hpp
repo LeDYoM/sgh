@@ -34,7 +34,7 @@ namespace lib
 			void exitProgram();
 
 			void updateCamera(const draw::Camera &camera);
-			sptr<RenderTarget> renderTarget();
+			const sptr<RenderTarget> renderTarget();
 
 			/* Driver communication */
 			void wantsClose();

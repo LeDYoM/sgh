@@ -29,7 +29,7 @@ namespace lib
 			Transformation &rotate(f32 angle, const vector2df &center);
 			Transformation &scale(const vector2df &factors);
 			Transformation &scale(const vector2df &factors, const vector2df &center);
-			Transformation operator*(const Transformation &right);
+			Transformation operator*(const Transformation &right) const;
 			Transformation &operator*=(const Transformation &right);
 			vector2df operator*(const vector2df &right);
 		private:

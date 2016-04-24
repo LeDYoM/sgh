@@ -176,15 +176,15 @@ namespace lib
 		u32 NodeShape::draw()
 		{
 			ensureGeometryUpdate();
-			RenderStates &states{ *service<SceneManager>()->frameRenderStates() };
-			auto oldTransformation= states.transform;
-			states.transform *= transformation();
+//			RenderStates &states{ service<SceneManager>()->frameRenderStates() };
+//			auto oldTransformation= states.transform;
+//			states.transform *= transformation();
 
 			// Render the inside
-			states.texture = m_texture;
-			states.currentTarget->draw(m_vertices,states);
+//			states.texture = m_texture;
+//			states.currentTarget->draw(m_vertices,states);
 
-			states.transform = oldTransformation;
+//			states.transform = oldTransformation;
 			return 1;
 		}
 

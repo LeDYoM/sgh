@@ -128,13 +128,12 @@ namespace lib
 			if (m_font)
 			{
 				ensureGeometryUpdate();
-
-				RenderStates &states{ *service<SceneManager>()->frameRenderStates() };
-				auto oldTransformation = states.transform;
-				states.transform *= transformation();
-				states.texture = &m_font->getTexture(m_characterSize);
-				states.currentTarget->draw(m_vertices, states);
-				states.transform = oldTransformation;
+//				RenderStates states{ top.blendMode,top.transform*transformableNode->transformation(),top.texture,top.shader };
+//				auto oldTransformation = states.transform;
+//				states.transform *= transformation();
+//				states.texture = &m_font->getTexture(m_characterSize);
+//				states.currentTarget->draw(m_vertices, states);
+//				states.transform = oldTransformation;
 				return 1;
 			}
 			return 0;

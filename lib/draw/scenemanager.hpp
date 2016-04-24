@@ -5,6 +5,7 @@
 #include <lib/include/types.hpp>
 #include <lib/core/appservice.hpp>
 #include <lib/include/key.hpp>
+#include "renderstates.hpp"
 #include <stack>
 
 namespace lib
@@ -36,7 +37,7 @@ namespace lib
 			void addScenes(const std::vector<sptr<Scene>> &&sceneVector);
 			void exitProgram();
 
-			sptr<RenderStates> frameRenderStates() const;
+			const RenderStates &frameRenderStates() const;
 			void visit(const sptr<Node> &node);
 		private:
 			void setScene(sptr<Scene> scene);
@@ -46,7 +47,7 @@ namespace lib
 			sptr<Scene> _currentScene{ nullptr };
 			bool b_lock{ false };
 			sptr<Scene> _nextScene{ nullptr };
-			typedef std::stack <sptr<RenderStates>, std::vector<sptr<RenderStates>>> StackVector;
+			typedef std::stack <RenderStates> StackVector;
 			StackVector m_renderStates;
 		};
 	}

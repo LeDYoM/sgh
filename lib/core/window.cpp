@@ -138,7 +138,7 @@ namespace lib
 			p_wPrivate->m_renderWindow->setViewRectangle(camera.target());
 		}
 
-		sptr<RenderTarget> Window::renderTarget()
+		const sptr<RenderTarget> Window::renderTarget()
 		{
 			return p_wPrivate->m_renderWindow;
 		}

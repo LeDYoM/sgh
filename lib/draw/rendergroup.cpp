@@ -79,14 +79,14 @@ namespace lib
 			{
 				updateAnimations();
 				u32 rNodes{ 0 };
-				auto oldTransformation = service<SceneManager>()->frameRenderStates()->transform;
-				service<SceneManager>()->frameRenderStates()->transform *= transformation();
+//				auto oldTransformation = service<SceneManager>()->frameRenderStates().transform;
+//				service<SceneManager>()->frameRenderStates().transform *= transformation();
 
 				for (const auto renderNode : _renderNodes)
 				{
 					rNodes += renderNode->draw();
 				}
-				service<SceneManager>()->frameRenderStates()->transform = oldTransformation;
+//				service<SceneManager>()->frameRenderStates().transform = oldTransformation;
 				return rNodes;
 			}
 

@@ -23,15 +23,15 @@ namespace lib
 		{
 		public:
 			RenderStates();
-			RenderStates(const sf::BlendMode &theBlendMode);
-			RenderStates(const Transformation &transformation);
-			RenderStates(const sf::Texture* theTexture);
-			RenderStates(const sf::Shader* theShader);
-			RenderStates(const sf::BlendMode &theBlendMode, const Transformation &transformation,
-				const sf::Texture *theTexture, const sf::Shader *theShader);
 			RenderStates(const RenderStates&) = default;
-			RenderStates &operator=(const RenderStates&) = default;
-
+			RenderStates &operator=(const RenderStates&) = delete;
+			explicit RenderStates(const sf::BlendMode &theBlendMode);
+			explicit RenderStates(const Transformation &transformation);
+			explicit RenderStates(const sf::Texture* theTexture);
+			explicit RenderStates(const sf::Shader* theShader);
+			explicit RenderStates(core::RenderTarget *theRenderTarget);
+			RenderStates(const sf::BlendMode &theBlendMode, const Transformation &transformation,
+				const sf::Texture *theTexture, const sf::Shader *theShader, core::RenderTarget *theRenderTarget);
 			void nextFrame();
 			void reset();
 
@@ -40,7 +40,7 @@ namespace lib
 			sf::BlendMode blendMode;
 			const sf::Texture *texture;
 			const sf::Shader *shader;
-			sptr<core::RenderTarget> currentTarget;
+			core::RenderTarget *currentTarget;
 		};
 	}
 }

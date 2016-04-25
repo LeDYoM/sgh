@@ -40,6 +40,9 @@ namespace lib
 			void setAlignment(Alignment alignment);
 
 			void updateGeometryIfNecessary();
+
+			virtual const sf::Texture *texture() const = 0;
+			virtual const VertexArray &vertexArray() const;
 		protected:
 			virtual void ensureGeometryUpdate() = 0;
 			void updateFillColors();

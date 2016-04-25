@@ -125,12 +125,6 @@ namespace lib
 			m_texture = texture;
 		}
 
-
-		const sf::Texture* NodeShape::getTexture() const
-		{
-			return m_texture;
-		}
-
 		void NodeShape::setTextureRect(const Rects32& rect)
 		{
 			m_textureRect = rect;
@@ -173,9 +167,15 @@ namespace lib
 			updateTexCoords();
 		}
 
+		const sf::Texture *NodeShape::texture() const
+		{
+			return m_texture;
+		}
+
 		u32 NodeShape::draw()
 		{
 			ensureGeometryUpdate();
+
 //			RenderStates &states{ service<SceneManager>()->frameRenderStates() };
 //			auto oldTransformation= states.transform;
 //			states.transform *= transformation();

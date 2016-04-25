@@ -35,6 +35,7 @@ namespace lib
 			u32 getCharacterSize() const;
 			u32 getStyle() const;
 			vector2df findCharacterPos(u32 index);
+			virtual const sf::Texture *texture() const override;
 		private:
 			virtual u32 draw() override;
 			virtual void ensureGeometryUpdate() override;

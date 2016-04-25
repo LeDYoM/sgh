@@ -123,6 +123,11 @@ namespace lib
 			return position;
 		}
 
+		const sf::Texture *NodeText::texture() const
+		{
+			return &(m_font->getTexture(m_characterSize));
+		}
+
 		u32 NodeText::draw()
 		{
 			if (m_font)

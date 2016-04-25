@@ -1,5 +1,7 @@
 #include "scenemanager.hpp"
 #include "scene.hpp"
+#include "renderstates.hpp"
+#include "../core/rendertarget.hpp"
 #include <lib/core/log.hpp>
 #include <lib/core/window.hpp>
 #include <lib/core/resourcemanager.hpp>
@@ -108,8 +110,7 @@ namespace lib
 			}
 
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
-			m_renderStates.emplace();
-			m_renderStates.top().currentTarget = service<core::Window>()->renderTarget();
+			m_renderStates.emplace(RenderStates{service<core::Window>()->renderTarget().get()});
 //			_currentScene->draw();
 			visit(_currentScene);
 			m_renderStates.pop();
@@ -119,14 +120,22 @@ namespace lib
 		void SceneManager::visit(const sptr<Node>& node)
 		{
 			service<Input>()->updateNode(node);
+			const RenderStates &top{ m_renderStates.top() };
+			RenderStates rStates{ top.blendMode, top.transform, top.texture, top.shader, top.currentTarget };
+
 
 			if (auto transformableNode = as<Transformable>(node)) {
-				const RenderStates &top{ m_renderStates.top() };
-				RenderStates rStates{ top.blendMode,top.transform*transformableNode->transformation(),top.texture,top.shader };
-				m_renderStates.push(rStates);
+				rStates.transform *= transformableNode->transformation();
 			}
 
-			if (auto drawableNode = as<IDrawable>(node)) {
+			if (auto renderableNode = as<RenderNode>(node)) {
+				rStates.texture = renderableNode->texture();
+			}
+
+			m_renderStates.push(rStates);
+
+			if (auto drawableNode = as<RenderNode>(node)) {
+				rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
 				drawableNode->draw();
 			}
 

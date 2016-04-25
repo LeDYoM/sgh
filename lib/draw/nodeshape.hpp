@@ -29,6 +29,7 @@ namespace lib
 			void setTextureRect(const Rects32& rect);
 			const sf::Texture* getTexture() const;
 			const Rects32& getTextureRect() const;
+			virtual const sf::Texture *texture() const override;
 
 		protected:
 			virtual void ensureGeometryUpdate() override;

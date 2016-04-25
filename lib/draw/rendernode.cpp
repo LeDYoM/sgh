@@ -92,8 +92,9 @@ namespace lib
 
 		void RenderNode::updateFillColors()
 		{
-			for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i)
+			for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i) {
 				m_vertices[i].color = m_color;
+			}
 		}
 
 		Rectf32 RenderNode::getLocalBounds()
@@ -109,17 +110,19 @@ namespace lib
 
 		void RenderNode::updateGeometryIfNecessary()
 		{
-			if (m_geometryNeedUpdate)
-			{
+			if (m_geometryNeedUpdate) {
 				ensureGeometryUpdate();
 			}
 
-			if (m_colorsNeedUpdate)
-			{
+			if (m_colorsNeedUpdate) {
 				updateFillColors();
 				m_colorsNeedUpdate = false;
 			}
 		}
 
+		const VertexArray &RenderNode::vertexArray() const
+		{
+			return m_vertices;
+		}
 	}
 }

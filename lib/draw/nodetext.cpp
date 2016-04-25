@@ -132,7 +132,7 @@ namespace lib
 //				auto oldTransformation = states.transform;
 //				states.transform *= transformation();
 //				states.texture = &m_font->getTexture(m_characterSize);
-				states.currentTarget->draw(m_vertices, states);
+//				states.currentTarget->draw(m_vertices, states);
 //				states.transform = oldTransformation;
 				return 1;
 			}

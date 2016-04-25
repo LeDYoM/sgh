@@ -50,6 +50,8 @@ namespace lib
 				m_servicesManager->addService(sptr<ResourceManager>{ new ResourceManager{} });
 				m_servicesManager->addService(sptr<draw::SceneManager>{ new draw::SceneManager{} });
 				m_servicesManager->addService(sptr<Window>{ new Window{ m_iapp->getAppDescriptor().wcp }});
+				m_servicesManager->addService(sptr<Input>{new Input{}});
+
 
 				m_servicesManager->setupAllServices();
 				m_servicesManager->initializeServices();

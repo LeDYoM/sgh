@@ -31,6 +31,7 @@ namespace lib
 		const Key &key() const { return m_key; }
 
 		InputData(const sptr<DataMap> eventData);
+		InputData &operator=(const InputData&) = delete;
 	private:
 		const Device m_device;
 		const Key m_key;

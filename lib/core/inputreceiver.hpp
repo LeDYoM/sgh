@@ -11,7 +11,7 @@ namespace lib
 	class InputReceiverNode : public virtual draw::Node
 	{
 	public:
-		InputReceiverNode(const str&) {}
+		InputReceiverNode(const str&str_) :draw::Node{ str_ } {}
 		virtual ~InputReceiverNode() {}
 		
 		virtual void onKeyPressed(const Key &) {}

@@ -124,8 +124,6 @@ namespace lib
 				const RenderStates &top{ m_renderStates.top() };
 				RenderStates rStates{ top.blendMode,top.transform*transformableNode->transformation(),top.texture,top.shader };
 				m_renderStates.push(rStates);
-//				m_renderStates.top().currentTarget = service<core::Window>()->renderTarget();
-//				service<SceneManager>()->frameRenderStates()->transform *= transformableNode->transformation();
 			}
 
 			if (auto drawableNode = as<IDrawable>(node)) {
@@ -137,6 +135,11 @@ namespace lib
 					visit(node_);
 				}
 			}
+
+			if (auto transformableNode = as<Transformable>(node)) {
+				m_renderStates.pop();
+			}
+
 		}
 
 		void SceneManager::exitProgram()

@@ -32,8 +32,6 @@ namespace lib
 			explicit RenderStates(core::RenderTarget *theRenderTarget);
 			RenderStates(const sf::BlendMode &theBlendMode, const Transformation &transformation,
 				const sf::Texture *theTexture, const sf::Shader *theShader, core::RenderTarget *theRenderTarget);
-			void nextFrame();
-			void reset();
 
 			Transformation transform;
 

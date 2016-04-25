@@ -32,7 +32,7 @@ namespace lib
 
 		RenderStates::RenderStates(const sf::BlendMode &theBlendMode, const Transformation &theTransformation,
 			const sf::Texture *theTexture, const sf::Shader *theShader, core::RenderTarget *theRenderTarget) 
-			: blendMode{ theBlendMode }, transform{ theTransformation }, texture{ theTexture }, shader{theShader}
-		{}
+			: blendMode{ theBlendMode }, transform{ theTransformation },
+			texture{ theTexture }, shader{ theShader }, currentTarget{ theRenderTarget } {}
 	}
 }

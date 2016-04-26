@@ -135,10 +135,10 @@ namespace lib
 			m_renderStates.push(rStates);
 
 			if (auto drawableNode = as<RenderNode>(node)) {
+				drawableNode->draw();
 				if (drawableNode->vertexArray().getVertexCount() > 0) {
 					rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
 				}
-//				drawableNode->draw();
 			}
 
 			if (auto renderGroupNode = as<RenderGroup>(node)) {

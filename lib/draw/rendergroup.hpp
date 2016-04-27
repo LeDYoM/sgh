@@ -43,7 +43,6 @@ namespace lib
 				addNode(t, beforeNode);
 				return t;
 			}
-			u32 draw() override;
 			sptr<Node> findByName(const str &name) const;
 			template <class T> sptr<T> findByNameAs(const str&name) const
 			{

@@ -7,6 +7,11 @@
 #include "transformable.hpp"
 #include "vertexarray.hpp"
 
+namespace sf
+{
+	class Texture;
+}
+
 namespace lib
 {
 	namespace draw
@@ -39,10 +44,9 @@ namespace lib
 			void setPositionY(const f32 y, Alignment alignment = Alignment::Left);
 			void setAlignment(Alignment alignment);
 
-			void updateGeometryIfNecessary();
-
 			virtual const sf::Texture *texture() const = 0;
 			virtual const VertexArray &vertexArray() const;
+			virtual void update();
 		protected:
 			virtual void ensureGeometryUpdate() = 0;
 			void updateFillColors();

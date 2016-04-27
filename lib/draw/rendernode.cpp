@@ -95,11 +95,12 @@ namespace lib
 			for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i) {
 				m_vertices[i].color = m_color;
 			}
+			m_colorsNeedUpdate = false;
 		}
 
 		Rectf32 RenderNode::getLocalBounds()
 		{
-			updateGeometryIfNecessary();
+			ensureGeometryUpdate();
 			return m_bounds;
 		}
 
@@ -108,7 +109,12 @@ namespace lib
 			return transformation().transformRect(getLocalBounds());
 		}
 
-		void RenderNode::updateGeometryIfNecessary()
+		const VertexArray &RenderNode::vertexArray() const
+		{
+			return m_vertices;
+		}
+
+		void RenderNode::update()
 		{
 			if (m_geometryNeedUpdate) {
 				ensureGeometryUpdate();
@@ -116,13 +122,7 @@ namespace lib
 
 			if (m_colorsNeedUpdate) {
 				updateFillColors();
-				m_colorsNeedUpdate = false;
 			}
-		}
-
-		const VertexArray &RenderNode::vertexArray() const
-		{
-			return m_vertices;
 		}
 	}
 }

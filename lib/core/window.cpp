@@ -77,12 +77,10 @@ namespace lib
 				if (pEvent)
 				{
 					const std::string &eType( pEvent->at("Type").getString() );
-					if ( eType == "Input")
-					{
-//						service<Input>()->
+					if ( eType == "Input") {
+						service<Input>()->processSystemEvent(pEvent);
 					}
-					else if (eType == "Window")
-					{
+					else if (eType == "Window") {
 						_shouldClose = true;
 					}
 				}

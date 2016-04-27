@@ -14,8 +14,7 @@ namespace lib
 			T *const parent() const { return m_parent; }
 		private:
 			T *m_parent{ nullptr };
-			void setParent(T *const parent_)
-			{
+			void setParent(T *const parent_) {
 				__ASSERT(!m_parent, "Node already has a parent");
 				m_parent = parent_;
 			}

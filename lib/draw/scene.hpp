@@ -6,6 +6,7 @@
 #include <lib/include/types.hpp>
 #include <lib/include/key.hpp>
 #include <lib/core/timer.hpp>
+#include <lib/core/inputreceiver.hpp>
 #include "rendergroup.hpp"
 #include "camera.hpp"
 #include <string>
@@ -22,7 +23,7 @@ namespace lib
 		}
 		class SceneManager;
 
-		class Scene : public draw::RenderGroup
+		class Scene : public draw::RenderGroup, public InputReceiverNode
 		{
 		public:
 			Scene(const std::string &_name);
@@ -31,14 +32,11 @@ namespace lib
 			virtual void onEnterScene() = 0;
 			virtual void onExitScene() = 0;
 
-			virtual void onKeyPressed(lib::Key key) = 0;
-			virtual void onKeyReleased(lib::Key key) = 0;
+			virtual void onKeyPressed(const Key &) override;
+			virtual void onKeyReleased(const Key &) override;
 
 			virtual const lib::vector2df getDefaultSizeView() = 0;
 			virtual void update() = 0;
-
-			virtual void onPrivateKeyPressed(Key key);
-			virtual void onPrivateKeyReleased(Key key);
 
 			sptr<lib::ResourceManager> resourceManager() const;
 			sptr<UtilProvider> utilProvider() const;

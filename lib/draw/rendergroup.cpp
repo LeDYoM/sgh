@@ -73,26 +73,6 @@ namespace lib
 			return removeFromspVector(element, _renderNodes);
 		}
 
-		u32 RenderGroup::draw()
-		{
-			if (isVisible())
-			{
-				updateAnimations();
-				u32 rNodes{ 0 };
-//				auto oldTransformation = service<SceneManager>()->frameRenderStates().transform;
-//				service<SceneManager>()->frameRenderStates().transform *= transformation();
-
-				for (const auto renderNode : _renderNodes)
-				{
-					rNodes += renderNode->draw();
-				}
-//				service<SceneManager>()->frameRenderStates().transform = oldTransformation;
-				return rNodes;
-			}
-
-			return 0;
-		}
-
 		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<Node> beforeNode)
 		{
 			sptr<RenderGroup> rg = sptr<RenderGroup>{ new RenderGroup(name) };
@@ -142,7 +122,7 @@ namespace lib
 			for (auto node_ : _renderNodes)
 			{
 				bool isThis{ node == node_ };
-				node_->setVisible(isThis);
+//				node_->setVisible(isThis);
 				found |= (isThis);
 			}
 			return found;

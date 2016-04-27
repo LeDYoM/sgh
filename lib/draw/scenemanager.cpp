@@ -6,7 +6,7 @@
 #include <lib/core/window.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/appcontroller.hpp>
-#include <lib/core/events/inputevent.hpp>
+#include <lib/core/input.hpp>
 
 namespace lib
 {
@@ -119,38 +119,41 @@ namespace lib
 
 		void SceneManager::visit(const sptr<Node>& node)
 		{
-			service<Input>()->updateNode(node);
-			const RenderStates &top{ m_renderStates.top() };
-			RenderStates rStates{ top.blendMode, top.transform, top.texture, top.shader, top.currentTarget };
+			if (node->isActive()) {
+				service<Input>()->updateNode(node);
 
+				if (node->isVisible()) {
+					const RenderStates &top{ m_renderStates.top() };
+					RenderStates rStates{ top.blendMode, top.transform, top.texture, top.shader, top.currentTarget };
 
-			if (auto transformableNode = as<Transformable>(node)) {
-				rStates.transform *= transformableNode->transformation();
-			}
+					if (auto transformableNode = as<Transformable>(node)) {
+						rStates.transform *= transformableNode->transformation();
+					}
 
-			if (auto renderableNode = as<RenderNode>(node)) {
-				rStates.texture = renderableNode->texture();
-			}
+					if (auto renderableNode = as<RenderNode>(node)) {
+						rStates.texture = renderableNode->texture();
+					}
 
-			m_renderStates.push(rStates);
+					m_renderStates.push(rStates);
 
-			if (auto drawableNode = as<RenderNode>(node)) {
-				drawableNode->draw();
-				if (drawableNode->vertexArray().getVertexCount() > 0) {
-					rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
+					if (auto drawableNode = as<RenderNode>(node)) {
+						drawableNode->update();
+						if (drawableNode->vertexArray().getVertexCount() > 0) {
+							rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
+						}
+					}
+
+					if (auto renderGroupNode = as<RenderGroup>(node)) {
+						for (auto node_ : renderGroupNode->renderNodes()) {
+							visit(node_);
+						}
+					}
+
+					if (auto transformableNode = as<Transformable>(node)) {
+						m_renderStates.pop();
+					}
 				}
 			}
-
-			if (auto renderGroupNode = as<RenderGroup>(node)) {
-				for (auto node_ : renderGroupNode->renderNodes()) {
-					visit(node_);
-				}
-			}
-
-			if (auto transformableNode = as<Transformable>(node)) {
-				m_renderStates.pop();
-			}
-
 		}
 
 		void SceneManager::exitProgram()

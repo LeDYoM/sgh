@@ -1,26 +1,32 @@
-#ifndef __LIB_INAMEDDRAWABLE_HPP__
-#define __LIB_INAMEDDRAWABLE_HPP__
+#ifndef LIB_NODE_HPP__
+#define LIB_NODE_HPP__
 
 #include <lib/core/obj.hpp>
 #include "hasname.hpp"
-#include "idrawable.hpp"
 #include "iparentable.hpp"
-#include "../core/input.hpp"
 
 namespace lib
 {
 	namespace draw
 	{
 		class RenderGroup;
-		class Node : public IParentable<RenderGroup>, public core::HasName, public IDrawable, public Object
+		class Node : public IParentable<RenderGroup>, public core::HasName, public virtual Object
 		{
 		public:
 			Node(const str &name);
 			virtual bool init();
 			virtual ~Node();
-			
-			virtual void autoUpdate();
 
+			inline void setActive(bool nv) { m_active = nv; }
+			inline const bool isActive() const { return m_active; }
+
+			inline void setVisible(bool nv) { m_visible = nv; }
+			inline const bool isVisible() const { return m_visible; }
+
+		private:
+			bool m_active{ true };
+			bool m_visible{ true };
+		
 		};
 	
 	}

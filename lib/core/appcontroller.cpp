@@ -10,6 +10,7 @@
 #include "configuration.hpp"
 #include "servicesmanager.hpp"
 #include "shareddata.hpp"
+#include "input.hpp"
 
 namespace lib
 {

@@ -5,7 +5,7 @@ namespace lib
 {
 	namespace draw
 	{
-		Node::Node(const str &name) : HasName(name), IDrawable{}, Object{} {}
+		Node::Node(const str &name) : HasName(name) {}
 		
 		bool Node::init()
 		{
@@ -16,11 +16,6 @@ namespace lib
 		Node::~Node()
 		{
 		}
-		
-		void Node::autoUpdate()
-		{
-			
-		}
-
+	
 	}
 }

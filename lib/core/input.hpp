@@ -30,7 +30,7 @@ namespace lib
 		const Action &action() const { return m_action; }
 		const Key &key() const { return m_key; }
 
-		InputData(const sptr<DataMap> eventData);
+		InputData(const sptr<DataMap> &eventData);
 		InputData &operator=(const InputData&) = delete;
 	private:
 		const Device m_device;
@@ -46,7 +46,7 @@ namespace lib
 		static const str staticTypeName() { return "Input"; }
 		void Init() override;
 
-		void processSystemEvent(const sptr<DataMap> eventData);
+		void processSystemEvent(const sptr<DataMap> &eventData);
 		void updateNode(const sptr<draw::Node>&);
 	private:
 		std::stack<InputData> m_iData;

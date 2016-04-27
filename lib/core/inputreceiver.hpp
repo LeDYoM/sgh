@@ -3,15 +3,14 @@
 
 #include <lib/include/types.hpp>
 #include <lib/include/key.hpp>
-#include "../draw/node.hpp"
 
 namespace lib
 {
 
-	class InputReceiverNode : public virtual draw::Node
+	class InputReceiverNode
 	{
 	public:
-		InputReceiverNode(const str&str_) :draw::Node{ str_ } {}
+		InputReceiverNode() {}
 		virtual ~InputReceiverNode() {}
 		
 		virtual void onKeyPressed(const Key &) {}

@@ -68,9 +68,9 @@ namespace lib
 				p_wPrivate->m_renderWindow->setTitle(std::string(_title + " FPS:" + std::to_string(p_wPrivate->lastFps) ).c_str());
 			}
 			++(p_wPrivate->currentFps);
-			p_wPrivate->m_renderWindow->clear();
 			p_wPrivate->m_renderWindow->collectEvents();
 
+			service<Input>()->nextFrame();
 			while (p_wPrivate->m_renderWindow->pendingEvents())
 			{
 				sptr<DataMap> pEvent{ p_wPrivate->m_renderWindow->nextEvent() };
@@ -85,21 +85,7 @@ namespace lib
 					}
 				}
 			}
-			/*
-			sf::Event event;
-			while (p_wPrivate->m_renderWindow->pollEvent(event))
-			{
-				if (event.type == sf::Event::Closed)
-				{
-					return true;
-				}
-				else if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
-				{
-					keyEvent(event);
-				}
-			}
-			*/
-
+			p_wPrivate->m_renderWindow->clear();
 			return _shouldClose;
 		}
 

@@ -4,7 +4,7 @@ namespace zoper
 {
 	KeyMapping::KeyMapping()
 	{
-//		std::array<lib::input::KeyCode, TotalKeys> defaults{ lib::input::KeyCode::Left, lib::input::KeyCode::Right, lib::input::KeyCode::Up, lib::input::KeyCode::Down, lib::input::KeyCode::Space, lib::input::KeyCode::Escape };
+		std::array<lib::KeyCode, TotalKeys> defaults{ lib::KeyCode::Left, lib::KeyCode::Right, lib::KeyCode::Up, lib::KeyCode::Down, lib::KeyCode::Space, lib::KeyCode::Escape };
 
 		for (auto i = 0u; i < Direction::Total; ++i)
 		{

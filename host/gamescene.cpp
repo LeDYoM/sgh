@@ -421,6 +421,7 @@ namespace zoper
 
 	void GameScene::onKeyPressed(const lib::Key &key)
 	{
+		Scene::onKeyPressed(key);
 		switch (state())
 		{
 		case Playing:

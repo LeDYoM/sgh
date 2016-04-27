@@ -19,7 +19,7 @@ namespace lib
 	void Input::processSystemEvent(const sptr<DataMap> &eventData)
 	{
 		__ASSERT(eventData, "Map parameter is nullptr");
-		m_iData.push(InputData{ eventData });
+		m_iData.push_back(InputData{ eventData });
 	}
 	
 	void Input::updateNode(const sptr<draw::Node> &node)
@@ -28,10 +28,21 @@ namespace lib
 			auto iReceiver = std::dynamic_pointer_cast<InputReceiverNode>(node);
 
 			if (iReceiver) {
-				const InputData iData{ m_iData.top() };
-				iReceiver->onKeyPressed(iData.key());
-				iReceiver->onKeyReleased(iData.key());
+				for (const InputData &iData : m_iData) {
+					iReceiver->onKeyPressed(iData.key());
+					iReceiver->onKeyReleased(iData.key());
+				}
 			}
 		}
+	}
+
+	void Input::nextFrame()
+	{
+		reset();
+	}
+
+	void Input::reset()
+	{
+		m_iData.clear();
 	}
 }

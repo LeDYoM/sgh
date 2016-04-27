@@ -48,8 +48,10 @@ namespace lib
 
 		void processSystemEvent(const sptr<DataMap> &eventData);
 		void updateNode(const sptr<draw::Node>&);
+		void nextFrame();
+		void reset();
 	private:
-		std::stack<InputData> m_iData;
+		std::vector<InputData> m_iData;
 	};
 }
 

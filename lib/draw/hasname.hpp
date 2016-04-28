@@ -20,7 +20,7 @@ namespace lib
 		class HasName : public IHasName
 		{
 		public:
-			HasName(const std::string name) :_name(name) {}
+			HasName(const std::string &name) :_name(name) {}
 			HasName(HasName &&other) { _name = std::move(other._name); }
 			virtual ~HasName() {}
 			

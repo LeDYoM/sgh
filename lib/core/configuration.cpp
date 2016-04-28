@@ -10,6 +10,7 @@ namespace lib
 	{
 		class DataPath
 		{
+		public:
 			explicit DataPath(const str &dp, const char separator = '/')
 				: m_separator{ separator }
 			{
@@ -20,20 +21,20 @@ namespace lib
 			{
 				m_nodes.clear();
 				std::string m_ndpcpy(newdp);
-				bool exit{ false };
 
-				do
-				{
+				do {
 					auto sz(m_ndpcpy.find_first_not_of(m_separator));
 					m_nodes.push_back(m_ndpcpy.substr(0, sz));
 					m_ndpcpy = m_ndpcpy.substr(sz);
-
 				} while (!m_ndpcpy.empty());
 			}
 
-			inline auto size() -> decltype(3)
+			inline auto size() const
 			{
+				return m_nodes.size();
 			}
+
+			inline const std::string &operator[](u32 index) const { return m_nodes[index]; }
 
 		private:
 			std::vector<std::string> m_nodes;
@@ -68,7 +69,22 @@ namespace lib
 
 	DataValue &Configuration::get(const str &cPath)
 	{
+		u32 index{ 0 };
+		DataPath dPath{ cPath };
+		DataMap *current{ &m_rootNode };
 
+		while (true) {
+			auto p(current->find(dPath[index]));
+			if (p != current->end()) {
+				if (index == (cPath.size() - 1)) {
+					return p->second;
+				}
+				current = p->second.getMap();
+			}
+			else {
+				return p->second;
+			}
+			++index;
+		}
 	}
-
 }

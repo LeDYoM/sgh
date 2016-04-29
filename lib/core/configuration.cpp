@@ -11,6 +11,8 @@ namespace lib
 		class DataPath
 		{
 		public:
+			typedef std::vector<std::string>::size_type size_type;
+
 			explicit DataPath(const str &dp, const char separator = '/')
 				: m_separator{ separator }
 			{
@@ -23,18 +25,18 @@ namespace lib
 				std::string m_ndpcpy(newdp);
 
 				do {
-					auto sz(m_ndpcpy.find_first_not_of(m_separator));
+					auto sz(m_ndpcpy.find_first_of(m_separator));
 					m_nodes.push_back(m_ndpcpy.substr(0, sz));
-					m_ndpcpy = m_ndpcpy.substr(sz);
+					m_ndpcpy = m_ndpcpy.substr((sz==std::string::npos)?(m_ndpcpy.size()):(sz+1));
 				} while (!m_ndpcpy.empty());
 			}
 
-			inline auto size() const
+			inline size_type size() const
 			{
 				return m_nodes.size();
 			}
 
-			inline const std::string &operator[](u32 index) const { return m_nodes[index]; }
+			inline const std::string &operator[](const size_type index) const { return m_nodes[index]; }
 
 		private:
 			std::vector<std::string> m_nodes;
@@ -62,29 +64,30 @@ namespace lib
 		m_rootNode = std::move(DataValue::fromStringVector(data, count) );
 	}
 
-	void Configuration::setDefaults(const DataMap &&defaults)
-	{
-		m_defaults = std::move(defaults);
-	}
-
-	DataValue &Configuration::get(const str &cPath)
+	DataValue Configuration::get(const str &cPath, const DataValue &defaultv)
 	{
 		u32 index{ 0 };
 		DataPath dPath{ cPath };
 		DataMap *current{ &m_rootNode };
 
-		while (true) {
+		while (index<dPath.size()) {
 			auto p(current->find(dPath[index]));
 			if (p != current->end()) {
-				if (index == (cPath.size() - 1)) {
+				if (index == (dPath.size() - 1)) {
 					return p->second;
 				}
-				current = p->second.getMap();
+				if (!(p->second.ismap())) {
+					return defaultv;
+				}
+				else {
+					current = p->second.getMap();
+				}
 			}
 			else {
-				return p->second;
+				return defaultv;
 			}
 			++index;
 		}
+		return defaultv;
 	}
 }

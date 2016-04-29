@@ -1,22 +1,27 @@
 #include "keymapping.hpp"
+#include <lib/core/configuration.hpp>
+#include <lib/core/appcontroller.hpp>
 
 namespace zoper
 {
 	KeyMapping::KeyMapping()
 	{
-		std::array<lib::KeyCode, TotalKeys> defaults{ lib::KeyCode::Left, lib::KeyCode::Right, lib::KeyCode::Up, lib::KeyCode::Down, lib::KeyCode::Space, lib::KeyCode::Escape };
-
-		for (auto i = 0u; i < Direction::Total; ++i)
-		{
-//			_keys[i] = static_cast<lib::input::KeyCode>(addConfigInt("key" + std::to_string(i), defaults[i]));
-		}
-
-//		_keys[Direction::Total] = static_cast<lib::input::KeyCode>(addConfigInt("key_launch" + std::to_string(Direction::Total), defaults[Direction::Total]));
-//		_keys[Direction::Total + 1] = static_cast<lib::input::KeyCode>(addConfigInt("key_pause" + std::to_string(Direction::Total + 1), defaults[Direction::Total + 1]));
 	}
 
 	KeyMapping::~KeyMapping()
 	{
+	}
+
+	void KeyMapping::init()
+	{
+		std::array<lib::KeyCode, TotalKeys> defaults{ lib::KeyCode::Left, lib::KeyCode::Right, lib::KeyCode::Up, lib::KeyCode::Down, lib::KeyCode::Space, lib::KeyCode::Escape };
+
+		for (auto i = 0u; i < Direction::Total; ++i) {
+			_keys[i] = static_cast<lib::KeyCode>(service<lib::Configuration>()->get("Keyboard/key" + std::to_string(i), lib::DataValue{ static_cast<lib::s32>(defaults[i]) }).gets32());
+		}
+
+		_keys[Direction::Total] = static_cast<lib::KeyCode>(service<lib::Configuration>()->get("Keyboard/key_launch" + std::to_string(Direction::Total), lib::DataValue{ static_cast<lib::s32>(defaults[Direction::Total]) }).gets32());
+		_keys[Direction::Total] = static_cast<lib::KeyCode>(service<lib::Configuration>()->get("Keyboard/key_pause" + std::to_string(Direction::Total + 1), lib::DataValue{ static_cast<lib::s32>(defaults[Direction::Total + 1]) }).gets32());
 	}
 
 	lib::KeyCode KeyMapping::getKey(Direction d) const

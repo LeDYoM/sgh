@@ -16,12 +16,12 @@ namespace lib
 		DataMap &configuration();
 		void Init() override;
 
-		void setDefaults(const DataMap &&defaults);
-		DataValue &get(const str &cPath);
+		DataValue get(const str &cPath, const DataValue &defaultv);
+
 
 	private:
 		DataMap m_rootNode;
-		DataMap m_defaults;
+		DataValue m_invalid;
 	};
 }
 

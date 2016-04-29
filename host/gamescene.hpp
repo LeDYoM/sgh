@@ -3,7 +3,6 @@
 
 #include <lib/include/types.hpp>
 #include <lib/core/compileconfig.hpp>
-#include <lib/core/configuration.hpp>
 #include <lib/core/timer.hpp>
 #include <lib/draw/scene.hpp>
 #include <lib/board/itilescontroller.hpp>
@@ -49,7 +48,8 @@ namespace zoper
 			Time=1,
 		} _gameMode{ Token };
 	};
-	class GameScene : public lib::draw::Scene, public lib::board::ITilesController, public lib::Configuration
+
+	class GameScene : public lib::draw::Scene, public lib::board::ITilesController
 	{
 	public:
 		GameScene();
@@ -64,8 +64,7 @@ namespace zoper
 		virtual void update();
 
 	private:
-		KeyMapping _keyMapping;
-		lib::Configuration _gameConfig;
+		KeyMapping m_keyMapping;
 		void setLevel(const lib::u32 nv);
 		void updateLevelData();
 		void updateGoals();

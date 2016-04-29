@@ -46,6 +46,8 @@ namespace zoper
 	{
 		if (Scene::init())
 		{
+			m_keyMapping.setProvider(this);
+			m_keyMapping.init();
 			_mainBoardrg = this->createNewRenderGroup("mainBoard");
 			_gameOverrg = this->createNewRenderGroup("gameOverScreen");
 			_scorerg = this->createNewRenderGroup("score");
@@ -426,17 +428,17 @@ namespace zoper
 		{
 		case Playing:
 		{
-			auto dir = _keyMapping.getDirectionFromKey(key.kCode);
+			auto dir = m_keyMapping.getDirectionFromKey(key.kCode);
 			if (dir.isValid())
 			{
 				p_player->setCurrentDirection(dir);
 				movePlayer(dir);
 			}
-			else if (_keyMapping.isLaunchKey(key.kCode))
+			else if (m_keyMapping.isLaunchKey(key.kCode))
 			{
 				launchPlayer();
 			}
-			else if (_keyMapping.isPauseKey(key.kCode))
+			else if (m_keyMapping.isPauseKey(key.kCode))
 			{
 				switchPause();
 			}
@@ -446,7 +448,7 @@ namespace zoper
 			setNextScene("MenuScene");
 			break;
 		case Pause:
-			if (_keyMapping.isPauseKey(key.kCode))
+			if (m_keyMapping.isPauseKey(key.kCode))
 			{
 				switchPause();
 			}

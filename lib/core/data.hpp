@@ -65,6 +65,16 @@ namespace lib
 		DataMap *getMap();
 		const str toString() const;
 
+		inline const bool iss8() const { return m_dtype == DataType::T_s8; }
+		inline const bool isu8() const { return m_dtype == DataType::T_s8; }
+		inline const bool iss16() const { return m_dtype == DataType::T_s16; }
+		inline const bool isu16() const { return m_dtype == DataType::T_u16; }
+		inline const bool iss32() const { return m_dtype == DataType::T_s32; }
+		inline const bool isu32() const { return m_dtype == DataType::T_u32; }
+		inline const bool isf64() const { return m_dtype == DataType::T_f64; }
+		inline const bool isstring() const { return m_dtype == DataType::T_string; }
+		inline const bool ismap() const { return m_dtype == DataType::T_Tree; }
+
 		static DataMap fromStringVector(const std::vector<str> &data, u32 &count);
 
 	private:

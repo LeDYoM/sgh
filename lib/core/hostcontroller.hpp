@@ -2,7 +2,6 @@
 #define __LIB_HOSTCONTROLLER_HPP__
 
 #include <lib/core/vecsptr.hpp>
-#include "configuration.hpp"
 #include <lib/include/iapp.hpp>
 #include <queue>
 #include <string>
@@ -17,7 +16,7 @@ namespace lib
 		class HostTask;
 		class AppController;
 
-		class HostController : public Configuration
+		class HostController
 		{
 		public:
 			HostController(const std::vector<std::string> &params);

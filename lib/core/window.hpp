@@ -5,8 +5,6 @@
 #include <lib/include/iapp.hpp>
 #include "appservice.hpp"
 
-#include "events/inputevent.hpp"
-
 namespace lib
 {
 	namespace draw

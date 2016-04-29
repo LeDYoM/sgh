@@ -2,7 +2,6 @@
 #include <lib/core/convops.hpp>
 #include <lib/core/window.hpp>
 #include <lib/include/key.hpp>
-#include <lib/core/events/inputevent.hpp>
 
 namespace lib
 {

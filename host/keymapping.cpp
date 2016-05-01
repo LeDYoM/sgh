@@ -21,7 +21,7 @@ namespace zoper
 		}
 
 		_keys[Direction::Total] = static_cast<lib::KeyCode>(service<lib::Configuration>()->get("Keyboard/key_launch" + std::to_string(Direction::Total), lib::DataValue{ static_cast<lib::s32>(defaults[Direction::Total]) }).gets32());
-		_keys[Direction::Total] = static_cast<lib::KeyCode>(service<lib::Configuration>()->get("Keyboard/key_pause" + std::to_string(Direction::Total + 1), lib::DataValue{ static_cast<lib::s32>(defaults[Direction::Total + 1]) }).gets32());
+		_keys[Direction::Total+1] = static_cast<lib::KeyCode>(service<lib::Configuration>()->get("Keyboard/key_pause" + std::to_string(Direction::Total + 1), lib::DataValue{ static_cast<lib::s32>(defaults[Direction::Total + 1]) }).gets32());
 	}
 
 	lib::KeyCode KeyMapping::getKey(Direction d) const

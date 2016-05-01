@@ -29,8 +29,12 @@ namespace lib
 
 			if (iReceiver) {
 				for (const InputData &iData : m_iData) {
-					iReceiver->onKeyPressed(iData.key());
-					iReceiver->onKeyReleased(iData.key());
+					if (iData.action() == InputData::Action::KeyPressed) {
+						iReceiver->onKeyPressed(iData.key());
+					}
+					else {
+						iReceiver->onKeyReleased(iData.key());
+					}
 				}
 			}
 		}

@@ -14,9 +14,10 @@ namespace lib
 	{
 		SimpleMenu::SimpleMenu(const str &name, const draw::Alignment alignment,
 			std::function<void(const u32, SimpleMenu &self)> onSelected)
-			: IMenuControl{ name  }, _onSelected {onSelected}
-			,m_textGroup{}
-		{}
+			: IMenuControl{ name  }, _onSelected {onSelected}, m_textGroup{ }
+		{
+			alignment;
+		}
 
 		SimpleMenu::~SimpleMenu()
 		{
@@ -67,6 +68,7 @@ namespace lib
 
 		void SimpleMenu::cursorSelectItem(u32 nodeIndex)
 		{
+			nodeIndex;
 			/*
 			__ASSERT(nodeIndex < _labelData.size(), "Invalid select index for cursor");
 

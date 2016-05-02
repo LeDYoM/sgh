@@ -27,6 +27,7 @@ namespace lib
 
 		void MenuStep::onKeyPressed(lib::Key key)
 		{
+			key;
 //			for (auto control : _renderNodes)
 //			{
 //				control->onKeyPressed(key);
@@ -35,6 +36,7 @@ namespace lib
 
 		void MenuStep::onKeyReleased(lib::Key key)
 		{
+			key;
 //			for (auto control : _controls)
 //			{
 //				control->onKeyReleased(key);

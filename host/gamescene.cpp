@@ -482,6 +482,7 @@ namespace zoper
 
 	void GameScene::onAnimationFinished(lib::sptr<lib::draw::anim::IAnimation> anim, lib::sptr<lib::draw::RenderNode> node)
 	{
+		/*
 		if (anim->animationType() == "ColorAnimation" && node == _pauseText)
 		{
 			_pauserg->setVisible(state()==Pause);
@@ -491,6 +492,7 @@ namespace zoper
 		{
 			removeNode(node);
 		}
+		*/
 	}
 
 	void GameScene::launchPlayer()

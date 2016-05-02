@@ -40,7 +40,7 @@ namespace lib
 
 		void TextGroup::setAlignment(const Alignment alignment)
 		{
-
+			alignment;
 		}
 
 		void TextGroup::addText(const str &caption)
@@ -80,7 +80,7 @@ namespace lib
 					temp->setCharacterSize(m_private->m_characterSize);
 					temp->setColor(m_private->m_color);
 					temp->setPositionX(viewCenter.x, m_private->m_alignment);
-					temp->setPositionY(count*m_private->m_characterSize);
+					temp->setPositionY(static_cast<f32>(count*m_private->m_characterSize));
 					++count;
 				}
 			}

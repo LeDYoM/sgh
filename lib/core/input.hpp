@@ -11,7 +11,7 @@ namespace lib
 {
 	namespace draw
 	{
-		class Node;
+		class SceneNode;
 	}
 	class InputData
 	{
@@ -47,7 +47,7 @@ namespace lib
 		void Init() override;
 
 		void processSystemEvent(const sptr<DataMap> &eventData);
-		void updateNode(const sptr<draw::Node>&);
+		void updateNode(const sptr<draw::SceneNode>&);
 		void nextFrame();
 		void reset();
 	private:

@@ -118,7 +118,7 @@ namespace lib
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
 		}
 
-		void SceneManager::visit(const sptr<Node>& node)
+		void SceneManager::visit(const sptr<SceneNode>& node)
 		{
 			if (node->isActive()) {
 				service<Input>()->updateNode(node);

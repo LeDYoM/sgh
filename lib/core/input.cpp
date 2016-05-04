@@ -1,6 +1,6 @@
 #include "input.hpp"
 #include "log.hpp"
-#include "../draw/node.hpp"
+#include "../draw/scenenode.hpp"
 #include "inputreceiver.hpp"
 namespace lib
 {
@@ -22,7 +22,7 @@ namespace lib
 		m_iData.push_back(InputData{ eventData });
 	}
 	
-	void Input::updateNode(const sptr<draw::Node> &node)
+	void Input::updateNode(const sptr<draw::SceneNode> &node)
 	{
 		if (!m_iData.empty()) {
 			auto iReceiver = std::dynamic_pointer_cast<InputReceiverNode>(node);

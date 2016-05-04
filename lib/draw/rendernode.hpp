@@ -1,7 +1,7 @@
 #ifndef LIB_DRAW_RENDERNODE_HPP
 #define LIB_DRAW_RENDERNODE_HPP
 
-#include "node.hpp"
+#include "scenenode.hpp"
 #include <lib/include/types.hpp>
 #include <lib/include/color.hpp>
 #include "transformable.hpp"
@@ -24,7 +24,7 @@ namespace lib
 			Right = 2
 		};
 
-		class RenderNode : public Node, public Transformable
+		class RenderNode : public SceneNode, public Transformable
 		{
 		public:
 			explicit RenderNode(const std::string &name, const PrimitiveType primitiveType);

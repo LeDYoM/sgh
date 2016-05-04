@@ -11,7 +11,7 @@ namespace lib
 	namespace draw
 	{
 		RenderGroup::RenderGroup(const std::string &name)
-			: Node(name) {}
+			: SceneNode(name) {}
 
 		RenderGroup::~RenderGroup()
 		{
@@ -20,7 +20,7 @@ namespace lib
 
 		bool RenderGroup::init()
 		{
-			return Node::init();
+			return SceneNode::init();
 		}
 
 		sptr<NodeText> RenderGroup::createText(const std::string &name)
@@ -44,7 +44,7 @@ namespace lib
 			return result;
 		}
 
-		sptr<Node> RenderGroup::addNode(sptr<Node> newElement, sptr<Node> beforeNode)
+		sptr<SceneNode> RenderGroup::addNode(sptr<SceneNode> newElement, sptr<SceneNode> beforeNode)
 		{
 			__ASSERT(newElement, "Trying to add nullptr node");
 			newElement->setParent(this);
@@ -68,12 +68,12 @@ namespace lib
 
 		}
 
-		bool RenderGroup::removeNode(sptr<Node> element)
+		bool RenderGroup::removeNode(sptr<SceneNode> element)
 		{
 			return removeFromspVector(element, _renderNodes);
 		}
 
-		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<Node> beforeNode)
+		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<SceneNode> beforeNode)
 		{
 			sptr<RenderGroup> rg = sptr<RenderGroup>{ new RenderGroup(name) };
 			addNode(rg, beforeNode);
@@ -85,14 +85,14 @@ namespace lib
 			_renderNodes.clear();
 		}
 
-		sptr<Node> RenderGroup::findByName(const str &name) const
+		sptr<SceneNode> RenderGroup::findByName(const str &name) const
 		{
-			auto result( std::find_if(_renderNodes.begin(), _renderNodes.end(), [name](const sptr<Node> &node)
+			auto result(std::find_if(_renderNodes.begin(), _renderNodes.end(), [name](const sptr<SceneNode> &node)
 			{
 				return (node->name() == name);
 			}) );
 
-			return (result != _renderNodes.end()) ? *result : sptr<Node>();
+			return (result != _renderNodes.end()) ? *result : sptr<SceneNode>();
 		}
 
 		lib::draw::Scene *const RenderGroup::parentScene()
@@ -101,7 +101,7 @@ namespace lib
 			return m_parent->parentScene();
 		}
 
-		void RenderGroup::for_each_renderNode(std::function<void(sptr<Node> node)> f)
+		void RenderGroup::for_each_renderNode(std::function<void(sptr<SceneNode> node)> f)
 		{
 			for (auto node : _renderNodes)
 			{
@@ -114,7 +114,7 @@ namespace lib
 			return activateOne(findByName(node));
 		}
 
-		bool RenderGroup::activateOne(sptr<Node> node)
+		bool RenderGroup::activateOne(sptr<SceneNode> node)
 		{
 			__ASSERT(node, "Node parameter is nullptr");
 			bool found{ false };

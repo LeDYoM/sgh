@@ -56,7 +56,7 @@ namespace lib
 	{
 		for (auto i = 0u; i < m_resources.size(); ++i)
 		{
-			if (m_resources[i]->name() == rid)
+			if (m_resources[i]->id() == rid)
 			{
 				return m_resources[i];
 			}

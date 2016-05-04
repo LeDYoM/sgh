@@ -1,7 +1,6 @@
 #ifndef __LIB_SCENE_HPP__
 #define __LIB_SCENE_HPP__
 
-#include "hasname.hpp"
 #include <lib/core/compileconfig.hpp>
 #include <lib/include/types.hpp>
 #include <lib/include/key.hpp>

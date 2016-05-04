@@ -3,22 +3,14 @@
 
 namespace lib
 {
-	Resource::Resource(Resource && other)
-		: HasName((HasName&&)other)
-	{
-		_resourceData = std::move(other._resourceData);
-		_isValid = std::move(other._isValid);
-		_resourceType = std::move(other._resourceType);
-	}
-
 	Resource::Resource(ResourceType rType, const std::string &file, const std::string &id)
-		: HasName{ id }
+		: m_id(id)
 	{
 		__ASSERT(rType != ResourceType::Empty && rType != ResourceType::MaxResourceType, "Invalid resource type");
 
 		if (rType == ResourceType::Font)
 		{
-			LOG_CONSTRUCT("Name: " + name() + " of type Font");
+			LOG_CONSTRUCT("Name: " + m_id + " of type Font");
 
 			sf::Font *font = new sf::Font();
 			_resourceData.font = font;
@@ -28,7 +20,7 @@ namespace lib
 		}
 		else if (rType == ResourceType::Texture)
 		{
-			LOG_CONSTRUCT("Name: " + name() + " of type Texture");
+			LOG_CONSTRUCT("Name: " + m_id + " of type Texture");
 
 			sf::Texture *texture = new sf::Texture();
 			_resourceData.texture = texture;
@@ -48,11 +40,11 @@ namespace lib
 			delete _resourceData.font;
 			break;
 		case ResourceType::Font:
-			LOG_DESTRUCT("Name: " + name() + " and type Font");
+			LOG_DESTRUCT("Name: " + m_id + " and type Font");
 			delete _resourceData.font;
 			break;
 		case ResourceType::Texture:
-			LOG_DESTRUCT("Name: " + name() + " and type Texture");
+			LOG_DESTRUCT("Name: " + m_id + " and type Texture");
 			delete _resourceData.texture;
 			break;
 		}

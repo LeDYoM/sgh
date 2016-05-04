@@ -2,14 +2,13 @@
 #define __RESOURCE_HPP__
 
 #include <lib/include/types.hpp>
-#include <lib/draw/hasname.hpp>
 #include "log.hpp"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
 namespace lib
 {
-	class Resource : public lib::core::HasName
+	class Resource
 	{
 	public:
 		enum class ResourceType
@@ -21,15 +20,17 @@ namespace lib
 		} _resourceType{ ResourceType::Empty };
 
 		Resource(const Resource &) = delete;
-		Resource(Resource &&other);
 		Resource(ResourceType rType, const std::string &file, const std::string &id);
 		virtual ~Resource();
 
 		inline bool isValid() const { return _isValid; }
 		sf::Font *getAsFont() const { __ASSERT(_resourceType == ResourceType::Font, "Resource is not a font"); return _resourceData.font; }
 		sf::Texture *getAsTexture() const { __ASSERT(_resourceType == ResourceType::Texture ,"Resource is not a font"); return _resourceData.texture; }
+
+		inline const str &id() const { return m_id; }
 	private:
 		bool _isValid{ false };
+		str m_id;
 		union ResourceData
 		{
 			sf::Font *font{ nullptr };

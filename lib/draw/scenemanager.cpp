@@ -130,9 +130,7 @@ namespace lib
 					const RenderStates &top{ m_renderStates.top() };
 					RenderStates rStates{ top.blendMode, top.transform, top.texture, top.shader, top.currentTarget };
 
-					if (auto transformableNode = as<Transformable>(node)) {
-						rStates.transform *= transformableNode->transformation();
-					}
+					rStates.transform *= node->transformation();
 
 					if (auto renderableNode = as<RenderNode>(node)) {
 						rStates.texture = renderableNode->texture();

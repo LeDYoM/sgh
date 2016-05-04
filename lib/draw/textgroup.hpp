@@ -2,7 +2,9 @@
 #define LIB_TTEXTGROUP_HPP
 
 #include <lib/include/types.hpp>
+#include <lib/include/color.hpp>
 #include "rendergroup.hpp"
+#include "rendernode.hpp"
 
 namespace lib
 {

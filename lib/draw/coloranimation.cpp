@@ -1,4 +1,5 @@
 #include "coloranimation.hpp"
+#include "rendernode.hpp"
 
 namespace lib
 {

@@ -1,13 +1,13 @@
 #ifndef __LIB_IANIMATION_HPP__
 #define __LIB_IANIMATION_HPP__
 
-#include "rendernode.hpp"
 #include <lib/core/timer.hpp>
 
 namespace lib
 {
 	namespace draw
 	{
+		class RenderNode;
 		class IAnimation
 		{
 		public:

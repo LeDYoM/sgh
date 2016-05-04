@@ -3,7 +3,7 @@
 
 #include "ianimation.hpp"
 #include <lib/include/types.hpp>
-
+#include <lib/include/color.hpp>
 namespace lib
 {
 	namespace draw

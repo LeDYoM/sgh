@@ -1,4 +1,5 @@
 #include "positionanimation.hpp"
+#include "rendernode.hpp"
 
 namespace lib
 {

@@ -1,6 +1,8 @@
 #include "animationmanager.hpp"
 #include <lib/core/log.hpp>
 
+#include <algorithm>
+
 namespace lib
 {
 	namespace draw

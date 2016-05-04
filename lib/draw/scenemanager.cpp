@@ -8,6 +8,7 @@
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/input.hpp>
 #include "animatable.hpp"
+#include "rendernode.hpp"
 
 namespace lib
 {

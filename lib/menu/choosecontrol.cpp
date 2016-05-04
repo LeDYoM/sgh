@@ -140,8 +140,8 @@ namespace lib
 
 			_cursor->setRotation(90);
 			
-			addAnimation(draw::anim::PositionAnimation::create(120, _cursor, 
-				vector2df{ selectedText->position().x - descriptorCursorSize.x, selectedText->position().y }));
+//			addAnimation(draw::anim::PositionAnimation::create(120, _cursor, 
+//				vector2df{ selectedText->position().x - descriptorCursorSize.x, selectedText->position().y }));
 		}
 
 		void ChooseControl::goDown()

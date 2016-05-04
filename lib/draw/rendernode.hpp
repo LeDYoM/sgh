@@ -4,7 +4,6 @@
 #include "scenenode.hpp"
 #include <lib/include/types.hpp>
 #include <lib/include/color.hpp>
-#include "transformable.hpp"
 #include "vertexarray.hpp"
 
 namespace sf
@@ -24,7 +23,7 @@ namespace lib
 			Right = 2
 		};
 
-		class RenderNode : public SceneNode, public Transformable
+		class RenderNode : public SceneNode
 		{
 		public:
 			explicit RenderNode(const std::string &name, const PrimitiveType primitiveType);

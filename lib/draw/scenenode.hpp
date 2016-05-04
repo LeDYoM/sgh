@@ -2,15 +2,15 @@
 #define LIB_SCENENODE_HPP__
 
 #include <lib/core/obj.hpp>
-#include "hasname.hpp"
 #include "iparentable.hpp"
+#include "transformable.hpp"
 
 namespace lib
 {
 	namespace draw
 	{
 		class RenderGroup;
-		class SceneNode : public IParentable<RenderGroup>, public virtual Object
+		class SceneNode : public IParentable<RenderGroup>, public Transformable, public virtual Object
 		{
 		public:
 			SceneNode(const str &name);
@@ -22,7 +22,7 @@ namespace lib
 
 			inline void setVisible(bool nv) { m_visible = nv; }
 			inline const bool isVisible() const { return m_visible; }
-			inline const str&name() const { return m_name; }
+			inline const str& name() const { return m_name; }
 
 		private:
 			bool m_active{ true };

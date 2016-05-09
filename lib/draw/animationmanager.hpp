@@ -17,8 +17,6 @@ namespace lib
 			public:
 				AnimationManager();
 				virtual ~AnimationManager();
-				void addAnimation(sptr<IAnimation> nanimation);
-				void updateAnimations();
 				virtual void onAnimationStarted(sptr<IAnimation> anim, sptr<RenderNode> node);
 				virtual void onAnimationFinished(sptr<IAnimation> anim, sptr<RenderNode> node);
 			private:

@@ -7,8 +7,8 @@ namespace lib
 	{
 		namespace anim
 		{
-			ColorAnimation::ColorAnimation(const s32 duration, sptr<RenderNode> node, const lib::draw::Color &startColor, const lib::draw::Color &endColor)
-				: IValueAnimation(duration, node, startColor, endColor)
+			ColorAnimation::ColorAnimation(const s32 duration, const lib::draw::Color &startColor, const lib::draw::Color &endColor)
+				: IValueAnimation{ duration, startColor, endColor }
 			{
 			}
 
@@ -27,24 +27,24 @@ namespace lib
 				return value;
 			}
 
-			bool ColorAnimation::animate()
+			bool ColorAnimation::animate(sptr<SceneNode> &node)
 			{
-				bool result = IAnimation::animate();
+				bool result = IAnimation::animate(node);
 				lib::draw::Color deltaColor{ _endValue - _startValue };
 				lib::draw::Color finalColor{ _startValue + (interpolate(deltaColor,_delta)) };
-				_node->setColor(finalColor);
+//				node->setColor(finalColor);
 				return result;
 			}
 
-			sptr<ColorAnimation> ColorAnimation::create(const s32 duration, sptr<RenderNode> node, const lib::draw::Color &startColor, const lib::draw::Color &endColor)
+			sptr<ColorAnimation> ColorAnimation::create(const s32 duration, const lib::draw::Color &startColor, const lib::draw::Color &endColor)
 			{
-				auto animation = std::make_shared<ColorAnimation>(duration, node, startColor, endColor);
+				auto animation = std::make_shared<ColorAnimation>(duration, startColor, endColor);
 				return animation;
 			}
 
-			sptr<ColorAnimation> ColorAnimation::create(const s32 duration, sptr<RenderNode> node, const lib::draw::Color &endColor)
+			sptr<ColorAnimation> ColorAnimation::create(const s32 duration, const lib::draw::Color &endColor)
 			{
-				auto animation = std::make_shared<ColorAnimation>(duration, node, endColor, endColor);
+				auto animation = std::make_shared<ColorAnimation>(duration, endColor, endColor);
 				return animation;
 			}
 		}

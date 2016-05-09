@@ -15,7 +15,7 @@ namespace lib
 			Animatable();
 			virtual ~Animatable();
 			void addAnimation(sptr<IAnimation> nanimation);
-			void updateAnimations();
+			void updateAnimations(const sptr<SceneNode> &node);
 //			virtual void onAnimationStarted(sptr<IAnimation> anim, sptr<RenderNode> node);
 //			virtual void onAnimationFinished(sptr<IAnimation> anim, sptr<RenderNode> node);
 		private:

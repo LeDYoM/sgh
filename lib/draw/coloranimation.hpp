@@ -13,11 +13,11 @@ namespace lib
 			class ColorAnimation : public IValueAnimation<lib::draw::Color>
 			{
 			public:
-				ColorAnimation(const s32 duration, sptr<RenderNode> node, const lib::draw::Color &startColor, const lib::draw::Color &endColor);
-				static sptr<ColorAnimation> create(const s32 duration, sptr<RenderNode> node, const lib::draw::Color &startColor, const lib::draw::Color &endColor);
-				static sptr<ColorAnimation> create(const s32 duration, sptr<RenderNode> node, const lib::draw::Color &endColor);
+				ColorAnimation(const s32 duration, const lib::draw::Color &startColor, const lib::draw::Color &endColor);
+				static sptr<ColorAnimation> create(const s32 duration, const lib::draw::Color &startColor, const lib::draw::Color &endColor);
+				static sptr<ColorAnimation> create(const s32 duration, const lib::draw::Color &endColor);
 				virtual ~ColorAnimation();
-				virtual bool animate();
+				virtual bool animate(const sptr<SceneNode> &node) override;
 				virtual const std::string animationType() const { return "ColorAnimation"; }
 			};
 		}

@@ -11,7 +11,7 @@ namespace lib
 	namespace draw
 	{
 		class RenderGroup;
-		class SceneNode : public IParentable<RenderGroup>, public Transformable, public Animatable, public virtual Object
+		class SceneNode : public IParentable<RenderGroup>, public Transformable, public virtual Object
 		{
 		public:
 			SceneNode(const str &name);

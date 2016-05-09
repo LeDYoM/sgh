@@ -13,11 +13,10 @@ namespace lib
 			class PositionAnimation : public IValueAnimation<vector2df>
 			{
 			public:
-				PositionAnimation(const s32 duration, sptr<RenderNode> node, const vector2df &startPosition, const vector2df &endPosition);
-				static sptr<PositionAnimation> create(const s32 duration, sptr<RenderNode> node, const vector2df &startPosition, const vector2df &endPosition);
-				static sptr<PositionAnimation> create(const s32 duration, sptr<RenderNode> node, const vector2df &endPosition);
+				PositionAnimation(const s32 duration, const vector2df &startPosition, const vector2df &endPosition);
+				static sptr<PositionAnimation> create(const s32 duration, const vector2df &startPosition, const vector2df &endPosition);
 				virtual ~PositionAnimation();
-				virtual bool animate();
+				virtual bool animate(const sptr<SceneNode> &node) override;
 				virtual const std::string animationType() const { return "PositionAnimation"; }
 			};
 		}

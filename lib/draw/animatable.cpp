@@ -23,7 +23,7 @@ namespace lib
 			{
 				auto elemFound = std::find_if(_animations.begin(), _animations.end(), [&nanimation](sptr<IAnimation> canimation)
 				{
-					return nanimation->node() == canimation->node() && canimation->animationType() == nanimation->animationType();
+					return canimation->animationType() == nanimation->animationType();
 				});
 
 				if (elemFound != _animations.end())
@@ -37,13 +37,13 @@ namespace lib
 //			onAnimationStarted(nanimation, nanimation->node());
 		}
 
-		void Animatable::updateAnimations()
+		void Animatable::updateAnimations(const sptr<SceneNode> &node)
 		{
 			if (!_animations.empty())
 			{
 				for (auto &animation : _animations)
 				{
-					if (!animation->animate())
+					if (!animation->animate(node))
 					{
 //						onAnimationFinished(animation, animation->node());
 						_animationsToDelete.push_back(animation);

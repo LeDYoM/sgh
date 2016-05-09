@@ -7,8 +7,8 @@ namespace lib
 	{
 		namespace anim
 		{
-			PositionAnimation::PositionAnimation(const s32 duration, sptr<RenderNode> node, const vector2df &startPosition, const vector2df &endPosition)
-				: IValueAnimation(duration,node,startPosition,endPosition)
+			PositionAnimation::PositionAnimation(const s32 duration, const vector2df &startPosition, const vector2df &endPosition)
+				: IValueAnimation{ duration, startPosition, endPosition }
 			{
 			}
 
@@ -17,24 +17,18 @@ namespace lib
 			{
 			}
 
-			bool PositionAnimation::animate()
+			bool PositionAnimation::animate(sptr<SceneNode> &node)
 			{
-				bool result = IAnimation::animate();
+				bool result = IAnimation::animate(node);
 				vector2df deltaPosition{ _endValue - _startValue };
 				vector2df finalPosition{ _startValue + (deltaPosition*_delta) };
-				_node->setPosition(finalPosition);
+				node->setPosition(finalPosition);
 				return result;
 			}
 
-			sptr<PositionAnimation> PositionAnimation::create(const s32 duration, sptr<RenderNode> node, const vector2df &startPosition, const vector2df &endPosition)
+			sptr<PositionAnimation> PositionAnimation::create(const s32 duration, const vector2df &startPosition, const vector2df &endPosition)
 			{
-				auto animation = std::make_shared<PositionAnimation>(duration, node, startPosition, endPosition);
-				return animation;
-			}
-
-			sptr<PositionAnimation> PositionAnimation::create(const s32 duration, sptr<RenderNode> node, const vector2df &endPosition)
-			{
-				auto animation = std::make_shared<PositionAnimation>(duration, node, node->position(), endPosition);
+				auto animation = std::make_shared<PositionAnimation>(duration, startPosition, endPosition);
 				return animation;
 			}
 		}

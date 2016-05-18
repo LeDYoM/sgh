@@ -17,7 +17,7 @@ namespace lib
 				static sptr<ColorAnimation> create(const s32 duration, const lib::draw::Color &startColor, const lib::draw::Color &endColor);
 				static sptr<ColorAnimation> create(const s32 duration, const lib::draw::Color &endColor);
 				virtual ~ColorAnimation();
-				virtual bool animate(const sptr<SceneNode> &node) override;
+				virtual bool animate(SceneNode *const) override;
 				virtual const std::string animationType() const { return "ColorAnimation"; }
 			};
 		}

@@ -11,7 +11,7 @@ namespace lib
 			_clock.restart();
 		}
 
-		bool IAnimation::animate(const sptr<SceneNode> &)
+		bool IAnimation::animate(SceneNode*const)
 		{
 			currentTime = _clock.getElapsedTime().asMilliSeconds();
 			if (currentTime > _duration) {

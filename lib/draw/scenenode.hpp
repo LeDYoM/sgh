@@ -4,13 +4,14 @@
 #include <lib/core/obj.hpp>
 #include "iparentable.hpp"
 #include "transformable.hpp"
-#include "animatable.hpp"
+#include <lib/core/vecsptr.hpp>
 
 namespace lib
 {
 	namespace draw
 	{
 		class RenderGroup;
+		class IAnimation;
 		class SceneNode : public IParentable<RenderGroup>, public Transformable, public virtual Object
 		{
 		public:
@@ -25,11 +26,16 @@ namespace lib
 			inline const bool isVisible() const { return m_visible; }
 			inline const str& name() const { return m_name; }
 
+			void addAnimation(sptr<IAnimation> nanimation);
+			void updateAnimations();
+
 		private:
 			bool m_active{ true };
 			bool m_visible{ true };
 			str m_name;
-		
+
+			VecSPtr<IAnimation> _animations;
+			std::vector<sptr<IAnimation>> _animationsToDelete;
 		};
 	
 	}

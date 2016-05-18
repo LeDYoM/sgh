@@ -17,7 +17,7 @@ namespace lib
 			{
 			}
 
-			bool PositionAnimation::animate(sptr<SceneNode> &node)
+			bool PositionAnimation::animate(SceneNode*const node)
 			{
 				bool result = IAnimation::animate(node);
 				vector2df deltaPosition{ _endValue - _startValue };

@@ -27,7 +27,7 @@ namespace lib
 				return value;
 			}
 
-			bool ColorAnimation::animate(sptr<SceneNode> &node)
+			bool ColorAnimation::animate(SceneNode*const node)
 			{
 				bool result = IAnimation::animate(node);
 				lib::draw::Color deltaColor{ _endValue - _startValue };

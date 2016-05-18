@@ -7,7 +7,6 @@
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/input.hpp>
-#include "animatable.hpp"
 #include "rendernode.hpp"
 
 namespace lib
@@ -125,9 +124,7 @@ namespace lib
 				service<Input>()->updateNode(node);
 
 				if (node->isVisible()) {
-					if (auto animatableNode = as<Animatable>(node)) {
-						animatableNode->updateAnimations();
-					}
+					node->updateAnimations();
 					const RenderStates &top{ m_renderStates.top() };
 					RenderStates rStates{ top.blendMode, top.transform, top.texture, top.shader, top.currentTarget };
 

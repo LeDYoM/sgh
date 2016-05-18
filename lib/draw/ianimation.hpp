@@ -13,7 +13,7 @@ namespace lib
 		public:
 			IAnimation(const u32 duration);
 			virtual const std::string animationType() const = 0;
-			virtual bool animate(const sptr<SceneNode> &node);
+			virtual bool animate(SceneNode *const);
 			virtual ~IAnimation();
 		protected:
 			u64 currentTime;

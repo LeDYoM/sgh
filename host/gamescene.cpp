@@ -214,13 +214,6 @@ namespace zoper
 		}
 	}
 
-	class ColorAnimation : public lib::draw::Animation<lib::draw::Color, lib::draw::SceneNode::setColor>
-	{
-		using ty = lib::draw::Animation<lib::draw::Color, lib::draw::SceneNode::setColor>;
-		using ty::Animation;
-	};
-
-
 	bool GameScene::switchPause()
 	{
 		if (state() == Playing)
@@ -228,7 +221,7 @@ namespace zoper
 			setState(Pause);
 			_pauserg->setVisible(true);
 			//_pauseText->getAsText()->setColor(lib::draw::Color(255, 255, 255, 20));
-			lib::sptr<ColorAnimation> ca = lib::sptr<ColorAnimation>(new ColorAnimation);
+			lib::sptr<lib::draw::ColorAnimation> ca = lib::sptr<lib::draw::ColorAnimation>(new lib::draw::ColorAnimation);
 			ca->setDuration(1000);
 			ca->setStartValue(lib::draw::Color(255, 255, 255, 0));
 			ca->setEndValue(lib::draw::Color(255, 255, 255, 255));

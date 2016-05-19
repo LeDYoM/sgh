@@ -1,7 +1,6 @@
 #include "choosecontrol.hpp"
 #include "menudescriptors.hpp"
 #include <lib/core/resource.hpp>
-#include <lib/draw/positionanimation.hpp>
 #include <lib/draw/nodeshape.hpp>
 #include <lib/draw/nodetext.hpp>
 #include <lib/include/key.hpp>

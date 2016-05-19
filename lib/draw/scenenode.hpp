@@ -5,6 +5,7 @@
 #include "iparentable.hpp"
 #include "transformable.hpp"
 #include <lib/core/vecsptr.hpp>
+#include <lib/include/color.hpp>
 
 namespace lib
 {
@@ -28,6 +29,7 @@ namespace lib
 
 			void addAnimation(sptr<IAnimation> nanimation);
 			void updateAnimations();
+			void setColor(const Color &) {}
 
 		private:
 			bool m_active{ true };

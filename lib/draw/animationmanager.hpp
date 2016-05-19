@@ -2,7 +2,7 @@
 #define __LIB_ANIMATIONMANAGER_HPP__
 
 #include <vector>
-#include "ianimation.hpp"
+#include "animation.hpp"
 #include <lib/core/vecsptr.hpp>
 
 namespace lib
@@ -20,8 +20,8 @@ namespace lib
 				virtual void onAnimationStarted(sptr<IAnimation> anim, sptr<RenderNode> node);
 				virtual void onAnimationFinished(sptr<IAnimation> anim, sptr<RenderNode> node);
 			private:
-				VecSPtr<IAnimation> _animations;
-				std::vector<sptr<IAnimation>> _animationsToDelete;
+				VecSPtr<IAnimation> m_animations;
+				std::vector<sptr<IAnimation>> m_animationsToDelete;
 			};
 		}
 	}

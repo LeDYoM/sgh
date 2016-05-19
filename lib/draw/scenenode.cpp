@@ -24,7 +24,7 @@ namespace lib
 			{
 				auto elemFound = std::find_if(_animations.begin(), _animations.end(), [&nanimation](sptr<IAnimation> canimation)
 				{
-					return canimation->animationType() == nanimation->animationType();
+					return canimation->name() == nanimation->name();
 				});
 
 				if (elemFound != _animations.end())

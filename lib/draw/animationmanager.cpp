@@ -16,7 +16,7 @@ namespace lib
 
 			AnimationManager::~AnimationManager()
 			{
-				_animations.clear();
+				m_animations.clear();
 			}
 
 

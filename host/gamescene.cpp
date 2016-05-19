@@ -9,8 +9,6 @@
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
 #include <lib/draw/rendernode.hpp>
-#include <lib/draw/positionanimation.hpp>
-#include <lib/draw/coloranimation.hpp>
 #include <lib/draw/nodeshape.hpp>
 #include <lib/draw/nodetext.hpp>
 #include <lib/core/resourcemanager.hpp>
@@ -216,6 +214,13 @@ namespace zoper
 		}
 	}
 
+	class ColorAnimation : public lib::draw::Animation<lib::draw::Color, lib::draw::SceneNode::setColor>
+	{
+		using ty = lib::draw::Animation<lib::draw::Color, lib::draw::SceneNode::setColor>;
+		using ty::Animation;
+	};
+
+
 	bool GameScene::switchPause()
 	{
 		if (state() == Playing)
@@ -223,7 +228,12 @@ namespace zoper
 			setState(Pause);
 			_pauserg->setVisible(true);
 			//_pauseText->getAsText()->setColor(lib::draw::Color(255, 255, 255, 20));
-			addAnimation(lib::draw::anim::ColorAnimation::create(1000, _pauseText, lib::draw::Color(255, 255, 255, 0), lib::draw::Color(255, 255, 255, 255)));
+			lib::sptr<ColorAnimation> ca = lib::sptr<ColorAnimation>(new ColorAnimation);
+			ca->setDuration(1000);
+			ca->setStartValue(lib::draw::Color(255, 255, 255, 0));
+			ca->setEndValue(lib::draw::Color(255, 255, 255, 255));
+			_pauseText->addAnimation(ca);
+//			addAnimation(lib::draw::anim::ColorAnimation::create(1000, _pauseText, lib::draw::Color(255, 255, 255, 0), lib::draw::Color(255, 255, 255, 255)));
 			gameClock.pause();
 			return true;
 		}

@@ -30,7 +30,7 @@ namespace lib
 			virtual ~RenderNode();
 
 			virtual u32 draw() = 0;
-			virtual void setColor(const lib::draw::Color &color);
+			virtual void setColor(const Color &color);
 			const Color& getColor() const;
 
 			virtual Rectf32 getLocalBounds();

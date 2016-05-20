@@ -149,40 +149,34 @@ namespace lib
 
 		void ChooseControl::goDown()
 		{
-			if (_cursorItemSelected < (_labelData.size() - 1))
-			{
+			if (_cursorItemSelected < (_labelData.size() - 1)) {
 				cursorSelectItem(_cursorItemSelected + 1);
 			}
-			else
-			{
+			else {
 				cursorSelectItem(0);
 			}
 		}
 
 		void ChooseControl::goUp()
 		{
-			if (_cursorItemSelected > 0)
-			{
+			if (_cursorItemSelected > 0) {
 				cursorSelectItem(_cursorItemSelected - 1);
 			}
-			else
-			{
+			else {
 				cursorSelectItem(_labelData.size()-1);
 			}
 		}
 
 		void ChooseControl::goLeft()
 		{
-			auto index = _labelData[_cursorItemSelected].selectedSublabel;
+			auto index(_labelData[_cursorItemSelected].selectedSublabel);
 
 			if (_labelData[_cursorItemSelected].textSubLabel.size() > 0)
 			{
-				if (index < 1)
-				{
+				if (index < 1) {
 					index = _labelData[_cursorItemSelected].textSubLabel.size()-1;
 				}
-				else
-				{
+				else {
 					--index;
 				}
 				_labelData[_cursorItemSelected].selectedSublabel = index;
@@ -192,16 +186,14 @@ namespace lib
 
 		void ChooseControl::goRight()
 		{
-			auto index = _labelData[_cursorItemSelected].selectedSublabel;
+			auto index (_labelData[_cursorItemSelected].selectedSublabel);
 
 			if (_labelData[_cursorItemSelected].textSubLabel.size() > 0)
 			{
-				if (index >= _labelData[_cursorItemSelected].textSubLabel.size() - 1)
-				{
+				if (index >= _labelData[_cursorItemSelected].textSubLabel.size() - 1) {
 					index = 0;
 				}
-				else
-				{
+				else {
 					++index;
 				}
 				_labelData[_cursorItemSelected].selectedSublabel = index;

@@ -11,7 +11,7 @@ namespace lib
 {
 	namespace draw
 	{
-		class NodeText : public lib::draw::RenderNode
+		class NodeText : public RenderNode
 		{
 		public:
 			enum Style

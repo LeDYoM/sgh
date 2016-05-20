@@ -4,6 +4,7 @@
 #include <lib/draw/nodeshape.hpp>
 #include <lib/draw/nodetext.hpp>
 #include <lib/include/key.hpp>
+#include <lib/draw/animations.hpp>
 
 namespace lib
 {
@@ -139,8 +140,11 @@ namespace lib
 
 			_cursor->setRotation(90);
 			
-//			addAnimation(draw::anim::PositionAnimation::create(120, _cursor, 
-//				vector2df{ selectedText->position().x - descriptorCursorSize.x, selectedText->position().y }));
+			lib::sptr<lib::draw::PositionAnimation> pa = lib::sptr<lib::draw::PositionAnimation>(new lib::draw::PositionAnimation("myPositionAnimationId"));
+			pa->setDuration(120);
+			pa->setStartValue(_cursor->position());
+			pa->setEndValue(vector2df{ selectedText->position().x - descriptorCursorSize.x, selectedText->position().y });
+			_cursor->addAnimation(pa);
 		}
 
 		void ChooseControl::goDown()

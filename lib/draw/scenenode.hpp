@@ -29,7 +29,8 @@ namespace lib
 
 			void addAnimation(sptr<IAnimation> nanimation);
 			void updateAnimations();
-			void setColor(const Color &) {}
+			virtual void setColor(const Color &) {}
+			using Transformable::setPosition;
 
 		private:
 			bool m_active{ true };

@@ -67,6 +67,7 @@ namespace lib
 				return *this;
 
 			}
+
 			Color &operator *=(const Color& right)
 			{
 				r = static_cast<u8>(static_cast<u32>(r)* right.r / 255);
@@ -74,6 +75,16 @@ namespace lib
 				b = static_cast<u8>(static_cast<u32>(b)* right.b / 255);
 				a =	static_cast<u8>(static_cast<u32>(a)* right.a / 255);
 				return *this;
+			}
+
+			Color operator*(const f32 delta) const
+			{
+				return Color(
+					static_cast<u8>(static_cast<u32>(r)* delta),
+					static_cast<u8>(static_cast<u32>(g)* delta),
+					static_cast<u8>(static_cast<u32>(b)* delta),
+					static_cast<u8>(static_cast<u32>(a)* delta)
+					);
 			}
 
 			static const Color Black() { return Color{ 0, 0, 0 }; }

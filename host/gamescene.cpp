@@ -11,6 +11,7 @@
 #include <lib/draw/rendernode.hpp>
 #include <lib/draw/nodeshape.hpp>
 #include <lib/draw/nodetext.hpp>
+#include <lib/draw/animations.hpp>
 #include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
 #include <lib/core/randomizer.hpp>
@@ -221,7 +222,7 @@ namespace zoper
 			setState(Pause);
 			_pauserg->setVisible(true);
 			//_pauseText->getAsText()->setColor(lib::draw::Color(255, 255, 255, 20));
-			lib::sptr<lib::draw::ColorAnimation> ca = lib::sptr<lib::draw::ColorAnimation>(new lib::draw::ColorAnimation);
+			lib::sptr<lib::draw::ColorAnimation> ca = lib::sptr<lib::draw::ColorAnimation>(new lib::draw::ColorAnimation("myColorAnimationId"));
 			ca->setDuration(1000);
 			ca->setStartValue(lib::draw::Color(255, 255, 255, 0));
 			ca->setEndValue(lib::draw::Color(255, 255, 255, 255));
@@ -536,7 +537,11 @@ namespace zoper
 			if (found)
 			{
 				auto node = createShape("pointIncrementScore", lib::vector2df{ 15.0f,15.0f });
-				addAnimation(lib::draw::anim::PositionAnimation::create(600, node, lastTokenPosition, lib::vector2df(450,100)));
+				lib::sptr<lib::draw::PositionAnimation> pa = lib::sptr<lib::draw::PositionAnimation>(new lib::draw::PositionAnimation("myPositionAnimationId"));
+				pa->setDuration(600);
+				pa->setStartValue(lastTokenPosition);
+				pa->setEndValue(lib::vector2df(450, 100));
+				node->addAnimation(pa);
 			}
 			return result;
 		});
@@ -677,7 +682,7 @@ namespace zoper
 	void GameScene::tokenMoved(const lib::vector2du32 &source, const lib::vector2du32 &dest, lib::sptr<Tile> tile)
 	{
 		source;
-		addAnimation(lib::draw::anim::PositionAnimation::create(_levelProperties.millisBetweenTokens() / 2, tile, board2Scene(dest)));
+//		addAnimation(lib::draw::anim::PositionAnimation::create(_levelProperties.millisBetweenTokens() / 2, tile, board2Scene(dest)));
 	}
 
 	void GameScene::tokenAppeared(const lib::vector2du32 &position, lib::sptr<Tile> tile)

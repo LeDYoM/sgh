@@ -682,6 +682,12 @@ namespace zoper
 	void GameScene::tokenMoved(const lib::vector2du32 &source, const lib::vector2du32 &dest, lib::sptr<Tile> tile)
 	{
 		source;
+		lib::sptr<lib::draw::PositionAnimation> pa = lib::sptr<lib::draw::PositionAnimation>(new lib::draw::PositionAnimation("myPositionAnimationId"));
+		pa->setDuration(_levelProperties.millisBetweenTokens() / 2);
+		pa->setStartValue(tile->position());
+		pa->setEndValue(board2Scene(dest));
+		tile->addAnimation(pa);
+
 //		addAnimation(lib::draw::anim::PositionAnimation::create(_levelProperties.millisBetweenTokens() / 2, tile, board2Scene(dest)));
 	}
 

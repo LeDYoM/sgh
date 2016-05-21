@@ -221,13 +221,11 @@ namespace zoper
 		{
 			setState(Pause);
 			_pauserg->setVisible(true);
-			//_pauseText->getAsText()->setColor(lib::draw::Color(255, 255, 255, 20));
 			lib::sptr<lib::draw::ColorAnimation> ca = lib::sptr<lib::draw::ColorAnimation>(new lib::draw::ColorAnimation("myColorAnimationId"));
 			ca->setDuration(1000);
 			ca->setStartValue(lib::draw::Color(255, 255, 255, 0));
 			ca->setEndValue(lib::draw::Color(255, 255, 255, 255));
 			_pauseText->addAnimation(ca);
-//			addAnimation(lib::draw::anim::ColorAnimation::create(1000, _pauseText, lib::draw::Color(255, 255, 255, 0), lib::draw::Color(255, 255, 255, 255)));
 			gameClock.pause();
 			return true;
 		}
@@ -356,7 +354,6 @@ namespace zoper
 
 		lib::vector2du32 loopPosition{ (currentTokenZone.direction.isHorizontal() ? currentTokenZone.zone.width : newX),
 			(currentTokenZone.direction.isHorizontal() ? newY : currentTokenZone.zone.height) };
-//		lib::vector2du32 destPosition;
 		LOG_DEBUG("Starting at: " << loopPosition.x << "," << loopPosition.y);
 
 		// Now, we have the data for the new token generated, but first, lets start to move the row or col.
@@ -687,8 +684,6 @@ namespace zoper
 		pa->setStartValue(tile->position());
 		pa->setEndValue(board2Scene(dest));
 		tile->addAnimation(pa);
-
-//		addAnimation(lib::draw::anim::PositionAnimation::create(_levelProperties.millisBetweenTokens() / 2, tile, board2Scene(dest)));
 	}
 
 	void GameScene::tokenAppeared(const lib::vector2du32 &position, lib::sptr<Tile> tile)

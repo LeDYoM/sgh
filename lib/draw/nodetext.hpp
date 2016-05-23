@@ -36,6 +36,13 @@ namespace lib
 			u32 getStyle() const;
 			vector2df findCharacterPos(u32 index);
 			virtual const sf::Texture *texture() const override;
+			using Transformable::setPosition;
+
+			void setPosition(const vector2df &pos, Alignment alignment);
+			void setPositionX(const f32 x, Alignment alignment = Alignment::Left);
+			void setPositionY(const f32 y, Alignment alignment = Alignment::Left);
+			void setAlignment(Alignment alignment);
+
 		private:
 			virtual u32 draw() override;
 			virtual void ensureGeometryUpdate() override;

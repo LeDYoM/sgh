@@ -16,13 +16,6 @@ namespace lib
 	namespace draw
 	{
 		class RenderGroup;
-		enum class Alignment : u8
-		{
-			Left = 0,
-			Center = 1,
-			Right = 2
-		};
-
 		class RenderNode : public SceneNode
 		{
 		public:

@@ -1,5 +1,4 @@
 #include "textgroup.hpp"
-#include "nodetext.hpp"
 #include "scene.hpp"
 #include <lib/core/resource.hpp>
 #include <lib/core/log.hpp>

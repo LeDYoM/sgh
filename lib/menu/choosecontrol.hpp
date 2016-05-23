@@ -3,6 +3,7 @@
 
 #include <lib/include/types.hpp>
 #include <lib/draw/rendernode.hpp>
+#include <lib/draw/nodetext.hpp>
 #include "imenucontrol.hpp"
 #include "menudescriptors.hpp"
 #include <vector>

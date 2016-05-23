@@ -4,7 +4,7 @@
 #include <lib/include/types.hpp>
 #include <lib/include/color.hpp>
 #include "rendergroup.hpp"
-#include "rendernode.hpp"
+#include "nodetext.hpp"
 
 namespace lib
 {

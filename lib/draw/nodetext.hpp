@@ -11,6 +11,13 @@ namespace lib
 {
 	namespace draw
 	{
+			enum class Alignment : u8
+			{
+				Left = 0,
+				Center = 1,
+				Right = 2
+			};
+
 		class NodeText : public RenderNode
 		{
 		public:

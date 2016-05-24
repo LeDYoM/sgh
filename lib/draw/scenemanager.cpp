@@ -149,9 +149,7 @@ namespace lib
 						}
 					}
 
-					if (auto transformableNode = as<Transformable>(node)) {
-						m_renderStates.pop();
-					}
+					m_renderStates.pop();
 				}
 			}
 		}

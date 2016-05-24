@@ -3,7 +3,6 @@
 
 #include <lib/include/types.hpp>
 #include "scenenode.hpp"
-#include "animationmanager.hpp"
 #include <lib/core/vecsptr.hpp>
 #include "iparentable.hpp"
 
@@ -21,7 +20,7 @@ namespace lib
 		class NodeShape;
 		class NodeText;
 		class Scene;
-		class RenderGroup : public SceneNode, public anim::AnimationManager
+		class RenderGroup : public SceneNode
 		{
 		public:
 			RenderGroup(const std::string &name);

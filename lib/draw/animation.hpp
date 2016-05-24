@@ -11,7 +11,6 @@
 	#define CALL_MEMBER_FN(object,ptrToMember)  ((object).*(ptrToMember))
 #endif
 
-
 namespace lib
 {
 	namespace draw
@@ -24,7 +23,7 @@ namespace lib
 		{
 		public:
 			IAnimation(const str&name) : m_name(name), m_animationStartedCallback{ nullptr }, m_animationFinishedCallback{ nullptr },
-				m_currentTime{ 0 }, m_duration{ 0 }, m_delta{ 0.0f }, m_running{ false } {}
+				m_currentTime{ 0 }, m_duration{ 0 }, m_delta{ 0.0f }, m_running{ false }, m_repeat{ false } {}
 			virtual ~IAnimation() {}
 
 			const str& name() const { return m_name; }
@@ -64,6 +63,7 @@ namespace lib
 
 		private:
 			bool m_running;
+			bool m_repeat;
 
 		};
 

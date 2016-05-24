@@ -1,5 +1,6 @@
 #include "scenenode.hpp"
 #include "rendergroup.hpp"
+#include "animation.hpp"
 
 namespace lib
 {

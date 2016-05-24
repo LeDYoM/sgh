@@ -4,6 +4,7 @@
 #include "scenenode.hpp"
 #include <lib/include/types.hpp>
 #include <lib/include/color.hpp>
+#include <lib/include/properties.hpp>
 #include "vertexarray.hpp"
 
 namespace sf
@@ -23,8 +24,9 @@ namespace lib
 			virtual ~RenderNode();
 
 			virtual u32 draw() = 0;
-			virtual void setColor(const Color &color);
-			const Color& getColor() const;
+			PropertyWithMethods<Color> m_color2;
+			void setColor(const Color color);
+			const Color getColor() const;
 
 			virtual Rectf32 getLocalBounds();
 			virtual Rectf32 getGlobalBounds();
@@ -33,11 +35,12 @@ namespace lib
 			virtual const VertexArray &vertexArray() const;
 			virtual void update();
 		protected:
+			Color m_color;
 			virtual void ensureGeometryUpdate() = 0;
 			void updateFillColors();
 			VertexArray m_vertices;
 			Rectf32 m_bounds;
-			Color m_color;
+//			Color m_color;
 			bool m_geometryNeedUpdate;
 			bool m_colorsNeedUpdate;
 		};

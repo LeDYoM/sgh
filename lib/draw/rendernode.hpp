@@ -24,9 +24,7 @@ namespace lib
 			virtual ~RenderNode();
 
 			virtual u32 draw() = 0;
-			PropertyWithMethods<Color> m_color2;
-			void setColor(const Color color);
-			const Color getColor() const;
+			NotifableProperty<Color> color;
 
 			virtual Rectf32 getLocalBounds();
 			virtual Rectf32 getGlobalBounds();
@@ -35,12 +33,10 @@ namespace lib
 			virtual const VertexArray &vertexArray() const;
 			virtual void update();
 		protected:
-			Color m_color;
 			virtual void ensureGeometryUpdate() = 0;
 			void updateFillColors();
 			VertexArray m_vertices;
 			Rectf32 m_bounds;
-//			Color m_color;
 			bool m_geometryNeedUpdate;
 			bool m_colorsNeedUpdate;
 		};

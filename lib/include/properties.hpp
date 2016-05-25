@@ -15,17 +15,35 @@ namespace lib
 	class Property
 	{
 	public:
-//		using Getter = std::function<const draw::Color()>;
-//		using Setter = std::function<void(const draw::Color)>;
 		explicit Property(const T&iv) : m_value{ iv } {}
-//		explicit PropertyWithMethods(const draw::Color&iv, Getter getter, Setter setter) :m_value{ iv }, m_getter{ getter }, m_setter{ setter } {}
-//		PropertyWithMethods &operator=(const draw::Color&nv) { m_setter(nv); return *this; }
+		Property &operator=(const T&nv) { m_value=nv; return *this; }
 		operator const T&() const { return m_value; }
 	private:
 		T m_value;
-//		Getter m_getter;
-//		Setter m_setter;
 	};
+
+	template <typename T>
+	class NotifableProperty : public Property<T>
+	{
+	public:
+		explicit NotifableProperty(const T&iv) : Property{ iv } {}
+		NotifableProperty &operator=(const T&nv) { Property::operator=(nv); m_changedFlag = true; return *this; }
+		bool changed() const { return m_changedFlag; }
+		void resetChanged() { m_changedFlag = false; }
+		bool readResetChanged()
+		{ 
+			if (m_changedFlag)
+			{
+				m_changedFlag = false;
+				return true;
+			}
+			return false;
+		}
+		operator const T&() const { return Property::operator const T&(); }
+	private:
+		bool m_changedFlag;
+	};
+
 }
 
 #undef CALL_MEMBER_FN

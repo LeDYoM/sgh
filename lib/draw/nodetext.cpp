@@ -265,12 +265,12 @@ namespace lib
 					float top = std::floor(y + underlineOffset - (underlineThickness / 2) + 0.5f);
 					float bottom = top + std::floor(underlineThickness + 0.5f);
 
-					m_vertices.append(Vertex(vector2df(0, top), m_color, vector2df(1, 1)));
-					m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
-					m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
-					m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
-					m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
-					m_vertices.append(Vertex(vector2df(x, bottom), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, top), color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, top), color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, bottom), color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, bottom), color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, top), color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, bottom), color, vector2df(1, 1)));
 				}
 
 				// If we're using the strike through style and there's a new line, draw a line across all characters
@@ -279,12 +279,12 @@ namespace lib
 					float top = std::floor(y + strikeThroughOffset - (underlineThickness / 2) + 0.5f);
 					float bottom = top + std::floor(underlineThickness + 0.5f);
 
-					m_vertices.append(Vertex(vector2df(0, top), m_color, vector2df(1, 1)));
-					m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
-					m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
-					m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
-					m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
-					m_vertices.append(Vertex(vector2df(x, bottom), m_color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, top), color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, top), color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, bottom), color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(0, bottom), color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, top), color, vector2df(1, 1)));
+					m_vertices.append(Vertex(vector2df(x, bottom), color, vector2df(1, 1)));
 				}
 
 				// Handle special characters
@@ -323,12 +323,12 @@ namespace lib
 				f32 v2 = static_cast<f32>(glyph.textureRect.top + glyph.textureRect.height);
 
 				// Add a quad for the current character
-				m_vertices.append(Vertex(vector2df(x + left - italic * top, y + top), m_color, vector2df(u1, v1)));
-				m_vertices.append(Vertex(vector2df(x + right - italic * top, y + top), m_color, vector2df(u2, v1)));
-				m_vertices.append(Vertex(vector2df(x + left - italic * bottom, y + bottom), m_color, vector2df(u1, v2)));
-				m_vertices.append(Vertex(vector2df(x + left - italic * bottom, y + bottom), m_color, vector2df(u1, v2)));
-				m_vertices.append(Vertex(vector2df(x + right - italic * top, y + top), m_color, vector2df(u2, v1)));
-				m_vertices.append(Vertex(vector2df(x + right - italic * bottom, y + bottom), m_color, vector2df(u2, v2)));
+				m_vertices.append(Vertex(vector2df(x + left - italic * top, y + top), color, vector2df(u1, v1)));
+				m_vertices.append(Vertex(vector2df(x + right - italic * top, y + top), color, vector2df(u2, v1)));
+				m_vertices.append(Vertex(vector2df(x + left - italic * bottom, y + bottom), color, vector2df(u1, v2)));
+				m_vertices.append(Vertex(vector2df(x + left - italic * bottom, y + bottom), color, vector2df(u1, v2)));
+				m_vertices.append(Vertex(vector2df(x + right - italic * top, y + top), color, vector2df(u2, v1)));
+				m_vertices.append(Vertex(vector2df(x + right - italic * bottom, y + bottom), color, vector2df(u2, v2)));
 
 				// Update the current bounds
 				minX = std::min(minX, x + left - italic * bottom);
@@ -346,12 +346,12 @@ namespace lib
 				f32 top = std::floor(y + underlineOffset - (underlineThickness / 2) + 0.5f);
 				f32 bottom = top + std::floor(underlineThickness + 0.5f);
 
-				m_vertices.append(Vertex(vector2df(0, top), m_color, vector2df(1, 1)));
-				m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
-				m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
-				m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
-				m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
-				m_vertices.append(Vertex(vector2df(x, bottom), m_color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(0, top), color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(x, top), color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(0, bottom), color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(0, bottom), color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(x, top), color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(x, bottom), color, vector2df(1, 1)));
 			}
 
 			// If we're using the strike through style, add the last line across all characters
@@ -360,12 +360,12 @@ namespace lib
 				f32 top = std::floor(y + strikeThroughOffset - (underlineThickness / 2) + 0.5f);
 				f32 bottom = top + std::floor(underlineThickness + 0.5f);
 
-				m_vertices.append(Vertex(vector2df(0, top), m_color, vector2df(1, 1)));
-				m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
-				m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
-				m_vertices.append(Vertex(vector2df(0, bottom), m_color, vector2df(1, 1)));
-				m_vertices.append(Vertex(vector2df(x, top), m_color, vector2df(1, 1)));
-				m_vertices.append(Vertex(vector2df(x, bottom), m_color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(0, top), color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(x, top), color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(0, bottom), color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(0, bottom), color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(x, top), color, vector2df(1, 1)));
+				m_vertices.append(Vertex(vector2df(x, bottom), color, vector2df(1, 1)));
 			}
 
 			// Update the bounding rectangle

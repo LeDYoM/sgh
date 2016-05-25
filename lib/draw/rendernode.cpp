@@ -7,7 +7,8 @@ namespace lib
 	namespace draw
 	{
 		RenderNode::RenderNode(const std::string &name, const PrimitiveType primitiveType)
-			: SceneNode(name), m_vertices{ primitiveType }, m_bounds{}, m_color{ Color{ 255, 255, 255 } }, m_color2{ Color{ 255, 255, 255 } },
+			: SceneNode(name), m_vertices{ primitiveType }, m_bounds{}, 
+			color{ Color{ 255, 255, 255 } }, 
 			m_geometryNeedUpdate{ true }, m_colorsNeedUpdate{ true }
 		{
 			LOG_CONSTRUCT("Name: " + name);
@@ -19,21 +20,10 @@ namespace lib
 			m_vertices.clear();
 		}
 
-		void RenderNode::setColor(const Color color)
-		{
-			m_color = color;
-			m_colorsNeedUpdate = true;
-		}
-
-		const Color RenderNode::getColor() const
-		{
-			return m_color;
-		}
-
 		void RenderNode::updateFillColors()
 		{
 			for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i) {
-				m_vertices[i].color = m_color;
+				m_vertices[i].color = color;
 			}
 			m_colorsNeedUpdate = false;
 		}

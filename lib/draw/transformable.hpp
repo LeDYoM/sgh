@@ -3,7 +3,7 @@
 
 #include "transformation.hpp"
 #include <lib/include/types.hpp>
-
+#include <lib/include/properties.hpp>
 
 namespace lib
 {
@@ -17,15 +17,13 @@ namespace lib
 
 			void setPosition(const vector2df& position);
 			void setRotation(f32 angle);
-			void setScale(const vector2df &factors);
 			void setOrigin(const vector2df &origin);
 			const vector2df &position() const;
 			f32 rotation() const;
-			const vector2df &scale() const;
 			const vector2df &origin() const;
 			void move(const vector2df &offset);
 			void rotate(f32 angle);
-			void scale(const vector2df &factor);
+			NotifableProperty<vector2df> scale;
 			const Transformation &transformation();
 			const Transformation &inverseTransform();
 
@@ -33,7 +31,6 @@ namespace lib
 			vector2df m_origin;
 			vector2df m_position;
 			f32 m_rotation;
-			vector2df m_scale;
 			Transformation m_transformation;
 			bool m_transformationNeedUpdate;
 			Transformation m_inverseTransformation;

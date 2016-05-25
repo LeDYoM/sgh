@@ -38,7 +38,6 @@ namespace lib
 			VertexArray m_vertices;
 			Rectf32 m_bounds;
 			bool m_geometryNeedUpdate;
-			bool m_colorsNeedUpdate;
 		};
 	}
 }

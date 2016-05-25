@@ -8,7 +8,7 @@ namespace zoper
 		playerDirection{ Direction::Up }
 	{
 		setPointCount(3);
-		setColor(getColorForToken());
+		color = getColorForToken();
 		setBoardPosition(bPosition);
 	}
 

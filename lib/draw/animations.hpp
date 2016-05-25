@@ -4,16 +4,16 @@
 #include "animation.hpp"
 #include "scenenode.hpp"
 #include <lib/include/color.hpp>
-
+#include <lib/include/properties.hpp>
 
 namespace lib
 {
 	namespace draw
 	{
-		class ColorAnimation : public Animation<Color, &SceneNode::setColor>
+		class ColorAnimation : public AnimationTemp<Color>
 		{
 		public:
-			ColorAnimation(const str&name) : Animation{ name } {}
+			ColorAnimation(const str&name, Property<Color> &color) : AnimationTemp( name, color) {}
 		};
 
 		class PositionAnimation : public Animation<vector2df, &SceneNode::setPosition>

@@ -22,7 +22,7 @@ namespace lib
 			descriptorCursorSize = cursorDescriptor->_size;
 			_cursor = createShape("cursor");
 			_cursor->setPointCount(cursorDescriptor->_nVertex);
-			_cursor->setColor(cursorDescriptor->_color);
+			_cursor->color = cursorDescriptor->_color;
 			_cursor->setSize(descriptorCursorSize);
 
 			u32 count{ 0 };
@@ -33,7 +33,7 @@ namespace lib
 				text->setFont(*(font->getAsFont()));
 				text->setCharacterSize(chSize);
 				text->setString(labels[count]->_text);
-				text->setColor(textColor);
+				text->color = textColor;
 				text->setPositionX(0, alignment);
 				text->setPositionY(currentPos.y);
 
@@ -44,7 +44,7 @@ namespace lib
 					subtext->setFont(*(font->getAsFont()));
 					subtext->setCharacterSize(chSize);
 					subtext->setString(labels[count]->_subOptionsLabels[labels[count]->_startValueIndex]);
-					subtext->setColor(textColor);
+					subtext->color = textColor;
 					subtext->setPositionX(1800, lib::draw::Alignment::Right);
 					subtext->setPositionY(currentPos.y);
 				}
@@ -123,19 +123,19 @@ namespace lib
 		{
 			__ASSERT(nodeIndex < _labelData.size(), "Invalid select index for cursor");
 
-			_labelData[_cursorItemSelected].label->setColor(_textColor);
+			_labelData[_cursorItemSelected].label->color = _textColor;
 			if (_labelData[_cursorItemSelected].subLabel)
 			{
-				_labelData[_cursorItemSelected].subLabel->setColor(_textColor);
+				_labelData[_cursorItemSelected].subLabel->color = _textColor;
 			}
 
 			_cursorItemSelected = nodeIndex;
 			auto selectedText = _labelData[nodeIndex].label;
 
-			selectedText->setColor(_selectedTextColor);
+			selectedText->color = _selectedTextColor;
 			if (_labelData[_cursorItemSelected].subLabel)
 			{
-				_labelData[_cursorItemSelected].subLabel->setColor(_selectedTextColor);
+				_labelData[_cursorItemSelected].subLabel->color = _selectedTextColor;
 			}
 
 			_cursor->setRotation(90);

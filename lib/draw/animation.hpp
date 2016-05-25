@@ -4,7 +4,7 @@
 #include <lib/core/timer.hpp>
 #include <lib/include/types.hpp>
 #include <lib/include/color.hpp>
-
+#include <lib/include/properties.hpp>
 #include <functional>
 
 #ifndef CALL_MEMBER_FN
@@ -103,6 +103,44 @@ namespace lib
 			T m_startValue;
 			T m_endValue;
 		};
+
+		template <typename T>
+		class AnimationTemp : public IAnimation
+		{
+		public:
+			AnimationTemp(const str&name, Property<T> &property) : IAnimation{ name }, m_property{ property } {}
+			virtual ~AnimationTemp() {}
+
+			void setDuration(u64 duration) { m_duration = duration; }
+			void setStartValue(const T&startValue) { m_startValue = startValue; }
+			void setEndValue(const T&endValue) { m_endValue = endValue; }
+
+			u64 duration() const { return m_duration; }
+			const T& startValue() const { return m_startValue; }
+			const T& endValue() const { return m_endValue; }
+
+			virtual bool animate(SceneNode *node) override
+			{
+				m_currentTime = m_clock.getElapsedTime().asMilliSeconds();
+				if (m_currentTime > m_duration) {
+					m_delta = 1.0f;
+					finish();
+					return false;
+				}
+				m_delta = (static_cast<f32>(m_currentTime) / m_duration);
+
+				T deltaValue{ m_endValue - m_startValue };
+				T finalValue{ m_startValue + (deltaValue*m_delta) };
+				m_property = finalValue;
+				return true;
+			}
+
+		protected:
+			T m_startValue;
+			T m_endValue;
+			Property<T> &m_property;
+		};
+
 	}
 }
 

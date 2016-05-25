@@ -16,7 +16,8 @@ namespace lib
 	{
 	public:
 		explicit Property(const T&iv) : m_value{ iv } {}
-		Property &operator=(const T&nv) { m_value=nv; return *this; }
+		Property(const Property&) = delete;
+		virtual Property &operator=(const T&nv) { m_value=nv; return *this; }
 		operator const T&() const { return m_value; }
 	private:
 		T m_value;
@@ -27,7 +28,8 @@ namespace lib
 	{
 	public:
 		explicit NotifableProperty(const T&iv) : Property{ iv } {}
-		NotifableProperty &operator=(const T&nv) { Property::operator=(nv); m_changedFlag = true; return *this; }
+		explicit NotifableProperty(const NotifableProperty &iv) = delete;
+		virtual NotifableProperty &operator=(const T&nv) override { Property::operator=(nv); m_changedFlag = true; return *this; }
 		bool changed() const { return m_changedFlag; }
 		void resetChanged() { m_changedFlag = false; }
 		bool readResetChanged()
@@ -39,7 +41,6 @@ namespace lib
 			}
 			return false;
 		}
-		operator const T&() const { return Property::operator const T&(); }
 	private:
 		bool m_changedFlag;
 	};

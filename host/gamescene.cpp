@@ -98,17 +98,17 @@ namespace zoper
 			_goalDisplay->setCharacterSize(90);
 			_pauseText->setCharacterSize(180);
 
-			_scoreText->setColor(lib::draw::Color::Blue());
-			_scoreDisplay->setColor(lib::draw::Color::White());
-			_currentLevelText->setColor(lib::draw::Color::Blue());
-			_currentLevelDisplay->setColor(lib::draw::Color::White());
-			_gameText->setColor(lib::draw::Color::White());
-			_overText->setColor(lib::draw::Color::White());
-			_levelText->setColor(lib::draw::Color::Blue());
-			_levelDisplay->setColor(lib::draw::Color::White());
-			_goalText->setColor(lib::draw::Color::Blue());
-			_goalDisplay->setColor(lib::draw::Color::White());
-			_pauseText->setColor(lib::draw::Color::White());
+			_scoreText->color = lib::draw::Color::Blue();
+			_scoreDisplay->color = lib::draw::Color::White();
+			_currentLevelText->color = lib::draw::Color::Blue();
+			_currentLevelDisplay->color = lib::draw::Color::White();
+			_gameText->color = lib::draw::Color::White();
+			_overText->color = lib::draw::Color::White();
+			_levelText->color = lib::draw::Color::Blue();
+			_levelDisplay->color = lib::draw::Color::White();
+			_goalText->color = lib::draw::Color::Blue();
+			_goalDisplay->color = lib::draw::Color::White();
+			_pauseText->color = lib::draw::Color::White();
 
 			_scoreText->setScale({ 1.0f, 2.0f });
 			_scoreDisplay->setScale({ 1.0f, 2.0f });
@@ -221,7 +221,7 @@ namespace zoper
 		{
 			setState(Pause);
 			_pauserg->setVisible(true);
-			lib::sptr<lib::draw::ColorAnimation> ca = lib::sptr<lib::draw::ColorAnimation>(new lib::draw::ColorAnimation("myColorAnimationId"));
+			lib::sptr<lib::draw::ColorAnimation> ca = lib::sptr<lib::draw::ColorAnimation>(new lib::draw::ColorAnimation("myColorAnimationId", _pauseText->color));
 			ca->setDuration(1000);
 			ca->setStartValue(lib::draw::Color(255, 255, 255, 0));
 			ca->setEndValue(lib::draw::Color(255, 255, 255, 255));
@@ -256,7 +256,7 @@ namespace zoper
 		{
 			for (lib::u32 x = 0; x < _gameData.size.x; ++x)
 			{
-				_backgroundTiles[y][x]->setColor(_levelProperties.getBackgroundTileColor(x, y, pointInCenter(lib::vector2du32{ x,y })));
+				_backgroundTiles[y][x]->color = _levelProperties.getBackgroundTileColor(x, y, pointInCenter(lib::vector2du32{ x, y }));
 				
 			}
 		}
@@ -619,7 +619,7 @@ namespace zoper
 				center.x -= (node->getLocalBounds().width / 2.0f);
 				center.y -= (node->getLocalBounds().height / 2.0f);
 				node->setPosition(center);
-				node->setColor(lib::draw::Color::White());
+				node->color = lib::draw::Color::White();
 			}
 			_backgroundTiles.push_back(column);
 		}
@@ -703,7 +703,7 @@ namespace zoper
 		const lib::board::BoardTileData &ov, const lib::board::BoardTileData &nv)
 	{
 		position; nv; ov;
-		tile->setColor(tile->getColorForToken());
+		tile->color = tile->getColorForToken();
 	}
 
 	void GameScene::updatePlayer(const lib::vector2du32 &dest, lib::sptr<Player> player_)
@@ -734,7 +734,7 @@ namespace zoper
 		const lib::board::BoardTileData &ov, const lib::board::BoardTileData &nv)
 	{
 		position; nv; ov;
-		player->setColor(player->getColorForToken());
+		player->color = player->getColorForToken();
 	}
 
 	void GameScene::increaseScore(lib::u32 scoreIncrement)

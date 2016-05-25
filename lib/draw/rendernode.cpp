@@ -9,7 +9,7 @@ namespace lib
 		RenderNode::RenderNode(const std::string &name, const PrimitiveType primitiveType)
 			: SceneNode(name), m_vertices{ primitiveType }, m_bounds{}, 
 			color{ Color{ 255, 255, 255 } }, 
-			m_geometryNeedUpdate{ true }, m_colorsNeedUpdate{ true }
+			m_geometryNeedUpdate{ true }
 		{
 			LOG_CONSTRUCT("Name: " + name);
 		}
@@ -25,7 +25,7 @@ namespace lib
 			for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i) {
 				m_vertices[i].color = color;
 			}
-			m_colorsNeedUpdate = false;
+			color.resetChanged();
 		}
 
 		Rectf32 RenderNode::getLocalBounds()
@@ -50,7 +50,7 @@ namespace lib
 				ensureGeometryUpdate();
 			}
 
-			if (m_colorsNeedUpdate) {
+			if (color.changed()) {
 				updateFillColors();
 			}
 		}

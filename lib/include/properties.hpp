@@ -18,7 +18,7 @@ namespace lib
 		explicit Property(const T&iv) : m_value{ iv } {}
 		Property(const Property&) = delete;
 		virtual Property &operator=(const T&nv) { m_value=nv; return *this; }
-		operator const T&() const { return m_value; }
+		operator T() { return m_value; }
 	private:
 		T m_value;
 	};

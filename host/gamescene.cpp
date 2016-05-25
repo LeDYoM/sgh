@@ -534,11 +534,13 @@ namespace zoper
 			if (found)
 			{
 				auto node = createShape("pointIncrementScore", lib::vector2df{ 15.0f,15.0f });
+				/*
 				lib::sptr<lib::draw::PositionAnimation> pa = lib::sptr<lib::draw::PositionAnimation>(new lib::draw::PositionAnimation("myPositionAnimationId"));
 				pa->setDuration(600);
 				pa->setStartValue(lastTokenPosition);
 				pa->setEndValue(lib::vector2df(450, 100));
 				node->addAnimation(pa);
+				*/
 			}
 			return result;
 		});
@@ -679,11 +681,13 @@ namespace zoper
 	void GameScene::tokenMoved(const lib::vector2du32 &source, const lib::vector2du32 &dest, lib::sptr<Tile> tile)
 	{
 		source;
+		/*
 		lib::sptr<lib::draw::PositionAnimation> pa = lib::sptr<lib::draw::PositionAnimation>(new lib::draw::PositionAnimation("myPositionAnimationId"));
 		pa->setDuration(_levelProperties.millisBetweenTokens() / 2);
 		pa->setStartValue(tile->position());
 		pa->setEndValue(board2Scene(dest));
 		tile->addAnimation(pa);
+		*/
 	}
 
 	void GameScene::tokenAppeared(const lib::vector2du32 &position, lib::sptr<Tile> tile)

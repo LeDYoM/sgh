@@ -44,7 +44,7 @@ namespace lib
 			{
 				for (auto &animation : _animations)
 				{
-					if (!animation->animate(this))
+					if (!animation->animate())
 					{
 						_animationsToDelete.push_back(animation);
 					}

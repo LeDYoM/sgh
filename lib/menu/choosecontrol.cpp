@@ -140,11 +140,13 @@ namespace lib
 
 			_cursor->setRotation(90);
 			
+			/*
 			lib::sptr<lib::draw::PositionAnimation> pa = lib::sptr<lib::draw::PositionAnimation>(new lib::draw::PositionAnimation("myPositionAnimationId"));
 			pa->setDuration(120);
 			pa->setStartValue(_cursor->position());
 			pa->setEndValue(vector2df{ selectedText->position().x - descriptorCursorSize.x, selectedText->position().y });
 			_cursor->addAnimation(pa);
+			*/
 		}
 
 		void ChooseControl::goDown()

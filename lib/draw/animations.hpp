@@ -10,16 +10,16 @@ namespace lib
 {
 	namespace draw
 	{
-		class ColorAnimation : public AnimationTemp<Color>
+		class ColorAnimation : public Animation<Color>
 		{
 		public:
-			ColorAnimation(const str&name, Property<Color> &color) : AnimationTemp( name, color) {}
+			ColorAnimation(const str&name, Property<Color> &color) : Animation{ name, color } {}
 		};
 
-		class PositionAnimation : public Animation<vector2df, &SceneNode::setPosition>
+		class PositionAnimation : public Animation<vector2df>
 		{
 		public:
-			PositionAnimation(const str&name) : Animation{ name } {}
+			PositionAnimation(const str&name, Property<vector2df> &position) : Animation{ name, position } {}
 		};
 	}
 }

@@ -6,7 +6,7 @@ namespace lib
 	namespace draw
 	{
 		Transformable::Transformable() :
-			m_origin{ 0, 0 }, m_position{ 0, 0 }, m_rotation{ 0 }, scale{ vector2df{ 1, 1 } },
+			m_origin{ 0, 0 }, m_position{ 0, 0 }, rotation{ {0.0f} }, scale{ vector2df{ 1, 1 } },
 			m_transformation{}, m_transformationNeedUpdate{ true }, m_inverseTransformation{}, m_inverseTransformationNeedUpdate{ true } {}
 
 		Transformable::~Transformable()
@@ -16,16 +16,6 @@ namespace lib
 		void Transformable::setPosition(const vector2df &position)
 		{
 			m_position = position;
-			m_transformationNeedUpdate = true;
-			m_inverseTransformationNeedUpdate = true;
-		}
-
-		void Transformable::setRotation(f32 angle)
-		{
-			m_rotation = (fmod(angle, 360.f));
-			if (m_rotation < 0)
-				m_rotation += 360.f;
-
 			m_transformationNeedUpdate = true;
 			m_inverseTransformationNeedUpdate = true;
 		}
@@ -42,11 +32,6 @@ namespace lib
 			return m_position;
 		}
 
-		f32 Transformable::rotation() const
-		{
-			return m_rotation;
-		}
-
 		const vector2df &Transformable::origin() const
 		{
 			return m_origin;
@@ -57,17 +42,12 @@ namespace lib
 			setPosition(position()+offset);
 		}
 
-		void Transformable::rotate(f32 angle)
-		{
-			setRotation(m_rotation + angle);
-		}
-
 		const Transformation &Transformable::transformation()
 		{
 			// Recompute the combined transformation if needed
 			if (m_transformationNeedUpdate)
 			{
-				float angle = -m_rotation * 3.141592654f / 180.f;
+				float angle = -rotation * 3.141592654f / 180.f;
 				float cosine = static_cast<float>(std::cos(angle));
 				float sine = static_cast<float>(std::sin(angle));
 				float sxc = scale->x * cosine;

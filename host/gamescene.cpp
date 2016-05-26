@@ -714,7 +714,7 @@ namespace zoper
 	{
 		player_->setOrigin(tileSize() / 2.0f);
 		player_->setPosition(board2Scene(dest) + (tileSize() / 2.0f));
-		player_->setRotation(player_->currentDirection().angle());
+		player_->rotation = player_->currentDirection().angle();
 	}
 
 	void GameScene::playerMoved(const lib::vector2du32 &source, const lib::vector2du32 &dest, lib::sptr<Player> player_)

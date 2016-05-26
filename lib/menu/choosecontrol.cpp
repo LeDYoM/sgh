@@ -138,7 +138,7 @@ namespace lib
 				_labelData[_cursorItemSelected].subLabel->color = _selectedTextColor;
 			}
 
-			_cursor->setRotation(90);
+			_cursor->rotation = 90;
 			
 			/*
 			lib::sptr<lib::draw::PositionAnimation> pa = lib::sptr<lib::draw::PositionAnimation>(new lib::draw::PositionAnimation("myPositionAnimationId"));

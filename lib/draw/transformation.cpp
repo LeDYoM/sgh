@@ -68,10 +68,10 @@ namespace lib
 			// Transform the 4 corners of the rectangle
 			const vector2df points[] =
 			{
-				transformPoint(rectangle.origin()),
+				transformPoint(rectangle.leftTop()),
 				transformPoint({ rectangle.left, rectangle.top + rectangle.height }),
 				transformPoint({ rectangle.left + rectangle.width, rectangle.top }),
-				transformPoint(rectangle.dest())
+				transformPoint(rectangle.rightBottom())
 			};
 
 			// Compute the bounding rectangle of the transformed points

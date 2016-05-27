@@ -83,11 +83,11 @@ namespace lib
 			return !(operator==(r));
 		}
 
-		inline vector2d<T> origin() const { return vector2d<T>(left, top); }
+		inline vector2d<T> leftTop() const { return vector2d<T>(left, top); }
 		inline vector2d<T> size() const { return vector2d<T>(width, height); }
-		inline T destX() const { return left + width; }
-		inline T destY() const { return top + height; }
-		inline vector2d<T> dest() const { return vector2d<T>{destX(), destY()}; }
+		inline T right() const { return left + width; }
+		inline T bottom() const { return top + height; }
+		inline vector2d<T> rightBottom() const { return vector2d<T>{right(), bottom()}; }
 	};
 
 	using Rects32 = lib::Rect<s32>;

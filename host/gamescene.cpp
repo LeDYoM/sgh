@@ -403,7 +403,7 @@ namespace zoper
 		LOG_DEBUG("Adding player tile at " << _gameData.centerRect.top << "," << _gameData.centerRect.height);
 		__ASSERT(!p_player, "Player already initialized");
 		// Create the player instance
-		p_player = lib::sptr<Player>(new Player(lib::vector2du32(_gameData.centerRect.origin()),tileSize()));
+		p_player = lib::sptr<Player>(new Player(lib::vector2du32(_gameData.centerRect.leftTop()),tileSize()));
 
 		// Add it to the board and to the scene nodes
 		p_boardModel->setTile(p_player->boardPosition(), std::dynamic_pointer_cast<lib::board::ITile>(_mainBoardrg->addNode(p_player)));
@@ -555,7 +555,7 @@ namespace zoper
 			if (_position.x < _gameData.centerRect.left || _position.y < _gameData.centerRect.top)
 				return false;
 
-			if (_position.x >= _gameData.centerRect.destX() || _position.y >= _gameData.centerRect.destY())
+			if (_position.x >= _gameData.centerRect.right() || _position.y >= _gameData.centerRect.bottom())
 				return false;
 
 			return true;

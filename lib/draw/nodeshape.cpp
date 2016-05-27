@@ -55,18 +55,18 @@ namespace lib
 		vector2df NodeShape::getPoint(unsigned int index) const
 		{
 			// TO DO:
-			// Optimize and cache it
+			// Optimize
 			switch (_mode)
 			{
 			default:
 			case lib::draw::NodeShape::NodeMode::Shape:
 			{
-				lib::vector2df m_radius{ _size / 2.0f };
-				double angle = ((index * 2 * M_PI) / getPointCount()) - (M_PI_2);
-				double x = std::cos(angle) * m_radius.x;
-				double y = std::sin(angle) * m_radius.y;
+				vector2df m_radius{ _size / 2.0f };
+				f64 angle = ((index * 2 * M_PI) / getPointCount()) - (M_PI_2);
+				f64 x = std::cos(angle) * m_radius.x;
+				f64 y = std::sin(angle) * m_radius.y;
 
-				return vector2df(static_cast<float>(m_radius.x + x), static_cast<float>(m_radius.y + y));
+				return vector2df(static_cast<f32>(m_radius.x + x), static_cast<f32>(m_radius.y + y));
 
 			}
 			break;

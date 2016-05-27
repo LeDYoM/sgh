@@ -69,7 +69,7 @@ namespace lib
 			const vector2df points[4] =
 			{
 				transformPoint(rectangle.leftTop()),
-				transformPoint({ rectangle.left, rectangle.bottom }),
+				transformPoint({ rectangle.left, rectangle.bottom() }),
 				transformPoint({ rectangle.right(), rectangle.top }),
 				transformPoint(rectangle.rightBottom())
 			};

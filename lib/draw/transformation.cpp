@@ -66,11 +66,11 @@ namespace lib
 		Rectf32 Transformation::transformRect(const Rectf32 &rectangle) const
 		{
 			// Transform the 4 corners of the rectangle
-			const vector2df points[] =
+			const vector2df points[4] =
 			{
 				transformPoint(rectangle.leftTop()),
-				transformPoint({ rectangle.left, rectangle.top + rectangle.height }),
-				transformPoint({ rectangle.left + rectangle.width, rectangle.top }),
+				transformPoint({ rectangle.left, rectangle.bottom }),
+				transformPoint({ rectangle.right(), rectangle.top }),
 				transformPoint(rectangle.rightBottom())
 			};
 
@@ -79,7 +79,7 @@ namespace lib
 			f32 top = points[0].y;
 			f32 right = points[0].x;
 			f32 bottom = points[0].y;
-			for (int i = 1; i < 4; ++i)
+			for (auto i = 1; i < 4; ++i)
 			{
 				if (points[i].x < left)   left = points[i].x;
 				else if (points[i].x > right)  right = points[i].x;

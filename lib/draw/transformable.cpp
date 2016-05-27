@@ -6,7 +6,8 @@ namespace lib
 	namespace draw
 	{
 		Transformable::Transformable() :
-			origin{ {0, 0} }, position{ {0, 0} }, rotation{ {0.0f} }, scale{ vector2df{ 1, 1 } },
+			//origin{ {0, 0} }, 
+			position{ {0, 0} }, rotation{ {0.0f} }, scale{ vector2df{ 1, 1 } },
 			m_transformation{}, m_inverseTransformation{} {}
 
 		Transformable::~Transformable()
@@ -30,11 +31,14 @@ namespace lib
 				float syc = scale->y * cosine;
 				float sxs = scale->x * sine;
 				float sys = scale->y * sine;
-				float tx = -origin->x * sxc - origin->y * sys + position->x;
-				float ty = origin->x * sxs - origin->y * syc + position->y;
+//				float tx = -origin->x * sxc - origin->y * sys + position->x;
+//				float ty = origin->x * sxs - origin->y * syc + position->y;
 
-				m_transformation= Transformation{ sxc, sys, tx,
-					-sxs, syc, ty,
+//				f32 tx = position->x;
+//				f32 ty = position->y;
+
+				m_transformation= Transformation{ sxc, sys, position->x,
+					-sxs, syc, position->y,
 					0.f, 0.f, 1.f };
 
 				m_inverseTransformation = m_transformation.inverse();
@@ -57,15 +61,15 @@ namespace lib
 
 		bool Transformable::transformationNeedUpdate()
 		{
-			return position.changed() || scale.changed() || rotation.changed() || origin.changed();
+			return position.changed() || scale.changed() || rotation.changed();// || origin.changed();
 		}
 
 		void Transformable::resetTransformationNeedUpdate()
 		{
-			position.readResetChanged();
+			position.resetChanged();
 			scale.resetChanged();
 			rotation.resetChanged();
-			origin.resetChanged();
+//			origin.resetChanged();
 		}
 
 	}

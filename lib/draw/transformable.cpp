@@ -6,7 +6,7 @@ namespace lib
 	namespace draw
 	{
 		Transformable::Transformable() :
-			m_origin{ 0, 0 }, m_position{ 0, 0 }, rotation{ {0.0f} }, scale{ vector2df{ 1, 1 } },
+			origin{ {0, 0} }, m_position{ 0, 0 }, rotation{ {0.0f} }, scale{ vector2df{ 1, 1 } },
 			m_transformation{}, m_transformationNeedUpdate{ true }, m_inverseTransformation{}, m_inverseTransformationNeedUpdate{ true } {}
 
 		Transformable::~Transformable()
@@ -20,21 +20,9 @@ namespace lib
 			m_inverseTransformationNeedUpdate = true;
 		}
 
-		void Transformable::setOrigin(const vector2df &origin)
-		{
-			m_origin = origin;
-			m_transformationNeedUpdate = true;
-			m_inverseTransformationNeedUpdate = true;
-		}
-
 		const vector2df &Transformable::position() const
 		{
 			return m_position;
-		}
-
-		const vector2df &Transformable::origin() const
-		{
-			return m_origin;
 		}
 
 		void Transformable::move(const vector2df &offset)
@@ -54,8 +42,8 @@ namespace lib
 				float syc = scale->y * cosine;
 				float sxs = scale->x * sine;
 				float sys = scale->y * sine;
-				float tx = -m_origin.x * sxc - m_origin.y * sys + m_position.x;
-				float ty = m_origin.x * sxs - m_origin.y * syc + m_position.y;
+				float tx = -origin->x * sxc - origin->y * sys + m_position.x;
+				float ty = origin->x * sxs - origin->y * syc + m_position.y;
 
 				m_transformation= Transformation{ sxc, sys, tx,
 					-sxs, syc, ty,

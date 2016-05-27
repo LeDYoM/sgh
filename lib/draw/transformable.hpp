@@ -16,17 +16,15 @@ namespace lib
 			virtual ~Transformable();
 
 			void setPosition(const vector2df& position);
-			void setOrigin(const vector2df &origin);
 			const vector2df &position() const;
-			const vector2df &origin() const;
 			void move(const vector2df &offset);
 			NotifableProperty<vector2df> scale;
+			NotifableProperty<vector2df> origin;
 			NotifableProperty<f32> rotation;
 			const Transformation &transformation();
 			const Transformation &inverseTransform();
 
 		private:
-			vector2df m_origin;
 			vector2df m_position;
 			Transformation m_transformation;
 			bool m_transformationNeedUpdate;

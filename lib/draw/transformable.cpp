@@ -7,7 +7,7 @@ namespace lib
 	{
 		Transformable::Transformable() :
 			origin{ {0, 0} }, position{ {0, 0} }, rotation{ {0.0f} }, scale{ vector2df{ 1, 1 } },
-			m_transformation{}, m_transformationNeedUpdate{ true }, m_inverseTransformation{}, m_inverseTransformationNeedUpdate{ true } {}
+			m_transformation{}, m_inverseTransformation{} {}
 
 		Transformable::~Transformable()
 		{
@@ -21,7 +21,7 @@ namespace lib
 		const Transformation &Transformable::transformation()
 		{
 			// Recompute the combined transformation if needed
-			if (m_transformationNeedUpdate)
+			if (transformationNeedUpdate())
 			{
 				float angle = -rotation * 3.141592654f / 180.f;
 				float cosine = static_cast<float>(std::cos(angle));
@@ -36,7 +36,10 @@ namespace lib
 				m_transformation= Transformation{ sxc, sys, tx,
 					-sxs, syc, ty,
 					0.f, 0.f, 1.f };
-				m_transformationNeedUpdate = false;
+
+				m_inverseTransformation = m_transformation.inverse();
+
+				resetTransformationNeedUpdate();
 			}
 
 			return m_transformation;
@@ -44,13 +47,26 @@ namespace lib
 
 		const Transformation &Transformable::inverseTransform()
 		{
-			if (m_inverseTransformationNeedUpdate)
+			if (transformationNeedUpdate())
 			{
-				m_inverseTransformation= transformation().inverse();
-				m_inverseTransformationNeedUpdate = false;
+				transformation();
 			}
 
 			return m_inverseTransformation;
 		}
+
+		bool Transformable::transformationNeedUpdate()
+		{
+			return position.changed() || scale.changed() || rotation.changed() || origin.changed();
+		}
+
+		void Transformable::resetTransformationNeedUpdate()
+		{
+			position.readResetChanged();
+			scale.resetChanged();
+			rotation.resetChanged();
+			origin.resetChanged();
+		}
+
 	}
 }

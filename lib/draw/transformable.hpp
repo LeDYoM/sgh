@@ -24,10 +24,10 @@ namespace lib
 			const Transformation &inverseTransform();
 
 		private:
+			bool transformationNeedUpdate();
+			void resetTransformationNeedUpdate();
 			Transformation m_transformation;
-			bool m_transformationNeedUpdate;
 			Transformation m_inverseTransformation;
-			bool m_inverseTransformationNeedUpdate;
 		};
 	}
 }

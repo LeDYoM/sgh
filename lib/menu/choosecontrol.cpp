@@ -34,8 +34,9 @@ namespace lib
 				text->setCharacterSize(chSize);
 				text->setString(labels[count]->_text);
 				text->color = textColor;
-				text->setPositionX(0, alignment);
-				text->setPositionY(currentPos.y);
+				text->setAlignment(alignment);
+				text->position->x = 0;
+				text->position->y = currentPos.y;
 
 				sptr<draw::NodeText> subtext{ nullptr };
 				if (labels[count]->_subOptionsLabels.size()>0)
@@ -45,8 +46,9 @@ namespace lib
 					subtext->setCharacterSize(chSize);
 					subtext->setString(labels[count]->_subOptionsLabels[labels[count]->_startValueIndex]);
 					subtext->color = textColor;
-					subtext->setPositionX(1800, lib::draw::Alignment::Right);
-					subtext->setPositionY(currentPos.y);
+					subtext->setAlignment(lib::draw::Alignment::Right);
+					subtext->position->x = 1800;
+					subtext->position->y = currentPos.y;
 				}
 
 				currentPos.y += (chSize + incY);
@@ -116,7 +118,8 @@ namespace lib
 		void ChooseControl::updateSubLabelText(const u32 index)
 		{
 			_labelData[index].subLabel->setString(_labelData[index].textSubLabel[_labelData[index].selectedSublabel]);
-			_labelData[index].subLabel->setPositionX(1800.0f, lib::draw::Alignment::Right);
+			_labelData[index].subLabel->setAlignment(lib::draw::Alignment::Right);
+			_labelData[index].subLabel->position->x = 1800.0f;
 		}
 
 		void ChooseControl::cursorSelectItem(u32 nodeIndex)

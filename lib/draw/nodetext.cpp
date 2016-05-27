@@ -95,57 +95,58 @@ namespace lib
 			float vspace = static_cast<float>(m_font->getLineSpacing(m_characterSize));
 
 			// Compute the position
-			vector2df position;
+			vector2df _position;
 			u32 prevChar = 0;
 			for (auto i = 0u; i < index; ++i)
 			{
 				u32 curChar = m_string[i];
 
 				// Apply the kerning offset
-				position.x += static_cast<float>(m_font->getKerning(prevChar, curChar, m_characterSize));
+				_position.x += static_cast<float>(m_font->getKerning(prevChar, curChar, m_characterSize));
 				prevChar = curChar;
 
 				// Handle special characters
 				switch (curChar)
 				{
-				case ' ':  position.x += hspace;                 continue;
-				case '\t': position.x += hspace * 4;             continue;
-				case '\n': position.y += vspace; position.x = 0; continue;
+				case ' ':  _position.x += hspace;                  continue;
+				case '\t': _position.x += hspace * 4;              continue;
+				case '\n': _position.y += vspace; _position.x = 0; continue;
 				}
 
 				// For regular characters, add the advance offset of the glyph
-				position.x += static_cast<float>(m_font->getGlyph(curChar, m_characterSize, bold).advance);
+				_position.x += static_cast<float>(m_font->getGlyph(curChar, m_characterSize, bold).advance);
 			}
 
 			// Transform the position to global coordinates
-			position = transformation().transformPoint(position);
+			_position = transformation().transformPoint(position);
 
-			return position;
+			return _position;
 		}
 
 		const sf::Texture *NodeText::texture() const
 		{
 			return &(m_font->getTexture(m_characterSize));
 		}
-
+		/*
 		void NodeText::setPosition(const vector2df &pos, Alignment alignment)
 		{
 			switch (alignment)
 			{
 			default:
 			case lib::draw::Alignment::Left:
-				Transformable::setPosition(pos);
+				position = pos;
 				break;
 			case lib::draw::Alignment::Center:
-				Transformable::setPosition(lib::vector2df{ pos.x - (getLocalBounds().width / 2.0f), pos.y - (getLocalBounds().height / 2.0f) });
+				position = (lib::vector2df{ pos.x - (getLocalBounds().width / 2.0f), pos.y - (getLocalBounds().height / 2.0f) });
 				break;
 			case lib::draw::Alignment::Right:
-				Transformable::setPosition(lib::vector2df{ pos.x - (getLocalBounds().width), pos.y - (getLocalBounds().height) });
+				position = (lib::vector2df{ pos.x - (getLocalBounds().width), pos.y - (getLocalBounds().height) });
 				break;
 			}
 		}
 
-		void NodeText::setPositionX(const f32 x, Alignment alignment /*= Alignment::Left*/)
+		
+		void NodeText::setPositionX(const f32 x, Alignment alignment)
 		{
 			const lib::vector2df position(Transformable::position());
 			switch (alignment)
@@ -165,7 +166,7 @@ namespace lib
 			}
 		}
 
-		void NodeText::setPositionY(const f32 y, Alignment alignment /*= Alignment::Left*/)
+		void NodeText::setPositionY(const f32 y, Alignment alignment)
 		{
 			const lib::vector2df position(Transformable::position());
 			switch (alignment)
@@ -182,10 +183,10 @@ namespace lib
 				break;
 			}
 		}
-
+		*/
 		void NodeText::setAlignment(Alignment alignment)
 		{
-			setPosition(position(), alignment);
+			//setPosition(position, alignment);
 		}
 
 		u32 NodeText::draw()

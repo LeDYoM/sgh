@@ -37,7 +37,8 @@ namespace zoper
 			_nextKeyText->setCharacterSize(90);
 			_nextKeyText->setString(" ");
 			_nextKeyText->color = lib::draw::Color::Blue();
-			_nextKeyText->setPosition(lib::vector2df{ 1000.0f, 1000.0f }, lib::draw::Alignment::Center);
+			_nextKeyText->setAlignment(lib::draw::Alignment::Center);
+			_nextKeyText->position = { 1000.0f, 1000.0f };
 			_indexKey = 0;
 			setTextForKey();
 			return true;
@@ -69,7 +70,8 @@ namespace zoper
 			else
 			{
 				_nextKeyText->setString("Press key for "+getKeyNameStr(_indexKey));
-				_nextKeyText->setPosition(lib::vector2df{ 1000.0,1000.0 }, lib::draw::Alignment::Center);
+				_nextKeyText->setAlignment(lib::draw::Alignment::Center);
+				_nextKeyText->position = { 1000.0,1000.0 };
 			}
 		}
 

@@ -29,7 +29,6 @@ namespace lib
 
 			void addAnimation(sptr<IAnimation> nanimation);
 			void updateAnimations();
-			using Transformable::setPosition;
 
 		private:
 			bool m_active{ true };

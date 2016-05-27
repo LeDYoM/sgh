@@ -15,9 +15,8 @@ namespace lib
 			Transformable();
 			virtual ~Transformable();
 
-			void setPosition(const vector2df& position);
-			const vector2df &position() const;
 			void move(const vector2df &offset);
+			NotifableProperty<vector2df> position;
 			NotifableProperty<vector2df> scale;
 			NotifableProperty<vector2df> origin;
 			NotifableProperty<f32> rotation;
@@ -25,7 +24,6 @@ namespace lib
 			const Transformation &inverseTransform();
 
 		private:
-			vector2df m_position;
 			Transformation m_transformation;
 			bool m_transformationNeedUpdate;
 			Transformation m_inverseTransformation;

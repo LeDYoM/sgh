@@ -55,7 +55,7 @@ namespace zoper
 						lib::sptr<lib::menu::OptionDescriptor>(new lib::menu::OptionDescriptor("Back", true))
 				}));
 				addMenuControl(_chooseControl);
-				_chooseControl->setPosition({ 100, 700 });
+				_chooseControl->position = { 100, 700 };
 				return true;
 			}
 			return false;

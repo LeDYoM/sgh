@@ -66,7 +66,8 @@ namespace zoper
 			_gameText = _gameOverrg->createText("gameovergame");
 			_overText = _gameOverrg->createText("gameoverover");
 
-			_scoreText->setFont(*(service<ResourceManager>()->getResource("game_scene.scoreFont")->getAsFont()));
+			auto resourceManager = service<ResourceManager>();
+			_scoreText->setFont(*(resourceManager->getResource("game_scene.scoreFont")->getAsFont()));
 			_scoreDisplay->setFont(*(service<ResourceManager>()->getResource("game_scene.scoreFont")->getAsFont()));
 			_currentLevelText->setFont(*(service<ResourceManager>()->getResource("game_scene.scoreFont")->getAsFont()));
 			_currentLevelDisplay->setFont(*(service<ResourceManager>()->getResource("game_scene.scoreFont")->getAsFont()));

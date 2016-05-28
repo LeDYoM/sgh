@@ -1,6 +1,7 @@
 #include "servicesmanager.hpp"
 #include "appservice.hpp"
 #include "data.hpp"
+#include "input.hpp"
 
 namespace lib
 {
@@ -26,6 +27,9 @@ namespace lib
 	void ServicesManager::addServiceInstance(const std::type_index &typeName, sptr<AppService> newService)
 	{
 		m_services[typeName] = std::move(newService);
+		if (typeName == std::type_index(typeid(Input)))
+			m_input = std::dynamic_pointer_cast<Input>(m_services[typeName]);
+
 	}
 
 	void ServicesManager::setupAllServices()
@@ -66,5 +70,6 @@ namespace lib
 	{
 		return m_services.at(serviceType);
 	}
+
 
 }

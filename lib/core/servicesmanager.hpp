@@ -15,6 +15,8 @@ namespace lib
 	{
 		class AppController;
 	}
+	class Input;
+
 	class ServicesManager
 	{
 	public:
@@ -36,6 +38,11 @@ namespace lib
 			return std::dynamic_pointer_cast<T>(service(std::type_index(typeid(T))));
 		}
 
+		template<>
+		sptr<Input> service() const
+		{
+			return m_input;
+		}
 	private:
 		void for_each_service(std::function<void(std::type_index, sptr<AppService>)> callback);
 		void addServiceInstance(const std::type_index &typeName, sptr<AppService> newService);
@@ -43,6 +50,9 @@ namespace lib
 
 		std::map<std::type_index,sptr<AppService>> m_services;
 		core::AppController *m_appController;
+
+		// Cached variables
+		sptr<Input> m_input;
 	};
 }
 #endif

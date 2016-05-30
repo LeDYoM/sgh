@@ -24,20 +24,20 @@ namespace lib
 			// Recompute the combined transformation if needed
 			if (transformationNeedUpdate())
 			{
-				float angle = -rotation * 3.141592654f / 180.f;
-				float cosine = static_cast<float>(std::cos(angle));
-				float sine = static_cast<float>(std::sin(angle));
-				float sxc = scale->x * cosine;
-				float syc = scale->y * cosine;
-				float sxs = scale->x * sine;
-				float sys = scale->y * sine;
-//				float tx = -origin->x * sxc - origin->y * sys + position->x;
-//				float ty = origin->x * sxs - origin->y * syc + position->y;
+				f32 angle = -rotation * 3.141592654f / 180.f;
+				f32 cosine = static_cast<f32>(std::cos(angle));
+				f32 sine = static_cast<f32>(std::sin(angle));
+				f32 sxc = scale->x * cosine;
+				f32 syc = scale->y * cosine;
+				f32 sxs = scale->x * sine;
+				f32 sys = scale->y * sine;
+//				f32 tx = -origin->x * sxc - origin->y * sys + position->x;
+//				f32 ty = origin->x * sxs - origin->y * syc + position->y;
 
 //				f32 tx = position->x;
 //				f32 ty = position->y;
 
-				m_transformation= Transformation{ sxc, sys, position->x,
+				m_transformation = Transformation{ sxc, sys, position->x,
 					-sxs, syc, position->y,
 					0.f, 0.f, 1.f };
 

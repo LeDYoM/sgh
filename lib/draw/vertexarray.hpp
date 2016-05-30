@@ -31,7 +31,6 @@ namespace lib
 			void clear();
 			void resize(const std::size_t vertexCount);
 			void append(const Vertex &vertex);
-			void append(vector2df translation, const BasicVertexArray &data);
 			void setPrimitiveType(const PrimitiveType type);
 			PrimitiveType getPrimitiveType() const;
 			Rectf32 getBounds() const;

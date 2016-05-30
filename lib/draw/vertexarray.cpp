@@ -42,14 +42,6 @@ namespace lib
 			m_vertices.push_back(vertex);
 		}
 
-		void VertexArray::append(vector2df translation, const BasicVertexArray &data)
-		{
-			for (const Vertex &vertex : data)
-			{
-				m_vertices.emplace_back(Vertex{vertex.position*translation,data.})
-			}
-		}
-
 		void VertexArray::setPrimitiveType(PrimitiveType type)
 		{
 			m_primitiveType = type;

@@ -9,6 +9,7 @@ namespace lib
 {
 	namespace draw
 	{
+		using BasicVertexArray = std::vector<Vertex>;
 		enum PrimitiveType
 		{
 			Points,
@@ -30,11 +31,12 @@ namespace lib
 			void clear();
 			void resize(const std::size_t vertexCount);
 			void append(const Vertex &vertex);
+			void append(vector2df translation, const BasicVertexArray &data);
 			void setPrimitiveType(const PrimitiveType type);
 			PrimitiveType getPrimitiveType() const;
 			Rectf32 getBounds() const;
 		private:
-			std::vector<Vertex> m_vertices;
+			BasicVertexArray m_vertices;
 			PrimitiveType m_primitiveType;
 		};
 	}

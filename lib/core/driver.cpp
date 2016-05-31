@@ -21,6 +21,7 @@ namespace lib
 
 		sptr<drivers::window::IWWindow> Driver::newWindow()
 		{
+			__ASSERT(m_initialized, "Driver is not initialized");
 			return sptr<drivers::window::SFMLWindow>(new drivers::window::SFMLWindow());
 		}
 

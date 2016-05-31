@@ -15,6 +15,8 @@ namespace lib
 			bool initialize(const std::string &fileName);
 			sptr<drivers::window::IWWindow> newWindow();
 			virtual ~Driver();
+		private:
+			bool m_initialized{ false };
 		};
 	}
 }

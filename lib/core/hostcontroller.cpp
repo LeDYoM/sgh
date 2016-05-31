@@ -58,6 +58,7 @@ namespace lib
 		int HostController::finalize()
 		{
 			addTask(sptr<HostTaskUnloadDriver>(new HostTaskUnloadDriver()));
+			processTask();
 			return 0;
 		}
 
@@ -93,7 +94,7 @@ namespace lib
 						break;
 					case HostTask::HostTaskCode::UnloadDriver:
 						__ASSERT(m_driver, "Trying to delete driver when no driver loaded");
-						m_driver = nullptr;
+						m_driver.reset();
 						break;
 					case HostTask::HostTaskCode::LoadAppFromFileName:
 						__ASSERT(m_driver, "Cannot load an app without having loaded a driver first");

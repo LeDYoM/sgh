@@ -5,20 +5,18 @@
 #include <functional>
 #include <lib/include/color.hpp>
 
-#ifndef CALL_MEMBER_FN
-#define CALL_MEMBER_FN(object,ptrToMember)  ((object).*(ptrToMember))
-#endif
-
 namespace lib
 {
 	template <typename T>
 	class Property
 	{
 	public:
-		explicit Property(const T&iv) : m_value{ iv } {}
+		Property(const T&iv) : m_value{ iv } {}
+		Property(T&&iv) : m_value{ std::move(iv) } {}
 		Property(const Property&) = delete;
 		virtual Property &operator=(const T&nv) { m_value=nv; return *this; }
-		operator const T() const { return m_value; }
+		virtual Property &operator=(T&&nv) { std::swap(m_value,nv); return *this; }
+		operator const T&() const { return m_value; }
 		const T *const operator ->() const { return &m_value; }
 		virtual T *operator ->() { return &m_value; }
 
@@ -30,9 +28,11 @@ namespace lib
 	class NotifableProperty : public Property<T>
 	{
 	public:
-		explicit NotifableProperty(const T&iv) : Property{ iv } {}
+		using Property::Property;
+
 		explicit NotifableProperty(const NotifableProperty &iv) = delete;
 		virtual NotifableProperty &operator=(const T&nv) override { Property::operator=(nv); m_changedFlag = true; return *this; }
+		virtual NotifableProperty &operator=(T&&nv) { Property::operator=(nv); m_changedFlag = true; return *this; }
 		virtual T *operator ->() { m_changedFlag = true; return Property::operator ->(); }
 
 		bool changed() const { return m_changedFlag; }
@@ -51,7 +51,5 @@ namespace lib
 	};
 
 }
-
-#undef CALL_MEMBER_FN
 
 #endif

@@ -18,7 +18,6 @@ namespace lib
 			void move(const vector2df &offset);
 			NotifableProperty<vector2df> position;
 			NotifableProperty<vector2df> scale;
-//			NotifableProperty<vector2df> origin;
 			NotifableProperty<f32> rotation;
 			const Transformation &transformation();
 			const Transformation &inverseTransform();
@@ -26,8 +25,8 @@ namespace lib
 		private:
 			bool transformationNeedUpdate();
 			void resetTransformationNeedUpdate();
-			Transformation m_transformation;
-			Transformation m_inverseTransformation;
+			NotifableProperty<Transformation> m_transformation;
+			NotifableProperty<Transformation> m_inverseTransformation;
 		};
 	}
 }

@@ -11,12 +11,13 @@ namespace lib
 	class Property
 	{
 	public:
-		Property(const T&iv) : m_value{ iv } {}
+		explicit Property(const T&iv) : m_value{ iv } {}
 		Property(T&&iv) : m_value{ std::move(iv) } {}
 		Property(const Property&) = delete;
 		virtual Property &operator=(const T&nv) { m_value=nv; return *this; }
 		virtual Property &operator=(T&&nv) { std::swap(m_value,nv); return *this; }
 		operator const T&() const { return m_value; }
+		const T& get() const { return m_value; }
 		const T *const operator ->() const { return &m_value; }
 		virtual T *operator ->() { return &m_value; }
 
@@ -28,8 +29,8 @@ namespace lib
 	class NotifableProperty : public Property<T>
 	{
 	public:
-		using Property::Property;
-
+		explicit NotifableProperty(const T&iv) : Property{ iv } {}
+		explicit NotifableProperty(T&&iv) : Property{ std::move(iv) } {}
 		explicit NotifableProperty(const NotifableProperty &iv) = delete;
 		virtual NotifableProperty &operator=(const T&nv) override { Property::operator=(nv); m_changedFlag = true; return *this; }
 		virtual NotifableProperty &operator=(T&&nv) { Property::operator=(nv); m_changedFlag = true; return *this; }
@@ -47,7 +48,7 @@ namespace lib
 			return false;
 		}
 	private:
-		bool m_changedFlag;
+		bool m_changedFlag{ true };
 	};
 
 }

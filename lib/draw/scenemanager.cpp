@@ -16,7 +16,7 @@ namespace lib
 
 		SceneManager::SceneManager()
 		{
-			LOG_DESTRUCT_NOPARAMS;
+			LOG_CONSTRUCT_NOPARAMS;
 		}
 
 		SceneManager::~SceneManager()

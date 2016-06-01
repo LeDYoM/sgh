@@ -16,7 +16,7 @@ namespace lib
 
 		void Transformable::move(const vector2df &offset)
 		{
-//			position = (position + offset);
+			position = (position.get() + offset);
 		}
 
 		const Transformation &Transformable::transformation()

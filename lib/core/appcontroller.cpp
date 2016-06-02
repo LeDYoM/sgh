@@ -2,7 +2,6 @@
 #include "window.hpp"
 #include "resourcemanager.hpp"
 #include <lib/draw/scenemanager.hpp>
-#include <lib/draw/scene.hpp>
 #include "utilprovider.hpp"
 #include "log.hpp"
 #include "exceptionmanager.hpp"

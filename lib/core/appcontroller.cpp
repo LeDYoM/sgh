@@ -2,6 +2,7 @@
 #include "window.hpp"
 #include "resourcemanager.hpp"
 #include <lib/draw/scenemanager.hpp>
+#include <lib/draw/rendermanager.hpp>
 #include "utilprovider.hpp"
 #include "log.hpp"
 #include "exceptionmanager.hpp"
@@ -49,9 +50,9 @@ namespace lib
 				m_servicesManager->addService(sptr<UtilProvider>{new UtilProvider{}});
 				m_servicesManager->addService(sptr<ResourceManager>{ new ResourceManager{} });
 				m_servicesManager->addService(sptr<draw::SceneManager>{ new draw::SceneManager{} });
+				m_servicesManager->addService(sptr<draw::RenderManager>{ new draw::RenderManager{} });
 				m_servicesManager->addService(sptr<Window>{ new Window{ m_iapp->getAppDescriptor().wcp }});
 				m_servicesManager->addService(sptr<Input>{new Input{}});
-
 
 				m_servicesManager->setupAllServices();
 				m_servicesManager->initializeServices();

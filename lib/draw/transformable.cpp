@@ -8,7 +8,7 @@ namespace lib
 		Transformable::Transformable() :
 			//origin{ {0, 0} }, 
 			position{ {0, 0} }, rotation{ {0.0f} }, scale{ vector2df{ 1, 1 } },
-			m_transformation{ Transformation{} }, m_inverseTransformation{ Transformation{} } {}
+			m_transformation{ Transformation{} } {}
 
 		Transformable::~Transformable()
 		{
@@ -41,27 +41,16 @@ namespace lib
 					-sxs, syc, position->y,
 					0.f, 0.f, 1.f };
 
-				m_inverseTransformation = m_transformation->inverse();
-
 				resetTransformationNeedUpdate();
+				m_transformationFrameUpdated = true;
 			}
 
 			return m_transformation;
 		}
 
-		const Transformation &Transformable::inverseTransform()
-		{
-			if (transformationNeedUpdate())
-			{
-				transformation();
-			}
-
-			return m_inverseTransformation;
-		}
-
 		bool Transformable::transformationNeedUpdate()
 		{
-			return position.changed() || scale.changed() || rotation.changed();// || origin.changed();
+			return position.changed() || scale.changed() || rotation.changed();
 		}
 
 		void Transformable::resetTransformationNeedUpdate()
@@ -69,7 +58,6 @@ namespace lib
 			position.resetChanged();
 			scale.resetChanged();
 			rotation.resetChanged();
-//			origin.resetChanged();
 		}
 
 	}

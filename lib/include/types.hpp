@@ -5,6 +5,8 @@
 #include <memory>
 #include <map>
 #include <string>
+#include <vector>
+#include <list>
 #include <lib/core/compileconfig.hpp>
 
 namespace lib
@@ -30,6 +32,13 @@ namespace lib
 	using f64 = double;
 
 	using str = std::string;
+
+	template <typename T>
+	using Vector = std::vector<T>;
+
+	template <typename T>
+	using List = std::list<T>;
+
 }
 
 #include "vector2d.hpp"

@@ -20,13 +20,12 @@ namespace lib
 			NotifableProperty<vector2df> scale;
 			NotifableProperty<f32> rotation;
 			const Transformation &transformation();
-			const Transformation &inverseTransform();
-
 		private:
 			bool transformationNeedUpdate();
 			void resetTransformationNeedUpdate();
+
 			NotifableProperty<Transformation> m_transformation;
-			NotifableProperty<Transformation> m_inverseTransformation;
+			bool m_transformationFrameUpdated{ true };
 		};
 	}
 }

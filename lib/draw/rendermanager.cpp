@@ -20,5 +20,11 @@ namespace lib
 		{
 			AppService::Init();
 		}
+
+		void RenderManager::preRenderNode(const sptr<SceneNode> &node)
+		{
+
+		}
+
 	}
 }

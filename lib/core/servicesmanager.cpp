@@ -2,24 +2,22 @@
 #include "appservice.hpp"
 #include "data.hpp"
 #include "input.hpp"
+#include <lib/draw/rendermanager.hpp>
 
 namespace lib
 {
 	ServicesManager::ServicesManager(core::AppController *appController)
 		: m_appController{ appController }
 	{
-
 	}
 
 	ServicesManager::~ServicesManager()
 	{
-
 	}
 
 	void ServicesManager::for_each_service(std::function<void(std::type_index, sptr<AppService>)> callback)
 	{
-		for (std::pair<std::type_index,sptr<AppService>> serviceNode : m_services)
-		{
+		for (std::pair<std::type_index,sptr<AppService>> serviceNode : m_services) {
 			callback(serviceNode.first, serviceNode.second);
 		}
 	}
@@ -29,6 +27,8 @@ namespace lib
 		m_services[typeName] = std::move(newService);
 		if (typeName == std::type_index(typeid(Input)))
 			m_input = std::dynamic_pointer_cast<Input>(m_services[typeName]);
+		else if (typeName == std::type_index(typeid(draw::RenderManager)))
+			m_renderManager = std::dynamic_pointer_cast<draw::RenderManager>(m_services[typeName]);
 
 	}
 

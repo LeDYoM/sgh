@@ -16,7 +16,11 @@ namespace lib
 		class AppController;
 	}
 	class Input;
-
+	
+	namespace draw
+	{
+		class RenderManager;
+	}
 	class ServicesManager
 	{
 	public:
@@ -43,6 +47,13 @@ namespace lib
 		{
 			return m_input;
 		}
+
+		template<>
+		sptr<draw::RenderManager> service() const
+		{
+			return m_renderManager;
+		}
+
 	private:
 		void for_each_service(std::function<void(std::type_index, sptr<AppService>)> callback);
 		void addServiceInstance(const std::type_index &typeName, sptr<AppService> newService);
@@ -53,6 +64,7 @@ namespace lib
 
 		// Cached variables
 		sptr<Input> m_input;
+		sptr<draw::RenderManager> m_renderManager;
 	};
 }
 #endif

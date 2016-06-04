@@ -9,9 +9,8 @@ namespace lib
 {
 	namespace draw
 	{
-		class SceneNode;
-		using RenderListType = List<SceneNode*>;
-		using RenderListTypeIterator = RenderListType::iterator;
+		class RenderNode;
+		class RenderStates;
 
 		class RenderManager : public AppService
 		{
@@ -22,9 +21,8 @@ namespace lib
 			static const str staticTypeName() { return "RenderManager"; }
 
 			virtual void Init() override;
-			void preRenderNode(const sptr<SceneNode> &);
+			void preRenderNode(const sptr<RenderNode> &, const RenderStates&);
 		private:
-			RenderListType m_renderList;
 		};
 	}
 }

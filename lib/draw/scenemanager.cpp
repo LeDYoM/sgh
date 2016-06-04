@@ -8,6 +8,7 @@
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/input.hpp>
 #include "rendernode.hpp"
+#include "rendermanager.hpp"
 
 namespace lib
 {
@@ -112,7 +113,6 @@ namespace lib
 
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
 			m_renderStates.emplace(RenderStates{service<core::Window>()->renderTarget().get()});
-//			_currentScene->draw();
 			visit(_currentScene);
 			m_renderStates.pop();
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
@@ -122,9 +122,9 @@ namespace lib
 		{
 			if (node->isActive()) {
 				service<Input>()->updateNode(node);
-
 				if (node->isVisible()) {
 					node->updateAnimations();
+
 					const RenderStates &top{ m_renderStates.top() };
 					RenderStates rStates{ top.blendMode, top.transform, top.texture, top.shader, top.currentTarget };
 
@@ -139,7 +139,8 @@ namespace lib
 					if (auto drawableNode = as<RenderNode>(node)) {
 						drawableNode->update();
 						if (drawableNode->vertexArray().getVertexCount() > 0) {
-							rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
+							//rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
+							service<RenderManager>()->preRenderNode(drawableNode, rStates);
 						}
 					}
 

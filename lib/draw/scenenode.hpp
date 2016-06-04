@@ -13,9 +13,6 @@ namespace lib
 	{
 		class RenderGroup;
 		class IAnimation;
-		class RenderManager;
-		class RenderManager;
-		class RenderListTypeIterator;
 
 		class SceneNode : public IParentable<RenderGroup>, public Transformable, public virtual Object
 		{
@@ -38,7 +35,6 @@ namespace lib
 			bool m_active{ true };
 			bool m_visible{ true };
 			str m_name;
-			RenderListTypeIterator *m_renderManagerAutoIterator{ nullptr };
 			VecSPtr<IAnimation> _animations;
 			std::vector<sptr<IAnimation>> _animationsToDelete;
 		};

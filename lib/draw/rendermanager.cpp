@@ -1,5 +1,8 @@
 #include "rendermanager.hpp"
 #include <lib/core/log.hpp>
+#include "renderstates.hpp"
+#include "rendernode.hpp"
+#include <lib/core/rendertarget.hpp>
 
 namespace lib
 {
@@ -21,9 +24,9 @@ namespace lib
 			AppService::Init();
 		}
 
-		void RenderManager::preRenderNode(const sptr<SceneNode> &node)
+		void RenderManager::preRenderNode(const sptr<RenderNode> &node, const RenderStates &rStates)
 		{
-
+			rStates.currentTarget->draw(node->vertexArray(), rStates);
 		}
 
 	}

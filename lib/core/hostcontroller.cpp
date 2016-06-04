@@ -47,7 +47,6 @@ namespace lib
 				}
 			}
 
-			finalize();
 			if (m_apps.empty())
 			{
 				LOG_INFO("Apps list is empty. Exiting normally");

@@ -70,7 +70,7 @@ void commitLog(const LogMessage &message)
 
 	void doLogOutput()
 	{
-		while (doLoop)
+		while (doLoop || !logQueue.empty())
 		{
 			std::unique_lock<std::mutex> _lock(_mutex);
 			if (logQueue.empty())
@@ -79,11 +79,15 @@ void commitLog(const LogMessage &message)
 			}
 			else
 			{
-				while (!logQueue.empty())
-				{
-					const LogMessage &str = logQueue.front();
-					commitLog(str);
-					logQueue.pop();
+				bool workToDo(!logQueue.empty());
+				if (workToDo) {
+					while (!logQueue.empty())
+					{
+						const LogMessage &str = logQueue.front();
+						commitLog(str);
+						logQueue.pop();
+					}
+					std::this_thread::sleep_for(std::chrono::milliseconds(5));
 				}
 			}
 		}

@@ -21,13 +21,13 @@ namespace lib
 		class GlobalRenderNode
 		{
 		public:
-			explicit GlobalRenderNode();
+			explicit GlobalRenderNode(sptr<RenderNode> generatedFrom);
 			virtual ~GlobalRenderNode();
 
 			sf::Texture *texture{ nullptr };
 			sf::Shader *shader{ nullptr };
 			sf::BlendMode *blendMode{ nullptr };
-			VertexArray vertices{  };
+			VertexArray vertices{ };
 
 
 		};

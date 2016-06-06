@@ -11,6 +11,7 @@ namespace lib
 	class Property
 	{
 	public:
+		explicit Property() : m_value{} {}
 		explicit Property(const T&iv) : m_value{ iv } {}
 		Property(T&&iv) : m_value{ std::move(iv) } {}
 		Property(const Property&) = delete;
@@ -29,6 +30,7 @@ namespace lib
 	class NotifableProperty : public Property<T>
 	{
 	public:
+		explicit NotifableProperty() : Property{} {}
 		explicit NotifableProperty(const T&iv) : Property{ iv } {}
 		explicit NotifableProperty(T&&iv) : Property{ std::move(iv) } {}
 		explicit NotifableProperty(const NotifableProperty &iv) = delete;

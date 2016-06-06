@@ -4,9 +4,14 @@
 #include <lib/include/types.hpp>
 #include <lib/core/appservice.hpp>
 #include "renderstates.hpp"
+#include <lib/include/properties.hpp>
 
 namespace lib
 {
+	namespace core
+	{
+		class RenderTarget;
+	}
 	namespace draw
 	{
 		class RenderNode;
@@ -20,7 +25,12 @@ namespace lib
 
 			static const str staticTypeName() { return "RenderManager"; }
 
+			NotifableProperty<sptr<core::RenderTarget>> renderTarget;
+
 			virtual void Init() override;
+
+			void startFrame();
+			void finishFrame();
 			void preRenderNode(const sptr<RenderNode> &, const RenderStates&);
 		private:
 		};

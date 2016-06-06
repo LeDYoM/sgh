@@ -24,10 +24,19 @@ namespace lib
 			AppService::Init();
 		}
 
+		void RenderManager::startFrame()
+		{
+
+		}
+
+		void RenderManager::finishFrame()
+		{
+
+		}
+
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node, const RenderStates &rStates)
 		{
 			rStates.currentTarget->draw(node->vertexArray(), rStates);
 		}
-
 	}
 }

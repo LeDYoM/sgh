@@ -44,6 +44,12 @@ namespace lib
 			return m_vertices;
 		}
 
+		void RenderNode::updateForFrame()
+		{
+			update();
+		}
+
+		/*
 		void RenderNode::update()
 		{
 			if (m_geometryNeedUpdate) {
@@ -54,5 +60,6 @@ namespace lib
 				updateFillColors();
 			}
 		}
+		*/
 	}
 }

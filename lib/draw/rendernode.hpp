@@ -32,6 +32,9 @@ namespace lib
 			virtual const sf::Texture *texture() const = 0;
 			virtual const VertexArray &vertexArray() const;
 			virtual void update();
+			virtual void updateForFrame();
+
+
 		protected:
 			virtual void ensureGeometryUpdate() = 0;
 			void updateFillColors();

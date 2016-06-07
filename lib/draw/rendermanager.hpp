@@ -33,7 +33,7 @@ namespace lib
 			void finishFrame();
 			void preRenderNode(const sptr<RenderNode> &, const RenderStates&);
 		private:
-			std::vector<const RenderNode*const> m_renderList;
+			std::vector<const RenderNode*> m_renderList;
 		};
 	}
 }

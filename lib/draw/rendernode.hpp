@@ -34,7 +34,6 @@ namespace lib
 			virtual void update();
 			virtual void updateForFrame();
 
-
 		protected:
 			virtual void ensureGeometryUpdate() = 0;
 			void updateFillColors();

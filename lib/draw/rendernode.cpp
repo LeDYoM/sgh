@@ -49,7 +49,6 @@ namespace lib
 			update();
 		}
 
-		/*
 		void RenderNode::update()
 		{
 			if (m_geometryNeedUpdate) {
@@ -60,6 +59,5 @@ namespace lib
 				updateFillColors();
 			}
 		}
-		*/
 	}
 }

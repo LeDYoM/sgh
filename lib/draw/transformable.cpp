@@ -42,7 +42,7 @@ namespace lib
 					0.f, 0.f, 1.f };
 
 				resetTransformationNeedUpdate();
-				m_transformationFrameUpdated = true;
+				m_frameTransformationNeedsUpdate = true;
 			}
 
 			return m_transformation;
@@ -60,5 +60,9 @@ namespace lib
 			rotation.resetChanged();
 		}
 
+		void Transformable::updateForFrame()
+		{
+
+		}
 	}
 }

@@ -36,7 +36,23 @@ namespace lib
 
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node, const RenderStates &rStates)
 		{
+
 			rStates.currentTarget->draw(node->vertexArray(), rStates);
 		}
+
+		void RenderManager::preRenderNode(const sptr<RenderNode> &node)
+		{
+			m_renderList.push_back(node.get());
+//			rStates.currentTarget->draw(node->vertexArray(), rStates);
+		}
+
+		void RenderManager::renderAll()
+		{
+			for (auto node : m_renderList)
+			{
+
+			}
+		}
+
 	}
 }

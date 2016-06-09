@@ -44,13 +44,10 @@ namespace lib
 			return m_vertices;
 		}
 
-		void RenderNode::updateForFrame()
-		{
-			update();
-		}
-
 		void RenderNode::update()
 		{
+			Transformable::update();
+
 			if (m_geometryNeedUpdate) {
 				ensureGeometryUpdate();
 			}

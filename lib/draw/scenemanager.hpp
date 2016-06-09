@@ -38,7 +38,7 @@ namespace lib
 			void exitProgram();
 
 			const RenderStates &frameRenderStates() const;
-			void visit(const sptr<SceneNode> &node);
+			void visit(const sptr<SceneNode> &node, bool forceFrameUpdate, Transformation &parentTransformation);
 		private:
 			void setScene(sptr<Scene> scene);
 

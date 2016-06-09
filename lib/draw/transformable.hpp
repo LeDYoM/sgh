@@ -20,9 +20,12 @@ namespace lib
 			NotifableProperty<vector2df> scale;
 			NotifableProperty<f32> rotation;
 			const Transformation &transformation();
-			void updateForFrame();
+			virtual void update();
 			const bool frameTransformationNeedsUpdate() const { return m_frameTransformationNeedsUpdate; }
+			void updateTransformationForFrame(const Transformation &other);
+			const Transformation &globalTransformation() const { return m_frameTransformation; }
 		private:
+			void updateTransformIfNecessary();
 			bool transformationNeedUpdate();
 			void resetTransformationNeedUpdate();
 

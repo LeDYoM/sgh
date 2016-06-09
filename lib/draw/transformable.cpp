@@ -21,6 +21,12 @@ namespace lib
 
 		const Transformation &Transformable::transformation()
 		{
+			updateTransformIfNecessary();
+			return m_transformation;
+		}
+
+		void Transformable::updateTransformIfNecessary()
+		{
 			// Recompute the combined transformation if needed
 			if (transformationNeedUpdate())
 			{
@@ -31,11 +37,11 @@ namespace lib
 				f32 syc = scale->y * cosine;
 				f32 sxs = scale->x * sine;
 				f32 sys = scale->y * sine;
-//				f32 tx = -origin->x * sxc - origin->y * sys + position->x;
-//				f32 ty = origin->x * sxs - origin->y * syc + position->y;
+				//				f32 tx = -origin->x * sxc - origin->y * sys + position->x;
+				//				f32 ty = origin->x * sxs - origin->y * syc + position->y;
 
-//				f32 tx = position->x;
-//				f32 ty = position->y;
+				//				f32 tx = position->x;
+				//				f32 ty = position->y;
 
 				m_transformation = Transformation{ sxc, sys, position->x,
 					-sxs, syc, position->y,
@@ -44,8 +50,6 @@ namespace lib
 				resetTransformationNeedUpdate();
 				m_frameTransformationNeedsUpdate = true;
 			}
-
-			return m_transformation;
 		}
 
 		bool Transformable::transformationNeedUpdate()
@@ -60,9 +64,15 @@ namespace lib
 			rotation.resetChanged();
 		}
 
-		void Transformable::updateForFrame()
+		void Transformable::update()
 		{
-
+			updateTransformIfNecessary();
 		}
+
+		void Transformable::updateTransformationForFrame(const Transformation &other)
+		{
+			m_frameTransformation = m_transformation.get() * other;
+		}
+
 	}
 }

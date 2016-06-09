@@ -113,12 +113,13 @@ namespace lib
 
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
 			m_renderStates.emplace(RenderStates{service<core::Window>()->renderTarget().get()});
-			visit(_currentScene);
+			Transformation t;
+			visit(_currentScene,false,t);
 			m_renderStates.pop();
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
 		}
 
-		void SceneManager::visit(const sptr<SceneNode>& node)
+		void SceneManager::visit(const sptr<SceneNode>& node, bool forceFrameUpdate, Transformation &parentTransformation)
 		{
 			if (node->isActive()) {
 				service<Input>()->updateNode(node);
@@ -135,18 +136,22 @@ namespace lib
 					}
 
 					m_renderStates.push(rStates);
+					node->update();
+					forceFrameUpdate &= node->frameTransformationNeedsUpdate();
+
+					if (forceFrameUpdate) {
+						node->updateTransformationForFrame(parentTransformation);
+						parentTransformation = node->globalTransformation();
+					}
 
 					if (auto drawableNode = as<RenderNode>(node)) {
-						drawableNode->update();
 						if (drawableNode->vertexArray().getVertexCount() > 0) {
 							//rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
 							service<RenderManager>()->preRenderNode(drawableNode, rStates);
 						}
-					}
-
-					if (auto renderGroupNode = as<RenderGroup>(node)) {
+					} else if (auto renderGroupNode = as<RenderGroup>(node)) {
 						for (auto node_ : renderGroupNode->renderNodes()) {
-							visit(node_);
+							visit(node_,forceFrameUpdate,parentTransformation);
 						}
 					}
 

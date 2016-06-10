@@ -124,7 +124,10 @@ namespace lib
 
 			void SFMLWindow::drawAll(const draw::RenderList &list)
 			{
-
+				for (auto node : m_renderList)
+				{
+					renderTarget.get()->draw(node->vertexArray());
+				}
 			}
 
 		}

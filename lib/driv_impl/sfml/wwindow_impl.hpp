@@ -27,7 +27,7 @@ namespace lib
 				virtual void collectEvents() override;
 				virtual sptr<DataMap> nextEvent();
 				virtual u32 pendingEvents();
-				virtual void drawAll(const draw::RenderList &list) = 0;
+				virtual void drawAll(const draw::RenderList &list);
 
 			private:
 				bool m_resizePending;

@@ -11,6 +11,11 @@ namespace lib
 	{
 		class Window;
 	}
+
+	namespace draw
+	{
+		typedef RenderList;
+	}
 	namespace drivers
 	{
 		namespace window
@@ -29,6 +34,7 @@ namespace lib
 				virtual void collectEvents() = 0;
 				virtual sptr<DataMap> nextEvent() = 0;
 				virtual u32 pendingEvents() = 0;
+				virtual void drawAll(const draw::RenderList &list) = 0;
 			};
 		}
 	}

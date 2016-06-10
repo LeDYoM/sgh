@@ -2,6 +2,7 @@
 #include <lib/core/convops.hpp>
 #include <lib/core/window.hpp>
 #include <lib/include/key.hpp>
+#include <lib/draw/rendermanager.hpp>
 
 namespace lib
 {
@@ -119,6 +120,11 @@ namespace lib
 			u32 SFMLWindow::pendingEvents()
 			{
 				return m_collectedEvents.size();
+			}
+
+			void SFMLWindow::drawAll(const draw::RenderList &list)
+			{
+
 			}
 
 		}

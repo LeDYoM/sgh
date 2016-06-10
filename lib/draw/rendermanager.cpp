@@ -50,7 +50,7 @@ namespace lib
 		{
 			for (auto node : m_renderList)
 			{
-
+				renderTarget.get()->draw(node->vertexArray());
 			}
 		}
 

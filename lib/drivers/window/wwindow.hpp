@@ -4,6 +4,7 @@
 #include <lib/include/types.hpp>
 #include <lib/core/rendertarget.hpp>
 #include <lib/core/data.hpp>
+#include <lib/draw/rendermanager.hpp>
 
 namespace lib
 {

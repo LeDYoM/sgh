@@ -16,7 +16,6 @@ namespace lib
 	{
 		class RenderNode;
 		class RenderStates;
-		typedef std::vector<const RenderNode*> RenderList;
 
 		class RenderManager : public AppService
 		{
@@ -35,9 +34,10 @@ namespace lib
 			void preRenderNode(const sptr<RenderNode> &, const RenderStates&);
 			void preRenderNode(const sptr<RenderNode> &);
 			void renderAll();
+			void renderOne(const sptr<RenderNode> &);
 
 		private:
-			 RenderList m_renderList;
+			std::vector<const RenderNode*> m_renderList;
 		};
 	}
 }

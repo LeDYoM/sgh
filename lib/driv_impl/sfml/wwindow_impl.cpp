@@ -2,7 +2,6 @@
 #include <lib/core/convops.hpp>
 #include <lib/core/window.hpp>
 #include <lib/include/key.hpp>
-#include <lib/draw/rendermanager.hpp>
 
 namespace lib
 {
@@ -121,15 +120,6 @@ namespace lib
 			{
 				return m_collectedEvents.size();
 			}
-
-			void SFMLWindow::drawAll(const draw::RenderList &list)
-			{
-				for (auto node : m_renderList)
-				{
-					renderTarget.get()->draw(node->vertexArray());
-				}
-			}
-
 		}
 	}
 }

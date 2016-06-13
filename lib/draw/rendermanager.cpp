@@ -6,6 +6,16 @@
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/driver.hpp>
 
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Shader.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
+//#include <SFML/Graphics/GLCheck.hpp>
+#include <SFML/System/Err.hpp>
+#include <cassert>
+#include <iostream>
+
 namespace lib
 {
 	namespace draw
@@ -50,19 +60,28 @@ namespace lib
 
 		void RenderManager::renderAll()
 		{
+			for (auto renderNode : m_renderList)
+			{
+
+			}
 //			service<Window>()->
 //			renderTarget.get()->
 //			appController()->driver()-> renderAll(m_renderList);
 		}
 
+		void RenderManager::renderOne(const RenderNode *node)
+		{
+
+		}
+
+		/*
 		void RenderManager::renderOne(const sptr<RenderNode> &node)
 		{
 			// Nothing to draw?
-			if (!vertices || (vertexCount == 0))
+			if (!node->vertexArray().getVertexCount())
 				return;
 
-
-			if (activate(true))
+			if (true)//renderTarget->activate(true))
 			{
 				// First set the persistent OpenGL states if it's the very first call
 				if (!m_cache.glStatesSet)
@@ -147,5 +166,6 @@ namespace lib
 				m_cache.useVertexCache = useVertexCache;
 			}
 		}
+		*/
 	}
 }

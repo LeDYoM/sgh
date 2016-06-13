@@ -34,7 +34,7 @@ namespace lib
 			void preRenderNode(const sptr<RenderNode> &, const RenderStates&);
 			void preRenderNode(const sptr<RenderNode> &);
 			void renderAll();
-			void renderOne(const sptr<RenderNode> &);
+			void renderOne(const RenderNode *);
 
 		private:
 			std::vector<const RenderNode*> m_renderList;

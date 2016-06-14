@@ -6,6 +6,7 @@
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/driver.hpp>
 
+#include <SFML/OpenGL.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Shader.hpp>
@@ -74,8 +75,23 @@ namespace lib
 
 		}
 
-		/*
-		void RenderManager::renderOne(const sptr<RenderNode> &node)
+		void popGLStates()
+		{
+			if (activate(true))
+			{
+				glCheck(glMatrixMode(GL_PROJECTION));
+				glCheck(glPopMatrix());
+				glCheck(glMatrixMode(GL_MODELVIEW));
+				glCheck(glPopMatrix());
+				glCheck(glMatrixMode(GL_TEXTURE));
+				glCheck(glPopMatrix());
+#ifndef SFML_OPENGL_ES
+				glCheck(glPopClientAttrib());
+				glCheck(glPopAttrib());
+#endif
+			}
+		}
+		void RenderManager::renderOne(const RenderNode *node)
 		{
 			// Nothing to draw?
 			if (!node->vertexArray().getVertexCount())

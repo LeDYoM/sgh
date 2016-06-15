@@ -17,6 +17,9 @@
 #include <cassert>
 #include <iostream>
 
+#define glCheck(x) x
+inline bool activate(const bool p) { return p; }
+
 namespace lib
 {
 	namespace draw
@@ -77,8 +80,8 @@ namespace lib
 
 		void popGLStates()
 		{
-			if (activate(true))
-			{
+//			if (activate(true))
+//			{
 				glCheck(glMatrixMode(GL_PROJECTION));
 				glCheck(glPopMatrix());
 				glCheck(glMatrixMode(GL_MODELVIEW));
@@ -89,7 +92,7 @@ namespace lib
 				glCheck(glPopClientAttrib());
 				glCheck(glPopAttrib());
 #endif
-			}
+//			}
 		}
 		void RenderManager::renderOne(const RenderNode *node)
 		{
@@ -100,10 +103,11 @@ namespace lib
 			if (true)//renderTarget->activate(true))
 			{
 				// First set the persistent OpenGL states if it's the very first call
-				if (!m_cache.glStatesSet)
-					resetGLStates();
+//				if (!m_cache.glStatesSet)
+//					resetGLStates();
 
 				// Check if the vertex count is low enough so that we can pre-transform them
+				/*
 				bool useVertexCache = (vertexCount <= StatesCache::VertexCacheSize);
 				if (useVertexCache)
 				{
@@ -121,12 +125,12 @@ namespace lib
 						applyTransform(Transform::Identity);
 				}
 				else
-				{
+				{*/
 					applyTransform(states.transform);
-				}
+//				}
 
 				// Apply the view
-				if (m_cache.viewChanged)
+//				if (m_cache.viewChanged)
 					applyCurrentView();
 
 				// Apply the blend mode

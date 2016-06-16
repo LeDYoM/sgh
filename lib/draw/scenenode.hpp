@@ -14,7 +14,7 @@ namespace lib
 		class RenderGroup;
 		class IAnimation;
 
-		class SceneNode : public IParentable<RenderGroup>, public Transformable, public virtual Object
+		class SceneNode : public Transformable, public virtual Object
 		{
 		public:
 			SceneNode(const str &name);

@@ -190,7 +190,7 @@ namespace lib
 
 		void NodeShape::updateTexCoords()
 		{
-			for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i)
+			for (std::size_t i = 0; i < m_vertices.size(); ++i)
 			{
 				float xratio = m_bounds.width > 0 ? (m_vertices[i].position.x - m_bounds.left) / m_bounds.width : 0;
 				float yratio = m_bounds.height > 0 ? (m_vertices[i].position.y - m_bounds.top) / m_bounds.height : 0;

@@ -145,7 +145,7 @@ namespace lib
 					}
 
 					if (auto drawableNode = as<RenderNode>(node)) {
-						if (drawableNode->vertexArray().getVertexCount() > 0) {
+						if (drawableNode->vertexArray().size() > 0) {
 							//rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
 							service<RenderManager>()->preRenderNode(drawableNode, rStates);
 						}

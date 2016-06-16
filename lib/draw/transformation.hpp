@@ -20,6 +20,7 @@ namespace lib
 
 			Transformation(const Transformation &) = default;
 			const TransformationDataType &matrix() const;
+			TransformationDataType::const_pointer data() const { return m_matrix.data(); }
 			Transformation inverse() const;
 			vector2df transformPoint(const vector2df &point) const;
 			Rectf32 transformRect(const Rectf32 &rectangle) const;

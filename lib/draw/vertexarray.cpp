@@ -12,11 +12,6 @@ namespace lib
 		VertexArray::VertexArray(const PrimitiveType type, const std::size_t vertexCount)
 			: m_vertices( vertexCount ), m_primitiveType{ type } {}
 
-		std::size_t VertexArray::getVertexCount() const
-		{
-			return m_vertices.size();
-		}
-
 		Vertex &VertexArray::operator [](const std::size_t index)
 		{
 			return m_vertices[index];

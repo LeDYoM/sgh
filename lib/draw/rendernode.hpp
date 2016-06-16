@@ -17,6 +17,19 @@ namespace lib
 	namespace draw
 	{
 		class RenderGroup;
+		enum class BlendType : u32
+		{
+			Zero,
+			One,
+			SrcColor,
+			OneMinusSrcColor,
+			DstColor,
+			OneMinusDstColor,
+			SrcAlpha,
+			OneMinusSrcAlpha,
+			DstAlpha,
+			OneMinusDstAlpha,
+		};
 		class RenderNode : public SceneNode
 		{
 		public:

@@ -1,4 +1,5 @@
 #include "rendermanager.hpp"
+#include "transformation.hpp"
 #include <lib/core/log.hpp>
 #include "renderstates.hpp"
 #include "rendernode.hpp"
@@ -17,13 +18,56 @@
 #include <cassert>
 #include <iostream>
 
-#define glCheck(x) x
+//#define glCheck(x) x
+#define glCheck(x)
+
 inline bool activate(const bool p) { return p; }
 
 namespace lib
 {
 	namespace draw
 	{
+
+		namespace
+		{
+			// Convert an :BlendMode constant to the corresponding OpenGL constant.
+			inline const u32 factorToGlConstant(const BlendType blendFactor)
+			{
+				switch (blendFactor)
+				{
+				case BlendType::Zero:             return GL_ZERO;
+				case BlendType::One:              return GL_ONE;
+				case BlendType::SrcColor:         return GL_SRC_COLOR;
+				case BlendType::OneMinusSrcColor: return GL_ONE_MINUS_SRC_COLOR;
+				case BlendType::DstColor:         return GL_DST_COLOR;
+				case BlendType::OneMinusDstColor: return GL_ONE_MINUS_DST_COLOR;
+				case BlendType::SrcAlpha:         return GL_SRC_ALPHA;
+				case BlendType::OneMinusSrcAlpha: return GL_ONE_MINUS_SRC_ALPHA;
+				case BlendType::DstAlpha:         return GL_DST_ALPHA;
+				case BlendType::OneMinusDstAlpha: return GL_ONE_MINUS_DST_ALPHA;
+				default:
+					LOG_ERROR("Invalid value for BlendType.");
+					return GL_ZERO;
+				}
+			}
+
+			// Convert an :BlendMode constant to the corresponding OpenGL constant.
+			inline const GLenum primitiveToGlConstant(const PrimitiveType primitiveType)
+			{
+				switch (primitiveType)
+				{
+				case PrimitiveType::Points:             return GL_POINTS;
+				case PrimitiveType::Lines:              return GL_LINES;
+				case PrimitiveType::LinesStrip:         return GL_LINE_STRIP;
+				case PrimitiveType::Triangles:			return GL_TRIANGLES;
+				case PrimitiveType::TrianglesStrip:     return GL_TRIANGLE_STRIP;
+				case PrimitiveType::TrianglesFan:		return GL_TRIANGLE_FAN;
+				default:
+					LOG_ERROR("Invalid value for PrimitiveType");
+					return GL_POINTS;
+				}
+			}
+		}
 
 		RenderManager::RenderManager()
 		{
@@ -66,16 +110,11 @@ namespace lib
 		{
 			for (auto renderNode : m_renderList)
 			{
-
+				renderOne(renderNode);
 			}
 //			service<Window>()->
 //			renderTarget.get()->
 //			appController()->driver()-> renderAll(m_renderList);
-		}
-
-		void RenderManager::renderOne(const RenderNode *node)
-		{
-
 		}
 
 		void popGLStates()
@@ -94,98 +133,30 @@ namespace lib
 #endif
 //			}
 		}
+
+		void applyTransform(const Transformation& transform)
+		{
+			glCheck(glLoadMatrixf(transform.data()));
+		}
+
 		void RenderManager::renderOne(const RenderNode *node)
 		{
-			// Nothing to draw?
-			if (!node->vertexArray().getVertexCount())
+			if (!node->vertexArray().size())
 				return;
 
-			if (true)//renderTarget->activate(true))
-			{
-				// First set the persistent OpenGL states if it's the very first call
-//				if (!m_cache.glStatesSet)
-//					resetGLStates();
+			applyTransform(node->globalTransformation());
+//			applyCurrentView();
 
-				// Check if the vertex count is low enough so that we can pre-transform them
-				/*
-				bool useVertexCache = (vertexCount <= StatesCache::VertexCacheSize);
-				if (useVertexCache)
-				{
-					// Pre-transform the vertices and store them into the vertex cache
-					for (std::size_t i = 0; i < vertexCount; ++i)
-					{
-						Vertex& vertex = m_cache.vertexCache[i];
-						vertex.position = states.transform * vertices[i].position;
-						vertex.color = vertices[i].color;
-						vertex.texCoords = vertices[i].texCoords;
-					}
+			auto textureId = node->texture() ? node->texture() : 0;
+//			applyTexture(textureId);
+			const char* data = reinterpret_cast<const char*>(node->vertexArray().data());
+			glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), data + 0));
+			glCheck(glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex), data + sizeof(GLfloat)*2/*8*/));
+			glCheck(glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), data + (sizeof(GLfloat) * 2) + (sizeof(GLubyte)*4) /*+12*/));
 
-					// Since vertices are transformed, we must use an identity transform to render them
-					if (!m_cache.useVertexCache)
-						applyTransform(Transform::Identity);
-				}
-				else
-				{*/
-					applyTransform(states.transform);
-//				}
-
-				// Apply the view
-//				if (m_cache.viewChanged)
-					applyCurrentView();
-
-				// Apply the blend mode
-				if (states.blendMode != m_cache.lastBlendMode)
-					applyBlendMode(states.blendMode);
-
-				// Apply the texture
-				Uint64 textureId = states.texture ? states.texture->m_cacheId : 0;
-				if (textureId != m_cache.lastTextureId)
-					applyTexture(states.texture);
-
-				// Apply the shader
-				if (states.shader)
-					applyShader(states.shader);
-
-				// If we pre-transform the vertices, we must use our internal vertex cache
-				if (useVertexCache)
-				{
-					// ... and if we already used it previously, we don't need to set the pointers again
-					if (!m_cache.useVertexCache)
-						vertices = m_cache.vertexCache;
-					else
-						vertices = NULL;
-				}
-
-				// Setup the pointers to the vertices' components
-				if (vertices)
-				{
-					const char* data = reinterpret_cast<const char*>(vertices);
-					glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), data + 0));
-					glCheck(glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex), data + 8));
-					glCheck(glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), data + 12));
-				}
-
-				// Find the OpenGL primitive type
-				static const GLenum modes[] = { GL_POINTS, GL_LINES, GL_LINE_STRIP, GL_TRIANGLES,
-					GL_TRIANGLE_STRIP, GL_TRIANGLE_FAN, GL_QUADS };
-				GLenum mode = modes[type];
-
-				// Draw the primitives
-				glCheck(glDrawArrays(mode, 0, vertexCount));
-
-				// Unbind the shader, if any
-				if (states.shader)
-					applyShader(NULL);
-
-				// If the texture we used to draw belonged to a RenderTexture, then forcibly unbind that texture.
-				// This prevents a bug where some drivers do not clear RenderTextures properly.
-				if (states.texture && states.texture->m_fboAttachment)
-					applyTexture(NULL);
-
-				// Update the cache
-				m_cache.useVertexCache = useVertexCache;
-			}
+			// Draw the primitives
+			glCheck(glDrawArrays(primitiveToGlConstant(node->vertexArray().getPrimitiveType()), 0, node->vertexArray().size()));
+//			applyTexture(NULL);
 		}
-		*/
 	}
 }

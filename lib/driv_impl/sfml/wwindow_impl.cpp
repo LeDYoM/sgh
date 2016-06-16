@@ -63,7 +63,7 @@ namespace lib
 
 			void SFMLWindow::draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states)
 			{
-				sf::RenderWindow::draw(convert(vertexArray), vertexArray.getVertexCount(), convert(vertexArray.getPrimitiveType()), convert(states));
+				sf::RenderWindow::draw(convert(vertexArray), vertexArray.size(), convert(vertexArray.getPrimitiveType()), convert(states));
 			}
 
 			void SFMLWindow::setViewRectangle(const Rectf32 &rect)

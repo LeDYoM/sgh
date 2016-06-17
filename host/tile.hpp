@@ -8,7 +8,7 @@ namespace zoper
 	class Tile : public GameBaseTile
 	{
 	public:
-		explicit Tile(lib::board::BoardTileData data, const lib::vector2df &size);
+		explicit Tile(lib::draw::RenderGroup *const p_parent, lib::board::BoardTileData data, const lib::vector2df &size);
 		Tile(const Tile &other) = delete;
 		virtual ~Tile();
 

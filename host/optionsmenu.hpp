@@ -12,7 +12,7 @@ namespace zoper
 		class OptionsMenu : public lib::menu::MenuStep, public lib::Configuration
 		{
 		public:
-			OptionsMenu();
+			OptionsMenu(lib::draw::RenderGroup *const p_parent);
 			virtual ~OptionsMenu();
 			virtual bool init() override;
 

@@ -11,7 +11,7 @@ namespace zoper
 		class KeyRedefinitionMenu : public lib::menu::MenuStep
 		{
 		public:
-			KeyRedefinitionMenu();
+			KeyRedefinitionMenu(lib::draw::RenderGroup *const p_parent);
 			virtual ~KeyRedefinitionMenu();
 			virtual bool init() override;
 

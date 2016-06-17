@@ -13,8 +13,8 @@ namespace zoper
 {
 	namespace zmenu
 	{
-		KeyRedefinitionMenu::KeyRedefinitionMenu()
-			: lib::menu::MenuStep{ "KeyRedefinitionMenu" }
+		KeyRedefinitionMenu::KeyRedefinitionMenu(lib::draw::RenderGroup *const p_parent)
+			: lib::menu::MenuStep{ p_parent, "KeyRedefinitionMenu" }
 		{
 		}
 

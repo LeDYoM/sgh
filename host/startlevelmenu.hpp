@@ -12,7 +12,7 @@ namespace zoper
 		class StartLevelMenu : public lib::menu::MenuStep, public lib::Configuration
 		{
 		public:
-			StartLevelMenu();
+			StartLevelMenu(lib::draw::RenderGroup *const p_parent);
 			virtual ~StartLevelMenu();
 			virtual bool init() override;
 

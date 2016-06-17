@@ -27,10 +27,10 @@ namespace zoper
 		{
 			_background = createSpriteShape("background");
 
-			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::MainMenu));
-			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::OptionsMenu));
-			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::KeyRedefinitionMenu));
-			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::StartLevelMenu));
+			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::MainMenu(this)));
+			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::OptionsMenu(this)));
+			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::KeyRedefinitionMenu(this)));
+			addMenuStep(lib::sptr<lib::menu::MenuStep>(new zoper::zmenu::StartLevelMenu(this)));
 
 			_logo = createSpriteShape("mainLogo");
 			_logo->setTexture(resourceManager()->getResource("game_menu.logo")->getAsTexture(), true, false);

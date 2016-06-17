@@ -12,8 +12,8 @@ namespace zoper
 {
 	namespace zmenu
 	{
-		StartLevelMenu::StartLevelMenu()
-			: lib::menu::MenuStep{ "StartLevelMenu" }
+		StartLevelMenu::StartLevelMenu(lib::draw::RenderGroup *const p_parent)
+			: lib::menu::MenuStep{ p_parent, "StartLevelMenu" }
 		{
 		}
 
@@ -43,7 +43,7 @@ namespace zoper
 						break;
 					}
 				};
-				_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl("optionsmenu_chooseControl",
+				_chooseControl = lib::sptr<lib::menu::ChooseControl>(new lib::menu::ChooseControl(this, "optionsmenu_chooseControl",
 					menuManager()->resourceManager()->getResource("game_menu.mainFont"), lib::draw::Color::Blue(), lib::draw::Color::Red(),
 					lib::draw::Alignment::Left,
 					70, 1,

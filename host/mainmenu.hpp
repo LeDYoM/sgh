@@ -12,7 +12,7 @@ namespace zoper
 		class MainMenu : public lib::menu::MenuStep
 		{
 		public:
-			MainMenu();
+			MainMenu(lib::draw::RenderGroup *const p_parent);
 			virtual ~MainMenu();
 
 			virtual bool init() override;

@@ -3,8 +3,8 @@
 
 namespace zoper
 {
-	Player::Player(const lib::vector2du32 &bPosition, const lib::vector2df &size)
-		: GameBaseTile{ 0, size, "player" },
+	Player::Player(lib::draw::RenderGroup *const p_parent, const lib::vector2du32 &bPosition, const lib::vector2df &size)
+		: GameBaseTile{ p_parent, 0, size, "player" },
 		playerDirection{ Direction::Up }
 	{
 		setPointCount(3);

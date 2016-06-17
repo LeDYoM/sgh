@@ -11,9 +11,9 @@ namespace lib
 {
 	namespace menu
 	{
-		SimpleMenu::SimpleMenu(const str &name, const draw::Alignment alignment,
+		SimpleMenu::SimpleMenu(RenderGroup *const p_parent, const str &name, const draw::Alignment alignment,
 			std::function<void(const u32, SimpleMenu &self)> onSelected)
-			: IMenuControl{ name  }, _onSelected {onSelected}, m_textGroup{ }
+			: IMenuControl{ p_parent, name  }, _onSelected {onSelected}, m_textGroup{ }
 		{
 			alignment;
 		}

@@ -14,7 +14,7 @@ namespace lib
 		class TextGroup : public RenderGroup
 		{
 		public:
-			TextGroup(const str &name);
+			TextGroup(RenderGroup *const p_parent, const str &name);
 			virtual ~TextGroup();
 
 			virtual bool init() override;

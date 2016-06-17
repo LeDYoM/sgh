@@ -33,7 +33,7 @@ namespace lib
 		class RenderNode : public SceneNode
 		{
 		public:
-			explicit RenderNode(const std::string &name, const PrimitiveType primitiveType);
+			explicit RenderNode(RenderGroup *const p_parent, const std::string &name, const PrimitiveType primitiveType);
 			virtual ~RenderNode();
 
 			virtual u32 draw() = 0;

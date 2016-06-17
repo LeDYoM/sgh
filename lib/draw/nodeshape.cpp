@@ -13,8 +13,8 @@ namespace lib
 {
 	namespace draw
 	{
-		NodeShape::NodeShape(const std::string &name, const vector2df& size, const u32 pointCount, const NodeMode mode)
-			: RenderNode{ name, PrimitiveType::TrianglesFan }, _mode{ mode }, m_texture{ nullptr }, m_textureRect{},
+		NodeShape::NodeShape(RenderGroup *const p_parent, const std::string &name, const vector2df& size, const u32 pointCount, const NodeMode mode)
+			: RenderNode{ p_parent, name, PrimitiveType::TrianglesFan }, _mode{ mode }, m_texture{ nullptr }, m_textureRect{},
 			_size{ size }, m_pointCount{ pointCount }
 		{
 			ensureGeometryUpdate();

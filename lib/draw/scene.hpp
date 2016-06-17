@@ -22,7 +22,7 @@ namespace lib
 		}
 		class SceneManager;
 
-		class Scene : public draw::RenderGroup, public InputReceiverNode
+		class Scene : public RenderGroup, public InputReceiverNode
 		{
 		public:
 			Scene(const std::string &_name);

@@ -6,8 +6,8 @@ namespace lib
 {
 	namespace draw
 	{
-		RenderNode::RenderNode(const std::string &name, const PrimitiveType primitiveType)
-			: SceneNode(name), m_vertices{ primitiveType }, m_bounds{}, 
+		RenderNode::RenderNode(RenderGroup *const p_parent, const std::string &name, const PrimitiveType primitiveType)
+			: SceneNode(p_parent, name), m_vertices{ primitiveType }, m_bounds{}, 
 			color{ Color{ 255, 255, 255 } }, 
 			m_geometryNeedUpdate{ true }
 		{

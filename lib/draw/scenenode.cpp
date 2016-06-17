@@ -6,7 +6,8 @@ namespace lib
 {
 	namespace draw
 	{
-		SceneNode::SceneNode(const str &name) : m_name( name ) {}
+		SceneNode::SceneNode(RenderGroup *const p_parent, const str &name)
+			: m_parent{ p_parent }, m_name(name), Object{ p_parent } {}
 		
 		bool SceneNode::init()
 		{

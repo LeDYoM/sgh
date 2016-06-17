@@ -4,8 +4,6 @@
 #include <lib/include/types.hpp>
 #include "scenenode.hpp"
 #include <lib/core/vecsptr.hpp>
-#include "iparentable.hpp"
-
 #include <functional>
 
 namespace lib
@@ -23,7 +21,7 @@ namespace lib
 		class RenderGroup : public SceneNode
 		{
 		public:
-			RenderGroup(const std::string &name);
+			RenderGroup(RenderGroup *const p_parent, const std::string &name);
 			virtual ~RenderGroup();
 
 			virtual bool init() override;
@@ -37,7 +35,7 @@ namespace lib
 			sptr<RenderGroup> createNewRenderGroup(const std::string &name, sptr<SceneNode> beforeNode = nullptr);
 			template <class T> sptr<T> createNewRenderGroupOf(const std::string &name, sptr<SceneNode> beforeNode = nullptr)
 			{
-				sptr<T> t{ new T(name) };
+				sptr<T> t{ new T(this, name) };
 				addNode(t, beforeNode);
 				return t;
 			}

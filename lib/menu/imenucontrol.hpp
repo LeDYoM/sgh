@@ -15,7 +15,7 @@ namespace lib
 		{
 		public:
 
-			IMenuControl(const std::string &name) : lib::draw::RenderGroup(name) {}
+			IMenuControl(RenderGroup *const p_parent, const std::string &name) : lib::draw::RenderGroup(p_parent, name) {}
 			virtual ~IMenuControl() {}
 			virtual void onKeyPressed(lib::Key key) = 0;
 			virtual void onKeyReleased(lib::Key key) = 0;

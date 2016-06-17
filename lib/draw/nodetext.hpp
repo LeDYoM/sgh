@@ -30,8 +30,8 @@ namespace lib
 				StrikeThrough = 1 << 3
 			};
 
-			NodeText(const std::string &name);
-			NodeText(const std::string &name, const sf::String& string, const sf::Font& font, u32 characterSize = 30);
+			NodeText(RenderGroup *const p_parent, const std::string &name);
+			NodeText(RenderGroup *const p_parent, const std::string &name, const sf::String& string, const sf::Font& font, u32 characterSize = 30);
 			virtual ~NodeText();
 			void setString(const std::string &string);
 			void setFont(const sf::Font& font);

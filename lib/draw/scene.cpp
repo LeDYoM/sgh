@@ -12,7 +12,7 @@ namespace lib
 {
 	namespace draw
 	{
-		Scene::Scene(const std::string &_name) : RenderGroup{ _name }
+		Scene::Scene(const std::string &_name) : RenderGroup{ nullptr, _name }
 		{
 			LOG_CONSTRUCT("Name: " + name());
 		}

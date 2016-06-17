@@ -5,8 +5,8 @@ namespace lib
 {
 	namespace menu
 	{
-		MenuStep::MenuStep(const std::string &name)
-			: RenderGroup(name)
+		MenuStep::MenuStep(RenderGroup *const p_parent, const std::string &name)
+			: RenderGroup(p_parent, name)
 		{
 		}
 

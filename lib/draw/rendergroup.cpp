@@ -10,8 +10,8 @@ namespace lib
 {
 	namespace draw
 	{
-		RenderGroup::RenderGroup(const std::string &name)
-			: SceneNode(name) {}
+		RenderGroup::RenderGroup(RenderGroup *const p_parent, const std::string &name)
+			: SceneNode(p_parent, name) {}
 
 		RenderGroup::~RenderGroup()
 		{
@@ -25,21 +25,21 @@ namespace lib
 
 		sptr<NodeText> RenderGroup::createText(const std::string &name)
 		{
-			auto result = sptr<NodeText>{new NodeText(name)};
+			auto result = sptr<NodeText>{new NodeText(this, name)};
 			addNode(result);
 			return result;
 		}
 
 		sptr<NodeShape> RenderGroup::createShape(const std::string &name, const lib::vector2df &radius/*=lib::vector2df()*/, u32 pointCount/*=30*/)
 		{
-			auto result = sptr<NodeShape>(new NodeShape(name,radius,pointCount));
+			auto result = sptr<NodeShape>(new NodeShape(this, name,radius,pointCount));
 			addNode(result);
 			return result;
 		}
 
 		sptr<NodeShape> RenderGroup::createSpriteShape(const std::string &name, const lib::vector2df &radius /*= lib::vector2df()*/)
 		{
-			auto result = sptr<NodeShape>(new NodeShape(name,radius, 4,NodeShape::NodeMode::Sprite));
+			auto result = sptr<NodeShape>(new NodeShape(this, name,radius, 4,NodeShape::NodeMode::Sprite));
 			addNode(result);
 			return result;
 		}
@@ -47,7 +47,6 @@ namespace lib
 		sptr<SceneNode> RenderGroup::addNode(sptr<SceneNode> newElement, sptr<SceneNode> beforeNode)
 		{
 			__ASSERT(newElement, "Trying to add nullptr node");
-			newElement->setParent(this);
 			if (!beforeNode)
 			{
 				_renderNodes.push_back(newElement);
@@ -75,7 +74,7 @@ namespace lib
 
 		sptr<RenderGroup> RenderGroup::createNewRenderGroup(const std::string & name, sptr<SceneNode> beforeNode)
 		{
-			sptr<RenderGroup> rg = sptr<RenderGroup>{ new RenderGroup(name) };
+			sptr<RenderGroup> rg = sptr<RenderGroup>{ new RenderGroup(this, name) };
 			addNode(rg, beforeNode);
 			return rg;
 		}
@@ -97,8 +96,8 @@ namespace lib
 
 		lib::draw::Scene *const RenderGroup::parentScene()
 		{
-			__ASSERT(m_parent, "Error getting parent scene: nullptr parent");
-			return m_parent->parentScene();
+			__ASSERT(parent(), "Error getting parent scene: nullptr parent");
+			return parent()->parentScene();
 		}
 
 		void RenderGroup::for_each_renderNode(std::function<void(sptr<SceneNode> node)> f)

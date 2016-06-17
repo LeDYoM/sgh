@@ -10,14 +10,15 @@ namespace lib
 {
 	namespace menu
 	{
-		ChooseControl::ChooseControl(const std::string &name, sptr<Resource> font, 
+		ChooseControl::ChooseControl(RenderGroup *const p_parent, const std::string &name, sptr<Resource> font,
 			const lib::draw::Color &textColor, const lib::draw::Color &selectedTextColor,
 			const draw::Alignment alignment,
 			u32 chSize,float incY,
 			std::function<void(const u32, ChooseControl &self)> onSelected,
 			sptr<CursorDescriptor> cursorDescriptor, 
 			const std::vector<sptr<OptionDescriptor>> labels)
-			: IMenuControl{ name }, _textColor{ textColor }, _selectedTextColor{ selectedTextColor }, _onSelected {onSelected}
+			: IMenuControl{ p_parent, name }, _textColor{ textColor }, 
+			_selectedTextColor{ selectedTextColor }, _onSelected {onSelected}
 		{
 			descriptorCursorSize = cursorDescriptor->_size;
 			_cursor = createShape("cursor");

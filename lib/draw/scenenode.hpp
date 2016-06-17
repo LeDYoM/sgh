@@ -14,10 +14,10 @@ namespace lib
 		class RenderGroup;
 		class IAnimation;
 
-		class SceneNode : public IParentable<RenderGroup>, public Transformable, public virtual Object
+		class SceneNode : public Transformable, public Object
 		{
 		public:
-			SceneNode(const str &name);
+			SceneNode(RenderGroup *const p_parent, const str &name);
 			virtual bool init();
 			virtual ~SceneNode();
 
@@ -31,9 +31,13 @@ namespace lib
 			void addAnimation(sptr<IAnimation> nanimation);
 			void updateAnimations();
 
+			const RenderGroup *const parent() const { return m_parent; }
+			RenderGroup *parent() { return m_parent; }
+
 		private:
 			bool m_active{ true };
 			bool m_visible{ true };
+			RenderGroup *m_parent;
 			str m_name;
 			VecSPtr<IAnimation> _animations;
 			std::vector<sptr<IAnimation>> _animationsToDelete;

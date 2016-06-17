@@ -18,13 +18,14 @@ namespace lib
 	namespace draw
 	{
 		class TextGroup;
+		class RenderGroup;
 	}
 	namespace menu
 	{
 		class SimpleMenu : public IMenuControl
 		{
 		public:
-			SimpleMenu(const str &name, const draw::Alignment alignment,
+			SimpleMenu(draw::RenderGroup *const p_parent, const str &name, const draw::Alignment alignment,
 				std::function<void(const u32, SimpleMenu &self)> onSelected);
 			virtual ~SimpleMenu();
 

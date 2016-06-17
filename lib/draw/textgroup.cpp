@@ -16,8 +16,8 @@ namespace lib
 			draw::Color m_color;
 		};
 
-		TextGroup::TextGroup(const str &name)
-			: RenderGroup{ name }, m_private{ sptr<TextGroupPrivate>(new TextGroupPrivate) }
+		TextGroup::TextGroup(RenderGroup *const p_parent, const str &name)
+			: RenderGroup{ p_parent, name }, m_private{ sptr<TextGroupPrivate>(new TextGroupPrivate) }
 		{
 		}
 

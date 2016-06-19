@@ -4,13 +4,10 @@
 
 namespace zoper
 {
-	KeyMapping::KeyMapping()
-	{
-	}
+	KeyMapping::KeyMapping(lib::Object *const obj)
+		: lib::Object{ obj } {}
 
-	KeyMapping::~KeyMapping()
-	{
-	}
+	KeyMapping::~KeyMapping() {}
 
 	void KeyMapping::init()
 	{

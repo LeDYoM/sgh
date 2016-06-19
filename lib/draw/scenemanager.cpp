@@ -40,7 +40,6 @@ namespace lib
 		{
 			__ASSERT(newScene, "Cannot add a null scene");
 			_scenes.push_back(newScene);
-			newScene->setProvider(this);
 			newScene->init();
 		}
 	

@@ -11,7 +11,6 @@ namespace lib
 		
 		bool SceneNode::init()
 		{
-			setProvider(parent());
 			return true;
 		}
 		

@@ -11,7 +11,7 @@ namespace zoper
 	class KeyMapping : public lib::Object
 	{
 	public:
-		KeyMapping();
+		KeyMapping(lib::Object *const obj);
 		virtual ~KeyMapping();
 
 		void init();

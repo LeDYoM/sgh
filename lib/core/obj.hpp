@@ -17,7 +17,6 @@ namespace lib
 		Object(core::AppController *app);
 
 		void setProvider(core::AppController *app);
-		void setProvider(Object *obj);
 		virtual ~Object();
 
 		template <class T> sptr<T> service() const

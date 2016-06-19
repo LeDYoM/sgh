@@ -25,8 +25,8 @@ using namespace lib;
 
 namespace zoper
 {
-	GameScene::GameScene()
-		: Scene("GameScene")
+	GameScene::GameScene(lib::draw::SceneManager *const pSceneManager)
+		: Scene(pSceneManager, "GameScene")
 	{
 		_gameData.size.x = 18;
 		_gameData.size.y = 12;
@@ -45,8 +45,8 @@ namespace zoper
 	{
 		if (Scene::init())
 		{
-			m_keyMapping.setProvider(this);
-			m_keyMapping.init();
+			m_keyMapping = lib::uptr<KeyMapping>(new KeyMapping(this));
+			m_keyMapping->init();
 			_mainBoardrg = this->createNewRenderGroup("mainBoard");
 			_gameOverrg = this->createNewRenderGroup("gameOverScreen");
 			_scorerg = this->createNewRenderGroup("score");
@@ -429,17 +429,17 @@ namespace zoper
 		{
 		case Playing:
 		{
-			auto dir = m_keyMapping.getDirectionFromKey(key.kCode);
+			auto dir = m_keyMapping->getDirectionFromKey(key.kCode);
 			if (dir.isValid())
 			{
 				p_player->setCurrentDirection(dir);
 				movePlayer(dir);
 			}
-			else if (m_keyMapping.isLaunchKey(key.kCode))
+			else if (m_keyMapping->isLaunchKey(key.kCode))
 			{
 				launchPlayer();
 			}
-			else if (m_keyMapping.isPauseKey(key.kCode))
+			else if (m_keyMapping->isPauseKey(key.kCode))
 			{
 				switchPause();
 			}
@@ -449,7 +449,7 @@ namespace zoper
 			setNextScene("MenuScene");
 			break;
 		case Pause:
-			if (m_keyMapping.isPauseKey(key.kCode))
+			if (m_keyMapping->isPauseKey(key.kCode))
 			{
 				switchPause();
 			}

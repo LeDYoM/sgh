@@ -14,14 +14,9 @@ namespace zoper
 	namespace zmenu
 	{
 		KeyRedefinitionMenu::KeyRedefinitionMenu(lib::draw::RenderGroup *const p_parent)
-			: lib::menu::MenuStep{ p_parent, "KeyRedefinitionMenu" }
-		{
-		}
+			: lib::menu::MenuStep{ p_parent, "KeyRedefinitionMenu" }, m_keyMapping{ new KeyMapping{this} } {}
 
-
-		KeyRedefinitionMenu::~KeyRedefinitionMenu()
-		{
-		}
+		KeyRedefinitionMenu::~KeyRedefinitionMenu() {}
 
 		bool KeyRedefinitionMenu::init()
 		{
@@ -47,7 +42,7 @@ namespace zoper
 		void KeyRedefinitionMenu::onKeyPressed(lib::Key key)
 		{
 			lib::menu::MenuStep::onKeyPressed(key);
-			if (_keyMapping.setKey(_indexKey, key.kCode))
+			if (m_keyMapping->setKey(_indexKey, key.kCode))
 			{
 				++_indexKey;
 				setTextForKey();
@@ -64,7 +59,7 @@ namespace zoper
 			if (_indexKey >= KeyMapping::TotalKeys)
 			{
 				_indexKey = 0;
-				_keyMapping.apply();
+				m_keyMapping->apply();
 				menuManager()->changeStep("OptionsMenu");
 			}
 			else

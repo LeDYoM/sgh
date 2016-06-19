@@ -14,7 +14,7 @@ namespace lib
 		class MenuManager : public draw::Scene
 		{
 		public:
-			MenuManager(const std::string &name);
+			MenuManager(draw::SceneManager *const pSceneManager, const std::string &name);
 			virtual ~MenuManager();
 
 			virtual bool init() override;

@@ -25,7 +25,7 @@ namespace lib
 		class Scene : public RenderGroup, public InputReceiverNode
 		{
 		public:
-			Scene(const std::string &_name);
+			Scene(SceneManager *const pSceneManager, const std::string &_name);
 			virtual ~Scene();
 
 			virtual void onEnterScene() = 0;

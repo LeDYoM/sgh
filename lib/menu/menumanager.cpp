@@ -7,8 +7,8 @@ namespace lib
 {
 	namespace menu
 	{
-		MenuManager::MenuManager(const std::string &name)
-			: Scene{ name }
+		MenuManager::MenuManager(draw::SceneManager *const pSceneManager, const std::string &name)
+			: Scene{ pSceneManager, name }
 		{
 			LOG_CONSTRUCT("Name: " + name);
 		}

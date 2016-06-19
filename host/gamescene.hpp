@@ -52,7 +52,7 @@ namespace zoper
 	class GameScene : public lib::draw::Scene, public lib::board::ITilesController
 	{
 	public:
-		GameScene();
+		GameScene(lib::draw::SceneManager *const pSceneManager);
 		virtual ~GameScene();
 
 		virtual bool init() override;
@@ -64,7 +64,7 @@ namespace zoper
 		virtual void update();
 
 	private:
-		KeyMapping m_keyMapping;
+		lib::uptr<KeyMapping> m_keyMapping;
 		void setLevel(const lib::u32 nv);
 		void updateLevelData();
 		void updateGoals();

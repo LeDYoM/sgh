@@ -11,15 +11,10 @@
 
 namespace zoper
 {
-	MenuScene::MenuScene()
-		: lib::menu::MenuManager("MenuScene")
-	{
-	}
+	MenuScene::MenuScene(lib::draw::SceneManager *const pSceneManager)
+		: lib::menu::MenuManager(pSceneManager, "MenuScene"), m_keyMapping{ this } {}
 
-
-	MenuScene::~MenuScene()
-	{
-	}
+	MenuScene::~MenuScene() {}
 
 	bool MenuScene::init()
 	{

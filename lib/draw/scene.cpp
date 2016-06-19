@@ -12,8 +12,9 @@ namespace lib
 {
 	namespace draw
 	{
-		Scene::Scene(const std::string &_name) : RenderGroup{ nullptr, _name }
+		Scene::Scene(SceneManager *const pSceneManager, const std::string &_name) : RenderGroup{ nullptr, _name }
 		{
+			setProvider(pSceneManager->appController());
 			LOG_CONSTRUCT("Name: " + name());
 		}
 
@@ -37,7 +38,6 @@ namespace lib
 			LOG_DEBUG("Initializing scene " << name());
 			if (RenderGroup::init())
 			{
-				setProvider(service<SceneManager>().get());
 				auto sceneSize = getDefaultSizeView();
 				m_camera.setSize(sceneSize);
 				updateView();

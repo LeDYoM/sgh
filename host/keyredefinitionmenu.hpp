@@ -23,7 +23,7 @@ namespace zoper
 			void setTextForKey();
 
 			lib::u32 _indexKey;
-			KeyMapping _keyMapping;
+			lib::uptr<KeyMapping> m_keyMapping;
 			lib::sptr<lib::draw::NodeText> _nextKeyText{ nullptr };
 		};
 	}

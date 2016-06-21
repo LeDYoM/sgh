@@ -12,7 +12,7 @@ namespace zoper
 	class MenuScene : public lib::menu::MenuManager
 	{
 	public:
-		MenuScene(lib::draw::SceneManager *const pSceneManager);
+		MenuScene(lib::PIAppContext piAppContext);
 		virtual ~MenuScene();
 
 		// Inherited via Scene

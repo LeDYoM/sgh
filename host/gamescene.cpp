@@ -25,8 +25,8 @@ using namespace lib;
 
 namespace zoper
 {
-	GameScene::GameScene(lib::draw::SceneManager *const pSceneManager)
-		: Scene(pSceneManager, "GameScene")
+	GameScene::GameScene(lib::PIAppContext piAppContext)
+		: Scene(piAppContext, "GameScene")
 	{
 		_gameData.size.x = 18;
 		_gameData.size.y = 12;

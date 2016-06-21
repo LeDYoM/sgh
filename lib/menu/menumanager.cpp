@@ -7,8 +7,8 @@ namespace lib
 {
 	namespace menu
 	{
-		MenuManager::MenuManager(draw::SceneManager *const pSceneManager, const std::string &name)
-			: Scene{ pSceneManager, name }
+		MenuManager::MenuManager(PIAppContext piAppContext, const std::string &name)
+			: Scene{ piAppContext, name }
 		{
 			LOG_CONSTRUCT("Name: " + name);
 		}

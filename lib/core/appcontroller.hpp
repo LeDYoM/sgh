@@ -3,6 +3,7 @@
 
 #include <lib/include/types.hpp>
 #include <lib/include/iapp.hpp>
+#include <lib/include/iappcontext.hpp>
 #include <lib/core/vecsptr.hpp>
 #include <vector>
 #include <string>
@@ -12,11 +13,17 @@ namespace lib
 	class AppService;
 	class ServicesManager;
 
+	class IAppContext
+	{
+	protected:
+		virtual ~IAppContext() {}
+	};
+
 	namespace core
 	{
 		class Driver;
 	
-		class AppController
+		class AppController : IAppContext
 		{
 		public:
 			enum class AppState
@@ -48,6 +55,8 @@ namespace lib
 
 			std::vector<uptr<AppService>> m_services;
 		};
+
+		AppController *toController(PIAppContext context);
 	}
 }
 

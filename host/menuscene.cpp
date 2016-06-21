@@ -11,8 +11,8 @@
 
 namespace zoper
 {
-	MenuScene::MenuScene(lib::draw::SceneManager *const pSceneManager)
-		: lib::menu::MenuManager(pSceneManager, "MenuScene"), m_keyMapping{ this } {}
+	MenuScene::MenuScene(lib::PIAppContext piAppContext)
+		: lib::menu::MenuManager(piAppContext, "MenuScene"), m_keyMapping{ this } {}
 
 	MenuScene::~MenuScene() {}
 

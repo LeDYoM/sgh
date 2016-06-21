@@ -12,9 +12,9 @@ namespace lib
 {
 	namespace draw
 	{
-		Scene::Scene(SceneManager *const pSceneManager, const std::string &_name) : RenderGroup{ nullptr, _name }
+		Scene::Scene(PIAppContext piAppContext, const std::string &_name) : RenderGroup{ nullptr, _name }
 		{
-			setProvider(pSceneManager->appController());
+			setProvider(core::toController(piAppContext));
 			LOG_CONSTRUCT("Name: " + name());
 		}
 

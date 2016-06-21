@@ -4,6 +4,7 @@
 #include <lib/core/compileconfig.hpp>
 #include <lib/include/types.hpp>
 #include <lib/include/key.hpp>
+#include <lib/include/iappcontext.hpp>
 #include <lib/core/timer.hpp>
 #include <lib/core/inputreceiver.hpp>
 #include "rendergroup.hpp"
@@ -25,7 +26,7 @@ namespace lib
 		class Scene : public RenderGroup, public InputReceiverNode
 		{
 		public:
-			Scene(SceneManager *const pSceneManager, const std::string &_name);
+			Scene(PIAppContext piAppContext, const std::string &_name);
 			virtual ~Scene();
 
 			virtual void onEnterScene() = 0;

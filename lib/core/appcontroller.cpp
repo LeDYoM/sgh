@@ -108,5 +108,9 @@ namespace lib
 			return "NoApp:0.0.0";
 		}
 
+		AppController * toController(PIAppContext context)
+		{
+			return dynamic_cast<AppController*>(context);
+		}
 	}
 }

@@ -20,6 +20,7 @@ namespace lib
 			: m_iapp{ std::move(iapp) }, m_driver{ driverInstance }, m_servicesManager{ new ServicesManager{ this } }
 		{
 			LOG_CONSTRUCT_NOPARAMS;
+			m_iapp->setAppContext(this);
 			LOG_DEBUG("Starting app " << appId() << "...");
 			m_state = AppState::ReadyToStart;
 		}

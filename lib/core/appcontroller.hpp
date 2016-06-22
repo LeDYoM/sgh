@@ -23,7 +23,7 @@ namespace lib
 	{
 		class Driver;
 	
-		class AppController : IAppContext
+		class AppController : public IAppContext
 		{
 		public:
 			enum class AppState

@@ -4,6 +4,7 @@
 #include "compconfig.hpp"
 #include "types.hpp"
 #include "wcp.hpp"
+#include "iappcontext.hpp"
 #include <string>
 #include <vector>
 
@@ -36,6 +37,10 @@ namespace lib
 		virtual void onInit() = 0;
 		virtual lib::VecSPtr<draw::Scene> scenesVector() = 0;
 		virtual int loop() = 0;
+		PIAppContext appContext() const { return m_iappContext; }
+		void setAppContext(PIAppContext appContext) { m_iappContext = appContext; }
+	private:
+		PIAppContext m_iappContext;
 	};
 }
 

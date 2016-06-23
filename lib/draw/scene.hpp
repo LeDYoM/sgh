@@ -23,7 +23,7 @@ namespace lib
 		}
 		class SceneManager;
 
-		class Scene : public RenderGroup, public InputReceiverNode
+		class LIB_API_EXPORT Scene : public RenderGroup, public InputReceiverNode
 		{
 		public:
 			Scene(PIAppContext piAppContext, const std::string &_name);

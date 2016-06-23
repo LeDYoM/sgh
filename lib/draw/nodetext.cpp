@@ -186,6 +186,7 @@ namespace lib
 		*/
 		void NodeText::setAlignment(Alignment alignment)
 		{
+			alignment;
 			//setPosition(position, alignment);
 		}
 

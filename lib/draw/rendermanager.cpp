@@ -30,7 +30,7 @@ namespace lib
 
 		namespace
 		{
-			// Convert an :BlendMode constant to the corresponding OpenGL constant.
+			// Convert a BlendMode constant to the corresponding OpenGL constant.
 			inline const u32 factorToGlConstant(const BlendType blendFactor)
 			{
 				switch (blendFactor)

@@ -10,9 +10,9 @@
 
 #include_directories ("${LIB_DIRECTORY}")
 
-#Temp. That should be here
+#Temp. That should not be here
 include_directories ("${PROJECT_SOURCE_DIR}/SFML/include")
-link_directories ("${PROJECT_SOURCE_DIR}/SFML/lib/win32/msvc")
+link_directories ("${PROJECT_SOURCE_DIR}/SFML/lib")
 #End temp.
 
 include_directories ("${PROJECT_SOURCE_DIR}")

@@ -29,15 +29,32 @@ file (GLOB LIB_BOARD_SOURCES "${LIB_DIRECTORY}board/*.cpp")
 file (GLOB_RECURSE LIB_HEADERS "${LIB_DIRECTORY}*.hpp")
 file (GLOB_RECURSE LIB_SOURCES "${LIB_DIRECTORY}*.cpp")
 
-#Add SFML directories
-link_directories ("${PROJECT_SOURCE_DIR}/SFML/lib/win32/msvc")
-include_directories ("${PROJECT_SOURCE_DIR}/SFML/include")
-include_directories ("../")
-#include_directories (${LIB_BASE_DIRECTORY})
+
+##############################################################################################
 
 set(CURRENT_TARGET sgh)
-
 add_library(${CURRENT_TARGET} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
+
+# Detect and add SFML
+message("CMAKE_SOURCE_DIR:" ${CMAKE_SOURCE_DIR})
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/SFML/cmake/Modules" ${CMAKE_MODULE_PATH})
+message("CMAKE_MODULE_PATH:" ${CMAKE_MODULE_PATH})
+#Find any version 2.X of SFML
+#See the FindSFML.cmake file for additional details and instructions
+find_package(SFML 2 REQUIRED system window graphics network audio)
+if(SFML_FOUND)
+  include_directories(${SFML_INCLUDE_DIR})
+  message("SFML_LIBRARIES:" ${SFML_LIBRARIES})
+  target_link_libraries(${CURRENT_TARGET} ${SFML_LIBRARIES})
+endif()
+
+#include myself
+include_directories ("../")
+
+#Add SFML directories
+#link_directories ("${PROJECT_SOURCE_DIR}/SFML/lib/win32/msvc")
+#include_directories ("${PROJECT_SOURCE_DIR}/SFML/include")
+#include_directories (${LIB_BASE_DIRECTORY})
 
 set(SGH_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 set(SGH_INSTALL_DIRECTORY ${CMAKE_BINARY_DIR}/install/)
@@ -72,17 +89,18 @@ source_group("lib\\drivers\\window" FILES ${LIB_DRIVERS_WINDOW_HEADERS})
 # For now, add SFML driver implementation
 source_group("lib\\driv_implementation\\sfml\\window" FILES ${LIB_DRIVERS_IMPLEMENTATION_SFML_WINDOW_HEADERS}  ${LIB_DRIVERS_IMPLEMENTATION_SFML_WINDOW_SOURCES})
 
-target_link_libraries(${CURRENT_TARGET} 
-	debug sfml-system-d
-	debug sfml-window-d
-	debug sfml-graphics-d
-	debug sfml-main-d
-	optimized sfml-system
-	optimized sfml-window
-	optimized sfml-graphics
-	optimized sfml-main
-)
-set (SFML_LINK_DLLS_DIR ${PROJECT_SOURCE_DIR}/SFML/shared/win32/msvc)
+#target_link_libraries(${CURRENT_TARGET} 
+#	debug sfml-system-d
+#	debug sfml-window-d
+#	debug sfml-graphics-d
+#	debug sfml-main-d
+#	optimized sfml-system
+#	optimized sfml-window
+#	optimized sfml-graphics
+#	optimized sfml-main
+#)
+
+#set (SFML_LINK_DLLS_DIR ${PROJECT_SOURCE_DIR}/SFML/shared/win32/msvc)
 
 add_custom_target(copy_zoper_data)
 	add_custom_command(TARGET copy_zoper_data PRE_BUILD
@@ -90,11 +108,11 @@ add_custom_target(copy_zoper_data)
 		${PROJECT_SOURCE_DIR}/zoper/data/
 		${SGH_OUTPUT_DIRECTORY})
 
-add_custom_target(copy_sfml_dlls)
-	add_custom_command(TARGET copy_sfml_dlls PRE_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-		${SFML_LINK_DLLS_DIR}
-		${SGH_OUTPUT_DIRECTORY})
+#add_custom_target(copy_sfml_dlls)
+#	add_custom_command(TARGET copy_sfml_dlls PRE_BUILD
+#		COMMAND ${CMAKE_COMMAND} -E copy_directory
+#		${SFML_LINK_DLLS_DIR}
+#		${SGH_OUTPUT_DIRECTORY})
 
 if (MSVC)
 	file( WRITE "${CMAKE_CURRENT_BINARY_DIR}/${CURRENT_TARGET}.vcxproj.user" 

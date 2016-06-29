@@ -2,6 +2,7 @@
 #define LIB_DRAW_CAMERA_HPP
 
 #include <lib/include/types.hpp>
+#include "transformation.hpp"
 
 namespace lib
 {
@@ -11,36 +12,36 @@ namespace lib
 		{
 		public:
 			Camera();
-			explicit Camera(const FloatRect& rectangle);
-			Camera(const Vector2f& center, const Vector2f& size);
-			void setCenter(float x, float y);
-			void setCenter(const Vector2f& center);
-			void setSize(float width, float height);
-			void setSize(const Vector2f& size);
-			void setRotation(float angle);
-			void setViewport(const FloatRect& viewport);
-			void reset(const FloatRect& rectangle);
-			const Vector2f& getCenter() const;
-			const Vector2f& getSize() const;
-			float getRotation() const;
-			const FloatRect& getViewport() const;
-			void move(float offsetX, float offsetY);
-			void move(const Vector2f& offset);
-			void rotate(float angle);
-			void zoom(float factor);
-			const Transform& getTransform() const;
-			const Transform& getInverseTransform() const;
+			explicit Camera(const Rectf32 &rectangle);
+			Camera(const vector2df& center, const vector2df& size);
+			void setCenter(f32 x, f32 y);
+			void setCenter(const vector2df& center);
+			void setSize(f32 width, f32 height);
+			void setSize(const vector2df& size);
+			void setRotation(f32 angle);
+			void setViewport(const Rectf32& viewport);
+			void reset(const Rectf32& rectangle);
+			const vector2df& getCenter() const;
+			const vector2df& getSize() const;
+			f32 getRotation() const;
+			const Rectf32& getViewport() const;
+			void move(f32 offsetX, f32 offsetY);
+			void move(const vector2df& offset);
+			void rotate(f32 angle);
+			void zoom(f32 factor);
+			const Transformation& getTransform() const;
+			const Transformation& getInverseTransform() const;
 		private:
-			Vector2f          m_center;
-			Vector2f          m_size;
-			float             m_rotation;
-			FloatRect         m_viewport;
-			mutable Transform m_transform;
-			mutable Transform m_inverseTransform;
-			mutable bool      m_transformUpdated;
-			mutable bool      m_invTransformUpdated;
-		}
-	};
+			vector2df m_center;
+			vector2df m_size;
+			f32 m_rotation;
+			Rectf32 m_viewport;
+			mutable Transformation m_transform;
+			mutable Transformation m_inverseTransform;
+			mutable bool m_transformUpdated;
+			mutable bool m_invTransformUpdated;
+		};
+	}
 }
 
 #endif

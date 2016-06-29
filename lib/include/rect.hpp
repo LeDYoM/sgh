@@ -11,8 +11,9 @@ namespace lib
 		T left, top, width, height;
 
 		Rect(T rectLeft, T rectTop, T rectWidth, T rectHeight) : left{ rectLeft }, top{ rectTop }, width{ rectWidth }, height{ rectHeight } { }
-		Rect() : Rect{ 0, 0, 0, 0 } {}
+		explicit Rect() : Rect{ {}, {}, {}, {} } {}
 		Rect(const vector2d<T>& position, const vector2d<T>& size) : Rect{ position.x, position.y, size.x, size.y } {}
+		Rect(const Rect&) = default;
 		template <typename U>
 		Rect(const Rect<U>& rectangle) :
 			left{ static_cast<T>(rectangle.left) }, top{ static_cast<T>(rectangle.top) },

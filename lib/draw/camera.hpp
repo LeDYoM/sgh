@@ -1,5 +1,5 @@
-#ifndef LIB_DRAW_VIEW_HPP
-#define LIB_DRAW_VIEW_HPP
+#ifndef LIB_DRAW_CAMERA_HPP
+#define LIB_DRAW_CAMERA_HPP
 
 #include <lib/include/types.hpp>
 
@@ -7,19 +7,17 @@ namespace lib
 {
 	namespace draw
 	{
+		class CameraPriv;
+
 		class Camera
 		{
 		public:
-			explicit Camera() {}
-			explicit Camera(const Rectf32 &rectangle) : m_target{ rectangle } {}
+			explicit Camera(const Rectf32 &rectangle);
 			inline const Rectf32 &target() const { return m_target; }
-			inline void setSize(const vector2df &size)
-			{
-				m_target.width = size.x;
-				m_target.height = size.y;
-			}
-
+			void setSize(const vector2df &size);
+			~Camera();
 		private:
+			uptr<CameraPriv> m_priv;
 			Rectf32 m_target;
 		};
 	}

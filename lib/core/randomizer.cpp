@@ -18,6 +18,7 @@ namespace lib
 		}
 		std::uniform_int_distribution<int> dist;
 	};
+
 	Randomizer::Randomizer()
 		: p_rPriv{ new RandomizerPrivate() }
 	{

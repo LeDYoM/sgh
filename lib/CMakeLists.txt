@@ -37,8 +37,10 @@ add_library(${CURRENT_TARGET} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
 
 # Detect and add SFML
 message("CMAKE_SOURCE_DIR:" ${CMAKE_SOURCE_DIR})
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/SFML/cmake/Modules" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 message("CMAKE_MODULE_PATH:" ${CMAKE_MODULE_PATH})
+set (SFML_ROOT "${CMAKE_SOURCE_DIR}/SFML")
+message("SFML_ROOT:" ${SFML_ROOT})
 #Find any version 2.X of SFML
 #See the FindSFML.cmake file for additional details and instructions
 find_package(SFML 2 REQUIRED system window graphics network audio)

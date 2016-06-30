@@ -30,14 +30,12 @@ namespace lib
 			void rotate(f32 angle);
 			void zoom(f32 factor);
 			const Transformation& getTransform() const;
-			const Transformation& getInverseTransform() const;
 		private:
 			vector2df m_center;
 			vector2df m_size;
 			f32 m_rotation;
 			Rectf32 m_viewport;
 			mutable Transformation m_transform;
-			mutable Transformation m_inverseTransform;
 			mutable bool m_transformUpdated;
 			mutable bool m_invTransformUpdated;
 		};

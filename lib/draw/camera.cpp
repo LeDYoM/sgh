@@ -144,18 +144,6 @@ namespace lib
 
 			return m_transform;
 		}
-
-		const Transformation& Camera::getInverseTransform() const
-		{
-			// Recompute the matrix if needed
-			if (!m_invTransformUpdated)
-			{
-				m_inverseTransform = getTransform().getInverse();
-				m_invTransformUpdated = true;
-			}
-
-			return m_inverseTransform;
-		}
 	}
 }
 

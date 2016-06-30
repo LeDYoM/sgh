@@ -31,7 +31,6 @@ namespace lib
 			virtual void onDestroy();
 			void exitProgram();
 
-			void updateCamera(const draw::Camera &camera);
 			const sptr<RenderTarget> renderTarget();
 
 			/* Driver communication */

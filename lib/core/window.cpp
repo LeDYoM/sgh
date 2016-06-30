@@ -117,11 +117,6 @@ namespace lib
 			_shouldClose = true;
 		}
 
-		void Window::updateCamera(const draw::Camera &camera)
-		{
-			p_wPrivate->m_renderWindow->setViewRectangle(camera.target());
-		}
-
 		const sptr<RenderTarget> Window::renderTarget()
 		{
 			return p_wPrivate->m_renderWindow;

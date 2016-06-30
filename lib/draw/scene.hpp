@@ -49,14 +49,13 @@ namespace lib
 			void exitProgram();
 
 			Timer clock;
-			inline const Rectf32 &currentView() const { return m_camera.target(); }
+//			inline const Rectf32 &currentView() const { return m_camera.target(); }
 			virtual bool init() override;
 			virtual bool deinit();
 
 		protected:
 			inline u32 state() const { return _state; }
 			inline void setState(u32 ns) { _state = ns; }
-			void updateView();
 
 			Scene *const parentScene() override final;
 

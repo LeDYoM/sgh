@@ -24,11 +24,6 @@ namespace lib
 			LOG_DESTRUCT("Name: " + name());
 		}
 
-		void Scene::updateView()
-		{
-			service<core::Window>()->updateCamera(m_camera);
-		}
-
 		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const
 		{
 			return{ m_camera.target().center().x - (coordinates.width / 2.0f), m_camera.target().center().y - (coordinates.height / 2.0f) };

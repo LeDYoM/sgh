@@ -41,7 +41,6 @@ namespace lib
 			sptr<lib::ResourceManager> resourceManager() const;
 			sptr<UtilProvider> utilProvider() const;
 
-			const vector2df getCoordinatesToCenter(const Rectf32 &coordinates) const;
 			inline const Camera &camera() const { return m_camera; }
 			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
 

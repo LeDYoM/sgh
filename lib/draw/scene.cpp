@@ -24,11 +24,6 @@ namespace lib
 			LOG_DESTRUCT("Name: " + name());
 		}
 
-		const vector2df Scene::getCoordinatesToCenter(const Rectf32 &coordinates) const
-		{
-			return{ m_camera.target().center().x - (coordinates.width / 2.0f), m_camera.target().center().y - (coordinates.height / 2.0f) };
-		}
-
 		bool Scene::init()
 		{
 			LOG_DEBUG("Initializing scene " << name());
@@ -36,7 +31,7 @@ namespace lib
 			{
 				auto sceneSize = getDefaultSizeView();
 				m_camera.setSize(sceneSize);
-				updateView();
+//				updateView();
 				/*
 				m_eventClient = service<SceneManager>()->eventClient()->newEventClient();
 				m_eventClient->setReceiver([this](lib::core::events::EventClient::ReceivedEvent event_)
@@ -76,9 +71,9 @@ namespace lib
 			auto sceneSize = getDefaultSizeView();
 			m_camera.setSize(sceneSize);
 			//			m_view.setCenter(sceneSize.x / 2, sceneSize.y / 2);
-			updateView();
+//			updateView();
 
-			LOG_DEBUG("Scene camera set to: center: " << m_camera.target().center().x << "," << m_camera.target().center().y << " and size: " << m_camera.target().width << "," << m_camera.target().height);
+//			LOG_DEBUG("Scene camera set to: center: " << m_camera.target().center().x << "," << m_camera.target().center().y << " and size: " << m_camera.target().width << "," << m_camera.target().height);
 
 			clock.restart();
 			onEnterScene();

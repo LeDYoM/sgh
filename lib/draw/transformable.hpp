@@ -22,7 +22,7 @@ namespace lib
 			const Transformation &transformation();
 			virtual void update();
 			const bool frameTransformationNeedsUpdate() const { return m_frameTransformationNeedsUpdate; }
-			void updateTransformationForFrame(const Transformation &other);
+			void updateTransformationForFrameIfNecessary(const Transformation &other, const bool force);
 			const Transformation &globalTransformation() const { return m_frameTransformation; }
 		private:
 			void updateTransformIfNecessary();

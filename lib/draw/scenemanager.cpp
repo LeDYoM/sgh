@@ -136,10 +136,10 @@ namespace lib
 
 					m_renderStates.push(rStates);
 					node->update();
-					forceFrameUpdate &= node->frameTransformationNeedsUpdate();
+					forceFrameUpdate |= node->frameTransformationNeedsUpdate();
 
 					if (forceFrameUpdate) {
-						node->updateTransformationForFrame(parentTransformation);
+						node->updateTransformationForFrameIfNecessary(parentTransformation,forceFrameUpdate);
 						parentTransformation = node->globalTransformation();
 					}
 

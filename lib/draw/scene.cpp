@@ -30,7 +30,7 @@ namespace lib
 			if (RenderGroup::init())
 			{
 				auto sceneSize = getDefaultSizeView();
-				m_camera.setSize(sceneSize);
+				m_camera.size = sceneSize;
 //				updateView();
 				/*
 				m_eventClient = service<SceneManager>()->eventClient()->newEventClient();
@@ -69,7 +69,7 @@ namespace lib
 		{
 			LOG_DEBUG("Entered in scene " << name());
 			auto sceneSize = getDefaultSizeView();
-			m_camera.setSize(sceneSize);
+			m_camera.size = sceneSize;
 			//			m_view.setCenter(sceneSize.x / 2, sceneSize.y / 2);
 //			updateView();
 
@@ -81,7 +81,7 @@ namespace lib
 
 		lib::vector2df Scene::pointViewToCurrentView(const vector2df &point, const vector2df &size) const
 		{
-			return{ (m_camera.target().width * point.x) / size.x, (camera().target().height * point.y) / size.y };
+			return{ (m_camera.getSize().x * point.x) / size.x, (camera().getSize().y * point.y) / size.y };
 		}
 
 		void Scene::privateOnExitScene()

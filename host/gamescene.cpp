@@ -129,9 +129,9 @@ namespace zoper
 			_currentLevelText->position->y = 200;
 			_currentLevelDisplay->position->y = 200;
 			
-			auto _gameBoundingBox = _gameText->getLocalBounds();
-			auto _overBoundingBox = _overText->getLocalBounds();
-			auto sceneCenter = camera().target().center();
+			auto _gameBoundingBox(_gameText->getLocalBounds());
+			auto _overBoundingBox(_overText->getLocalBounds());
+			auto sceneCenter( camera().getCenter() );
 			_gameText->position = { sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height };
 			_overText->position = { sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y };
 

@@ -6,58 +6,29 @@ namespace lib
 	{
 		Camera::Camera() :
 			m_center{},	m_size{}, m_rotation{},	m_viewport{ 0, 0, 1, 1 },
-			m_transformUpdated{ false }, m_invTransformUpdated{ false }
+			m_transformUpdated{ false }
 		{
 			reset(Rectf32{ 0, 0, 1000, 1000 });
 		}
 
 		Camera::Camera(const Rectf32& rectangle) :
-			m_center{}, m_size{}, m_rotation{},
-			m_viewport{ 0, 0, 1, 1 }, m_transformUpdated{ false }, m_invTransformUpdated{ false }
+			center{}, size{}, m_rotation{},
+			m_viewport{ 0, 0, 1, 1 }, m_transformUpdated{ false }
 		{
 			reset(rectangle);
 		}
 
 		Camera::Camera(const vector2df& center, const vector2df& size) :
 			m_center{ center }, m_size{ size },	m_rotation{}, m_viewport(0, 0, 1, 1),
-			m_transformUpdated{ false }, m_invTransformUpdated{ false } {}
-
-		void Camera::setCenter(f32 x, f32 y)
-		{
-			m_center.x = x;
-			m_center.y = y;
-
-			m_transformUpdated = false;
-			m_invTransformUpdated = false;
-		}
-
-		void Camera::setCenter(const vector2df& center)
-		{
-			setCenter(center.x, center.y);
-		}
-
-		void Camera::setSize(f32 width, f32 height)
-		{
-			m_size.x = width;
-			m_size.y = height;
-
-			m_transformUpdated = false;
-			m_invTransformUpdated = false;
-		}
-
-		void Camera::setSize(const vector2df& size)
-		{
-			setSize(size.x, size.y);
-		}
+			m_transformUpdated{ false } {}
 
 		void Camera::setRotation(f32 angle)
 		{
-			m_rotation = static_cast<float>(fmod(angle, 360));
+			m_rotation = static_cast<f32>(fmod(angle, 360));
 			if (m_rotation < 0)
 				m_rotation += 360.f;
 
 			m_transformUpdated = false;
-			m_invTransformUpdated = false;
 		}
 
 		void Camera::setViewport(const Rectf32& viewport)
@@ -74,7 +45,6 @@ namespace lib
 			m_rotation = 0;
 
 			m_transformUpdated = false;
-			m_invTransformUpdated = false;
 		}
 
 		const vector2df& Camera::getCenter() const
@@ -97,24 +67,19 @@ namespace lib
 			return m_viewport;
 		}
 
-		void Camera::move(float offsetX, float offsetY)
+		void Camera::move(f32 offsetX, f32 offsetY)
 		{
-			setCenter(m_center.x + offsetX, m_center.y + offsetY);
+			center = vector2df{ center.get().x + offsetX, center.get().y + offsetY };
 		}
 
-		void Camera::move(const vector2df& offset)
-		{
-			setCenter(m_center + offset);
-		}
-
-		void Camera::rotate(float angle)
+		void Camera::rotate(f32 angle)
 		{
 			setRotation(m_rotation + angle);
 		}
 
-		void Camera::zoom(float factor)
+		void Camera::zoom(f32 factor)
 		{
-			setSize(m_size.x * factor, m_size.y * factor);
+			size = vector2df{ size.get() * factor };
 		}
 
 		const Transformation& Camera::getTransform() const

@@ -67,7 +67,7 @@ namespace lib
 
 		void TextGroup::update()
 		{
-			const Rectf32 &parentView{  };
+			const Rectf32 parentView;
 			const vector2df viewCenter{ parentView.center() };
 			u32 count{ 0 };
 			for (auto &node : _renderNodes)

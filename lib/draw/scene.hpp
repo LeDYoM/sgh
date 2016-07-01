@@ -64,7 +64,7 @@ namespace lib
 			u32 _state;
 
 			friend class SceneManager;
-			lib::draw::Camera m_camera;
+			Camera m_camera;
 		};
 	}
 }

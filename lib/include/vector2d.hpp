@@ -18,87 +18,63 @@ namespace lib
 		template <typename U>
 		explicit vector2d(const vector2d<U>& vector) : x{ static_cast<T>(vector.x) }, y{ static_cast<T>(vector.y) } {}
 
-		vector2d operator-() { return vector2d{-x,-y} }
-		vector2d &operator+=(const vector2d &right)
+		inline vector2d &operator+=(const vector2d &right)
 		{ 
 			x += right.x;
 			y += right.y;
 			return *this;
 		}
 
-		vector2d &operator-=(const vector2d &right)
+		inline vector2d &operator-=(const vector2d &right)
 		{
 			x -= right.x;
 			y -= right.y;
 			return *this;
 		}
 
-		vector2d &operator*=(const vector2d &right)
+		inline vector2d &operator*=(const vector2d &right)
 		{
 			x *= right.x;
 			y *= right.y;
 			return *this;
 		}
 
-		vector2d &operator/=(const vector2d &right)
+		inline vector2d &operator*=(const T &scalar)
+		{
+			x *= scalar;
+			y *= scalar;
+			return *this;
+		}
+
+		inline vector2d &operator/=(const vector2d &right)
 		{
 			x /= right.x;
 			y /= right.y;
 			return *this;
 		}
 
-		vector2d &operator*=(const T &right)
+		inline vector2d &operator/=(const T &scalar)
 		{
-			x *= right;
-			y *= right;
+			x /= scalar;
+			y /= scalar;
 			return *this;
 		}
 
-		vector2d &operator/=(const T &right)
+		inline vector2d &operator-()
 		{
-			x /= right;
-			y /= right;
+			x = -x;
+			y = -y;
 			return *this;
 		}
 
-		vector2d operator+(const vector2d &right) const
-		{
-			return (vector2d(*this) += right);
-		}
-
-		vector2d operator-(const vector2d &right) const
-		{
-			return (vector2d(*this) -= right);
-		}
-
-		vector2d operator*(const vector2d &right) const
-		{
-			return (vector2d(*this) *= right);
-		}
-		vector2d operator/(const vector2d &right) const
-		{
-			return (vector2d(*this) /= right);
-		}
-
-		vector2d operator*(const T &right) const
-		{
-			return (vector2d(*this) *= right);
-		}
-
-		vector2d operator/(const T &right) const
-		{
-			return (vector2d(*this) /= right);
-		}
-
-		bool operator ==(const vector2d &right) const
-		{
-			return (x == right.x && y == right.y);
-		}
-
-		bool operator !=(const vector2d &right) const
-		{
-			return !(*this == right);
-		}
+		inline vector2d operator+(const vector2d &right) const { return (vector2d(*this) += right); }
+		inline vector2d operator-(const vector2d &right) const { return (vector2d(*this) -= right); }
+		inline vector2d operator*(const vector2d &right) const { return (vector2d(*this) *= right); }
+		inline vector2d operator/(const vector2d &right) const { return (vector2d(*this) /= right); }
+		inline vector2d operator*(const T &right) const { return (vector2d(*this) *= right);	}
+		inline vector2d operator/(const T &right) const { return (vector2d(*this) /= right); }
+		inline bool operator ==(const vector2d &right) const { return (x == right.x && y == right.y); }
+		inline bool operator !=(const vector2d &right) const {	return !(*this == right); }
 
 		T x;
 		T y;

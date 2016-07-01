@@ -2,6 +2,7 @@
 #define LIB_DRAW_CAMERA_HPP
 
 #include <lib/include/types.hpp>
+#include <lib/include/properties.hpp>
 #include "transformation.hpp"
 
 namespace lib
@@ -14,10 +15,8 @@ namespace lib
 			Camera();
 			explicit Camera(const Rectf32 &rectangle);
 			Camera(const vector2df& center, const vector2df& size);
-			void setCenter(f32 x, f32 y);
-			void setCenter(const vector2df& center);
-			void setSize(f32 width, f32 height);
-			void setSize(const vector2df& size);
+			NotifableProperty<vector2df> center;
+			NotifableProperty<vector2df> size;
 			void setRotation(f32 angle);
 			void setViewport(const Rectf32& viewport);
 			void reset(const Rectf32& rectangle);
@@ -37,7 +36,6 @@ namespace lib
 			Rectf32 m_viewport;
 			mutable Transformation m_transform;
 			mutable bool m_transformUpdated;
-			mutable bool m_invTransformUpdated;
 		};
 	}
 }

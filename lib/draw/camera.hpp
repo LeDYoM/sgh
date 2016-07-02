@@ -17,12 +17,9 @@ namespace lib
 			Camera(const vector2df& center, const vector2df& size);
 			NotifableProperty<vector2df> center;
 			NotifableProperty<vector2df> size;
-			void setRotation(f32 angle);
+			NotifableProperty<f32> rotation;
 			void setViewport(const Rectf32& viewport);
 			void reset(const Rectf32& rectangle);
-			const vector2df& getCenter() const;
-			const vector2df& getSize() const;
-			f32 getRotation() const;
 			const Rectf32& getViewport() const;
 			void move(f32 offsetX, f32 offsetY);
 			void move(const vector2df& offset);

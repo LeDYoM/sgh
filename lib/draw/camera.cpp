@@ -22,15 +22,6 @@ namespace lib
 			m_center{ center }, m_size{ size },	m_rotation{}, m_viewport(0, 0, 1, 1),
 			m_transformUpdated{ false } {}
 
-		void Camera::setRotation(f32 angle)
-		{
-			m_rotation = static_cast<f32>(fmod(angle, 360));
-			if (m_rotation < 0)
-				m_rotation += 360.f;
-
-			m_transformUpdated = false;
-		}
-
 		void Camera::setViewport(const Rectf32& viewport)
 		{
 			m_viewport = viewport;
@@ -47,21 +38,6 @@ namespace lib
 			m_transformUpdated = false;
 		}
 
-		const vector2df& Camera::getCenter() const
-		{
-			return m_center;
-		}
-
-		const vector2df& Camera::getSize() const
-		{
-			return m_size;
-		}
-
-		float Camera::getRotation() const
-		{
-			return m_rotation;
-		}
-
 		const Rectf32 &Camera::getViewport() const
 		{
 			return m_viewport;
@@ -74,7 +50,7 @@ namespace lib
 
 		void Camera::rotate(f32 angle)
 		{
-			setRotation(m_rotation + angle);
+			rotation.modify() += angle;
 		}
 
 		void Camera::zoom(f32 factor)

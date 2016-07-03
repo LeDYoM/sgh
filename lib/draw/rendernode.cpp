@@ -23,7 +23,7 @@ namespace lib
 		void RenderNode::updateFillColors()
 		{
 			for (std::size_t i = 0; i < m_vertices.size(); ++i) {
-				m_vertices[i].color = color;
+				m_vertices[i].color = color();
 			}
 			color.resetChanged();
 		}

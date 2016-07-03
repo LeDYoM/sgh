@@ -77,10 +77,10 @@ namespace lib
 				{
 					temp->setFont(*(m_private->m_font->getAsFont()));
 					temp->setCharacterSize(m_private->m_characterSize);
-					temp->color = m_private->m_color;
+					temp->color() = m_private->m_color;
 					temp->setAlignment(m_private->m_alignment);
-					temp->position->x = viewCenter.x;
-					temp->position->y = static_cast<f32>(count*m_private->m_characterSize);
+					temp->position().x = viewCenter.x;
+					temp->position().y = static_cast<f32>(count*m_private->m_characterSize);
 					++count;
 				}
 			}

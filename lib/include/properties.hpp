@@ -15,28 +15,23 @@ namespace lib
 		explicit Property(const T&iv) : m_value{ iv } {}
 		Property(T&&iv) : m_value{ std::move(iv) } {}
 		Property(const Property&) = delete;
-		virtual Property &operator=(const T&nv) { m_value=nv; return *this; }
-		virtual Property &operator=(T&&nv) { std::swap(m_value,nv); return *this; }
-		operator const T&() const { return m_value; }
-		const T& get() const { return m_value; }
-		const T *const operator ->() const { return &m_value; }
-		virtual T *operator ->() { return &m_value; }
+		operator T() const { return m_value; }
+		T& operator ()() { return m_value; }
 
 	private:
 		T m_value;
 	};
 
 	template <typename T>
-	class NotifableProperty : public Property<T>
+	class NotifableProperty
 	{
 	public:
-		explicit NotifableProperty() : Property{} {}
-		explicit NotifableProperty(const T&iv) : Property{ iv } {}
-		explicit NotifableProperty(T&&iv) : Property{ std::move(iv) } {}
-		explicit NotifableProperty(const NotifableProperty &iv) = delete;
-		virtual NotifableProperty &operator=(const T&nv) override { Property::operator=(nv); m_changedFlag = true; return *this; }
-		virtual NotifableProperty &operator=(T&&nv) { Property::operator=(nv); m_changedFlag = true; return *this; }
-		virtual T *operator ->() { m_changedFlag = true; return Property::operator ->(); }
+		explicit NotifableProperty() : m_value{} {}
+		explicit NotifableProperty(const T&iv) : m_value{ iv } {}
+		NotifableProperty(T&&iv) : m_value{ std::move(iv) } {}
+
+		const T& operator ()() const { return m_value; }
+		T& operator ()() { m_changedFlag = true; return m_value; }
 
 		bool changed() const { return m_changedFlag; }
 		void resetChanged() { m_changedFlag = false; }
@@ -50,6 +45,7 @@ namespace lib
 			return false;
 		}
 	private:
+		T m_value;
 		bool m_changedFlag{ true };
 	};
 

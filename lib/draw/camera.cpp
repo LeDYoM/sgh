@@ -45,17 +45,17 @@ namespace lib
 
 		void Camera::move(f32 offsetX, f32 offsetY)
 		{
-			center = vector2df{ center.get().x + offsetX, center.get().y + offsetY };
+			center = vector2df{ center().x + offsetX, center().y + offsetY };
 		}
 
 		void Camera::rotate(f32 angle)
 		{
-			rotation.modify() += angle;
+			rotation() += angle;
 		}
 
 		void Camera::zoom(f32 factor)
 		{
-			size = vector2df{ size.get() * factor };
+			size = vector2df{ size() * factor };
 		}
 
 		const Transformation& Camera::getTransform() const

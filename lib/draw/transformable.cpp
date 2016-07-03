@@ -16,13 +16,13 @@ namespace lib
 
 		void Transformable::move(const vector2df &offset)
 		{
-			position = (position.get() + offset);
+			position = (position() + offset);
 		}
 
 		const Transformation &Transformable::transformation()
 		{
 			updateTransformIfNecessary();
-			return m_transformation;
+			return m_transformation();
 		}
 
 		void Transformable::updateTransformIfNecessary()

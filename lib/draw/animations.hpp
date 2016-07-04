@@ -13,13 +13,13 @@ namespace lib
 		class ColorAnimation : public Animation<Color>
 		{
 		public:
-			ColorAnimation(const str&name, Property<Color> &color) : Animation{ name, color } {}
+			ColorAnimation(const str&name, NotifableProperty<Color> &color) : Animation{ name, color } {}
 		};
 
 		class PositionAnimation : public Animation<vector2df>
 		{
 		public:
-			PositionAnimation(const str&name, Property<vector2df> &position) : Animation{ name, position } {}
+			PositionAnimation(const str&name, NotifableProperty<vector2df> &position) : Animation{ name, position } {}
 		};
 	}
 }

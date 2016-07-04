@@ -131,7 +131,7 @@ namespace zoper
 			
 			auto _gameBoundingBox(_gameText->getLocalBounds());
 			auto _overBoundingBox(_overText->getLocalBounds());
-			auto sceneCenter( camera().getCenter() );
+			vector2df sceneCenter( camera().center() );
 			_gameText->position = { sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height };
 			_overText->position = { sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y };
 
@@ -681,6 +681,7 @@ namespace zoper
 	void GameScene::tokenMoved(const lib::vector2du32 &source, const lib::vector2du32 &dest, lib::sptr<Tile> tile)
 	{
 		source;
+		dest;
 		/*
 		lib::sptr<lib::draw::PositionAnimation> pa = lib::sptr<lib::draw::PositionAnimation>(new lib::draw::PositionAnimation("myPositionAnimationId"));
 		pa->setDuration(_levelProperties.millisBetweenTokens() / 2);

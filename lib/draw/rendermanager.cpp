@@ -136,6 +136,7 @@ namespace lib
 
 		void applyTransform(const Transformation& transform)
 		{
+			transform;
 			glCheck(glLoadMatrixf(transform.data()));
 		}
 
@@ -148,8 +149,10 @@ namespace lib
 //			applyCurrentView();
 
 			auto textureId = node->texture() ? node->texture() : 0;
+			textureId;
 //			applyTexture(textureId);
 			const char* data = reinterpret_cast<const char*>(node->vertexArray().data());
+			data;
 			glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), data + 0));
 			glCheck(glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex), data + sizeof(GLfloat)*2/*8*/));
 			glCheck(glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), data + (sizeof(GLfloat) * 2) + (sizeof(GLubyte)*4) /*+12*/));

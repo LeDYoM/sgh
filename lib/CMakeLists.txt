@@ -19,10 +19,6 @@ file (GLOB LIB_INCLUDE_HEADERS "${LIB_DIRECTORY}include/*.hpp")
 #file (GLOB LIB_BASE_SOURCES "${LIB_DIRECTORY}include/*.cpp")
 
 #TO DO: A separated lib?
-file (GLOB LIB_MENU_HEADERS "${LIB_DIRECTORY}menu/*.hpp")
-file (GLOB LIB_MENU_SOURCES "${LIB_DIRECTORY}menu/*.cpp")
-
-#TO DO: A separated lib?
 file (GLOB LIB_BOARD_HEADERS "${LIB_DIRECTORY}board/*.hpp")
 file (GLOB LIB_BOARD_SOURCES "${LIB_DIRECTORY}board/*.cpp")
 
@@ -84,7 +80,6 @@ source_group("lib\\include" FILES ${LIB_INCLUDE_HEADERS})
 source_group("lib\\core" FILES ${LIB_CORE_HEADERS} ${LIB_CORE_SOURCES})
 source_group("lib\\core\\events" FILES ${LIB_CORE_EVENTS_HEADERS} ${LIB_CORE_EVENTS_SOURCES})
 source_group("lib\\draw" FILES ${LIB_DRAW_HEADERS} ${LIB_DRAW_SOURCES})
-source_group("lib\\menu" FILES ${LIB_MENU_HEADERS} ${LIB_MENU_SOURCES})
 source_group("lib\\board" FILES ${LIB_BOARD_HEADERS} ${LIB_BOARD_SOURCES})
 source_group("lib\\drivers\\window" FILES ${LIB_DRIVERS_WINDOW_HEADERS})
 

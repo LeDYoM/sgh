@@ -67,7 +67,7 @@ namespace lib
 		class Animation : public IAnimation
 		{
 		public:
-			Animation(const str&name, Property<T> &property) : IAnimation{ name }, m_property{ property } {}
+			Animation(const str&name, NotifableProperty<T> &property) : IAnimation{ name }, m_property{ property } {}
 			virtual ~Animation() {}
 
 			void setDuration(u64 duration) { m_duration = duration; }
@@ -97,7 +97,7 @@ namespace lib
 		protected:
 			T m_startValue;
 			T m_endValue;
-			Property<T> &m_property;
+			NotifableProperty<T> &m_property;
 		};
 
 	}

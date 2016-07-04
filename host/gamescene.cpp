@@ -131,7 +131,7 @@ namespace zoper
 			
 			auto _gameBoundingBox(_gameText->getLocalBounds());
 			auto _overBoundingBox(_overText->getLocalBounds());
-			vector2df sceneCenter( camera().center() );
+			vector2df sceneCenter( camera()->center() );
 			_gameText->position = { sceneCenter.x - (_gameBoundingBox.width / 2.0f), sceneCenter.y - _gameBoundingBox.height };
 			_overText->position = { sceneCenter.x - (_overBoundingBox.width / 2.0f), sceneCenter.y };
 

@@ -7,10 +7,6 @@
 
 namespace lib
 {
-	namespace draw
-	{
-		class Camera;
-	}
 	namespace core
 	{
 		struct WindowPrivate;

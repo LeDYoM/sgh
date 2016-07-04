@@ -15,6 +15,7 @@ namespace lib
 	namespace draw
 	{
 		class RenderNode;
+		class Camera;
 		class RenderStates;
 
 		class RenderManager : public AppService
@@ -31,6 +32,7 @@ namespace lib
 
 			void startFrame();
 			void finishFrame();
+			void setCamera(const sptr<Camera> &);
 			void preRenderNode(const sptr<RenderNode> &, const RenderStates&);
 			void preRenderNode(const sptr<RenderNode> &);
 			void renderAll();

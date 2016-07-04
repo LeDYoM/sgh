@@ -13,7 +13,7 @@ namespace lib
 	namespace draw
 	{
 		Scene::Scene(PIAppContext piAppContext, const std::string &_name) 
-			: RenderGroup{ nullptr, _name }, m_camera{ Rectf32{} }
+			: RenderGroup{ nullptr, _name }, m_camera{ new Camera{ Rectf32{} } }
 		{
 			setProvider(core::toController(piAppContext));
 			LOG_CONSTRUCT("Name: " + name());
@@ -30,7 +30,7 @@ namespace lib
 			if (RenderGroup::init())
 			{
 				auto sceneSize = getDefaultSizeView();
-				m_camera.size() = sceneSize;
+				m_camera->size() = sceneSize;
 //				updateView();
 				/*
 				m_eventClient = service<SceneManager>()->eventClient()->newEventClient();
@@ -69,7 +69,7 @@ namespace lib
 		{
 			LOG_DEBUG("Entered in scene " << name());
 			auto sceneSize = getDefaultSizeView();
-			m_camera.size() = sceneSize;
+			m_camera->size() = sceneSize;
 			//			m_view.setCenter(sceneSize.x / 2, sceneSize.y / 2);
 //			updateView();
 
@@ -81,7 +81,7 @@ namespace lib
 
 		lib::vector2df Scene::pointViewToCurrentView(const vector2df &point, const vector2df &size) const
 		{
-			return{ (m_camera.size().x * point.x) / size.x, (camera().size().y * point.y) / size.y };
+			return{ (m_camera->size().x * point.x) / size.x, (camera()->size().y * point.y) / size.y };
 		}
 
 		void Scene::privateOnExitScene()

@@ -1,26 +1,34 @@
 #include "camera.hpp"
+#include <SFML/Graphics/View.hpp>
 
 namespace lib
 {
 	namespace draw
 	{
+		class CameraPrivate
+		{
+		public:
+			sf::View m_view;
+		};
 		Camera::Camera() :
 			m_center{},	m_size{}, m_rotation{},	m_viewport{ 0, 0, 1, 1 },
-			m_transformUpdated{ false }
+			m_transformUpdated{ false }, m_priv{ new CameraPrivate }
 		{
 			reset(Rectf32{ 0, 0, 1000, 1000 });
 		}
 
 		Camera::Camera(const Rectf32& rectangle) :
 			center{}, size{}, m_rotation{},
-			m_viewport{ 0, 0, 1, 1 }, m_transformUpdated{ false }
+			m_viewport{ 0, 0, 1, 1 }, m_transformUpdated{ false }, m_priv{ new CameraPrivate }
 		{
 			reset(rectangle);
 		}
 
 		Camera::Camera(const vector2df& center, const vector2df& size) :
 			m_center{ center }, m_size{ size },	m_rotation{}, m_viewport(0, 0, 1, 1),
-			m_transformUpdated{ false } {}
+			m_transformUpdated{ false }, m_priv{ new CameraPrivate } {}
+
+		Camera::~Camera() {}
 
 		void Camera::setViewport(const Rectf32& viewport)
 		{

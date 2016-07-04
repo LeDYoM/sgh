@@ -3,6 +3,7 @@
 #include <lib/core/log.hpp>
 #include "renderstates.hpp"
 #include "rendernode.hpp"
+#include "camera.hpp"
 #include <lib/core/rendertarget.hpp>
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/driver.hpp>
@@ -90,6 +91,11 @@ namespace lib
 		}
 
 		void RenderManager::finishFrame()
+		{
+
+		}
+
+		void RenderManager::setCamera(const sptr<Camera> &camera)
 		{
 
 		}

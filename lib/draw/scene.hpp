@@ -41,7 +41,7 @@ namespace lib
 			sptr<lib::ResourceManager> resourceManager() const;
 			sptr<UtilProvider> utilProvider() const;
 
-			inline const Camera &camera() const { return m_camera; }
+			sptr<Camera> camera() const { return m_camera; }
 			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
 
 			void setNextScene(const std::string &name);
@@ -51,6 +51,8 @@ namespace lib
 //			inline const Rectf32 &currentView() const { return m_camera.target(); }
 			virtual bool init() override;
 			virtual bool deinit();
+
+
 
 		protected:
 			inline u32 state() const { return _state; }
@@ -64,7 +66,7 @@ namespace lib
 			u32 _state;
 
 			friend class SceneManager;
-			Camera m_camera;
+			sptr<Camera> m_camera;
 		};
 	}
 }

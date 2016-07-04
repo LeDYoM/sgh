@@ -9,12 +9,14 @@ namespace lib
 {
 	namespace draw
 	{
+		class CameraPrivate;
 		class Camera
 		{
 		public:
 			Camera();
 			explicit Camera(const Rectf32 &rectangle);
 			Camera(const vector2df& center, const vector2df& size);
+			~Camera();
 			NotifableProperty<vector2df> center;
 			NotifableProperty<vector2df> size;
 			NotifableProperty<f32> rotation;
@@ -27,6 +29,7 @@ namespace lib
 			void zoom(f32 factor);
 			const Transformation& getTransform();
 		private:
+			uptr<CameraPrivate> m_priv;
 			vector2df m_center;
 			vector2df m_size;
 			f32 m_rotation;

@@ -30,7 +30,7 @@ namespace lib
 			// Recompute the combined transformation if needed
 			if (transformationNeedUpdate())
 			{
-				f32 angle = -rotation * 3.141592654f / 180.f;
+				f32 angle = -rotation() * 3.141592654f / 180.f;
 				f32 cosine = static_cast<f32>(std::cos(angle));
 				f32 sine = static_cast<f32>(std::sin(angle));
 				f32 sxc = scale->x * cosine;
@@ -73,7 +73,7 @@ namespace lib
 		{
 			if (m_frameTransformationNeedsUpdate || force) {
 				m_frameTransformationNeedsUpdate = false;
-				m_frameTransformation = m_transformation.get() * other;
+				m_frameTransformation = m_transformation() * other;
 			}
 		}
 

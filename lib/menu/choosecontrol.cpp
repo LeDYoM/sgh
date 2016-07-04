@@ -23,7 +23,7 @@ namespace lib
 			descriptorCursorSize = cursorDescriptor->_size;
 			_cursor = createShape("cursor");
 			_cursor->setPointCount(cursorDescriptor->_nVertex);
-			_cursor->color = cursorDescriptor->_color;
+			_cursor->color() = cursorDescriptor->_color;
 			_cursor->setSize(descriptorCursorSize);
 
 			u32 count{ 0 };
@@ -34,10 +34,10 @@ namespace lib
 				text->setFont(*(font->getAsFont()));
 				text->setCharacterSize(chSize);
 				text->setString(labels[count]->_text);
-				text->color = textColor;
+				text->color() = textColor;
 				text->setAlignment(alignment);
-				text->position->x = 0;
-				text->position->y = currentPos.y;
+				text->position().x = 0;
+				text->position().y = currentPos.y;
 
 				sptr<draw::NodeText> subtext{ nullptr };
 				if (labels[count]->_subOptionsLabels.size()>0)
@@ -46,7 +46,7 @@ namespace lib
 					subtext->setFont(*(font->getAsFont()));
 					subtext->setCharacterSize(chSize);
 					subtext->setString(labels[count]->_subOptionsLabels[labels[count]->_startValueIndex]);
-					subtext->color = textColor;
+					subtext->color() = textColor;
 					subtext->setAlignment(lib::draw::Alignment::Right);
 					subtext->position->x = 1800;
 					subtext->position->y = currentPos.y;

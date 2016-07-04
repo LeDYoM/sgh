@@ -25,14 +25,14 @@ namespace lib
 			void move(const vector2df& offset);
 			void rotate(f32 angle);
 			void zoom(f32 factor);
-			const Transformation& getTransform() const;
+			const Transformation& getTransform();
 		private:
 			vector2df m_center;
 			vector2df m_size;
 			f32 m_rotation;
 			Rectf32 m_viewport;
-			mutable Transformation m_transform;
-			mutable bool m_transformUpdated;
+			Transformation m_transform;
+			bool m_transformUpdated;
 		};
 	}
 }

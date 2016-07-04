@@ -58,7 +58,7 @@ namespace lib
 			size = vector2df{ size() * factor };
 		}
 
-		const Transformation& Camera::getTransform() const
+		const Transformation& Camera::getTransform()
 		{
 			// Recompute the matrix if needed
 			if (!m_transformUpdated)

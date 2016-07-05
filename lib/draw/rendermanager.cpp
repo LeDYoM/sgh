@@ -85,7 +85,7 @@ namespace lib
 			AppService::Init();
 		}
 
-		void RenderManager::startFrame()
+		void RenderManager::startFrame(sptr<Camera> &camera)
 		{
 
 		}

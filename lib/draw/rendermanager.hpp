@@ -30,7 +30,7 @@ namespace lib
 
 			virtual void Init() override;
 
-			void startFrame();
+			void startFrame(sptr<Camera> &camera);
 			void finishFrame();
 			void setCamera(const sptr<Camera> &);
 			void preRenderNode(const sptr<RenderNode> &, const RenderStates&);

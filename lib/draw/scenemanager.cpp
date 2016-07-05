@@ -113,7 +113,9 @@ namespace lib
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
 			m_renderStates.emplace(RenderStates{service<core::Window>()->renderTarget().get()});
 			Transformation t;
-			//service<RenderManager>()->setCamera(_currentScene->camera());
+			auto _renderManager{ service<RenderManager>() };
+			_renderManager->startFrame();
+			_renderManager->setCamera(_currentScene->camera());
 
 			visit(_currentScene,false,t);
 			m_renderStates.pop();

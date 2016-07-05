@@ -9,7 +9,6 @@ namespace lib
 {
 	namespace draw
 	{
-		class CameraPrivate;
 		class Camera
 		{
 		public:
@@ -29,7 +28,6 @@ namespace lib
 			void zoom(f32 factor);
 			const Transformation& getTransform();
 		private:
-			uptr<CameraPrivate> m_priv;
 			vector2df m_center;
 			vector2df m_size;
 			f32 m_rotation;

@@ -40,6 +40,7 @@ namespace lib
 
 		private:
 			std::vector<const RenderNode*> m_renderList;
+			Camera *m_camera{ nullptr };
 		};
 	}
 }

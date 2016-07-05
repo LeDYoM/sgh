@@ -49,6 +49,8 @@ namespace lib
 			sptr<Scene> _nextScene{ nullptr };
 			typedef std::stack <RenderStates> StackVector;
 			StackVector m_renderStates;
+
+
 		};
 	}
 }

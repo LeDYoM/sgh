@@ -97,7 +97,7 @@ namespace lib
 
 		void RenderManager::setCamera(const sptr<Camera> &camera)
 		{
-
+			m_camera = camera.get();
 		}
 
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node, const RenderStates &rStates)

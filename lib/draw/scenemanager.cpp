@@ -113,7 +113,8 @@ namespace lib
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
 			m_renderStates.emplace(RenderStates{service<core::Window>()->renderTarget().get()});
 			Transformation t;
-			service<RenderManager>()->setCamera(_currentScene->camera());
+			//service<RenderManager>()->setCamera(_currentScene->camera());
+
 			visit(_currentScene,false,t);
 			m_renderStates.pop();
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
@@ -146,8 +147,7 @@ namespace lib
 
 					if (auto drawableNode = as<RenderNode>(node)) {
 						if (drawableNode->vertexArray().size() > 0) {
-							//rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
-							service<RenderManager>()->preRenderNode(drawableNode, rStates);
+							rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
 						}
 					} else if (auto renderGroupNode = as<RenderGroup>(node)) {
 						for (auto node_ : renderGroupNode->renderNodes()) {

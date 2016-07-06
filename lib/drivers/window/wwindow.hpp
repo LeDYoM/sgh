@@ -27,7 +27,6 @@ namespace lib
 				virtual void setTitle(const char *title) = 0;
 				virtual void clear() = 0;
 				virtual void display() = 0;
-				virtual void setViewRectangle(const Rectf32 &rect) = 0;
 				virtual void collectEvents() = 0;
 				virtual sptr<DataMap> nextEvent() = 0;
 				virtual u32 pendingEvents() = 0;

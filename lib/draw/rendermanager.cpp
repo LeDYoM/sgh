@@ -85,19 +85,16 @@ namespace lib
 			AppService::Init();
 		}
 
-		void RenderManager::startFrame(sptr<Camera> &camera)
+		void RenderManager::startFrame(sptr<core::RenderTarget> renderTarget, sptr<Camera> camera)
 		{
+			m_renderTarget = renderTarget;
+			m_camera = camera;
 
 		}
 
 		void RenderManager::finishFrame()
 		{
 
-		}
-
-		void RenderManager::setCamera(const sptr<Camera> &camera)
-		{
-			m_camera = camera.get();
 		}
 
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node, const RenderStates &rStates)

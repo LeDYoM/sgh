@@ -23,7 +23,8 @@ namespace lib
 				virtual void clear() override;
 				virtual void display() override;
 				virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) override;
-				virtual void setViewRectangle(const Rectf32 &rect) override;
+				virtual void setViewRectangle(const Rectf32 &rectangle) override;
+				virtual void setViewport(const vector2df &vPort) override;
 				virtual void collectEvents() override;
 				virtual sptr<DataMap> nextEvent();
 				virtual u32 pendingEvents();

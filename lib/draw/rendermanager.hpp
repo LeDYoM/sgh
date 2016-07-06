@@ -26,13 +26,10 @@ namespace lib
 
 			static const str staticTypeName() { return "RenderManager"; }
 
-			NotifableProperty<sptr<core::RenderTarget>> renderTarget;
-
 			virtual void Init() override;
 
-			void startFrame(sptr<Camera> &camera);
+			void startFrame(sptr<core::RenderTarget> renderTarget, sptr<Camera> camera);
 			void finishFrame();
-			void setCamera(const sptr<Camera> &);
 			void preRenderNode(const sptr<RenderNode> &, const RenderStates&);
 			void preRenderNode(const sptr<RenderNode> &);
 			void renderAll();
@@ -40,7 +37,8 @@ namespace lib
 
 		private:
 			std::vector<const RenderNode*> m_renderList;
-			Camera *m_camera{ nullptr };
+			sptr<Camera> m_camera;
+			sptr<core::RenderTarget> m_renderTarget;
 		};
 	}
 }

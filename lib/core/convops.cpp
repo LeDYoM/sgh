@@ -7,6 +7,16 @@ namespace lib
 		return Rect<f32>{source.left, source.top, source.width, source.height};
 	}
 
+	sf::IntRect convert(const Rects32 &source)
+	{
+		return sf::IntRect(source.left, source.top, source.width, source.height);
+	}
+
+	sf::FloatRect convert(const Rectf32 &source)
+	{
+		return sf::FloatRect(source.left, source.top, source.width, source.height);
+	}
+
 	sf::Transform convert(const draw::Transformation &transform)
 	{
 		const draw::Transformation::TransformationDataType &f{ transform.matrix() };

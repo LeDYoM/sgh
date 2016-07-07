@@ -1,7 +1,7 @@
 #include "scenemanager.hpp"
 #include "scene.hpp"
 #include "renderstates.hpp"
-#include "../core/rendertarget.hpp"
+#include <lib/drivers/render/rendertarget.hpp>
 #include <lib/core/log.hpp>
 #include <lib/core/window.hpp>
 #include <lib/core/resourcemanager.hpp>
@@ -111,10 +111,10 @@ namespace lib
 			}
 
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
-			m_renderStates.emplace(RenderStates{service<core::Window>()->renderTarget().get()});
+			m_renderStates.emplace(RenderStates{service<core::Window>()->windowRender().get()});
 			Transformation t;
 			auto _renderManager( service<RenderManager>() );
-			_renderManager->startFrame(_currentScene->camera());
+			_renderManager->startFrame(service<core::Window>()->renderTarget(), _currentScene->camera());
 
 			visit(_currentScene,false,t);
 			m_renderStates.pop();

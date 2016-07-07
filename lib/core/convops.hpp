@@ -17,6 +17,9 @@ namespace lib
 	*/
 
 	Rect<f32> convert(const sf::FloatRect &source);
+
+	sf::IntRect convert(const Rects32 &);
+	sf::FloatRect convert(const Rectf32 &);
 	sf::Transform convert(const draw::Transformation &transform);
 	sf::RenderStates convert(const draw::RenderStates &renderStates);
 	const sf::Vertex * convert(const draw::VertexArray &vertexArray);

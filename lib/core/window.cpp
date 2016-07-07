@@ -115,10 +115,9 @@ namespace lib
 		{
 			_shouldClose = true;
 		}
-
-		const sptr<RenderTarget> Window::renderTarget()
+		sptr<draw::RenderTarget> Window::windowRenderTarget() const
 		{
-			return p_wPrivate->m_renderWindow;
+			return p_wPrivate->m_renderWindow->windowRenderTarget();
 		}
 	}
 }

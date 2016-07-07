@@ -1,7 +1,6 @@
 #include "nodeshape.hpp"
 #include <lib/core/convops.hpp>
 #include <lib/core/log.hpp>
-#include <lib/core/rendertarget.hpp>
 #include "scenemanager.hpp"
 #include <SFML/Graphics/Texture.hpp>
 #include "../core/appcontroller.hpp"

@@ -1,5 +1,5 @@
 #include "renderstates.hpp"
-#include "../core/rendertarget.hpp"
+#include "rendertarget.hpp"
 #include <lib/include/types.hpp>
 #include <cstddef>
 
@@ -27,11 +27,11 @@ namespace lib
 		RenderStates::RenderStates(const sf::Shader* theShader)
 			: RenderStates{ sf::BlendAlpha, {}, nullptr, theShader, nullptr } {}
 
-		RenderStates::RenderStates(core::RenderTarget *theRenderTarget)
+		RenderStates::RenderStates(RenderTarget *theRenderTarget)
 			: RenderStates{ sf::BlendAlpha, {}, nullptr, nullptr, theRenderTarget } {}
 
 		RenderStates::RenderStates(const sf::BlendMode &theBlendMode, const Transformation &theTransformation,
-			const sf::Texture *theTexture, const sf::Shader *theShader, core::RenderTarget *theRenderTarget) 
+			const sf::Texture *theTexture, const sf::Shader *theShader, RenderTarget *theRenderTarget) 
 			: blendMode{ theBlendMode }, transform{ theTransformation },
 			texture{ theTexture }, shader{ theShader }, currentTarget{ theRenderTarget } {}
 	}

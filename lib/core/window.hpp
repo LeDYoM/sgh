@@ -7,11 +7,14 @@
 
 namespace lib
 {
+	namespace draw
+	{
+		class RenderTarget;
+	}
 	namespace core
 	{
 		struct WindowPrivate;
 		class AppController;
-		class RenderTarget;
 
 		class Window : public AppService
 		{
@@ -27,8 +30,7 @@ namespace lib
 			virtual void onDestroy();
 			void exitProgram();
 
-			const sptr<RenderTarget> renderTarget();
-
+			sptr<draw::RenderTarget> windowRenderTarget() const;
 			/* Driver communication */
 			void wantsClose();
 		private:

@@ -4,7 +4,7 @@
 #include "renderstates.hpp"
 #include "rendernode.hpp"
 #include "camera.hpp"
-#include <lib/core/rendertarget.hpp>
+#include "rendertarget.hpp"
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/driver.hpp>
 

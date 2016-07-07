@@ -2,6 +2,7 @@
 #define LIB_DRIVERS_SFML_WWINDOW_IMPLEMENTATION_HPP
 
 #include <lib/drivers/window/wwindow.hpp>
+#include <lib/drivers/render/rendertarget.hpp>
 #include <lib/include/types.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -22,15 +23,14 @@ namespace lib
 				virtual void setTitle(const char *title) override;
 				virtual void clear() override;
 				virtual void display() override;
-				virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) override;
-				virtual void setViewRectangle(const Rectf32 &rectangle) override;
-				virtual void setViewport(const vector2df &vPort) override;
+				virtual sptr<render::RenderTarget> windowRenderTarget() const override;
 				virtual void collectEvents() override;
 				virtual sptr<DataMap> nextEvent();
 				virtual u32 pendingEvents();
 			private:
 				bool m_resizePending;
 				std::queue<sptr<DataMap>> m_collectedEvents;
+				sptr<render::RenderTarget> m_thisAsRenderTarget;
 			};
 		}
 	}

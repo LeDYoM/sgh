@@ -1,4 +1,5 @@
 #include "wwindow_impl.hpp"
+#include <lib/drivers/render/rendertarget.hpp>
 #include <lib/core/convops.hpp>
 #include <lib/core/window.hpp>
 #include <lib/include/key.hpp>
@@ -61,15 +62,9 @@ namespace lib
 				sf::Window::display();
 			}
 
-			void SFMLWindow::draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states)
+			sptr<render::RenderTarget> SFMLWindow::windowRenderTarget() const
 			{
-				sf::RenderWindow::draw(convert(vertexArray), vertexArray.size(), convert(vertexArray.getPrimitiveType()), convert(states));
-			}
-
-			void SFMLWindow::setViewRectangle(const Rectf32 &rect)
-			{
-				sf::View view{ sf::FloatRect{ rect.left, rect.top, rect.width, rect.height } };
-				setView(view);
+				return m_thisAsRenderTarget;
 			}
 
 			void SFMLWindow::collectEvents()

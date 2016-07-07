@@ -13,12 +13,9 @@ namespace sf
 
 namespace lib
 {
-	namespace core
-	{
-		class RenderTarget;
-	}
 	namespace draw
 	{
+		class RenderTarget;
 		class RenderStates
 		{
 		public:
@@ -29,16 +26,16 @@ namespace lib
 			explicit RenderStates(const Transformation &transformation);
 			explicit RenderStates(const sf::Texture* theTexture);
 			explicit RenderStates(const sf::Shader* theShader);
-			explicit RenderStates(core::RenderTarget *theRenderTarget);
+			explicit RenderStates(RenderTarget *theRenderTarget);
 			RenderStates(const sf::BlendMode &theBlendMode, const Transformation &transformation,
-				const sf::Texture *theTexture, const sf::Shader *theShader, core::RenderTarget *theRenderTarget);
+				const sf::Texture *theTexture, const sf::Shader *theShader, draw::RenderTarget *theRenderTarget);
 
 			Transformation transform;
 
 			sf::BlendMode blendMode;
 			const sf::Texture *texture;
 			const sf::Shader *shader;
-			core::RenderTarget *currentTarget;
+			draw::RenderTarget *currentTarget;
 		};
 	}
 }

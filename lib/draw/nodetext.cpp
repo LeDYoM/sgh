@@ -2,7 +2,6 @@
 #include "lib/core/convops.hpp"
 #include <SFML/Graphics/Texture.hpp>
 #include <lib/core/window.hpp>
-#include <lib/core/rendertarget.hpp>
 #include "scenemanager.hpp"
 #include "../core/appcontroller.hpp"
 

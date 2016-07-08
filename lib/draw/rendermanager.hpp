@@ -8,9 +8,12 @@
 
 namespace lib
 {
-	namespace core
+	namespace drivers
 	{
-		class RenderTarget;
+		namespace render
+		{
+			class RenderTarget;
+		}
 	}
 	namespace draw
 	{
@@ -28,9 +31,9 @@ namespace lib
 
 			virtual void Init() override;
 
-			void startFrame(sptr<core::RenderTarget> renderTarget, sptr<Camera> camera);
+			void startFrame(sptr<drivers::render::RenderTarget> renderTarget, sptr<Camera> camera);
 			void finishFrame();
-			void preRenderNode(const sptr<RenderNode> &, const RenderStates&);
+			void preRenderNode(const sptr<RenderNode> &, const RenderStates&) const;
 			void preRenderNode(const sptr<RenderNode> &);
 			void renderAll();
 			void renderOne(const RenderNode *);
@@ -38,7 +41,7 @@ namespace lib
 		private:
 			std::vector<const RenderNode*> m_renderList;
 			sptr<Camera> m_camera;
-			sptr<core::RenderTarget> m_renderTarget;
+			sptr<drivers::render::RenderTarget> m_renderTarget;
 		};
 	}
 }

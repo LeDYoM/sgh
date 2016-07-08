@@ -9,11 +9,11 @@ namespace lib
 {
 	namespace draw
 	{
-		class RenderTarget
+		class RenderTarget : public drivers::render::RenderTarget
 		{
 		public:
-			virtual void setView(const Rectf32 &rectangle, const vector2df &vPort) = 0;
-			virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) = 0;
+//			virtual void setView(const Rectf32 &rectangle, const vector2df &vPort) = 0;
+//			virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) = 0;
 		};
 	}
 }

@@ -11,6 +11,13 @@ namespace lib
 	{
 		class RenderTarget;
 	}
+	namespace drivers
+	{
+		namespace render
+		{
+			class RenderTarget;
+		}
+	}
 	namespace core
 	{
 		struct WindowPrivate;
@@ -30,7 +37,7 @@ namespace lib
 			virtual void onDestroy();
 			void exitProgram();
 
-			sptr<draw::RenderTarget> windowRenderTarget() const;
+			sptr<drivers::render::RenderTarget> windowRenderTarget() const;
 			/* Driver communication */
 			void wantsClose();
 		private:

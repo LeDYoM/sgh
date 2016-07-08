@@ -3,7 +3,6 @@
 
 #include <lib/draw/vertexarray.hpp>
 #include <lib/draw/renderstates.hpp>
-#include <lib/draw/rendertarget.hpp>
 
 namespace lib
 {
@@ -11,7 +10,7 @@ namespace lib
 	{
 		namespace render
 		{
-			class RenderTarget : public draw::RenderTarget
+			class RenderTarget
 			{
 			public:
 				virtual void setView(const Rectf32 &rectangle, const vector2df &vPort) = 0;

@@ -7,6 +7,7 @@
 #include <lib/include/iapp.hpp>
 #include "servicesmanager.hpp"
 #include <lib/driv_impl/sfml/wwindow_impl.hpp>
+#include <lib/driv_impl/sfml/rendertarget_impl.hpp>
 #include "appcontroller.hpp"
 #include "driver.hpp"
 #include "input.hpp"
@@ -115,7 +116,7 @@ namespace lib
 		{
 			_shouldClose = true;
 		}
-		sptr<draw::RenderTarget> Window::windowRenderTarget() const
+		sptr<drivers::render::RenderTarget> Window::windowRenderTarget() const
 		{
 			return p_wPrivate->m_renderWindow->windowRenderTarget();
 		}

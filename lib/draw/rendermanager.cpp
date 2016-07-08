@@ -85,7 +85,7 @@ namespace lib
 			AppService::Init();
 		}
 
-		void RenderManager::startFrame(sptr<core::RenderTarget> renderTarget, sptr<Camera> camera)
+		void RenderManager::startFrame(sptr<drivers::render::RenderTarget> renderTarget, sptr<Camera> camera)
 		{
 			m_renderTarget = renderTarget;
 			m_camera = camera;
@@ -97,10 +97,10 @@ namespace lib
 
 		}
 
-		void RenderManager::preRenderNode(const sptr<RenderNode> &node, const RenderStates &rStates)
+		void RenderManager::preRenderNode(const sptr<RenderNode> &node, const RenderStates &rStates) const
 		{
 
-			rStates.currentTarget->draw(node->vertexArray(), rStates);
+			m_renderTarget->draw(node->vertexArray(), rStates);
 		}
 
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node)

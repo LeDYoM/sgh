@@ -111,10 +111,10 @@ namespace lib
 			}
 
 			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
-			m_renderStates.emplace(RenderStates{service<core::Window>()->windowRender().get()});
+			m_renderStates.emplace(RenderStates{});
 			Transformation t;
 			auto _renderManager( service<RenderManager>() );
-			_renderManager->startFrame(service<core::Window>()->renderTarget(), _currentScene->camera());
+			_renderManager->startFrame(service<core::Window>()->windowRenderTarget(), _currentScene->camera());
 
 			visit(_currentScene,false,t);
 			m_renderStates.pop();
@@ -129,7 +129,7 @@ namespace lib
 					node->updateAnimations();
 
 					const RenderStates &top{ m_renderStates.top() };
-					RenderStates rStates{ top.blendMode, top.transform, top.texture, top.shader, top.currentTarget };
+					RenderStates rStates{ top.blendMode, top.transform, top.texture, top.shader };
 
 					rStates.transform *= node->transformation();
 
@@ -148,7 +148,7 @@ namespace lib
 
 					if (auto drawableNode = as<RenderNode>(node)) {
 						if (drawableNode->vertexArray().size() > 0) {
-							rStates.currentTarget->draw(drawableNode->vertexArray(), rStates);
+							service<RenderManager>()->preRenderNode(drawableNode, rStates);
 						}
 					} else if (auto renderGroupNode = as<RenderGroup>(node)) {
 						for (auto node_ : renderGroupNode->renderNodes()) {

@@ -105,11 +105,11 @@ add_custom_target(copy_zoper_data)
 		${PROJECT_SOURCE_DIR}/zoper/data/
 		${SGH_OUTPUT_DIRECTORY})
 
-#add_custom_target(copy_sfml_dlls)
-#	add_custom_command(TARGET copy_sfml_dlls PRE_BUILD
-#		COMMAND ${CMAKE_COMMAND} -E copy_directory
-#		${SFML_LINK_DLLS_DIR}
-#		${SGH_OUTPUT_DIRECTORY})
+add_custom_target(copy_sfml_dlls)
+	add_custom_command(TARGET copy_sfml_dlls PRE_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+		"${SFML_ROOT}/bin"
+		${SGH_OUTPUT_DIRECTORY})
 
 if (MSVC)
 	file( WRITE "${CMAKE_CURRENT_BINARY_DIR}/${CURRENT_TARGET}.vcxproj.user" 

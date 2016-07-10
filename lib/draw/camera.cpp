@@ -11,7 +11,7 @@ namespace lib
 		{
 			reset(Rectf32{ 0, 0, 1000, 1000 });
 		}
-
+		/*
 		Camera::Camera(const Rectf32& rectangle) :
 			center{}, size{}, rotation{},
 			m_viewport{ 0, 0, 1, 1 }, m_transformUpdated{ false }
@@ -21,8 +21,9 @@ namespace lib
 
 		Camera::Camera(const vector2df& center, const vector2df& size) :
 			center{ center }, size{ size },	rotation{}, m_viewport(0, 0, 1, 1),
-			m_transformUpdated{ false } {}
-
+			m_transformUpdated{ false } 
+		{}
+		*/
 		Camera::~Camera() {}
 
 		void Camera::setViewport(const Rectf32& viewport)

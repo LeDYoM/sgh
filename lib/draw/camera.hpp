@@ -28,9 +28,6 @@ namespace lib
 			void zoom(f32 factor);
 			const Transformation& getTransform();
 		private:
-			vector2df m_center;
-			vector2df m_size;
-			f32 m_rotation;
 			Rectf32 m_viewport;
 			Transformation m_transform;
 			bool m_transformUpdated;

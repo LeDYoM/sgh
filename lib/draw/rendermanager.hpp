@@ -35,9 +35,6 @@ namespace lib
 			void finishFrame();
 			void preRenderNode(const sptr<RenderNode> &, const RenderStates&) const;
 			void preRenderNode(const sptr<RenderNode> &);
-			void renderAll();
-			void renderOne(const RenderNode *);
-
 		private:
 			std::vector<const RenderNode*> m_renderList;
 			sptr<Camera> m_camera;

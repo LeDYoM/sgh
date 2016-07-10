@@ -4,7 +4,7 @@
 #include "renderstates.hpp"
 #include "rendernode.hpp"
 #include "camera.hpp"
-#include "rendertarget.hpp"
+#include <lib/drivers/render/rendertarget.hpp>
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/driver.hpp>
 
@@ -89,7 +89,6 @@ namespace lib
 		{
 			m_renderTarget = renderTarget;
 			m_camera = camera;
-
 		}
 
 		void RenderManager::finishFrame()
@@ -99,7 +98,6 @@ namespace lib
 
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node, const RenderStates &rStates) const
 		{
-
 			m_renderTarget->draw(node->vertexArray(), rStates);
 		}
 

@@ -7,10 +7,6 @@
 
 namespace lib
 {
-	namespace draw
-	{
-		class RenderTarget;
-	}
 	namespace drivers
 	{
 		namespace render

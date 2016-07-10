@@ -1,5 +1,6 @@
 #include "wwindow_impl.hpp"
 #include <lib/drivers/render/rendertarget.hpp>
+#include "rendertarget_impl.hpp"
 #include <lib/core/convops.hpp>
 #include <lib/core/window.hpp>
 #include <lib/include/key.hpp>
@@ -29,6 +30,7 @@ namespace lib
 			bool SFMLWindow::create(u32 width, u32 height, u32 bpp, const char *title, u32 depth, u32 stencil, u32 antialiasing, u32 major, u32 minor, u32 attributes)
 			{
 				sf::Window::create(sf::VideoMode{ width, height, bpp }, getAsString(title), sf::Style::Default, sf::ContextSettings{ depth, stencil, antialiasing, major, minor, attributes });
+				m_thisAsRenderTarget = sptr<drivers::render::RenderTarget>(new drivers::render::SFMLRenderTarget(static_cast<sf::RenderTarget*>(this)));
 				return true;
 			}
 

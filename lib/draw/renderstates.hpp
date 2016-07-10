@@ -15,7 +15,6 @@ namespace lib
 {
 	namespace draw
 	{
-		class RenderTarget;
 		class RenderStates
 		{
 		public:

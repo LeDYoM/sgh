@@ -6,7 +6,7 @@ namespace lib
 	namespace draw
 	{
 		Camera::Camera() :
-			center{},	size{}, rotation{},	m_viewport{ 0, 0, 1, 1 },
+			view{ Rectf32{.0f,.0f,1000.0f,1000.0f} }, rotation{}, m_viewport{ 0, 0, 1, 1 },
 			m_transformUpdated{ false }
 		{
 			reset(Rectf32{ 0, 0, 1000, 1000 });
@@ -33,10 +33,7 @@ namespace lib
 
 		void Camera::reset(const Rectf32& rectangle)
 		{
-			center().x = rectangle.left + rectangle.width / 2.f;
-			center().y = rectangle.top + rectangle.height / 2.f;
-			size().x = rectangle.width;
-			size().y = rectangle.height;
+			view() = rectangle;
 			rotation = 0;
 
 			m_transformUpdated = false;
@@ -49,7 +46,7 @@ namespace lib
 
 		void Camera::move(f32 offsetX, f32 offsetY)
 		{
-			center = vector2df{ center().x + offsetX, center().y + offsetY };
+			view().move({ view->center().x + offsetX, view->center().y + offsetY });
 		}
 
 		void Camera::rotate(f32 angle)
@@ -59,7 +56,8 @@ namespace lib
 
 		void Camera::zoom(f32 factor)
 		{
-			size = vector2df{ size() * factor };
+			factor;
+//			size = vector2df{ size() * factor };
 		}
 
 		const Transformation& Camera::getTransform()
@@ -67,18 +65,20 @@ namespace lib
 			// Recompute the matrix if needed
 			if (!m_transformUpdated)
 			{
+				auto center( view().center() );
+				auto size( view().size() );
 				// Rotation components
 				f32 angle = rotation() * 3.141592654f / 180.f;
 				f32 cosine = static_cast<float>(std::cos(angle));
 				f32 sine = static_cast<float>(std::sin(angle));
-				f32 tx = -center().x * cosine - center().y * sine + center().x;
-				f32 ty = center().x * sine - center().y * cosine + center().y;
+				f32 tx = -center.x * cosine - center.y * sine + center.x;
+				f32 ty = center.x * sine - center.y * cosine + center.y;
 
 				// Projection components
-				f32 a = 2.f / size().x;
-				f32 b = -2.f / size().y;
-				f32 c = -a * center().x;
-				f32 d = -b * center().y;
+				f32 a = 2.f / size.x;
+				f32 b = -2.f / size.y;
+				f32 c = -a * center.x;
+				f32 d = -b * center.y;
 
 				// Rebuild the projection matrix
 				m_transform = Transformation{ a * cosine, a * sine, a * tx + c,

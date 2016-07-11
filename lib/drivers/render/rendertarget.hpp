@@ -13,7 +13,7 @@ namespace lib
 			class RenderTarget
 			{
 			public:
-				virtual void setView(const Rectf32 &rectangle, const vector2df &vPort) = 0;
+				virtual void setView(const Rectf32 &rectangle, const Rectf32 &vPort) = 0;
 				virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) = 0;
 			};
 		}

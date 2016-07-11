@@ -13,11 +13,8 @@ namespace lib
 		{
 		public:
 			Camera();
-//			explicit Camera(const Rectf32 &rectangle);
-//			Camera(const vector2df& center, const vector2df& size);
 			~Camera();
-			NotifableProperty<vector2df> center;
-			NotifableProperty<vector2df> size;
+			NotifableProperty<Rectf32> view;
 			NotifableProperty<f32> rotation;
 			void setViewport(const Rectf32& viewport);
 			void reset(const Rectf32& rectangle);

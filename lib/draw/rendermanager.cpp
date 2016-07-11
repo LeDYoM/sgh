@@ -38,6 +38,7 @@ namespace lib
 		{
 			m_renderTarget = renderTarget;
 			m_camera = camera;
+			m_renderTarget->setView(m_camera->view(), m_camera->getViewport());
 		}
 
 		void RenderManager::finishFrame()

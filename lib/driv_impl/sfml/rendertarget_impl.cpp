@@ -17,7 +17,7 @@ namespace lib
 				m_renderTarget->draw(convert(vertexArray), vertexArray.size(), convert(vertexArray.getPrimitiveType()), convert(states));
 
 			}
-			void SFMLRenderTarget::setView(const Rectf32 & rectangle, const vector2df & vPort)
+			void SFMLRenderTarget::setView(const Rectf32 & rectangle, const Rectf32 & vPort)
 			{
 				m_view.reset(convert(rectangle));
 				m_renderTarget->setView(m_view);

@@ -56,7 +56,13 @@ namespace lib
 		return result;
 	}
 }
-
+/*
+int main(int argc, char* argv[])
+{
+	int result = lib::libMain(argc, argv, lib::uptr<lib::IApp>(new zoper::ZoperProgramController));
+	return result;
+}
+*/
 int main(int argc, char* argv[])
 {
 	lib::libMain(argc, argv, nullptr);

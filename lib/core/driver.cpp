@@ -14,8 +14,10 @@ namespace lib
 
 		bool Driver::initialize(const std::string &fileName)
 		{
-			LOG_CONSTRUCT("Driver fileName: " + fileName);
+			LOG_DEBUG("Initializing driver");
+			LOG_DEBUG("Driver fileName: " + fileName);
 			fileName;
+			m_initialized = true;
 			return true;
 		}
 
@@ -27,6 +29,7 @@ namespace lib
 
 		Driver::~Driver()
 		{
+			m_initialized = false;
 			LOG_DESTRUCT_NOPARAMS;
 		}
 

@@ -89,7 +89,8 @@ namespace lib
 					{
 					case HostTask::HostTaskCode::LoadDriver:
 						__ASSERT(!m_driver, "Cannot load another driver. There is already one loaded");
-						m_driver = sptr<Driver>(new Driver());
+						m_driver = sptr<Driver>{new Driver};
+						m_driver->initialize("");
 						break;
 					case HostTask::HostTaskCode::UnloadDriver:
 						__ASSERT(m_driver, "Trying to delete driver when no driver loaded");

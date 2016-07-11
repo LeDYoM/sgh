@@ -13,7 +13,7 @@
 #Temp. That should not be here
 include_directories ("${PROJECT_SOURCE_DIR}/SFML/include")
 link_directories ("${PROJECT_SOURCE_DIR}/SFML/lib")
-#End temp.
+#End temp
 
 include_directories ("${PROJECT_SOURCE_DIR}")
 #add_subdirectory (lib)

@@ -31,7 +31,7 @@ file (GLOB_RECURSE LIB_SOURCES "${LIB_DIRECTORY}*.cpp")
 ##############################################################################################
 
 set(CURRENT_TARGET sgh)
-add_library(${CURRENT_TARGET} STATIC ${LIB_HEADERS} ${LIB_SOURCES})
+add_executable(${CURRENT_TARGET} ${LIB_HEADERS} ${LIB_SOURCES})
 
 # Detect and add SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
@@ -128,7 +128,7 @@ endif()
 		
 # Adds logic to INSTALL.vcproj to copy host.exe to destination directory
 #install (TARGETS ${CURRENT_TARGET} RUNTIME DESTINATION ${SGH_INSTALL_DIRECTORY})
-install (TARGETS ${CURRENT_TARGET} ARCHIVE DESTINATION ${PROJECT_BINARY_DIR}/install)
+install (TARGETS ${CURRENT_TARGET} RUNTIME DESTINATION ${PROJECT_BINARY_DIR}/install)
 #install(FILES ${SFML_LINK_DLLS_DIR}${CMAKE_BUILD_TYPE}/*.dll DESTINATION ${PROJECT_BINARY_DIR}/bin)
 # Copy all assets to resources file
 #INSTALL(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/assets/ DESTINATION ${INSTALL_PATH}/assets FILES_MATCHING PATTERN "*.dae"  PATTERN "*.jpg")

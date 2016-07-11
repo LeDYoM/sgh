@@ -23,10 +23,10 @@ file (GLOB ZOPER_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 set(CURRENT_TARGET host)
 
-add_executable (${CURRENT_TARGET} ${ZOPER_HEADERS} ${ZOPER_SOURCES} 
+add_library (${CURRENT_TARGET} STATIC ${ZOPER_HEADERS} ${ZOPER_SOURCES} 
 #${LIB_HEADERS} ${LIB_SOURCES}
 )
-target_link_libraries(${CURRENT_TARGET} sgh)
+#target_link_libraries(${CURRENT_TARGET} sgh)
 
 set(SGH_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 set(SGH_INSTALL_DIRECTORY ${CMAKE_BINARY_DIR}/install/)
@@ -74,7 +74,7 @@ if (MSVC)
 endif()
 		
 # Adds logic to INSTALL.vcproj to copy host.exe to destination directory
-install (TARGETS host RUNTIME DESTINATION ${SGH_INSTALL_DIRECTORY})
+install (TARGETS host ARCHIVE DESTINATION ${SGH_INSTALL_DIRECTORY})
 #install(FILES ${SFML_LINK_DLLS_DIR}${CMAKE_BUILD_TYPE}/*.dll DESTINATION ${PROJECT_BINARY_DIR}/bin)
 # Copy all assets to resources file
 #INSTALL(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/assets/ DESTINATION ${INSTALL_PATH}/assets FILES_MATCHING PATTERN "*.dae"  PATTERN "*.jpg")

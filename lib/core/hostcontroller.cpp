@@ -63,7 +63,8 @@ namespace lib
 
 		void HostController::addApp(uptr<IApp> iapp)
 		{
-			addTask(sptr<HostTaskLoadAppFromIApp>(new HostTaskLoadAppFromIApp(std::move(iapp))));
+			__ASSERT(iapp, "Trying to add null application");
+			if (iapp) addTask(sptr<HostTaskLoadAppFromIApp>(new HostTaskLoadAppFromIApp(std::move(iapp))));
 		}
 
 		void HostController::removeApp(sptr<AppController> iapp)

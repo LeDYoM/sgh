@@ -56,3 +56,9 @@ namespace lib
 		return result;
 	}
 }
+
+int main(int argc, char* argv[])
+{
+	lib::libMain(argc, argv, nullptr);
+	return 0;
+}

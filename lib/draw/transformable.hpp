@@ -9,7 +9,7 @@ namespace lib
 {
 	namespace draw
 	{
-		class Transformable
+		class LIB_API Transformable
 		{
 		public:
 			Transformable();

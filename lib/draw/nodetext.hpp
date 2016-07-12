@@ -1,11 +1,16 @@
 #ifndef _LIB_NODETEXT_HPP__
 #define _LIB_NODETEXT_HPP__
 
-#include <SFML/Graphics/Font.hpp>
 #include <string>
 #include <vector>
-
 #include "rendernode.hpp"
+
+namespace sf
+{
+	class Font;
+	class Texture;
+	class String;
+}
 
 namespace lib
 {

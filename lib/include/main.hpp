@@ -7,7 +7,7 @@
 
 namespace lib
 {
-	LIB_API_EXPORT int libMain(int argc, char *argv[], uptr<IApp> iApp);
+	LIB_API int libMain(int argc, char *argv[], uptr<IApp> iApp);
 }
 
 #endif

@@ -63,7 +63,8 @@ namespace lib
 
 		void HostController::addApp(uptr<IApp> iapp)
 		{
-			addTask(sptr<HostTaskLoadAppFromIApp>(new HostTaskLoadAppFromIApp(std::move(iapp))));
+			__ASSERT(iapp, "Trying to add null application");
+			if (iapp) addTask(sptr<HostTaskLoadAppFromIApp>(new HostTaskLoadAppFromIApp(std::move(iapp))));
 		}
 
 		void HostController::removeApp(sptr<AppController> iapp)
@@ -112,13 +113,11 @@ namespace lib
 					{
 						sptr<AppController> app{ std::dynamic_pointer_cast<HostTaskUnloadApp>(task)->deAttach() };
 						bool found{ removeFromspVector(app, m_apps) };
-						if (found)
-						{
+						if (found) {
 							LOG_DEBUG("Going to uninstatiate " << app->appId());
 							app.reset();
 						}
-						else
-						{
+						else {
 							LOG_WARNING("Trying to unload unregistered app");
 						}
 					}

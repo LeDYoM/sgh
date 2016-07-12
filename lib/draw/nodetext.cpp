@@ -5,6 +5,9 @@
 #include "scenemanager.hpp"
 #include "../core/appcontroller.hpp"
 
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Texture.hpp>
+
 namespace lib
 {
 	namespace draw

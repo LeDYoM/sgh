@@ -3,8 +3,12 @@
 
 #include <lib/include/types.hpp>
 #include "log.hpp"
-#include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/Texture.hpp>
+
+namespace sf
+{
+	class Font;
+	class Texture;
+}
 
 namespace lib
 {

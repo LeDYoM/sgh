@@ -48,13 +48,9 @@ endif()
 #include myself
 include_directories ("../")
 
-#Add SFML directories
-#link_directories ("${PROJECT_SOURCE_DIR}/SFML/lib/win32/msvc")
-#include_directories ("${PROJECT_SOURCE_DIR}/SFML/include")
-#include_directories (${LIB_BASE_DIRECTORY})
-
 set(SGH_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 set(SGH_INSTALL_DIRECTORY ${CMAKE_BINARY_DIR}/install/)
+
 set_target_properties(${CURRENT_TARGET}
     PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY_DEBUG "${SGH_OUTPUT_DIRECTORY}"
@@ -86,18 +82,6 @@ source_group("lib\\drivers\\render" FILES ${LIB_DRIVERS_RENDER_HEADERS})
 # For now, add SFML driver implementation
 source_group("lib\\driv_implementation\\sfml" FILES ${LIB_DRIVERS_IMPLEMENTATION_SFML_HEADERS}  ${LIB_DRIVERS_IMPLEMENTATION_SFML_SOURCES})
 
-#target_link_libraries(${CURRENT_TARGET} 
-#	debug sfml-system-d
-#	debug sfml-window-d
-#	debug sfml-graphics-d
-#	debug sfml-main-d
-#	optimized sfml-system
-#	optimized sfml-window
-#	optimized sfml-graphics
-#	optimized sfml-main
-#)
-
-#set (SFML_LINK_DLLS_DIR ${PROJECT_SOURCE_DIR}/SFML/shared/win32/msvc)
 
 add_custom_target(copy_zoper_data)
 	add_custom_command(TARGET copy_zoper_data PRE_BUILD

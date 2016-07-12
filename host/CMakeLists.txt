@@ -1,15 +1,3 @@
-#set (LIB_DIRECTORY "${LIB_BASE_DIRECTORY}/")
-
-#file (GLOB_RECURSE LIB_HEADERS "${LIB_DIRECTORY}*.hpp")
-#file (GLOB_RECURSE LIB_SOURCES "${LIB_DIRECTORY}*.cpp")
-
-#Add SFML directories
-#link_directories ("${PROJECT_SOURCE_DIR}/SFML/lib/win32/msvc")
-#include_directories ("${PROJECT_SOURCE_DIR}/SFML/include")
-#include_directories (${LIB_BASE_DIRECTORY})
-
-#include_directories ("${LIB_DIRECTORY}")
-
 include_directories ("${PROJECT_SOURCE_DIR}")
 #add_subdirectory (lib)
 
@@ -41,17 +29,6 @@ set_target_properties(${CURRENT_TARGET}
     RUNTIME_OUTPUT_DIRECTORY_RELEASE "${SGH_OUTPUT_DIRECTORY}"
 	OUTPUT_NAME_DEBUG "${CURRENT_TARGET}d"
 )
-
-#target_link_libraries(${CURRENT_TARGET} 
-#	debug sfml-system-d
-#	debug sfml-window-d
-#	debug sfml-graphics-d
-#	debug sfml-main-d
-#	optimized sfml-system
-#	optimized sfml-window
-#	optimized sfml-graphics
-#	optimized sfml-main
-#)
 
 if (MSVC)
 	file( WRITE "${CMAKE_CURRENT_BINARY_DIR}/${CURRENT_TARGET}.vcxproj.user" 

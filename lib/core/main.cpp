@@ -6,7 +6,8 @@
 #include <vector>
 #include <string>
 
-//#include "zoperprogramcontroller.hpp"
+// Temp
+#include "../../host/zoperprogramcontroller.hpp"
 
 namespace lib
 {
@@ -34,7 +35,7 @@ namespace lib
 		{
 			initLog();
 			installMemManager();
-//			zoper::ZoperProgramController *program = new zoper::ZoperProgramController;
+			zoper::ZoperProgramController *program = new zoper::ZoperProgramController;
 
 			core::HostController hostController(transformParams(argc,argv));
 			// WIP:

@@ -9,7 +9,7 @@ namespace lib
 {
 	namespace draw
 	{
-		class Camera
+		class LIB_API Camera
 		{
 		public:
 			Camera();

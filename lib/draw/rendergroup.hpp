@@ -18,7 +18,7 @@ namespace lib
 		class NodeShape;
 		class NodeText;
 		class Scene;
-		class RenderGroup : public SceneNode
+		class LIB_API RenderGroup : public SceneNode
 		{
 		public:
 			RenderGroup(RenderGroup *const p_parent, const std::string &name);

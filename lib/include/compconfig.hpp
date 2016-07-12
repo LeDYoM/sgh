@@ -46,13 +46,18 @@
 	#define LIB_DEBUG
 #endif
 
-#define LIB_API_EXPORT
+//#define LIB_EXECUTABLE
 
 #ifdef LIB_SYSTEM_WINDOWS
-	#ifdef LIB_API_EXPORT
-		#define LIB_API __declspec(dllexport)
+#ifdef LIB_EXECUTABLE
+		#define LIB_API
+		#define MODULE
+
+	//	#define LIB_API __declspec(dllexport)
+	//	#define MODULE __declspec(dllimport)
 	#else
 		#define LIB_API __declspec(dllimport)
+		#define MODULE __declspec(dllexport)
 	#endif
 #else // Linux, FreeBSD, Mac OS X
 	#if __GNUC__ >= 4

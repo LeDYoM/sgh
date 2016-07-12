@@ -8,7 +8,7 @@ namespace lib
 {
 	namespace draw
 	{
-		class Transformation
+		class LIB_API Transformation
 		{
 		public:
 			using TransformationDataType = std::array<f32, 16>;

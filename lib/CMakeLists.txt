@@ -33,6 +33,8 @@ file (GLOB_RECURSE LIB_SOURCES "${LIB_DIRECTORY}*.cpp")
 set(CURRENT_TARGET sgh)
 add_executable(${CURRENT_TARGET} ${LIB_HEADERS} ${LIB_SOURCES})
 
+add_definitions(-DLIB_EXECUTABLE)
+
 # Detect and add SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 set (SFML_ROOT "${CMAKE_SOURCE_DIR}/SFML")
@@ -44,6 +46,10 @@ if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
   target_link_libraries(${CURRENT_TARGET} ${SFML_LIBRARIES})
 endif()
+
+#Temp add zooper
+link_directories ("${PROJECT_SOURCE_DIR}/host")
+target_link_libraries(${CURRENT_TARGET} hostd)
 
 #include myself
 include_directories ("../")

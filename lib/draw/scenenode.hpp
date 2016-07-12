@@ -14,7 +14,7 @@ namespace lib
 		class RenderGroup;
 		class IAnimation;
 
-		class SceneNode : public Transformable, public Object
+		class LIB_API SceneNode : public Transformable, public Object
 		{
 		public:
 			SceneNode(RenderGroup *const p_parent, const str &name);

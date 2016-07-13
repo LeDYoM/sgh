@@ -6,7 +6,6 @@
 #include <unordered_map>
 #include <queue>
 #include <string>
-#include <hash_map>
 
 namespace lib
 {

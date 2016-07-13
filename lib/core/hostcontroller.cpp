@@ -40,9 +40,9 @@ namespace lib
 			{
 				processTask();
 				exit = m_apps.empty();
-				for (auto app : m_apps)
+				for (auto appNode : m_apps)
 				{
-					bool terminated = app->update();
+					bool terminated = appNode.second->update();
 					if (terminated)
 					{
 						removeApp(app);
@@ -64,12 +64,12 @@ namespace lib
 			return 0;
 		}
 
-		void HostController::loadAppFromFileName(const str&fileName)
+		const LoadedAppDescriptor *const HostController::loadAppFromFileName(const str&fileName)
 		{
+			addTask(sptr<HostTaskLoadAppFromFileName>(new HostTaskLoadAppFromFileName(fileName)));
 			// Temp. Ignore filename.
-			fileName;
-
 			addApp(getModule());
+			return LoadedAppDescriptor(fileName);
 		}
 
 

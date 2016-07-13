@@ -1,9 +1,7 @@
 #include <lib/include/main.hpp>
 
-#include "zoperprogramcontroller.hpp"
-
 int main(int argc, char* argv[])
 {
-	int result = lib::libMain(argc, argv,getModule());
+	int result = lib::libMain(argc, argv);
 	return result;
 }

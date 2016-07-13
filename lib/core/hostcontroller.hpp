@@ -26,10 +26,10 @@ namespace lib
 			int finalize();
 
 			void loadAppFromFileName(const str&fileName);
-			void addApp(uptr<IApp> iapp);
 			void removeApp(sptr<AppController> iapp);
 
 		private:
+			void addApp(uptr<IApp> iapp);
 			void addTask(sptr<HostTask> newTask);
 
 			void processTask();

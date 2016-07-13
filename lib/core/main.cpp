@@ -6,8 +6,6 @@
 #include <vector>
 #include <string>
 
-//#include "zoperprogramcontroller.hpp"
-
 namespace lib
 {
 	namespace
@@ -24,7 +22,7 @@ namespace lib
 		}
 	}
 
-	int lib::libMain(int argc, char *argv[], uptr<lib::IApp> iApp)
+	int lib::libMain(int argc, char *argv[])
 	{
 		argc;
 		argv;
@@ -34,15 +32,14 @@ namespace lib
 		{
 			initLog();
 			installMemManager();
-//			zoper::ZoperProgramController *program = new zoper::ZoperProgramController;
 
 			core::HostController hostController(transformParams(argc,argv));
-			// WIP:
 			hostController.initialize();
-//			uptr<IApp> zpc = std::make_unique<zoper::ZoperProgramController>();
-			hostController.addApp(std::move(iApp));
 
+			// WIP:
+			hostController.loadAppFromFileName("zoper");
 			// End wip
+
 			result = hostController.run();
 			hostController.finalize();
 		}

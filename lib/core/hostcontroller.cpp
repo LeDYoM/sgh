@@ -5,6 +5,9 @@
 #include "appcontroller.hpp"
 #include "driver.hpp"
 
+//Temp
+#include "../../host/zoperprogramcontroller.hpp"
+
 namespace lib
 {
 	namespace core
@@ -66,7 +69,7 @@ namespace lib
 			// Temp. Ignore filename.
 			fileName;
 
-
+			addApp(getModule());
 		}
 
 

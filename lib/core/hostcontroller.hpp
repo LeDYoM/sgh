@@ -6,7 +6,6 @@
 #include <queue>
 #include <string>
 
-
 namespace lib
 {
 	namespace core
@@ -26,6 +25,7 @@ namespace lib
 			int run();
 			int finalize();
 
+			void loadAppFromFileName(const str&fileName);
 			void addApp(uptr<IApp> iapp);
 			void removeApp(sptr<AppController> iapp);
 

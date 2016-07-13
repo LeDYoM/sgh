@@ -61,6 +61,15 @@ namespace lib
 			return 0;
 		}
 
+		void HostController::loadAppFromFileName(const str&fileName)
+		{
+			// Temp. Ignore filename.
+			fileName;
+
+
+		}
+
+
 		void HostController::addApp(uptr<IApp> iapp)
 		{
 			__ASSERT(iapp, "Trying to add null application");

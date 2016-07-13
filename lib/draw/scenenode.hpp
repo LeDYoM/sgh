@@ -2,7 +2,6 @@
 #define LIB_SCENENODE_HPP__
 
 #include <lib/core/obj.hpp>
-#include "iparentable.hpp"
 #include "transformable.hpp"
 #include <lib/core/vecsptr.hpp>
 #include <lib/include/color.hpp>

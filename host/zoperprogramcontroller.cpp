@@ -2,6 +2,10 @@
 #include "gamescene.hpp"
 #include "common.hpp"
 
+lib::uptr<lib::IApp> getModule() {
+	return lib::uptr<lib::IApp>(new zoper::ZoperProgramController());
+}
+
 namespace zoper
 {
 	ZoperProgramController::ZoperProgramController()

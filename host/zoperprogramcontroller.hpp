@@ -21,4 +21,6 @@ namespace zoper
 	};
 }
 
+lib::uptr<lib::IApp> getModule();
+
 #endif

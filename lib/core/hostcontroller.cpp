@@ -42,10 +42,10 @@ namespace lib
 				exit = m_apps.empty();
 				for (auto appNode : m_apps)
 				{
-					bool terminated = appNode.second->update();
+					bool terminated = appNode->update();
 					if (terminated)
 					{
-						removeApp(app);
+						removeApp(appNode);
 					}
 				}
 			}
@@ -64,14 +64,12 @@ namespace lib
 			return 0;
 		}
 
-		const LoadedAppDescriptor *const HostController::loadAppFromFileName(const str&fileName)
+		void HostController::loadAppFromFileName(const str&fileName)
 		{
 			addTask(sptr<HostTaskLoadAppFromFileName>(new HostTaskLoadAppFromFileName(fileName)));
 			// Temp. Ignore filename.
 			addApp(getModule());
-			return LoadedAppDescriptor(fileName);
 		}
-
 
 		void HostController::addApp(uptr<IApp> iapp)
 		{
@@ -111,7 +109,6 @@ namespace lib
 						break;
 					case HostTask::HostTaskCode::LoadAppFromFileName:
 						__ASSERT(m_driver, "Cannot load an app without having loaded a driver first");
-
 						break;
 					case HostTask::HostTaskCode::LoadAppFromIApp:
 					{

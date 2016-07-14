@@ -69,12 +69,14 @@ namespace lib
 			updateTransformIfNecessary();
 		}
 
-		void Transformable::updateTransformationForFrameIfNecessary(const Transformation &other, const bool force)
+		bool Transformable::updateTransformationForFrameIfNecessary(const Transformation &other, const bool force)
 		{
 			if (m_frameTransformationNeedsUpdate || force) {
 				m_frameTransformationNeedsUpdate = false;
-				m_frameTransformation = m_transformation() * other;
+				m_frameTransformation = other * m_transformation();
+				return true;
 			}
+			return false;
 		}
 
 	}

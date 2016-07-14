@@ -21,8 +21,7 @@ namespace lib
 			NotifableProperty<f32> rotation;
 			const Transformation &transformation();
 			virtual void update();
-			const bool frameTransformationNeedsUpdate() const { return m_frameTransformationNeedsUpdate; }
-			void updateTransformationForFrameIfNecessary(const Transformation &other, const bool force);
+			bool updateTransformationForFrameIfNecessary(const Transformation &other, const bool force);
 			const Transformation &globalTransformation() const { return m_frameTransformation; }
 		private:
 			void updateTransformIfNecessary();

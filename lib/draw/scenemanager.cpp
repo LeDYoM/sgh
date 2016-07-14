@@ -139,12 +139,9 @@ namespace lib
 
 					m_renderStates.push(rStates);
 					node->update();
-					forceFrameUpdate |= node->frameTransformationNeedsUpdate();
+					forceFrameUpdate |= node->updateTransformationForFrameIfNecessary(parentTransformation, forceFrameUpdate);
 
-					if (forceFrameUpdate) {
-						node->updateTransformationForFrameIfNecessary(parentTransformation,forceFrameUpdate);
-						parentTransformation = node->globalTransformation();
-					}
+					parentTransformation = node->globalTransformation();
 
 					if (auto drawableNode = as<RenderNode>(node)) {
 						if (drawableNode->vertexArray().size() > 0) {

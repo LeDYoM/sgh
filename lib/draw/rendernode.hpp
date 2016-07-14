@@ -17,7 +17,10 @@ namespace lib
 	namespace draw
 	{
 		class RenderGroup;
-		class RenderStates;
+		namespace priv
+		{
+			class RenderStates;
+		}
 
 		enum class BlendType : u32
 		{
@@ -56,7 +59,7 @@ namespace lib
 			bool m_geometryNeedUpdate;
 
 		private:
-			RenderStates m_renderStates;
+			uptr<priv::RenderStates> m_renderStates;
 		};
 	}
 }

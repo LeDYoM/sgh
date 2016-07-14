@@ -2,13 +2,13 @@
 #define LIB_DRAW_RENDERSTATES_HPP
 
 #include <SFML/Graphics/BlendMode.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
 #include "transformation.hpp"
 
 namespace sf
 {
 	class Shader;
 	class Texture;
-
 }
 
 namespace lib
@@ -34,6 +34,13 @@ namespace lib
 			const sf::Texture *texture;
 			const sf::Shader *shader;
 		};
+
+		namespace priv
+		{
+			class RenderStates : sf::RenderStates
+			{
+			};
+		}
 	}
 }
 

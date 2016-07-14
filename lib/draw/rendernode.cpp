@@ -1,6 +1,7 @@
-#include "RenderNode.hpp"
+#include "rendernode.hpp"
 #include <lib/core/window.hpp>
 #include <lib/core/log.hpp>
+#include "renderstates.hpp"
 
 namespace lib
 {
@@ -8,8 +9,7 @@ namespace lib
 	{
 		RenderNode::RenderNode(RenderGroup *const p_parent, const std::string &name, const PrimitiveType primitiveType)
 			: SceneNode(p_parent, name), m_vertices{ primitiveType }, m_bounds{}, 
-			color{ Color{ 255, 255, 255 } }, 
-			m_geometryNeedUpdate{ true }
+			color{ Color{ 255, 255, 255 } }, m_geometryNeedUpdate{ true }, m_renderStates{ new priv::RenderStates }
 		{
 			LOG_CONSTRUCT("Name: " + name);
 		}

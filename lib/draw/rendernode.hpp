@@ -17,6 +17,8 @@ namespace lib
 	namespace draw
 	{
 		class RenderGroup;
+		class RenderStates;
+
 		enum class BlendType : u32
 		{
 			Zero,
@@ -52,6 +54,9 @@ namespace lib
 			VertexArray m_vertices;
 			Rectf32 m_bounds;
 			bool m_geometryNeedUpdate;
+
+		private:
+			RenderStates m_renderStates;
 		};
 	}
 }

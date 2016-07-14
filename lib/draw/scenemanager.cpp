@@ -85,12 +85,11 @@ namespace lib
 
 		sptr<Scene> SceneManager::getSceneByName(const std::string &name) const
 		{
-			for (auto scene : _scenes) {
-				if (scene->name() == name) {
-					return scene;
-				}
-			}
-			return nullptr;
+			auto resultIterator{ std::find_if(_scenes.cbegin(), _scenes.cend(), [&name](auto scene)
+			{
+				return scene->name() == name;
+			}) };
+			return resultIterator == _scenes.end() ? sptr<Scene>() : *resultIterator;
 		}
 
 		void SceneManager::update()

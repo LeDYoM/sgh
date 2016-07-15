@@ -51,6 +51,8 @@ namespace lib
 			virtual const VertexArray &vertexArray() const;
 			virtual void update() override;
 
+			void updateRenderStates();
+
 		protected:
 			virtual void ensureGeometryUpdate() = 0;
 			void updateFillColors();

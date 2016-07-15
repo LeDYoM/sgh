@@ -56,5 +56,11 @@ namespace lib
 				updateFillColors();
 			}
 		}
+
+		void RenderNode::updateRenderStates()
+		{
+			m_renderStates->transform = m_global
+		}
+
 	}
 }

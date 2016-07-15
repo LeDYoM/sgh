@@ -1,15 +1,15 @@
 #include "rendermanager.hpp"
-#include "transformation.hpp"
+
 #include <lib/core/log.hpp>
+
+#include "transformation.hpp"
 #include "renderstates.hpp"
 #include "rendernode.hpp"
 #include "camera.hpp"
+
 #include <lib/drivers/render/rendertarget.hpp>
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/driver.hpp>
-
-#include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Shader.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
@@ -53,6 +53,7 @@ namespace lib
 
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node)
 		{
+
 			m_renderList.push_back(node.get());
 		}
 	}

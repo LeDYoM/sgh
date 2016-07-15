@@ -37,7 +37,7 @@ namespace lib
 
 		namespace priv
 		{
-			class RenderStates : sf::RenderStates
+			class RenderStates : public sf::RenderStates
 			{
 			};
 		}

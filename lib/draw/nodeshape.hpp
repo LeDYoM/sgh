@@ -34,7 +34,7 @@ namespace lib
 		protected:
 			virtual void ensureGeometryUpdate() override;
 			void setTexture_(const sf::Texture* texture, bool resetRect = false);
-			virtual u32 draw() override;
+			virtual void update() override;
 			void updateTexCoords();
 
 		private:

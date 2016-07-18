@@ -171,20 +171,10 @@ namespace lib
 			return m_texture;
 		}
 
-		u32 NodeShape::draw()
+		void NodeShape::update()
 		{
+			RenderNode::update();
 			ensureGeometryUpdate();
-
-//			RenderStates &states{ service<SceneManager>()->frameRenderStates() };
-//			auto oldTransformation= states.transform;
-//			states.transform *= transformation();
-
-			// Render the inside
-//			states.texture = m_texture;
-//			states.currentTarget->draw(m_vertices,states);
-
-//			states.transform = oldTransformation;
-			return 1;
 		}
 
 		void NodeShape::updateTexCoords()

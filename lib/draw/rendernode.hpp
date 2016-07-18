@@ -41,7 +41,6 @@ namespace lib
 			explicit RenderNode(RenderGroup *const p_parent, const std::string &name, const PrimitiveType primitiveType);
 			virtual ~RenderNode();
 
-			virtual u32 draw() = 0;
 			NotifableProperty<Color> color;
 
 			virtual Rectf32 getLocalBounds();

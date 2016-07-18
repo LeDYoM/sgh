@@ -133,8 +133,6 @@ namespace lib
 						if (drawableNode->vertexArray().size() > 0) {
 							drawableNode->updateRenderStates();
 							service<RenderManager>()->preRenderNode(drawableNode);
-
-//							service<RenderManager>()->preRenderNode(drawableNode, rStates);
 						}
 					} else if (auto renderGroupNode = as<RenderGroup>(node)) {
 						for (auto node_ : renderGroupNode->renderNodes()) {

@@ -47,7 +47,7 @@ namespace lib
 					? Resource::ResourceType::Font :
 					Resource::ResourceType::Texture;
 				m_resources.push_back(sptr<Resource>(new Resource(resourceType, m_resourcesDirectory + tuple.second.getString(), id)));
-				LOG_DEBUG_("Resource with id " + tuple.second.getString() + " added");
+				LOG_DEBUG("Resource with id " + tuple.second.getString() + " added");
 			}
 		}
 	}

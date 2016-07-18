@@ -39,7 +39,7 @@ namespace lib
 			case AppState::ReadyToStart:
 			{
 				// Create the scene manager
-				LOG_DEBUG_(appId() + ":  Starting initialization...");
+				LOG_DEBUG(appId() + ":  Starting initialization...");
 				m_state = AppState::Executing;
 
 				//TO DO: Ask via requests
@@ -78,7 +78,7 @@ namespace lib
 //				m_iapp->onFinish();
 
 				m_servicesManager->stopServices();
-				LOG_DEBUG_(appId() + ": terminated");
+				LOG_DEBUG(appId() + ": terminated");
 				return true;
 				break;
 			case AppState::Terminated:

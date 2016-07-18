@@ -144,7 +144,10 @@ namespace lib
 
 					if (auto drawableNode = as<RenderNode>(node)) {
 						if (drawableNode->vertexArray().size() > 0) {
-							service<RenderManager>()->preRenderNode(drawableNode, rStates);
+							drawableNode->updateRenderStates();
+							service<RenderManager>()->preRenderNode(drawableNode);
+
+//							service<RenderManager>()->preRenderNode(drawableNode, rStates);
 						}
 					} else if (auto renderGroupNode = as<RenderGroup>(node)) {
 						for (auto node_ : renderGroupNode->renderNodes()) {

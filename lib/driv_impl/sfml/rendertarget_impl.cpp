@@ -1,5 +1,6 @@
 #include "rendertarget_impl.hpp"
 #include <lib/core/convops.hpp>
+#include <lib/draw/rendernode.hpp>
 
 namespace lib
 {
@@ -17,6 +18,13 @@ namespace lib
 				m_renderTarget->draw(convert(vertexArray), vertexArray.size(), convert(vertexArray.getPrimitiveType()), convert(states));
 
 			}
+
+			void SFMLRenderTarget::draw(const sptr<draw::RenderNode> &node)
+			{
+				m_renderTarget->draw(convert(node->vertexArray()), node->vertexArray().size(), convert(node->vertexArray().getPrimitiveType()), node->renderStates());
+
+			}
+
 			void SFMLRenderTarget::setView(const Rectf32 & rectangle, const Rectf32 & vPort)
 			{
 				m_view.reset(convert(rectangle));

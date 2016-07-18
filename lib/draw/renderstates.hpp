@@ -15,6 +15,7 @@ namespace lib
 {
 	namespace draw
 	{
+		
 		class RenderStates
 		{
 		public:
@@ -34,7 +35,7 @@ namespace lib
 			const sf::Texture *texture;
 			const sf::Shader *shader;
 		};
-
+		
 		namespace priv
 		{
 			class RenderStates : public sf::RenderStates

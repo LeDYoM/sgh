@@ -2,6 +2,7 @@
 #include <lib/core/window.hpp>
 #include <lib/core/log.hpp>
 #include "renderstates.hpp"
+#include <lib/core/convops.hpp>
 
 namespace lib
 {
@@ -59,7 +60,10 @@ namespace lib
 
 		void RenderNode::updateRenderStates()
 		{
-			m_renderStates->transform = m_global
+			m_renderStates->transform = convert(globalTransformation());
+			m_renderStates->blendMode = sf::BlendMode();
+			m_renderStates->shader = nullptr;
+			m_renderStates->texture = texture();
 		}
 
 	}

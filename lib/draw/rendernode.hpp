@@ -52,6 +52,7 @@ namespace lib
 			virtual void update() override;
 
 			void updateRenderStates();
+			const priv::RenderStates &renderStates() const { return *m_renderStates; }
 
 		protected:
 			virtual void ensureGeometryUpdate() = 0;

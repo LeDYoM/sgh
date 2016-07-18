@@ -53,8 +53,8 @@ namespace lib
 
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node)
 		{
-
-			m_renderList.push_back(node.get());
+			m_renderTarget->draw(node);
+//			m_renderList.push_back(node.get());
 		}
 	}
 }

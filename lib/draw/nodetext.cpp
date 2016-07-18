@@ -241,7 +241,7 @@ namespace lib
 
 			// Create one quad for each character
 			f32 minX = static_cast<f32>(m_characterSize);
-			f32 minY = static_cast<f32>(m_characterSize);
+			f32 minY = minX;
 			f32 maxX = 0.f;
 			f32 maxY = 0.f;
 			u32 prevChar = 0;

@@ -4,16 +4,12 @@
 #include <vector>
 #include <lib/include/types.hpp>
 #include <lib/core/appservice.hpp>
-#include <lib/include/key.hpp>
+#include "transformation.hpp"
 #include "renderstates.hpp"
 #include <stack>
 
 namespace lib
 {
-	namespace core
-	{
-		class Window;
-	}
 	namespace draw
 	{
 		class Scene;

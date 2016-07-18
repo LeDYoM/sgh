@@ -19,7 +19,6 @@ namespace lib
 	{
 		class RenderNode;
 		class Camera;
-		class RenderStates;
 
 		class RenderManager : public AppService
 		{
@@ -33,7 +32,6 @@ namespace lib
 
 			void startFrame(sptr<drivers::render::RenderTarget> renderTarget, sptr<Camera> camera);
 			void finishFrame();
-			void preRenderNode(const sptr<RenderNode> &, const RenderStates&) const;
 			void preRenderNode(const sptr<RenderNode> &);
 		private:
 			std::vector<const RenderNode*> m_renderList;

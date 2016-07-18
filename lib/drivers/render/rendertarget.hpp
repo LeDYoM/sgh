@@ -18,7 +18,6 @@ namespace lib
 			{
 			public:
 				virtual void setView(const Rectf32 &rectangle, const Rectf32 &vPort) = 0;
-				virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) = 0;
 				virtual void draw(const sptr<draw::RenderNode> &node) = 0;
 			};
 		}

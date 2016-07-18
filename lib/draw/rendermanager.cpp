@@ -46,11 +46,6 @@ namespace lib
 
 		}
 
-		void RenderManager::preRenderNode(const sptr<RenderNode> &node, const RenderStates &rStates) const
-		{
-			m_renderTarget->draw(node->vertexArray(), rStates);
-		}
-
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node)
 		{
 			m_renderTarget->draw(node);

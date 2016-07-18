@@ -13,16 +13,9 @@ namespace lib
 			{
 			}
 
-			void SFMLRenderTarget::draw(const draw::VertexArray & vertexArray, const draw::RenderStates & states)
-			{
-				m_renderTarget->draw(convert(vertexArray), vertexArray.size(), convert(vertexArray.getPrimitiveType()), convert(states));
-
-			}
-
 			void SFMLRenderTarget::draw(const sptr<draw::RenderNode> &node)
 			{
 				m_renderTarget->draw(convert(node->vertexArray()), node->vertexArray().size(), convert(node->vertexArray().getPrimitiveType()), node->renderStates());
-
 			}
 
 			void SFMLRenderTarget::setView(const Rectf32 & rectangle, const Rectf32 & vPort)

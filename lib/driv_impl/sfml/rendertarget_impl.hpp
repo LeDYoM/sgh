@@ -15,7 +15,6 @@ namespace lib
 			{
 			public:
 				SFMLRenderTarget(sf::RenderTarget *mySelf);
-				virtual void draw(const draw::VertexArray &vertexArray, const draw::RenderStates& states) override;
 				virtual void draw(const sptr<draw::RenderNode> &node) override;
 				virtual void setView(const Rectf32 &rectangle, const Rectf32 &vPort) override;
 			private:

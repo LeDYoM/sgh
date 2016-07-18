@@ -109,34 +109,21 @@ namespace lib
 				}
 			}
 
-			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
-			m_renderStates.emplace(RenderStates{});
 			Transformation t;
 			auto _renderManager( service<RenderManager>() );
 			_renderManager->startFrame(service<core::Window>()->windowRenderTarget(), _currentScene->camera());
 
 			visit(_currentScene,false,t);
-			m_renderStates.pop();
-			__ASSERT(m_renderStates.size() == 0, "Render states still on the stack");
 		}
 
 		void SceneManager::visit(const sptr<SceneNode>& node, bool forceFrameUpdate, Transformation &parentTransformation)
 		{
+			Transformation t{ parentTransformation };
 			if (node->isActive()) {
 				service<Input>()->updateNode(node);
 				if (node->isVisible()) {
 					node->updateAnimations();
 
-					const RenderStates &top{ m_renderStates.top() };
-					RenderStates rStates{ top.blendMode, top.transform, top.texture, top.shader };
-
-					rStates.transform *= node->transformation();
-
-					if (auto renderableNode = as<RenderNode>(node)) {
-						rStates.texture = renderableNode->texture();
-					}
-
-					m_renderStates.push(rStates);
 					node->update();
 					forceFrameUpdate |= node->updateTransformationForFrameIfNecessary(parentTransformation, forceFrameUpdate);
 
@@ -154,20 +141,14 @@ namespace lib
 							visit(node_,forceFrameUpdate,parentTransformation);
 						}
 					}
-
-					m_renderStates.pop();
 				}
 			}
+			parentTransformation = t;
 		}
 
 		void SceneManager::exitProgram()
 		{
 //			p_parentWindow->exitProgram();
-		}
-
-		const RenderStates &SceneManager::frameRenderStates() const
-		{
-			return m_renderStates.top();
 		}
 	}
 }

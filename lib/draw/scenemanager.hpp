@@ -17,7 +17,6 @@ namespace lib
 	namespace draw
 	{
 		class Scene;
-		class RenderStates;
 		class SceneNode;
 
 		class SceneManager : public AppService
@@ -37,7 +36,6 @@ namespace lib
 			void addScenes(const std::vector<sptr<Scene>> &&sceneVector);
 			void exitProgram();
 
-			const RenderStates &frameRenderStates() const;
 			void visit(const sptr<SceneNode> &node, bool forceFrameUpdate, Transformation &parentTransformation);
 		private:
 			void setScene(sptr<Scene> scene);
@@ -47,10 +45,6 @@ namespace lib
 			sptr<Scene> _currentScene{ nullptr };
 			bool b_lock{ false };
 			sptr<Scene> _nextScene{ nullptr };
-			typedef std::stack <RenderStates> StackVector;
-			StackVector m_renderStates;
-
-
 		};
 	}
 }

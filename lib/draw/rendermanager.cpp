@@ -38,25 +38,23 @@ namespace lib
 		{
 			m_renderTarget = renderTarget;
 			m_camera = camera;
-			m_renderTarget->setView(m_camera->view(), m_camera->getViewport());
 		}
 
 		void RenderManager::finishFrame()
 		{
+			lib::drivers::render::RenderTarget *renderTarget{ m_renderTarget.get() };
+			renderTarget->setView(m_camera->view(), m_camera->getViewport());
 			for (const RenderNode*node : m_renderList)
 			{
-				m_renderTarget->draw(node);
+				renderTarget->draw(node);
 			}
 
 			m_renderList.clear();
-
-
 		}
 
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node)
 		{
 //			m_renderTarget->draw(node);
-
 			m_renderList.push_back(node.get());
 		}
 	}

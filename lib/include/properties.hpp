@@ -24,8 +24,25 @@ namespace lib
 		T m_value;
 	};
 
+	class NotifablePropertyBase
+	{
+	public:
+		bool changed() const { return m_changedFlag; }
+		void resetChanged() { m_changedFlag = false; }
+		bool readResetChanged()
+		{
+			if (m_changedFlag)
+			{
+				m_changedFlag = false;
+				return true;
+			}
+			return false;
+		}
+	protected:
+		bool m_changedFlag{ true };
+	};
 	template <typename T>
-	class NotifableProperty
+	class NotifableProperty : public NotifablePropertyBase
 	{
 	public:
 		explicit NotifableProperty() : m_value{} {}
@@ -38,20 +55,37 @@ namespace lib
 		T* operator->() { m_changedFlag = true; return &m_value; }
 		NotifableProperty &operator=(const T&rh) { m_changedFlag = true; m_value = rh; return *this; }
 
-		bool changed() const { return m_changedFlag; }
-		void resetChanged() { m_changedFlag = false; }
-		bool readResetChanged()
-		{ 
-			if (m_changedFlag)
-			{
-				m_changedFlag = false;
-				return true;
-			}
-			return false;
-		}
 	private:
 		T m_value;
-		bool m_changedFlag{ true };
+	};
+
+	class LinkedNotifableProperty
+	{
+	public:
+		LinkedNotifableProperty() = default;
+		LinkedNotifableProperty(std::initializer_list<NotifablePropertyBase*> properties)
+		{
+			for (NotifablePropertyBase* pr : properties) {
+				m_properties.emplace_back(pr);
+			}
+		};
+
+		bool changed() const {
+			return std::any_of(m_properties.cbegin(), m_properties.cend(), [](const NotifablePropertyBase* pr) { return pr->changed(); });
+		}
+
+		void resetChanged() { 
+			std::for_each(m_properties.begin(), m_properties.end(), [](NotifablePropertyBase *pr) { pr->resetChanged(); });
+		}
+
+		operator bool() const
+		{
+			return changed();
+		}
+
+
+	private:
+		std::vector<NotifablePropertyBase*> m_properties;
 	};
 
 }

@@ -8,7 +8,10 @@ namespace lib
 		Transformable::Transformable() :
 			//origin{ {0, 0} }, 
 			position{ {0, 0} }, rotation{ {0.0f} }, scale{ vector2df{ 1, 1 } },
-			m_transformation{ Transformation{} } {}
+			m_transformation{ Transformation{} } 
+		{
+			transformationNeedUpdate = { &position, &scale, &rotation };
+		}
 
 		Transformable::~Transformable()
 		{
@@ -28,7 +31,7 @@ namespace lib
 		void Transformable::updateTransformIfNecessary()
 		{
 			// Recompute the combined transformation if needed
-			if (transformationNeedUpdate())
+			if (transformationNeedUpdate)
 			{
 				f32 angle = -rotation() * 3.141592654f / 180.f;
 				f32 cosine = static_cast<f32>(std::cos(angle));
@@ -47,21 +50,9 @@ namespace lib
 					-sxs, syc, position->y,
 					0.f, 0.f, 1.f };
 
-				resetTransformationNeedUpdate();
+				transformationNeedUpdate.resetChanged();
 				m_frameTransformationNeedsUpdate = true;
 			}
-		}
-
-		bool Transformable::transformationNeedUpdate()
-		{
-			return position.changed() || scale.changed() || rotation.changed();
-		}
-
-		void Transformable::resetTransformationNeedUpdate()
-		{
-			position.resetChanged();
-			scale.resetChanged();
-			rotation.resetChanged();
 		}
 
 		void Transformable::update()

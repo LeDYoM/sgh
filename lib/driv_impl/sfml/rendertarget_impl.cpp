@@ -13,7 +13,7 @@ namespace lib
 			{
 			}
 
-			void SFMLRenderTarget::draw(const sptr<draw::RenderNode> &node)
+			void SFMLRenderTarget::draw(const draw::RenderNode *node)
 			{
 				m_renderTarget->draw(convert(node->vertexArray()), node->vertexArray().size(), convert(node->vertexArray().getPrimitiveType()), node->renderStates());
 			}

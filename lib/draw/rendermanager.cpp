@@ -43,13 +43,21 @@ namespace lib
 
 		void RenderManager::finishFrame()
 		{
+			for (const RenderNode*node : m_renderList)
+			{
+				m_renderTarget->draw(node);
+			}
+
+			m_renderList.clear();
+
 
 		}
 
 		void RenderManager::preRenderNode(const sptr<RenderNode> &node)
 		{
-			m_renderTarget->draw(node);
-//			m_renderList.push_back(node.get());
+//			m_renderTarget->draw(node);
+
+			m_renderList.push_back(node.get());
 		}
 	}
 }

@@ -68,7 +68,8 @@ namespace lib
 			std::swap(m_dtype, other.m_dtype);
 			std::swap(f64_, other.f64_);
 		}
-		virtual ~DataValue();
+		
+		~DataValue();
 
 		bool operator==(const s8 value_) const;
 		bool operator==(const u8 value_) const;

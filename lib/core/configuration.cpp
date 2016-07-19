@@ -64,11 +64,11 @@ namespace lib
 		m_rootNode = std::move(DataValue::fromStringVector(data, count) );
 	}
 
-	DataValue Configuration::get(const str &cPath, const DataValue &defaultv)
+	DataValue Configuration::get(const str &cPath, const DataValue &defaultv) const
 	{
 		u32 index{ 0 };
 		DataPath dPath{ cPath };
-		DataMap *current{ &m_rootNode };
+		const DataMap *current{ &m_rootNode };
 
 		while (index<dPath.size()) {
 			auto p(current->find(dPath[index]));
@@ -90,4 +90,10 @@ namespace lib
 		}
 		return defaultv;
 	}
+
+	s32 Configuration::gets32(const str &cPath, const s32 defaultv) const
+	{
+		return static_cast<s32>(get(cPath, DataValue{ defaultv }).gets32());
+	}
+
 }

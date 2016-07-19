@@ -66,7 +66,7 @@ namespace lib
 		inline DataValue(DataValue &&other)
 		{
 			std::swap(m_dtype, other.m_dtype);
-			std::swap(f64_, other.f64_);
+			f64_ = other.f64_;
 		}
 		
 		~DataValue();

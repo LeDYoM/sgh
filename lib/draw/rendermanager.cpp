@@ -26,6 +26,7 @@ namespace lib
 
 		RenderManager::~RenderManager()
 		{
+			m_renderList.clear();
 			LOG_DESTRUCT_NOPARAMS;
 		}
 

@@ -3,12 +3,6 @@
 
 #include <SFML/Graphics/RenderStates.hpp>
 
-namespace sf
-{
-	class Shader;
-	class Texture;
-}
-
 namespace lib
 {
 	namespace draw

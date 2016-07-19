@@ -77,21 +77,21 @@ namespace lib
 			auto p(current->find(dPath[index]));
 			if (p != current->end()) {
 				if (index == (dPath.size() - 1)) {
-					return p->second;
+					return DataValue{ p->second };
 				}
 				if (!(p->second.ismap())) {
-					return defaultv;
+					return DataValue{ defaultv };
 				}
 				else {
 					current = p->second.getMap();
 				}
 			}
 			else {
-				return defaultv;
+				return DataValue{ defaultv };
 			}
 			++index;
 		}
-		return defaultv;
+		return DataValue{ defaultv };
 	}
 
 	s32 Configuration::gets32(const str &cPath, const s32 defaultv) const

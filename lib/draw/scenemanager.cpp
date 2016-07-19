@@ -118,10 +118,10 @@ namespace lib
 
 		void SceneManager::visit(const sptr<SceneNode>& node, bool forceFrameUpdate, Transformation &parentTransformation)
 		{
-			Transformation t{ parentTransformation };
 			if (node->isActive()) {
 				service<Input>()->updateNode(node);
 				if (node->isVisible()) {
+					Transformation t{ parentTransformation };
 					node->updateAnimations();
 
 					node->update();
@@ -139,9 +139,9 @@ namespace lib
 							visit(node_,forceFrameUpdate,parentTransformation);
 						}
 					}
+					parentTransformation = t;
 				}
 			}
-			parentTransformation = t;
 		}
 
 		void SceneManager::exitProgram()

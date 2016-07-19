@@ -40,11 +40,6 @@ namespace lib
 			return transformation().transformRect(getLocalBounds());
 		}
 
-		const VertexArray &RenderNode::vertexArray() const
-		{
-			return m_vertices;
-		}
-
 		void RenderNode::update()
 		{
 			Transformable::update();

@@ -27,18 +27,18 @@ namespace lib
 	class LIB_API DataValue
 	{
 	public:
-		inline explicit DataValue() : m_dtype{ DataType::T_Empty }, f64_{ 0 } {}
-		inline DataValue(const s8 value_) : m_dtype{ DataType::T_s8 }, s8_{ value_ } {}
-		inline DataValue(const u8 value_) : m_dtype{ DataType::T_u8 }, u8_{ value_ } {}
-		inline DataValue(const s16 value_) : m_dtype{ DataType::T_s16 }, s16_{ value_ } {}
-		inline DataValue(const u16 value_) : m_dtype{ DataType::T_u16 }, u16_{ value_ } {}
-		inline DataValue(const s32 value_) : m_dtype{ DataType::T_s32 }, s32_{ value_ } {}
-		inline DataValue(const u32 value_) : m_dtype{ DataType::T_u32 }, u32_{ value_ } {}
-		inline DataValue(const f64 value_) : m_dtype{ DataType::T_f64 }, f64_{ value_ } {}
-		inline DataValue(const str &value_) : m_dtype{ DataType::T_string }, ptr_{ new str(value_) } {}
-		inline DataValue(const DataMap &value_) : m_dtype{ DataType::T_Tree }, ptr_{ new DataMap(value_) } {}
+		explicit inline DataValue() : m_dtype{ DataType::T_Empty }, f64_{ 0 } {}
+		explicit inline DataValue(const s8 value_) : m_dtype{ DataType::T_s8 }, s8_{ value_ } {}
+		explicit inline DataValue(const u8 value_) : m_dtype{ DataType::T_u8 }, u8_{ value_ } {}
+		explicit inline DataValue(const s16 value_) : m_dtype{ DataType::T_s16 }, s16_{ value_ } {}
+		explicit inline DataValue(const u16 value_) : m_dtype{ DataType::T_u16 }, u16_{ value_ } {}
+		explicit inline DataValue(const s32 value_) : m_dtype{ DataType::T_s32 }, s32_{ value_ } {}
+		explicit inline DataValue(const u32 value_) : m_dtype{ DataType::T_u32 }, u32_{ value_ } {}
+		explicit inline DataValue(const f64 value_) : m_dtype{ DataType::T_f64 }, f64_{ value_ } {}
+		explicit inline DataValue(const str &value_) : m_dtype{ DataType::T_string }, ptr_{ new str(value_) } {}
+		explicit inline DataValue(const DataMap &value_) : m_dtype{ DataType::T_Tree }, ptr_{ new DataMap(value_) } {}
 
-		inline DataValue(const DataValue &value_) : m_dtype{ value_.m_dtype }
+		explicit inline DataValue(const DataValue &value_): m_dtype{ value_.m_dtype }
 		{
 			switch (m_dtype)
 			{

@@ -47,7 +47,7 @@ namespace lib
 			virtual Rectf32 getGlobalBounds();
 
 			virtual const sf::Texture *texture() const = 0;
-			virtual const VertexArray &vertexArray() const;
+			inline const VertexArray &vertexArray() const { return m_vertices; }
 			virtual void update() override;
 
 			void updateRenderStates();

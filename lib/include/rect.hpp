@@ -10,19 +10,21 @@ namespace lib
 	{
 		T left, top, width, height;
 
-		Rect(T rectLeft, T rectTop, T rectWidth, T rectHeight) : left{ rectLeft }, top{ rectTop }, width{ rectWidth }, height{ rectHeight } { }
-		explicit Rect() : Rect{ {}, {}, {}, {} } {}
-		Rect(const vector2d<T>& position, const vector2d<T>& size) : Rect{ position.x, position.y, size.x, size.y } {}
-		Rect(const Rect&) = default;
+		inline Rect(T rectLeft, T rectTop, T rectWidth, T rectHeight) : left{ rectLeft }, top{ rectTop }, width{ rectWidth }, height{ rectHeight } { }
+		inline explicit Rect() : Rect{ {}, {}, {}, {} } {}
+		inline Rect(const vector2d<T>& position, const vector2d<T>& size) : Rect{ position.x, position.y, size.x, size.y } {}
+		inline Rect(const Rect&) = default;
 		template <typename U>
-		Rect(const Rect<U>& rectangle) :
+		inline Rect(const Rect<U>& rectangle) :
 			left{ static_cast<T>(rectangle.left) }, top{ static_cast<T>(rectangle.top) },
 			width{ static_cast<T>(rectangle.width) }, height{ static_cast<T>(rectangle.height) } {}
+
+//		static_assert(std::is_move_constructible<Rect>(), "Rect<T> not movable");
 
 		inline vector2d<T> center() const { return vector2d<T> {left + (width / static_cast<T>(2)), 
 			top + (height / static_cast<T>(2))}; }
 
-		bool contains(T x, T y) const
+		inline bool contains(T x, T y) const
 		{
 			T minX = std::min(left, static_cast<T>(left + width));
 			T maxX = std::max(left, static_cast<T>(left + width));
@@ -39,16 +41,15 @@ namespace lib
 
 		bool intersects(const Rect<T>& rectangle) const
 		{
-			Rect<T> intersection;
-			return intersects(rectangle, intersection);
+			return intersects(rectangle, std::move(Rect<T>()));
 		}
 
 		bool intersects(const Rect<T>& rectangle, Rect<T>& intersection) const
 		{
-			T r1MinX = std::min(left, static_cast<T>(left + width));
-			T r1MaxX = std::max(left, static_cast<T>(left + width));
-			T r1MinY = std::min(top, static_cast<T>(top + height));
-			T r1MaxY = std::max(top, static_cast<T>(top + height));
+			T r1MinX = std::min(left, right());
+			T r1MaxX = std::max(left, right());
+			T r1MinY = std::min(top, bottom());
+			T r1MaxY = std::max(top, bottom());
 
 			T r2MinX = std::min(rectangle.left, static_cast<T>(rectangle.left + rectangle.width));
 			T r2MaxX = std::max(rectangle.left, static_cast<T>(rectangle.left + rectangle.width));
@@ -62,24 +63,22 @@ namespace lib
 			T interBottom = std::min(r1MaxY, r2MaxY);
 
 			// If the intersection is valid (positive non zero area), then there is an intersection
-			if ((interLeft < interRight) && (interTop < interBottom))
-			{
+			if ((interLeft < interRight) && (interTop < interBottom)) {
 				intersection = Rect<T>(interLeft, interTop, interRight - interLeft, interBottom - interTop);
 				return true;
 			}
-			else
-			{
+			else {
 				intersection = Rect<T>(0, 0, 0, 0);
 				return false;
 			}
 		}
 
-		inline bool operator==(const Rect<T> &r)
+		inline bool operator==(const Rect<T> &r) const
 		{
 			return (left == r.left && width == r.width && top == r.top && height == r.height);
 		}
 
-		inline bool operator!=(const Rect<T> &r)
+		inline bool operator!=(const Rect<T> &r) const
 		{
 			return !(operator==(r));
 		}
@@ -102,5 +101,7 @@ namespace lib
 	using Rects32 = lib::Rect<s32>;
 	using Rectf32 = lib::Rect<f32>;
 	using Rectu32 = lib::Rect<u32>;
+
 }
+
 #endif

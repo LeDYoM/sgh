@@ -300,15 +300,15 @@ namespace lib
 	{
 		if (is_int(str_))
 		{
-			return std::stoi(str_);
+			return DataValue{ std::stoi(str_) };
 		}
 		else if (is_number(str_))
 		{
-			return std::stod(str_);
+			return DataValue{ std::stod(str_) };
 		}
 		else
 		{
-			return str_;
+			return DataValue{ str_ };
 		}
 	}
 
@@ -344,7 +344,7 @@ namespace lib
 					{
 						return current;
 					}
-					current[currentSection] = fromStringVector(data, ++count);
+					current[currentSection] = DataValue{ fromStringVector(data, ++count) };
 				}
 				else
 				{

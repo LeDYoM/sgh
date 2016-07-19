@@ -8,15 +8,13 @@ namespace lib
 	{
 	public:
 
-		vector2d() : x{}, y{} {}
-		vector2d(T X, T Y) : x{ X }, y{ Y } {}
-		vector2d(const vector2d<T> &) = default;
-		vector2d(vector2d &&v) : x{ std::move(v.x) }, y{ std::move(v.y) } {}
-		vector2d &operator=(const vector2d<T> &) = default;
-		vector2d &operator=(vector2d<T> &&v) { x = std::move(v.x); y = std::move(v.y); return *this; }
+		inline explicit vector2d() : x{}, y{} {};
+		inline vector2d(T X, T Y) : x{ X }, y{ Y } {}
+		inline vector2d(const vector2d<T> &) = default;
+		inline vector2d &operator=(const vector2d<T> &) = default;
 
 		template <typename U>
-		explicit vector2d(const vector2d<U>& vector) : x{ static_cast<T>(vector.x) }, y{ static_cast<T>(vector.y) } {}
+		inline explicit vector2d(const vector2d<U>& vector) : x{ static_cast<T>(vector.x) }, y{ static_cast<T>(vector.y) } {}
 
 		inline vector2d &operator+=(const vector2d &right)
 		{ 
@@ -74,7 +72,7 @@ namespace lib
 		inline vector2d operator*(const T &right) const { return (vector2d(*this) *= right);	}
 		inline vector2d operator/(const T &right) const { return (vector2d(*this) /= right); }
 		inline bool operator ==(const vector2d &right) const { return (x == right.x && y == right.y); }
-		inline bool operator !=(const vector2d &right) const {	return !(*this == right); }
+		inline bool operator !=(const vector2d &right) const {	return !(*operator==(right)); }
 
 		T x;
 		T y;

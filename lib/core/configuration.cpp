@@ -93,7 +93,7 @@ namespace lib
 
 	s32 Configuration::gets32(const str &cPath, const s32 defaultv) const
 	{
-		return static_cast<s32>(get(cPath, DataValue{ defaultv }).gets32());
+		return get(cPath, DataValue{ defaultv }).get<s32>();
 	}
 
 }

@@ -27,75 +27,6 @@
 
 namespace lib
 {
-	DataValue::DataValue()
-		: m_dtype{ DataType::T_Empty }, f64_{ 0 } {}
-
-	DataValue::DataValue(const s8 value_)
-		: m_dtype{ DataType::T_s8 }, s8_{ value_ } {}
-
-	DataValue::DataValue(const u8 value_)
-		: m_dtype{ DataType::T_u8 }, u8_{ value_ } {}
-
-	DataValue::DataValue(const s16 value_)
-		: m_dtype{ DataType::T_s16 }, s16_{ value_ } {}
-
-	DataValue::DataValue(const u16 value_)
-		: m_dtype{ DataType::T_u16 }, u16_{ value_ } {}
-
-	DataValue::DataValue(const s32 value_)
-		: m_dtype{ DataType::T_s32 }, s32_{ value_ } {}
-
-	DataValue::DataValue(const u32 value_)
-		: m_dtype{ DataType::T_u32 }, u32_{ value_ } {}
-
-	DataValue::DataValue(const f64 value_)
-		: m_dtype{ DataType::T_f64 }, f64_{ value_ } {}
-
-	DataValue::DataValue(const str &value_)
-		: m_dtype{ DataType::T_string }, ptr_{ new str(value_) } {}
-
-	DataValue::DataValue(const DataMap &value_)
-		: m_dtype{ DataType::T_Tree }, ptr_{ new DataMap(value_) } {}
-
-	DataValue::DataValue(const DataValue &value_)
-		: m_dtype{ value_.m_dtype }
-	{
-		switch (m_dtype)
-		{
-		case DataType::T_Empty:
-			break;
-		case DataType::T_s8:
-			s8_ = value_.s8_;
-			break;
-		case DataType::T_u8:
-			u8_ = value_.u8_;
-			break;
-		case DataType::T_s16:
-			s16_ = value_.s16_;
-			break;
-		case DataType::T_u16:
-			u16_ = value_.u16_;
-			break;
-		case DataType::T_s32:
-			s32_ = value_.s32_;
-			break;
-		case DataType::T_u32:
-			u32_ = value_.u32_;
-			break;
-		case DataType::T_f64:
-			f64_ = value_.f64_;
-			break;
-		case DataType::T_string:
-			ptr_ = new str(value_.getString());
-			break;
-		case DataType::T_Tree:
-			ptr_ = new DataMap(*value_.getMap());
-			break;
-		default:
-			break;
-		}
-	}
-
 	DataValue::~DataValue()
 	{
 		switch (m_dtype)
@@ -109,14 +40,6 @@ namespace lib
 		default:
 			break;
 		}
-	}
-
-	DataValue::DataValue(DataValue &&other)
-		: m_dtype{ other.m_dtype }
-	{
-		f64_ = std::move(other.f64_);
-		other.m_dtype = DataType::T_Empty;
-		other.f64_ = 0;
 	}
 
 	DataValue &DataValue::operator=(DataValue &&other)

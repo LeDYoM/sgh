@@ -4,6 +4,8 @@
 #include "file.hpp"
 #include "log.hpp"
 
+#define LOG_CONFIG(x) LOG_DEBUG("Configuration: "<<x)
+
 namespace lib
 {
 	namespace
@@ -66,6 +68,7 @@ namespace lib
 
 	DataValue Configuration::get(const str &cPath, const DataValue &defaultv) const
 	{
+		LOG_CONFIG("Reading property: " << cPath);
 		u32 index{ 0 };
 		DataPath dPath{ cPath };
 		const DataMap *current{ &m_rootNode };

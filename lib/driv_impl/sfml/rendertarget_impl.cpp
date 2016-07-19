@@ -20,6 +20,7 @@ namespace lib
 
 			void SFMLRenderTarget::setView(const Rectf32 & rectangle, const Rectf32 & vPort)
 			{
+				vPort;
 				m_view.reset(convert(rectangle));
 				m_renderTarget->setView(m_view);
 			}

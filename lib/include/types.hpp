@@ -1,13 +1,13 @@
 #ifndef __LIB_TYPES_HPP__
 #define __LIB_TYPES_HPP__
 
+#include <lib/core/compileconfig.hpp>
 #include <cstdint>
 #include <memory>
 #include <map>
 #include <string>
 #include <vector>
 #include <list>
-#include <lib/core/compileconfig.hpp>
 
 namespace lib
 {

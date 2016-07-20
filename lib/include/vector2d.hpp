@@ -1,6 +1,8 @@
 #ifndef LIB_VECTOR2D_HPP
 #define LIB_VECTOR2D_HPP
 
+#include <lib/core/data.hpp>
+
 namespace lib
 {
 	template <typename T>

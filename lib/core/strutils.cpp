@@ -70,4 +70,18 @@ namespace lib
 		return !str.empty() && str.find_first_not_of(".-0123456789") == std::string::npos;
 	}
 
+	std::vector<std::string> split(const std::string &str, const char separator)
+	{
+		std::string m_ndpcpy(str);
+		std::vector<std::string> result;
+
+		do {
+			auto sz(m_ndpcpy.find_first_of(separator));
+			result.emplace_back(m_ndpcpy.substr(0, sz));
+			m_ndpcpy = m_ndpcpy.substr((sz == std::string::npos) ? (m_ndpcpy.size()) : (sz + 1));
+		} while (!m_ndpcpy.empty());
+
+		return std::move(result);
+	}
+
 }

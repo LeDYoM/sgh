@@ -2,6 +2,7 @@
 #define LIB_STRUTILS_HPP
 
 #include <string>
+#include <vector>
 
 namespace lib
 {
@@ -16,6 +17,7 @@ namespace lib
 	bool is_uint(const std::string &str);
 	bool is_int(const std::string &str);
 	bool is_number(const std::string &str);
+	std::vector<std::string> split(const std::string &str, const char separator);
 }
 
 #endif

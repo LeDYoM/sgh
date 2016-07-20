@@ -95,23 +95,15 @@ namespace lib
 		DataMap *getMap();
 		const str toString() const;
 
-		template <typename T>
-		inline const T get() const;
+		template <typename T> inline const T get() const;
 
-		template <>
-		inline const s8 get() const { return gets8(); }
-		template <>
-		inline const u8 get() const { return getu8(); }
-		template <>
-		inline const s16 get() const { return gets16(); }
-		template <>
-		inline const u16 get() const { return getu16(); }
-		template <>
-		inline const s32 get() const { return gets32(); }
-		template <>
-		inline const u32 get() const { return getu32(); }
-		template <>
-		inline const f64 get() const { return getf64(); }
+		template <> inline const s8 get() const { return gets8(); }
+		template <> inline const u8 get() const { return getu8(); }
+		template <> inline const s16 get() const { return gets16(); }
+		template <> inline const u16 get() const { return getu16(); }
+		template <> inline const s32 get() const { return gets32(); }
+		template <> inline const u32 get() const { return getu32(); }
+		template <> inline const f64 get() const { return getf64(); }
 
 		inline const bool iss8() const { return m_dtype == DataType::T_s8; }
 		inline const bool isu8() const { return m_dtype == DataType::T_s8; }
@@ -126,20 +118,13 @@ namespace lib
 		template <typename T>
 		const bool is() const;
 
-		template <>
-		inline const bool is<s8>() const { return iss8(); }
-		template <>
-		inline const bool is<u8>() const { return isu8(); }
-		template <>
-		inline const bool is<s16>() const { return iss16(); }
-		template <>
-		inline const bool is<u16>() const { return isu16(); }
-		template <>
-		inline const bool is<s32>() const { return iss32(); }
-		template <>
-		inline const bool is<u32>() const { return isu32(); }
-		template <>
-		inline const bool is<f64>() const { return isf64(); }
+		template <> inline const bool is<s8>() const { return iss8(); }
+		template <> inline const bool is<u8>() const { return isu8(); }
+		template <> inline const bool is<s16>() const { return iss16(); }
+		template <> inline const bool is<u16>() const { return isu16(); }
+		template <> inline const bool is<s32>() const { return iss32(); }
+		template <> inline const bool is<u32>() const { return isu32(); }
+		template <> inline const bool is<f64>() const { return isf64(); }
 
 		static DataMap fromStringVector(const std::vector<str> &data, u32 &count);
 

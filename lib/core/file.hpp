@@ -3,7 +3,6 @@
 
 #include <lib/include/types.hpp>
 #include "obj.hpp"
-#include "classutils.hpp"
 #include <string>
 #include <vector>
 
@@ -12,8 +11,11 @@ namespace lib
 	class FileSystem;
 	class File : public Object
 	{
-		NO_COPY(File);
 	public:
+		File() = delete;
+		File(const File&) = delete;
+		File &operator=(const File&) = delete;
+
 		virtual ~File();
 		bool exists() const;
 		const std::vector<std::string> asText();

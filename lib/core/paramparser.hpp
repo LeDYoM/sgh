@@ -1,20 +1,22 @@
-#ifndef __LIB_PARAMPARSER_HPP__
-#define __LIB_PARAMPARSER_HPP__
+#ifndef LIB_PARAMPARSER_HPP__
+#define LIB_PARAMPARSER_HPP__
 
 #include <lib/include/types.hpp>
-#include "data.hpp"
+#include <lib/include/compconfig.hpp>
 
 namespace lib
 {
-	class ParamParser
+	namespace priv
+	{
+		struct ParamParserPrivate;
+	}
+	class LIB_API ParamParser
 	{
 	public:
 		ParamParser(int argc, char *argv[]);
 		virtual ~ParamParser();
-
 	private:
-		std::vector<std::string> m_params;
-		DataMap m_parsedParams;
+		priv::ParamParserPrivate *priv;
 	};
 }
 

@@ -8,10 +8,20 @@
 
 namespace lib
 {
-	ParamParser::ParamParser(int argc, char *argv[])
+	namespace priv
 	{
+		struct ParamParserPrivate
+		{
+			std::vector<std::string> m_params;
+			DataMap m_parsedParams;
+		};
+	}
+	ParamParser::ParamParser(int argc, char *argv[])
+		: priv{ new priv::ParamParserPrivate() }
+	{
+		auto &m_params(priv->m_params);
 		m_params.clear();
-		for (int i = 1; i<argc; ++i)
+		for (auto i = 1; i<argc; ++i)
 		{
 			m_params.push_back(argv[i]);
 		}
@@ -27,7 +37,7 @@ namespace lib
 		std::for_each(m_params.begin(), m_params.end(), [](std::string&element){LOG_DEBUG(element)});
 
 		u32 count{};
-		m_parsedParams = std::move(DataValue::fromStringVector(m_params, count));
+		priv->m_parsedParams = std::move(DataValue::fromStringVector(m_params, count));
 	}
 
 	ParamParser::~ParamParser()

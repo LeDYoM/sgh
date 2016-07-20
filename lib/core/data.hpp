@@ -93,7 +93,8 @@ namespace lib
 		const str getString() const;
 		const DataMap *getMap() const;
 		DataMap *getMap();
-		const str toString() const;
+
+		friend std::ostream &operator<<(std::ostream &output, const DataValue &this_);
 
 		template <typename T> inline const T get() const;
 

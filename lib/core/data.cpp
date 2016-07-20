@@ -270,30 +270,44 @@ namespace lib
 			return nullptr;
 	}
 
-	const str DataValue::toString() const
+	std::ostream &operator<<(std::ostream &output, const DataValue &this_)
 	{
-		if (m_dtype == DataType::T_Empty)
-			return "T_Empty: ()";
-		else if (m_dtype == DataType::T_s8)
-			return "T_s8: " + std::to_string(s8_);
-		else if (m_dtype == DataType::T_u8)
-			return "T_u8: " + std::to_string(u8_);
-		else if (m_dtype == DataType::T_s16)
-			return "T_s16: " + std::to_string(s16_);
-		else if (m_dtype == DataType::T_u16)
-			return "T_u16: " + std::to_string(u16_);
-		else if (m_dtype == DataType::T_s32)
-			return "T_s32: " + std::to_string(s32_);
-		else if (m_dtype == DataType::T_u32)
-			return "T_u32: " + std::to_string(u32_);
-		else if (m_dtype == DataType::T_f64)
-			return "T_f64: " + std::to_string(f64_);
-		else if (m_dtype == DataType::T_string)
-			return "T_string: " + getString();
-		else if (m_dtype == DataType::T_Tree)
-			return "T_TreeNode: at " + std::to_string((u32)(ptr_));
-		else
-			return "T_Unknown: (?)";
+		switch (this_.m_dtype)
+		{
+		case (DataType::T_Empty):
+				output << "T_Empty: ()";
+			break;
+		case DataType::T_s8:
+			output << "T_s8: " << this_.s8_;
+			break;
+		case DataType::T_u8:
+			output << "T_u8: " << this_.u8_;
+			break;
+		case DataType::T_s16:
+			output << "T_s16: " << this_.s16_;
+			break;
+		case DataType::T_u16:
+			output << "T_u16: " << this_.u16_;
+			break;
+		case DataType::T_s32:
+			output << "T_s32: " << this_.s32_;
+			break;
+		case DataType::T_u32:
+			output << "T_u32: " << this_.u32_;
+			break;
+		case DataType::T_f64:
+			output << "T_f64: " << this_.f64_;
+			break;
+		case DataType::T_string:
+			output << "T_string: " << this_.getString();
+			break;
+		case DataType::T_Tree:
+			output << "T_TreeNode: at " << std::to_string((u32)(this_.ptr_));
+			break;
+		default:
+			output << "T_Unknown: (?)";
+		}
+		return output;
 	}
 
 	DataValue fromString_helper(const str &str_)

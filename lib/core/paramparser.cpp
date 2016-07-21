@@ -8,39 +8,47 @@
 
 namespace lib
 {
-	namespace priv
+	namespace core
 	{
-		struct ParamParserPrivate
+		namespace priv
 		{
-			std::vector<std::string> m_params;
-			DataMap m_parsedParams;
-		};
-	}
-	ParamParser::ParamParser(int argc, char *argv[])
-		: priv{ new priv::ParamParserPrivate() }
-	{
-		auto &m_params(priv->m_params);
-		m_params.clear();
-		for (auto i = 1; i<argc; ++i)
-		{
-			m_params.push_back(argv[i]);
-		}
-
-		std::for_each(m_params.cbegin(), m_params.cend(), [](const std::string&element){LOG_DEBUG(element)});
-		for (std::string &element : m_params)
-		{
-			if (starts_with(element, "-"))
+			struct ParamParserPrivate
 			{
-				element = element.substr(1);
-			}
+				std::vector<std::string> m_params;
+				DataMap m_parsedParams;
+			};
 		}
-		std::for_each(m_params.begin(), m_params.end(), [](std::string&element){LOG_DEBUG(element)});
 
-		u32 count{};
-		priv->m_parsedParams = std::move(DataValue::fromStringVector(m_params, count));
-	}
+		ParamParser::ParamParser(int argc, char *argv[])
+			: priv{ new priv::ParamParserPrivate() }
+		{
+			auto &m_params(priv->m_params);
+			m_params.clear();
+			for (auto i = 1; i < argc; ++i)
+			{
+				m_params.push_back(argv[i]);
+			}
 
-	ParamParser::~ParamParser()
-	{
+			m_params.push_back("-rx=800");
+			m_params.push_back("-ry=600");
+
+			std::for_each(m_params.cbegin(), m_params.cend(), [](const str&element) {LOG_DEBUG(element)});
+			for (std::string &element : m_params)
+			{
+				if (starts_with(element, "-"))
+				{
+					element = element.substr(1);
+				}
+			}
+			std::for_each(m_params.cbegin(), m_params.cend(), [](const str&element) {LOG_DEBUG(element)});
+
+			u32 count{};
+			priv->m_parsedParams = std::move(DataValue::fromStringVector(m_params, count));
+		}
+
+		ParamParser::~ParamParser()
+		{
+			delete priv;
+		}
 	}
 }

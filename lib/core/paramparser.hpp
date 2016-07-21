@@ -6,18 +6,21 @@
 
 namespace lib
 {
-	namespace priv
+	namespace core
 	{
-		struct ParamParserPrivate;
+		namespace priv
+		{
+			struct ParamParserPrivate;
+		}
+		class ParamParser
+		{
+		public:
+			ParamParser(int argc, char *argv[]);
+			virtual ~ParamParser();
+		private:
+			priv::ParamParserPrivate *priv;
+		};
 	}
-	class LIB_API ParamParser
-	{
-	public:
-		ParamParser(int argc, char *argv[]);
-		virtual ~ParamParser();
-	private:
-		priv::ParamParserPrivate *priv;
-	};
 }
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef __LIB_TYPES_HPP__
 #define __LIB_TYPES_HPP__
 
-#include <lib/core/compileconfig.hpp>
+#include "compconfig.hpp"
 #include <cstdint>
 #include <memory>
 #include <map>
@@ -31,13 +31,16 @@ namespace lib
 	using f32 = float;
 	using f64 = double;
 
-	using str = std::string;
-
 	template <typename T>
 	using Vector = std::vector<T>;
 
-	template <typename T>
-	using List = std::list<T>;
+//	template <typename T>
+//	using List = std::list<T>;
+
+//	LIB_API std::string;
+	using str = std::string;
+
+	EXPIMP_TEMPLATE template class LIB_API std::basic_string<char, std::char_traits<char>, std::allocator<char> >;
 
 }
 

@@ -5,6 +5,7 @@
 #include "transformable.hpp"
 #include <lib/core/vecsptr.hpp>
 #include <lib/include/color.hpp>
+#include <lib/include/types.hpp>
 
 namespace lib
 {

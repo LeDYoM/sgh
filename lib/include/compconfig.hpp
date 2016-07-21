@@ -49,15 +49,15 @@
 //#define LIB_EXECUTABLE
 
 #ifdef LIB_SYSTEM_WINDOWS
-#ifdef LIB_EXECUTABLE
-		#define LIB_API
-		#define MODULE
-
-	//	#define LIB_API __declspec(dllexport)
-	//	#define MODULE __declspec(dllimport)
-	#else
+#ifdef LIB_EXECUTABLE // Compiling the executable (using/importing the libray)
 		#define LIB_API //__declspec(dllimport)
+		#define MODULE // __declspec(dllimport)
+		#define EXPIMP_TEMPLATE // extern
+	#else
+		#define LIB_API //__declspec(dllexport)
 		#define MODULE //__declspec(dllexport)
+		#define EXPIMP_TEMPLATE
+
 	#endif
 #else // Linux, FreeBSD, Mac OS X
 	#if __GNUC__ >= 4

@@ -1,14 +1,13 @@
 #ifndef LIB_PROPERTIES_HPP
 #define LIB_PROPERTIES_HPP
 
+#include "compconfig.hpp"
 #include "types.hpp"
-#include <functional>
-#include <lib/include/color.hpp>
 
 namespace lib
 {
 	template <typename T>
-	class Property
+	class LIB_API Property
 	{
 	public:
 		explicit Property() : m_value{} {}
@@ -24,7 +23,7 @@ namespace lib
 		T m_value;
 	};
 
-	class NotifablePropertyBase
+	class LIB_API NotifablePropertyBase
 	{
 	public:
 		bool changed() const { return m_changedFlag; }
@@ -42,7 +41,7 @@ namespace lib
 		bool m_changedFlag{ true };
 	};
 	template <typename T>
-	class NotifableProperty : public NotifablePropertyBase
+	class LIB_API NotifableProperty : public NotifablePropertyBase
 	{
 	public:
 		explicit NotifableProperty() : m_value{} {}
@@ -59,7 +58,10 @@ namespace lib
 		T m_value;
 	};
 
-	class LinkedNotifableProperty
+	EXPIMP_TEMPLATE template class LIB_API std::vector<NotifablePropertyBase*>;
+	using NotifablePropertyBaseVector = std::vector<NotifablePropertyBase*>;
+
+	class LIB_API LinkedNotifableProperty
 	{
 	public:
 		LinkedNotifableProperty() = default;
@@ -85,7 +87,7 @@ namespace lib
 
 
 	private:
-		std::vector<NotifablePropertyBase*> m_properties;
+		NotifablePropertyBaseVector m_properties;
 	};
 
 }

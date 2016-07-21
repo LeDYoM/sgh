@@ -1,6 +1,7 @@
 #ifndef LIB_OBJECT_HPP
 #define LIB_OBJECT_HPP
 
+#include "compileconfig.hpp"
 #include "servicesmanager.hpp"
 
 namespace lib
@@ -9,7 +10,7 @@ namespace lib
 	{
 		class AppController;
 	}
-	class Object
+	class LIB_API Object
 	{
 	public:
 		Object();

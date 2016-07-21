@@ -6,7 +6,7 @@
 namespace lib
 {
 	template <typename T>
-	class vector2d
+	class LIB_API vector2d
 	{
 	public:
 

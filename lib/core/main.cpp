@@ -22,10 +22,8 @@ namespace lib
 		}
 	}
 
-	int lib::libMain(int argc, char *argv[])
+	int libMain(int argc, char *argv[])
 	{
-		argc;
-		argv;
 		int result = -1;
 
 		try
@@ -33,7 +31,7 @@ namespace lib
 			initLog();
 			installMemManager();
 
-			core::HostController hostController(transformParams(argc,argv));
+			core::HostController hostController(argc,argv);
 			hostController.initialize();
 
 			// WIP:

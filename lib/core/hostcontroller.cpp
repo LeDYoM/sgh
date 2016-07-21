@@ -12,10 +12,9 @@ namespace lib
 {
 	namespace core
 	{
-		HostController::HostController(const std::vector<std::string> &params)
-//			: Configuration{ "host.cfg" }
+		HostController::HostController(int argc, char *argv[])
+			: m_paramParser{ argc,argv }
 		{
-			params;
 			LOG_CONSTRUCT_NOPARAMS;
 			LOG_INFO("Starting HostController...");
 		}

@@ -3,6 +3,9 @@
 
 #include <lib/core/vecsptr.hpp>
 #include <lib/include/iapp.hpp>
+
+#include "paramparser.hpp"
+
 #include <queue>
 #include <string>
 
@@ -18,7 +21,7 @@ namespace lib
 		class HostController
 		{
 		public:
-			HostController(const std::vector<std::string> &params);
+			HostController(int argc, char *argv[]);
 			virtual ~HostController();
 
 			int initialize();
@@ -26,7 +29,6 @@ namespace lib
 			int finalize();
 
 			void loadAppFromFileName(const str&fileName);
-			void removeAppFromId(const str&id);
 		private:
 			void addApp(uptr<IApp> iapp);
 			void addTask(sptr<HostTask> newTask);
@@ -38,6 +40,7 @@ namespace lib
 			std::queue<sptr<HostTask>> m_pendingTasks;
 			VecSPtr<AppController> m_apps;
 			sptr<Driver> m_driver{ nullptr };
+			ParamParser m_paramParser;
 		};
 	}
 }

@@ -3,6 +3,7 @@
 
 #include "compconfig.hpp"
 #include "types.hpp"
+#include <algorithm>
 
 namespace lib
 {

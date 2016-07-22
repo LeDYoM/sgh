@@ -12,12 +12,11 @@ namespace lib
 	}
 	class LIB_API Object
 	{
-	public:
+	protected:
 		Object();
-		Object(Object *other);
-		Object(core::AppController *app);
-
-		void setProvider(core::AppController *app);
+		Object(Object *const other);
+		Object(core::AppController *const app);
+	public:
 		virtual ~Object();
 
 		template <class T> sptr<T> service() const
@@ -30,7 +29,25 @@ namespace lib
 		core::AppController *appController() const { return m_app; }
 	protected:
 		core::AppController *m_app;
+	};
+
+	class LIB_API ClientObject : public Object
+	{
+	public:
+		ClientObject(ClientObject *const other) : Object( static_cast<Object*const>(other) ) {}
+		virtual ~ClientObject() {}
+	};
+
+	class LIB_API SystemObject : public Object
+	{
+	public:
+		SystemObject() : Object() {}
+		SystemObject(core::AppController *const app) : Object( app ) {}
+		virtual ~SystemObject() {}
+
+		void setProvider(core::AppController *app);
 
 	};
+
 }
 #endif

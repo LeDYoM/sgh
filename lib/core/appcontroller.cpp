@@ -38,11 +38,10 @@ namespace lib
 				break;
 			case AppState::ReadyToStart:
 			{
-				// Create the scene manager
 				LOG_DEBUG(appId() + ":  Starting initialization...");
 				m_state = AppState::Executing;
 
-				//TO DO: Ask via requests
+				m_servicesManager->addService(sptr<Window>{ new Window( this )});
 				m_servicesManager->addService(sptr<ExceptionManager>{new ExceptionManager{}});
 				m_servicesManager->addService(sptr<FileSystem>{ new FileSystem{} });
 				m_servicesManager->addService(sptr<Configuration>{ new Configuration{} });
@@ -51,7 +50,6 @@ namespace lib
 				m_servicesManager->addService(sptr<ResourceManager>{ new ResourceManager{} });
 				m_servicesManager->addService(sptr<draw::SceneManager>{ new draw::SceneManager{} });
 				m_servicesManager->addService(sptr<draw::RenderManager>{ new draw::RenderManager{} });
-				m_servicesManager->addService(sptr<Window>{ new Window{ m_iapp->getAppDescriptor().wcp }});
 				m_servicesManager->addService(sptr<Input>{new Input{}});
 
 				m_servicesManager->setupAllServices();

@@ -11,7 +11,7 @@ namespace lib
 		class AppController;
 	}
 
-	class AppService : public virtual Object
+	class AppService : public SystemObject
 	{
 	public:
 		virtual void Setup() {}

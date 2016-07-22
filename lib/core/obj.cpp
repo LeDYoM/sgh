@@ -1,18 +1,17 @@
 #include "obj.hpp"
-#include "appservice.hpp"
 
 namespace lib
 {
 	Object::Object()
 		: m_app{ nullptr } {}
 
-	Object::Object(Object *other)
+	Object::Object(Object *const other)
 		: m_app{ other ? other->m_app : nullptr } { }
 
-	Object::Object(core::AppController *app) 
+	Object::Object(core::AppController *const app) 
 		: m_app{ app } {}
 
-	void Object::setProvider(core::AppController *app)
+	void SystemObject::setProvider(core::AppController *const app)
 	{
 		m_app = app;
 	}

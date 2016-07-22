@@ -50,5 +50,19 @@ namespace lib
 		{
 			delete priv;
 		}
+
+		void ParamParser::overwriteWithParams(DataMap &config)
+		{
+			auto parsedParams(priv->m_parsedParams);
+			for (const auto &paramDesc : parsedParams)
+			{
+				auto fNodeIterator = config.find(paramDesc.first);
+				if (fNodeIterator != config.end())
+				{
+					decltype(*fNodeIterator) pair{ *fNodeIterator };
+					pair.second = paramDesc.second;
+				}
+			}
+		}
 	}
 }

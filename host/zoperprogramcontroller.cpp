@@ -31,17 +31,6 @@ namespace zoper
 			1,
 			"config.cfg",
 			"res.cfg",
-			lib::WindowCreationParams
-			(
-				std::string("ZOPER"),
-				(lib::u32)1024,
-				(lib::u32)768,
-				(lib::u32)32,
-				(lib::u32)0,
-				false,
-				false,
-				false
-				)
 		};
 	}
 

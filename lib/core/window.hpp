@@ -19,14 +19,26 @@ namespace lib
 		struct WindowPrivate;
 		class AppController;
 
-		class Window : public AppService
+		struct WindowCreationParams
+		{
+			u32 width{ 1024 };
+			u32 height{ 768 };
+			u32 bpp{ 16 };
+			u32 antialiasing{ 0 };
+			bool vsync{ false };
+			bool fullScreen{ false };
+			bool resizable{ false };
+			bool titleBar{ true };
+			str windowTitle;
+			WindowCreationParams() = default;
+		};
+
+		class Window : SystemObject
 		{
 		public:
-			Window(const WindowCreationParams &wcp);
+			Window(AppController *,WindowCreationParams &&wcp);
 			virtual ~Window();
-			static const str staticTypeName() { return "Window"; }
 
-			void Init() override;
 			bool preLoop();
 			bool postLoop();
 			virtual void onCreate();
@@ -37,11 +49,12 @@ namespace lib
 			/* Driver communication */
 			void wantsClose();
 		private:
-			void create(const WindowCreationParams &wcp);
+			void create(WindowCreationParams &&wcp);
+
 			WindowCreationParams m_wcp;
 			uptr<WindowPrivate> p_wPrivate{ nullptr };
-			bool _shouldClose{ false };
-			std::string _title;
+			bool m_shouldClose{ false };
+			str m_title;
 		};
 	}
 }

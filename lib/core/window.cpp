@@ -24,10 +24,11 @@ namespace lib
 			s32 currentFps{ 0 };
 			sptr<drivers::window::IWWindow> m_renderWindow{ nullptr };
 		};
-		Window::Window(const WindowCreationParams &wcp)
-			: p_wPrivate{ new WindowPrivate() }, m_wcp{ wcp }, _title(wcp.windowTitle)
+		Window::Window(AppController *m_appController, WindowCreationParams && wcp)
+			: SystemObject{ m_appController }, p_wPrivate {	new WindowPrivate()	}, m_title(wcp.windowTitle)
 		{
 			LOG_CONSTRUCT_NOPARAMS;
+			create(std::move(wcp));
 		}
 
 		Window::~Window()
@@ -35,12 +36,7 @@ namespace lib
 			LOG_DESTRUCT_NOPARAMS;
 		}
 
-		void Window::Init()
-		{
-			create(m_wcp);
-		}
-
-		void Window::create(const WindowCreationParams &wcp)
+		void Window::create(WindowCreationParams &&wcp)
 		{
 			LOG_DEBUG("Going to create Window");
 			LOG_DEBUG("Resolution:" << wcp.width << "x" << wcp.height << "x" << std::to_string(wcp.bpp));
@@ -52,7 +48,7 @@ namespace lib
 				style = sf::Style::Fullscreen;
 
 			p_wPrivate->m_renderWindow = appController()->driver()->newWindow(); //sptr<drivers::window>{new RenderWindow()};
-			p_wPrivate->m_renderWindow->create(wcp.width, wcp.height, wcp.bpp, _title.c_str(), 0, 0, 0, 0, 0, 0);
+			p_wPrivate->m_renderWindow->create(wcp.width, wcp.height, wcp.bpp, m_title.c_str(), 0, 0, 0, 0, 0w);
 
 			p_wPrivate->m_renderWindow->setVerticalSync(wcp.vsync);
 		}
@@ -65,7 +61,7 @@ namespace lib
 				p_wPrivate->lastTimeFps = eMs;
 				p_wPrivate->lastFps = p_wPrivate->currentFps;
 				p_wPrivate->currentFps = 0;
-				p_wPrivate->m_renderWindow->setTitle(std::string(_title + " FPS:" + std::to_string(p_wPrivate->lastFps) ).c_str());
+				p_wPrivate->m_renderWindow->setTitle(std::string(m_title + " FPS:" + std::to_string(p_wPrivate->lastFps) ).c_str());
 			}
 			++(p_wPrivate->currentFps);
 			p_wPrivate->m_renderWindow->collectEvents();
@@ -81,18 +77,18 @@ namespace lib
 						service<Input>()->processSystemEvent(pEvent);
 					}
 					else if (eType == "Window") {
-						_shouldClose = true;
+						m_shouldClose = true;
 					}
 				}
 			}
 			p_wPrivate->m_renderWindow->clear();
-			return _shouldClose;
+			return m_shouldClose;
 		}
 
 		bool Window::postLoop()
 		{
 			p_wPrivate->m_renderWindow->display();
-			return _shouldClose;
+			return m_shouldClose;
 		}
 
 		void Window::onCreate()
@@ -109,12 +105,12 @@ namespace lib
 
 		void Window::wantsClose()
 		{
-			_shouldClose = true;
+			m_shouldClose = true;
 		}
 
 		void Window::exitProgram()
 		{
-			_shouldClose = true;
+			m_shouldClose = true;
 		}
 		sptr<drivers::render::RenderTarget> Window::windowRenderTarget() const
 		{

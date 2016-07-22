@@ -16,15 +16,13 @@ namespace lib
 {
 	struct IAppDescriptor
 	{
-		std::string Name;
+		str Name;
 		u32 Version;
 		u32 SubVersion;
 		u32 Patch;
-		std::string configFile;
-		std::string resourceFile;
-		WindowCreationParams wcp;
-		inline IAppDescriptor(const std::string &n, const u32 v, const u32 s, const u32 p, const std::string &cf, const std::string &rf, const WindowCreationParams &wcp_)
-			: Name(n), Version{ v }, SubVersion{ s }, Patch{ p }, configFile(cf), resourceFile(rf), wcp(wcp_) {	}
+		str configFile;
+		str resourceFile;
+		IAppDescriptor() = default;
 	};
 
 	class IApp

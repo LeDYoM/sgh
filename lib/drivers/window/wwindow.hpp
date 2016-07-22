@@ -14,14 +14,26 @@ namespace lib
 		}
 		namespace window
 		{
+			struct WindowData
+			{
+				vector2du16 size;
+				vector2du16 initialPosition{ 0,0 };
+				u8 depth{ 0 };
+				u8 bpp{ 32 };
+				u16 major{ 0 };
+				u16 minor{ 0 };
+				u32 antialiasing{ 0 };
+				bool fullscreen{ false };
+				bool resizable{ true };
+			};
 			class IWWindow
 			{
 			public:
-				virtual bool create(u32 width, u32 height, u32 bpp, const char *title, u32 depth, u32 stencil, u32 antialiasing, u32  major, u32 minor, u32 attributes) = 0;
+				virtual bool create() = 0;
 				virtual bool resizePending() const = 0;
-				virtual vector2du32 size() const = 0;
-				virtual void setVerticalSync(bool enabled) = 0;
-				virtual void setTitle(const char *title) = 0;
+				virtual vector2du16 size() const = 0;
+				virtual void setVerticalSync(bool) = 0;
+				virtual void setTitle(const str &title) = 0;
 				virtual void clear() = 0;
 				virtual void display() = 0;
 				virtual void collectEvents() = 0;

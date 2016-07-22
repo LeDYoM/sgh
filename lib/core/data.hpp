@@ -68,6 +68,13 @@ namespace lib
 			std::swap(m_dtype, other.m_dtype);
 			f64_ = other.f64_;
 		}
+
+		inline DataValue &operator=(const DataValue &rh)
+		{
+			DataValue temp{ rh };
+			std::swap(*this, temp);
+			return *this;
+		}
 		
 		~DataValue();
 

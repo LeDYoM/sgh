@@ -52,8 +52,8 @@ namespace lib
 			AppState m_state;
 			uptr<IApp> m_iapp{ nullptr };
 			sptr<Driver> m_driver{ nullptr };
-
 			std::vector<uptr<AppService>> m_services;
+			sptr<Window> m_window;
 		};
 
 		AppController *toController(PIAppContext context);

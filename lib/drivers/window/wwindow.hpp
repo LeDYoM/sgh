@@ -29,7 +29,7 @@ namespace lib
 			class IWWindow
 			{
 			public:
-				virtual bool create() = 0;
+				virtual bool create(const WindowData&) = 0;
 				virtual bool resizePending() const = 0;
 				virtual vector2du16 size() const = 0;
 				virtual void setVerticalSync(bool) = 0;

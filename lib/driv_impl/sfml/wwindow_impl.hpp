@@ -16,11 +16,11 @@ namespace lib
 		{
 			class SFMLWindow : public IWWindow, public sf::RenderWindow
 			{
-				virtual bool create(u32 width, u32 height, u32 bpp, const char *title, u32 depth, u32 stencil, u32 antialiasing, u32  major, u32 minor, u32 attributes) override;
+				virtual bool create(const WindowData&) override;
 				virtual bool resizePending() const override;
-				virtual vector2du32 size() const override;
+				virtual vector2du16 size() const override;
 				virtual void setVerticalSync(bool enabled) override;
-				virtual void setTitle(const char *title) override;
+				virtual void setTitle(const str &title) override;
 				virtual void clear() override;
 				virtual void display() override;
 				virtual sptr<render::RenderTarget> windowRenderTarget() const override;

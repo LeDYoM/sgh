@@ -36,7 +36,7 @@ namespace lib
 		class Window : SystemObject
 		{
 		public:
-			Window(AppController *,WindowCreationParams &&wcp);
+			Window(AppController *,WindowCreationParams &&);
 			virtual ~Window();
 
 			bool preLoop();

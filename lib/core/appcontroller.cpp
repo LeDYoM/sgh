@@ -41,7 +41,8 @@ namespace lib
 				LOG_DEBUG(appId() + ":  Starting initialization...");
 				m_state = AppState::Executing;
 
-				m_servicesManager->addService(sptr<Window>{ new Window( this )});
+				m_window = sptr<Window>{ new Window(this, WindowCreationParams{}) };
+
 				m_servicesManager->addService(sptr<ExceptionManager>{new ExceptionManager{}});
 				m_servicesManager->addService(sptr<FileSystem>{ new FileSystem{} });
 				m_servicesManager->addService(sptr<Configuration>{ new Configuration{} });

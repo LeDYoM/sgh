@@ -27,9 +27,9 @@ namespace lib
 				}
 			}
 
-			bool SFMLWindow::create(u32 width, u32 height, u32 bpp, const char *title, u32 depth, u32 stencil, u32 antialiasing, u32 major, u32 minor, u32 attributes)
+			bool SFMLWindow::create(const WindowData&wd)
 			{
-				sf::Window::create(sf::VideoMode{ width, height, bpp }, getAsString(title), sf::Style::Default, sf::ContextSettings{ depth, stencil, antialiasing, major, minor, attributes });
+				sf::Window::create(sf::VideoMode{ wd.size.x, wd.size.y, wd.bpp }, getAsString(""), sf::Style::Default, sf::ContextSettings{ wd.depth, 0, wd.antialiasing, wd.major, wd.minor, 0 });
 				m_thisAsRenderTarget = sptr<drivers::render::RenderTarget>(new drivers::render::SFMLRenderTarget(static_cast<sf::RenderTarget*>(this)));
 				return true;
 			}
@@ -39,9 +39,9 @@ namespace lib
 				return m_resizePending;
 			}
 
-			lib::vector2du32 SFMLWindow::size() const
+			vector2du16 SFMLWindow::size() const
 			{
-				return vector2du32();
+				return vector2du16();
 			}
 
 			void SFMLWindow::setVerticalSync(bool enabled)
@@ -49,7 +49,7 @@ namespace lib
 				sf::Window::setVerticalSyncEnabled(enabled);
 			}
 
-			void SFMLWindow::setTitle(const char *title)
+			void SFMLWindow::setTitle(const str &title)
 			{
 				sf::Window::setTitle(getAsString(title));
 			}

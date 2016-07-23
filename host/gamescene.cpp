@@ -22,11 +22,12 @@
 #include <functional>
 
 using namespace lib;
+using namespace lib::draw;
 
 namespace zoper
 {
-	GameScene::GameScene(lib::PIAppContext piAppContext)
-		: Scene(piAppContext, "GameScene")
+	GameScene::GameScene(SceneManager *sceneManager)
+		: Scene(sceneManager, "GameScene")
 	{
 		_gameData.size.x = 18;
 		_gameData.size.y = 12;

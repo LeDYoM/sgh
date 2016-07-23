@@ -26,7 +26,7 @@ namespace lib
 		class LIB_API Scene : public RenderGroup, public InputReceiverNode
 		{
 		public:
-			Scene(PIAppContext piAppContext, const std::string &_name);
+			Scene(SceneManager *sceneManager, const std::string &_name);
 			virtual ~Scene();
 
 			virtual void onEnterScene() = 0;

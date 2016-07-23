@@ -12,10 +12,10 @@ namespace lib
 {
 	namespace draw
 	{
-		Scene::Scene(PIAppContext piAppContext, const std::string &_name) 
+		Scene::Scene(SceneManager *sceneManager, const std::string &_name)
 			: RenderGroup{ nullptr, _name }, m_camera{ new Camera{} }
 		{
-			setProvider(core::toController(piAppContext));
+//			setProvider(core::toController(piAppContext));
 			LOG_CONSTRUCT("Name: " + name());
 		}
 

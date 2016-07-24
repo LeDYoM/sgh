@@ -74,13 +74,13 @@ namespace lib
 		{
 			__ASSERT(scene, "Cannot change to a nullptr Scene");
 			if (_currentScene) {
-				_currentScene->privateOnExitScene();
+				_currentScene->onExitScene();
 			}
 			else {
 				LOG_DEBUG("Set first scene");
 			}
 			_currentScene = scene;
-			_currentScene->privateOnEnterScene();
+			_currentScene->onEnterScene();
 		}
 
 		sptr<Scene> SceneManager::getSceneByName(const std::string &name) const

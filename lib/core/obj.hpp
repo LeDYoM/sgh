@@ -16,6 +16,8 @@ namespace lib
 		Object();
 		Object(Object *const other);
 		Object(core::AppController *const app);
+		void setProvider(core::AppController *app);
+
 	public:
 		virtual ~Object();
 
@@ -44,9 +46,6 @@ namespace lib
 		SystemObject() : Object() {}
 		SystemObject(core::AppController *const app) : Object( app ) {}
 		virtual ~SystemObject() {}
-
-		void setProvider(core::AppController *app);
-
 	};
 
 }

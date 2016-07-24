@@ -12,10 +12,10 @@ namespace lib
 {
 	namespace draw
 	{
-		Scene::Scene(SceneManager *sceneManager, const std::string &_name)
+		Scene::Scene(PIAppContext piAppContext, const std::string &_name)
 			: RenderGroup{ nullptr, _name }, m_camera{ new Camera{} }
 		{
-//			setProvider(core::toController(piAppContext));
+			setProvider(core::toController(piAppContext));
 			LOG_CONSTRUCT("Name: " + name());
 		}
 
@@ -65,6 +65,7 @@ namespace lib
 			return true;
 		}
 
+		/*
 		void Scene::privateOnEnterScene()
 		{
 			LOG_DEBUG("Entered in scene " << name());
@@ -79,15 +80,10 @@ namespace lib
 			onEnterScene();
 		}
 
+		*/
 		lib::vector2df Scene::pointViewToCurrentView(const vector2df &point, const vector2df &size) const
 		{
 			return{ (m_camera->view().size().x * point.x) / size.x, (m_camera->view().size().y * point.y) / size.y };
-		}
-
-		void Scene::privateOnExitScene()
-		{
-			onExitScene();
-			LOG_DEBUG("Exited from scene " << name());
 		}
 
 		void Scene::onKeyPressed(const Key &key)

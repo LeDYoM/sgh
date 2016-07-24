@@ -2,8 +2,10 @@
 #include "gamescene.hpp"
 #include "common.hpp"
 
-lib::uptr<lib::IApp> getModule() {
-	return lib::uptr<lib::IApp>(new zoper::ZoperProgramController());
+using namespace lib;
+
+uptr<IApp> getModule() {
+	return uptr<IApp>(new zoper::ZoperProgramController());
 }
 
 namespace zoper
@@ -21,9 +23,9 @@ namespace zoper
 	{
 	}
 
-	const lib::IAppDescriptor ZoperProgramController::getAppDescriptor() const
+	const IAppDescriptor ZoperProgramController::getAppDescriptor() const
 	{
-		return lib::IAppDescriptor
+		return IAppDescriptor
 		{
 			"Zoper",
 			1,
@@ -39,9 +41,9 @@ namespace zoper
 		return 0;
 	}
 
-	lib::VecSPtr<lib::draw::Scene> ZoperProgramController::scenesVector()
+	VecSPtr<draw::Scene> ZoperProgramController::scenesVector()
 	{
-		return{ /*lib::sptr<lib::draw::Scene>(new MenuScene),*/ lib::sptr<lib::draw::Scene>(new GameScene(appContext())) };
+		return{ /*sptr<draw::Scene>(new MenuScene),*/ sptr<draw::Scene>(new GameScene(appContext())) };
 	}
 
 

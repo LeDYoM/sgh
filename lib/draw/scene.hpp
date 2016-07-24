@@ -26,7 +26,7 @@ namespace lib
 		class LIB_API Scene : public RenderGroup, public InputReceiverNode
 		{
 		public:
-			Scene(SceneManager *sceneManager, const std::string &_name);
+			Scene(PIAppContext piAppContext, const std::string &_name);
 			virtual ~Scene();
 
 			virtual void onEnterScene() = 0;
@@ -35,7 +35,7 @@ namespace lib
 			virtual void onKeyPressed(const Key &) override;
 			virtual void onKeyReleased(const Key &) override;
 
-			virtual const lib::vector2df getDefaultSizeView() = 0;
+			virtual const vector2df getDefaultSizeView() = 0;
 			virtual void update() = 0;
 
 			sptr<lib::ResourceManager> resourceManager() const;
@@ -48,11 +48,8 @@ namespace lib
 			void exitProgram();
 
 			Timer clock;
-//			inline const Rectf32 &currentView() const { return m_camera.target(); }
 			virtual bool init() override;
 			virtual bool deinit();
-
-
 
 		protected:
 			inline u32 state() const { return _state; }
@@ -61,8 +58,6 @@ namespace lib
 			Scene *const parentScene() override final;
 
 		private:
-			void privateOnEnterScene();
-			void privateOnExitScene();
 			u32 _state;
 
 			friend class SceneManager;

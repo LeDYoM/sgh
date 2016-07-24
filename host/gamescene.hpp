@@ -52,7 +52,7 @@ namespace zoper
 	class GameScene : public lib::draw::Scene, public lib::board::ITilesController
 	{
 	public:
-		GameScene(lib::draw::SceneManager *sceneManager);
+		GameScene(lib::PIAppContext piAppContext);
 		virtual ~GameScene();
 
 		virtual bool init() override;

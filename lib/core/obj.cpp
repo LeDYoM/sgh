@@ -11,7 +11,7 @@ namespace lib
 	Object::Object(core::AppController *const app) 
 		: m_app{ app } {}
 
-	void SystemObject::setProvider(core::AppController *const app)
+	void Object::setProvider(core::AppController *const app)
 	{
 		m_app = app;
 	}

@@ -27,9 +27,17 @@ namespace lib
 				}
 			}
 
-			bool SFMLWindow::create(const core::WindowCreationParams &wd)
+			bool SFMLWindow::create(const core::WindowCreationParams &wcp)
 			{
-				sf::Window::create(sf::VideoMode{ wd.size.x, wd.size.y, wd.bpp }, getAsString(""), sf::Style::Default, sf::ContextSettings{ 0, 0, wd.antialiasing, 0, 0, 0 });
+				sf::Uint32 style{ sf::Style::None };
+				if (wcp.titleBar)
+					style |= sf::Style::Titlebar | sf::Style::Close;
+				if (wcp.resizable)
+					style |= sf::Style::Resize;
+				if (wcp.fullScreen)
+					style = sf::Style::Fullscreen;
+
+				sf::Window::create(sf::VideoMode{ wcp.size.x, wcp.size.y, wcp.bpp }, getAsString(""), style, sf::ContextSettings{ 0, 0, wcp.antialiasing, 0, 0, 0 });
 				m_thisAsRenderTarget = sptr<drivers::render::RenderTarget>(new drivers::render::SFMLRenderTarget(static_cast<sf::RenderTarget*>(this)));
 				return true;
 			}

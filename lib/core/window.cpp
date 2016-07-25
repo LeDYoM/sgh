@@ -43,13 +43,8 @@ namespace lib
 			LOG_DEBUG("Fullscreen:" << wcp.fullScreen);
 			LOG_DEBUG("Antialiasing:" << wcp.antialiasing);
 
-			sf::Uint32 style{ sf::Style::Titlebar | sf::Style::Close };
-			if (wcp.fullScreen)
-				style = sf::Style::Fullscreen;
-
-			p_wPrivate->m_renderWindow = appController()->driver()->newWindow(); //sptr<drivers::window>{new RenderWindow()};
-			p_wPrivate->m_renderWindow->create(core::WindowCreationParams{});
-//			p_wPrivate->m_renderWindow->create(wcp.width, wcp.height, wcp.bpp, m_title.c_str(), 0, 0, 0, 0, 0w);
+			p_wPrivate->m_renderWindow = appController()->driver()->newWindow();
+			p_wPrivate->m_renderWindow->create(wcp);
 
 			p_wPrivate->m_renderWindow->setVerticalSync(wcp.vsync);
 		}

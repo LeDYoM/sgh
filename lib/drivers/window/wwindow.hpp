@@ -6,6 +6,10 @@
 
 namespace lib
 {
+	namespace core
+	{
+		struct WindowCreationParams;
+	}
 	namespace drivers
 	{
 		namespace render
@@ -14,22 +18,10 @@ namespace lib
 		}
 		namespace window
 		{
-			struct WindowData
-			{
-				vector2du16 size;
-				vector2du16 initialPosition{ 0,0 };
-				u8 depth{ 0 };
-				u8 bpp{ 32 };
-				u16 major{ 0 };
-				u16 minor{ 0 };
-				u32 antialiasing{ 0 };
-				bool fullscreen{ false };
-				bool resizable{ true };
-			};
 			class IWWindow
 			{
 			public:
-				virtual bool create(const WindowData&) = 0;
+				virtual bool create(const core::WindowCreationParams&) = 0;
 				virtual bool resizePending() const = 0;
 				virtual vector2du16 size() const = 0;
 				virtual void setVerticalSync(bool) = 0;

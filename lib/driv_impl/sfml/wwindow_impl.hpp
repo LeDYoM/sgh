@@ -16,7 +16,7 @@ namespace lib
 		{
 			class SFMLWindow : public IWWindow, public sf::RenderWindow
 			{
-				virtual bool create(const WindowData&) override;
+				virtual bool create(const core::WindowCreationParams&) override;
 				virtual bool resizePending() const override;
 				virtual vector2du16 size() const override;
 				virtual void setVerticalSync(bool enabled) override;

@@ -91,9 +91,9 @@ namespace lib
 
 		bool AppController::loopStep()
 		{
-			bool windowWants2Close = m_servicesManager->service<Window>()->preLoop();
+			bool windowWants2Close = m_window->preLoop();
 			m_servicesManager->service<draw::SceneManager>()->update();
-			windowWants2Close |= m_servicesManager->service<Window>()->postLoop();
+			windowWants2Close |= m_window->postLoop();
 			return windowWants2Close;
 		}
 

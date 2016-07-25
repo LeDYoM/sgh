@@ -21,8 +21,7 @@ namespace lib
 
 		struct WindowCreationParams
 		{
-			u32 width{ 1024 };
-			u32 height{ 768 };
+			vector2du32 size{ 1024,768 };
 			u32 bpp{ 16 };
 			u32 antialiasing{ 0 };
 			bool vsync{ false };

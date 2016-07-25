@@ -111,7 +111,8 @@ namespace lib
 
 			Transformation t;
 			auto _renderManager( service<RenderManager>() );
-			_renderManager->startFrame(service<core::Window>()->windowRenderTarget(), _currentScene->camera());
+			_renderManager->startFrame(appController()->window()->windowRenderTarget(), _currentScene->camera());
+//			_renderManager->startFrame(service<core::Window>()->windowRenderTarget(), _currentScene->camera());
 			visit(_currentScene,false,t);
 			_renderManager->finishFrame();
 		}

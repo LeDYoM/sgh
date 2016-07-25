@@ -41,6 +41,7 @@ namespace lib
 			sptr<Driver> const &driver() const { return m_driver; }
 
 			uptr<ServicesManager> const &servicesManager() const { return m_servicesManager; }
+			sptr<Window> window() const { return m_window; }
 
 			const std::string appId() const;
 

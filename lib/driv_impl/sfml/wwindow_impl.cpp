@@ -27,9 +27,9 @@ namespace lib
 				}
 			}
 
-			bool SFMLWindow::create(const WindowData&wd)
+			bool SFMLWindow::create(const core::WindowCreationParams &wd)
 			{
-				sf::Window::create(sf::VideoMode{ wd.size.x, wd.size.y, wd.bpp }, getAsString(""), sf::Style::Default, sf::ContextSettings{ wd.depth, 0, wd.antialiasing, wd.major, wd.minor, 0 });
+				sf::Window::create(sf::VideoMode{ wd.size.x, wd.size.y, wd.bpp }, getAsString(""), sf::Style::Default, sf::ContextSettings{ 0, 0, wd.antialiasing, 0, 0, 0 });
 				m_thisAsRenderTarget = sptr<drivers::render::RenderTarget>(new drivers::render::SFMLRenderTarget(static_cast<sf::RenderTarget*>(this)));
 				return true;
 			}

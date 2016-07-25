@@ -10,6 +10,7 @@
 //	#define __MULTITHREAD_LOG__
 //	#define __LOGFILE__		"log.txt"
 #else
+#define _ACCEPT_CONFIGURATION_PARAMETERS_				/// Flag indicating if this build accept parameters for substituting configuration values or not
 #define USE_MEM_MANAGER
 #define __EXCEPTION_ON_ERROR__
 #define __USE_LOGS__

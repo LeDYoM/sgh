@@ -1,3 +1,4 @@
+#include "compileconfig.hpp"
 #include "configuration.hpp"
 #include "appcontroller.hpp"
 #include "filesystem.hpp"
@@ -64,6 +65,12 @@ namespace lib
 		std::vector<str> data{ file->asText() };
 		u32 count{ 0 };
 		m_rootNode = std::move(DataValue::fromStringVector(data, count) );
+
+		// Configuration parameters
+#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
+
+#endif
+
 	}
 
 	DataValue Configuration::get(const str &cPath, const DataValue &defaultv) const

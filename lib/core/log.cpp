@@ -21,10 +21,16 @@ struct LogMessage
 	std::ofstream logFile;
 #endif
 
-void initLog()
+bool m_useFile, m_showInIde, m_showInConsole;
+
+void initLog(bool useFile, bool showInIde, bool showInConsole)
 {
+	m_useFile = useFile;
+	m_showInIde = showInIde;
+	m_showInConsole = showInConsole;
+
 #ifdef __LOGFILE__
-	logFile.open(__LOGFILE__);
+	if (m_useFile) logFile.open(__LOGFILE__);
 #endif
 }
 
@@ -33,15 +39,20 @@ void commitLog(const LogMessage &message)
 	const std::string &str = message.message;
 	const LogType &lt = message.logType;
 #ifdef __LOGFILE__
-	if (logFile.is_open())
-		logFile << str;
+	if (m_useFile)
+		if (logFile.is_open())
+			logFile << str;
 #endif
-	if (lt == LogType::Error || lt == LogType::Warning)
-		std::cerr << str;
-	else
-		std::cout << str;
+	if (m_showInConsole)
+	{
+		if (lt == LogType::Error || lt == LogType::Warning)
+			std::cerr << str;
+		else
+			std::cout << str;
+	}
 #if defined(_MSC_VER) || defined(__BORLANDC__)
-	OutputDebugString(str.c_str());
+	if (m_showInIde)
+		OutputDebugString(str.c_str());
 #endif
 }
 
@@ -109,12 +120,8 @@ void finishLog()
 	t1.join();
 #endif
 #ifdef __LOGFILE__
-	logFile.close();
+	if (m_useFile) logFile.close();
 #endif
 }
-
-#else
-void initLog() {}
-void finishLog() {}
 
 #endif

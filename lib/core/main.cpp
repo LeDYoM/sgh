@@ -29,7 +29,7 @@ namespace lib
 
 		try
 		{
-			initLog();
+			initLog(false,false,false);
 			installMemManager();
 			core::ParamParser paramParser(argc, argv);
 			core::HostController::createHostController(std::move(paramParser));

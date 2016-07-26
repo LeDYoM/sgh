@@ -13,7 +13,7 @@
 		Error,
 	};
 
-	void initLog();
+	void initLog(bool useFile=true,bool showInIde=true,bool showInConsole=true);
 	void finishLog();
 	void logOutput(const LogType&, const std::string&);
 	#define PREPARE_LOG(level,params) { std::ostringstream os_; os_ << params << std::endl; logOutput(level,os_.str()); }
@@ -46,7 +46,9 @@
 	#define __ASSERT(cond,x)
 	#define __CHECK(cond,x)
 	#define __CRITICAL(cond,x)
+	inline void initLog(bool useFile = true, bool showInIde = true, bool showInConsole = true) {}
+	inline void finishLog();
+
 #endif
-void initLog();
-void finishLog();
+
 #endif

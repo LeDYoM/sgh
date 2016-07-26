@@ -32,6 +32,7 @@ namespace lib
 			__ASSERT(m_initialized, "Driver is not initialized");
 			__ASSERT(!m_window, "Window is already created");
 			m_window = sptr<drivers::window::SFMLWindow>(new drivers::window::SFMLWindow());
+			m_window->create(wcp);
 			return currentWindow();
 		}
 

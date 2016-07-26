@@ -28,8 +28,9 @@
 	#define LOG_CONSTRUCT_NOPARAMS	LOG_CONSTRUCT("")
 	#define LOG_DESTRUCT_NOPARAMS	LOG_DESTRUCT("")
 
-	#define __ASSERT(cond,x)		if (!(cond)) LOG_ERROR(x<< "\n\tIn file "<<__FILE__<< " and line: "<<__LINE__<<"\n\tFunction: "<<__FUNCDNAME__ );
+	#define __ASSERT(cond,x)	if (!(cond)) LOG_ERROR(x<< "\n\tIn file "<<__FILE__<< " and line: "<<__LINE__<<"\n\tFunction: "<<__FUNCDNAME__ );
 	#define __CHECK(cond,x)		if (!(cond)) LOG_WARNING(x<< "\n\tIn file "<<__FILE__<< " and line: "<<__LINE__<<"\n\tFunction: "<<__FUNCDNAME__ );
+	#define __CRITICAL(cond,x)	if (!(cond)) LOG_WARNING(x<< "\n\tIn file "<<__FILE__<< " and line: "<<__LINE__<<"\n\tFunction: "<<__FUNCDNAME__ );
 
 #else
 	#define EXECUTE_IN_DEBUG(x)	
@@ -44,6 +45,7 @@
 
 	#define __ASSERT(cond,x)
 	#define __CHECK(cond,x)
+	#define __CRITICAL(cond,x)
 #endif
 void initLog();
 void finishLog();

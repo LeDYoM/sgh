@@ -3,6 +3,7 @@
 #include <lib/core/memmanager.hpp>
 #include <lib/core/log.hpp>
 #include <lib/core/hostcontroller.hpp>
+#include <lib/core/paramparser.hpp>
 #include <vector>
 #include <string>
 
@@ -30,16 +31,18 @@ namespace lib
 		{
 			initLog();
 			installMemManager();
-
-			core::HostController hostController(argc,argv);
-			hostController.initialize();
+			core::ParamParser paramParser(argc, argv);
+			core::HostController::createHostController(std::move(paramParser));
+			auto hController = core::HostController::hController();
+			hController->initialize();
 
 			// WIP:
-			hostController.loadAppFromFileName("zoper");
+			hController->loadAppFromFileName("zoper");
 			// End wip
 
-			result = hostController.run();
-			hostController.finalize();
+			result = hController->run();
+			hController->finalize();
+			core::HostController::destroyHostController();
 		}
 		catch (std::exception e)
 		{

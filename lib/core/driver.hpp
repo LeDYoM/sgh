@@ -13,10 +13,12 @@ namespace lib
 		public:
 			explicit Driver();
 			bool initialize(const std::string &fileName);
-			sptr<drivers::window::IWWindow> newWindow();
+			sptr<drivers::window::IWWindow> currentWindow();
+			sptr<drivers::window::IWWindow> newWindow(const WindowCreationParams &wcp);
 			virtual ~Driver();
 		private:
 			bool m_initialized{ false };
+			sptr<drivers::window::IWWindow> m_window;
 		};
 	}
 }

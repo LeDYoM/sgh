@@ -21,10 +21,18 @@ namespace lib
 			return true;
 		}
 
-		sptr<drivers::window::IWWindow> Driver::newWindow()
+		sptr<drivers::window::IWWindow> Driver::currentWindow()
+		{
+			__ASSERT(m_window, "There is no window created");
+			return m_window;
+		}
+
+		sptr<drivers::window::IWWindow> Driver::newWindow(const WindowCreationParams & wcp)
 		{
 			__ASSERT(m_initialized, "Driver is not initialized");
-			return sptr<drivers::window::SFMLWindow>(new drivers::window::SFMLWindow());
+			__ASSERT(!m_window, "Window is already created");
+			m_window = sptr<drivers::window::SFMLWindow>(new drivers::window::SFMLWindow());
+			return currentWindow();
 		}
 
 		Driver::~Driver()

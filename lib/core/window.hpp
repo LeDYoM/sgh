@@ -13,6 +13,10 @@ namespace lib
 		{
 			class RenderTarget;
 		}
+		namespace window
+		{
+			class IWWindow;
+		}
 	}
 	namespace core
 	{
@@ -35,7 +39,7 @@ namespace lib
 		class Window : SystemObject
 		{
 		public:
-			Window(AppController *,WindowCreationParams &&);
+			Window(AppController *, sptr<drivers::window::IWWindow>);
 			virtual ~Window();
 
 			bool preLoop();
@@ -48,12 +52,9 @@ namespace lib
 			/* Driver communication */
 			void wantsClose();
 		private:
-			void create(WindowCreationParams &&wcp);
 
-			WindowCreationParams m_wcp;
 			uptr<WindowPrivate> p_wPrivate{ nullptr };
 			bool m_shouldClose{ false };
-			str m_title;
 		};
 	}
 }

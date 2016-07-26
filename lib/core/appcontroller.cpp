@@ -11,6 +11,7 @@
 #include "servicesmanager.hpp"
 #include "shareddata.hpp"
 #include "input.hpp"
+#include "driver.hpp"
 
 namespace lib
 {
@@ -21,6 +22,7 @@ namespace lib
 		{
 			LOG_CONSTRUCT_NOPARAMS;
 			m_iapp->setAppContext(this);
+			m_window = sptr<Window>{ new Window(this, driverInstance->currentWindow()) };
 			LOG_DEBUG("Starting app " << appId() << "...");
 			m_state = AppState::ReadyToStart;
 		}
@@ -53,8 +55,6 @@ namespace lib
 
 				m_servicesManager->setupAllServices();
 				m_servicesManager->initializeServices();
-
-				m_window = sptr<Window>{ new Window(this, WindowCreationParams{}) };
 
 				m_servicesManager->service<draw::SceneManager>()->addScenes(m_iapp->scenesVector());
 

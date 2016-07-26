@@ -24,29 +24,24 @@ namespace lib
 			s32 currentFps{ 0 };
 			sptr<drivers::window::IWWindow> m_renderWindow{ nullptr };
 		};
-		Window::Window(AppController *m_appController, WindowCreationParams && wcp)
-			: SystemObject{ m_appController }, p_wPrivate {	new WindowPrivate()	}, m_title(wcp.windowTitle)
+		Window::Window(AppController *m_appController, sptr<drivers::window::IWWindow> drvWindow)
+			: SystemObject{ m_appController }, p_wPrivate {	new WindowPrivate()	}
 		{
 			LOG_CONSTRUCT_NOPARAMS;
-			create(std::move(wcp));
+//			LOG_DEBUG("Going to create Window");
+//			LOG_DEBUG("Resolution:" << wcp.size.x << "x" << wcp.size.y << "x" << std::to_string(wcp.bpp));
+//			LOG_DEBUG("Fullscreen:" << wcp.fullScreen);
+//			LOG_DEBUG("Antialiasing:" << wcp.antialiasing);
+
+			p_wPrivate->m_renderWindow = drvWindow;
+			//			p_wPrivate->m_renderWindow->create(wcp);
+
+//			p_wPrivate->m_renderWindow->setVerticalSync(wcp.vsync);
 		}
 
 		Window::~Window()
 		{
 			LOG_DESTRUCT_NOPARAMS;
-		}
-
-		void Window::create(WindowCreationParams &&wcp)
-		{
-			LOG_DEBUG("Going to create Window");
-			LOG_DEBUG("Resolution:" << wcp.size.x << "x" << wcp.size.y << "x" << std::to_string(wcp.bpp));
-			LOG_DEBUG("Fullscreen:" << wcp.fullScreen);
-			LOG_DEBUG("Antialiasing:" << wcp.antialiasing);
-
-			p_wPrivate->m_renderWindow = appController()->driver()->newWindow();
-			p_wPrivate->m_renderWindow->create(wcp);
-
-			p_wPrivate->m_renderWindow->setVerticalSync(wcp.vsync);
 		}
 
 		bool Window::preLoop()
@@ -57,7 +52,7 @@ namespace lib
 				p_wPrivate->lastTimeFps = eMs;
 				p_wPrivate->lastFps = p_wPrivate->currentFps;
 				p_wPrivate->currentFps = 0;
-				p_wPrivate->m_renderWindow->setTitle(std::string(m_title + " FPS:" + std::to_string(p_wPrivate->lastFps) ).c_str());
+				p_wPrivate->m_renderWindow->setTitle(std::string(" FPS:" + std::to_string(p_wPrivate->lastFps) ).c_str());
 			}
 			++(p_wPrivate->currentFps);
 			p_wPrivate->m_renderWindow->collectEvents();

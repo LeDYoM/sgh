@@ -6,10 +6,8 @@
 
 namespace lib
 {
-	namespace core
-	{
-		struct WindowCreationParams;
-	}
+	struct WindowCreationParams;
+
 	namespace drivers
 	{
 		namespace render
@@ -21,7 +19,7 @@ namespace lib
 			class IWWindow
 			{
 			public:
-				virtual bool create(const core::WindowCreationParams&) = 0;
+				virtual bool create(const WindowCreationParams&) = 0;
 				virtual bool resizePending() const = 0;
 				virtual vector2du16 size() const = 0;
 				virtual void setVerticalSync(bool) = 0;

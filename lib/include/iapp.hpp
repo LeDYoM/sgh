@@ -3,7 +3,6 @@
 
 #include "compconfig.hpp"
 #include "types.hpp"
-#include "wcp.hpp"
 #include "iappcontext.hpp"
 #include <string>
 #include <vector>

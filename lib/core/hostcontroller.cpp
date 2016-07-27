@@ -1,4 +1,5 @@
 #include "hostcontroller.hpp"
+#include "wcp.hpp"
 #include "window.hpp"
 #include "log.hpp"
 #include "hosttask.hpp"

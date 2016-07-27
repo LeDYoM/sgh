@@ -2,6 +2,7 @@
 #include <lib/drivers/render/rendertarget.hpp>
 #include "rendertarget_impl.hpp"
 #include <lib/core/convops.hpp>
+#include <lib/core/wcp.hpp>
 #include <lib/core/window.hpp>
 #include <lib/include/key.hpp>
 
@@ -27,7 +28,7 @@ namespace lib
 				}
 			}
 
-			bool SFMLWindow::create(const core::WindowCreationParams &wcp)
+			bool SFMLWindow::create(const WindowCreationParams &wcp)
 			{
 				sf::Uint32 style{ sf::Style::None };
 				if (wcp.titleBar)

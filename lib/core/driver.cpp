@@ -1,6 +1,7 @@
 #include "driver.hpp"
 #include <lib/driv_impl/sfml/wwindow_impl.hpp>
 #include "log.hpp"
+#include "wcp.hpp"
 
 namespace lib
 {

@@ -1,4 +1,5 @@
-#include "data.hpp"
+#include "datavalue.hpp"
+#include "datamap.hpp"
 #include "log.hpp"
 
 #include "strutils.hpp"
@@ -37,6 +38,34 @@ namespace lib
 		case DataType::T_Tree:
 			delete reinterpret_cast<DataMap*>(ptr_);
 			break;
+		default:
+			break;
+		}
+	}
+
+	DataValue::DataValue(const DataMap &value_)
+		: m_dtype{ DataType::T_Tree }, ptr_{ new DataMap(value_) } {}
+
+	DataValue::DataValue(const DataValue &value_) : m_dtype{ value_.m_dtype }
+	{
+		switch (m_dtype)
+		{
+		case DataType::T_s8:
+		case DataType::T_u8:
+		case DataType::T_s16:
+		case DataType::T_u16:
+		case DataType::T_s32:
+		case DataType::T_u32:
+		case DataType::T_f64:
+			f64_ = value_.f64_;
+			break;
+		case DataType::T_string:
+			ptr_ = new str(value_.getString());
+			break;
+		case DataType::T_Tree:
+			ptr_ = new DataMap(*value_.getMap());
+			break;
+		case DataType::T_Empty:
 		default:
 			break;
 		}

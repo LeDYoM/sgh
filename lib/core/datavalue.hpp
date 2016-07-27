@@ -1,15 +1,13 @@
-#ifndef LIB_DATA_HPP__
-#define LIB_DATA_HPP__
+#ifndef LIB_DATAVALUE_HPP__
+#define LIB_DATAVALUE_HPP__
 
 #include <lib/include/types.hpp>
 #include <lib/include/compconfig.hpp>
-#include <map>
-#include <vector>
 
 namespace lib
 {
-	class DataValue;
-	typedef LIB_API std::map<str, DataValue> DataMap;
+	class DataMap;
+
 	enum class LIB_API DataType : u8
 	{
 		T_Empty,
@@ -36,32 +34,8 @@ namespace lib
 		explicit inline DataValue(const u32 value_) : m_dtype{ DataType::T_u32 }, u32_{ value_ } {}
 		explicit inline DataValue(const f64 value_) : m_dtype{ DataType::T_f64 }, f64_{ value_ } {}
 		explicit inline DataValue(const str &value_) : m_dtype{ DataType::T_string }, ptr_{ new str(value_) } {}
-		explicit inline DataValue(const DataMap &value_) : m_dtype{ DataType::T_Tree }, ptr_{ new DataMap(value_) } {}
-
-		explicit inline DataValue(const DataValue &value_): m_dtype{ value_.m_dtype }
-		{
-			switch (m_dtype)
-			{
-				case DataType::T_s8:
-				case DataType::T_u8:
-				case DataType::T_s16:
-				case DataType::T_u16:
-				case DataType::T_s32:
-				case DataType::T_u32:
-				case DataType::T_f64:
-					f64_ = value_.f64_;
-					break;
-				case DataType::T_string:
-					ptr_ = new str(value_.getString());
-					break;
-				case DataType::T_Tree:
-					ptr_ = new DataMap(*value_.getMap());
-					break;
-				case DataType::T_Empty:
-				default:
-					break;
-			}
-		}
+		explicit DataValue(const DataMap &value_);
+		explicit DataValue(const DataValue &value_);
 
 		inline DataValue(DataValue &&other)
 		{
@@ -149,13 +123,6 @@ namespace lib
 		};
 		DataType m_dtype{ DataType::T_Empty };
 	};
-
-	template <typename T>
-	vector2d<T> fromDataMap(const DataMap &map, const str &xStr, const str& yStr)
-	{
-		vector2d<T> x{ map[xStr],map[yStr] };
-		return x;
-	}
 }
 
 #endif

@@ -21,6 +21,11 @@ namespace lib
 				bool log2Console{ true };
 				bool log2File{ false };
 				bool log2Ide{ true };
+
+				void setDataMap(const DataMap& map)
+				{
+					resolution = fromDataMap<u32>(map,"rx", "ry");
+				}
 			};
 		}
 

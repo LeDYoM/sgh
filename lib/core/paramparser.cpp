@@ -44,25 +44,12 @@ namespace lib
 
 			u32 count{};
 			priv->m_parsedParams = std::move(DataValue::fromStringVector(m_params, count));
+			LOG_DEBUG(DataValue{ priv->m_parsedParams });
 		}
 
 		ParamParser::~ParamParser()
 		{
 			delete priv;
-		}
-
-		void ParamParser::overwriteWithParams(DataMap &config)
-		{
-			auto parsedParams(priv->m_parsedParams);
-			for (const auto &paramDesc : parsedParams)
-			{
-				auto fNodeIterator = config.find(paramDesc.first);
-				if (fNodeIterator != config.end())
-				{
-					decltype(*fNodeIterator) pair{ *fNodeIterator };
-					pair.second = paramDesc.second;
-				}
-			}
 		}
 	}
 }

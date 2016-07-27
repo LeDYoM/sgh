@@ -29,9 +29,9 @@ namespace lib
 
 		try
 		{
-			initLog(false,false,false);
-			installMemManager();
+			initLog(false,true,false);
 			core::ParamParser paramParser(argc, argv);
+			installMemManager();
 			core::HostController::createHostController(std::move(paramParser));
 			auto hController = core::HostController::hController();
 			hController->initialize();

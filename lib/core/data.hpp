@@ -149,6 +149,13 @@ namespace lib
 		};
 		DataType m_dtype{ DataType::T_Empty };
 	};
+
+	template <typename T>
+	vector2d<T> fromDataMap(const DataMap &map, const str &xStr, const str& yStr)
+	{
+		vector2d<T> x{ map[xStr],map[yStr] };
+		return x;
+	}
 }
 
 #endif

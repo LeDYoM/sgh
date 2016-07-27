@@ -18,7 +18,6 @@ namespace lib
 			ParamParser(int argc, char *argv[]);
 			virtual ~ParamParser();
 
-			void overwriteWithParams(DataMap&);
 		private:
 			priv::ParamParserPrivate *priv;
 		};

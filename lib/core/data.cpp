@@ -302,7 +302,11 @@ namespace lib
 			output << "T_string: " << this_.getString();
 			break;
 		case DataType::T_Tree:
-			output << "T_TreeNode: at " << std::to_string((u32)(this_.ptr_));
+			output << "T_TreeNode: \n";// << std::to_string((u32)(this_.ptr_));
+			for (const auto&element : *(this_.getMap()))
+			{
+				output << element.first << ":\n" << element.second;
+			}
 			break;
 		default:
 			output << "T_Unknown: (?)";

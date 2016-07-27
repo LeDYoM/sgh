@@ -17,15 +17,14 @@ namespace lib
 		{
 			struct HostConfiguration
 			{
-				vector2du32 resolution{ 1024,768 };
-				u8 bpp{ 32 };
+				WindowCreationParams wcp;
 				bool log2Console{ true };
 				bool log2File{ false };
 				bool log2Ide{ true };
 
 				void setDataMap(const DataMap& map)
 				{
-					resolution = fromDataMap<u32>(map,"rx", "ry");
+					wcp.size = fromDataMap<u32>(map,"rx", "ry");
 				}
 			};
 		}
@@ -118,7 +117,7 @@ namespace lib
 
 		void HostController::loadConfiguration()
 		{
-			m_configuration->resolution = vector2du32(640, 480);
+			m_configuration->wcp.size = vector2du32(640, 480);
 		}
 
 		void HostController::addTask(sptr<HostTask> newTask)
@@ -142,9 +141,7 @@ namespace lib
 						m_driver = sptr<Driver>{new Driver};
 						m_driver->initialize("");
 						{
-							WindowCreationParams wcp;
-							wcp.size = m_configuration->resolution;
-							m_driver->newWindow(wcp);
+							m_driver->newWindow(m_configuration->wcp);
 						}
 						break;
 					case HostTask::HostTaskCode::UnloadDriver:

@@ -6,6 +6,7 @@
 
 namespace lib
 {
+	class DataMap;
 	namespace core
 	{
 		namespace priv
@@ -17,6 +18,8 @@ namespace lib
 		public:
 			ParamParser(int argc, char *argv[]);
 			virtual ~ParamParser();
+
+			const DataMap &parameters() const;
 
 		private:
 			priv::ParamParserPrivate *priv;

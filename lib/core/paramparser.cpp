@@ -29,9 +29,6 @@ namespace lib
 				m_params.push_back(argv[i]);
 			}
 
-			m_params.push_back("-rx=800");
-			m_params.push_back("-ry=600");
-
 			std::for_each(m_params.cbegin(), m_params.cend(), [](const str&element) {LOG_DEBUG(element)});
 			for (std::string &element : m_params)
 			{
@@ -50,6 +47,11 @@ namespace lib
 		ParamParser::~ParamParser()
 		{
 			delete priv;
+		}
+
+		const DataMap & ParamParser::parameters() const
+		{
+			return priv->m_parsedParams;
 		}
 	}
 }

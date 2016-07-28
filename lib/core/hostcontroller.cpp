@@ -24,7 +24,7 @@ namespace lib
 
 				void setDataMap(const DataMap& map)
 				{
-					wcp.size = fromDataMap<u32>(map,"rx", "ry");
+					wcp.size = fromDataMap<u32>(map, { "rx", "ry" });
 				}
 			};
 		}
@@ -117,7 +117,7 @@ namespace lib
 
 		void HostController::loadConfiguration()
 		{
-			m_configuration->wcp.size = vector2du32(640, 480);
+			m_configuration->setDataMap(m_paramParser.parameters());
 		}
 
 		void HostController::addTask(sptr<HostTask> newTask)
@@ -127,8 +127,7 @@ namespace lib
 
 		void HostController::processTask()
 		{
-			if (!m_pendingTasks.empty())
-			{
+			if (!m_pendingTasks.empty()) {
 				u32 nTasks = m_pendingTasks.size();
 				u32 nProcessedTasks{ 0 };
 				while (nProcessedTasks < nTasks && !m_pendingTasks.empty())

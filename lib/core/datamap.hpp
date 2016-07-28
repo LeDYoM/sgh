@@ -11,14 +11,10 @@ namespace lib
 	{
 	public:
 		using Base = std::map<str, DataValue>;
-		using Base::Base;
 
 		const Base::mapped_type& operator[](const str& index) const
 		{
-			auto _iterator(find(index));
-			if (_iterator != end())
-				return _iterator->second;
-			return DataValue{};
+			return find(index)->second;
 		}
 
 		using Base::operator[];

@@ -7,7 +7,6 @@ namespace lib
 	class LIB_API vector2d
 	{
 	public:
-
 		inline explicit vector2d() : x{}, y{} {};
 		inline vector2d(T X, T Y) : x{ X }, y{ Y } {}
 		inline vector2d(const vector2d<T> &) = default;

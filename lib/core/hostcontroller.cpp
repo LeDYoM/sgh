@@ -139,9 +139,7 @@ namespace lib
 						__ASSERT(!m_driver, "Cannot load another driver. There is already one loaded");
 						m_driver = sptr<Driver>{new Driver};
 						m_driver->initialize("");
-						{
-							m_driver->newWindow(m_configuration->wcp);
-						}
+						m_driver->newWindow(m_configuration->wcp);
 						break;
 					case HostTask::HostTaskCode::UnloadDriver:
 						__ASSERT(m_driver, "Trying to delete driver when no driver loaded");

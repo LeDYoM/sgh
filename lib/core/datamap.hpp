@@ -8,14 +8,19 @@
 
 namespace lib
 {
-	class LIB_API DataMap : public std::map<str, DataValue>
+	class DataMap : public std::map<str, DataValue>
 	{
+	private:
+		DataValue empty{};
+
 	public:
+
 		using Base = std::map<str, DataValue>;
 
 		inline const Base::mapped_type& operator[](const str& index) const
 		{
-			return find(index)->second;
+			auto result(find(index));
+			return result == end()?empty:result->second;
 		}
 
 		using Base::operator[];
@@ -36,7 +41,7 @@ namespace lib
 	template <typename T>
 	vector2d<T> fromDataMap(const DataMap &map, std::initializer_list<str> iList)
 	{
-		return vector2d<T>{ map[*(iList.begin())].get<T>(), map[iList[1]].get<T>() };
+		return vector2d<T>{ map[*(iList.begin())].get<T>(), map[*(iList.begin()+1)].get<T>() };
 	}
 
 //	template <typename T>

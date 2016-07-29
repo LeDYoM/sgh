@@ -44,12 +44,10 @@ namespace lib
 		return vector2d<T>{ map[*(iList.begin())].get<T>(), map[*(iList.begin()+1)].get<T>() };
 	}
 
-//	template <typename T>
 	inline bool canConvertfromDataMap(const DataMap &map, std::initializer_list<str> iList)
 	{
 		return map.containsProperties(iList);
 	}
-
 }
 
 #endif

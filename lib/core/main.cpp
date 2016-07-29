@@ -32,7 +32,11 @@ namespace lib
 			initLog(false,true,false);
 			core::ParamParser paramParser(argc, argv);
 			installMemManager();
-			core::HostController::createHostController(std::move(paramParser));
+			core::HostController::createHostController(
+#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
+				std::move(paramParser)
+#endif
+			);
 			auto hController = core::HostController::hController();
 			hController->initialize();
 

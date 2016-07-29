@@ -1,10 +1,13 @@
 #ifndef __LIB_HOSTCONTROLLER_HPP__
 #define __LIB_HOSTCONTROLLER_HPP__
 
+#include "compileconfig.hpp"
 #include <lib/core/vecsptr.hpp>
 #include <lib/include/iapp.hpp>
 
-#include "paramparser.hpp"
+#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
+	#include "paramparser.hpp"
+#endif
 
 #include <queue>
 #include <string>
@@ -25,7 +28,11 @@ namespace lib
 		class HostController
 		{
 		public:
-			static void createHostController(ParamParser &&paramParser);
+			static void createHostController(
+				#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
+					ParamParser &&paramParser
+				#endif
+			);
 			static void destroyHostController();
 			static inline HostController *const hController() { return instance; }
 			int initialize();
@@ -34,7 +41,11 @@ namespace lib
 
 			void loadAppFromFileName(const str&fileName);
 		private:
-			HostController(ParamParser &&paramParser);
+			HostController(
+#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
+				ParamParser &&paramParser
+#endif
+			);
 			virtual ~HostController();
 
 			static HostController *instance;
@@ -49,7 +60,9 @@ namespace lib
 			std::queue<sptr<HostTask>> m_pendingTasks;
 			VecSPtr<AppController> m_apps;
 			sptr<Driver> m_driver{ nullptr };
+#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
 			ParamParser &m_paramParser;
+#endif
 			uptr<priv::HostConfiguration> m_configuration;
 		};
 	}

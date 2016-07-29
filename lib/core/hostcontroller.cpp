@@ -32,8 +32,15 @@ namespace lib
 		HostController *HostController::instance{ nullptr };
 
 
-		HostController::HostController(ParamParser &&paramParser)
-			: m_configuration{new priv::HostConfiguration }, m_paramParser{paramParser}
+		HostController::HostController(
+#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
+			ParamParser &&paramParser
+#endif
+		)
+			: m_configuration{new priv::HostConfiguration }
+#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
+			, m_paramParser{paramParser}
+#endif
 		{
 			LOG_CONSTRUCT_NOPARAMS;
 			LOG_INFO("Starting HostController...");
@@ -44,16 +51,25 @@ namespace lib
 			LOG_DESTRUCT_NOPARAMS;
 		}
 
-		void HostController::createHostController(ParamParser &&paramParser)
+		void HostController::createHostController(
+#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
+			ParamParser &&paramParser
+#endif
+		)
 		{
 			__CRITICAL(!instance, "Cannot start more than one host controller");
-			instance = new HostController(std::move(paramParser));
+			instance = new HostController(
+#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
+				std::move(paramParser)
+#endif
+			);
 		}
 
 		void HostController::destroyHostController()
 		{
 			__ASSERT(instance, "There is no instance of the hostcontroller");
 			delete instance;
+			instance = nullptr;
 		}
 
 		int HostController::initialize()
@@ -117,7 +133,14 @@ namespace lib
 
 		void HostController::loadConfiguration()
 		{
+#ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
 			m_configuration->setDataMap(m_paramParser.parameters());
+#endif
+
+			if (m_configuration->wcp.size.x < 1 || m_configuration->wcp.size.y < 1)
+			{
+				m_configuration->wcp.size = vector2du32{ 1024,768 };
+			}
 		}
 
 		void HostController::addTask(sptr<HostTask> newTask)

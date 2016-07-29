@@ -46,7 +46,6 @@ namespace lib
 			}
 
 			void for_each_renderNode(std::function<void(sptr<SceneNode> node)> f);
-			virtual Scene *const parentScene();
 
 			bool activateOne(const str& node);
 			bool activateOne(sptr<SceneNode> node);

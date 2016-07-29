@@ -94,12 +94,6 @@ namespace lib
 			return (result != _renderNodes.end()) ? *result : sptr<SceneNode>();
 		}
 
-		lib::draw::Scene *const RenderGroup::parentScene()
-		{
-			__ASSERT(parent(), "Error getting parent scene: nullptr parent");
-			return parent()->parentScene();
-		}
-
 		void RenderGroup::for_each_renderNode(std::function<void(sptr<SceneNode> node)> f)
 		{
 			for (auto node : _renderNodes)

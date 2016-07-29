@@ -55,8 +55,6 @@ namespace lib
 			inline u32 state() const { return _state; }
 			inline void setState(u32 ns) { _state = ns; }
 
-			Scene *const parentScene() override final;
-
 		private:
 			u32 _state;
 

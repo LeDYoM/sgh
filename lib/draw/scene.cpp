@@ -115,10 +115,5 @@ namespace lib
 		{
 			service<SceneManager>()->exitProgram();
 		}
-
-		lib::draw::Scene *const Scene::parentScene()
-		{
-			return this;
-		}
 	}
 }

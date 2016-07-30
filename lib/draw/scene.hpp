@@ -22,6 +22,7 @@ namespace lib
 			class IAnimation;
 		}
 		class SceneManager;
+		class ISceneController;
 
 		class LIB_API Scene : public RenderGroup, public InputReceiverNode
 		{
@@ -60,6 +61,8 @@ namespace lib
 
 			friend class SceneManager;
 			sptr<Camera> m_camera;
+
+			sptr<ISceneController> m_controller;
 		};
 	}
 }

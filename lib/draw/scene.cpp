@@ -96,7 +96,7 @@ namespace lib
 			LOG_DEBUG("Key released: " << int{ key.kCode });
 		}
 
-		void Scene::setNextScene(const std::string &name)
+		void Scene::setNextScene(const str &name)
 		{
 			service<SceneManager>()->setScene(name);
 		}

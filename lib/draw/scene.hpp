@@ -39,13 +39,13 @@ namespace lib
 			virtual const vector2df getDefaultSizeView() = 0;
 			virtual void update() = 0;
 
-			sptr<lib::ResourceManager> resourceManager() const;
+			sptr<ResourceManager> resourceManager() const;
 			sptr<UtilProvider> utilProvider() const;
 
 			sptr<Camera> camera() const { return m_camera; }
 			vector2df pointViewToCurrentView(const vector2df &point, const vector2df &size) const;
 
-			void setNextScene(const std::string &name);
+			void setNextScene(const str &name);
 			void exitProgram();
 
 			Timer clock;

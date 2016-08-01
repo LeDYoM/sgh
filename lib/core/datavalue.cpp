@@ -345,16 +345,16 @@ namespace lib
 
 	DataValue fromString_helper(const str &str_)
 	{
-		if (is_int(str_))
-		{
+		if (is_int(str_)) {
 			return DataValue{ std::stoi(str_) };
-		}
-		else if (is_number(str_))
-		{
+		} 
+		else if (is_number(str_)) {
 			return DataValue{ std::stod(str_) };
 		}
-		else
-		{
+		else if (is_bool(str_)) {
+			return DataValue{ to_bool(str_) };
+		}
+		else {
 			return DataValue{ str_ };
 		}
 	}

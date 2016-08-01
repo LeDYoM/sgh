@@ -78,6 +78,14 @@ namespace lib
 		return (cpy == "true" || cpy == "false");
 	}
 
+	bool to_bool(const std::string & str)
+	{
+		std::string cpy;
+		std::transform(str.begin(), str.end(), cpy.begin(), ::tolower);
+
+		return (cpy == "true");
+	}
+
 	std::vector<std::string> split(const std::string &str, const char separator)
 	{
 		std::string m_ndpcpy(str);

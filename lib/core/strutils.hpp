@@ -18,6 +18,7 @@ namespace lib
 	bool is_int(const std::string &str);
 	bool is_number(const std::string &str);
 	bool is_bool(const std::string &str);
+	bool to_bool(const std::string &str);
 	std::vector<std::string> split(const std::string &str, const char separator);
 }
 

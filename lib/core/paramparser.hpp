@@ -20,6 +20,7 @@ namespace lib
 			virtual ~ParamParser();
 
 			const DataMap &parameters() const;
+			bool paramEntered(const str&) const;
 
 		private:
 			priv::ParamParserPrivate *priv;

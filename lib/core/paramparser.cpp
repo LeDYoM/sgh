@@ -53,5 +53,10 @@ namespace lib
 		{
 			return priv->m_parsedParams;
 		}
+
+		bool ParamParser::paramEntered(const str &param) const
+		{
+			return priv->m_parsedParams.find(param) != priv->m_parsedParams.end();
+		}
 	}
 }

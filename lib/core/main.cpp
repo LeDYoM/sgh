@@ -29,8 +29,8 @@ namespace lib
 
 		try
 		{
-			initLog(false,true,false);
 			core::ParamParser paramParser(argc, argv);
+			initLog(false,true,false);
 			installMemManager();
 			core::HostController::createHostController(
 #ifdef _ACCEPT_CONFIGURATION_PARAMETERS_

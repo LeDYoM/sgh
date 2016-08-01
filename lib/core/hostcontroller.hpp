@@ -22,7 +22,7 @@ namespace lib
 		class AppController;
 		namespace priv
 		{
-			struct HostConfiguration;
+			struct HostPrivate;
 		}
 
 		class HostController
@@ -63,7 +63,7 @@ namespace lib
 #ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
 			ParamParser &m_paramParser;
 #endif
-			uptr<priv::HostConfiguration> m_configuration;
+			uptr<priv::HostPrivate> m_hPrivate;
 		};
 	}
 }

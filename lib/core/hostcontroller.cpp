@@ -27,6 +27,11 @@ namespace lib
 					wcp.size = fromDataMap<u32>(map, { "rx", "ry" });
 				}
 			};
+
+			struct HostPrivate
+			{
+				HostConfiguration hostConfig;
+			};
 		}
 
 		HostController *HostController::instance{ nullptr };
@@ -37,7 +42,7 @@ namespace lib
 			ParamParser &&paramParser
 #endif
 		)
-			: m_configuration{new priv::HostConfiguration }
+			: m_hPrivate{new priv::HostPrivate }
 #ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
 			, m_paramParser{paramParser}
 #endif
@@ -134,12 +139,16 @@ namespace lib
 		void HostController::loadConfiguration()
 		{
 #ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
-			m_configuration->setDataMap(m_paramParser.parameters());
+			m_hPrivate->hostConfig.setDataMap(m_paramParser.parameters());
+			if (m_paramParser.paramEntered("lconsole"))
+			{
+
+			}
 #endif
 
-			if (m_configuration->wcp.size.x < 1 || m_configuration->wcp.size.y < 1)
+			if (m_hPrivate->hostConfig.wcp.size.x < 1 || m_hPrivate->hostConfig.wcp.size.y < 1)
 			{
-				m_configuration->wcp.size = vector2du32{ 1024,768 };
+				m_hPrivate->hostConfig.wcp.size = vector2du32{ 1024,768 };
 			}
 		}
 
@@ -162,7 +171,7 @@ namespace lib
 						__ASSERT(!m_driver, "Cannot load another driver. There is already one loaded");
 						m_driver = sptr<Driver>{new Driver};
 						m_driver->initialize("");
-						m_driver->newWindow(m_configuration->wcp);
+						m_driver->newWindow(m_hPrivate->hostConfig.wcp);
 						break;
 					case HostTask::HostTaskCode::UnloadDriver:
 						__ASSERT(m_driver, "Trying to delete driver when no driver loaded");

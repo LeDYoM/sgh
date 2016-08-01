@@ -70,6 +70,14 @@ namespace lib
 		return !str.empty() && str.find_first_not_of(".-0123456789") == std::string::npos;
 	}
 
+	bool is_bool(const std::string & str)
+	{
+		std::string cpy;
+		std::transform(str.begin(), str.end(), cpy.begin(), ::tolower);
+
+		return (cpy == "true" || cpy == "false");
+	}
+
 	std::vector<std::string> split(const std::string &str, const char separator)
 	{
 		std::string m_ndpcpy(str);

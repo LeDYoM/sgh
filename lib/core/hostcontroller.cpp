@@ -24,7 +24,12 @@ namespace lib
 
 				void setDataMap(const DataMap& map)
 				{
-					wcp.size = fromDataMap<u32>(map, { "rx", "ry" });
+					fromDataMap<vector2d<u32>>(map, wcp.size, { "rx", "ry" });
+					if (m_paramParser.paramEntered("lconsole"))
+					{
+						m_hPrivate->hostConfig.log2Console = m_paramParser.parameters["lconsole"]
+					}
+
 				}
 			};
 
@@ -140,10 +145,6 @@ namespace lib
 		{
 #ifdef _ACCEPT_CONFIGURATION_PARAMETERS_
 			m_hPrivate->hostConfig.setDataMap(m_paramParser.parameters());
-			if (m_paramParser.paramEntered("lconsole"))
-			{
-
-			}
 #endif
 
 			if (m_hPrivate->hostConfig.wcp.size.x < 1 || m_hPrivate->hostConfig.wcp.size.y < 1)

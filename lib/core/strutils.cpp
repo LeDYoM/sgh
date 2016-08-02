@@ -73,7 +73,7 @@ namespace lib
 	bool is_bool(const std::string & str)
 	{
 		std::string cpy;
-		std::transform(str.begin(), str.end(), cpy.begin(), ::tolower);
+		std::transform(str.begin(), str.end(), std::back_inserter(cpy), ::tolower);
 
 		return (cpy == "true" || cpy == "false");
 	}

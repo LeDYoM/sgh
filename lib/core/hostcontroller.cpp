@@ -5,6 +5,7 @@
 #include "hosttask.hpp"
 #include "appcontroller.hpp"
 #include "driver.hpp"
+#include "dataconversion.hpp"
 
 //Temp
 #include "../../host/zoperprogramcontroller.hpp"
@@ -24,7 +25,7 @@ namespace lib
 
 				void setDataMap(const DataMap& map)
 				{
-					fromDataMap<vector2d<u32>>(map, wcp.size, { "rx", "ry" });
+					wcp.size = fromDataMap<u32>(map, { "rx", "ry" });
 				}
 			};
 

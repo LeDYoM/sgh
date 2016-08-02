@@ -37,21 +37,6 @@ namespace lib
 			return true;
 		}
 	};
-
-	template <typename T>
-	void fromDataMap(const DataMap &map, T &result, std::initializer_list<str> iList);
-
-	template <typename T>
-	void fromDataMap(const DataMap &map, vector2d<T> &result, std::initializer_list<str> iList)
-	{
-		result = vector2d<T>{ map[*(iList.begin())].get<T>(), map[*(iList.begin()+1)].get<T>() };
-	}
-
-
-	inline bool canConvertfromDataMap(const DataMap &map, std::initializer_list<str> iList)
-	{
-		return map.containsProperties(iList);
-	}
 }
 
 #endif

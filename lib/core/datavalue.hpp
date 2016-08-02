@@ -78,6 +78,7 @@ namespace lib
 		friend std::ostream &operator<<(std::ostream &output, const DataValue &this_);
 		
 		template <typename T> inline const T get() const;
+		template <> inline const bool get() const { return gets32() != 0; }
 		template <> inline const s8 get() const { return gets8(); }
 		template <> inline const u8 get() const { return getu8(); }
 		template <> inline const s16 get() const { return gets16(); }

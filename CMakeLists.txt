@@ -24,5 +24,6 @@ endif()
 message ("cxx Flags: " ${CMAKE_CXX_FLAGS})
 
 # Sub-directories where more CMakeLists.txt exist
+add_subdirectory(sghcommon)
 add_subdirectory(lib)
 add_subdirectory(host)

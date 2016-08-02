@@ -11,6 +11,7 @@ namespace lib
 	enum class LIB_API DataType : u8
 	{
 		T_Empty,
+		T_bool,
 		T_s8,
 		T_u8,
 		T_s16,
@@ -26,6 +27,7 @@ namespace lib
 	{
 	public:
 		explicit inline DataValue() : m_dtype{ DataType::T_Empty }, f64_{ 0 } {}
+		explicit inline DataValue(const bool value_) : m_dtype{ DataType::T_bool }, s8_{ value_ } {}
 		explicit inline DataValue(const s8 value_) : m_dtype{ DataType::T_s8 }, s8_{ value_ } {}
 		explicit inline DataValue(const u8 value_) : m_dtype{ DataType::T_u8 }, u8_{ value_ } {}
 		explicit inline DataValue(const s16 value_) : m_dtype{ DataType::T_s16 }, s16_{ value_ } {}
@@ -52,6 +54,7 @@ namespace lib
 		
 		~DataValue();
 
+		bool operator==(const bool value_) const;
 		bool operator==(const s8 value_) const;
 		bool operator==(const u8 value_) const;
 		bool operator==(const s16 value_) const;
@@ -64,6 +67,7 @@ namespace lib
 		bool operator==(const DataValue &other) const;
 		DataValue &operator=(DataValue &&other);
 
+		const bool getbool() const;
 		const s8 gets8() const;
 		const u8 getu8() const;
 		const s16 gets16() const;
@@ -78,7 +82,7 @@ namespace lib
 		friend std::ostream &operator<<(std::ostream &output, const DataValue &this_);
 		
 		template <typename T> inline const T get() const;
-		template <> inline const bool get() const { return gets32() != 0; }
+		template <> inline const bool get() const { return getbool(); }
 		template <> inline const s8 get() const { return gets8(); }
 		template <> inline const u8 get() const { return getu8(); }
 		template <> inline const s16 get() const { return gets16(); }
@@ -113,6 +117,7 @@ namespace lib
 	private:
 		union
 		{
+			bool bool_;
 			s8 s8_;
 			u8 u8_;
 			s16 s16_;

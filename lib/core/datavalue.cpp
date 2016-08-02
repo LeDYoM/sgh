@@ -4,6 +4,9 @@
 
 #include "strutils.hpp"
 
+#define SW_CONV_BOOL(T) case DataType::T_bool:	\
+						return static_cast<T>(bool_);
+
 #define SW_CONV_S8(T) case DataType::T_s8:	\
 						return static_cast<T>(s8_);
 
@@ -78,6 +81,14 @@ namespace lib
 		other.m_dtype = DataType::T_Empty;
 		other.f64_ = 0;
 		return *this;
+	}
+
+	bool DataValue::operator==(const bool value_) const
+	{
+		if (m_dtype != DataType::T_bool)
+			return false;
+
+		return bool_ == value_;
 	}
 
 	bool DataValue::operator==(const s8 value_) const
@@ -163,10 +174,16 @@ namespace lib
 		return f64_ == value_.f64_;
 	}
 
+	const bool DataValue::getbool() const
+	{
+		return false;
+	}
+
 	const s8 DataValue::gets8() const
 	{
 		switch (m_dtype)
 		{
+			SW_CONV_BOOL(s8);
 			SW_CONV_S8(s8);
 			SW_CONV_U8(s8);
 			SW_CONV_S16(s8);
@@ -183,6 +200,7 @@ namespace lib
 	{
 		switch (m_dtype)
 		{
+			SW_CONV_BOOL(u8);
 			SW_CONV_S8(u8);
 			SW_CONV_U8(u8);
 			SW_CONV_S16(u8);
@@ -199,6 +217,7 @@ namespace lib
 	{
 		switch (m_dtype)
 		{
+			SW_CONV_BOOL(u8);
 			SW_CONV_S8(s16);
 			SW_CONV_U8(s16);
 			SW_CONV_S16(s16);
@@ -215,6 +234,7 @@ namespace lib
 	{
 		switch (m_dtype)
 		{
+			SW_CONV_BOOL(u8);
 			SW_CONV_S8(u16);
 			SW_CONV_U8(u16);
 			SW_CONV_S16(u16);
@@ -231,6 +251,7 @@ namespace lib
 	{
 		switch (m_dtype)
 		{
+			SW_CONV_BOOL(s32);
 			SW_CONV_S8(s32);
 			SW_CONV_U8(s32);
 			SW_CONV_S16(s32);
@@ -247,6 +268,7 @@ namespace lib
 	{
 		switch (m_dtype)
 		{
+			SW_CONV_BOOL(u32);
 			SW_CONV_S8(u32);
 			SW_CONV_U8(u32);
 			SW_CONV_S16(u32);
@@ -263,6 +285,7 @@ namespace lib
 	{
 		switch (m_dtype)
 		{
+			SW_CONV_BOOL(f64);
 			SW_CONV_S8(f64);
 			SW_CONV_U8(f64);
 			SW_CONV_S16(f64);

@@ -1,7 +1,6 @@
 #ifndef __LIB_TYPES_HPP__
 #define __LIB_TYPES_HPP__
 
-#include "compconfig.hpp"
 #include <cstdint>
 #include <memory>
 #include <map>
@@ -40,7 +39,7 @@ namespace lib
 //	LIB_API std::string;
 	using str = std::string;
 
-	EXPIMP_TEMPLATE template class LIB_API std::basic_string<char, std::char_traits<char>, std::allocator<char> >;
+	//EXPIMP_TEMPLATE template class LIB_API std::basic_string<char, std::char_traits<char>, std::allocator<char> >;
 
 }
 

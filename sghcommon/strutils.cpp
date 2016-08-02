@@ -1,6 +1,7 @@
-#include "strutils.hpp"
+#include "include/strutils.hpp"
 #include <cctype>
 #include <algorithm>
+#include <iterator>
 
 namespace lib
 {

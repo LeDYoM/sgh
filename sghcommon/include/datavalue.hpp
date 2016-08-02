@@ -1,14 +1,13 @@
 #ifndef LIB_DATAVALUE_HPP__
 #define LIB_DATAVALUE_HPP__
 
-#include <lib/include/types.hpp>
-#include <lib/include/compconfig.hpp>
+#include "types.hpp"
 
 namespace lib
 {
 	class DataMap;
 
-	enum class LIB_API DataType : u8
+	enum class DataType : u8
 	{
 		T_Empty,
 		T_bool,
@@ -23,7 +22,7 @@ namespace lib
 		T_Tree
 	};
 
-	class LIB_API DataValue
+	class DataValue
 	{
 	public:
 		explicit inline DataValue() : m_dtype{ DataType::T_Empty }, f64_{ 0 } {}

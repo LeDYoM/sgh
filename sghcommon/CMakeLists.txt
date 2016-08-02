@@ -1,12 +1,8 @@
-set (INCLUDE_DIRECTORY "./include")
+set (INCLUDE_DIRECTORY "include")
 
-set (GLOB SOURCES "./*.*")
-set (GLOB HEADERS "*.*")
-set (GLOB PUBLIC_HEADERS "${INCLUDE_DIRECTORY}/*.hpp")
-message ("SOURCES:" ${SOURCES})
-message ("HEADERS:" ${HEADERS})
-message ("PUBLIC_HEADERS:" ${PUBLIC_HEADERS})
-
+file (GLOB SOURCES "*.cpp")
+file (GLOB HEADERS "*.hpp")
+file (GLOB PUBLIC_HEADERS "${INCLUDE_DIRECTORY}/*.hpp")
 
 ##############################################################################################
 

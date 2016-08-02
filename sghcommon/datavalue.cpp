@@ -1,8 +1,7 @@
-#include "datavalue.hpp"
-#include "datamap.hpp"
-#include "log.hpp"
+#include "include/datavalue.hpp"
+#include "include/datamap.hpp"
 
-#include "strutils.hpp"
+#include "include/strutils.hpp"
 
 #define SW_CONV_BOOL(T) case DataType::T_bool:	\
 						return static_cast<T>(bool_);

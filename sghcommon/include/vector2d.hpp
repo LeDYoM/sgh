@@ -1,10 +1,12 @@
 #ifndef LIB_VECTOR2D_HPP
 #define LIB_VECTOR2D_HPP
 
+#include "types.hpp"
+
 namespace lib
 {
 	template <typename T>
-	class LIB_API vector2d
+	class vector2d
 	{
 	public:
 		inline explicit vector2d() : x{}, y{} {};

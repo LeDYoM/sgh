@@ -1,7 +1,6 @@
 #ifndef LIB_DATA_HPP__
 #define LIB_DATA_HPP__
 
-#include <lib/include/compconfig.hpp>
 #include "datavalue.hpp"
 #include <initializer_list>
 #include <map>

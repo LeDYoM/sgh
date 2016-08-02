@@ -58,5 +58,17 @@ namespace lib
 		{
 			return priv->m_parsedParams.find(param) != priv->m_parsedParams.end();
 		}
+		s32 ParamParser::paramAsInt(const str &, int defaultv)
+		{
+			return s32();
+		}
+		bool ParamParser::paramAsBool(const str &, bool defaultv)
+		{
+			return false;
+		}
+		const str & ParamParser::paramAsString(const str &, const str & defaultv)
+		{
+			// TODO: insert return statement here
+		}
 	}
 }

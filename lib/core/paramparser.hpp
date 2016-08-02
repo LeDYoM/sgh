@@ -7,6 +7,7 @@
 namespace lib
 {
 	class DataMap;
+	class DataValue;
 	namespace core
 	{
 		namespace priv
@@ -21,9 +22,7 @@ namespace lib
 
 			const DataMap &parameters() const;
 			bool paramEntered(const str&) const;
-			s32 paramAsInt(const str&, int defaultv);
-			bool paramAsBool(const str&, bool defaultv);
-			const str& paramAsString(const str&, const str& defaultv);
+			const DataValue &param(const str&, const DataValue &defaultv);
 
 		private:
 			priv::ParamParserPrivate *priv;

@@ -50,8 +50,8 @@ namespace lib
 			m_pointCount = numPoints;
 			m_geometryNeedUpdate = true;
 		}
-			
-		vector2df NodeShape::getPoint(unsigned int index) const
+	
+		vector2df NodeShape::getPoint(const u32 index) const
 		{
 			// TO DO:
 			// Optimize

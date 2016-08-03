@@ -1,6 +1,7 @@
 #include "wwindow_impl.hpp"
 #include <lib/drivers/render/rendertarget.hpp>
 #include "rendertarget_impl.hpp"
+#include "texture_impl.hpp"
 #include <lib/core/convops.hpp>
 #include <lib/core/wcp.hpp>
 #include <lib/core/window.hpp>
@@ -80,7 +81,7 @@ namespace lib
 
 			sptr<render::Texture> SFMLWindow::newTexture(const str & fileName) const
 			{
-				return sptr<render::Texture>();
+				return sptr<render::Texture>(new render::SFMLTexture);
 			}
 
 			void SFMLWindow::collectEvents()

@@ -78,6 +78,11 @@ namespace lib
 				return m_thisAsRenderTarget;
 			}
 
+			sptr<render::Texture> SFMLWindow::newTexture(const str & fileName) const
+			{
+				return sptr<render::Texture>();
+			}
+
 			void SFMLWindow::collectEvents()
 			{
 				sf::Event e;

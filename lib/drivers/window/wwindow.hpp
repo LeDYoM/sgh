@@ -13,6 +13,7 @@ namespace lib
 		namespace render
 		{
 			class RenderTarget;
+			class Texture;
 		}
 		namespace window
 		{
@@ -30,6 +31,7 @@ namespace lib
 				virtual sptr<DataMap> nextEvent() = 0;
 				virtual u32 pendingEvents() = 0;
 				virtual sptr<render::RenderTarget> windowRenderTarget() const = 0;
+				virtual sptr<render::Texture> newTexture(const str &fileName) const = 0;
 			};
 		}
 	}

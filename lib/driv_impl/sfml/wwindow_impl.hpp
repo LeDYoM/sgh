@@ -3,6 +3,7 @@
 
 #include <lib/drivers/window/wwindow.hpp>
 #include <lib/drivers/render/rendertarget.hpp>
+#include <lib/drivers/render/texture.hpp>
 #include <lib/include/types.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -24,6 +25,7 @@ namespace lib
 				virtual void clear() override;
 				virtual void display() override;
 				virtual sptr<render::RenderTarget> windowRenderTarget() const override;
+				virtual sptr<render::Texture> newTexture(const str &fileName) const override;
 				virtual void collectEvents() override;
 				virtual sptr<DataMap> nextEvent();
 				virtual u32 pendingEvents();

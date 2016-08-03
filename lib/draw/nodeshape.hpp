@@ -27,7 +27,6 @@ namespace lib
 			void setTexture(const sf::Texture *texture, bool resetSize=true, bool resetRect = false);
 
 			void setTextureRect(const Rects32& rect);
-			const sf::Texture* getTexture() const;
 			const Rects32& getTextureRect() const;
 			virtual const sf::Texture *texture() const override;
 

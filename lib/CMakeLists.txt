@@ -17,6 +17,10 @@ file (GLOB LIB_CORE_SOURCES "${LIB_DIRECTORY}core/*.cpp")
 file (GLOB LIB_DRAW_HEADERS "${LIB_DIRECTORY}draw/*.hpp")
 file (GLOB LIB_DRAW_SOURCES "${LIB_DIRECTORY}draw/*.cpp")
 
+file (GLOB LIB_MANAGERS_HEADERS "${LIB_DIRECTORY}managers/*.hpp")
+file (GLOB LIB_MANAGERS_SOURCES "${LIB_DIRECTORY}managers/*.cpp")
+
+
 file (GLOB LIB_INCLUDE_HEADERS "${LIB_DIRECTORY}include/*.hpp")
 #file (GLOB LIB_BASE_SOURCES "${LIB_DIRECTORY}include/*.cpp")
 
@@ -82,6 +86,7 @@ source_group("lib\\draw" FILES ${LIB_DRAW_HEADERS} ${LIB_DRAW_SOURCES})
 source_group("lib\\board" FILES ${LIB_BOARD_HEADERS} ${LIB_BOARD_SOURCES})
 source_group("lib\\drivers\\window" FILES ${LIB_DRIVERS_WINDOW_HEADERS})
 source_group("lib\\drivers\\render" FILES ${LIB_DRIVERS_RENDER_HEADERS})
+source_group("lib\\managers" FILES ${LIB_MANAGERS_HEADERS} ${LIB_MANAGERS_SOURCES})
 
 # For now, add SFML driver implementation
 source_group("lib\\driv_implementation\\sfml" FILES ${LIB_DRIVERS_IMPLEMENTATION_SFML_HEADERS}  ${LIB_DRIVERS_IMPLEMENTATION_SFML_SOURCES})

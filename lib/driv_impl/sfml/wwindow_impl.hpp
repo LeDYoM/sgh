@@ -25,7 +25,7 @@ namespace lib
 				virtual void clear() override;
 				virtual void display() override;
 				virtual sptr<render::RenderTarget> windowRenderTarget() const override;
-				virtual sptr<render::Texture> newTexture(const str &fileName) const override;
+				virtual sptr<render::Texture> newTexture() const override;
 				virtual void collectEvents() override;
 				virtual sptr<DataMap> nextEvent();
 				virtual u32 pendingEvents();

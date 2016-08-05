@@ -17,8 +17,8 @@ file (GLOB LIB_CORE_SOURCES "${LIB_DIRECTORY}core/*.cpp")
 file (GLOB LIB_DRAW_HEADERS "${LIB_DIRECTORY}draw/*.hpp")
 file (GLOB LIB_DRAW_SOURCES "${LIB_DIRECTORY}draw/*.cpp")
 
-file (GLOB LIB_MANAGERS_HEADERS "${LIB_DIRECTORY}managers/*.hpp")
-file (GLOB LIB_MANAGERS_SOURCES "${LIB_DIRECTORY}managers/*.cpp")
+file (GLOB LIB_MANAGERS_HEADERS "${LIB_DIRECTORY}core/managers/*.hpp")
+file (GLOB LIB_MANAGERS_SOURCES "${LIB_DIRECTORY}core/managers/*.cpp")
 
 
 file (GLOB LIB_INCLUDE_HEADERS "${LIB_DIRECTORY}include/*.hpp")
@@ -82,11 +82,11 @@ set_target_properties(${CURRENT_TARGET}
 source_group("lib\\include" FILES ${LIB_INCLUDE_HEADERS})
 source_group("lib\\core" FILES ${LIB_CORE_HEADERS} ${LIB_CORE_SOURCES})
 source_group("lib\\core\\events" FILES ${LIB_CORE_EVENTS_HEADERS} ${LIB_CORE_EVENTS_SOURCES})
+source_group("lib\\core\\managers" FILES ${LIB_MANAGERS_HEADERS} ${LIB_MANAGERS_SOURCES})
 source_group("lib\\draw" FILES ${LIB_DRAW_HEADERS} ${LIB_DRAW_SOURCES})
 source_group("lib\\board" FILES ${LIB_BOARD_HEADERS} ${LIB_BOARD_SOURCES})
 source_group("lib\\drivers\\window" FILES ${LIB_DRIVERS_WINDOW_HEADERS})
 source_group("lib\\drivers\\render" FILES ${LIB_DRIVERS_RENDER_HEADERS})
-source_group("lib\\managers" FILES ${LIB_MANAGERS_HEADERS} ${LIB_MANAGERS_SOURCES})
 
 # For now, add SFML driver implementation
 source_group("lib\\driv_implementation\\sfml" FILES ${LIB_DRIVERS_IMPLEMENTATION_SFML_HEADERS}  ${LIB_DRIVERS_IMPLEMENTATION_SFML_SOURCES})

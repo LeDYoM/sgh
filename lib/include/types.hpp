@@ -42,6 +42,8 @@ namespace lib
 
 	EXPIMP_TEMPLATE template class LIB_API std::basic_string<char, std::char_traits<char>, std::allocator<char> >;
 
+	EXPIMP_TEMPLATE template class LIB_API std::map<str, str>;
+	using StringMap = std::map<str, str>;
 }
 
 #include "vector2d.hpp"

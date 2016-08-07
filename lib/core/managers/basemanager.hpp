@@ -15,12 +15,11 @@ namespace lib
 		class AppController;
 		namespace managers
 		{
-
 			template <class T, class INDEXTYPE = str>
-			class BaseManager : SystemObject
+			class BaseManager : public SystemObject
 			{
 			public:
-				EXPIMP_TEMPLATE template class LIB_API std::map<INDEXTYPE, sptr<T>>;
+				using IndexType = INDEXTYPE;
 				using ManagerResources = std::map<INDEXTYPE, sptr<T>>;
 
 				using SystemObject::SystemObject;

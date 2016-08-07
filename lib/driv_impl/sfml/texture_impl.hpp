@@ -17,9 +17,6 @@ namespace lib
 				SFMLTexture();
 				virtual ~SFMLTexture();
 
-				virtual bool create(const vector2du32 &size) override;
-				virtual bool loadFromFile(const str &filename, const Rects32 &area) override;
-				virtual bool loadFromMemory(const void *data, std::size_t size, const Rects32 &area) override;
 				virtual vector2du32 getSize() const;
 				virtual void setSmooth(bool smooth);
 				virtual bool isSmooth() const;

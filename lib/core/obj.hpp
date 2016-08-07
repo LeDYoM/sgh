@@ -28,7 +28,7 @@ namespace lib
 
 		template <class T, class S> static sptr<T> as(sptr<S> node) { return std::dynamic_pointer_cast<T>(node); }
 
-		core::AppController *appController() const { return m_app; }
+		inline core::AppController *appController() const { return m_app; }
 	protected:
 		core::AppController *m_app;
 	};

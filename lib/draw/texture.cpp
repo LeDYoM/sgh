@@ -5,12 +5,11 @@ namespace lib
 {
 	namespace draw
 	{
-		Texture::Texture(uptr<drivers::render::Texture>&tHandle)
-			: m_driverTexture{ std::move(tHandle) } {}
+		Texture::Texture(drivers::render::Texture *tHandle)
+			: m_driverTexture{ tHandle } {}
 
 		Texture::~Texture()
 		{
-			m_driverTexture.reset(nullptr);
 		}
 	}
 }

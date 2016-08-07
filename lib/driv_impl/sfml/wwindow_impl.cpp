@@ -1,5 +1,6 @@
 #include "wwindow_impl.hpp"
 #include <lib/drivers/render/rendertarget.hpp>
+#include <lib/drivers/render/texture.hpp>
 #include "rendertarget_impl.hpp"
 #include "texture_impl.hpp"
 #include <lib/core/convops.hpp>
@@ -79,9 +80,19 @@ namespace lib
 				return m_thisAsRenderTarget;
 			}
 
-			sptr<render::Texture> SFMLWindow::newTexture() const
+			render::Texture * SFMLWindow::createTexture(const vector2du32 & size) const
 			{
-				return sptr<render::Texture>(new render::SFMLTexture);
+				return nullptr;
+			}
+
+			render::Texture * SFMLWindow::loadTextureFromMemory(const void * data, std::size_t size) const
+			{
+				return nullptr;
+			}
+
+			bool SFMLWindow::deleteTexture(render::Texture *texture) const
+			{
+				delete texture;
 			}
 
 			void SFMLWindow::collectEvents()

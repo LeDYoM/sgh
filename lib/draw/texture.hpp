@@ -13,15 +13,24 @@ namespace lib
 		}
 	}
 
+	namespace core
+	{
+		namespace managers
+		{
+			class TextureManager;
+		}
+	}
+
 	namespace draw
 	{
 		class Texture
 		{
 		private:
-			Texture(uptr<drivers::render::Texture>&);
+			Texture(drivers::render::Texture*);
 			virtual ~Texture();
 
-			uptr<drivers::render::Texture> m_driverTexture;
+			drivers::render::Texture *m_driverTexture;
+			friend class core::managers::TextureManager;
 		};
 	}
 }

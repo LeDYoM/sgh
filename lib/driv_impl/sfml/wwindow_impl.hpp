@@ -13,6 +13,10 @@ namespace lib
 {
 	namespace drivers
 	{
+		namespace render
+		{
+			class Texture;
+		}
 		namespace window
 		{
 			class SFMLWindow : public IWWindow, public sf::RenderWindow
@@ -25,8 +29,14 @@ namespace lib
 				virtual void clear() override;
 				virtual void display() override;
 				virtual sptr<render::RenderTarget> windowRenderTarget() const override;
-				virtual sptr<render::Texture> newTexture() const override;
+				
+				virtual render::Texture *createTexture(const vector2du32 &size) const override;
+				virtual render::Texture *loadTextureFromMemory(const void *data, std::size_t size) const override;
+				virtual bool deleteTexture(render::Texture *) const override;
+
 				virtual void collectEvents() override;
+
+
 				virtual sptr<DataMap> nextEvent();
 				virtual u32 pendingEvents();
 			private:

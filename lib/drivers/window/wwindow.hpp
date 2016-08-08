@@ -33,7 +33,6 @@ namespace lib
 				virtual sptr<render::RenderTarget> windowRenderTarget() const = 0;
 
 				virtual render::Texture *newTexture() const = 0;
-				virtual render::Texture *loadTextureFromMemory(const void *data, std::size_t size) const = 0;
 				virtual bool deleteTexture(render::Texture *) const = 0;
 			};
 		}

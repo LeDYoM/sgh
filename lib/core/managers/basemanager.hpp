@@ -34,9 +34,9 @@ namespace lib
 					return sptr<T>;
 				}
 
-				inline bool set(const INDEXTYPE &index, sptr<T> resource)
+				inline bool set(const INDEXTYPE &index, sptr<T> resource, bool overwrite=false)
 				{
-					if (!exists(index)) {
+					if (overwrite || !exists(index)) {
 						m_managedResources[index] = resource;
 						return true;
 					}

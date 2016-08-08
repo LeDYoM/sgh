@@ -13,9 +13,9 @@ namespace lib
 			{
 			}
 
-			void TextureManager::load(const BaseClass::IndexType &index, void *data)
+			void TextureManager::load(const BaseClass::IndexType &index, void *data, u32 size)
 			{
-				drivers::render::Texture *driverTexture (appController()->driver()->currentWindow()->loadTextureFromMemory(data));
+				drivers::render::Texture *driverTexture (appController()->driver()->currentWindow()->loadTextureFromMemory(data, size));
 				draw::Texture *texture = new draw::Texture(driverTexture);
 			}
 

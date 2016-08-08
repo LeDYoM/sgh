@@ -14,20 +14,18 @@ namespace lib
 			{
 			}
 
-			bool SFMLTexture::create(const vector2du32 &size)
+			bool SFMLTexture::create(const vector2du32 & size)
 			{
 				return m_internalTexture.create(size.x, size.y);
 			}
 
-			bool SFMLTexture::loadFromFile(const str& filename, const Rects32 & area)
+			bool SFMLTexture::loadFromFile(const str & filename)
 			{
-				area;
 				return m_internalTexture.loadFromFile(filename);
 			}
 
-			bool SFMLTexture::loadFromMemory(const void * data, std::size_t size, const Rects32 & area)
+			bool SFMLTexture::loadFromMemory(const void * data, std::size_t size)
 			{
-				area;
 				return m_internalTexture.loadFromMemory(data, size);
 			}
 

@@ -32,7 +32,7 @@ namespace lib
 				virtual u32 pendingEvents() = 0;
 				virtual sptr<render::RenderTarget> windowRenderTarget() const = 0;
 
-				virtual render::Texture *createTexture(const vector2du32 &size) const = 0;
+				virtual render::Texture *newTexture() const = 0;
 				virtual render::Texture *loadTextureFromMemory(const void *data, std::size_t size) const = 0;
 				virtual bool deleteTexture(render::Texture *) const = 0;
 			};

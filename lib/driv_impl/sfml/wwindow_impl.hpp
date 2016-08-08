@@ -29,9 +29,8 @@ namespace lib
 				virtual void clear() override;
 				virtual void display() override;
 				virtual sptr<render::RenderTarget> windowRenderTarget() const override;
-				
-				virtual render::Texture *createTexture(const vector2du32 &size) const override;
-				virtual render::Texture *loadTextureFromMemory(const void *data, std::size_t size) const override;
+
+				virtual render::Texture *newTexture() const override;
 				virtual bool deleteTexture(render::Texture *) const override;
 
 				virtual void collectEvents() override;

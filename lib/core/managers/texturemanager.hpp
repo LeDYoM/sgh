@@ -16,12 +16,12 @@ namespace lib
 			class TextureManager : public BaseManager<draw::Texture>
 			{
 			public:
-				using BaseClass = BaseManager<draw::Texture>;
-				using BaseClass::BaseManager;
+				using BaseClass = BaseManager<draw::Texture, str>;
+				using BaseManager::BaseManager;
 
 				virtual ~TextureManager();
 
-				virtual void load(const BaseClass::IndexType &index, void *);
+				virtual void load(const BaseClass::IndexType &index, void *, u32 size);
 			};
 		}
 	}

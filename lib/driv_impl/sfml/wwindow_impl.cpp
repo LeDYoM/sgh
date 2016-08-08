@@ -80,19 +80,18 @@ namespace lib
 				return m_thisAsRenderTarget;
 			}
 
-			render::Texture * SFMLWindow::createTexture(const vector2du32 & size) const
+			render::Texture * SFMLWindow::newTexture() const
 			{
-				return nullptr;
-			}
-
-			render::Texture * SFMLWindow::loadTextureFromMemory(const void * data, std::size_t size) const
-			{
-				return nullptr;
+				return new render::SFMLTexture;
 			}
 
 			bool SFMLWindow::deleteTexture(render::Texture *texture) const
 			{
-				delete texture;
+				if (texture) {
+					delete texture;
+					return true;
+				}
+				return false;
 			}
 
 			void SFMLWindow::collectEvents()

@@ -12,8 +12,8 @@ namespace lib
 			class Texture
 			{
 				virtual bool create(const vector2du32 &size) = 0;
-				virtual bool loadFromFile(const str &filename, const Rects32 &area) = 0;
-				virtual bool loadFromMemory(const void *data, std::size_t size, const Rects32 &area) = 0;
+				virtual bool loadFromFile(const str &filename) = 0;
+				virtual bool loadFromMemory(const void *data, std::size_t size) = 0;
 			};
 		}
 	}

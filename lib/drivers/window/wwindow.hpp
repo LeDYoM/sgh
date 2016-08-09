@@ -35,7 +35,7 @@ namespace lib
 
 				virtual render::Texture *newTexture() const = 0;
 				virtual bool deleteTexture(render::Texture *) const = 0;
-				virtual render::Font *newFont() const const = 0;
+				virtual render::Font *newFont() const = 0;
 				virtual bool deleteFont(render::Font *) const = 0;
 
 			};

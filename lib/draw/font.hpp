@@ -1,5 +1,5 @@
-#ifndef LIB_TEXTURE_HPP
-#define LIB_TEXTURE_HPP
+#ifndef LIB_DRAW_FONT_HPP
+#define LIB_DRAW_FONT_HPP
 
 #include <lib/include/types.hpp>
 
@@ -9,7 +9,7 @@ namespace lib
 	{
 		namespace render
 		{
-			class Texture;
+			class Font;
 		}
 	}
 
@@ -17,7 +17,7 @@ namespace lib
 	{
 		namespace managers
 		{
-			class TextureManager;
+			class FontManager;
 		}
 	}
 
@@ -26,11 +26,11 @@ namespace lib
 		class Texture
 		{
 		private:
-			Texture(drivers::render::Texture*);
+			Texture(drivers::render::Font*);
 			virtual ~Texture();
 
-			drivers::render::Texture *m_driverTexture;
-			friend class core::managers::TextureManager;
+			drivers::render::Font *m_driverFont;
+			friend class core::managers::FontManager;
 		};
 	}
 }

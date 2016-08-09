@@ -32,6 +32,8 @@ namespace lib
 
 				virtual render::Texture *newTexture() const override;
 				virtual bool deleteTexture(render::Texture *) const override;
+				virtual render::Font *newFont() const const override;
+				virtual bool deleteFont(render::Font *) const override;
 
 				virtual void collectEvents() override;
 

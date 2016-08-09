@@ -94,6 +94,16 @@ namespace lib
 				return false;
 			}
 
+			render::Font * SFMLWindow::newFont() const
+			{
+				return nullptr;
+			}
+
+			bool SFMLWindow::deleteFont(render::Font *) const
+			{
+				return false;
+			}
+
 			void SFMLWindow::collectEvents()
 			{
 				sf::Event e;

@@ -18,7 +18,7 @@ namespace lib
 			{
 				auto *driverFont(appController()->driver()->currentWindow()->newFont());
 				driverFont->loadFromMemory(data, size);
-				draw::Font *texture = new draw::Font(driverTexture);
+				draw::Font *font = new draw::Font(driverFont);
 			}
 
 		}

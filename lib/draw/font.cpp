@@ -1,14 +1,14 @@
-#include "texture.hpp"
-#include <lib/drivers/render/texture.hpp>
+#include "font.hpp"
+#include <lib/drivers/render/font.hpp>
 
 namespace lib
 {
 	namespace draw
 	{
-		Texture::Texture(drivers::render::Texture *tHandle)
-			: m_driverTexture{ tHandle } {}
+		Font::Font(drivers::render::Font *tHandle)
+			: m_driverFont{ tHandle } {}
 
-		Texture::~Texture()
+		Font::~Font()
 		{
 		}
 	}

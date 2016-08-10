@@ -1,4 +1,4 @@
-#include "texture_impl.hpp"
+#include "font_impl.hpp"
 
 namespace lib
 {
@@ -6,52 +6,22 @@ namespace lib
 	{
 		namespace render
 		{
-			SFMLTexture::SFMLTexture() : m_internalTexture{}
+			SFMLFont::SFMLFont() : m_internalFont{}
 			{
 			}
 
-			SFMLTexture::~SFMLTexture()
+			SFMLFont::~SFMLFont()
 			{
 			}
 
-			bool SFMLTexture::create(const vector2du32 & size)
+			bool SFMLFont::loadFromFile(const str & filename)
 			{
-				return m_internalTexture.create(size.x, size.y);
+				return m_internalFont.loadFromFile(filename);
 			}
 
-			bool SFMLTexture::loadFromFile(const str & filename)
+			bool SFMLFont::loadFromMemory(const void * data, std::size_t size)
 			{
-				return m_internalTexture.loadFromFile(filename);
-			}
-
-			bool SFMLTexture::loadFromMemory(const void * data, std::size_t size)
-			{
-				return m_internalTexture.loadFromMemory(data, size);
-			}
-
-			vector2du32 SFMLTexture::getSize() const
-			{
-				return vector2du32{ m_internalTexture.getSize().x,m_internalTexture.getSize().y };
-			}
-
-			void SFMLTexture::setSmooth(bool smooth)
-			{
-				m_internalTexture.setSmooth(smooth);
-			}
-
-			bool SFMLTexture::isSmooth() const
-			{
-				return m_internalTexture.isSmooth();
-			}
-
-			void SFMLTexture::setRepeated(bool repeated)
-			{
-				m_internalTexture.setRepeated(repeated);
-			}
-
-			bool SFMLTexture::isRepeated() const
-			{
-				return m_internalTexture.isRepeated();
+				return m_internalFont.loadFromMemory(data, size);
 			}
 		}
 	}

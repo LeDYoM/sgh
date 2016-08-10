@@ -9,7 +9,7 @@ namespace lib
 	{
 		namespace render
 		{
-			class Texture
+			class Font
 			{
 			public:
 				virtual bool create(const vector2du32 &size) = 0;

@@ -23,11 +23,11 @@ namespace lib
 
 	namespace draw
 	{
-		class Texture
+		class Font
 		{
 		private:
-			Texture(drivers::render::Font*);
-			virtual ~Texture();
+			Font(drivers::render::Font*);
+			virtual ~Font();
 
 			drivers::render::Font *m_driverFont;
 			friend class core::managers::FontManager;

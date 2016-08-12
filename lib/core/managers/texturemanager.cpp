@@ -3,6 +3,7 @@
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/driver.hpp>
 #include <lib/drivers/render/texture.hpp>
+#include <lib/core/compileconfig.hpp>
 
 namespace lib
 {
@@ -16,9 +17,11 @@ namespace lib
 
 			void TextureManager::load(const BaseClass::IndexType &index, void *data, u32 size)
 			{
-				drivers::render::Texture *driverTexture(appController()->driver()->currentWindow()->newTexture());
+				auto driverTexture(appController()->driver()->currentWindow()->newTexture());
 				driverTexture->loadFromMemory(data, size);
-				draw::Texture *texture = new draw::Texture(driverTexture);
+				auto texture = sptr<draw::Texture>(new draw::Texture(driverTexture));
+				auto ok (set(index, texture));
+				__ASSERT(ok,"Cannot add texture");
 			}
 
 		}

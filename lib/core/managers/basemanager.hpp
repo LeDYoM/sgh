@@ -20,11 +20,11 @@ namespace lib
 			{
 			public:
 				using IndexType = INDEXTYPE;
-				using ManagerResources = std::map<INDEXTYPE, sptr<T>>;
+				using ManagerResources = std::map<INDEXTYPE, T*>;
 
 				using SystemObject::SystemObject;
 
-				inline bool exists(const INDEXTYPE &index) const { return m_managedResources.find() != m_managedResources.end(); }
+				inline bool exists(const INDEXTYPE &index) const { return m_managedResources.find(index) != m_managedResources.end(); }
 				inline sptr<T> get(const INDEXTYPE &index) const
 				{
 					auto iterator(m_managedResources.find(index));
@@ -34,7 +34,7 @@ namespace lib
 					return sptr<T>;
 				}
 
-				inline bool set(const INDEXTYPE &index, sptr<T> resource, bool overwrite=false)
+				inline bool set(const INDEXTYPE &index, T* resource, bool overwrite=false)
 				{
 					if (overwrite || !exists(index)) {
 						m_managedResources[index] = resource;

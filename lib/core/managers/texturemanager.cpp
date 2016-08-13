@@ -19,7 +19,7 @@ namespace lib
 			{
 				auto driverTexture(appController()->driver()->currentWindow()->newTexture());
 				driverTexture->loadFromMemory(data, size);
-				auto texture = sptr<draw::Texture>(new draw::Texture(driverTexture));
+				auto texture = new draw::Texture(driverTexture);
 				auto ok (set(index, texture));
 				__ASSERT(ok,"Cannot add texture");
 			}

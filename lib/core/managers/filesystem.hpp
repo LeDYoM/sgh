@@ -18,6 +18,7 @@ namespace lib
 				using BaseClass = BaseManager<File, str>;
 				using BaseManager::BaseManager;
 
+				sptr<File> load(const BaseClass::IndexType &);
 				virtual ~FileSystem();
 			};
 		}

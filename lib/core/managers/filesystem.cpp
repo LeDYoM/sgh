@@ -11,6 +11,12 @@ namespace lib
 			{
 
 			}
+
+			sptr<File> FileSystem::load(const BaseClass::IndexType &fileName)
+			{
+				return sptr<File>();
+			}
+
 		}
 	}
 }

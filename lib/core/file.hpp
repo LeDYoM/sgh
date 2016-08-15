@@ -2,33 +2,34 @@
 #define LIB_FILE_HPP
 
 #include <lib/include/types.hpp>
-#include "obj.hpp"
-#include <string>
+#include "filepath.hpp"
 #include <vector>
 
 namespace lib
 {
-	class FileSystem;
-	class File : public Object
+	namespace core
 	{
-	public:
-		File() = delete;
-		File(const File&) = delete;
-		File &operator=(const File&) = delete;
+		namespace managers
+		{
+			class FileManager;
+		}
+		class File
+		{
+		private:
+			File() = delete;
+			File(const File&) = delete;
+			File &operator=(const File&) = delete;
+			File(const std::vector<u8> &, const FilePath &);
+			virtual ~File();
+		public:
+			const std::vector<str> asText();
 
-		virtual ~File();
-		bool exists() const;
-		const std::vector<std::string> asText();
-		const std::string fileName() const;
-
-	private:
-		File(FileSystem *const fileSystem, const std::string &fileName);
-
-	private:
-		friend class FileSystem;
-		FileSystem *const m_fileSystem;
-		std::string m_fileName;
-	};
+		private:
+			std::vector<u8> m_data;
+			FilePath m_filePath;
+			friend class managers::FileManager;
+		};
+	}
 }
 
 #endif

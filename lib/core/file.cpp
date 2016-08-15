@@ -1,49 +1,33 @@
 #include "file.hpp"
-#include "filesystem.hpp"
-#include <fstream>
-#include "exceptionmanager.hpp"
-#include "appcontroller.hpp"
 
 namespace lib
 {
-	File::File(FileSystem *const fileSystem, const std::string &fileName)
-		: Object{fileSystem}, m_fileSystem{ fileSystem }, m_fileName(fileName)
+	namespace core
 	{
+		File::File(const std::vector<u8> &data, const FilePath &path)
+			: m_data{ data }, m_filePath{ path } {}
 
-	}
+		File::~File() {	}
 
-	File::~File()
-	{
-
-	}
-
-	bool File::exists() const
-	{
-		return static_cast<bool>(std::ifstream(m_fileName));
-	}
-
-	const std::vector<std::string> File::asText()
-	{
-		std::ifstream f(m_fileName);
-		std::vector<std::string> result;
-		if (f)
+		const std::vector<str> File::asText()
 		{
-			std::string temp;
-			while (std::getline(f, temp))
-			{
-				result.push_back(temp);
+			std::vector<str> result;
+			str temp;
+
+			for (const auto ch : m_data) {
+				if (ch != '\n' && ch != 0x13) {
+					temp.push_back(ch);
+				}
+				else {
+					if (!temp.empty()) {
+						result.push_back(temp);
+						temp.clear();
+					}
+				}
 			}
-		}
-		else
-		{
-			service<core::ExceptionManager>()->addException(EXCEPTION_INTERNAL("FileNotFound", "", "Cannot find or open file " + m_fileName));
-		}
-		return result;
-	}
 
-	const std::string File::fileName() const
-	{
-		return m_fileName;
+			return std::move(result);
+		}
 	}
 }
 

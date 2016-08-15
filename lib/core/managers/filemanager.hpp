@@ -11,15 +11,15 @@ namespace lib
 
 		namespace managers
 		{
-			class FileManager : public BaseManager<core::File>
+			class FileManager : public BaseManager<File>
 			{
 			public:
-				using BaseClass = BaseManager<core::File, str>;
+				using BaseClass = BaseManager<File, str>;
 				using BaseManager::BaseManager;
 
 				virtual ~FileManager();
 
-				virtual void load(const BaseClass::IndexType &index, File &);
+				virtual void load(const BaseClass::IndexType &index);
 			};
 		}
 	}

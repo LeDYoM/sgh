@@ -3,7 +3,9 @@
 
 #include <lib/include/types.hpp>
 #include <map>
+#include <algorithm>
 #include "strmap.hpp"
+#include "strutils.hpp"
 
 namespace lib
 {
@@ -24,6 +26,21 @@ namespace lib
 
 		StringMap::StringMap()
 			: m_private(new StringMapPrivate) {	}
+
+		StringMap::StringMap(const std::vector<str> &dataVector, const str &separator)
+		{
+			for (const auto &data : dataVector) {
+				str left(data);
+				str right(data);
+				leftFrom(left, separator);
+				trim(left);
+				rightFrom(right, separator);
+				trim(right);
+				if (!left.empty()) {
+					m_private->m_data[left] = right;
+				}
+			}
+		}
 
 		StringMap::~StringMap()
 		{
@@ -84,6 +101,11 @@ namespace lib
 				}
 			}
 			return std::move(result);
+		}
+
+		void StringMap::for_each(std::function<void(std::pair<const Index &, const Value&>)> precdicate) const
+		{
+			std::for_each(m_private->m_data.cbegin(), m_private->m_data.cend(), precdicate);
 		}
 	}
 }

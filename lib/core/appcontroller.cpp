@@ -1,13 +1,11 @@
 #include "appcontroller.hpp"
 #include "window.hpp"
-#include "resourcemanager.hpp"
 #include <lib/draw/scenemanager.hpp>
 #include <lib/draw/rendermanager.hpp>
 #include "utilprovider.hpp"
 #include "log.hpp"
 #include "exceptionmanager.hpp"
 #include "filesystem.hpp"
-#include "configuration.hpp"
 #include "servicesmanager.hpp"
 #include "shareddata.hpp"
 #include "input.hpp"
@@ -45,10 +43,8 @@ namespace lib
 
 				m_servicesManager->addService(sptr<ExceptionManager>{new ExceptionManager{}});
 				m_servicesManager->addService(sptr<FileSystem>{ new FileSystem{} });
-				m_servicesManager->addService(sptr<Configuration>{ new Configuration{} });
 				m_servicesManager->addService(sptr<SharedData>{ new SharedData{} });
 				m_servicesManager->addService(sptr<UtilProvider>{new UtilProvider{}});
-				m_servicesManager->addService(sptr<ResourceManager>{ new ResourceManager{} });
 				m_servicesManager->addService(sptr<draw::SceneManager>{ new draw::SceneManager{} });
 				m_servicesManager->addService(sptr<draw::RenderManager>{ new draw::RenderManager{} });
 				m_servicesManager->addService(sptr<Input>{new Input{}});

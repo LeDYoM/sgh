@@ -3,6 +3,7 @@
 
 #include <lib/include/types.hpp>
 #include "strmap.hpp"
+#include "filepath.hpp"
 
 namespace lib
 {
@@ -11,23 +12,20 @@ namespace lib
 		namespace managers
 		{
 			class FileManager;
-			class FontManager;
-			class TextureManager;
+			class ConfigurationManager;
 		}
-		class ResourceLoadController
+		class ConfigurationLoadController
 		{
 		public:
-			ResourceLoadController(const StringMap &, const str &, managers::FileManager *const,
-				managers::FontManager *const, managers::TextureManager *const);
-			virtual ~ResourceLoadController();
+			ConfigurationLoadController(const FilePath &, managers::ConfigurationManager *const,
+				managers::FileManager *const);
+			virtual ~ConfigurationLoadController();
 
 			bool operator()();
 		private:
-			StringMap m_stringMap;
-			const str m_section;
+			managers::ConfigurationManager *const m_configurationManager;
 			managers::FileManager *const m_fileManager;
-			managers::FontManager *const m_fontManager;
-			managers::TextureManager *const m_textureManager;
+			FilePath m_filePath;
 		};
 	}
 }

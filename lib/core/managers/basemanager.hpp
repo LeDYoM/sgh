@@ -25,13 +25,13 @@ namespace lib
 				using SystemObject::SystemObject;
 
 				inline bool exists(const INDEXTYPE &index) const { return m_managedResources.find(index) != m_managedResources.end(); }
-				inline sptr<T> get(const INDEXTYPE &index) const
+				inline T *get(const INDEXTYPE &index) const
 				{
 					auto iterator(m_managedResources.find(index));
 					if (iterator != m_managedResources.end()) {
-						return *iterator;
+						return iterator->second;
 					}
-					return sptr<T>;
+					return nullptr;
 				}
 
 				inline bool set(const INDEXTYPE &index, T* resource, bool overwrite=false)

@@ -20,7 +20,7 @@ namespace lib
 			StringMap &operator=(const StringMap &);
 			StringMap(StringMap &&);
 			StringMap &operator=(StringMap &&);
-			StringMap(const std::vector<str> &dataVector, const str &separator);
+			explicit StringMap(const std::vector<str> &dataVector, const str &separator="=");
 
 			bool exists(const Index &index) const;
 			bool add(const Index &index, const Value value);
@@ -34,6 +34,5 @@ namespace lib
 		};
 	}
 }
-
 
 #endif

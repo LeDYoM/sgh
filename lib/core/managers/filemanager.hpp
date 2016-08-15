@@ -8,6 +8,7 @@ namespace lib
 	namespace core
 	{
 		class File;
+		class FilePath;
 
 		namespace managers
 		{
@@ -19,7 +20,8 @@ namespace lib
 
 				virtual ~FileManager();
 
-				virtual void load(const BaseClass::IndexType &index);
+				File *const load(const FilePath &);
+				File *const load(const BaseClass::IndexType &);
 			};
 		}
 	}

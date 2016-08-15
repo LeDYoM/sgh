@@ -9,18 +9,13 @@ namespace lib
 		{
 			ConfigurationManager::~ConfigurationManager() {	}
 
-			lib::StringMap ConfigurationManager::asStringMap() const
-			{
-
-			}
-
 			void ConfigurationManager::add(const StringMap &stringMap, const bool overwrite)
 			{
 				stringMap.for_each([this,overwrite](std::pair<const StringMap::Index&, const StringMap::Value&> data) {
-					set(data.first, &(static_cast<str>(data.second)), overwrite);
+					str *copy = new str(data.second);
+					set(data.first, copy, overwrite);
 				});
 			}
-
 		}
 	}
 }

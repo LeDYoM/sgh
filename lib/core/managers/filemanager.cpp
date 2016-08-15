@@ -1,5 +1,6 @@
 #include "filemanager.hpp"
 #include <lib/core/file.hpp>
+#include <lib/core/filepath.hpp>
 #include <fstream>
 
 namespace lib
@@ -12,7 +13,7 @@ namespace lib
 			{
 			}
 
-			void FileManager::load(const BaseClass::IndexType &index)
+			File*const FileManager::load(const BaseClass::IndexType &index)
 			{
 				if (!exists(index)) {
 					std::ifstream file(index);
@@ -27,7 +28,14 @@ namespace lib
 						set(index, file);
 					}
 				}
+				return get(index);
 			}
+
+			File *const FileManager::load(const FilePath &path)
+			{
+				return load(path.c_str());
+			}
+
 		}
 	}
 }

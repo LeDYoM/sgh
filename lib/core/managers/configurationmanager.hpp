@@ -20,7 +20,6 @@ namespace lib
 
 				~ConfigurationManager();
 
-				StringMap asStringMap() const;
 				void add(const StringMap &, const bool);
 			};
 		}

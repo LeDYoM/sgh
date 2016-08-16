@@ -18,14 +18,9 @@ namespace lib
 			ensureGeometryUpdate();
 		}
 
-		NodeText::NodeText(RenderGroup *const p_parent, const std::string &name, const sf::String& string, const sf::Font& font, unsigned int characterSize) :
-			RenderNode{ p_parent, name, PrimitiveType::Triangles }, m_string(string), m_font(&font), m_characterSize(characterSize), m_style(Regular)
-		{
-		}
-
 		NodeText::~NodeText() {	}
 
-		void NodeText::setString(const std::string &string)
+		void NodeText::setString(const str &string)
 		{
 			if (m_string != string)
 			{
@@ -34,7 +29,7 @@ namespace lib
 			}
 		}
 
-		void NodeText::setFont(const sf::Font &font)
+		void NodeText::setFont(const str &fontId)
 		{
 			if (m_font != &font)
 			{

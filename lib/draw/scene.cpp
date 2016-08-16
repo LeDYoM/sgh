@@ -5,7 +5,6 @@
 #include <lib/core/window.hpp>
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/utilprovider.hpp>
-#include <lib/core/resourcemanager.hpp>
 #include "camera.hpp"
 
 namespace lib
@@ -99,11 +98,6 @@ namespace lib
 		void Scene::setNextScene(const str &name)
 		{
 			service<SceneManager>()->setScene(name);
-		}
-
-		sptr<lib::ResourceManager> Scene::resourceManager() const
-		{
-			return service<lib::ResourceManager>();
 		}
 
 		sptr<UtilProvider> Scene::utilProvider() const

@@ -8,6 +8,7 @@ namespace lib
 {
 	namespace draw
 	{
+		class Texture;
 		class NodeShape : public RenderNode
 		{
 		public:
@@ -24,15 +25,15 @@ namespace lib
 			u32 getPointCount() const;
 			void setPointCount(lib::u32 numPoints);
 			virtual vector2df getPoint(const u32 index) const;
-			void setTexture(const sf::Texture *texture, bool resetSize=true, bool resetRect = false);
+			void setTexture(const str &textureId, bool resetSize=true, bool resetRect = false);
 
 			void setTextureRect(const Rects32& rect);
 			const Rects32& getTextureRect() const;
-			virtual const sf::Texture *texture() const override;
+			virtual const Texture *texture() const override;
 
 		protected:
 			virtual void ensureGeometryUpdate() override;
-			void setTexture_(const sf::Texture* texture, bool resetRect = false);
+			void setTexture_(const Texture* texture, bool resetRect = false);
 			virtual void update() override;
 			void updateTexCoords();
 

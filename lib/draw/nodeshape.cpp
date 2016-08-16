@@ -2,8 +2,10 @@
 #include <lib/core/convops.hpp>
 #include <lib/core/log.hpp>
 #include "scenemanager.hpp"
-#include <SFML/Graphics/Texture.hpp>
-#include "../core/appcontroller.hpp"
+#include "texture.hpp"
+#include <lib/core/appcontroller.hpp>
+#include <lib/core/managers/texturemanager.hpp>
+#include <lib/core/servicesmanager.hpp>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -86,8 +88,9 @@ namespace lib
 			}
 		}
 
-		void NodeShape::setTexture(const sf::Texture *texture, bool resetSize/*=true*/, bool resetRect /*= false*/)
+		void NodeShape::setTexture(const str &textureId, bool resetSize/*=true*/, bool resetRect /*= false*/)
 		{
+			auto texture(service<core::managers::TextureManager>()->get(textureId));
 			setTexture_(texture, resetRect);
 			if (resetSize)
 			{
@@ -111,7 +114,7 @@ namespace lib
 			return p1.x * p2.x + p1.y * p2.y;
 		}
 
-		void NodeShape::setTexture_(const sf::Texture* texture, bool resetRect)
+		void NodeShape::setTexture_(const Texture* texture, bool resetRect)
 		{
 			if (texture)
 			{

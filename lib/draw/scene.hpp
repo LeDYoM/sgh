@@ -39,7 +39,6 @@ namespace lib
 			virtual const vector2df getDefaultSizeView() = 0;
 			virtual void update() = 0;
 
-			sptr<ResourceManager> resourceManager() const;
 			sptr<UtilProvider> utilProvider() const;
 
 			sptr<Camera> camera() const { return m_camera; }

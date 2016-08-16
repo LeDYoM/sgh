@@ -6,17 +6,14 @@
 #include <lib/board/boardmodel.hpp>
 #include <lib/board/itilescontroller.hpp>
 #include <lib/core/log.hpp>
-#include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
 #include <lib/draw/rendernode.hpp>
 #include <lib/draw/nodeshape.hpp>
 #include <lib/draw/nodetext.hpp>
 #include <lib/draw/animations.hpp>
-#include <lib/core/resourcemanager.hpp>
 #include <lib/core/resource.hpp>
 #include <lib/core/randomizer.hpp>
 #include <lib/core/utilprovider.hpp>
-#include <lib/core/shareddata.hpp>
 #include <lib/core/appcontroller.hpp>
 #include <memory>
 #include <functional>

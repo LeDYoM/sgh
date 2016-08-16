@@ -4,7 +4,6 @@
 #include <lib/drivers/render/rendertarget.hpp>
 #include <lib/core/log.hpp>
 #include <lib/core/window.hpp>
-#include <lib/core/resourcemanager.hpp>
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/input.hpp>
 #include "rendernode.hpp"

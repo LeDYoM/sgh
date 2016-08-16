@@ -21,6 +21,8 @@ namespace lib
 				managers::FontManager *const, managers::TextureManager *const);
 			virtual ~ResourceLoadController();
 
+			ResourceLoadController(const ResourceLoadController &) = delete;
+			ResourceLoadController &operator=(const ResourceLoadController &) = delete;
 			bool operator()();
 		private:
 			StringMap m_stringMap;

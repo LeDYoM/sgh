@@ -7,16 +7,15 @@
 #include <lib/include/properties.hpp>
 #include "vertexarray.hpp"
 
-namespace sf
-{
-	class Texture;
-}
-
 namespace lib
 {
+	namespace drivers::render {
+		class Texture;
+	}
 	namespace draw
 	{
 		class RenderGroup;
+		class Texture;
 		namespace priv
 		{
 			class RenderStates;
@@ -46,7 +45,6 @@ namespace lib
 			virtual Rectf32 getLocalBounds();
 			virtual Rectf32 getGlobalBounds();
 
-			virtual const sf::Texture *texture() const = 0;
 			inline const VertexArray &vertexArray() const { return m_vertices; }
 			virtual void update() override;
 

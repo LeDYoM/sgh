@@ -36,10 +36,9 @@ namespace lib
 			};
 
 			NodeText(RenderGroup *const p_parent, const std::string &name);
-			NodeText(RenderGroup *const p_parent, const std::string &name, const sf::String& string, const sf::Font& font, u32 characterSize = 30);
 			virtual ~NodeText();
-			void setString(const std::string &string);
-			void setFont(const sf::Font& font);
+			void setString(const str &string);
+			void setFont(const str& fontId);
 			void setCharacterSize(u32 size);
 			void setStyle(u32 style);
 			const std::string &getString() const;
@@ -47,11 +46,8 @@ namespace lib
 			u32 getCharacterSize() const;
 			u32 getStyle() const;
 			vector2df findCharacterPos(u32 index);
-			virtual const sf::Texture *texture() const override;
+			virtual const Texture *texture() const override;
 
-//			void setPosition(const vector2df &pos, Alignment alignment);
-//			void setPositionX(const f32 x, Alignment alignment = Alignment::Left);
-//			void setPositionY(const f32 y, Alignment alignment = Alignment::Left);
 			void setAlignment(Alignment alignment);
 
 		private:

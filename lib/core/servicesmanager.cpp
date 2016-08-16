@@ -3,7 +3,6 @@
 #include "datamap.hpp"
 #include "input.hpp"
 #include "exceptionmanager.hpp"
-#include "shareddata.hpp"
 #include "utilprovider.hpp"
 #include <lib/draw/scenemanager.hpp>
 #include <lib/draw/rendermanager.hpp>
@@ -28,7 +27,6 @@ namespace lib
 		void ServicesManager::createServices()
 		{
 			addService(sptr<ExceptionManager>{new ExceptionManager{}});
-			addService(sptr<SharedData>{ new SharedData{} });
 			addService(sptr<UtilProvider>{new UtilProvider{}});
 			addService(sptr<draw::SceneManager>{ new draw::SceneManager{} });
 			addService(sptr<draw::RenderManager>{ new draw::RenderManager{} });

@@ -24,8 +24,8 @@ namespace lib
 							file.read(&temp, 1);
 							result.push_back(temp);
 						}
-						File *file(new File(result, FilePath(index)));
-						set(index, file);
+						File *file_(new File(result, FilePath(index)));
+						set(index, file_);
 					}
 				}
 				return get(index);

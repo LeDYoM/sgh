@@ -5,18 +5,21 @@
 
 namespace lib
 {
-	namespace draw
+	namespace drivers 
 	{
-		class Texture;
+		namespace render
+		{
+			class Texture;
+		}
 	}
 	namespace core
 	{
 		namespace managers
 		{
-			class TextureManager : public BaseManager<draw::Texture>
+			class TextureManager : public BaseManager<drivers::render::Texture>
 			{
 			public:
-				using BaseClass = BaseManager<draw::Texture, str>;
+				using BaseClass = BaseManager<drivers::render::Texture, str>;
 				using BaseManager::BaseManager;
 
 				virtual ~TextureManager();

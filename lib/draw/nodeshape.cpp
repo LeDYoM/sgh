@@ -91,7 +91,15 @@ namespace lib
 		void NodeShape::setTexture(const str &textureId, bool resetSize/*=true*/, bool resetRect /*= false*/)
 		{
 			auto texture(service<core::managers::TextureManager>()->get(textureId));
-			setTexture_(texture, resetRect);
+			if (texture)
+			{
+				// Recompute the texture area if requested, or if there was no texture & rect before
+				if (resetRect || (!m_texture && (m_textureRect == Rects32())))
+					setTextureRect(Rects32(0, 0, texture->getSize().x, texture->getSize().y));
+			}
+
+			// Assign the new texture
+			m_texture = texture;
 			if (resetSize)
 			{
 				setSize(static_cast<lib::vector2df>(convert(texture->getSize())));
@@ -116,15 +124,6 @@ namespace lib
 
 		void NodeShape::setTexture_(const Texture* texture, bool resetRect)
 		{
-			if (texture)
-			{
-				// Recompute the texture area if requested, or if there was no texture & rect before
-				if (resetRect || (!m_texture && (m_textureRect == Rects32())))
-					setTextureRect(Rects32(0, 0, texture->getSize().x, texture->getSize().y));
-			}
-
-			// Assign the new texture
-			m_texture = texture;
 		}
 
 		void NodeShape::setTextureRect(const Rects32& rect)

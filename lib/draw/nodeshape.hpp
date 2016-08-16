@@ -6,9 +6,15 @@
 
 namespace lib
 {
+	namespace drivers
+	{
+		namespace render
+		{
+			class Texture;
+		}
+	}
 	namespace draw
 	{
-		class Texture;
 		class NodeShape : public RenderNode
 		{
 		public:
@@ -29,7 +35,6 @@ namespace lib
 
 			void setTextureRect(const Rects32& rect);
 			const Rects32& getTextureRect() const;
-			virtual const Texture *texture() const override;
 
 		protected:
 			virtual void ensureGeometryUpdate() override;

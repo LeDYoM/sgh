@@ -9,8 +9,12 @@
 
 namespace lib
 {
-	namespace drivers::render {
-		class Texture;
+	namespace drivers
+	{
+		namespace render
+		{
+			class Texture;
+		}
 	}
 	namespace draw
 	{

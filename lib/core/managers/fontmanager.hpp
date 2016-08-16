@@ -5,18 +5,22 @@
 
 namespace lib
 {
-	namespace draw
+	namespace drivers
 	{
-		class Font;
+		namespace render
+		{
+			class Font;
+		}
 	}
+
 	namespace core
 	{
 		namespace managers
 		{
-			class FontManager : public BaseManager<draw::Font>
+			class FontManager : public BaseManager<drivers::render::Font>
 			{
 			public:
-				using BaseClass = BaseManager<draw::Font, str>;
+				using BaseClass = BaseManager<drivers::render::Font, str>;
 				using BaseManager::BaseManager;
 
 				virtual ~FontManager();

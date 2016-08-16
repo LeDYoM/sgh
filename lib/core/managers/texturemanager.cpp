@@ -1,5 +1,4 @@
 #include "texturemanager.hpp"
-#include <lib/draw/texture.hpp>
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/driver.hpp>
 #include <lib/drivers/render/texture.hpp>
@@ -19,8 +18,7 @@ namespace lib
 			{
 				auto driverTexture(appController()->driver()->currentWindow()->newTexture());
 				driverTexture->loadFromMemory(data, size);
-				auto texture = new draw::Texture(driverTexture);
-				auto ok (set(index, texture));
+				auto ok (set(index, driverTexture));
 				__ASSERT(ok,"Cannot add texture");
 			}
 

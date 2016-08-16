@@ -5,7 +5,7 @@ namespace lib
 	namespace core
 	{
 		File::File(const std::vector<u8> &data, const FilePath &path)
-			: m_data{ data }, m_filePath{ path } {}
+			: m_data( data ), m_filePath{ path } {}
 
 		File::~File() {	}
 

@@ -17,6 +17,9 @@ namespace lib
 		class ConfigurationLoadController
 		{
 		public:
+			ConfigurationLoadController(const ConfigurationLoadController&) = delete;
+			ConfigurationLoadController& operator=(const ConfigurationLoadController&) = delete;
+
 			ConfigurationLoadController(const FilePath &, managers::ConfigurationManager *const,
 				managers::FileManager *const);
 			virtual ~ConfigurationLoadController();

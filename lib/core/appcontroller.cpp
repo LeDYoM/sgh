@@ -2,12 +2,8 @@
 #include "window.hpp"
 #include <lib/draw/scenemanager.hpp>
 #include <lib/draw/rendermanager.hpp>
-#include "utilprovider.hpp"
 #include "log.hpp"
-#include "exceptionmanager.hpp"
-#include "filesystem.hpp"
 #include "servicesmanager.hpp"
-#include "shareddata.hpp"
 #include "input.hpp"
 #include "driver.hpp"
 
@@ -41,13 +37,6 @@ namespace lib
 				LOG_DEBUG(appId() + ":  Starting initialization...");
 				m_state = AppState::Executing;
 
-				m_servicesManager->addService(sptr<ExceptionManager>{new ExceptionManager{}});
-				m_servicesManager->addService(sptr<FileSystem>{ new FileSystem{} });
-				m_servicesManager->addService(sptr<SharedData>{ new SharedData{} });
-				m_servicesManager->addService(sptr<UtilProvider>{new UtilProvider{}});
-				m_servicesManager->addService(sptr<draw::SceneManager>{ new draw::SceneManager{} });
-				m_servicesManager->addService(sptr<draw::RenderManager>{ new draw::RenderManager{} });
-				m_servicesManager->addService(sptr<Input>{new Input{}});
 
 				m_servicesManager->setupAllServices();
 				m_servicesManager->initializeServices();

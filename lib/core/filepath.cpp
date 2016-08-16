@@ -4,6 +4,19 @@ namespace lib
 {
 	namespace core
 	{
+		FilePath::FilePath(FilePath &&rh)
+			: m_data( std::move(rh.m_data) ), m_separator{ std::move(rh.m_separator) }
+		{
+		}
+
+		FilePath & FilePath::operator=(FilePath &&rh)
+		{
+			m_data.clear();
+			std::swap(m_data, rh.m_data);
+			m_separator = std::move(rh.m_separator);
+			return *this;
+		}
+
 		FilePath::FilePath(const str&fileName, const s8 separator)
 			: m_separator{ separator }
 		{

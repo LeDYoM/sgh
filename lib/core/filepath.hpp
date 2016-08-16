@@ -14,10 +14,10 @@ namespace lib
 
 			FilePath() = delete;
 			FilePath(const FilePath&) = default;
-			FilePath(FilePath&&) = default;
+			FilePath(FilePath&&);
 
 			FilePath &operator=(const FilePath&) = default;
-			FilePath &operator=(FilePath&&) = default;
+			FilePath &operator=(FilePath&&);
 
 			FilePath(const str&, const s8 = '/');
 			~FilePath() = default;
@@ -30,7 +30,7 @@ namespace lib
 			const str c_str() const;
 		private:
 			std::vector<str> m_data;
-			const s8 m_separator;
+			s8 m_separator;
 		};
 	}
 }

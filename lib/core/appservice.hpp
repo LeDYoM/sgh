@@ -21,7 +21,7 @@ namespace lib
 		virtual void processSystemEvent(const DataMap *) {}
 	private:
 		friend class core::AppController;
-		friend class ServicesManager;
+		friend class core::ServicesManager;
 
 		void PrivateSetup(core::AppController *const appController_)
 		{

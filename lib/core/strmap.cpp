@@ -20,8 +20,6 @@ namespace lib
 			StringMapPrivate() = default;
 			StringMapPrivate(const StringMapPrivate &) = default;
 			StringMapPrivate &operator=(const StringMapPrivate&) = default;
-			StringMapPrivate(StringMapPrivate &&) = default;
-			StringMapPrivate &operator=(StringMapPrivate&&) = default;
 		};
 
 		StringMap::StringMap()

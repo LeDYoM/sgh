@@ -12,7 +12,7 @@ namespace lib
 		ResourceLoadController::ResourceLoadController(const StringMap &stringMap, const str &section,
 			managers::FileManager *const fileManager, managers::FontManager *const fontManager, 
 			managers::TextureManager *const textureManager)
-			: m_stringMap{ stringMap }, m_section{ section },
+			: m_stringMap( stringMap ), m_section( section ),
 			m_fileManager {fileManager},m_fontManager{ fontManager }, m_textureManager{ textureManager } {}
 
 		ResourceLoadController::~ResourceLoadController()
@@ -33,7 +33,7 @@ namespace lib
 				}
 
 			});
-
+			return true;
 		}
 	}
 }

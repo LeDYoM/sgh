@@ -54,6 +54,8 @@ namespace lib
 			uptr<IApp> m_iapp{ nullptr };
 			sptr<Driver> m_driver{ nullptr };
 			sptr<Window> m_window;
+
+
 		};
 
 		AppController *toController(PIAppContext context);

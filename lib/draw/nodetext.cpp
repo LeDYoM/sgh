@@ -17,12 +17,13 @@ namespace lib
 
 		NodeText::~NodeText() {	}
 
-		vector2df NodeText::findCharacterPos(u32 index)
+		vector2df NodeText::findCharacterPos(u32)
 		{
 			// Make sure that we have a valid font
-			if (!text().empty())
+//			if (!text().empty())
 				return vector2df{};
 
+				/*
 			// Adjust the index if it's out of range
 			if (index > text().length())
 				index = text().length();
@@ -58,6 +59,7 @@ namespace lib
 			_position = transformation().transformPoint(position());
 
 			return _position;
+			*/
 		}
 
 		void NodeText::update()
@@ -68,6 +70,7 @@ namespace lib
 
 		void NodeText::ensureGeometryUpdate()
 		{
+			/*
 			// Do nothing, if geometry has not changed
 			if (!m_geometryNeedUpdate)
 				return;
@@ -171,6 +174,7 @@ namespace lib
 			m_bounds.top = minY;
 			m_bounds.width = maxX - minX;
 			m_bounds.height = maxY - minY;
+			*/
 		}
 	}
 }

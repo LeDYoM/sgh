@@ -2,7 +2,6 @@
 #include <lib/core/convops.hpp>
 #include <lib/core/log.hpp>
 #include "scenemanager.hpp"
-#include "texture.hpp"
 #include <lib/core/appcontroller.hpp>
 #include <lib/core/managers/texturemanager.hpp>
 #include <lib/core/servicesmanager.hpp>
@@ -73,7 +72,7 @@ namespace lib
 			break;
 			case lib::draw::NodeShape::NodeMode::Sprite:
 			{
-				__ASSERT(m_pointCount == 4, "Invalid sprite state");
+				__ASSERT(pointCount() == 4, "Invalid sprite state");
 
 				switch (index)
 				{

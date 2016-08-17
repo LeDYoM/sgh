@@ -58,7 +58,7 @@ namespace lib
 			m_renderStates->transform = convert(globalTransformation());
 			m_renderStates->blendMode = sf::BlendMode();
 			m_renderStates->shader = nullptr;
-			m_renderStates->texture = texture();
+//			m_renderStates->texture = texture();
 		}
 
 	}

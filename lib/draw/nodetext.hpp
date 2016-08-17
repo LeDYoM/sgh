@@ -1,63 +1,34 @@
 #ifndef _LIB_NODETEXT_HPP__
 #define _LIB_NODETEXT_HPP__
 
-#include <string>
-#include <vector>
 #include "rendernode.hpp"
-
-namespace sf
-{
-	class Font;
-	class Texture;
-	class String;
-}
+#include <lib/include/properties.hpp>
 
 namespace lib
 {
 	namespace draw
 	{
-			enum class Alignment : u8
-			{
-				Left = 0,
-				Center = 1,
-				Right = 2
-			};
+		enum class Alignment : u8
+		{
+			Left = 0,
+			Center = 1,
+			Right = 2
+		};
 
 		class NodeText : public RenderNode
 		{
 		public:
-			enum Style
-			{
-				Regular = 0,
-				Bold = 1 << 0,
-				Italic = 1 << 1,
-				Underlined = 1 << 2,
-				StrikeThrough = 1 << 3
-			};
-
 			NodeText(RenderGroup *const p_parent, const std::string &name);
 			virtual ~NodeText();
-			void setString(const str &string);
-			void setFont(const str& fontId);
-			void setCharacterSize(u32 size);
-			void setStyle(u32 style);
-			const std::string &getString() const;
-			const sf::Font* getFont() const;
-			u32 getCharacterSize() const;
-			u32 getStyle() const;
+
+			Property<str> fontId;
+			Property<str> text;
+			Property<Alignment> alignment;
+			Property<u32> characterSize;
 			vector2df findCharacterPos(u32 index);
-			virtual const Texture *texture() const override;
-
-			void setAlignment(Alignment alignment);
-
 		private:
 			virtual void update() override;
 			virtual void ensureGeometryUpdate() override;
-
-			std::string m_string;
-			const sf::Font* m_font;
-			u32 m_characterSize;
-			u32 m_style;
 		};
 	}
 }

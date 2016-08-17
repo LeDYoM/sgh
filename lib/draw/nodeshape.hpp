@@ -43,7 +43,6 @@ namespace lib
 			void updateTexCoords();
 
 		private:
-			const sf::Texture* m_texture;
 			lib::vector2df _size;
 			lib::u32 m_pointCount;
 			Rects32 m_textureRect;

@@ -1,16 +1,16 @@
-file (GLOB MODULER_SOURCES "*.cpp")
-file (GLOB MODULER_HEADERS "*.hpp")
+file (GLOB _SOURCES "*.cpp")
+file (GLOB _HEADERS "*.hpp")
  
-file (GLOB MODULER_INCLUDES "include/*.hpp")
+file (GLOB _INCLUDES "include/*.hpp")
 
 set (CURRENT_TARGET moduler) 
-source_group("Sources" FILES ${MODULER_SOURCES})
-source_group("Headers" FILES ${MODULER_HEADERS})
-source_group("Includes" FILES ${MODULER_INCLUDES})
+source_group("Sources" FILES ${_SOURCES})
+source_group("Headers" FILES ${_HEADERS})
+source_group("Includes" FILES ${_INCLUDES})
 set(CMAKE_DEBUG_POSTFIX  "d") 
 add_definitions(-DMODULER_EXPORTS) 
 
-add_library(${CURRENT_TARGET} SHARED ${MODULER_SOURCES} ${MODULER_HEADERS} ${MODULER_INCLUDES})
+add_library(${CURRENT_TARGET} SHARED ${_SOURCES} ${_HEADERS} ${_INCLUDES})
 
 set(SGH_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 
@@ -23,4 +23,4 @@ set_target_properties(${CURRENT_TARGET}
 )
 
 
-install (TARGETS moduler RUNTIME DESTINATION ${PROJECT_BINARY_DIR}/bin)
+install (TARGETS ${CURRENT_TARGET} RUNTIME DESTINATION ${PROJECT_BINARY_DIR}/bin)

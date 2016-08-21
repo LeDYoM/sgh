@@ -1,5 +1,6 @@
 #include "include/loader.hpp"
 #include <moduler/include/moduler.hpp>
+#include <logger/include/logger.hpp>
 
 namespace loader
 {
@@ -26,8 +27,11 @@ namespace loader
 
 	Loader *createLoader()
 	{
+		LOG_DEBUG("Creating loader...");
 		if (!loaderInstance)
 			loaderInstance = new Loader;
+
+		LOG_DEBUG("Loader created");
 
 		return loaderInstance;
 	}
@@ -36,8 +40,10 @@ namespace loader
 	{
 		if (loaderInstance)
 		{
+			LOG_DEBUG("Destroying loader...");
 			delete loaderInstance;
 			loaderInstance = nullptr;
+			LOG_DEBUG("Loader destroyed");
 		}
 	}
 }

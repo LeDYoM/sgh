@@ -25,6 +25,7 @@ message ("cxx Flags: " ${CMAKE_CXX_FLAGS})
 
 
 # Sub-directories where more CMakeLists.txt exist
+add_subdirectory(extypes)
 add_subdirectory(logger)
 add_subdirectory(moduler)
 add_subdirectory(loader)

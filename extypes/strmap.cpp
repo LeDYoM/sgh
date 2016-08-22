@@ -5,7 +5,6 @@
 namespace ext
 {
 	using DataTypeInternal = std::map<StrMap::Index, StrMap::Value>;
-	using Node = std::pair<StrMap::Index, StrMap::Value>;
 
 	struct StringMapPrivate
 	{
@@ -13,22 +12,18 @@ namespace ext
 		StringMapPrivate() = default;
 		StringMapPrivate(const StringMapPrivate &) = default;
 		StringMapPrivate &operator=(const StringMapPrivate&) = default;
+		StringMapPrivate(StringMapPrivate &&) = default;
+		StringMapPrivate &operator=(StringMapPrivate&&) = default;
 	};
 
 	StrMap::StrMap()
 		: m_private(new StringMapPrivate) {	}
 
 	StrMap::StrMap(const std::vector<str> &dataVector, const str &separator)
+		: StrMap{}
 	{
 		for (const auto &data : dataVector) {
-			str left(data);
-			str right(data);
-			left.leftFrom(separator).trim();
-			right.rightFrom(separator).trim();
-
-			if (!left.empty()) {
-				m_private->m_data[left] = right;
-			}
+			addLine(data, separator);
 		}
 	}
 
@@ -36,6 +31,14 @@ namespace ext
 	{
 		if (m_private)
 			delete m_private;
+	}
+
+	StrMap::StrMap(int argc, char * argv[], int start)
+		: StrMap{}
+	{
+		for (auto i = start; i < argc; ++i) {
+			addLine(argv[i], "=");
+		}
 	}
 
 	StrMap::StrMap(const StrMap &rh)
@@ -64,7 +67,7 @@ namespace ext
 		return m_private->m_data.find(index) != m_private->m_data.end();
 	}
 
-	bool StrMap::add(const Index &index, const Value value)
+	bool StrMap::add(const Index &index, const Value &value)
 	{
 		if (!exists(index)) {
 			m_private->m_data[index] = value;
@@ -73,7 +76,7 @@ namespace ext
 		return false;
 	}
 
-	bool StrMap::update(const Index &index, const Value value)
+	bool StrMap::update(const Index &index, const Value &value)
 	{
 		if (exists(index)) {
 			m_private->m_data[index] = value;
@@ -82,10 +85,23 @@ namespace ext
 		return false;
 	}
 
+	bool StrMap::addLine(const Value & value, const str & separator)
+	{
+		str left(value);
+		left.leftFrom(separator).trim();
+
+		if (!left.empty()) {
+			str right(value);
+			right.rightFrom(separator).trim();
+			return add(left, right);
+		}
+		return false;
+	}
+
 	StrMap StrMap::subMap(const Index &index) const
 	{
 		StrMap result;
-		for (Node node : m_private->m_data) {
+		for (const auto node : m_private->m_data) {
 			if (!(node.first.find_first_of(index))) {
 				result.add(node.first, node.second);
 			}

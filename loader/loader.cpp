@@ -9,20 +9,32 @@ namespace loader
 	class LoaderPrivate
 	{
 	public:
-		LoaderPrivate() {}
-		~LoaderPrivate() {}
+		moduler::Moduler *modulerInstance{ nullptr };
+
+		LoaderPrivate()
+			: modulerInstance{ moduler::createModuler() } {}
+
+		~LoaderPrivate() { moduler::destroyModuler(); }
 	};
 
 	Loader::Loader()
 	{
 		m_private = new LoaderPrivate;
-		moduler::createModuler();
+		
 	}
 
 	Loader::~Loader()
 	{
-		moduler::destroyModuler();
 		delete m_private;
+	}
+
+	IModule * Loader::loadModule(const char * fileName)
+	{
+		auto *moduleData(m_private->modulerInstance->loadModule(fileName));
+		if (moduleData) {
+			IModule *loadedModule = reinterpret_cast<IModule*>(moduleData);
+			return loadedModule;
+		}
 	}
 
 	Loader *createLoader()

@@ -24,7 +24,7 @@ namespace moduler
 		delete m_private;
 	}
 
-	bool Moduler::loadModule(const char *fileName)
+	void *Moduler::loadModule(const char *fileName)
 	{
 		LoadedInstance *loadedInstace = new LoadedInstance();
 		loadedInstace->load(fileName);
@@ -32,7 +32,7 @@ namespace moduler
 		if (loadedInstace->loaded()) {
 			m_private->m_loadedInstances[fileName] = loadedInstace;
 		}
-		return loadedInstace->loaded();
+		return loadedInstace->loadedData();
 	}
 
 	void * Moduler::loadMethod(const char *fileName, const char *methodName)

@@ -16,8 +16,9 @@ namespace moduler
 		bool load(const char *fileName);
 		void *loadMethod(const char *methodName);
 
-		inline bool loaded() const;
+		bool loaded() const;
 		bool unload();
+		void *loadedData() const;
 	private:
 		std::unique_ptr<LoadedInstancePrivate> m_private;
 	};

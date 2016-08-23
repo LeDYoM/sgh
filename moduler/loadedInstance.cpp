@@ -61,4 +61,9 @@ namespace moduler
 		return false;
 	}
 
+	void * LoadedInstance::loadedData() const
+	{
+		return static_cast<void*>(m_private->m_dllHandle);
+	}
+
 }

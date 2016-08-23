@@ -10,10 +10,11 @@ namespace moduler
 	{
 	public:
 		Moduler();
-		~Moduler();
+		virtual ~Moduler();
 
-		MODULER_API virtual bool loadModule(const char *fileName);
+		MODULER_API virtual void *loadModule(const char *fileName);
 		MODULER_API virtual void *loadMethod(const char *fileName,const char *methodName);
+
 	private:
 		ModulerPrivate *m_private;
 	};

@@ -1,9 +1,11 @@
 #ifndef APPRUNNER_INCLUDE_HPP
 #define APPRUNNER_INCLUDE_HPP
 
+#include "iapprunner.hpp"
+
 namespace apprunner
 {
-	class AppRunner
+	class AppRunner : public virtual IAppRunner
 	{
 	public:
 		AppRunner();

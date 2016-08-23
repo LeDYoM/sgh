@@ -11,3 +11,5 @@ namespace apprunner
 	{
 	}
 }
+
+DEFINE_MODULE_CREATION(apprunner::AppRunner);

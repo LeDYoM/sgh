@@ -1,7 +1,7 @@
-#ifndef LOADER_BASIC_INTERFACE_INCLUDE_HPP
-#define LOADER_BASIC_INTERFACE_INCLUDE_HPP
+#ifndef MODULER_BASIC_INTERFACE_INCLUDE_HPP
+#define MODULER_BASIC_INTERFACE_INCLUDE_HPP
 
-#ifndef LOADER_EXPORTS
+#ifndef MODULER_EXPORTS
 	#ifdef _WIN32
 		#define EXPORT_API   __declspec( dllexport ) 
 	#else
@@ -11,8 +11,7 @@
 	#define EXPORT_API
 #endif
 
-
-namespace loader
+namespace moduler
 {
 	class IBasicInterface
 	{

@@ -5,7 +5,6 @@ file (GLOB _INCLUDES "include/*.hpp")
 
 set (CURRENT_TARGET apprunner) 
 set(CMAKE_DEBUG_POSTFIX  "d") 
-add_definitions(-DLOADER_EXPORTS) 
 
 source_group("Sources" FILES ${_SOURCES})
 source_group("Headers" FILES ${_HEADERS})

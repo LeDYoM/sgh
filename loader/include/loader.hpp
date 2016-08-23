@@ -2,7 +2,6 @@
 #define LOADER_INCLUDE_HPP
 
 #include "loaderexport.hpp"
-#include "imodule.hpp"
 
 namespace loader
 {
@@ -11,9 +10,10 @@ namespace loader
 	{
 	public:
 		Loader();
-		~Loader();
+		virtual ~Loader();
 
-		LOADER_API IModule *loadModule(const char *fileName);
+		LOADER_API virtual void *loadModule(const char *fileName);
+		LOADER_API virtual void *loadMethod(const char *fileName,const char *methodName);
 
 	private:
 		LoaderPrivate *m_private;
@@ -21,8 +21,6 @@ namespace loader
 
 	LOADER_API Loader *createLoader();
 	LOADER_API void destroyLoader();
-
 }
-
 
 #endif

@@ -1,26 +1,22 @@
 #include "include/loader.hpp"
-#include <moduler/include/moduler.hpp>
-#include <logger/include/logger.hpp>
+#include "loadedinstance.hpp"
+#include <map>
 
 namespace loader
 {
-	static Loader *loaderInstance{ nullptr };
-
 	class LoaderPrivate
 	{
 	public:
-		moduler::Moduler *modulerInstance{ nullptr };
-
-		LoaderPrivate()
-			: modulerInstance{ moduler::createModuler() } {}
-
-		~LoaderPrivate() { moduler::destroyModuler(); }
+		LoaderPrivate() {}
+		~LoaderPrivate() {}
+		std::map<std::string, LoadedInstance*> m_loadedInstances;
 	};
+
+	static Loader *loaderInstance{ nullptr };
 
 	Loader::Loader()
 	{
 		m_private = new LoaderPrivate;
-		
 	}
 
 	Loader::~Loader()
@@ -28,22 +24,31 @@ namespace loader
 		delete m_private;
 	}
 
-	IModule * Loader::loadModule(const char * fileName)
+	void *Loader::loadModule(const char *fileName)
 	{
-		auto *moduleData(m_private->modulerInstance->loadModule(fileName));
-		if (moduleData) {
-			IModule *loadedModule = reinterpret_cast<IModule*>(moduleData);
-			return loadedModule;
+		LoadedInstance *loadedInstace = new LoadedInstance();
+		loadedInstace->load(fileName);
+
+		if (loadedInstace->loaded()) {
+			m_private->m_loadedInstances[fileName] = loadedInstace;
 		}
+		return loadedInstace->loadedData();
 	}
 
-	Loader *createLoader()
+	void * Loader::loadMethod(const char *fileName, const char *methodName)
 	{
-		LOG_DEBUG("Creating loader...");
+		auto iterator(m_private->m_loadedInstances.find(fileName));
+		if (iterator != m_private->m_loadedInstances.end()) {
+			LoadedInstance* loadedInstance((*iterator).second);
+			return loadedInstance->loadMethod(methodName);
+		}
+		return nullptr;
+	}
+
+	Loader * loader::createLoader()
+	{
 		if (!loaderInstance)
 			loaderInstance = new Loader;
-
-		LOG_DEBUG("Loader created");
 
 		return loaderInstance;
 	}
@@ -52,10 +57,8 @@ namespace loader
 	{
 		if (loaderInstance)
 		{
-			LOG_DEBUG("Destroying loader...");
 			delete loaderInstance;
 			loaderInstance = nullptr;
-			LOG_DEBUG("Loader destroyed");
 		}
 	}
 }

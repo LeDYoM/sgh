@@ -9,7 +9,7 @@ add_executable (${CURRENT_TARGET} ${MAIN_SGHOST_HEADERS} ${MAIN_SGHOST_SOURCES})
 
 target_link_libraries (${CURRENT_TARGET} extypes)
 target_link_libraries (${CURRENT_TARGET} logger)
-target_link_libraries (${CURRENT_TARGET} loader)
+target_link_libraries (${CURRENT_TARGET} moduler)
 
 
 set(SGH_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)

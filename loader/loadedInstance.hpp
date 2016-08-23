@@ -1,9 +1,9 @@
-#ifndef MODULER_LOADEDINSTANCE_HPP
-#define MODULER_LOADEDINSTANCE_HPP
+#ifndef LOADER_LOADEDINSTANCE_HPP
+#define LOADER_LOADEDINSTANCE_HPP
 
 #include <memory>
 
-namespace moduler
+namespace loader
 {
 	class LoadedInstancePrivate;
 

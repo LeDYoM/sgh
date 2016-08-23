@@ -1,9 +1,9 @@
-#ifndef LOADER_IMODULE_INTERFACE_INCLUDE_HPP
-#define LOADER_IMODULE_INTERFACE_INCLUDE_HPP
+#ifndef MODULER_IMODULE_INTERFACE_INCLUDE_HPP
+#define MODULER_IMODULE_INTERFACE_INCLUDE_HPP
 
 #include "ibasicinterface.hpp"
 
-namespace loader
+namespace moduler
 {
 	class IModule : public virtual IBasicInterface
 	{
@@ -14,15 +14,15 @@ namespace loader
 }
 
 #define DECLARE_MODULE_CREATION()     \
-	EXPORT_API loader::IModule* createModule();     \
-    EXPORT_API bool deleteModule(loader::IModule*);
+	EXPORT_API moduler::IModule* createModule();     \
+    EXPORT_API bool deleteModule(moduler::IModule*);
 
 #define DEFINE_MODULE_CREATION(className)     \
-	loader::IModule* createModule()	\
+	moduler::IModule* createModule()	\
 	{	\
 		return new className;	\
 	}	\
-    bool deleteModule(loader::IModule*module)	\
+    bool deleteModule(moduler::IModule*module)	\
 	{	\
 		if (module) {	\
 			delete module;	\

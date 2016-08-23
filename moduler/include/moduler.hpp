@@ -2,6 +2,7 @@
 #define MODULER_INCLUDE_HPP
 
 #include "modulerexport.hpp"
+#include "imodule.hpp"
 
 namespace moduler
 {
@@ -10,10 +11,9 @@ namespace moduler
 	{
 	public:
 		Moduler();
-		virtual ~Moduler();
+		~Moduler();
 
-		MODULER_API virtual void *loadModule(const char *fileName);
-		MODULER_API virtual void *loadMethod(const char *fileName,const char *methodName);
+		MODULER_API IModule *loadModule(const char *fileName);
 
 	private:
 		ModulerPrivate *m_private;

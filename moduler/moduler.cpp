@@ -1,18 +1,21 @@
 #include "include/moduler.hpp"
-#include "loadedinstance.hpp"
-#include <map>
+#include <loader/include/loader.hpp>
+#include <logger/include/logger.hpp>
 
 namespace moduler
 {
+	static Moduler *modulerInstance{ nullptr };
+
 	class ModulerPrivate
 	{
 	public:
-		ModulerPrivate() {}
-		~ModulerPrivate() {}
-		std::map<std::string, LoadedInstance*> m_loadedInstances;
-	};
+		loader::Loader *loaderInstance{ nullptr };
 
-	static Moduler *modulerInstance{ nullptr };
+		ModulerPrivate()
+			: loaderInstance{ loader::createLoader() } {}
+
+		~ModulerPrivate() { loader::destroyLoader(); }
+	};
 
 	Moduler::Moduler()
 	{
@@ -24,31 +27,26 @@ namespace moduler
 		delete m_private;
 	}
 
-	void *Moduler::loadModule(const char *fileName)
+	IModule *Moduler::loadModule(const char * fileName)
 	{
-		LoadedInstance *loadedInstace = new LoadedInstance();
-		loadedInstace->load(fileName);
-
-		if (loadedInstace->loaded()) {
-			m_private->m_loadedInstances[fileName] = loadedInstace;
-		}
-		return loadedInstace->loadedData();
-	}
-
-	void * Moduler::loadMethod(const char *fileName, const char *methodName)
-	{
-		auto iterator(m_private->m_loadedInstances.find(fileName));
-		if (iterator != m_private->m_loadedInstances.end()) {
-			LoadedInstance* loadedInstance((*iterator).second);
-			return loadedInstance->loadMethod(methodName);
+		auto *moduleData(m_private->loaderInstance->loadModule(fileName));
+		if (moduleData) {
+			IModule *loadedModule = reinterpret_cast<IModule*>(moduleData);
+			return loadedModule;
 		}
 		return nullptr;
 	}
 
-	Moduler * moduler::createModuler()
+	Moduler *createModuler ()
 	{
-		if (!modulerInstance)
+		if (!modulerInstance) {
+			LOG_DEBUG("Creating moduler...");
 			modulerInstance = new Moduler;
+			LOG_DEBUG("Moduler created");
+		}
+		else {
+			LOG_DEBUG("Moduler already reated");
+		}
 
 		return modulerInstance;
 	}
@@ -57,9 +55,10 @@ namespace moduler
 	{
 		if (modulerInstance)
 		{
+			LOG_DEBUG("Destroying moduler...");
 			delete modulerInstance;
 			modulerInstance = nullptr;
+			LOG_DEBUG("Moduler destroyed");
 		}
 	}
-
 }

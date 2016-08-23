@@ -4,7 +4,7 @@
 #include <windows.h>
 #endif
 
-namespace moduler
+namespace loader
 {
 	class LoadedInstancePrivate
 	{

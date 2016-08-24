@@ -17,7 +17,7 @@
 
 	inline bool freeSharedObject(void *handle)
 	{
-		FreeLibrary(static_cast<HMODULE>(handle));
+		return (FreeLibrary(static_cast<HMODULE>(handle)) != 0);
 	}
 #endif
 
@@ -78,12 +78,11 @@ namespace loader
 
 	bool LoadedInstance::unload()
 	{
-		if (loaded())
-		{
-			freeSharedObject(m_private->m_sharedFileHandle);
+		if (loaded()) {
+			bool result(freeSharedObject(m_private->m_sharedFileHandle));
 			m_private->m_sharedFileHandle = nullptr;
 			m_private->m_methods.clear();
-			return true;
+			return result;
 		}
 		return false;
 	}

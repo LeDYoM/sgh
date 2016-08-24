@@ -29,7 +29,7 @@ namespace moduler
 	}
 
 	typedef moduler::IModule * (*createModuleFunc)();
-	typedef void (*deleteModuleFunc)(moduler::IModule *74);
+	typedef void (*deleteModuleFunc)(moduler::IModule *);
 
 	IModule *Moduler::loadModule(const char * fileName)
 	{
@@ -38,8 +38,14 @@ namespace moduler
 		if (moduleData) {
 			LOG_DEBUG("Object file loaded");
 			auto creatorFunc = static_cast<createModuleFunc>(m_private->loaderInstance->loadMethod(fileName, "createModule"));
-			IModule *loadedModule = creatorFunc();
-			return loadedModule;
+			auto deleterFunc = static_cast<deleteModuleFunc>(m_private->loaderInstance->loadMethod(fileName, "deleteModule"));
+			if (creatorFunc && deleterFunc) {
+				IModule *loadedModule = creatorFunc();
+				return loadedModule;
+			}
+			else {
+				LOG_WARNING("Cannot read method createModule()");
+			}
 		}
 		return nullptr;
 	}

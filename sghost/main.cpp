@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 {
 	using namespace logger;
 	using namespace moduler;
-	createLogger();
+	createLogger()->setLoggerSeverity(LogSeverity::Debug);
 	auto *moduler = createModuler();
 	IModule *temp = moduler->loadModule("apprunnerd.dll");
 	LOG_DEBUG(std::string(temp!=nullptr?"true":"false").c_str());

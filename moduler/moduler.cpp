@@ -29,6 +29,8 @@ namespace moduler
 	}
 
 	typedef moduler::IModule * (*createModuleFunc)();
+	typedef void (*deleteModuleFunc)(moduler::IModule *74);
+
 	IModule *Moduler::loadModule(const char * fileName)
 	{
 		LOG_DEBUG_STR("Going to open " << fileName);

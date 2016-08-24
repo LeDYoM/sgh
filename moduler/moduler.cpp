@@ -29,6 +29,7 @@ namespace moduler
 
 	IModule *Moduler::loadModule(const char * fileName)
 	{
+		LOG_DEBUG("Going to open ")
 		auto *moduleData(m_private->loaderInstance->loadModule(fileName));
 		if (moduleData) {
 			IModule *loadedModule = reinterpret_cast<IModule*>(moduleData);

@@ -15,6 +15,7 @@ namespace logger
 	public:
 		LoggerPrivate() {}
 		~LoggerPrivate() {}
+		LogSeverity m_currentSeverity{ LogSeverity::None };
 		void toLog(const char *message) {
 			OutputDebugString(message);
 			OutputDebugString("\n");
@@ -31,32 +32,31 @@ namespace logger
 		delete m_private;
 	}
 
-	void Logger::debug(const char *message)
+	void Logger::setLoggerSeverity(const LogSeverity severity)
 	{
-		m_private->toLog(message);
+		m_private->m_currentSeverity = severity;
 	}
 
-	void Logger::info(const char *message)
+	void Logger::log(const LogSeverity severity, const char *message)
 	{
-		m_private->toLog(message);
+		if (severity <= m_private->m_currentSeverity)
+			m_private->toLog(message);
 	}
 
-	void Logger::warning(const char *message)
+#ifdef USE_STDSTRING
+	void Logger::log(const LogSeverity severity, const std::string &message)
 	{
-		m_private->toLog(message);
+		if (severity <= m_private->m_currentSeverity)
+			m_private->toLog(message.c_str());
 	}
 
-	void Logger::error(const char *message)
-	{
-		m_private->toLog(message);
-	}
-
+#endif
 	Logger *createLogger()
 	{
 		if (!loggerInstance)
 		{
 			loggerInstance = new Logger;
-			loggerInstance->info("Logger created");
+			loggerInstance->log(LogSeverity::Debug, "Logger created");
 		}
 
 		return loggerInstance;
@@ -71,7 +71,7 @@ namespace logger
 	{
 		if (loggerInstance)
 		{
-			loggerInstance->info("Destroying logger");
+			loggerInstance->log(LogSeverity::Debug, "Destroying logger");
 			delete loggerInstance;
 			loggerInstance = nullptr;
 		}

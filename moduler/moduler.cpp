@@ -1,6 +1,7 @@
 #include "include/moduler.hpp"
 #include <loader/include/loader.hpp>
 #include <logger/include/logger.hpp>
+#include <sstream>
 
 namespace moduler
 {
@@ -29,7 +30,7 @@ namespace moduler
 
 	IModule *Moduler::loadModule(const char * fileName)
 	{
-		LOG_DEBUG("Going to open ")
+		LOG_DEBUG_STR("Going to open " << fileName);
 		auto *moduleData(m_private->loaderInstance->loadModule(fileName));
 		if (moduleData) {
 			IModule *loadedModule = reinterpret_cast<IModule*>(moduleData);

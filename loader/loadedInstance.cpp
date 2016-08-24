@@ -14,6 +14,11 @@
 	{
 		return static_cast<void*>(LoadLibrary(fileName));
 	}
+
+	inline bool freeSharedObject(void *handle)
+	{
+		FreeLibrary(static_cast<HMODULE>(handle));
+	}
 #endif
 
 namespace loader
@@ -37,7 +42,7 @@ namespace loader
 
 	LoadedInstance::~LoadedInstance()
 	{
-		m_private.reset();
+		unload();
 	}
 
 	bool LoadedInstance::load(const char * fileName)
@@ -75,16 +80,15 @@ namespace loader
 	{
 		if (loaded())
 		{
-#ifdef _WIN32
-			FreeLibrary(static_cast<HMODULE>(m_private->m_sharedFileHandle));
-#endif
+			freeSharedObject(m_private->m_sharedFileHandle);
 			m_private->m_sharedFileHandle = nullptr;
+			m_private->m_methods.clear();
 			return true;
 		}
 		return false;
 	}
 
-	void * LoadedInstance::loadedData() const
+	void *LoadedInstance::loadedData() const
 	{
 		return m_private->m_sharedFileHandle;
 	}

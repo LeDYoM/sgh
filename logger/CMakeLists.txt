@@ -5,7 +5,7 @@ file (GLOB _INCLUDES "include/*.hpp")
 
 set (CURRENT_TARGET logger) 
 set(CMAKE_DEBUG_POSTFIX  "d") 
-add_definitions(-DLOGGER_EXPORTS -DUSE_STDSTRING)
+add_definitions(-DLOGGER_EXPORTS)
 
 source_group("Sources" FILES ${_SOURCES})
 source_group("Headers" FILES ${_HEADERS})

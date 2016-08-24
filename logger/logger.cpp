@@ -43,14 +43,12 @@ namespace logger
 			m_private->toLog(message);
 	}
 
-#ifdef USE_STDSTRING
 	void Logger::log(const LogSeverity severity, const std::string &message)
 	{
 		if (severity <= m_private->m_currentSeverity)
 			m_private->toLog(message.c_str());
 	}
 
-#endif
 	Logger *createLogger()
 	{
 		if (!loggerInstance)

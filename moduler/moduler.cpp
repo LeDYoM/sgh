@@ -28,12 +28,15 @@ namespace moduler
 		delete m_private;
 	}
 
+	typedef moduler::IModule * (*createModuleFunc)();
 	IModule *Moduler::loadModule(const char * fileName)
 	{
 		LOG_DEBUG_STR("Going to open " << fileName);
 		auto *moduleData(m_private->loaderInstance->loadModule(fileName));
 		if (moduleData) {
-			IModule *loadedModule = reinterpret_cast<IModule*>(moduleData);
+			LOG_DEBUG("Object file loaded");
+			auto creatorFunc = static_cast<createModuleFunc>(m_private->loaderInstance->loadMethod(fileName, "createModule"));
+			IModule *loadedModule = creatorFunc();
 			return loadedModule;
 		}
 		return nullptr;

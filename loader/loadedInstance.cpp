@@ -38,7 +38,9 @@ namespace loader
 	{
 		if (loaded())
 		{
+#ifdef _WIN32
 			return static_cast<void*>(GetProcAddress(m_private->m_dllHandle,methodName));
+#endif
 		}
 		return nullptr;
 	}

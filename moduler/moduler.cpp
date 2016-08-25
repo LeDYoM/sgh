@@ -1,4 +1,5 @@
 #include "include/moduler.hpp"
+#include "include/imoduleexport.hpp"
 #include <loader/include/loader.hpp>
 #include <logger/include/logger.hpp>
 #include <sstream>
@@ -37,8 +38,8 @@ namespace moduler
 		auto *moduleData(m_private->loaderInstance->loadModule(fileName));
 		if (moduleData) {
 			LOG_DEBUG("Object file loaded");
-			auto creatorFunc = static_cast<createModuleFunc>(m_private->loaderInstance->loadMethod(fileName, "createModule"));
-			auto deleterFunc = static_cast<deleteModuleFunc>(m_private->loaderInstance->loadMethod(fileName, "deleteModule"));
+			auto creatorFunc = static_cast<createModuleFunc>(m_private->loaderInstance->loadMethod(fileName, CREATE_MODULE_FUNC_NAME_STR));
+			auto deleterFunc = static_cast<deleteModuleFunc>(m_private->loaderInstance->loadMethod(fileName, DELETE_MODULE_FUNC_NAME_STR));
 			if (creatorFunc && deleterFunc) {
 				IModule *loadedModule = creatorFunc();
 				return loadedModule;

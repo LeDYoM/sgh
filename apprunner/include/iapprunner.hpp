@@ -1,7 +1,7 @@
 #ifndef APPRUNNER_INTERFACE_INCLUDE_HPP
 #define APPRUNNER_INTERFACE_INCLUDE_HPP
 
-#include <moduler/include/imodule.hpp>
+#include <moduler/include/imoduleexport.hpp>
 
 namespace apprunner
 {
@@ -13,6 +13,6 @@ namespace apprunner
 	};
 }
 
-DECLARE_MODULE_CREATION()
+DECLARE_MODULE_CREATION
 
 #endif

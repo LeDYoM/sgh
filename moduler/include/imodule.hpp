@@ -13,22 +13,4 @@ namespace moduler
 	};
 }
 
-#define DECLARE_MODULE_CREATION()     \
-	EXPORT_API moduler::IModule* createModule();     \
-    EXPORT_API bool deleteModule(void*);
-
-#define DEFINE_MODULE_CREATION(className)     \
-	moduler::IModule* createModule()	\
-	{	\
-		return new className;	\
-	}	\
-    bool deleteModule(void*module)	\
-	{	\
-		if (module) {	\
-			delete module;	\
-			return true;	\
-		}	\
-		return false;	\
-	}
-
 #endif

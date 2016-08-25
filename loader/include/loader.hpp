@@ -10,10 +10,10 @@ namespace loader
 	{
 	public:
 		Loader();
-		virtual ~Loader();
+		~Loader();
 
-		LOADER_API virtual void *loadModule(const char *fileName);
-		LOADER_API virtual void *loadMethod(const char *fileName,const char *methodName);
+		LOADER_API void *loadModule(const char *fileName);
+		LOADER_API void *loadMethod(const char *fileName,const char *methodName);
 
 	private:
 		LoaderPrivate *m_private;

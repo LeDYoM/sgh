@@ -8,9 +8,9 @@ namespace moduler
 	struct ModuleInformation
 	{
 		const char *name;
-		const char version[4];
-		const char subVersion[4];
-		const char patch[5];
+		const char *version;
+		const char *subVersion;
+		const char *patch;
 	};
 	class IModule : public virtual IBasicInterface
 	{

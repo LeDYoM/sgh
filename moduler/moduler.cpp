@@ -29,8 +29,9 @@ namespace moduler
 		delete m_private;
 	}
 
-	typedef moduler::IModule * (*createModuleFunc)();
-	typedef void (*deleteModuleFunc)(moduler::IModule *);
+	using CreateModuleFunc  = bool (*)();
+	using GetModuleFunc = moduler::IModule * (*)();
+	using DeleteModuleFunc = bool(*)();
 
 	IModule *Moduler::loadModule(const char * fileName)
 	{
@@ -38,10 +39,12 @@ namespace moduler
 		auto *moduleData(m_private->loaderInstance->loadModule(fileName));
 		if (moduleData) {
 			LOG_DEBUG("Object file loaded");
-			auto creatorFunc = static_cast<createModuleFunc>(m_private->loaderInstance->loadMethod(fileName, CREATE_MODULE_FUNC_NAME_STR));
-			auto deleterFunc = static_cast<deleteModuleFunc>(m_private->loaderInstance->loadMethod(fileName, DELETE_MODULE_FUNC_NAME_STR));
-			if (creatorFunc && deleterFunc) {
-				IModule *loadedModule = creatorFunc();
+			auto createModuleFunc = static_cast<CreateModuleFunc>(m_private->loaderInstance->loadMethod(fileName, CREATE_MODULE_FUNC_NAME_STR));
+			auto getModuleFunc = static_cast<GetModuleFunc>(m_private->loaderInstance->loadMethod(fileName, GET_MODULE_FUNC_NAME_STR));
+			auto deleteModuleFunc = static_cast<DeleteModuleFunc>(m_private->loaderInstance->loadMethod(fileName, DELETE_MODULE_FUNC_NAME_STR));
+			if (createModuleFunc && getModuleFunc && deleteModuleFunc) {
+				createModuleFunc();
+				IModule *loadedModule = getModuleFunc();
 				return loadedModule;
 			}
 			else {

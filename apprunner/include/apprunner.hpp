@@ -11,6 +11,7 @@ namespace apprunner
 		AppRunner();
 		~AppRunner();
 
+		virtual moduler::ModuleInformation *const moduleInformation() const override;
 	};
 }
 

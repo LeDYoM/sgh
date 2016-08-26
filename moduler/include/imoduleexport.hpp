@@ -11,7 +11,7 @@
 #define GET_MODULE_FUNC_NAME_STR	"getModule"
 #define DELETE_MODULE_FUNC_NAME_STR "deleteModule"
 
-#if !defined MODULER_EXPORTS && defined _MSC_VER
+#if !defined MODULER_EXPORTS && defined WIN32
 	#define EXPORT_API   extern "C" __declspec( dllexport ) 
 #else
 	#define EXPORT_API

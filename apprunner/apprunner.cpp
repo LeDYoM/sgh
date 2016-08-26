@@ -2,6 +2,13 @@
 
 namespace apprunner
 {
+	static moduler::ModuleInformation moduleInfo = 
+	{
+		"AppRunner",
+		"0",
+		"1",
+		"1",
+	};
 
 	AppRunner::AppRunner()
 	{
@@ -9,6 +16,10 @@ namespace apprunner
 
 	AppRunner::~AppRunner()
 	{
+	}
+	moduler::ModuleInformation * const AppRunner::moduleInformation() const
+	{
+		return &moduleInfo;
 	}
 }
 

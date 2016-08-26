@@ -43,8 +43,16 @@ namespace moduler
 			auto getModuleFunc = static_cast<GetModuleFunc>(m_private->loaderInstance->loadMethod(fileName, GET_MODULE_FUNC_NAME_STR));
 			auto deleteModuleFunc = static_cast<DeleteModuleFunc>(m_private->loaderInstance->loadMethod(fileName, DELETE_MODULE_FUNC_NAME_STR));
 			if (createModuleFunc && getModuleFunc && deleteModuleFunc) {
+				LOG_INFO_STR("Module from " << fileName << " has correct interface definition");
+				LOG_INFO("Initializing module...");
 				createModuleFunc();
 				IModule *loadedModule = getModuleFunc();
+				auto *moduleInfo = loadedModule->moduleInformation();
+				LOG_INFO("Module info:");
+				LOG_INFO_STR("Name: " << moduleInfo->name);
+				LOG_INFO_STR("Version: " << moduleInfo->version << "." << moduleInfo->subVersion << "." << moduleInfo->patch);
+
+				LOG_INFO("Seems module has correct implementation");
 				return loadedModule;
 			}
 			else {

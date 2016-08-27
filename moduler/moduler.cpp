@@ -61,22 +61,44 @@ namespace moduler
 				LOG_INFO("Initializing module...");
 				createModuleFunc();
 				IModule *loadedModule = getModuleFunc();
-				auto *moduleInfo = loadedModule->moduleInformation();
-				LOG_INFO("Module info:");
-				LOG_INFO_STR("Name: " << moduleInfo->name);
-				LOG_INFO_STR("Version: " << moduleInfo->version << "." << moduleInfo->subVersion << "." << moduleInfo->patch);
-				LOG_INFO("Seems module has correct implementation");
-				ModuleData moduleData;
-				moduleData.moduleInformation = loadedModule->moduleInformation();
-				moduleData.createModuleFunc = createModuleFunc;
-				moduleData.getModuleFunc = getModuleFunc;
-				moduleData.deleteModuleFunc = deleteModuleFunc;
+				if (loadedModule) {
+					auto *moduleInfo = loadedModule->moduleInformation();
+					if (moduleInfo) {
+						LOG_INFO("Module info:");
+						LOG_INFO_STR("Name: " << moduleInfo->name);
+						LOG_INFO_STR("Version: " << moduleInfo->version << "." << moduleInfo->subVersion << "." << moduleInfo->patch);
+						LOG_INFO("Seems module has correct implementation");
+						ModuleData moduleData;
+						moduleData.moduleInformation = loadedModule->moduleInformation();
+						moduleData.createModuleFunc = createModuleFunc;
+						moduleData.getModuleFunc = getModuleFunc;
+						moduleData.deleteModuleFunc = deleteModuleFunc;
 
-				m_private->modules[fileName] = moduleData;
-				return loadedModule;
+						m_private->modules[fileName] = moduleData;
+						return loadedModule;
+					}
+					else {
+						LOG_ERROR_STR("Error trying to get the module information");
+						return nullptr;
+					}
+				}
+				else {
+					LOG_ERROR_STR("The method " << GET_MODULE_FUNC_NAME_STR << " returned nullptr");
+					return nullptr;
+				}
 			}
 			else {
-				LOG_WARNING("Cannot read method createModule()");
+				if (!createModuleFunc)
+					LOG_ERROR_STR("Cannot read method " << CREATE_MODULE_FUNC_NAME_STR << "()");
+				if (!getModuleFunc)
+					LOG_ERROR_STR("Cannot read method " << GET_MODULE_FUNC_NAME_STR << "()");
+				if (!deleteModuleFunc)
+					LOG_ERROR_STR("Cannot read method "<< DELETE_MODULE_FUNC_NAME_STR << "()");
+
+				// We are not going to use the loaded instance
+				// TO DO: Delete object
+//				m_private->loaderInstance->delete();
+				return nullptr;
 			}
 		}
 		return nullptr;

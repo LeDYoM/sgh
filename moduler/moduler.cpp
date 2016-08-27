@@ -108,6 +108,11 @@ namespace moduler
 	{
 		auto iterator(m_private->modules.find(fileName));
 		if (iterator != m_private->modules.end()) {
+			auto& moduleData(iterator->second);
+			moduleData.deleteModuleFunc();
+
+			// Check that worked internally asking for the module pointer and checking for null
+			IModule *module (moduleData.getModuleFunc());
 
 		}
 		else {
@@ -117,7 +122,6 @@ namespace moduler
 
 	Moduler *createModuler ()
 	{
-
 		if (!modulerInstance) {
 			LOG_DEBUG("Creating moduler...");
 			modulerInstance = new Moduler;

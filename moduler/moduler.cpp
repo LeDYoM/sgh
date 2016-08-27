@@ -104,8 +104,20 @@ namespace moduler
 		return nullptr;
 	}
 
+	bool Moduler::unloadModule(const char *fileName)
+	{
+		auto iterator(m_private->modules.find(fileName));
+		if (iterator != m_private->modules.end()) {
+
+		}
+		else {
+			LOG_ERROR_STR("Module " << fileName << " not found to unload");
+		}
+	}
+
 	Moduler *createModuler ()
 	{
+
 		if (!modulerInstance) {
 			LOG_DEBUG("Creating moduler...");
 			modulerInstance = new Moduler;

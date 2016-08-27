@@ -112,7 +112,7 @@ namespace moduler
 			moduleData.deleteModuleFunc();
 
 			// Check that worked internally asking for the module pointer and checking for null
-			IModule *module (moduleData.getModuleFunc());
+			ASSERT_WARNING(!moduleData.getModuleFunc(),"Deleter function does not delete the module");
 
 		}
 		else {

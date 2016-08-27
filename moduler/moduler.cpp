@@ -112,7 +112,7 @@ namespace moduler
 			LOG_DEBUG("Moduler created");
 		}
 		else {
-			LOG_DEBUG("Moduler already reated");
+			LOG_DEBUG("Moduler already created");
 		}
 
 		return modulerInstance;

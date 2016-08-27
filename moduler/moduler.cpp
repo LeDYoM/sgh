@@ -3,20 +3,38 @@
 #include <loader/include/loader.hpp>
 #include <logger/include/logger.hpp>
 #include <sstream>
+#include <map>
 
 namespace moduler
 {
 	static Moduler *modulerInstance{ nullptr };
 
+	struct ModuleData
+	{
+		using CreateModuleFunc = bool(*)();
+		using GetModuleFunc = moduler::IModule * (*)();
+		using DeleteModuleFunc = bool(*)();
+
+		ModuleInformation *moduleInformation{ nullptr };
+		CreateModuleFunc createModuleFunc{ nullptr };
+		GetModuleFunc getModuleFunc{ nullptr };
+		DeleteModuleFunc deleteModuleFunc{ nullptr };
+
+		std::string fileName;
+	};
 	class ModulerPrivate
 	{
 	public:
 		loader::Loader *loaderInstance{ nullptr };
-
+		std::map<std::string, ModuleData> modules;
 		ModulerPrivate()
-			: loaderInstance{ loader::createLoader() } {}
+			: loaderInstance{ loader::createLoader() } 
+		{}
 
-		~ModulerPrivate() { loader::destroyLoader(); }
+		~ModulerPrivate()
+		{
+			loader::destroyLoader(); 
+		}
 	};
 
 	Moduler::Moduler()
@@ -29,19 +47,15 @@ namespace moduler
 		delete m_private;
 	}
 
-	using CreateModuleFunc  = bool (*)();
-	using GetModuleFunc = moduler::IModule * (*)();
-	using DeleteModuleFunc = bool(*)();
-
 	IModule *Moduler::loadModule(const char * fileName)
 	{
 		LOG_DEBUG_STR("Going to open " << fileName);
-		auto *moduleData(m_private->loaderInstance->loadModule(fileName));
-		if (moduleData) {
+		auto *moduleObject(m_private->loaderInstance->loadModule(fileName));
+		if (moduleObject) {
 			LOG_DEBUG("Object file loaded");
-			auto createModuleFunc = static_cast<CreateModuleFunc>(m_private->loaderInstance->loadMethod(fileName, CREATE_MODULE_FUNC_NAME_STR));
-			auto getModuleFunc = static_cast<GetModuleFunc>(m_private->loaderInstance->loadMethod(fileName, GET_MODULE_FUNC_NAME_STR));
-			auto deleteModuleFunc = static_cast<DeleteModuleFunc>(m_private->loaderInstance->loadMethod(fileName, DELETE_MODULE_FUNC_NAME_STR));
+			auto createModuleFunc = static_cast<ModuleData::CreateModuleFunc>(m_private->loaderInstance->loadMethod(fileName, CREATE_MODULE_FUNC_NAME_STR));
+			auto getModuleFunc = static_cast<ModuleData::GetModuleFunc>(m_private->loaderInstance->loadMethod(fileName, GET_MODULE_FUNC_NAME_STR));
+			auto deleteModuleFunc = static_cast<ModuleData::DeleteModuleFunc>(m_private->loaderInstance->loadMethod(fileName, DELETE_MODULE_FUNC_NAME_STR));
 			if (createModuleFunc && getModuleFunc && deleteModuleFunc) {
 				LOG_INFO_STR("Module from " << fileName << " has correct interface definition");
 				LOG_INFO("Initializing module...");
@@ -51,8 +65,14 @@ namespace moduler
 				LOG_INFO("Module info:");
 				LOG_INFO_STR("Name: " << moduleInfo->name);
 				LOG_INFO_STR("Version: " << moduleInfo->version << "." << moduleInfo->subVersion << "." << moduleInfo->patch);
-
 				LOG_INFO("Seems module has correct implementation");
+				ModuleData moduleData;
+				moduleData.moduleInformation = loadedModule->moduleInformation();
+				moduleData.createModuleFunc = createModuleFunc;
+				moduleData.getModuleFunc = getModuleFunc;
+				moduleData.deleteModuleFunc = deleteModuleFunc;
+
+				m_private->modules[fileName] = moduleData;
 				return loadedModule;
 			}
 			else {

@@ -111,13 +111,16 @@ namespace moduler
 			auto& moduleData(iterator->second);
 			moduleData.deleteModuleFunc();
 
-			// Check that worked internally asking for the module pointer and checking for null
+			// Check that the deletion worked internally,
+			// asking for the module pointer and checking for null
 			ASSERT_WARNING(!moduleData.getModuleFunc(),"Deleter function does not delete the module");
-
+			m_private->modules.erase(iterator);
+			return m_private->loaderInstance->unloadModule(fileName);
 		}
 		else {
 			LOG_ERROR_STR("Module " << fileName << " not found to unload");
 		}
+		return false;
 	}
 
 	Moduler *createModuler ()

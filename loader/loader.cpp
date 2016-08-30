@@ -9,7 +9,7 @@ namespace loader
 	public:
 		LoaderPrivate() {}
 		~LoaderPrivate() {}
-		std::map<std::string, LoadedInstance*> m_loadedInstances;
+		std::map<std::string, std::shared_ptr<LoadedInstance>> m_loadedInstances;
 	};
 
 	static Loader *loaderInstance{ nullptr };
@@ -21,12 +21,17 @@ namespace loader
 
 	Loader::~Loader()
 	{
-		delete m_private;
+		if (m_private)
+		{
+			m_private->m_loadedInstances.clear();
+			delete m_private;
+			m_private = nullptr;
+		}
 	}
 
 	void *Loader::loadModule(const char *fileName)
 	{
-		LoadedInstance *loadedInstace = new LoadedInstance();
+		auto loadedInstace = std::shared_ptr<LoadedInstance>(new LoadedInstance());
 		loadedInstace->load(fileName);
 
 		if (loadedInstace->loaded()) {
@@ -39,10 +44,20 @@ namespace loader
 	{
 		auto iterator(m_private->m_loadedInstances.find(fileName));
 		if (iterator != m_private->m_loadedInstances.end()) {
-			LoadedInstance* loadedInstance((*iterator).second);
+			auto loadedInstance((*iterator).second);
 			return loadedInstance->loadMethod(methodName);
 		}
 		return nullptr;
+	}
+
+	bool Loader::unloadModule(const char *fileName)
+	{
+		auto iterator(m_private->m_loadedInstances.find(fileName));
+		if (iterator != m_private->m_loadedInstances.end()) {
+			m_private->m_loadedInstances.erase(iterator);
+			return true;
+		}
+		return false;
 	}
 
 	Loader * loader::createLoader()

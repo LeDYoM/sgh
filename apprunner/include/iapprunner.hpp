@@ -5,7 +5,7 @@
 
 namespace apprunner
 {
-	class IAppRunner : public moduler::IModule
+	class IAppRunner : public virtual moduler::IModule
 	{
 	public:
 		IAppRunner() {}

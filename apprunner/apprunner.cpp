@@ -27,6 +27,14 @@ namespace apprunner
 	{
 		return &moduleInfo;
 	}
+
+	bool AppRunner::start()
+	{
+	}
+
+	bool AppRunner::stop()
+	{
+	}
 }
 
 using namespace apprunner;

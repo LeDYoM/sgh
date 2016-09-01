@@ -19,14 +19,13 @@ namespace moduler
 		CreateModuleFunc createModuleFunc{ nullptr };
 		GetModuleFunc getModuleFunc{ nullptr };
 		DeleteModuleFunc deleteModuleFunc{ nullptr };
-
-		std::string fileName;
 	};
 	class ModulerPrivate
 	{
 	public:
+		using ModuleMap = std::map<std::string, ModuleData>;
 		loader::Loader *loaderInstance{ nullptr };
-		std::map<std::string, ModuleData> modules;
+		ModuleMap modules;
 		ModulerPrivate()
 			: loaderInstance{ loader::createLoader() } 
 		{}
@@ -35,6 +34,7 @@ namespace moduler
 		{
 			loader::destroyLoader(); 
 		}
+
 	};
 
 	Moduler::Moduler()
@@ -44,7 +44,10 @@ namespace moduler
 
 	Moduler::~Moduler()
 	{
-		delete m_private;
+		if (m_private) {
+			delete m_private;
+			m_private = nullptr;
+		}
 	}
 
 	IModule *Moduler::loadModule(const char * fileName)

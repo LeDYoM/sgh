@@ -15,7 +15,7 @@ static int crtDebugMemAllocHook(int allocType, void *userData, size_t size, int 
 	userData;
 	allocType;
 
-	if (requestIndex == 316) //break;
+	if (requestIndex == 202) //break;
 
 		return true;
 
@@ -35,6 +35,6 @@ void installMemLeakDetector()
 void finishMemLeakDetector()
 {
 #ifdef _MSC_VER && defined USE_LEAKDETECTOR
-	_CrtDumpMemoryLeaks();
+//	_CrtDumpMemoryLeaks();
 #endif
 }

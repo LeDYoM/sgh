@@ -12,6 +12,7 @@ namespace moduler
 		const char *subVersion;
 		const char *patch;
 	};
+
 	class IModule : public virtual IBasicInterface
 	{
 	public:

@@ -14,7 +14,7 @@ namespace moduler
 		~Moduler();
 
 		MODULER_API IModule *loadModule(const char *fileName);
-		MODULER_API bool unloadModule(const char *fileName);
+		MODULER_API bool unloadModule(IModule*);
 
 	private:
 		ModulerPrivate *m_private;

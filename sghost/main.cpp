@@ -15,7 +15,6 @@ int main(int argc, char* argv[])
 	auto *moduler = createModuler();
 
 	IModule *temp = moduler->loadModule("apprunnerd.dll");
-	LOG_DEBUG(std::string(temp!=nullptr?"true":"false").c_str());
 
 	// Destroy the moduler
 	destroyModuler();

@@ -26,7 +26,7 @@ static int crtDebugMemAllocHook(int allocType, void *userData, size_t size, int 
 
 void installMemLeakDetector()
 {
-#ifdef _MSC_VER && defined USE_LEAKDETECTOR
+#if defined _MSC_VER && defined USE_LEAKDETECTOR
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	_CrtSetAllocHook(crtDebugMemAllocHook);
 #endif
@@ -34,7 +34,7 @@ void installMemLeakDetector()
 
 void finishMemLeakDetector()
 {
-#ifdef _MSC_VER && defined USE_LEAKDETECTOR
+#if defined _MSC_VER && defined USE_LEAKDETECTOR
 //	_CrtDumpMemoryLeaks();
 #endif
 }

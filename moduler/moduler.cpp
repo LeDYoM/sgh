@@ -7,6 +7,7 @@
 
 namespace moduler
 {
+	using namespace std;
 	static Moduler *modulerInstance{ nullptr };
 
 	struct ModuleData
@@ -23,16 +24,43 @@ namespace moduler
 	class ModulerPrivate
 	{
 	public:
-		using ModuleMap = std::map<std::string, ModuleData>;
+		using ModuleMap = map<string, ModuleData>;
+
 		loader::Loader *loaderInstance{ nullptr };
 		ModuleMap modules;
-		ModulerPrivate()
-			: loaderInstance{ loader::createLoader() } 
-		{}
+
+		ModulerPrivate() : loaderInstance{ loader::createLoader() } {}
 
 		~ModulerPrivate()
 		{
 			loader::destroyLoader(); 
+		}
+
+		void addModule(const string &fileName, const ModuleData &moduleData)
+		{
+			modules[fileName] = moduleData;
+		}
+
+		bool deleteModule(const ModuleMap::const_iterator &node)
+		{
+			LOG_DEBUG_STR("Going to delete module " << node->first)
+			auto& moduleData(node->second);
+			moduleData.deleteModuleFunc();
+
+			// Check that the deletion worked internally,
+			// asking for the module pointer and checking for null
+			ASSERT_WARNING(!moduleData.getModuleFunc(), "Deleter function does not delete the module");
+			LOG_DEBUG_STR("Deleter worked: " << ((moduleData.getModuleFunc() == nullptr)?"true":"false"));
+			return modules.erase(node) != modules.end();
+		}
+
+		void deleteAllModules()
+		{
+			while (modules.begin() != modules.end()) {
+				string fileName((*modules.begin()).first);
+				deleteModule(modules.begin());
+				loaderInstance->unloadModule(fileName.c_str());
+			}
 		}
 
 	};
@@ -45,6 +73,7 @@ namespace moduler
 	Moduler::~Moduler()
 	{
 		if (m_private) {
+			m_private->deleteAllModules();
 			delete m_private;
 			m_private = nullptr;
 		}
@@ -77,7 +106,7 @@ namespace moduler
 						moduleData.getModuleFunc = getModuleFunc;
 						moduleData.deleteModuleFunc = deleteModuleFunc;
 
-						m_private->modules[fileName] = moduleData;
+						m_private->addModule(fileName, moduleData);
 						return loadedModule;
 					}
 					else {
@@ -109,16 +138,10 @@ namespace moduler
 
 	bool Moduler::unloadModule(const char *fileName)
 	{
-		auto iterator(m_private->modules.find(fileName));
-		if (iterator != m_private->modules.end()) {
-			auto& moduleData(iterator->second);
-			moduleData.deleteModuleFunc();
-
-			// Check that the deletion worked internally,
-			// asking for the module pointer and checking for null
-			ASSERT_WARNING(!moduleData.getModuleFunc(),"Deleter function does not delete the module");
-			m_private->modules.erase(iterator);
-			return m_private->loaderInstance->unloadModule(fileName);
+		auto it(m_private->modules.find(fileName));
+		if (it != m_private->modules.end()) {
+			bool result(m_private->deleteModule(it));
+			return m_private->loaderInstance->unloadModule(fileName) ? result : false;
 		}
 		else {
 			LOG_ERROR_STR("Module " << fileName << " not found to unload");

@@ -7,14 +7,16 @@
 namespace moduler
 {
 	class ModulerPrivate;
+	struct ModuleHandle;
+	using ModuleHandlePtr = ModuleHandle *;
 	class Moduler
 	{
 	public:
 		Moduler();
 		~Moduler();
 
-		MODULER_API IModule *loadModule(const char *fileName);
-		MODULER_API bool unloadModule(IModule*);
+		MODULER_API ModuleHandlePtr loadModule(const char *fileName);
+		MODULER_API bool unloadModule(ModuleHandlePtr&&);
 
 	private:
 		ModulerPrivate *m_private;

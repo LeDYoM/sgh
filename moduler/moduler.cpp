@@ -8,6 +8,7 @@
 namespace moduler
 {
 	using namespace std;
+
 	static Moduler *modulerInstance{ nullptr };
 
 	inline string moduleSignature(const IModule*const module)
@@ -20,7 +21,7 @@ namespace moduler
 	struct ModuleData
 	{
 		using CreateModuleFunc = bool(*)();
-		using GetModuleFunc = moduler::IModule * (*)();
+		using GetModuleFunc = IModule * (*)();
 		using DeleteModuleFunc = bool(*)();
 
 		string fileName;
@@ -29,6 +30,7 @@ namespace moduler
 		CreateModuleFunc createModuleFunc{ nullptr };
 		GetModuleFunc getModuleFunc{ nullptr };
 		DeleteModuleFunc deleteModuleFunc{ nullptr };
+		IModule *module{ nullptr };
 
 		static bool sameModuleInformation(const ModuleInformation &lh, const ModuleInformation &rh) {
 			return string(lh.name) == string(rh.name);
@@ -46,11 +48,19 @@ namespace moduler
 		}
 	};
 
+	using ModuleContainer = list<ModuleData>;
+	struct ModuleHandle : public ModuleContainer::iterator
+	{
+		ModuleHandle(ModuleContainer::iterator it) : ModuleContainer::iterator{ it } {}
+
+		operator ModuleContainer::iterator() {
+			return *this;
+		}
+	};
+
 	class ModulerPrivate
 	{
 	public:
-		using ModuleContainer = list<ModuleData>;
-
 		loader::Loader *loaderInstance{ nullptr };
 		ModuleContainer modules;
 
@@ -61,14 +71,15 @@ namespace moduler
 			loader::destroyLoader();
 		}
 
-		void addModule(ModuleData &&moduleData)
+		ModuleHandle addModule(const ModuleData &moduleData)
 		{
-			modules.emplace_back(move(moduleData));
+			modules.emplace_back(moduleData);
+			return prev(modules.end());
 		}
 
-		bool deleteModule(const ModuleContainer::iterator &it)
+		bool deleteModule(const ModuleHandle &it)
 		{
-			const ModuleData &moduleData = *it;
+			const ModuleData &moduleData = (*it);
 			LOG_DEBUG_STR("Going to delete module " << moduleData.fileName);
 			moduleData.deleteModuleFunc();
 
@@ -128,7 +139,7 @@ namespace moduler
 		}
 	}
 
-	IModule *Moduler::loadModule(const char * fileName)
+	ModuleHandlePtr Moduler::loadModule(const char * fileName)
 	{
 		LOG_DEBUG_STR("Going to open " << fileName);
 		auto *moduleObject(m_private->loaderInstance->loadModule(fileName));
@@ -156,8 +167,7 @@ namespace moduler
 						moduleData.getModuleFunc = getModuleFunc;
 						moduleData.deleteModuleFunc = deleteModuleFunc;
 
-						m_private->addModule(move(moduleData));
-						return loadedModule;
+						return &(m_private->addModule(moduleData));
 					}
 					else {
 						LOG_ERROR_STR("Error trying to get the module information");
@@ -184,6 +194,11 @@ namespace moduler
 			}
 		}
 		return nullptr;
+	}
+
+	bool Moduler::unloadModule(ModuleHandlePtr&&moduleHandlePtr)
+	{
+
 	}
 
 	bool Moduler::unloadModule(IModule*module)

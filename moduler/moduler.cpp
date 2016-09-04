@@ -18,7 +18,7 @@ namespace moduler
 		return t.str();
 	}
 
-	struct ModuleData
+	struct ModuleHandle
 	{
 		using CreateModuleFunc = bool(*)();
 		using GetModuleFunc = IModule * (*)();
@@ -41,22 +41,15 @@ namespace moduler
 			// string(lh.patch) == string(rh.patch);
 		}
 
-		static bool sameModuleData(const ModuleData &lh, const ModuleData &rh) {
+		static bool sameModuleData(const ModuleHandle &lh, const ModuleHandle &rh) {
 			return lh.system_uniqueId == rh.system_uniqueId && sameModuleInformation(*(lh.moduleInformation), *(rh.moduleInformation));
 
 			// TO DO: Compare more data?
 		}
+
 	};
 
-	using ModuleContainer = list<ModuleData>;
-	struct ModuleHandle : public ModuleContainer::iterator
-	{
-		ModuleHandle(ModuleContainer::iterator it) : ModuleContainer::iterator{ it } {}
-
-		operator ModuleContainer::iterator() {
-			return *this;
-		}
-	};
+	using ModuleContainer = list<ModuleHandle>;
 
 	class ModulerPrivate
 	{
@@ -71,15 +64,26 @@ namespace moduler
 			loader::destroyLoader();
 		}
 
-		ModuleHandle addModule(const ModuleData &moduleData)
+		ModuleContainer::iterator pointerToIterator(const ModuleHandle* pointer_)
 		{
-			modules.emplace_back(moduleData);
-			return prev(modules.end());
+			for (auto moduleHandleIterator = modules.begin(); moduleHandleIterator != modules.end(); ++moduleHandleIterator) {
+				if (ModuleHandle::sameModuleData(*moduleHandleIterator, *pointer_)) {
+					return moduleHandleIterator;
+				}
+			}
+			return modules.end();
 		}
 
-		bool deleteModule(const ModuleHandle &it)
+		ModuleHandle* addModule(const ModuleHandle &moduleData)
 		{
-			const ModuleData &moduleData = (*it);
+			modules.emplace_back(moduleData);
+			return &(*prev(modules.end()));
+		}
+
+		bool deleteModule(const ModuleHandle *moduleHandle)
+		{
+			ASSERT_ERROR(moduleHandle, "Trying to delete nullptr moduleHandle");
+			const ModuleHandle &moduleData = (*moduleHandle);
 			LOG_DEBUG_STR("Going to delete module " << moduleData.fileName);
 			moduleData.deleteModuleFunc();
 
@@ -87,26 +91,14 @@ namespace moduler
 			// asking for the module pointer and checking for null
 			ASSERT_WARNING(!moduleData.getModuleFunc(), "Deleter function does not delete the module");
 			LOG_DEBUG_STR("Deleter worked: " << ((moduleData.getModuleFunc() == nullptr) ? "true" : "false"));
-			return modules.erase(it) != modules.end();
+			return modules.erase(pointerToIterator(moduleHandle)) != modules.end();
 		}
 
-		ModuleContainer::iterator search(const ModuleData &moduleData)
+		ModuleContainer::iterator search(const ModuleHandle &moduleData)
 		{
 			auto it{ modules.begin() };
 			while (it != modules.end()) {
-				if (ModuleData::sameModuleData((*it), moduleData)) {
-					return it;
-				}
-				++it;
-			}
-			return it;
-		}
-
-		ModuleContainer::iterator searchDataFromInfo(const ModuleInformation &moduleInformation)
-		{
-			auto it(modules.begin());
-			while (it != modules.end()) {
-				if (ModuleData::sameModuleInformation((*(*it).moduleInformation), moduleInformation)) {
+				if (ModuleHandle::sameModuleData((*it), moduleData)) {
 					return it;
 				}
 				++it;
@@ -118,11 +110,10 @@ namespace moduler
 		{
 			while (modules.begin() != modules.end()) {
 				string fileName((*modules.begin()).fileName);
-				deleteModule(modules.begin());
+				deleteModule(&*(modules.begin()));
 				loaderInstance->unloadModule(fileName.c_str());
 			}
 		}
-
 	};
 
 	Moduler::Moduler()
@@ -145,9 +136,9 @@ namespace moduler
 		auto *moduleObject(m_private->loaderInstance->loadModule(fileName));
 		if (moduleObject) {
 			LOG_DEBUG("Object file loaded");
-			auto createModuleFunc = static_cast<ModuleData::CreateModuleFunc>(m_private->loaderInstance->loadMethod(fileName, CREATE_MODULE_FUNC_NAME_STR));
-			auto getModuleFunc = static_cast<ModuleData::GetModuleFunc>(m_private->loaderInstance->loadMethod(fileName, GET_MODULE_FUNC_NAME_STR));
-			auto deleteModuleFunc = static_cast<ModuleData::DeleteModuleFunc>(m_private->loaderInstance->loadMethod(fileName, DELETE_MODULE_FUNC_NAME_STR));
+			auto createModuleFunc = static_cast<ModuleHandle::CreateModuleFunc>(m_private->loaderInstance->loadMethod(fileName, CREATE_MODULE_FUNC_NAME_STR));
+			auto getModuleFunc = static_cast<ModuleHandle::GetModuleFunc>(m_private->loaderInstance->loadMethod(fileName, GET_MODULE_FUNC_NAME_STR));
+			auto deleteModuleFunc = static_cast<ModuleHandle::DeleteModuleFunc>(m_private->loaderInstance->loadMethod(fileName, DELETE_MODULE_FUNC_NAME_STR));
 			if (createModuleFunc && getModuleFunc && deleteModuleFunc) {
 				LOG_INFO_STR("Module from " << fileName << " has correct interface definition");
 				LOG_INFO("Initializing module...");
@@ -160,14 +151,14 @@ namespace moduler
 						LOG_INFO_STR("Name: " << moduleInfo->name);
 						LOG_INFO_STR("Version: " << moduleInfo->version << "." << moduleInfo->subVersion << "." << moduleInfo->patch);
 						LOG_INFO("Seems module has correct implementation");
-						ModuleData moduleData;
+						ModuleHandle moduleData;
 						moduleData.fileName = fileName;
 						moduleData.moduleInformation = loadedModule->moduleInformation();
 						moduleData.createModuleFunc = createModuleFunc;
 						moduleData.getModuleFunc = getModuleFunc;
 						moduleData.deleteModuleFunc = deleteModuleFunc;
 
-						return &(m_private->addModule(moduleData));
+						return m_private->addModule(moduleData);
 					}
 					else {
 						LOG_ERROR_STR("Error trying to get the module information");
@@ -198,26 +189,13 @@ namespace moduler
 
 	bool Moduler::unloadModule(ModuleHandlePtr&&moduleHandlePtr)
 	{
-
-	}
-
-	bool Moduler::unloadModule(IModule*module)
-	{
-		ASSERT_ERROR(module, "Module parameter cannot be nullptr");
-		LOG_DEBUG_STR("Trying to unload module " << moduleSignature(module));
-		const auto moduleData( m_private->searchDataFromInfo(*(module->moduleInformation())) );
-		ASSERT_ERROR_STR(moduleData != m_private->modules.end(), "Internal data error: Module internal data for module "<< moduleSignature(module));
-		if (moduleData != m_private->modules.end()) {
-			m_private->deleteModule(moduleData);
-			// Store the string file name before removing the module from the modules list. We need it to remove the module from the loader.
-			const string fileName(moduleData->fileName);
-			bool result(m_private->deleteModule(moduleData));
-			return m_private->loaderInstance->unloadModule(fileName.c_str()) ? result : false;
-		}
-		else {
-			LOG_ERROR_STR("Module " << moduleSignature(module) << " not found to unload");
-		}
-		return false;
+		ASSERT_ERROR(moduleHandlePtr, "unloadModule: called with nullptr");
+		const ModuleHandle &moduleData(*moduleHandlePtr);
+		LOG_DEBUG_STR("Trying to unload module " << moduleSignature(moduleData.module));
+		// Store the string file name before removing the module from the modules list. We need it to remove the module from the loader.
+		const string fileName(moduleData.fileName);
+		bool result(m_private->deleteModule(moduleHandlePtr));
+		return m_private->loaderInstance->unloadModule(fileName.c_str()) ? result : false;
 	}
 
 	Moduler *createModuler ()

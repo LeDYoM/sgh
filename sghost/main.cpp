@@ -14,7 +14,8 @@ int main(int argc, char* argv[])
 	using namespace moduler;
 	auto *moduler = createModuler();
 
-	IModule *temp = moduler->loadModule("apprunnerd.dll");
+//	IModule *temp = 
+		moduler->loadModule("apprunnerd.dll");
 
 	// Destroy the moduler
 	destroyModuler();

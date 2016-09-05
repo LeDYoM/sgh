@@ -1,7 +1,7 @@
 #ifndef FILESYSTEM_INCLUDE_HPP
 #define FILESYSTEM_INCLUDE_HPP
 
-#include "filesystem.hpp"
+#include "ifilesystem.hpp"
 
 namespace filesystem
 {

@@ -14,7 +14,7 @@ namespace filesystem
 	{
 	}
 
-	FileSystem::~AppRunner()
+	FileSystem::~FileSystem()
 	{
 	}
 	moduler::ModuleInformation * const FileSystem::moduleInformation() const

@@ -1,7 +1,7 @@
-#include "include/apprunner.hpp"
+#include "include/filesystem.hpp"
 #include <logger/include/logger.hpp>
 
-namespace apprunner
+namespace filesystem
 {
 	DECLARE_MODULE_INFORMATION_BEGIN
 	DECLARE_MODULE_INFORMATION_NAME(AppRunner),
@@ -10,33 +10,33 @@ namespace apprunner
 	DECLARE_MODULE_INFORMATION_PATCH(3)
 	DECLARE_MODULE_INFORMATION_END
 
-	AppRunner::AppRunner()
+	FileSystem::FileSystem()
 	{
 	}
 
-	AppRunner::~AppRunner()
+	FileSystem::~AppRunner()
 	{
 	}
-	moduler::ModuleInformation * const AppRunner::moduleInformation() const
+	moduler::ModuleInformation * const FileSystem::moduleInformation() const
 	{
 		return &moduleInfo;
 	}
 
-	bool AppRunner::start()
+	bool FileSystem::start()
 	{
 		return true;
 	}
 
-	bool AppRunner::stop()
+	bool FileSystem::stop()
 	{
 		return true;
 	}
 
-	bool AppRunner::update()
+	bool FileSystem::update()
 	{
 		return true;
 	}
 }
 
-using namespace apprunner;
-DEFINE_MODULE_CREATION(AppRunner);
+using namespace filesystem;
+DEFINE_MODULE_CREATION(FileSystem);

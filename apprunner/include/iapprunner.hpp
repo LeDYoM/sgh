@@ -10,6 +10,8 @@ namespace apprunner
 	public:
 		IAppRunner() {}
 		virtual ~IAppRunner() {}
+
+		virtual bool update() = 0;
 	};
 }
 

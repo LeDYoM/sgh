@@ -1,15 +1,15 @@
-#ifndef APPRUNNER_INCLUDE_HPP
-#define APPRUNNER_INCLUDE_HPP
+#ifndef FILESYSTEM_INCLUDE_HPP
+#define FILESYSTEM_INCLUDE_HPP
 
-#include "iapprunner.hpp"
+#include "filesystem.hpp"
 
-namespace apprunner
+namespace filesystem
 {
-	class AppRunner : public virtual IAppRunner
+	class FileSystem : public virtual IFileSystem
 	{
 	public:
-		AppRunner();
-		~AppRunner();
+		FileSystem();
+		~FileSystem();
 
 		virtual moduler::ModuleInformation *const moduleInformation() const override;
 

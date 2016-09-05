@@ -15,6 +15,9 @@ namespace apprunner
 
 		virtual bool start() override;
 		virtual bool stop() override;
+
+		virtual bool update() override;
+
 	};
 }
 

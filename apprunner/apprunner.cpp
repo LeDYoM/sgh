@@ -1,4 +1,5 @@
 #include "include/apprunner.hpp"
+#include <logger/include/logger.hpp>
 
 namespace apprunner
 {
@@ -27,6 +28,11 @@ namespace apprunner
 	}
 
 	bool AppRunner::stop()
+	{
+		return true;
+	}
+
+	bool AppRunner::update()
 	{
 		return true;
 	}

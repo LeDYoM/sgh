@@ -10,8 +10,6 @@ namespace filesystem
 	public:
 		IFileSystem() {}
 		virtual ~IFileSystem() {}
-
-		virtual bool update() = 0;
 	};
 }
 

@@ -16,8 +16,8 @@ namespace filesystem
 		virtual bool start() override;
 		virtual bool stop() override;
 
-		virtual bool update() override;
-
+		virtual std::vector<std::string> readFileAsStringVector(const std::string &fileName) override;
+		virtual std::vector<char> readFile(const std::string &fileName) override;
 	};
 }
 

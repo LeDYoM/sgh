@@ -13,6 +13,8 @@ namespace moduler
 		const char *patch;
 	};
 
+	class ExecutionContext;
+
 	class IModule : public virtual IBasicInterface
 	{
 	public:
@@ -22,6 +24,12 @@ namespace moduler
 		virtual ModuleInformation *const moduleInformation() const = 0;
 		virtual bool start() = 0;
 		virtual bool stop() = 0;
+
+		ExecutionContext *const executionContext() { return m_context; }
+
+	private:
+		ExecutionContext *m_context{ nullptr };
+		friend class Moduler;
 	};
 }
 

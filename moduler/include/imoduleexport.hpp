@@ -19,12 +19,16 @@
 
 #ifndef MODULE_EXPORTS
 
-#define DECLARE_MODULE_INFORMATION_BEGIN			static moduler::ModuleInformation moduleInfo =	{
-#define DECLARE_MODULE_INFORMATION_NAME(name)			#name
-#define DECLARE_MODULE_INFORMATION_VERSION(v)			#v
-#define DECLARE_MODULE_INFORMATION_SUBVERSION(v)		#v
-#define DECLARE_MODULE_INFORMATION_PATCH(v)				#v
-#define DECLARE_MODULE_INFORMATION_END				};
+#define DECLARE_MODULE_INFORMATION_BEGIN				static moduler::ModuleInformation moduleInfo =	{
+#define DECLARE_MODULE_INFORMATION_NAME(name)				#name
+#define DECLARE_MODULE_INFORMATION_VERSION(v)				#v
+#define DECLARE_MODULE_INFORMATION_SUBVERSION(v)			#v
+#define DECLARE_MODULE_INFORMATION_PATCH(v)					#v
+#define DECLARE_MODULE_INFORMATION_END					};
+#define DECLARE_MODULE_INFORMATION_GETTER(className)	moduler::ModuleInformation * const className::moduleInformation() const	\
+														{	\
+															return &moduleInfo;	\
+														}
 
 #define DECLARE_MODULE_CREATION		\
 	EXPORT_API bool CREATE_MODULE_FUNC_NAME();	\

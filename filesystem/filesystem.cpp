@@ -10,6 +10,7 @@ namespace filesystem
 	DECLARE_MODULE_INFORMATION_SUBVERSION(1),
 	DECLARE_MODULE_INFORMATION_PATCH(1)
 	DECLARE_MODULE_INFORMATION_END
+	DECLARE_MODULE_INFORMATION_GETTER(FileSystem)
 
 	using namespace std;
 
@@ -19,10 +20,6 @@ namespace filesystem
 
 	FileSystem::~FileSystem()
 	{
-	}
-	moduler::ModuleInformation * const FileSystem::moduleInformation() const
-	{
-		return &moduleInfo;
 	}
 
 	bool FileSystem::start()

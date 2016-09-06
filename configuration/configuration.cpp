@@ -9,6 +9,7 @@ namespace configuration
 	DECLARE_MODULE_INFORMATION_SUBVERSION(1),
 	DECLARE_MODULE_INFORMATION_PATCH(1)
 	DECLARE_MODULE_INFORMATION_END
+	DECLARE_MODULE_INFORMATION_GETTER(Configuration)
 
 	using namespace std;
 
@@ -18,11 +19,6 @@ namespace configuration
 
 	Configuration::~Configuration()
 	{
-	}
-
-	moduler::ModuleInformation * const Configuration::moduleInformation() const
-	{
-		return &moduleInfo;
 	}
 
 	bool Configuration::start()

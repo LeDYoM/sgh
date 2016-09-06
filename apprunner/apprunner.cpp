@@ -9,6 +9,7 @@ namespace apprunner
 	DECLARE_MODULE_INFORMATION_SUBVERSION(1),
 	DECLARE_MODULE_INFORMATION_PATCH(3)
 	DECLARE_MODULE_INFORMATION_END
+	DECLARE_MODULE_INFORMATION_GETTER(AppRunner)
 
 	AppRunner::AppRunner()
 	{
@@ -16,10 +17,6 @@ namespace apprunner
 
 	AppRunner::~AppRunner()
 	{
-	}
-	moduler::ModuleInformation * const AppRunner::moduleInformation() const
-	{
-		return &moduleInfo;
 	}
 
 	bool AppRunner::start()

@@ -1,4 +1,4 @@
-#include "include/apprunner.hpp"
+#include "apprunner.hpp"
 #include <logger/include/logger.hpp>
 
 namespace apprunner
@@ -7,7 +7,7 @@ namespace apprunner
 	DECLARE_MODULE_INFORMATION_NAME(AppRunner),
 	DECLARE_MODULE_INFORMATION_VERSION(0),
 	DECLARE_MODULE_INFORMATION_SUBVERSION(1),
-	DECLARE_MODULE_INFORMATION_PATCH(3)
+	DECLARE_MODULE_INFORMATION_PATCH(4)
 	DECLARE_MODULE_INFORMATION_END
 	DECLARE_MODULE_INFORMATION_GETTER(AppRunner)
 

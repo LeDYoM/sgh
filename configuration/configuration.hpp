@@ -1,5 +1,5 @@
-#ifndef FILESYSTEM_INCLUDE_HPP
-#define FILESYSTEM_INCLUDE_HPP
+#ifndef CONFIGURATION_INCLUDE_HPP
+#define CONFIGURATION_INCLUDE_HPP
 
 #include "include/iconfiguration.hpp"
 

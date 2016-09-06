@@ -10,6 +10,9 @@ namespace moduler
 	public:
 		ModuleContext() {}
 		virtual ~ModuleContext() {}
+
+		virtual IModule *requireModule(const char *moduleName) override;
+
 	};
 }
 

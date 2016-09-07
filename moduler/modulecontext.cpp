@@ -9,7 +9,7 @@ namespace moduler
 		const auto iterator_{ m_modulesConnections.find(moduleName) };
 
 		if (iterator_ == m_modulesConnections.end()) {
-			// There is still no connection stablished
+			// There is still no connection established
 
 		}
 		return nullptr;

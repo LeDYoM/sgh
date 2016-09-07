@@ -20,6 +20,8 @@ namespace moduler
 		DeleteModuleFunc deleteModuleFunc{ nullptr };
 		IModule *module{ nullptr };
 
+		inline std::string moduleName() const { return moduleInformation->name; }
+
 		static bool sameModuleInformation(const ModuleInformation &lh, const ModuleInformation &rh) {
 			return std::string(lh.name) == std::string(rh.name);
 

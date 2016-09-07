@@ -8,9 +8,9 @@ namespace moduler
 	struct ModuleInformation
 	{
 		const char *name;
-		const char *version;
-		const char *subVersion;
-		const char *patch;
+		const unsigned int version;
+		const unsigned int subVersion;
+		const unsigned int patch;
 	};
 
 	class ExecutionContext;

@@ -1,9 +1,10 @@
 #include "include/moduler.hpp"
+#include "modulerprivate.hpp"
+#include "modulehandle.hpp"
 #include "include/imoduleexport.hpp"
 #include <loader/include/loader.hpp>
 #include <logger/include/logger.hpp>
 #include <sstream>
-#include <list>
 
 namespace moduler
 {
@@ -18,104 +19,6 @@ namespace moduler
 		return t.str();
 	}
 
-	struct ModuleHandle
-	{
-		using CreateModuleFunc = bool(*)();
-		using GetModuleFunc = IModule * (*)();
-		using DeleteModuleFunc = bool(*)();
-
-		string fileName;
-		uint_fast64_t system_uniqueId{};
-		ModuleInformation *moduleInformation{ nullptr };
-		CreateModuleFunc createModuleFunc{ nullptr };
-		GetModuleFunc getModuleFunc{ nullptr };
-		DeleteModuleFunc deleteModuleFunc{ nullptr };
-		IModule *module{ nullptr };
-
-		static bool sameModuleInformation(const ModuleInformation &lh, const ModuleInformation &rh) {
-			return string(lh.name) == string(rh.name);
-
-			// TO DO: Compare version numbers?
-			// string(lh.version) == string(rh.version) &&
-			// string(lh.subVersion) == string(rh.subVersion) &&
-			// string(lh.patch) == string(rh.patch);
-		}
-
-		static bool sameModuleData(const ModuleHandle &lh, const ModuleHandle &rh) {
-			return lh.system_uniqueId == rh.system_uniqueId && sameModuleInformation(*(lh.moduleInformation), *(rh.moduleInformation));
-
-			// TO DO: Compare more data?
-		}
-
-	};
-
-	using ModuleContainer = list<ModuleHandle>;
-
-	class ModulerPrivate
-	{
-	public:
-		loader::Loader *loaderInstance{ nullptr };
-		ModuleContainer modules;
-
-		ModulerPrivate() : loaderInstance{ loader::createLoader() } {}
-
-		~ModulerPrivate()
-		{
-			loader::destroyLoader();
-		}
-
-		ModuleContainer::iterator pointerToIterator(const ModuleHandle* pointer_)
-		{
-			for (auto moduleHandleIterator = modules.begin(); moduleHandleIterator != modules.end(); ++moduleHandleIterator) {
-				if (ModuleHandle::sameModuleData(*moduleHandleIterator, *pointer_)) {
-					return moduleHandleIterator;
-				}
-			}
-			return modules.end();
-		}
-
-		ModuleHandle* addModule(const ModuleHandle &moduleData)
-		{
-			modules.emplace_back(moduleData);
-			return &(*prev(modules.end()));
-		}
-
-		bool deleteModule(const ModuleHandle *moduleHandle)
-		{
-			ASSERT_ERROR(moduleHandle, "Trying to delete nullptr moduleHandle");
-			const ModuleHandle &moduleData = (*moduleHandle);
-			LOG_DEBUG_STR("Going to delete module " << moduleData.fileName);
-			moduleData.deleteModuleFunc();
-
-			// Check that the deletion worked internally,
-			// asking for the module pointer and checking for null
-			ASSERT_WARNING(!moduleData.getModuleFunc(), "Deleter function does not delete the module");
-			LOG_DEBUG_STR("Deleter worked: " << ((moduleData.getModuleFunc() == nullptr) ? "true" : "false"));
-			return modules.erase(pointerToIterator(moduleHandle)) != modules.end();
-		}
-
-		ModuleContainer::iterator search(const ModuleHandle &moduleData)
-		{
-			auto it{ modules.begin() };
-			while (it != modules.end()) {
-				if (ModuleHandle::sameModuleData((*it), moduleData)) {
-					return it;
-				}
-				++it;
-			}
-			return it;
-		}
-
-		void deleteAllModules()
-		{
-			while (modules.begin() != modules.end()) {
-				string fileName((*modules.begin()).fileName);
-				deleteModule(&*(modules.begin()));
-				loaderInstance->unloadModule(fileName.c_str());
-			}
-		}
-	};
-
 	Moduler::Moduler()
 	{
 		m_private = new ModulerPrivate;
@@ -124,7 +27,6 @@ namespace moduler
 	Moduler::~Moduler()
 	{
 		if (m_private) {
-			m_private->deleteAllModules();
 			delete m_private;
 			m_private = nullptr;
 		}

@@ -12,6 +12,7 @@ namespace moduler
 		virtual ~ModuleContext() {}
 
 		virtual IModule *requireModule(const char *moduleName) override;
+	private:
 
 	};
 }

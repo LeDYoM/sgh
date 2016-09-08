@@ -14,6 +14,7 @@ namespace moduler
 
 		std::string fileName;
 		uint_fast64_t system_uniqueId{};
+		uint_fast16_t referenceConunter;
 		ModuleInformation *moduleInformation{ nullptr };
 		CreateModuleFunc createModuleFunc{ nullptr };
 		GetModuleFunc getModuleFunc{ nullptr };

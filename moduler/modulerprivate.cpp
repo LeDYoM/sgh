@@ -28,7 +28,7 @@ namespace moduler
 	ModuleContainer::iterator ModulerPrivate::pointerToIterator(const ModuleHandle* pointer_)
 	{
 		for (auto moduleHandleIterator = modules.begin(); moduleHandleIterator != modules.end(); ++moduleHandleIterator) {
-			if (ModuleHandle::sameModuleData(*moduleHandleIterator, *pointer_)) {
+			if (*moduleHandleIterator == *pointer_) {
 				return moduleHandleIterator;
 			}
 		}
@@ -59,7 +59,7 @@ namespace moduler
 	{
 		auto it{ modules.begin() };
 		while (it != modules.end()) {
-			if (ModuleHandle::sameModuleData((*it), moduleData)) {
+			if (*it == moduleData) {
 				return it;
 			}
 			++it;

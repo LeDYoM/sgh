@@ -31,8 +31,14 @@ namespace moduler
 			// string(lh.patch) == string(rh.patch);
 		}
 
-		static bool sameModuleData(const ModuleHandle &lh, const ModuleHandle &rh) {
-			return lh.system_uniqueId == rh.system_uniqueId && sameModuleInformation(*(lh.moduleInformation), *(rh.moduleInformation));
+		bool operator==(const ModuleHandle &rh) const {
+			return system_uniqueId == rh.system_uniqueId && sameModuleInformation(*moduleInformation, *(rh.moduleInformation));
+
+			// TO DO: Compare more data?
+		}
+
+		bool operator!=(const ModuleHandle &rh) const {
+			return system_uniqueId != rh.system_uniqueId || !sameModuleInformation(*moduleInformation, *(rh.moduleInformation));
 
 			// TO DO: Compare more data?
 		}

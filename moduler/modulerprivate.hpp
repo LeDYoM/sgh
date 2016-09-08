@@ -24,6 +24,7 @@ namespace moduler
 		ModuleContainer::iterator pointerToIterator(const ModuleHandle* pointer_);
 		ModuleHandle* addModule(const ModuleHandle &moduleData);
 		bool deleteModule(const ModuleHandle *moduleHandle);
+
 		ModuleContainer::iterator search(const ModuleHandle &moduleData);
 		void deleteAllModules();
 	private:

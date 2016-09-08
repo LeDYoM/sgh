@@ -38,10 +38,17 @@ namespace moduler
 
 	bool ModuleConnection::addRequiredModule(ModuleHandle * requiredModule)
 	{
-		if (pcontainer::add_if_not_exists(m_dest, requiredModule)) {
+		if (!pcontainer::add_if_not_exists(m_dest, requiredModule)) {
 			++requiredModule->referenceConunter;
 			return true;
 		}
 		return false;
 	}
+
+	bool ModuleConnection::addRequiredModule(const char *moduleId)
+	{
+		// First, check if the module is already loaded.
+
+	}
+
 }

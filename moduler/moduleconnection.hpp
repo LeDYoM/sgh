@@ -17,6 +17,7 @@ namespace moduler
 
 		bool hasModule(const ModuleHandle *const requiredModule) const noexcept;
 		bool addRequiredModule(ModuleHandle *requiredModule);
+		bool addRequiredModule(const char *moduleId);
 
 	private:
 		ModulerPrivate *m_modulerPrivate;

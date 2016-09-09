@@ -15,16 +15,16 @@ namespace moduler
 		std::string fileName;
 		uint_fast64_t system_uniqueId{};
 		uint_fast16_t referenceConunter{};
-		ModuleInformation *moduleInformation{ nullptr };
+		inline const ModuleInformation * moduleInformation() const { return module->moduleInformation(); }
 		CreateModuleFunc createModuleFunc{ nullptr };
 		GetModuleFunc getModuleFunc{ nullptr };
 		DeleteModuleFunc deleteModuleFunc{ nullptr };
 		IModule *module{ nullptr };
 
-		inline std::string moduleName() const { return moduleInformation->name; }
+		inline std::string moduleName() const { return moduleInformation()->name; }
 
-		static bool sameModuleInformation(const ModuleInformation &lh, const ModuleInformation &rh) {
-			return std::string(lh.name) == std::string(rh.name);
+		bool sameModuleInformation(const ModuleHandle &rh) const {
+			return std::string(moduleName()) == std::string(rh.moduleName());
 
 			// TO DO: Compare version numbers?
 			// string(lh.version) == string(rh.version) &&
@@ -33,13 +33,13 @@ namespace moduler
 		}
 
 		bool operator==(const ModuleHandle &rh) const {
-			return system_uniqueId == rh.system_uniqueId && sameModuleInformation(*moduleInformation, *(rh.moduleInformation));
+			return system_uniqueId == rh.system_uniqueId && sameModuleInformation(rh);
 
 			// TO DO: Compare more data?
 		}
 
 		bool operator!=(const ModuleHandle &rh) const {
-			return system_uniqueId != rh.system_uniqueId || !sameModuleInformation(*moduleInformation, *(rh.moduleInformation));
+			return system_uniqueId != rh.system_uniqueId || !sameModuleInformation(rh);
 
 			// TO DO: Compare more data?
 		}

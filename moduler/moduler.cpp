@@ -55,7 +55,6 @@ namespace moduler
 						LOG_INFO("Seems module has correct implementation");
 						ModuleHandle moduleHandle;
 						moduleHandle.fileName = fileName;
-						moduleHandle.moduleInformation = loadedModule->moduleInformation();
 						moduleHandle.createModuleFunc = createModuleFunc;
 						moduleHandle.getModuleFunc = getModuleFunc;
 						moduleHandle.deleteModuleFunc = deleteModuleFunc;

@@ -45,13 +45,18 @@ namespace moduler
 	{
 		ASSERT_ERROR(moduleHandlePtr, "Trying to delete nullptr moduleHandle");
 		const ModuleHandle &moduleData = (*moduleHandlePtr);
-		LOG_DEBUG_STR("Going to delete module " << moduleData.fileName);
-		moduleData.deleteModuleFunc();
+		if (moduleData.fileName != "" && moduleData.deleteModuleFunc) {
+			LOG_DEBUG_STR("Going to delete module from file: " << moduleData.fileName);
+			moduleData.deleteModuleFunc();
 
-		// Check that the deletion worked internally,
-		// asking for the module pointer and checking for null
-		ASSERT_WARNING(!moduleData.getModuleFunc(), "Deleter function does not delete the module");
-		LOG_DEBUG_STR("Deleter worked: " << ((moduleData.getModuleFunc() == nullptr) ? "true" : "false"));
+			// Check that the deletion worked internally,
+			// asking for the module pointer and checking for null
+			ASSERT_WARNING(!moduleData.getModuleFunc(), "Deleter function does not delete the module");
+			LOG_DEBUG_STR("Deleter worked: " << ((moduleData.getModuleFunc() == nullptr) ? "true" : "false"));
+		}
+		else {
+			LOG_DEBUG_STR("Going to delete module: " << moduleData.moduleName());
+		}
 		return modules.erase(pointerToIterator(moduleHandlePtr)) != modules.end();
 	}
 

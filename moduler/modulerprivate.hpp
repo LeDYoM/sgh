@@ -21,11 +21,12 @@ namespace moduler
 
 		ModulerPrivate();
 		~ModulerPrivate();
-		ModuleContainer::iterator pointerToIterator(const ModuleHandle* pointer_);
-		ModuleHandle* addModule(const ModuleHandle &moduleData);
-		bool deleteModule(const ModuleHandle *moduleHandle);
+		ModuleContainer::iterator pointerToIterator(const ModuleHandle*);
+		ModuleHandle* addModule(const ModuleHandle &);
+		bool deleteModule(const ModuleHandle *);
+		void incrementModuleReferenceCounter(ModuleHandle *const);
 
-		ModuleContainer::iterator search(const ModuleHandle &moduleData);
+		ModuleContainer::iterator search(const ModuleHandle &);
 		void deleteAllModules();
 	private:
 		ModuleContainer modules;

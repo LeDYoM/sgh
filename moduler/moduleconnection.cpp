@@ -1,5 +1,6 @@
 #include "moduleconnection.hpp"
 #include "modulehandle.hpp"
+#include "modulerprivate.hpp"
 #include <algorithm>
 
 namespace moduler
@@ -39,16 +40,9 @@ namespace moduler
 	bool ModuleConnection::addRequiredModule(ModuleHandle * requiredModule)
 	{
 		if (!pcontainer::add_if_not_exists(m_dest, requiredModule)) {
-			++requiredModule->referenceConunter;
+			m_modulerPrivate->incrementModuleReferenceCounter(requiredModule);
 			return true;
 		}
 		return false;
 	}
-
-	bool ModuleConnection::addRequiredModule(const char *moduleId)
-	{
-		// First, check if the module is already loaded.
-
-	}
-
 }

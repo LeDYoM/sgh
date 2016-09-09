@@ -35,16 +35,16 @@ namespace moduler
 		return modules.end();
 	}
 
-	ModuleHandle* ModulerPrivate::addModule(const ModuleHandle &moduleData)
+	ModuleHandle* ModulerPrivate::addModule(const ModuleHandle &moduleHandle)
 	{
-		modules.emplace_back(moduleData);
+		modules.emplace_back(moduleHandle);
 		return &(*prev(modules.end()));
 	}
 
-	bool ModulerPrivate::deleteModule(const ModuleHandle *moduleHandle)
+	bool ModulerPrivate::deleteModule(const ModuleHandle *moduleHandlePtr)
 	{
-		ASSERT_ERROR(moduleHandle, "Trying to delete nullptr moduleHandle");
-		const ModuleHandle &moduleData = (*moduleHandle);
+		ASSERT_ERROR(moduleHandlePtr, "Trying to delete nullptr moduleHandle");
+		const ModuleHandle &moduleData = (*moduleHandlePtr);
 		LOG_DEBUG_STR("Going to delete module " << moduleData.fileName);
 		moduleData.deleteModuleFunc();
 
@@ -52,7 +52,13 @@ namespace moduler
 		// asking for the module pointer and checking for null
 		ASSERT_WARNING(!moduleData.getModuleFunc(), "Deleter function does not delete the module");
 		LOG_DEBUG_STR("Deleter worked: " << ((moduleData.getModuleFunc() == nullptr) ? "true" : "false"));
-		return modules.erase(pointerToIterator(moduleHandle)) != modules.end();
+		return modules.erase(pointerToIterator(moduleHandlePtr)) != modules.end();
+	}
+
+	void ModulerPrivate::incrementModuleReferenceCounter(ModuleHandle *const moduleHandle)
+	{
+		ASSERT_CRITICAL(moduleHandle, "Passed nullptr pointer");
+		++(moduleHandle->referenceConunter);
 	}
 
 	ModuleContainer::iterator ModulerPrivate::search(const ModuleHandle &moduleData)

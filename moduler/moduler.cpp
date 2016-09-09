@@ -53,14 +53,14 @@ namespace moduler
 						LOG_INFO_STR("Name: " << moduleInfo->name);
 						LOG_INFO_STR("Version: " << moduleInfo->version << "." << moduleInfo->subVersion << "." << moduleInfo->patch);
 						LOG_INFO("Seems module has correct implementation");
-						ModuleHandle moduleData;
-						moduleData.fileName = fileName;
-						moduleData.moduleInformation = loadedModule->moduleInformation();
-						moduleData.createModuleFunc = createModuleFunc;
-						moduleData.getModuleFunc = getModuleFunc;
-						moduleData.deleteModuleFunc = deleteModuleFunc;
+						ModuleHandle moduleHandle;
+						moduleHandle.fileName = fileName;
+						moduleHandle.moduleInformation = loadedModule->moduleInformation();
+						moduleHandle.createModuleFunc = createModuleFunc;
+						moduleHandle.getModuleFunc = getModuleFunc;
+						moduleHandle.deleteModuleFunc = deleteModuleFunc;
 
-						return m_private->addModule(moduleData);
+						return m_private->addModule(moduleHandle);
 					}
 					else {
 						LOG_ERROR_STR("Error trying to get the module information");
@@ -98,6 +98,18 @@ namespace moduler
 		const string fileName(moduleData.fileName);
 		bool result(m_private->deleteModule(moduleHandlePtr));
 		return m_private->loaderInstance->unloadModule(fileName.c_str()) ? result : false;
+	}
+
+	ModuleHandlePtr Moduler::addDirectModule(IModule *module)
+	{
+		ModuleHandle moduleHandle;
+		moduleHandle.createModuleFunc = nullptr;
+		moduleHandle.deleteModuleFunc = nullptr;
+		moduleHandle.getModuleFunc = nullptr;
+		moduleHandle.module = module;
+		moduleHandle.fileName = "";
+
+		return m_private->addModule(std::move(moduleHandle));
 	}
 
 	Moduler *createModuler ()

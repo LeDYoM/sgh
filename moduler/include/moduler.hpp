@@ -17,6 +17,7 @@ namespace moduler
 
 		MODULER_API ModuleHandlePtr loadModule(const char *fileName);
 		MODULER_API bool unloadModule(ModuleHandlePtr&&);
+		MODULER_API ModuleHandlePtr addDirectModule(IModule *);
 
 	private:
 		ModulerPrivate *m_private;

@@ -1,4 +1,5 @@
 #include "memleakdetector.hpp"
+#include "hostmodule.hpp"
 #include <logger/include/logger.hpp>
 #include <moduler/include/moduler.hpp>
 #include <string>
@@ -14,8 +15,9 @@ int main(int argc, char* argv[])
 	using namespace moduler;
 	auto *moduler = createModuler();
 
+	moduler->addDirectModule(new HostModule);
 //	IModule *temp = 
-		moduler->loadModule("apprunnerd.dll");
+//		moduler->loadModule("apprunnerd.dll");
 
 	// Destroy the moduler
 	destroyModuler();

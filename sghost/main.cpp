@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 	auto *moduler = createModuler();
 
 	HostModule *hostModule = new HostModule;
-	moduler->addDirectModule(new HostModule);
+	moduler->addDirectModule(hostModule);
 //	IModule *temp = 
 //		moduler->loadModule("apprunnerd.dll");
 

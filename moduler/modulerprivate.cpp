@@ -56,7 +56,7 @@ namespace moduler
 		}
 		else {
 			LOG_DEBUG_STR("Going to delete free module: " << moduleData.moduleName());
-			delete moduleHandlePtr;
+			delete moduleHandlePtr->module;
 		}
 		return modules.erase(pointerToIterator(moduleHandlePtr)) != modules.end();
 	}

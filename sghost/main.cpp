@@ -15,12 +15,14 @@ int main(int argc, char* argv[])
 	using namespace moduler;
 	auto *moduler = createModuler();
 
+	HostModule *hostModule = new HostModule;
 	moduler->addDirectModule(new HostModule);
 //	IModule *temp = 
 //		moduler->loadModule("apprunnerd.dll");
 
 	// Destroy the moduler
 	destroyModuler();
+	delete hostModule;
 
 	// Destroy the logger
 	destroyLogger();

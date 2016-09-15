@@ -1,0 +1,6 @@
+#ifndef VTX_COMMON_PATTERNS_HPP
+#define VTX_COMMON_PATTERNS_HPP
+
+
+#endif
+

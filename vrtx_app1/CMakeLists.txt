@@ -8,8 +8,6 @@ set(CURRENT_TARGET vrtx_app1)
 add_executable (${CURRENT_TARGET} ${MAIN_HEADERS} ${MAIN_SOURCES})
 
 target_link_libraries (${CURRENT_TARGET} vortex)
-#target_link_libraries (${CURRENT_TARGET} logger)
-#target_link_libraries (${CURRENT_TARGET} moduler)
 
 
 set(_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)

@@ -25,13 +25,17 @@ message ("cxx Flags: " ${CMAKE_CXX_FLAGS})
 
 
 # Sub-directories where more CMakeLists.txt exist
-add_subdirectory(extypes)
-add_subdirectory(logger)
-add_subdirectory(loader)
-add_subdirectory(moduler)
-add_subdirectory(filesystem)
-add_subdirectory(configuration)
-add_subdirectory(apprunner)
-add_subdirectory(sghost)
+#add_subdirectory(extypes)
+#add_subdirectory(logger)
+#add_subdirectory(loader)
+#add_subdirectory(moduler)
+#add_subdirectory(filesystem)
+#add_subdirectory(configuration)
+#add_subdirectory(apprunner)
+#add_subdirectory(sghost)
+
 #add_subdirectory(lib)
 #add_subdirectory(host)
+
+add_subdirectory(vortex)
+add_subdirectory(vrtx_app1)

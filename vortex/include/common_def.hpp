@@ -5,6 +5,8 @@
 	struct className##Private;	\
 	className##Private *privateObject;
 
+#define DECLARE_PRIVATE_MPRIVATE_PIMPL(className)		DECLARE_PRIVATE_PIMPL(className,m_private)
+
 
 #endif
 

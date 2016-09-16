@@ -11,9 +11,8 @@ namespace vtx
 	public:
 		Vortex();
 		~Vortex();
-	private:
-		struct VortexPrivate;
-		VortexPrivate *m_private;
+
+		DECLARE_PRIVATE_MPRIVATE_PIMPL(Vortex)
 	};
 }
 

@@ -1,21 +1,19 @@
 #include "include/vortex.hpp"
+#include "common_def_priv.hpp"
 
 namespace vtx
 {
-	struct Vortex::VortexPrivate
+	struct PRIVATE_STRUCT_NAME(Vortex)
 	{
 		int a;
 	};
 
-	Vortex::Vortex() : m_private{new VortexPrivate}
+	Vortex::Vortex() : m_private{new PRIVATE_STRUCT_NAME (Vortex)}
 	{
 	}
 
 	Vortex::~Vortex()
 	{
-		if (m_private) {
-			delete m_private;
-			m_private = nullptr;
-		}
+		DELETE_PRIVATE_MPRIVATE_PIMPL(Vortex)
 	}
 }

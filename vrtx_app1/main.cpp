@@ -2,6 +2,8 @@
 
 int main(int argc, char* argv[])
 {
-	vtx::Vortex vortex;
+	using namespace vtx;
+
+	Vortex vortex;
 	return 0;
 }

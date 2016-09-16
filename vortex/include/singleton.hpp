@@ -8,6 +8,10 @@ namespace vtx
 	template <class T>
 	class Singleton
 	{
+	protected:
+		Singleton() {}
+		virtual ~Singleton() {}
+
 	public:
 		inline static T*const createInstance()
 		{
@@ -25,10 +29,6 @@ namespace vtx
 			delete instance_;
 			instance_ = nullptr;
 		}
-
-	protected:
-		T() = default;
-		virtual ~T() = default;
 
 	private:
 		static T* instance_;

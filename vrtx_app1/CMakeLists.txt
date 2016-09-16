@@ -3,7 +3,7 @@ file (GLOB MAIN_SOURCES "*.cpp")
 
 set(CURRENT_TARGET vrtx_app1)
 
-#include_directories ("${PROJECT_SOURCE_DIR}/")
+include_directories ("${PROJECT_SOURCE_DIR}/")
 
 add_executable (${CURRENT_TARGET} ${MAIN_HEADERS} ${MAIN_SOURCES})
 

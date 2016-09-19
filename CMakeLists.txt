@@ -37,6 +37,5 @@ message ("cxx Flags: " ${CMAKE_CXX_FLAGS})
 #add_subdirectory(lib)
 #add_subdirectory(host)
 
-add_subdirectory(vrtxbackend)
 add_subdirectory(vortex)
 add_subdirectory(vrtx_app1)

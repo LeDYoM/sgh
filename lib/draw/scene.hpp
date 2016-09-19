@@ -13,7 +13,6 @@
 
 namespace lib
 {
-	class ResourceManager;
 	class UtilProvider;
 	namespace draw
 	{

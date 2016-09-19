@@ -7,6 +7,7 @@
 #include <lib/board/itilescontroller.hpp>
 #include <lib/core/log.hpp>
 #include <lib/core/resource.hpp>
+#include <lib/core/managers/fontmanager.hpp>
 #include <lib/draw/rendernode.hpp>
 #include <lib/draw/nodeshape.hpp>
 #include <lib/draw/nodetext.hpp>
@@ -64,7 +65,7 @@ namespace zoper
 			_gameText = _gameOverrg->createText("gameovergame");
 			_overText = _gameOverrg->createText("gameoverover");
 
-			auto resourceManager = service<ResourceManager>();
+			auto resourceManager = service<lib::core::managers::FontManager>();
 			_scoreText->setFont(*(resourceManager->getResource("game_scene.scoreFont")->getAsFont()));
 			_scoreDisplay->setFont(*(resourceManager->getResource("game_scene.scoreFont")->getAsFont()));
 			_currentLevelText->setFont(*(resourceManager->getResource("game_scene.scoreFont")->getAsFont()));

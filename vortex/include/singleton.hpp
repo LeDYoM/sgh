@@ -22,12 +22,14 @@ namespace vtx
 			return instance_;
 		}
 
-		inline static T*const getInstance() { return instance_; }
+		inline static T*const getInstance() noexcept { return instance_; }
 
 		inline static void destroyInstance()
 		{
-			delete instance_;
-			instance_ = nullptr;
+			if (instance_) {
+				delete instance_;
+				instance_ = nullptr;
+			}
 		}
 
 	private:

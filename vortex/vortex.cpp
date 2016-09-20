@@ -26,11 +26,11 @@ namespace vtx
 		DELETE_PRIVATE_MPRIVATE_PIMPL(Vortex)
 	}
 
-	void vtx::Vortex::initialize()
+	void Vortex::initialize()
 	{
 	}
 
-	void vtx::Vortex::deinitialize()
+	void Vortex::deinitialize()
 	{
 	}
 }

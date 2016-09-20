@@ -12,7 +12,6 @@ namespace vtx
 		Singleton() {}
 		virtual ~Singleton() {}
 
-	public:
 		inline static T*const createInstance()
 		{
 			if (!instance_) {
@@ -22,8 +21,6 @@ namespace vtx
 			return instance_;
 		}
 
-		inline static T*const getInstance() noexcept { return instance_; }
-
 		inline static void destroyInstance()
 		{
 			if (instance_) {
@@ -31,6 +28,9 @@ namespace vtx
 				instance_ = nullptr;
 			}
 		}
+
+	public:
+		inline static T*const getInstance() noexcept { return instance_; }
 
 	private:
 		static T* instance_;

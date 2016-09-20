@@ -11,6 +11,16 @@ namespace vtx
 	class VORTEX_API Vortex : public Singleton<Vortex>
 	{
 	public:
+		inline static Vortex*const createInstance()
+		{
+			return Singleton<Vortex>::createInstance();
+		}
+
+		inline static void destroyInstance()
+		{
+			Singleton<Vortex>::destroyInstance();
+		}
+
 		void initialize();
 		void deinitialize();
 

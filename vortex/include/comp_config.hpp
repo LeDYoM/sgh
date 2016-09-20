@@ -7,8 +7,10 @@
 		#define VORTEX_SYSTEM_WINDOWS
 		#ifdef vortex_EXPORTS
 			#define VORTEX_API __declspec(dllexport)
+			#define EXPIMP_TEMPLATE
 		#else
 			#define VORTEX_API __declspec(dllimport)
+			#define EXPIMP_TEMPLATE extern
 		#endif
 	#else
 

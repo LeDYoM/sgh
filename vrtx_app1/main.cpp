@@ -1,4 +1,5 @@
 #include <vortex/include/vortex.hpp>
+#include <vortex/include/app.hpp>
 
 int main(int argc, char* argv[])
 {

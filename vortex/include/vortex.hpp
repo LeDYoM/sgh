@@ -7,17 +7,18 @@
 
 namespace vtx
 {
+	class Application;
 	class VORTEX_API Vortex : public Singleton<Vortex>
 	{
 	public:
 		void initialize();
 		void deinitialize();
 
+		void setApplication(Application &&app);
 	private:
 		Vortex();
 		~Vortex();
 		friend class Singleton<Vortex>;
-
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(Vortex)
 	};
 }

@@ -36,6 +36,8 @@ namespace vtx
 		Logger &operator<<(const int message);
 		Logger &operator<<(const struct EndLine_t);
 
+		LogSeverity &severity() noexcept;
+		const LogSeverity severity() const noexcept;
 	private:
 		Logger();
 		~Logger();

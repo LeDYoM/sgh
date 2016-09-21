@@ -39,6 +39,9 @@ namespace vtx
 		return *this;
 	}
 
+	Logger::LogSeverity & Logger::severity() noexcept { return m_private->m_currentLogSeverity; }
+	const Logger::LogSeverity vtx::Logger::severity() const noexcept { return m_private->m_currentLogSeverity; }
+
 	Logger::Logger() : m_private{ new PRIVATE_STRUCT_NAME(Logger) } {}
 
 	Logger::~Logger()

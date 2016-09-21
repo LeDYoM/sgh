@@ -21,7 +21,7 @@ namespace vtx
 	Vortex::Vortex() : m_private{ new PRIVATE_STRUCT_NAME(Vortex) }
 	{
 		Logger::createInstance();
-		linfo() << "Log created" << Log::endLine();
+		linfo() << "Log created" << 3 << Logger::endLine();
 	}
 
 	Vortex::~Vortex()

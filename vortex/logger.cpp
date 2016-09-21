@@ -3,62 +3,43 @@
 #include "common_def_priv.hpp"
 
 #include <sstream>
+#include <iostream>
 
 namespace vtx
 {
 	struct PRIVATE_STRUCT_NAME(Logger)
 	{
-		Log m_debug;
-		Log m_info;
-		Log m_warning;
-		Log m_error;
+		LogSeverity m_currentLogSeverity{ LogSeverity::None };
+		std::ostringstream m_buffer;
 	};
 
-	std::ostringstream m_buffer;
-
-
-	Log & Log::operator<<(const char * const message)
+	Logger & Logger::operator<<(const LogSeverity lSeverity)
 	{
-		m_buffer << message;
+		m_private->m_currentLogSeverity = lSeverity;
+		m_private->m_buffer.clear();
 		return *this;
 	}
 
-	Log & Log::operator<<(int message)
+	Logger & Logger::operator<<(const char * const message)
 	{
-		m_buffer << message;
+		m_private->m_buffer << message;
 		return *this;
 	}
 
-	Log & Log::operator<<(const EndLine_t)
+	Logger & Logger::operator<<(int message)
 	{
-		m_buffer << std::endl;
+		m_private->m_buffer << message;
 		return *this;
 	}
 
-	Log & Logger::debug() noexcept
+	Logger & Logger::operator<<(const EndLine_t)
 	{
-		return m_private->m_debug;
+		m_private->m_buffer << std::endl;
+		std::cout << m_private->m_buffer.str();
+		return *this;
 	}
 
-	Log & Logger::info() noexcept
-	{
-		return m_private->m_info;
-	}
-
-	Log & Logger::warning() noexcept
-	{
-		return m_private->m_warning;
-	}
-
-	Log & Logger::error() noexcept
-	{
-		return m_private->m_error;
-	}
-
-	Logger::Logger() : m_private{ new PRIVATE_STRUCT_NAME(Logger) }
-	{
-	}
-
+	Logger::Logger() : m_private{ new PRIVATE_STRUCT_NAME(Logger) } {}
 
 	Logger::~Logger()
 	{

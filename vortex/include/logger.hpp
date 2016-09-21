@@ -12,31 +12,30 @@ namespace vtx
 	public:
 		virtual void add(const char *const message) = 0;
 	};
-	class VORTEX_API Log
-	{
-	public:
-		struct EndLine_t {};
-		static constexpr const EndLine_t endLine() { return EndLine_t{}; }
-		Log &operator<<(const char *const message);
-		Log &operator<<(int message);
-		Log &operator<<(const struct EndLine_t);
-
-	private:
-		Log() {}
-		friend class Logger;
-	};
 
 	class VORTEX_API Logger : public Singleton<Logger>
 	{
 	public:
 
+		struct EndLine_t {};
+
+		enum class LogSeverity
+		{
+			Debug,
+			Info,
+			Warning,
+			Error,
+			None
+		};
 		inline static Logger*const createInstance() { return Singleton<Logger>::createInstance(); }
 		inline static void destroyInstance() { Singleton<Logger>::destroyInstance(); }
 
-		Log &debug() noexcept;
-		Log &info() noexcept;
-		Log &warning() noexcept;
-		Log &error() noexcept;
+		static constexpr const EndLine_t endLine() noexcept { return EndLine_t{}; }
+		Logger &operator<<(const LogSeverity lSeverity);
+		Logger &operator<<(const char *const message);
+		Logger &operator<<(const int message);
+		Logger &operator<<(const struct EndLine_t);
+
 	private:
 		Logger();
 		~Logger();
@@ -44,13 +43,12 @@ namespace vtx
 		friend class Vortex;
 
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(Logger)
-
 	};
 
-	inline Log &ldebug() noexcept { return Logger::getInstance()->debug(); }
-	inline Log &linfo() noexcept { return Logger::getInstance()->info(); }
-	inline Log &lwarning() noexcept { return Logger::getInstance()->warning(); }
-	inline Log &lerror() noexcept { return Logger::getInstance()->error(); }
+	inline Logger &ldebug() { return *(Logger::getInstance()) << Logger::LogSeverity::Debug; }
+	inline Logger &linfo() { return *(Logger::getInstance()) << Logger::LogSeverity::Info; }
+	inline Logger &lwarning() { return *(Logger::getInstance()) << Logger::LogSeverity::Warning; }
+	inline Logger &lerror() { return *(Logger::getInstance()) << Logger::LogSeverity::Error; }
 }
 
 #endif

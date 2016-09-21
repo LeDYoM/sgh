@@ -7,6 +7,11 @@
 
 namespace vtx
 {
+	class ILogOutput
+	{
+	public:
+		virtual void add(const char *const message) = 0;
+	};
 	class VORTEX_API Log
 	{
 	public:
@@ -24,11 +29,15 @@ namespace vtx
 	class VORTEX_API Logger : public Singleton<Logger>
 	{
 	public:
-		Log &debug();
-		Log &info();
-		Log &warning();
-		Log &error();
-	protected:
+
+		inline static Logger*const createInstance() { return Singleton<Logger>::createInstance(); }
+		inline static void destroyInstance() { Singleton<Logger>::destroyInstance(); }
+
+		Log &debug() noexcept;
+		Log &info() noexcept;
+		Log &warning() noexcept;
+		Log &error() noexcept;
+	private:
 		Logger();
 		~Logger();
 		friend class Singleton<Logger>;
@@ -37,6 +46,11 @@ namespace vtx
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(Logger)
 
 	};
+
+	inline Log &ldebug() noexcept { return Logger::getInstance()->debug(); }
+	inline Log &linfo() noexcept { return Logger::getInstance()->info(); }
+	inline Log &lwarning() noexcept { return Logger::getInstance()->warning(); }
+	inline Log &lerror() noexcept { return Logger::getInstance()->error(); }
 }
 
 #endif

@@ -35,22 +35,22 @@ namespace vtx
 		return *this;
 	}
 
-	Log & Logger::debug()
+	Log & Logger::debug() noexcept
 	{
 		return m_private->m_debug;
 	}
 
-	Log & Logger::info()
+	Log & Logger::info() noexcept
 	{
 		return m_private->m_info;
 	}
 
-	Log & Logger::warning()
+	Log & Logger::warning() noexcept
 	{
 		return m_private->m_warning;
 	}
 
-	Log & Logger::error()
+	Log & Logger::error() noexcept
 	{
 		return m_private->m_error;
 	}

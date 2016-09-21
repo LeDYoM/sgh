@@ -6,7 +6,8 @@ int main(int argc, char* argv[])
 {
 	using namespace vtx;
 
-	Vortex *vortex{ Vortex::createInstance() };
+	Logger::createInstance();
+	Vortex *const vortex{ Vortex::createInstance() };
 	vortex->initialize();
 	vortex->deinitialize();
 	Vortex::destroyInstance();

@@ -1,5 +1,6 @@
 #include "include/vortex.hpp"
 #include "include/app.hpp"
+#include "include/logger.hpp"
 
 #include "common_def_priv.hpp"
 
@@ -19,6 +20,8 @@ namespace vtx
 
 	Vortex::Vortex() : m_private{ new PRIVATE_STRUCT_NAME(Vortex) }
 	{
+		Logger::createInstance();
+		linfo() << "Log created" << Log::endLine();
 	}
 
 	Vortex::~Vortex()

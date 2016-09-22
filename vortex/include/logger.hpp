@@ -18,13 +18,17 @@ namespace vtx
 		bool m_active{ false };
 	};
 
+	/**
+	/* \class Logger
+	** Class that manages logging functions. It is a singleton with public creation.
+	**/
 	class VORTEX_API Logger : public Singleton<Logger>
 	{
 	public:
 
-		struct EndLine_t {};
+		struct EndLine_t {};			///< Type of the endline
 
-		enum class LogSeverity : int
+		enum class LogSeverity
 		{
 			Debug,
 			Info,

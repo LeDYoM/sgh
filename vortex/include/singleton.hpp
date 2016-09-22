@@ -30,7 +30,8 @@ namespace vtx
 		}
 
 	public:
-		inline static T*const getInstance() noexcept { return instance_; }
+		inline static const T*const getConstInstance() noexcept { return instance_; }
+		inline static T* getInstance() noexcept { return instance_; }
 
 	private:
 		static T* instance_;

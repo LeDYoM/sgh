@@ -10,7 +10,12 @@ namespace vtx
 	class ILogOutput
 	{
 	public:
+		constexpr ILogOutput(const bool active_ = true) noexcept : m_active{ active_ } {}
 		virtual void add(const char *const message) = 0;
+		inline bool active() const noexcept { return m_active; }
+		inline bool &active() noexcept { return m_active; }
+	private:
+		bool m_active{ false };
 	};
 
 	class VORTEX_API Logger : public Singleton<Logger>
@@ -19,7 +24,7 @@ namespace vtx
 
 		struct EndLine_t {};
 
-		enum class LogSeverity
+		enum class LogSeverity : int
 		{
 			Debug,
 			Info,
@@ -38,6 +43,7 @@ namespace vtx
 
 		LogSeverity &severity() noexcept;
 		const LogSeverity severity() const noexcept;
+
 	private:
 		Logger();
 		~Logger();

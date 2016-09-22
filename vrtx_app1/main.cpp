@@ -6,10 +6,11 @@ int main(int argc, char* argv[])
 {
 	using namespace vtx;
 
-	Logger::createInstance();
-	Vortex *const vortex{ Vortex::createInstance() };
-	vortex->initialize();
-	vortex->deinitialize();
+	auto pLogger (Logger::createInstance());
+	pLogger->severity() = Logger::LogSeverity::Debug;
+	auto pVortex(Vortex::createInstance());
+	pVortex->initialize();
+	pVortex->deinitialize();
 	Vortex::destroyInstance();
 	return 0;
 }

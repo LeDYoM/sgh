@@ -51,6 +51,7 @@ namespace vtx
 	inline Logger &linfo() { return *(Logger::getInstance()) << Logger::LogSeverity::Info; }
 	inline Logger &lwarning() { return *(Logger::getInstance()) << Logger::LogSeverity::Warning; }
 	inline Logger &lerror() { return *(Logger::getInstance()) << Logger::LogSeverity::Error; }
+	inline const Logger::EndLine_t endline() noexcept { return Logger::EndLine_t{}; }
 }
 
 #endif

@@ -34,6 +34,10 @@ namespace vtx
 	void Vortex::initialize()
 	{
 		linfo() << "Initializing Vortex library..." << endline();
+		if (!m_private->m_application) {
+			lerror() << "No application set" << endline();
+			return;
+		}
 	}
 
 	void Vortex::deinitialize()

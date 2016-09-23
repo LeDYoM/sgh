@@ -9,7 +9,7 @@ namespace vtx
 	class Singleton
 	{
 	protected:
-		Singleton() {}
+		constexpr Singleton() {}
 		virtual ~Singleton() {}
 
 		inline static T*const createInstance()
@@ -31,7 +31,7 @@ namespace vtx
 
 	public:
 		inline static const T*const getConstInstance() noexcept { return instance_; }
-		inline static T* getInstance() noexcept { return instance_; }
+		inline static T* getInstance() noexcept  { return instance_; }
 
 	private:
 		static T* instance_;

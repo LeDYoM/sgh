@@ -33,7 +33,6 @@ namespace vtx
 				m_buffer << data;
 			}
 		}
-
 	};
 
 	Logger & Logger::operator<<(const LogSeverity lSeverity)

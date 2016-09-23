@@ -38,7 +38,8 @@ namespace vtx
 	Logger & Logger::operator<<(const LogSeverity lSeverity)
 	{
 		m_private->m_bufferSeverity = lSeverity;
-		m_private->m_buffer.clear();
+		static const std::string emptyStr;
+		m_private->m_buffer.str(emptyStr);
 		return *this;
 	}
 

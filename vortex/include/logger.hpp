@@ -40,7 +40,7 @@ namespace vtx
 		inline static void destroyInstance() { Singleton<Logger>::destroyInstance(); }
 
 		static constexpr const EndLine_t endLine{};
-		Logger &operator<<(const LogSeverity lSeverity);
+		Logger &operator<<(const LogSeverity lSeverity) noexcept;
 		Logger &operator<<(const char *const message);
 		Logger &operator<<(const int message);
 		Logger &operator<<(const struct EndLine_t);

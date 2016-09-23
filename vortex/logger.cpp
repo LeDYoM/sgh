@@ -35,7 +35,7 @@ namespace vtx
 		}
 	};
 
-	Logger & Logger::operator<<(const LogSeverity lSeverity)
+	Logger & Logger::operator<<(const LogSeverity lSeverity) noexcept
 	{
 		m_private->m_bufferSeverity = lSeverity;
 		return *this;

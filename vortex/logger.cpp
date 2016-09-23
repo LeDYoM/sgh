@@ -19,7 +19,7 @@ namespace vtx
 		}
 	};
 
-	struct PRIVATE_STRUCT_NAME(Logger)
+	PRIVATE_STRUCT_DEFINITION(Logger)
 	{
 		LogSeverity m_currentLogSeverity{ LogSeverity::None };
 		std::ostringstream m_buffer;

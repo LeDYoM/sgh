@@ -9,5 +9,7 @@
 	}
 
 #define PRIVATE_STRUCT_NAME(className)	className::className##Private
+#define PRIVATE_STRUCT_DEFINITION(className)	struct PRIVATE_STRUCT_NAME(className) final
+
 #endif
 

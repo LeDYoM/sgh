@@ -8,7 +8,7 @@
 
 namespace vtx
 {
-	struct PRIVATE_STRUCT_NAME(Vortex)
+	PRIVATE_STRUCT_DEFINITION(Vortex)
 	{
 		std::unique_ptr<IApplication> m_application;
 	};

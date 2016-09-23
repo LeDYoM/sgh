@@ -8,7 +8,7 @@ namespace vtx
 	class VORTEX_API NoCopy
 	{
 	public:
-		constexpr NoCopy() noexcept {}
+		constexpr NoCopy() noexcept = default;
 		virtual ~NoCopy() {}
 
 		NoCopy(const NoCopy &) = delete;

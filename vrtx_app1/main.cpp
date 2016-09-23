@@ -1,5 +1,5 @@
 #include <vortex/include/vortex.hpp>
-#include <vortex/include/app.hpp>
+#include <vortex/include/iapplication.hpp>
 #include <vortex/include/logger.hpp>
 
 int main(int argc, char* argv[])

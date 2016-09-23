@@ -12,6 +12,16 @@ namespace vtx
 		Assert();
 		~Assert();
 	};
+
 }
+
+#define USE_NATIVE_ASSERT
+
+#ifdef USE_NATIVE_ASSERT
+	#include <cassert>
+	#define SYSTEM_ASSERT(x)	assert(x)
+#else
+	#define SYSTEM_ASSERT(x,p)	if (!(x)) lerror() << p << endline();
+#endif
 
 #endif

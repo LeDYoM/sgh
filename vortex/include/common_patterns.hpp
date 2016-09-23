@@ -9,7 +9,7 @@ namespace vtx
 	{
 	public:
 		constexpr NoCopy() noexcept = default;
-		virtual ~NoCopy() {}
+		virtual ~NoCopy() = default;
 
 		NoCopy(const NoCopy &) = delete;
 		NoCopy &operator=(const NoCopy&) = delete;

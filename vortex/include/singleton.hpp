@@ -2,11 +2,12 @@
 #define VTX_SINGLETON_INCLUDE_HPP
 
 #include "comp_config.hpp"
+#include "common_patterns.hpp"
 
 namespace vtx
 {
 	template <class T>
-	class Singleton
+	class Singleton : public NoCopy
 	{
 	protected:
 		constexpr Singleton() {}

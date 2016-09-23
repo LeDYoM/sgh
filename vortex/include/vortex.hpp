@@ -7,7 +7,7 @@
 
 namespace vtx
 {
-	class Application;
+	class IApplication;
 	class VORTEX_API Vortex : public Singleton<Vortex>
 	{
 	public:
@@ -17,7 +17,7 @@ namespace vtx
 		void initialize();
 		void deinitialize();
 
-		void setApplication(Application &&app);
+		void setApplication(IApplication &&app);
 	private:
 		Vortex();
 		~Vortex();

@@ -1,5 +1,5 @@
 #include "include/vortex.hpp"
-#include "include/app.hpp"
+#include "include/iapplication.hpp"
 #include "include/logger.hpp"
 
 #include "common_def_priv.hpp"
@@ -10,10 +10,10 @@ namespace vtx
 {
 	struct PRIVATE_STRUCT_NAME(Vortex)
 	{
-		std::unique_ptr<Application> m_application;
+		std::unique_ptr<IApplication> m_application;
 	};
 
-	void Vortex::setApplication(Application &&app)
+	void Vortex::setApplication(IApplication &&app)
 	{
 		m_private->m_application.reset(&app);
 	}

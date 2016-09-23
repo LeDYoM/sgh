@@ -8,7 +8,7 @@
 namespace vtx
 {
 	class IApplication;
-	class VORTEX_API Vortex : public Singleton<Vortex>
+	class VORTEX_API Vortex final : public Singleton<Vortex>
 	{
 	public:
 		inline static Vortex*const createInstance() { return Singleton<Vortex>::createInstance(); }

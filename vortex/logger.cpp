@@ -27,7 +27,7 @@ namespace vtx
 		std::vector<std::unique_ptr<ILogOutput>> m_logOutputs;
 
 		template <typename T>
-		void storeLogChunk(const T&data)
+		inline void storeLogChunk(const T&data)
 		{
 			if (m_currentLogSeverity <= m_bufferSeverity) {
 				m_buffer << data;

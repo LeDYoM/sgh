@@ -26,7 +26,7 @@ namespace vtx
 
 	Vortex::~Vortex()
 	{
-		ldebug() << "Vortex library instance beeing deleted" << endline();
+		LDEBUG("Vortex library instance beeing deleted");
 		DELETE_PRIVATE_MPRIVATE_PIMPL(Vortex);
 		ldebug() << "Vortex library instance deleted" << endline();
 	}

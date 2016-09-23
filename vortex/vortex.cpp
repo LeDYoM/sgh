@@ -21,27 +21,27 @@ namespace vtx
 	Vortex::Vortex() : m_private{ new PRIVATE_STRUCT_NAME(Vortex) }
 	{
 		Logger::createInstance();
-		ldebug() << "Vortex library instance created" << endline();
+		LDEBUG("Vortex library instance created");
 	}
 
 	Vortex::~Vortex()
 	{
 		LDEBUG("Vortex library instance beeing deleted");
 		DELETE_PRIVATE_MPRIVATE_PIMPL(Vortex);
-		ldebug() << "Vortex library instance deleted" << endline();
+		LDEBUG("Vortex library instance deleted");
 	}
 
 	void Vortex::initialize()
 	{
-		linfo() << "Initializing Vortex library..." << endline();
+		LINFO("Initializing Vortex library...");
 		if (!m_private->m_application) {
-			lerror() << "No application set" << endline();
+			LERROR("No application set");
 			return;
 		}
 	}
 
 	void Vortex::deinitialize()
 	{
-		linfo() << "Deinitializing Vortex library..." << endline();
+		LINFO("Deinitializing Vortex library...");
 	}
 }

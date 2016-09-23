@@ -22,7 +22,7 @@ namespace vtx
 	/* \class Logger
 	** Class that manages logging functions. It is a singleton with public creation.
 	**/
-	class VORTEX_API Logger : public Singleton<Logger>
+	class VORTEX_API Logger final : public Singleton<Logger>
 	{
 	public:
 
@@ -39,7 +39,7 @@ namespace vtx
 		inline static Logger*const createInstance() { return Singleton<Logger>::createInstance(); }
 		inline static void destroyInstance() { Singleton<Logger>::destroyInstance(); }
 
-		static constexpr const EndLine_t endLine() noexcept { return EndLine_t{}; }
+		static constexpr const EndLine_t endLine{};
 		Logger &operator<<(const LogSeverity lSeverity);
 		Logger &operator<<(const char *const message);
 		Logger &operator<<(const int message);
@@ -61,9 +61,12 @@ namespace vtx
 	inline Logger &linfo() { return *(Logger::getInstance()) << Logger::LogSeverity::Info; }
 	inline Logger &lwarning() { return *(Logger::getInstance()) << Logger::LogSeverity::Warning; }
 	inline Logger &lerror() { return *(Logger::getInstance()) << Logger::LogSeverity::Error; }
-	inline const Logger::EndLine_t endline() noexcept { return Logger::EndLine_t{}; }
+	constexpr static Logger::EndLine_t endline{};
 
-#define LDEBUG(x)	*(Logger::getInstance()) << Logger::LogSeverity::Debug << x << Logger::EndLine_t{};
+	#define LDEBUG(x)	*(Logger::getInstance()) << Logger::LogSeverity::Debug << x << endline;
+	#define LINFO(x)	*(Logger::getInstance()) << Logger::LogSeverity::Info << x << endline;
+	#define LWARNING(x)	*(Logger::getInstance()) << Logger::LogSeverity::Warning << x << endline;
+	#define LERROR(x)	*(Logger::getInstance()) << Logger::LogSeverity::Error << x << endline;
 }
 
 #endif

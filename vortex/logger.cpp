@@ -38,8 +38,6 @@ namespace vtx
 	Logger & Logger::operator<<(const LogSeverity lSeverity)
 	{
 		m_private->m_bufferSeverity = lSeverity;
-		static const std::string emptyStr;
-		m_private->m_buffer.str(emptyStr);
 		return *this;
 	}
 
@@ -62,6 +60,9 @@ namespace vtx
 		for (const auto &logoutput : m_private->m_logOutputs) {
 			logoutput->add(message.c_str());
 		}
+		static const std::string emptyStr;
+		m_private->m_buffer.str(emptyStr);
+
 		return *this;
 	}
 

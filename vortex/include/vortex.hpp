@@ -18,9 +18,13 @@ namespace vtx
 		void deinitialize();
 
 		void setApplication(IApplication &&app);
+		int execute();
 	private:
 		Vortex();
 		~Vortex();
+
+		int update();
+
 		friend class Singleton<Vortex>;
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(Vortex)
 	};

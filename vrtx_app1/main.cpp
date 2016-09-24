@@ -10,7 +10,12 @@ int main(int argc, char* argv[])
 	pLogger->severity() = Logger::LogSeverity::Debug;
 	auto pVortex(Vortex::createInstance());
 	pVortex->initialize();
+
+	int result(pVortex->execute());
+
 	pVortex->deinitialize();
 	Vortex::destroyInstance();
-	return 0;
+
+	pLogger->destroyInstance();
+	return result;
 }

@@ -52,7 +52,7 @@ namespace vtx
 		Logger();
 		~Logger();
 		friend class Singleton<Logger>;
-		friend class Vortex;
+		friend class VApplication;
 
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(Logger)
 	};

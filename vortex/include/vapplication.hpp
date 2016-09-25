@@ -10,11 +10,8 @@ namespace vtx
 	class VORTEX_API VApplication : public Singleton<VApplication>
 	{
 	public:
-		inline static VApplication*const createInstance() { return Singleton<VApplication>::createInstance(); }
-		inline static void destroyInstance() { Singleton<VApplication>::destroyInstance(); }
-
-		void initialize();
-		void deinitialize();
+		virtual void initialize();
+		virtual void deinitialize();
 
 		int execute();
 	protected:

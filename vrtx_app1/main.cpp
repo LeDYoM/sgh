@@ -11,11 +11,11 @@ int main(int argc, char* argv[])
 //	auto pVortex(Vortex::createInstance());
 //	pVortex->initialize();
 
-//	int result(pVortex->execute());
+	int result(app.execute());
 
 //	pVortex->deinitialize();
 //	Vortex::destroyInstance();
 
 	pLogger->destroyInstance();
-	return 0;
+	return result;
 }

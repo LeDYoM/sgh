@@ -6,8 +6,8 @@
 class Application : public vtx::VApplication
 {
 public:
-	Application() noexcept {}
-	virtual ~Application() {}
+	Application() noexcept;
+	virtual ~Application();
 
 	virtual void onStart() {}
 	virtual void onFinish() {}

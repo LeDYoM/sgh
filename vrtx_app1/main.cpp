@@ -1,4 +1,4 @@
-#include <vortex/include/vapplication.hpp>
+#include "application.hpp"
 #include <vortex/include/logger.hpp>
 
 int main(int argc, char* argv[])
@@ -7,6 +7,7 @@ int main(int argc, char* argv[])
 
 	auto pLogger (Logger::createInstance());
 	pLogger->severity() = Logger::LogSeverity::Debug;
+	Application app;
 //	auto pVortex(Vortex::createInstance());
 //	pVortex->initialize();
 

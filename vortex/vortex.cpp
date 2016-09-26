@@ -32,7 +32,7 @@ namespace vtx
 		Logger::destroyInstance();
 	}
 
-	bool Vortex::setApplication(VApplication &&app)
+	bool Vortex::setApplication(VApplication &*app)
 	{
 		if (m_private->m_application)
 		{
@@ -40,7 +40,8 @@ namespace vtx
 			return false;
 		}
 
-		m_private->m_application.reset(&app);
+		m_private->m_application.reset(app);
+		app = nullptr;
 		return false;
 	}
 

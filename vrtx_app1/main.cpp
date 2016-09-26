@@ -1,5 +1,6 @@
 #include "application.hpp"
 #include <vortex/include/vortex.hpp>
+#include <memory>
 
 int main(int argc, char* argv[])
 {
@@ -8,6 +9,7 @@ int main(int argc, char* argv[])
 
 	{
 		Vortex_Init();
+		Vortex::getInstance()->setApplication(new VApplication{});
 		//	auto pLogger (Logger::createInstance());
 		//	pLogger->severity() = Logger::LogSeverity::Debug;
 //		Application app;

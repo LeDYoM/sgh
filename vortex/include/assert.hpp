@@ -16,8 +16,6 @@ namespace vtx
 
 }
 
-#define USE_NATIVE_ASSERT
-
 #ifdef USE_NATIVE_ASSERT
 	#include <cassert>
 	#define SYSTEM_ASSERT(x,p)	if (!(x)) LERROR(p); assert(x);

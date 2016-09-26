@@ -6,6 +6,9 @@ file (GLOB _INCLUDES "include/*.hpp")
 set (CURRENT_TARGET vortex) 
 set(CMAKE_DEBUG_POSTFIX  "d") 
 
+#Optional defines
+add_definitions(-DUSE_NATIVE_ASSERT)
+
 source_group("Sources" FILES ${_SOURCES})
 source_group("Headers" FILES ${_HEADERS})
 source_group("Includes" FILES ${_INCLUDES})

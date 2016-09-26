@@ -13,7 +13,7 @@ namespace vtx
 	{
 		using ILogOutput::ILogOutput;
 
-		virtual void add(const char *const data) override
+		virtual void add(const char *const data) noexcept override
 		{
 			std::cout << data;
 		}

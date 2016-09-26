@@ -1,10 +1,8 @@
 #include "include/vortex.hpp"
-#include "include/iapplication.hpp"
 #include "include/logger.hpp"
 
 #include "common_def_priv.hpp"
-
-#include <memory>
+#include "include/memleakdetector.hpp"
 
 namespace vtx
 {
@@ -14,6 +12,7 @@ namespace vtx
 
 	Vortex::Vortex() : m_private{ new PRIVATE_STRUCT_NAME(Vortex) }
 	{
+		installMemLeakDetector();
 		Logger::createInstance();
 		LDEBUG("Vortex library instance created");
 	}

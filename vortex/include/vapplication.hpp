@@ -7,11 +7,9 @@
 
 namespace vtx
 {
-	class VORTEX_API VApplication : public Singleton<VApplication>
+	class VORTEX_API VApplication
 	{
 	public:
-		virtual void initialize();
-		virtual void deinitialize();
 
 		int execute();
 	protected:
@@ -20,7 +18,6 @@ namespace vtx
 
 		int update();
 
-		friend class Singleton<VApplication>;
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(VApplication)
 	};
 }

@@ -3,7 +3,6 @@
 #include "include/logger.hpp"
 
 #include "common_def_priv.hpp"
-#include "vappinternal.hpp"
 
 #include <memory>
 
@@ -11,24 +10,11 @@ namespace vtx
 {
 	PRIVATE_STRUCT_DEFINITION(VApplication)
 	{
-		intern::VApplicationInternal *pvaInternal{ nullptr };
-
-		VApplicationPrivate()
-			: pvaInternal{ intern::VApplicationInternal::createInstance() }
-		{
-		}
-		~VApplicationPrivate()
-		{
-			if (pvaInternal) {
-				pvaInternal = nullptr;
-				intern::VApplicationInternal::destroyInstance();
-			}
-		}
 	};
 
 	VApplication::VApplication() : m_private{ new PRIVATE_STRUCT_NAME(VApplication) }
 	{
-		LDEBUG("Vortex library instance created");
+		LDEBUG("Vortex application instance created");
 	}
 
 	VApplication::~VApplication()
@@ -40,9 +26,9 @@ namespace vtx
 
 	int VApplication::execute()
 	{
-		while (!update()) {
+//		while (!update()) {
 
-		}
+//		}
 
 		return 0;
 	}

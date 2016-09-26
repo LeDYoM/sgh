@@ -19,6 +19,19 @@ namespace vtx
 		}
 	};
 
+#ifdef _MSC_VER 
+	#include <windows.h>
+	class LogOutputVSOutput : public ILogOutput
+	{
+		using ILogOutput::ILogOutput;
+
+		virtual void add(const char *const data) noexcept override
+		{
+			OutputDebugString(data);
+		}
+	};
+#endif
+
 	PRIVATE_STRUCT_DEFINITION(Logger)
 	{
 		LogSeverity m_currentLogSeverity{ LogSeverity::None };
@@ -72,6 +85,9 @@ namespace vtx
 	Logger::Logger() : m_private{ new PRIVATE_STRUCT_NAME(Logger) } 
 	{
 		m_private->m_logOutputs.emplace_back(new LogOutputCOut{ true });
+#ifdef _MSC_VER 
+		m_private->m_logOutputs.emplace_back(new LogOutputVSOutput{ true });
+#endif
 	}
 
 	Logger::~Logger()

@@ -1,4 +1,4 @@
-#include "include/memleakdetector.hpp"
+#include "memleakdetector.hpp"
 
 #if defined _MSC_VER && defined USE_LEAKDETECTOR
 

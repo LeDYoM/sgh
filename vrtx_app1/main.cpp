@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 		//	auto pVortex(Vortex::createInstance());
 		//	pVortex->initialize();
 
-//		result = app.execute();
+		result = Vortex_Loop();
 
 		//	pVortex->deinitialize();
 		//	Vortex::destroyInstance();

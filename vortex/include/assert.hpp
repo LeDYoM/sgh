@@ -3,6 +3,7 @@
 
 #include "comp_config.hpp"
 #include "singleton.hpp"
+#include "logger.hpp"
 
 namespace vtx
 {
@@ -19,9 +20,9 @@ namespace vtx
 
 #ifdef USE_NATIVE_ASSERT
 	#include <cassert>
-	#define SYSTEM_ASSERT(x)	assert(x)
+	#define SYSTEM_ASSERT(x,p)	if (!(x)) LERROR(p); assert(x);
 #else
-	#define SYSTEM_ASSERT(x,p)	if (!(x)) lerror() << p << endline();
+	#define SYSTEM_ASSERT(x,p)	if (!(x)) LERROR(p);
 #endif
 
 #endif

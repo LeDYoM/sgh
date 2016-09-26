@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 
 	{
 		Vortex_Init();
-		Vortex::getInstance()->setApplication(new VApplication{});
+		Vortex::getInstance()->setApplication(new Application);
 		//	auto pLogger (Logger::createInstance());
 		//	pLogger->severity() = Logger::LogSeverity::Debug;
 //		Application app;

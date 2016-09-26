@@ -32,7 +32,7 @@ namespace vtx
 		Logger::destroyInstance();
 	}
 
-	bool Vortex::setApplication(VApplication &*app)
+	bool Vortex::setApplication(VApplication *app)
 	{
 		if (m_private->m_application)
 		{
@@ -41,8 +41,8 @@ namespace vtx
 		}
 
 		m_private->m_application.reset(app);
-		app = nullptr;
-		return false;
+		
+		return true;
 	}
 
 	void Vortex::initialize()
@@ -58,19 +58,15 @@ namespace vtx
 
 	int Vortex::execute()
 	{
-		SYSTEM_ASSERT(m_private->m_application != nullptr, "An application must be set to run");
+		SYSTEM_ASSERT(m_private->m_application, "An application must be set to run");
 		initialize();
-		while (!update()) {
 
-		}
+		do 
+		{
+		} while (m_private->m_application->onUpdate());
 
 		deinitialize();
 
-		return 0;
-	}
-
-	int Vortex::update()
-	{
 		return 0;
 	}
 

@@ -10,10 +10,10 @@ namespace vtx
 	class VORTEX_API VApplication
 	{
 	public:
-		virtual void onStart();
+		virtual void onStart() = 0;
 		virtual void onFinish();
 
-		virtual int onUpdate();
+		virtual bool onUpdate();
 
 		VApplication();
 		~VApplication();

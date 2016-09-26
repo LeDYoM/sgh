@@ -9,10 +9,10 @@ public:
 	Application() noexcept;
 	virtual ~Application();
 
-	virtual void onStart() override {}
-	virtual void onFinish() override {}
+	virtual void onStart() override;
+	virtual void onFinish() override;
 
-	virtual int onUpdate() override { return 0; }
+	virtual bool onUpdate() override;
 };
 
 #endif

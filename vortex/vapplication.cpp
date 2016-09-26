@@ -19,16 +19,17 @@ namespace vtx
 	{
 	}
 
+	/*
 	void VApplication::onStart()
 	{
 	}
-
+	*/
 	void VApplication::onFinish()
 	{
 	}
 
-	int VApplication::onUpdate()
+	bool VApplication::onUpdate()
 	{
-		return 0;
+		return true;
 	}
 }

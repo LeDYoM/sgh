@@ -61,9 +61,13 @@ namespace vtx
 		SYSTEM_ASSERT(m_private->m_application, "An application must be set to run");
 		initialize();
 
+		LDEBUG("Entering execute loop");
+
 		do 
 		{
 		} while (m_private->m_application->onUpdate());
+
+		LDEBUG("Exiting execute loop");
 
 		deinitialize();
 

@@ -10,13 +10,13 @@ namespace vtx
 	class VORTEX_API VApplication
 	{
 	public:
+		virtual void onStart();
+		virtual void onFinish();
 
-		int execute();
-	protected:
+		virtual int onUpdate();
+
 		VApplication();
 		~VApplication();
-
-		int update();
 
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(VApplication)
 	};

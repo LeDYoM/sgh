@@ -7,7 +7,7 @@
 
 namespace vtx
 {
-	class IApplication;
+	class VApplication;
 
 	class VORTEX_API Vortex final : public Singleton<Vortex>
 	{
@@ -15,7 +15,7 @@ namespace vtx
 		inline static Vortex*const createInstance() { return Singleton<Vortex>::createInstance(); }
 		inline static void destroyInstance() { return Singleton<Vortex>::destroyInstance(); }
 
-		bool setApplication(IApplication&&);
+		bool setApplication(VApplication&&);
 		void initialize();
 		void deinitialize();
 

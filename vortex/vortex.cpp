@@ -1,6 +1,6 @@
 #include "include/vortex.hpp"
 #include "include/logger.hpp"
-#include "include/iapplication.hpp"
+#include "include/vapplication.hpp"
 #include "include/assert.hpp"
 
 #include "memleakdetector.hpp"
@@ -12,7 +12,7 @@ namespace vtx
 {
 	PRIVATE_STRUCT_DEFINITION(Vortex)
 	{
-		std::unique_ptr<IApplication> m_application;
+		std::unique_ptr<VApplication> m_application;
 	};
 
 	Vortex::Vortex() : m_private{ new PRIVATE_STRUCT_NAME(Vortex) }
@@ -32,7 +32,7 @@ namespace vtx
 		Logger::destroyInstance();
 	}
 
-	bool Vortex::setApplication(IApplication &&app)
+	bool Vortex::setApplication(VApplication &&app)
 	{
 		if (m_private->m_application)
 		{
@@ -47,6 +47,7 @@ namespace vtx
 	void Vortex::initialize()
 	{
 		LINFO("Initializing Vortex library...");
+		m_private->m_application->onStart();
 	}
 
 	void Vortex::deinitialize()

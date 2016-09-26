@@ -11,12 +11,12 @@ namespace vtx
 	{
 	public:
 		virtual void onStart() = 0;
-		virtual void onFinish();
+		virtual void onFinish() = 0;
 
-		virtual bool onUpdate();
+		virtual bool onUpdate() = 0;
 
-		VApplication();
-		~VApplication();
+		VApplication() {}
+		virtual ~VApplication() {}
 
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(VApplication)
 	};

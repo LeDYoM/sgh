@@ -13,7 +13,7 @@ namespace vtx
 		Str(const char *);
 		Str(const Str&);
 		Str &operator=(const Str&);
-		Str(Str&&);
+		constexpr Str(Str&&);
 		Str &operator=(Str&&);
 
 		~Str();

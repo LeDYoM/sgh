@@ -15,9 +15,12 @@ namespace vtx
 	};
 
 	Str::Str() : m_private{ new PRIVATE_STRUCT_NAME(Str) } { }
-	Str::Str(const char *data) : m_private{ new PRIVATE_STRUCT_NAME(Str)(data) } { }
 	Str::Str(const Str&rh) : m_private{ new PRIVATE_STRUCT_NAME(Str)(*(rh.m_private)) } { }
 	Str &Str::operator=(const Str&rh) { m_private->operator=(*(rh.m_private)); return *this; }
+	Str::Str(Str&&rh) : m_private{ std::move(rh.m_private) } { }
+	Str &Str::operator=(Str&&rh) { m_private = std::move(rh.m_private); rh.m_private = nullptr; return *this; }
+
+	Str::Str(const char *data) : m_private{ new PRIVATE_STRUCT_NAME(Str)(data) } { }
 
 	Str::~Str()
 	{

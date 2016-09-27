@@ -22,6 +22,11 @@ namespace vtx
 
 	Str::Str(const char *data) : m_private{ new PRIVATE_STRUCT_NAME(Str)(data) } { }
 
+	const char * Str::c_str() const
+	{
+		return m_private->str.c_str();
+	}
+
 	Str::~Str()
 	{
 		DELETE_PRIVATE_MPRIVATE_PIMPL(Str);

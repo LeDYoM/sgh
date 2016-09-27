@@ -16,6 +16,8 @@ namespace vtx
 		constexpr Str(Str&&);
 		Str &operator=(Str&&);
 
+		const char *c_str() const;
+
 		~Str();
 
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(Str)

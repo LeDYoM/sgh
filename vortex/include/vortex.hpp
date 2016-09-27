@@ -15,6 +15,7 @@ namespace vtx
 		inline static Vortex*const createInstance() { return Singleton<Vortex>::createInstance(); }
 		inline static void destroyInstance() { return Singleton<Vortex>::destroyInstance(); }
 
+		void setCommandLineParameters(int argc, char* argv[]);
 		bool setApplication(VApplication*);
 		void initialize();
 		void deinitialize();

@@ -1,7 +1,9 @@
 #include "include/vortex.hpp"
+
 #include "include/logger.hpp"
 #include "include/vapplication.hpp"
 #include "include/assert.hpp"
+#include "include/types.hpp"
 
 #include "memleakdetector.hpp"
 #include "common_def_priv.hpp"
@@ -30,6 +32,10 @@ namespace vtx
 		LDEBUG("Vortex library instance deleted");
 		LDEBUG("Deleting logger and finishing...");
 		Logger::destroyInstance();
+	}
+
+	void Vortex::setCommandLineParameters(int argc, char * argv[])
+	{
 	}
 
 	bool Vortex::setApplication(VApplication *app)

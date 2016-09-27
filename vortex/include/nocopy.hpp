@@ -1,5 +1,5 @@
-#ifndef VTX_COMMON_PATTERNS_HPP
-#define VTX_COMMON_PATTERNS_HPP
+#ifndef VTX_NOCOPY_INCLUDE_HPP
+#define VTX_NOCOPY_INCLUDE_HPP
 
 #include "comp_config.hpp"
 

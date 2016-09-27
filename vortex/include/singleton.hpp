@@ -2,7 +2,7 @@
 #define VTX_SINGLETON_INCLUDE_HPP
 
 #include "comp_config.hpp"
-#include "common_patterns.hpp"
+#include "nocopy.hpp"
 
 namespace vtx
 {

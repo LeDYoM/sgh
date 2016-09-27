@@ -9,14 +9,14 @@ namespace vtx
 	class VORTEX_API Str
 	{
 	public:
-		Str();
-		Str(const char *);
-		Str(const Str&);
-		Str &operator=(const Str&);
-		constexpr Str(Str&&);
-		Str &operator=(Str&&);
+		Str() noexcept;
+		Str(const char *) noexcept;
+		Str(const Str&) noexcept;
+		Str &operator=(const Str&) noexcept;
+		constexpr Str(Str&&) noexcept;
+		Str &operator=(Str&&) noexcept;
 
-		const char *c_str() const;
+		const char *c_str() const noexcept;
 
 		~Str();
 

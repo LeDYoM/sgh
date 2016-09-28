@@ -4,7 +4,7 @@
 #include "comp_config.hpp"
 #include <cstdint>
 
-namespace lib
+namespace vtx
 {
 	using u64 = uint64_t;
 	using s64 = int64_t;
@@ -17,10 +17,6 @@ namespace lib
 	using f32 = float;
 	using f64 = double;
 
-//	template <typename T>
-//	using Vector = std::vector<T>;
 }
-
-#include "vector2d.hpp"
 
 #endif

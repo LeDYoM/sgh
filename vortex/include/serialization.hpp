@@ -7,9 +7,19 @@
 
 namespace vtx
 {
-	Str VORTEX_API &operator<<(Str &string, const u64);
-	Str VORTEX_API &operator<<(Str &string, const s64);
-	Str VORTEX_API &operator<<(Str &string, const f64);
+	class VORTEX_API SerializationBuffer
+	{
+		SerializationBuffer&operator<<(const u64);
+		SerializationBuffer&operator<<(const s64);
+		SerializationBuffer&operator<<(const u32);
+		SerializationBuffer&operator<<(const s32);
+		SerializationBuffer&operator<<(const u16);
+		SerializationBuffer&operator<<(const s16);
+		SerializationBuffer&operator<<(const u8);
+		SerializationBuffer&operator<<(const s8);
+		SerializationBuffer&operator<<(const f64);
+		SerializationBuffer&operator<<(const f32);
+	};
 
 }
 

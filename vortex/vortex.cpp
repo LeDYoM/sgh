@@ -7,6 +7,7 @@
 
 #include "memleakdetector.hpp"
 #include "common_def_priv.hpp"
+#include "parameters.hpp"
 
 #include <memory>
 
@@ -15,6 +16,7 @@ namespace vtx
 	PRIVATE_STRUCT_DEFINITION(Vortex)
 	{
 		std::unique_ptr<VApplication> m_application;
+		Parameters m_parameters;
 	};
 
 	Vortex::Vortex() : m_private{ new PRIVATE_STRUCT_NAME(Vortex) }
@@ -36,6 +38,7 @@ namespace vtx
 
 	void Vortex::setCommandLineParameters(int argc, char * argv[])
 	{
+		m_private->m_parameters.resetParameters(argc, argv);
 	}
 
 	bool Vortex::setApplication(VApplication *app)

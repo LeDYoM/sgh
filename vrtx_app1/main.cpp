@@ -8,6 +8,7 @@ int main(int argc, char* argv[])
 	int result{ 0 };
 
 	Vortex_Init();
+	Vortex::getInstance()->setCommandLineParameters(argc, argv);
 	Vortex::getInstance()->setApplication(new Application);
 	result = Vortex_Loop();
 	Vortex_DeInit();

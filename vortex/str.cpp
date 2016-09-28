@@ -12,9 +12,14 @@ namespace vtx
 		constexpr PRIVATE_STRUCT_NAME(Str)(const char* data) noexcept : str(data) {}
 		constexpr PRIVATE_STRUCT_NAME(Str)(const PRIVATE_STRUCT_NAME(Str) &rh) noexcept : str(rh.str) {}
 		PRIVATE_STRUCT_NAME(Str) &operator=(const PRIVATE_STRUCT_NAME(Str) &rh) noexcept { str = rh.str; return *this; }
+
 	};
 
 	Str::Str() noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str) } { }
+
+	vtx::Str::Str(const u64 data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(std::to_string(data).c_str()) } { }
+	vtx::Str::Str(const s64 data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(std::to_string(data).c_str()) } { }
+	vtx::Str::Str(const f64 data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(std::to_string(data).c_str()) } { }
 	Str::Str(const Str&rh) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(*(rh.m_private)) } { }
 	Str &Str::operator=(const Str&rh) noexcept { m_private->operator=(*(rh.m_private)); return *this; }
 	constexpr Str::Str(Str&&rh) noexcept : m_private{ std::move(rh.m_private) } { }
@@ -23,6 +28,17 @@ namespace vtx
 	Str::Str(const char *data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(data) } { }
 
 	const char * Str::c_str() const noexcept { return m_private->str.c_str(); }
+
+	Str & vtx::Str::operator+=(const Str & other)
+	{
+		m_private->str += other.m_private->str;
+		return *this;
+	}
+
+	Str & vtx::Str::operator<<(const Str & other)
+	{
+		return operator+=(other);
+	}
 
 	Str::~Str()
 	{

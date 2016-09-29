@@ -14,9 +14,6 @@ namespace vtx
 		~ConfigGroup() = default;
 
 	protected:
-		void addProperty(const Str &name, const u64) noexcept;
-		void addProperty(const Str &name, const s64) noexcept;
-		void addProperty(const Str &name, const f64) noexcept;
 	};
 }
 

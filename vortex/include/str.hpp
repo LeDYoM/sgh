@@ -32,7 +32,6 @@ namespace vtx
 		Str &operator+=(const s8);
 		Str &operator+=(const f64);
 		Str &operator+=(const f32);
-		Str &operator+=(const Str &other);
 		Str &operator<<(const u64);
 		Str &operator<<(const s64);
 		Str &operator<<(const u32);

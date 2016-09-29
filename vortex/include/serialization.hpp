@@ -10,6 +10,9 @@ namespace vtx
 {
 	class SerializationObject
 	{
+		SerializationObject & SerializationObject::addProperty(const char * const, const s32);
+		SerializationObject & SerializationObject::addProperty(const char * const, const f32);
+
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationObject)
 	};
 

@@ -3,6 +3,7 @@
 
 #include "comp_config.hpp"
 #include "types.hpp"
+#include "str.hpp"
 
 namespace vtx
 {
@@ -13,9 +14,9 @@ namespace vtx
 		~ConfigGroup() = default;
 
 	protected:
-		void addProperty(const char *const name, const u64) noexcept;
-		void addProperty(const char *const name, const s64) noexcept;
-		void addProperty(const char *const name, const f64) noexcept;
+		void addProperty(const Str &name, const u64) noexcept;
+		void addProperty(const Str &name, const s64) noexcept;
+		void addProperty(const Str &name, const f64) noexcept;
 	};
 }
 

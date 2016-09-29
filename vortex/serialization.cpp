@@ -4,7 +4,7 @@
 
 namespace vtx
 {
-	PRIVATE_STRUCT_DEFINITION(SerializationBuffer)
+	PRIVATE_STRUCT_DEFINITION(SerializationObject)
 	{
 	};
 

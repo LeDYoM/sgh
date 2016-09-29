@@ -8,9 +8,9 @@
 
 namespace vtx
 {
-	class Serializable
+	class SerializationObject
 	{
-
+		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationObject)
 	};
 
 }

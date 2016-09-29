@@ -29,15 +29,90 @@ namespace vtx
 
 	const char * Str::c_str() const noexcept { return m_private->str.c_str(); }
 
-	Str & vtx::Str::operator+=(const Str & other)
+	Str & Str::operator+=(const Str & other)
 	{
 		m_private->str += other.m_private->str;
 		return *this;
 	}
 
-	Str & vtx::Str::operator<<(const Str & other)
+	Str & Str::operator+=(const u64 n)
+	{
+		m_private->str += std::to_string(n);
+		return *this;
+	}
+
+	Str & Str::operator+=(const s64 n)
+	{
+		m_private->str += std::to_string(n);
+		return *this;
+	}
+
+	Str & Str::operator+=(const u32 n)
+	{
+		m_private->str += std::to_string(n);
+		return *this;
+	}
+
+	Str & Str::operator+=(const s32 n)
+	{
+		m_private->str += std::to_string(n);
+		return *this;
+	}
+
+	Str & Str::operator+=(const u16 n)
+	{
+		m_private->str += std::to_string(n);
+		return *this;
+	}
+
+	Str & Str::operator+=(const s16 n)
+	{
+		m_private->str += std::to_string(n);
+		return *this;
+	}
+
+	Str & Str::operator+=(const u8 n)
+	{
+		m_private->str += std::to_string(n);
+		return *this;
+	}
+
+	Str & Str::operator+=(const s8 n)
+	{
+		m_private->str += std::to_string(n);
+		return *this;
+	}
+
+	Str & Str::operator+=(const f64 n)
+	{
+		m_private->str += std::to_string(n);
+		return *this;
+	}
+
+	Str & Str::operator+=(const f32 n)
+	{
+		m_private->str += std::to_string(n);
+		return *this;
+	}
+
+	Str & Str::operator<<(const Str & other)
 	{
 		return operator+=(other);
+	}
+
+	Str & vtx::Str::operator<<(const u64 n)
+	{
+		return operator+=(n);
+	}
+
+	Str & vtx::Str::operator<<(const s64 n)
+	{
+		return operator+=(n);
+	}
+
+	Str & vtx::Str::operator<<(const f64 n)
+	{
+		return operator+=(n);
 	}
 
 	Str::~Str()

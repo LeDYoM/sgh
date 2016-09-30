@@ -26,19 +26,26 @@ namespace vtx
 
 	enum SerializationPropertyTypes : int
 	{
-		Types32=0,
-		Typef32
+		Ts32=0,
+		Tf32,
+		Tstr,
 	};
-
-	SerializationObject & SerializationObject::addProperty(const char * const name, const s32 n)
-	{
-		m_private->addProperty(name, TypeAndValue(SerializationPropertyTypes::Types32,std::to_string(n)));
-		return *this;
-	}
 
 	SerializationObject & SerializationObject::addProperty(const char * const name, const f32 n)
 	{
-		m_private->addProperty(name, TypeAndValue(SerializationPropertyTypes::Typef32, std::to_string(n)));
+		m_private->addProperty(name, TypeAndValue(SerializationPropertyTypes::Tf32,std::to_string(n)));
+		return *this;
+	}
+
+	SerializationObject & SerializationObject::addProperty(const char * const name, const s32 n)
+	{
+		m_private->addProperty(name, TypeAndValue(SerializationPropertyTypes::Ts32, std::to_string(n)));
+		return *this;
+	}
+
+	SerializationObject & SerializationObject::addProperty(const char * const name, const char * const str)
+	{
+		m_private->addProperty(name, TypeAndValue(SerializationPropertyTypes::Tstr, str));
 		return *this;
 	}
 }

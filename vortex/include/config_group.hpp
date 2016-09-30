@@ -4,6 +4,8 @@
 #include "comp_config.hpp"
 #include "types.hpp"
 #include "str.hpp"
+#include "serialization.hpp"
+#include "properties.hpp"
 
 namespace vtx
 {
@@ -14,6 +16,7 @@ namespace vtx
 		~ConfigGroup() = default;
 
 	protected:
+		virtual SerializationObject &serialize(SerializationObject&);
 	};
 }
 

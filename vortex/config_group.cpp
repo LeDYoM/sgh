@@ -3,4 +3,8 @@
 
 namespace vtx
 {
+	SerializationObject & ConfigGroup::serialize(SerializationObject &so)
+	{
+		return so;
+	}
 }

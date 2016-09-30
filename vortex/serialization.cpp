@@ -24,6 +24,22 @@ namespace vtx
 		}
 	};
 
+	SerializationObject & operator<<(SerializationObject & so, const s32)
+	{
+		return so;
+	}
+	SerializationObject & operator<<(SerializationObject & so, const f32)
+	{
+		return so;
+	}
+	SerializationObject & operator<<(SerializationObject & so, const char * const)
+	{
+		return so;
+	}
+	SerializationObject & operator<<(SerializationObject & so, ISerializable & obj)
+	{
+		return obj.serialize(so);
+	}
 	enum SerializationPropertyTypes : int
 	{
 		Ts32=0,

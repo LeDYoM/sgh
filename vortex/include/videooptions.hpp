@@ -8,14 +8,14 @@
 
 namespace vtx
 {
-	class VORTEX_API VideoOptions : public ConfigGroup
+	class VORTEX_API VideoOptions : public ConfigGroup, public ISerializable
 	{
 	public:
 		VideoOptions() = default;
 		virtual ~VideoOptions() = default;
 
 	private:
-		vector2ds32 resolution;
+		SerializableVector2d resolution;
 	};
 }
 

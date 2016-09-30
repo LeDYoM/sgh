@@ -22,7 +22,13 @@ namespace vtx
 	{
 	public:
 		virtual SerializationObject &serialize(SerializationObject &so) { return so; };
+		virtual SerializationObject &deserialize(SerializationObject&so) { return so; }
 	};
+
+	SerializationObject VORTEX_API &operator<<(SerializationObject&so, ISerializable&obj);
+	SerializationObject VORTEX_API &operator<<(SerializationObject&so, const s32);
+	SerializationObject VORTEX_API &operator<<(SerializationObject&so, const f32);
+	SerializationObject VORTEX_API &operator<<(SerializationObject&so, const char * const);
 
 }
 

@@ -1,6 +1,8 @@
 #ifndef LIB_VECTOR2D_HPP
 #define LIB_VECTOR2D_HPP
 
+#include "types.hpp"
+
 namespace vtx
 {
 	template <typename T>
@@ -8,8 +10,9 @@ namespace vtx
 	{
 	public:
 		inline constexpr explicit vector2d() noexcept = default;
-		inline constexpr vector2d(T X, T Y) : x{ X }, y{ Y } {}
-		inline vector2d(const vector2d<T> &) = default;
+		inline constexpr vector2d(T X, T Y) noexcept : x{ X }, y{ Y } {}
+		inline constexpr vector2d(const vector2d<T> &) noexcept = default;
+
 		inline vector2d &operator=(const vector2d<T> &) = default;
 
 		template <typename U>
@@ -77,15 +80,6 @@ namespace vtx
 		T y;
 	};
 
-	template <typename T>
-	class VORTEX_API SerializableVector2d : public vector2d<T>
-	{
-		SerializationObject &serialize(SerializationObject &so)
-		{
-			return addProperty("x", x).addProperty("y", y);
-		}
-	};
-
 	using vector2du32 = vector2d<u32>;
 	using vector2ds32 = vector2d<s32>;
 	using vector2du16 = vector2d<u16>;
@@ -93,6 +87,12 @@ namespace vtx
 	using vector2df = vector2d<f32>;
 	using vector2du8 = vector2d<u8>;
 	using vector2ds8 = vector2d<s8>;
+
+	class VORTEX_API SerializableVector2d : public vector2ds32, public ISerializable
+	{
+
+	};
+
 }
 
 #endif

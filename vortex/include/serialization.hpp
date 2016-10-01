@@ -5,9 +5,24 @@
 #include "common_def.hpp"
 #include "types.hpp"
 #include "str.hpp"
+#include <stdexcept>
 
 namespace vtx
 {
+	class SerializationException : public std::runtime_error
+	{
+	public:
+		enum class ErrorCode
+		{
+			ExpectingPropertyName,
+			ExpectingData
+		};
+		inline SerializationException(const ErrorCode eCode, const Str &reason) 
+			: std::runtime_error(reason.c_str()), m_eCode{ eCode } {}
+	private:
+		ErrorCode m_eCode;
+	};
+
 	class VORTEX_API SerializationObject
 	{
 	public:

@@ -11,6 +11,8 @@ namespace vtx
 
 	PRIVATE_STRUCT_DEFINITION(SerializationObject)
 	{
+		int m_internalState{ 0 };
+
 		std::map<std::string, TypeAndValue> m_properties;
 
 		void addProperty(const std::string&name, TypeAndValue &&value)

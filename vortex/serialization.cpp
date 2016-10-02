@@ -1,5 +1,5 @@
 #include "include/serialization.hpp"
-
+#include "include/assert.hpp"
 #include "common_def_priv.hpp"
 
 #include <map>
@@ -11,7 +11,7 @@ namespace vtx
 
 	PRIVATE_STRUCT_DEFINITION(SerializationObject)
 	{
-		int m_internalState{ 0 };
+		bool m_WainingForPropertyName{ true };
 
 		std::map<std::string, TypeAndValue> m_properties;
 
@@ -28,6 +28,7 @@ namespace vtx
 
 	SerializationObject & operator<<(SerializationObject & so, const s32)
 	{
+		//LOGIC_ERROR_IF_NOT(so.m_private->m_WainingForPropertyName
 		return so;
 	}
 	SerializationObject & operator<<(SerializationObject & so, const f32)

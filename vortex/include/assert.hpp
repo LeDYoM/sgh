@@ -5,6 +5,8 @@
 #include "singleton.hpp"
 #include "logger.hpp"
 
+#include <stdexcept>
+
 namespace vtx
 {
 	class VORTEX_API Assert : public Singleton<Assert>
@@ -12,8 +14,9 @@ namespace vtx
 	public:
 		Assert();
 		~Assert();
-	};
 
+		DECLARE_PRIVATE_MPRIVATE_PIMPL(Assert)
+	};
 }
 
 #ifdef USE_NATIVE_ASSERT

@@ -11,6 +11,10 @@ namespace vtx
 	{
 	public:
 		Str() noexcept;
+		Str(const u16) noexcept;
+		Str(const s16) noexcept;
+		Str(const u32) noexcept;
+		Str(const s32) noexcept;
 		Str(const u64) noexcept;
 		Str(const s64) noexcept;
 		Str(const f64) noexcept;

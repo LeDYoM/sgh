@@ -25,15 +25,11 @@ namespace vtx
 	SerializationObject::SerializationObject(const SerializationBuffer *parentBuffer)
 		: m_private{new PRIVATE_STRUCT_NAME(SerializationObject)(parentBuffer) } {}
 
-	SerializationObject & SerializationObject::setName(const Str &name)
-	{
-		m_private->m_prName = name;
-	}
-
 	SerializationObject & SerializationObject::setValue(const s32 value)
 	{
 		m_private->m_prtype = SerializationPropertyTypes::Ts32;
-		m_private->m_prValue = value;
+		m_private->m_prValue = Str(value);
+		return *this;
 	}
 
 }

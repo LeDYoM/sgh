@@ -14,10 +14,9 @@ namespace vtx
 	{
 	public:
 		friend class SerializationObject;
-		SerializationObject &operator<<(const char * const);
+		SerializationObject &getNew(const char *const);
 
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationBuffer)
-
 	};
 
 	class VORTEX_API ISerializable

@@ -17,9 +17,14 @@ namespace vtx
 
 	Str::Str() noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str) } { }
 
+	vtx::Str::Str(const u16 data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(std::to_string(data).c_str()) } { }
+	vtx::Str::Str(const s16 data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(std::to_string(data).c_str()) } { }
+	vtx::Str::Str(const u32 data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(std::to_string(data).c_str()) } { }
+	vtx::Str::Str(const s32 data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(std::to_string(data).c_str()) } { }
 	vtx::Str::Str(const u64 data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(std::to_string(data).c_str()) } { }
 	vtx::Str::Str(const s64 data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(std::to_string(data).c_str()) } { }
 	vtx::Str::Str(const f64 data) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(std::to_string(data).c_str()) } { }
+
 	Str::Str(const Str&rh) noexcept : m_private{ new PRIVATE_STRUCT_NAME(Str)(*(rh.m_private)) } { }
 	Str &Str::operator=(const Str&rh) noexcept { m_private->operator=(*(rh.m_private)); return *this; }
 	constexpr Str::Str(Str&&rh) noexcept : m_private{ std::move(rh.m_private) } { }

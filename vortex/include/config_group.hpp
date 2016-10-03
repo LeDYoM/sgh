@@ -4,7 +4,8 @@
 #include "comp_config.hpp"
 #include "types.hpp"
 #include "str.hpp"
-#include "serialization.hpp"
+#include "serialization_buffer.hpp"
+#include "serialization_object.hpp"
 #include "properties.hpp"
 
 namespace vtx

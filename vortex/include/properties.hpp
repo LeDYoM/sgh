@@ -2,7 +2,6 @@
 #define LIB_PROPERTIES_HPP
 
 #include "comp_config.hpp"
-#include "serialization.hpp"
 
 #include <algorithm>
 #include <vector>

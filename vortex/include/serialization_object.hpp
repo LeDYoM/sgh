@@ -14,7 +14,6 @@ namespace vtx
 	{
 	public:
 		friend class SerializationBuffer;
-		SerializationObject & setName(const Str&);
 		SerializationObject & setValue(const s32);
 	private:
 		SerializationObject(const SerializationBuffer *parentBuffer);

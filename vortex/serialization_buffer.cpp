@@ -11,8 +11,6 @@ namespace vtx
 
 	PRIVATE_STRUCT_DEFINITION(SerializationObject)
 	{
-		bool m_WainingForPropertyName{ true };
-
 		std::map<std::string, TypeAndValue> m_properties;
 
 		void addProperty(const std::string&name, TypeAndValue &&value)
@@ -26,9 +24,19 @@ namespace vtx
 		}
 	};
 
+	SerializationObject & operator<<(SerializationBuffer &so, const char *str)
+	{
+		return so << Str(str);
+	}
+
+	SerializationObject & operator<<(SerializationBuffer &, const Str &str)
+	{
+
+	}
+
+
 	SerializationObject & operator<<(SerializationObject & so, const s32)
 	{
-		//LOGIC_ERROR_IF_NOT(so.m_private->m_WainingForPropertyName
 		return so;
 	}
 	SerializationObject & operator<<(SerializationObject & so, const f32)

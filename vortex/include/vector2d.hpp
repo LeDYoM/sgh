@@ -90,12 +90,12 @@ namespace vtx
 
 	class VORTEX_API SerializableVector2d : public vector2ds32, public ISerializable
 	{
-		virtual SerializationObject &serialize(SerializationObject &so) override {
-//			so << x;
-//			so << y;
+		virtual SerializationBuffer &serialize(SerializationBuffer &so) override {
+			so.getNew("x").setValue(x);
+			so.getNew("y").setValue(y);
 			return so; 
 		};
-		virtual SerializationObject &deserialize(SerializationObject&so) override { return so; }
+		virtual SerializationBuffer &deserialize(SerializationBuffer&so) override { return so; }
 	};
 
 }

@@ -22,8 +22,8 @@ namespace vtx
 	class VORTEX_API ISerializable
 	{
 	public:
-		virtual SerializationObject &serialize(SerializationObject &so) { return so; };
-		virtual SerializationObject &deserialize(SerializationObject&so) { return so; }
+		virtual SerializationBuffer &serialize(SerializationBuffer &so) { return so; };
+		virtual SerializationBuffer &deserialize(SerializationBuffer&so) { return so; }
 	};
 }
 

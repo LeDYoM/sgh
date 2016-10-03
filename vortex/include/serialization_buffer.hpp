@@ -13,19 +13,12 @@ namespace vtx
 	class VORTEX_API SerializationBuffer
 	{
 	public:
-		friend SerializationObject &operator<<(SerializationObject&so, ISerializable&obj);
-		friend SerializationObject &operator<<(SerializationObject&so, const s32);
-		friend SerializationObject &operator<<(SerializationObject&so, const f32);
-		friend SerializationObject &operator<<(SerializationObject&so, const char * const);
+		friend class SerializationObject;
+		SerializationObject &operator<<(const char * const);
 
-		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationObject)
+		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationBuffer)
 
 	};
-
-	SerializationObject VORTEX_API &operator<<(SerializationObject&so, ISerializable&obj);
-	SerializationObject VORTEX_API &operator<<(SerializationObject&so, const s32);
-	SerializationObject VORTEX_API &operator<<(SerializationObject&so, const f32);
-	SerializationObject VORTEX_API &operator<<(SerializationObject&so, const char * const);
 
 	class VORTEX_API ISerializable
 	{

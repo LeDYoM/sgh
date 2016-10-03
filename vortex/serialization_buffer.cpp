@@ -1,4 +1,4 @@
-#include "include/serialization.hpp"
+#include "include/serialization_buffer.hpp"
 #include "include/assert.hpp"
 #include "common_def_priv.hpp"
 
@@ -9,7 +9,7 @@ namespace vtx
 {
 	using TypeAndValue = std::pair<int, std::string>;
 
-	PRIVATE_STRUCT_DEFINITION(SerializationObject)
+	PRIVATE_STRUCT_DEFINITION(SerializationBuffer)
 	{
 		std::map<std::string, TypeAndValue> m_properties;
 
@@ -22,51 +22,15 @@ namespace vtx
 		{
 			addProperty(name, std::move(value));
 		}
+		SerializationObject & SerializationBuffer::operator<<(const char * const)
+		{
+			// TODO: insert return statement here
+		}
 	};
 
-	SerializationObject & operator<<(SerializationBuffer &so, const char *str)
+	SerializationObject & SerializationBuffer::operator<<(const s32 n)
 	{
-		return so << Str(str);
-	}
-
-	SerializationObject & operator<<(SerializationBuffer &, const Str &str)
-	{
-
-	}
-
-
-	SerializationObject & operator<<(SerializationObject & so, const s32)
-	{
-		return so;
-	}
-	SerializationObject & operator<<(SerializationObject & so, const f32)
-	{
-		return so;
-	}
-	SerializationObject & operator<<(SerializationObject & so, const char * const)
-	{
-		return so;
-	}
-	SerializationObject & operator<<(SerializationObject & so, ISerializable & obj)
-	{
-		return obj.serialize(so);
-	}
-	enum SerializationPropertyTypes : int
-	{
-		Ts32=0,
-		Tf32,
-		Tstr,
-	};
-
-	SerializationObject & SerializationObject::addProperty(const char * const name, const f32 n)
-	{
-		m_private->addProperty(name, TypeAndValue(SerializationPropertyTypes::Tf32,std::to_string(n)));
-		return *this;
-	}
-
-	SerializationObject & SerializationObject::addProperty(const char * const name, const s32 n)
-	{
-		m_private->addProperty(name, TypeAndValue(SerializationPropertyTypes::Ts32, std::to_string(n)));
+		m_private->addProperty(TypeAndValue(SerializationPropertyTypes::Ts32, std::to_string(n)));
 		return *this;
 	}
 

@@ -14,12 +14,11 @@ namespace vtx
 	{
 	public:
 		friend class SerializationBuffer;
-		SerializationBuffer & operator<<(const s32);
+		SerializationObject & setName(const Str&);
+		SerializationObject & setValue(const s32);
 	private:
-		SerializationObject(const SerializationBuffer *parentBuffer)
-			: m_parentBuffer{ parentBuffer } {}
-		//! Associated SerializationBuffer
-		const SerializationBuffer *m_parentBuffer;
+		SerializationObject(const SerializationBuffer *parentBuffer);
+		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationObject)
 	};
 }
 

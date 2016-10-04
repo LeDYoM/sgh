@@ -3,6 +3,9 @@
 
 #include "types.hpp"
 
+#include "iserializable.hpp"
+#include "serialization_buffer.hpp"
+
 namespace vtx
 {
 	template <typename T>
@@ -87,17 +90,6 @@ namespace vtx
 	using vector2df = vector2d<f32>;
 	using vector2du8 = vector2d<u8>;
 	using vector2ds8 = vector2d<s8>;
-
-	class VORTEX_API SerializableVector2d : public vector2ds32, public ISerializable
-	{
-		virtual SerializationBuffer &serialize(SerializationBuffer &so) override {
-			so.getNew("x").setValue(x);
-			so.getNew("y").setValue(y);
-			return so; 
-		};
-		virtual SerializationBuffer &deserialize(SerializationBuffer&so) override { return so; }
-	};
-
 }
 
 #endif

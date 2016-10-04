@@ -1,14 +1,15 @@
 #ifndef VTX_VIDEOOPTIONS_INCLUDE_HPP
 #define VTX_VIDEOOPTIONS_INCLUDE_HPP
 
-#include "config_group.hpp"
+#include "file_map.hpp"
 #include "comp_config.hpp"
 #include "properties.hpp"
-#include "vector2d.hpp"
+#include "serializable_types.hpp"
+#include "serialization_buffer.hpp"
 
 namespace vtx
 {
-	class VORTEX_API VideoOptions : public ConfigGroup, public ISerializable
+	class VORTEX_API VideoOptions : public FileMap, public ISerializable
 	{
 	public:
 		VideoOptions() = default;

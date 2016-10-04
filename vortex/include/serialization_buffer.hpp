@@ -8,7 +8,6 @@
 
 namespace vtx
 {
-	class ISerializable;
 	class SerializationObject;
 	class VORTEX_API SerializationBuffer
 	{
@@ -16,14 +15,13 @@ namespace vtx
 		friend class SerializationObject;
 		SerializationObject &getNew(const char *const);
 
-		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationBuffer)
-	};
+		SerializationBuffer() = default;
+		~SerializationBuffer() = default;
 
-	class VORTEX_API ISerializable
-	{
-	public:
-		virtual SerializationBuffer &serialize(SerializationBuffer &so) { return so; };
-		virtual SerializationBuffer &deserialize(SerializationBuffer&so) { return so; }
+		bool writeFile(const Str&);
+
+	private:
+		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationBuffer)
 	};
 }
 

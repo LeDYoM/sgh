@@ -5,6 +5,7 @@
 
 #include <map>
 #include <string>
+#include <fstream>
 
 namespace vtx
 {
@@ -27,6 +28,21 @@ namespace vtx
 	SerializationObject & SerializationBuffer::getNew(const char *const name)
 	{
 		return m_private->addObject(name,std::move(SerializationObject(this)));
+	}
+
+	bool SerializationBuffer::writeFile(const Str &fileName)
+	{
+		std::ofstream outputFile;
+
+		outputFile.open(fileName.c_str());
+		if (outputFile.is_open)
+		{
+			for (const auto& prop : m_private->m_properties)
+			{
+				outputFile << prop.first << "=" << prop.s
+			}
+		}
+		return false;
 	}
 
 }

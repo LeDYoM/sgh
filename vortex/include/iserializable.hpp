@@ -4,15 +4,16 @@
 #include "comp_config.hpp"
 #include "common_def.hpp"
 
+#define SER_NVP(x)	#x,x
 namespace vtx
 {
-	class SerializationBuffer;
+	class SerializationObject;
 
 	class ISerializable
 	{
 	public:
-		virtual SerializationBuffer &serialize(SerializationBuffer &so) const = 0;
-		virtual SerializationBuffer &deserialize(SerializationBuffer&so) = 0;
+		virtual SerializationObject & serialize(SerializationObject &so) const = 0;
+		virtual SerializationObject & deserialize(SerializationObject&so) = 0;
 	};
 }
 

@@ -4,20 +4,37 @@
 #include "comp_config.hpp"
 #include "common_def.hpp"
 #include "str.hpp"
+#include "types.hpp"
 
 namespace vtx
 {
 	class ISerializable;
-	class SerializationBuffer;
+
+	enum class SerializationTypes : u32
+	{
+		Tint = 0,
+		Tfloat,
+		Tstr,
+	};
+
+	enum class SerializationFormat : u32
+	{
+		VSO, // JSON similar
+		VML, // XML similar
+		VBF  // Binary
+	};
 
 	class VORTEX_API SerializationObject
 	{
 	public:
-		friend class SerializationBuffer;
-		SerializationObject & setValue(const s32);
+		SerializationObject(const SerializationFormat serializationFormat, const Str &fileName);
+		~SerializationObject();
+		void addValue(const Str&, const Str&);
+
+		inline SerializationFormat serializationFormat() const noexcept { return m_serializationFormat; }
 	private:
-		SerializationObject(const SerializationBuffer *parentBuffer);
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationObject)
+		const SerializationFormat m_serializationFormat;
 	};
 }
 

@@ -4,7 +4,6 @@
 #include "types.hpp"
 
 #include "iserializable.hpp"
-#include "serialization_buffer.hpp"
 
 namespace vtx
 {
@@ -81,6 +80,7 @@ namespace vtx
 
 		T x;
 		T y;
+
 	};
 
 	using vector2du32 = vector2d<u32>;

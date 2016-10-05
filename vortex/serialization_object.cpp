@@ -1,35 +1,50 @@
 #include "include/serialization_object.hpp"
-#include "include/serialization_buffer.hpp"
 
 #include "common_def_priv.hpp"
 
+#include <map>
+#include <fstream>
+
 namespace vtx
 {
-	enum SerializationPropertyTypes : int
-	{
-		Ts32 = 0,
-		Tf32,
-		Tstr,
-	};
-
 	PRIVATE_STRUCT_DEFINITION(SerializationObject)
 	{
-		const SerializationBuffer *m_parentBuffer;
-		SerializationPropertyTypes m_prtype;
-		Str m_prName;
-		Str m_prValue;
-		PRIVATE_STRUCT_NAME(SerializationObject)(const SerializationBuffer *parentBuffer)
-			: m_parentBuffer{ parentBuffer } {}
+		std::map<std::string, std::string> m_properties;
+		std::ofstream outputFile;
 	};
 
-	SerializationObject::SerializationObject(const SerializationBuffer *parentBuffer)
-		: m_private{new PRIVATE_STRUCT_NAME(SerializationObject)(parentBuffer) } {}
-
-	SerializationObject & SerializationObject::setValue(const s32 value)
+	void SerializationObject::addValue(const Str &name, const Str &value)
 	{
-		m_private->m_prtype = SerializationPropertyTypes::Ts32;
-		m_private->m_prValue = Str(value);
-		return *this;
+		std::ofstream &out(m_private->outputFile);
+		if (m_private->outputFile.is_open())
+		{
+			switch (m_serializationFormat)
+			{
+			case SerializationFormat::VSO:
+			case SerializationFormat::VML:
+			case SerializationFormat::VBF:
+			default:
+			{
+				out << '"' << name.c_str() << "\": \"" << value.c_str() << "\"\n";
+			}
+			break;
+			}
+		}
 	}
+
+	SerializationObject::SerializationObject(const SerializationFormat serializationFormat, const Str & fileName)
+		: m_private{ new PRIVATE_STRUCT_NAME(SerializationObject) }, m_serializationFormat{ serializationFormat }
+	{
+		m_private->outputFile.open(fileName.c_str());
+	}
+
+	SerializationObject::~SerializationObject()
+	{
+		if (m_private->outputFile.is_open())
+			m_private->outputFile.close();
+
+		DELETE_PRIVATE_MPRIVATE_PIMPL(SerializationObject);
+	}
+
 
 }

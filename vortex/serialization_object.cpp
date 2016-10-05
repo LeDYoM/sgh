@@ -15,7 +15,7 @@ namespace vtx
 
 	void SerializationObject::addValue(const Str &name, const Str &value)
 	{
-		std::ofstream &out(m_private->outputFile);
+		auto &out(m_private->outputFile);
 		if (m_private->outputFile.is_open())
 		{
 			switch (m_serializationFormat)
@@ -26,6 +26,25 @@ namespace vtx
 			default:
 			{
 				out << '"' << name.c_str() << "\": \"" << value.c_str() << "\"\n";
+			}
+			break;
+			}
+		}
+	}
+
+	void SerializationObject::addValue(const Str &name , const s32 value)
+	{
+		auto &out(m_private->outputFile);
+		if (m_private->outputFile.is_open())
+		{
+			switch (m_serializationFormat)
+			{
+			case SerializationFormat::VSO:
+			case SerializationFormat::VML:
+			case SerializationFormat::VBF:
+			default:
+			{
+				out << '"' << name.c_str() << "\": \"" << Str(value).c_str() << "\"\n";
 			}
 			break;
 			}

@@ -30,6 +30,7 @@ namespace vtx
 		SerializationObject(const SerializationFormat serializationFormat, const Str &fileName);
 		~SerializationObject();
 		void addValue(const Str&, const Str&);
+		void addValue(const Str&, const s32);
 
 		inline SerializationFormat serializationFormat() const noexcept { return m_serializationFormat; }
 	private:

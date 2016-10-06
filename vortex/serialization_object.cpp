@@ -10,13 +10,13 @@ namespace vtx
 	PRIVATE_STRUCT_DEFINITION(SerializationObject)
 	{
 		std::map<std::string, std::string> m_properties;
-		std::ofstream outputFile;
+		std::ofstream output;
 	};
 
 	void SerializationObject::addValue(const Str &name, const Str &value)
 	{
-		auto &out(m_private->outputFile);
-		if (m_private->outputFile.is_open())
+		auto &out(m_private->output);
+		if (m_private->output.is_open())
 		{
 			switch (m_serializationFormat)
 			{
@@ -34,8 +34,8 @@ namespace vtx
 
 	void SerializationObject::addValue(const Str &name , const s32 value)
 	{
-		auto &out(m_private->outputFile);
-		if (m_private->outputFile.is_open())
+		auto &out(m_private->output);
+		if (m_private->output.is_open())
 		{
 			switch (m_serializationFormat)
 			{
@@ -54,13 +54,13 @@ namespace vtx
 	SerializationObject::SerializationObject(const SerializationFormat serializationFormat, const Str & fileName)
 		: m_private{ new PRIVATE_STRUCT_NAME(SerializationObject) }, m_serializationFormat{ serializationFormat }
 	{
-		m_private->outputFile.open(fileName.c_str());
+		m_private->output.open(fileName.c_str());
 	}
 
 	SerializationObject::~SerializationObject()
 	{
-		if (m_private->outputFile.is_open())
-			m_private->outputFile.close();
+		if (m_private->output.is_open())
+			m_private->output.close();
 
 		DELETE_PRIVATE_MPRIVATE_PIMPL(SerializationObject);
 	}

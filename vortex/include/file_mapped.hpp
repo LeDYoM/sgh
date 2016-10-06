@@ -5,17 +5,22 @@
 #include "common_def.hpp"
 #include "str.hpp"
 #include "serialization_object.hpp"
+#include "singleton.hpp"
 
 namespace vtx
 {
-	class VORTEX_API FileMapped
+	class VORTEX_API FileMapped : public Singleton<FileMapped>
 	{
 	public:
-		FileMapped(const Str &fileName);
+		FileMapped();
 		~FileMapped();
-		virtual void serialize() const;
+		virtual void save() const;
+	protected:
+		inline void setFileName(const Str &fileName) noexcept { m_fileName = fileName; }
 	private:
-		SerializationObject m_serializationObject;
+
+		SerializationObject *m_serializationObject{ nullptr };
+		Str m_fileName;
 	};
 }
 

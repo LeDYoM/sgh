@@ -10,7 +10,7 @@ namespace vtx
 	class VORTEX_API VideoOptions : public FileMapped
 	{
 	public:
-		VideoOptions() : FileMapped("video.txt") {}
+		VideoOptions() : FileMapped() {}
 		virtual ~VideoOptions() = default;
 
 	private:

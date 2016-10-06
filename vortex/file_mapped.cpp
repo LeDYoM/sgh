@@ -4,8 +4,7 @@
 namespace vtx
 {
 
-	FileMapped::FileMapped(const Str & fileName)
-		: m_serializationObject{SerializationFormat::VSO,fileName }
+	FileMapped::FileMapped()
 	{
 	}
 
@@ -13,7 +12,7 @@ namespace vtx
 	{
 	}
 
-	void FileMapped::serialize() const
+	void FileMapped::save() const
 	{
 	}
 }

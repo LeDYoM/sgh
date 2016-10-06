@@ -5,6 +5,7 @@
 #include "common_def.hpp"
 #include "str.hpp"
 #include "types.hpp"
+#include "nocopy.hpp"
 
 namespace vtx
 {
@@ -24,10 +25,10 @@ namespace vtx
 		VBF  // Binary
 	};
 
-	class VORTEX_API SerializationObject
+	class VORTEX_API SerializationObject : public NoCopy
 	{
 	public:
-		SerializationObject(const SerializationFormat serializationFormat, const Str &fileName);
+		SerializationObject();
 		~SerializationObject();
 		void addValue(const Str&, const Str&);
 		void addValue(const Str&, const s32);
@@ -38,11 +39,14 @@ namespace vtx
 			DoSerialize(*this, v);
 		}
 
-		inline SerializationFormat serializationFormat() const noexcept { return m_serializationFormat; }
+		static SerializationFormat serializationFormat() noexcept;
+		static void setSerializationFormat(const SerializationFormat) noexcept;
 	private:
+		friend SerializationObject &&createFromFile(const Str&);
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationObject)
-		const SerializationFormat m_serializationFormat;
 	};
+
+	SerializationObject VORTEX_API &&createFromFile(const Str&);
 }
 
 #endif

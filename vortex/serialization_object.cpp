@@ -4,13 +4,14 @@
 
 #include <map>
 #include <fstream>
+#include <memory>
 
 namespace vtx
 {
 	PRIVATE_STRUCT_DEFINITION(SerializationObject)
 	{
 		std::map<std::string, std::string> m_properties;
-		std::ofstream output;
+		std::shared_ptr<std::ostream> output{ nullptr };
 	};
 
 	void SerializationObject::addValue(const Str &name, const Str &value)
@@ -34,36 +35,52 @@ namespace vtx
 
 	void SerializationObject::addValue(const Str &name , const s32 value)
 	{
-		auto &out(m_private->output);
-		if (m_private->output.is_open())
+		switch (m_serializationFormat)
 		{
-			switch (m_serializationFormat)
-			{
-			case SerializationFormat::VSO:
-			case SerializationFormat::VML:
-			case SerializationFormat::VBF:
-			default:
-			{
-				out << '"' << name.c_str() << "\": \"" << Str(value).c_str() << "\"\n";
-			}
-			break;
-			}
+		case SerializationFormat::VSO:
+		case SerializationFormat::VML:
+		case SerializationFormat::VBF:
+		default:
+		{
+			(*m_private->output) << '"' << name.c_str() << "\": \"" << Str(value).c_str() << "\"\n";
+		}
+		break;
 		}
 	}
 
-	SerializationObject::SerializationObject(const SerializationFormat serializationFormat, const Str & fileName)
-		: m_private{ new PRIVATE_STRUCT_NAME(SerializationObject) }, m_serializationFormat{ serializationFormat }
+	static SerializationFormat _serializationFormat{ SerializationFormat::VSO };
+
+	SerializationFormat SerializationObject::serializationFormat() noexcept
 	{
-		m_private->output.open(fileName.c_str());
+		return _serializationFormat;
+	}
+
+	void SerializationObject::setSerializationFormat(const SerializationFormat serializationFormat) noexcept
+	{
+		_serializationFormat = serializationFormat;
+	}
+
+	SerializationObject::SerializationObject()
+		: m_private{ new PRIVATE_STRUCT_NAME(SerializationObject) }
+	{
 	}
 
 	SerializationObject::~SerializationObject()
 	{
-		if (m_private->output.is_open())
-			m_private->output.close();
-
 		DELETE_PRIVATE_MPRIVATE_PIMPL(SerializationObject);
 	}
 
+
+	SerializationObject &&createFromFile(const Str &fileName)
+	{
+		auto outputFile(std::make_shared<std::ofstream>());
+		outputFile->open(fileName.c_str());
+		if (outputFile->is_open())
+		{
+			SerializationObject temp;
+			temp.m_private->output = outputFile;
+		}
+
+	}
 
 }

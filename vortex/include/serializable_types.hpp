@@ -4,15 +4,11 @@
 #include "comp_config.hpp"
 #include "types.hpp"
 #include "vector2d.hpp"
-#include "iserializable.hpp"
 #include "serialization_object.hpp"
 
 namespace vtx
 {
-	class VORTEX_API SerializableVector2d : public vector2ds32, public ISerializable
-	{
-	};
-
+	void VORTEX_API DoSerialize(SerializationObject&, const vector2ds32&);
 }
 
 #endif

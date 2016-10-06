@@ -32,6 +32,12 @@ namespace vtx
 		void addValue(const Str&, const Str&);
 		void addValue(const Str&, const s32);
 
+		template <typename T>
+		void addObject(const Str&name, const T&v)
+		{
+			DoSerialize(*this, v);
+		}
+
 		inline SerializationFormat serializationFormat() const noexcept { return m_serializationFormat; }
 	private:
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationObject)

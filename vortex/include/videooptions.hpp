@@ -2,19 +2,19 @@
 #define VTX_VIDEOOPTIONS_INCLUDE_HPP
 
 #include "comp_config.hpp"
-#include "properties.hpp"
-#include "serializable_types.hpp"
+#include "vector2d.hpp"
+#include "file_mapped.hpp"
 
 namespace vtx
 {
-	class VORTEX_API VideoOptions : public ISerializable
+	class VORTEX_API VideoOptions : public FileMapped
 	{
 	public:
-		VideoOptions() = default;
+		VideoOptions() : FileMapped("video.txt") {}
 		virtual ~VideoOptions() = default;
 
 	private:
-//		SerializableVector2d resolution;
+		vector2ds32 resolution;
 	};
 }
 

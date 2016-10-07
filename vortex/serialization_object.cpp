@@ -83,8 +83,15 @@ namespace vtx
 	{
 	}
 
-	SerializationObject::SerializationObject(SerializationObject &&)
+	constexpr SerializationObject::SerializationObject(SerializationObject &&rh) noexcept
+		: m_private {rh.m_private}
 	{
+	}
+
+	SerializationObject & vtx::SerializationObject::operator=(SerializationObject &&rh) noexcept
+	{
+		std::swap(m_private, rh.m_private);
+		return *this;
 	}
 
 	SerializationObject::~SerializationObject()

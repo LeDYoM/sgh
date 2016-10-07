@@ -29,9 +29,9 @@ namespace vtx
 	{
 	public:
 		SerializationObject();
-		SerializationObject(SerializationObject&&);
+		constexpr SerializationObject(SerializationObject&&) noexcept;
 		~SerializationObject();
-		SerializationObject &operator=(SerializationObject&&);
+		SerializationObject &operator=(SerializationObject&&) noexcept;
 		void addValue(const Str&, const Str&);
 		void addValue(const Str&, const s32);
 

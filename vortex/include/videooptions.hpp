@@ -13,6 +13,8 @@ namespace vtx
 		VideoOptions() : FileMapped() {}
 		virtual ~VideoOptions() = default;
 
+		virtual void save() const override {}
+
 	private:
 		vector2ds32 resolution;
 	};

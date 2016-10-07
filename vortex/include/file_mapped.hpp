@@ -14,7 +14,9 @@ namespace vtx
 	public:
 		FileMapped();
 		~FileMapped();
-		virtual void save() const;
+		void startSave();
+		void endSave();
+		virtual inline void save() const {}
 	protected:
 		inline void setFileName(const Str &fileName) noexcept { m_fileName = fileName; }
 	private:

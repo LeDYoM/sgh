@@ -10,19 +10,25 @@ namespace vtx
 {
 	PRIVATE_STRUCT_DEFINITION(SerializationObject)
 	{
-		std::shared_ptr<std::ostream> output{ nullptr };
+		std::ofstream *output{ nullptr };
 		PRIVATE_STRUCT_NAME(SerializationObject)() {}
 		PRIVATE_STRUCT_NAME(SerializationObject)(PRIVATE_STRUCT_NAME(SerializationObject) && rhs) noexcept
 		{
 			std::swap(output, rhs.output);
 		}
 
-		~SerializationObjectPrivate ()
+		void close()
 		{
-			if (output)
-			{
-				output->flush();
-				output.reset();
+			output->flush();
+			output->close();
+			delete output;
+			output = nullptr;
+		}
+
+		~SerializationObjectPrivate()
+		{
+			if (output) {
+				close();
 			}
 		}
 	};
@@ -69,15 +75,6 @@ namespace vtx
 		_serializationFormat = serializationFormat;
 	}
 
-	SerializationObject vtx::SerializationObject::createFromFile(const Str &fileName)
-	{
-		auto outputFile(std::make_shared<std::ofstream>());
-		outputFile->open(fileName.c_str());
-		SerializationObject temp;
-		temp.m_private->output = outputFile;
-		return std::move(temp);
-	}
-
 	SerializationObject::SerializationObject()
 		: m_private{ new PRIVATE_STRUCT_NAME(SerializationObject) }
 	{
@@ -92,6 +89,12 @@ namespace vtx
 	{
 		std::swap(m_private, rh.m_private);
 		return *this;
+	}
+
+	void SerializationObject::openFile(const Str &fileName)
+	{
+		m_private->output = new std::ofstream;
+		m_private->output->open(fileName.c_str());
 	}
 
 	SerializationObject::~SerializationObject()

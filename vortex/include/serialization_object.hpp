@@ -5,6 +5,7 @@
 #include "common_def.hpp"
 #include "str.hpp"
 #include "types.hpp"
+#include "serializable_types.hpp"
 #include "nocopy.hpp"
 
 namespace vtx
@@ -32,18 +33,20 @@ namespace vtx
 		constexpr SerializationObject(SerializationObject&&) noexcept;
 		~SerializationObject();
 		SerializationObject &operator=(SerializationObject&&) noexcept;
+		void openFile(const Str&);
+
 		void addValue(const Str&, const Str&);
 		void addValue(const Str&, const s32);
 
 		template <typename T>
-		void addObject(const Str&name, const T&v)
+		void addObject(const Str&, const T&v)
 		{
 			DoSerialize(*this, v);
 		}
 
 		static SerializationFormat serializationFormat() noexcept;
 		static void setSerializationFormat(const SerializationFormat) noexcept;
-		static SerializationObject createFromFile(const Str&);
+
 	private:
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationObject)
 	};

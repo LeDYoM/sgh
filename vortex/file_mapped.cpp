@@ -1,6 +1,8 @@
 #include "include/file_mapped.hpp"
 #include "include/serialization_object.hpp"
 
+#include <memory>
+
 namespace vtx
 {
 
@@ -14,10 +16,16 @@ namespace vtx
 
 	void FileMapped::startSave()
 	{
-		SerializationObject serializationObject{ SerializationObject::createFromFile(m_fileName) };
+		m_serializationObject = new SerializationObject;
+		m_serializationObject->openFile(m_fileName);
 	}
 
 	void FileMapped::endSave()
 	{
+		if (m_serializationObject)
+		{
+			delete m_serializationObject;
+			m_serializationObject = nullptr;
+		}
 	}
 }

@@ -16,12 +16,12 @@ namespace vtx
 		~FileMapped();
 		void startSave();
 		void endSave();
-		virtual inline void save() const {}
+		virtual inline void save() {}
 	protected:
 		inline void setFileName(const Str &fileName) noexcept { m_fileName = fileName; }
+		SerializationObject *so() const noexcept { return m_serializationObject; }
 	private:
-
-		SerializationObject *m_serializationObject{ nullptr };
+		SerializationObject *m_serializationObject;
 		Str m_fileName;
 	};
 }

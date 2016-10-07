@@ -14,5 +14,6 @@ namespace vtx
 
 	void FileMapped::save() const
 	{
+		SerializationObject serializationObject{ SerializationObject::createFromFile(m_fileName) };
 	}
 }

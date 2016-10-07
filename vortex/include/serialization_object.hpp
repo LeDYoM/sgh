@@ -29,7 +29,9 @@ namespace vtx
 	{
 	public:
 		SerializationObject();
+		SerializationObject(SerializationObject&&);
 		~SerializationObject();
+		SerializationObject &operator=(SerializationObject&&);
 		void addValue(const Str&, const Str&);
 		void addValue(const Str&, const s32);
 
@@ -41,12 +43,10 @@ namespace vtx
 
 		static SerializationFormat serializationFormat() noexcept;
 		static void setSerializationFormat(const SerializationFormat) noexcept;
+		static SerializationObject createFromFile(const Str&);
 	private:
-		friend SerializationObject &&createFromFile(const Str&);
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationObject)
 	};
-
-	SerializationObject VORTEX_API &&createFromFile(const Str&);
 }
 
 #endif

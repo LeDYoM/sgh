@@ -44,7 +44,8 @@ namespace vtx
 		case SerializationFormat::VBF:
 		default:
 		{
-			(*m_private->output) << '"' << name.c_str() << "\": \"" << value.c_str() << "\"\n";
+			addPropertyName(name);
+			(*m_private->output) << "\"" << value.c_str() << "\"\n";
 		}
 		break;
 		}
@@ -59,7 +60,8 @@ namespace vtx
 		case SerializationFormat::VBF:
 		default:
 		{
-			(*m_private->output) << '"' << name.c_str() << "\": \"" << Str(value).c_str() << "\"\n";
+			addPropertyName(name);
+			(*m_private->output) << "\"" << Str(value).c_str() << "\"\n";
 		}
 		break;
 		}
@@ -75,15 +77,26 @@ namespace vtx
 		_serializationFormat = serializationFormat;
 	}
 
-	SerializationObject::SerializationObject()
-		: m_private{ new PRIVATE_STRUCT_NAME(SerializationObject) }
+	void vtx::SerializationObject::addPropertyName(const Str &name)
 	{
+		switch (_serializationFormat)
+		{
+		case SerializationFormat::VSO:
+		case SerializationFormat::VML:
+		case SerializationFormat::VBF:
+		default:
+		{
+			(*m_private->output) << '"' << name.c_str() << "\": ";
+		}
+		break;
+		}
 	}
 
+	SerializationObject::SerializationObject()
+		: m_private{ new PRIVATE_STRUCT_NAME(SerializationObject) } {}
+
 	constexpr SerializationObject::SerializationObject(SerializationObject &&rh) noexcept
-		: m_private {rh.m_private}
-	{
-	}
+		: m_private {rh.m_private} {}
 
 	SerializationObject & vtx::SerializationObject::operator=(SerializationObject &&rh) noexcept
 	{

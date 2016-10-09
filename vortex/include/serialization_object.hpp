@@ -48,6 +48,7 @@ namespace vtx
 		static void setSerializationFormat(const SerializationFormat) noexcept;
 
 	private:
+		void addPropertyName(const Str&);
 		DECLARE_PRIVATE_MPRIVATE_PIMPL(SerializationObject)
 	};
 }

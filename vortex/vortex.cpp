@@ -5,6 +5,8 @@
 #include "include/assert.hpp"
 #include "include/types.hpp"
 
+#include "include/videooptions.hpp"
+
 #include "memleakdetector.hpp"
 #include "common_def_priv.hpp"
 #include "parameters.hpp"
@@ -58,6 +60,8 @@ namespace vtx
 	{
 		LINFO("Initializing Vortex library...");
 		m_private->m_application->onStart();
+
+		VideoOptions::initialize();
 	}
 
 	void Vortex::deinitialize()

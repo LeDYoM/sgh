@@ -9,8 +9,8 @@ namespace vtx
 {
 	class VORTEX_API VideoOptions : public FileMapped
 	{
-	public:
-		VideoOptions() : FileMapped() {}
+	protected:
+		VideoOptions() = default;
 		virtual ~VideoOptions() = default;
 
 		virtual void save() override;

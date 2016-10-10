@@ -5,13 +5,26 @@
 
 namespace vtx
 {
-
 	FileMapped::FileMapped()
 	{
 	}
 
 	FileMapped::~FileMapped()
 	{
+	}
+
+	void FileMapped::initialize()
+	{
+		//load();
+		createInstance();
+	}
+
+	bool FileMapped::updateFile()
+	{
+		startSave();
+		save();
+		endSave();
+		return true;
 	}
 
 	void FileMapped::startSave()
